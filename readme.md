@@ -1,40 +1,44 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Oblyk, site communautaire d'escalade
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Oblyk est un site communautaire d'escalade outdoor et indoor : on peut y noter ses croix, et voir l'activité des grimpeurs de la communauté
 
-## About Laravel
+Ici le nouveau dépôt du projet qui subit actuellement une refonte total de son code
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Voir le projet actuellement en ligne : [oblyk](http://www.oblyk.net/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Liste des changements majeurs prévus
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+**Au niveau du code :**
+- Changement de framework :
+    - PHP : [Laravel](https://laravel.com/)
+    - CSS : [Materialize](http://materializecss.com/)
+    - JS : [Vue.js](http://vuejs.org/) + VanilliaJs
+    - database : on reste sur du MySql pour permettre plus de contribution (téchnologie populaire) 
+- Passer Oblyk en opensource
+- Passer sur le fond de carte [mapbox](https://www.mapbox.com/)
+- Mise en place d'API pour l'utilisation des datas par d'autres sites
+- Passage d'oblyk en https
+- Remaniement des URL avec de l'Url Rewriting (SEO)
+- Réduction du nombre de page qui parle d'un même site (SEO)
+- Amélioration du back-office d'oblyk pour permettre plus de modérateurs
+- Mise en place d'iframe pour le partage des sites sur d'autre site / blog
 
-## Learning Laravel
+**Au niveau des fonctionnalités :**
+- Harmonisation de l'interface, en mettant mieux en avant la partie recherche de partenaire
+- Amélioration de l'interactivité entre les grimpeurs dans la recherche de partenaire
+- Pouvoir croixter plusieurs fois une même ligne (et pouvoir croixter seulement une longueur de grande-voie)
+- Pouvoir faire un carnet de croix en intérieur
+- Mieux intégrer la partie flux (falaise, profil, etc.)
+- Rendre la partie massif éditable, comme le reste des infos d'oblyk
+- Fusionner le forum avec le flux pour une meilleur intégration dans le profil
+- Proposer une newsletter des sites par rapport a sa localisation
+- Développement des "Missions" qui rendra ludique le renseignement d'infos sur les falaises (du moins j'espère : )
+- Possibilité d'ajouter le grimpeur avec qui on a fait une voie (pour le souvenir)
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## Installation
+Bientôt je metterais une aide pour installer le projet en local et ainsi contribuer à son développement
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Contribuer
+Pour l'instant la réécriture d'oblyk en est à ces balbutiement, la contribution sur le code est donc encore un peut précoce, mais vous pouvez envoyer vos suggestions sur la boîte d'oblyk ! : [ekip@oblyk.net](mailto:ekip@oblyk.net)
