@@ -1,6 +1,12 @@
 // Variables
 @import "variables";
 
+//police main pour le grand titre
+@import url('https://fonts.googleapis.com/css?family=Loved+by+the+King');
+
+//style de la barre de navigation
+@import "nav";
+
 .corps-de-page{
   min-height: 100vh;
   margin-top: -64px;

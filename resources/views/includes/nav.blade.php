@@ -4,8 +4,6 @@
     <ul id="dropdown_connexion" class="dropdown-content">
         <li><a href="#!">Connexion</a></li>
         <li><a href="#!">Créer un compte</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
     </ul>
 
     {{--MENU--}}
@@ -13,7 +11,7 @@
         <div class="nav-wrapper">
 
             {{--logo de oblyk--}}
-            <a href="#" class="brand-logo">Oblyk</a>
+            <a href="#" class="brand-logo"><img class="logo-de-oblyk" src="/img/logo-oblyk.svg" alt="logo de oblyk"> Oblyk</a>
 
             {{--icone de menu quand on est sur smartphone--}}
             <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i></a>

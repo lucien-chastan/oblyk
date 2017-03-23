@@ -1,0 +1,16 @@
+.brand-logo{
+    font-family: 'Loved by the King', cursive;
+    font-size: 1em;
+    transition: opacity 0.3s;
+
+    .logo-de-oblyk{
+        height: 35px;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+    &:hover{
+        opacity: 0.8;
+    }
+}
+
