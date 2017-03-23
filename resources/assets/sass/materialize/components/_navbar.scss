@@ -33,8 +33,28 @@ nav {
     line-height: $navbar-line-height-mobile;
   }
 
+  .nav-black {
+      background-color: rgba(255,255,255,0.7);
+      a {
+          color: rgb(40,40,40) !important;
+      }
+      #path-logo{
+          fill: rgb(40,40,40);
+      }
+  }
+
+  .nav-white {
+      background-color: rgba(255,255,255,0);
+      a {
+          color: rgb(255,255,255) !important;
+      }
+      #path-logo{
+          fill: rgb(255,255,255);
+      }
+  }
+
   .nav-wrapper {
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, color 0.5s;
     position: relative;
     height: 100%;
   }
