@@ -8,10 +8,10 @@
 
     {{--MENU--}}
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper" id="nav_barre">
 
             {{--logo de oblyk--}}
-            <a href="#" class="brand-logo"><img class="logo-de-oblyk" src="/img/logo-oblyk.svg" alt="logo de oblyk"> Oblyk</a>
+            <a href="/" class="brand-logo"><img class="logo-de-oblyk" src="/img/logo-oblyk.svg" alt="logo de oblyk"> Oblyk</a>
 
             {{--icone de menu quand on est sur smartphone--}}
             <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i></a>

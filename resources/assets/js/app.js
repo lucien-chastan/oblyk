@@ -1,20 +1,19 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+//initialisation des composants pour materialize
+$(".button-collapse").sideNav();
 
-require('./bootstrap');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+//on blanchie la barre de navigation au scroll
+var backgroundNav = function () {
+    let nav_barre = document.getElementById('nav_barre');
 
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+    if(window.pageYOffset > 0){
+        nav_barre.style.backgroundColor = 'rgba(255,255,255,0.25)';
+        nav_barre.style.color = 'rgb(20,20,20)';
+    }else{
+        nav_barre.style.backgroundColor = 'rgba(255,255,255,0)';
+        nav_barre.style.color = 'rgb(255,255,255)';
+    }
+};
+//changement de la couleur du fond de la nav bar au scroll
+window.addEventListener('scroll', backgroundNav);

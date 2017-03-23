@@ -72,6 +72,24 @@
         </div>
 
         <div class="row">
+
+            <div class="col s12 m6 l6">
+                <h2>Rejoins-nous !</h2>
+                <p>
+                    Rejoins la communauté d'oblyk et apporte ta pierre à l'édifice
+                </p>
+                <p class="center">
+                    <a class="waves-effect waves-light btn">Créer un compte</a>
+                </p>
+            </div>
+
+            <div class="col s12 m6 l6">
+                animation svg
+            </div>
+
+        </div>
+
+        <div class="row">
             <div class="col s12 m12 l12">
                 <h2 class="center">Oblyk en quelques chiffres</h2>
             </div>

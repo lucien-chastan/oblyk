@@ -6,6 +6,25 @@
 
 // Google Color Palette defined: http://www.google.com/design/spec/style/color.html
 
+$oblyk-orange: (
+  "base": #EC4728,
+  "lighten-1": #F55B29,
+  "lighten-2": #FF7F2A,
+);
+
+$oblyk-blue: (
+  "base": #2185C7,
+  "lighten-1": #218ED9,
+  "lighten-2": #2196DE,
+);
+
+$oblyk-success: (
+  "base": #37BB6B,
+);
+
+$oblyk-error: (
+  "base": #FF5555,
+);
 
 $materialize-red: (
   "base":       #e51c23,

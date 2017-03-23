@@ -34,6 +34,7 @@ nav {
   }
 
   .nav-wrapper {
+    transition: background-color 0.5s;
     position: relative;
     height: 100%;
   }
