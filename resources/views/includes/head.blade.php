@@ -4,6 +4,8 @@
 <meta name="description" content="#variable">
 <meta name="author" content="Lucien Chastan">
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
+<link rel="icon" href="/img/fav_icon.png">
+
 
 <!--Import Google Icon Font-->
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

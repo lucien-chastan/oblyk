@@ -42,3 +42,41 @@
     margin-top: 30px;
     box-shadow: 0 0 8px 2px rgba(0,0,0,0.3);
 }
+
+.svg-animation-home{
+    height: 180px;
+    margin-top: 35px;
+}
+
+.svg-container{
+    margin-top: 35px;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    vertical-align: middle;
+    overflow: hidden;
+
+    svg{
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+#nuage_1{
+    animation-delay: 7s;
+    animation: animation_nuage 14s infinite linear;}
+#nuage_2{animation: animation_nuage 14s infinite linear;}
+
+@keyframes animation_nuage {
+    0% {
+        transform: translateX(200px);
+        opacity: 0;}
+    5%{opacity: 1}
+    95%{opacity: 1;}
+    100% {
+        opacity: 0;
+        transform: translateX(-100px);}
+}

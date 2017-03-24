@@ -27,8 +27,11 @@
                 </p>
             </div>
 
-            <div class="col s12 m6 l6">
-                animation svg
+            <div class="col s12 m6 l6 center">
+                <div class="svg-container">
+                    @include('pages.home.partials.svg.info_falaise')
+                </div>
+                {{--<img src="/img/svg-info-falaise.svg" alt="les informations sur les falaises dans oblyk" class="svg-animation-home">--}}
             </div>
         </div>
 

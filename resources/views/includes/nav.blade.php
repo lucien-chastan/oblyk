@@ -12,7 +12,6 @@
 
             {{--logo de oblyk--}}
             <a href="/" class="brand-logo">
-                {{--<img class="logo-de-oblyk" src="/img/logo-oblyk.svg" alt="logo de oblyk">--}}
                 <svg
                         xmlns:dc="http://purl.org/dc/elements/1.1/"
                         xmlns:cc="http://creativecommons.org/ns#"
