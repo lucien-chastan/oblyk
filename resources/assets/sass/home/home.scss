@@ -43,9 +43,10 @@
     box-shadow: 0 0 8px 2px rgba(0,0,0,0.3);
 }
 
-.svg-animation-home{
-    height: 180px;
-    margin-top: 35px;
+.partie-point-home{
+    .row{
+        padding: 10vh 0;
+    }
 }
 
 .svg-container{
@@ -65,9 +66,9 @@
     }
 }
 
-#nuage_1{
-    animation-delay: 7s;
-    animation: animation_nuage 14s infinite linear;}
+
+//ANIMATION SVG
+#nuage_1{animation: animation_nuage 14s infinite linear;}
 #nuage_2{animation: animation_nuage 14s infinite linear;}
 
 @keyframes animation_nuage {
@@ -80,3 +81,20 @@
         opacity: 0;
         transform: translateX(-100px);}
 }
+
+#croix_1{animation : animation_croix_1 2.5s infinite;}
+#croix_2{animation : animation_croix_2 2.5s infinite;}
+#croix_3{animation : animation_croix_3 2.5s infinite;}
+@keyframes animation_croix_1 {0% {fill-opacity: 0;} 5% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
+@keyframes animation_croix_2 {0% {fill-opacity: 0;} 30% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
+@keyframes animation_croix_3 {0% {fill-opacity: 0;} 55% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
+
+//#bras {animation: animation_bras 2s infinite;}
+//@keyframes animation_bras {
+//    //0% {transform: rotate(0deg);}
+//    //33%{transform: rotate(-5deg);}
+//    //66%{transform: rotate(5deg);}
+//    //100%{transform: rotate(0deg);}
+//    0% {d: 'm 298.95099,570.8705 c 2.47,-4.0778 1.8593,-11.89644 2.14657,-18.62469 l -1.64149,-2.65165 c 0.24902,-0.95695 0.36762,-1.88683 0.1894,-2.77792 l -0.37881,-1.89403 c 0.7941,-0.74498 1.85761,-1.08584 3.15673,-1.07329 0.90026,1.06719 1.95298,1.92095 2.46224,3.53554 l -0.31567,3.40926 c 1.20596,8.65828 -0.04,17.51238 -0.82655,24.51021 z';}
+//    100%{d: 'm 198.95099,570.8705 c 2.47,-4.0778 1.8593,-11.89644 2.14657,-18.62469 l -1.64149,-2.65165 c 0.24902,-0.95695 0.36762,-1.88683 0.1894,-2.77792 l -0.37881,-1.89403 c 0.7941,-0.74498 1.85761,-1.08584 3.15673,-1.07329 0.90026,1.06719 1.95298,1.92095 2.46224,3.53554 l -0.31567,3.40926 c 1.20596,8.65828 -0.04,17.51238 -0.82655,24.51021 z';}
+//}
