@@ -71,6 +71,23 @@
     }
 }
 
+//PARTIE CHIFFRE D'OBLYK
+
+.partie-chiffre-oblyk{
+    margin-bottom: 10vh;
+
+    .oblyk-number {
+        font-weight: 300;
+        font-size: 1.5em;
+        line-height: 1.3em;
+        margin-bottom: 5vh;
+        span {
+            color: rgb(150,150,150);
+            font-size: 1.2em;
+        }
+    }
+}
+
 //ANIMATION SVG
 #nuage_1{animation: animation_nuage 14s infinite linear;}
 #nuage_2{animation: animation_nuage 14s infinite linear;}
@@ -110,4 +127,13 @@
     0% {transform: translate(0px,0px);  }
     80% {transform: translate(0.1%,0%);}
     100% {transform: translate(0px,0px);}
+}
+
+@media (max-width:600px) {
+    .description-oblyk{
+        h2 {
+            font-size: 2.3em;
+            text-align: center;
+        }
+    }
 }

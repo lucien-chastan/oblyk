@@ -174,15 +174,23 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col s12 m4 l4">
-                2077 Falaises
+        <div class="center partie-chiffre-oblyk">
+            <div class="row oblyk-number blue-text">
+                <div class="col s4 m4 l4">2077<br><span class="loved-king-font">Falaises</span></div>
+                <div class="col s4 m4 l4">1259<br><span class="loved-king-font">Grimpeurs</span></div>
+                <div class="col s4 m4 l4">120<br><span class="loved-king-font">Salles</span></div>
             </div>
-            <div class="col s12 m4 l4">
-                1259 Grimpeurs
+
+            <div class="row oblyk-number">
+                <div class="col s4 m4 l4">71018<br><span class="loved-king-font">Lignes</span></div>
+                <div class="col s4 m4 l4">8581<br><span class="loved-king-font">Croix</span></div>
+                <div class="col s4 m4 l4">1132<br><span class="loved-king-font">Photos</span></div>
             </div>
-            <div class="col s12 m4 l4">
-                120 Salles
+
+            <div class="row oblyk-number">
+                <div class="col s4 m4 l4">222<br><span class="loved-king-font">Topos</span></div>
+                <div class="col s4 m4 l4">1924<br><span class="loved-king-font">Commentaires</span></div>
+                <div class="col s4 m4 l4">105<br><span class="loved-king-font">Vidéos</span></div>
             </div>
         </div>
     </div>
