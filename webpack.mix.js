@@ -17,7 +17,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/home/home.scss', 'public/css');
 
 //fichier Js
-mix.copy('resources/assets/js/app.js', 'public/js');
+mix.copy('resources/assets/js/app.js', 'public/js')
+    .copy('resources/assets/js/home.js', 'public/js');
 
 //image
 mix.copy('resources/assets/img/','public/img/');

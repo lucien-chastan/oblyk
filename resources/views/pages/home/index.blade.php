@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col s12 m6 l6">
                     <h2>Check les infos des falaises</h2>
-                    <p>
+                    <p class="explication-oblyk">
                         Oblyk est une grande base de donnée des falaises d'escalades de france et du monde constament enrichie par la communauté,
                         tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte
                     </p>
@@ -33,26 +33,25 @@
                     <div class="svg-container">
                         @include('pages.home.partials.svg.info_falaise')
                     </div>
-                    {{--<img src="/img/svg-info-falaise.svg" alt="les informations sur les falaises dans oblyk" class="svg-animation-home">--}}
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col s12 m6 l6">
+            <div class="row reverse-smartphone">
+                <div class="col s12 m6 l6 order-1">
                     <div class="svg-container">
                         @include('pages.home.partials.svg.carnet_croix')
                     </div>
                 </div>
-                <div class="col s12 m6 l6">
+                <div class="col s12 m6 l6 order-2">
                     <h2>Tiens un carnet de croix</h2>
-                    <p>Garde une trace de tes sorties ou de ta progression en notant tes croix</p>
+                    <p class="explication-oblyk">Garde une trace de tes sorties ou de ta progression en notant tes croix</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col s12 m6 l6">
                     <h2>Trouve un partenaire de grimpe</h2>
-                    <p>
+                    <p class="explication-oblyk">
                         Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu'un avec qui grimper ?
                         Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu'un avec qui grimper
                     </p>
@@ -65,17 +64,17 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row reverse-smartphone">
 
-                <div class="col s12 m6 l6">
+                <div class="col s12 m6 l6 order-1">
                     <div class="svg-container">
                         @include('pages.home.partials.svg.flux')
                     </div>
                 </div>
 
-                <div class="col s12 m6 l6">
+                <div class="col s12 m6 l6 order-2">
                     <h2>Reste au courant</h2>
-                    <p>
+                    <p class="explication-oblyk">
                         Grâce à son système de flux, oblyk te tiendra au courant de ce qui se passe autour de toi, reçoit les
                         dernières news des falaises, salles, grimpeurs que tu suis
                     </p>
@@ -86,8 +85,10 @@
 
                 <div class="col s12 m6 l6">
                     <h2>Rejoins-nous !</h2>
-                    <p>
-                        Rejoins la communauté d'oblyk et apporte ta pierre à l'édifice
+                    <p class="explication-oblyk">
+                        En rejoingnant oblyk tu auras librement accès à tous les infos de la communauté, te tenir au courant de ce qui se passe dans le
+                        monde de la grimpe, tu pourras tenir un carnet de croix pour t'aider à progresser ou pour le garde un souvenire de tes passages en falaise.<br>
+                        Mais tu pouras aussi participer à l'élaboration d'une grande base de connaissance commune en contribuant au site
                     </p>
                     <p class="center">
                         <a class="waves-effect waves-light btn">Créer un compte</a>
@@ -114,7 +115,7 @@
 
         <div class="row">
             <div class="col s12 m12 l4">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
                         <img src="/img/oblyk-home-baume-rousse.jpg">
                         <span class="card-title">Card Title</span>
@@ -131,7 +132,7 @@
                 </div>
             </div>
             <div class="col s12 m12 l4">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
                         <img src="/img/oblyk-home-baume-rousse.jpg">
                         <span class="card-title">Card Title</span>
@@ -148,7 +149,7 @@
                 </div>
             </div>
             <div class="col s12 m12 l4">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
                         <img src="/img/oblyk-home-baume-rousse.jpg">
                         <span class="card-title">Card Title</span>
@@ -197,5 +198,5 @@
         });
 
     </script>
-    {{--<script type="text/javascript" src="{{url('/')}}/js/home.js"></script>--}}
+    <script type="text/javascript" src="/js/home.js"></script>
 @endsection

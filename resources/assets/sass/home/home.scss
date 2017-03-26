@@ -46,6 +46,11 @@
 .partie-point-home{
     .row{
         padding: 10vh 0;
+
+        .explication-oblyk {
+            text-indent:2em;
+            text-align: justify;
+        }
     }
 }
 
@@ -65,7 +70,6 @@
         left: 0;
     }
 }
-
 
 //ANIMATION SVG
 #nuage_1{animation: animation_nuage 14s infinite linear;}
@@ -89,12 +93,21 @@
 @keyframes animation_croix_2 {0% {fill-opacity: 0;} 30% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
 @keyframes animation_croix_3 {0% {fill-opacity: 0;} 55% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
 
-//#bras {animation: animation_bras 2s infinite;}
-//@keyframes animation_bras {
-//    //0% {transform: rotate(0deg);}
-//    //33%{transform: rotate(-5deg);}
-//    //66%{transform: rotate(5deg);}
-//    //100%{transform: rotate(0deg);}
-//    0% {d: 'm 298.95099,570.8705 c 2.47,-4.0778 1.8593,-11.89644 2.14657,-18.62469 l -1.64149,-2.65165 c 0.24902,-0.95695 0.36762,-1.88683 0.1894,-2.77792 l -0.37881,-1.89403 c 0.7941,-0.74498 1.85761,-1.08584 3.15673,-1.07329 0.90026,1.06719 1.95298,1.92095 2.46224,3.53554 l -0.31567,3.40926 c 1.20596,8.65828 -0.04,17.51238 -0.82655,24.51021 z';}
-//    100%{d: 'm 198.95099,570.8705 c 2.47,-4.0778 1.8593,-11.89644 2.14657,-18.62469 l -1.64149,-2.65165 c 0.24902,-0.95695 0.36762,-1.88683 0.1894,-2.77792 l -0.37881,-1.89403 c 0.7941,-0.74498 1.85761,-1.08584 3.15673,-1.07329 0.90026,1.06719 1.95298,1.92095 2.46224,3.53554 l -0.31567,3.40926 c 1.20596,8.65828 -0.04,17.51238 -0.82655,24.51021 z';}
-//}
+#text_fermeture{animation: animation_fermeture 10s infinite;}
+#text_nettoyage{animation: animation_nettoyage 10s infinite;}
+@keyframes animation_fermeture {0% {opacity: 0;} 20%{opacity: 1;} 40% {opacity: 1;} 50% {opacity: 0;} 60% {opacity: 0;} 80% {opacity: 0;} 100%{opacity: 0;}}
+@keyframes animation_nettoyage {0% {opacity: 0;} 20%{opacity: 0;} 40% {opacity: 0;} 50% {opacity: 0;} 60% {opacity: 1;} 80% {opacity: 1;} 100% {opacity: 0;}}
+
+#bras_gauche{animation : animation_bras_gauche 0.3s infinite;}
+@keyframes animation_bras_gauche {
+    0% {transform: translate(0px,0px);}
+    50% {transform: translate(0.1%,0.1%);}
+    100% {transform: translate(0px,0px);}
+}
+
+#bras_droit{animation : animation_bras_droit 0.3s infinite;}
+@keyframes animation_bras_droit {
+    0% {transform: translate(0px,0px);  }
+    80% {transform: translate(0.1%,0%);}
+    100% {transform: translate(0px,0px);}
+}

@@ -234,7 +234,7 @@
                     style="fill:#ac9d93;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
             <g
                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.23086357px;line-height:125%;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#241f1c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                    id="text7660">
+                    id="text_nettoyage">
                 <path
                         d="m 147.75059,695.86458 q 0.3347,0 0.3347,0.68439 l -0.12989,0.41962 0.04,1.124 0.34469,5.32025 -0.0699,0.27475 0.13488,0.82926 q -0.13488,0.31972 -0.27975,0.34969 l -0.20481,0 q -0.25478,0 -0.82427,-2.07814 -1.68849,-4.68582 -2.0082,-4.82569 -0.18484,0 -0.27476,2.3429 l 0.0699,0.96914 -0.0699,0.62444 0.14487,2.13809 -0.20482,0.27476 -0.0749,0 q -0.36967,0 -0.41962,-0.20482 l 0.14487,-2.00321 -0.0699,-0.0699 0.0699,-0.34969 0,-2.89741 q 0,-0.82426 0.27475,-1.24389 l 0,-0.13488 -0.27475,-0.34969 0,-0.20481 q 0.13488,-0.27476 0.40963,-0.27476 0.30473,0 1.17395,2.20803 0.41963,0.80928 1.24889,3.52186 l 0.5545,1.10401 0.06,0 0,-0.75433 -0.37966,-5.21034 0.0649,-0.95915 -0.0649,-0.34968 q 0.0549,-0.20482 0.27975,-0.27476 z"
                         id="path12215" />
@@ -380,7 +380,7 @@
             </g>
             <g
                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.23086357px;line-height:125%;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#241f1c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                    id="text12191">
+                    id="text_fermeture">
                 <path
                         d="m 148.57236,695.40499 0.20481,0.27476 0,0.0599 q 0,0.18484 -1.30883,0.34969 -0.97413,0.30473 -0.97413,1.24888 l -0.0699,1.51365 0.0699,0.20482 1.38377,-0.3397 0.13987,0.13488 0,0.13988 q 0,0.15486 -1.03907,0.33969 0,0.13488 -0.40964,0.21481 -0.18483,0 -0.5545,4.06138 l -0.0699,0.48956 0,0.69937 -0.40963,0.27476 -0.34969,-0.27476 q 0.75932,-2.61266 0.75932,-4.84067 -0.48456,-0.15486 -0.48456,-0.34969 0,-0.15986 0.48456,-0.41963 l 0.0699,-0.27475 0,-1.29884 0.0699,-1.10401 -0.21481,-0.35968 q 0,-0.19483 0.49456,-0.46958 l 0.0599,0.0599 0.69438,0 q 1.07404,-0.3347 1.45371,-0.3347 z"
                         id="path12196" />
