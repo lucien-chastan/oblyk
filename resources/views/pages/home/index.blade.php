@@ -25,7 +25,7 @@
                     <h2>Check les infos des falaises</h2>
                     <p class="explication-oblyk">
                         Oblyk est une grande base de donnée des falaises d'escalades de france et du monde constament enrichie par la communauté,
-                        tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte
+                        tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte.
                     </p>
                 </div>
 
@@ -44,7 +44,10 @@
                 </div>
                 <div class="col s12 m6 l6 order-2">
                     <h2>Tiens un carnet de croix</h2>
-                    <p class="explication-oblyk">Garde une trace de tes sorties ou de ta progression en notant tes croix</p>
+                    <p class="explication-oblyk">
+                        Bon pour la mémoire, la progression et la motivation, tenir un carnet de croix à beaucoup d'avantage.<br>
+                        Oblyk te permet de facilement faire ça, tu pourras ensuite visualiser ta progression grâce à de nombres façon d'analyser et afficher ton carnet de croix
+                    </p>
                 </div>
             </div>
 
@@ -52,8 +55,8 @@
                 <div class="col s12 m6 l6">
                     <h2>Trouve un partenaire de grimpe</h2>
                     <p class="explication-oblyk">
-                        Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu'un avec qui grimper ?
-                        Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu'un avec qui grimper
+                        Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu'un avec qui grimper en falaise ou en salle ?<br>
+                        Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu'un avec qui grimper.
                     </p>
                 </div>
 
@@ -75,8 +78,9 @@
                 <div class="col s12 m6 l6 order-2">
                     <h2>Reste au courant</h2>
                     <p class="explication-oblyk">
-                        Grâce à son système de flux, oblyk te tiendra au courant de ce qui se passe autour de toi, reçoit les
-                        dernières news des falaises, salles, grimpeurs que tu suis
+                        Oblyk intégre un système de flux simple qui te permet d'être au courant de l'activité des falaises autour de chez toi.<br>
+                        Par exemple s'il y a une mission "Nettoyage Printanier", l'organisateur post dans le flux de la falaise et hop !
+                        tous les intéréssés sont au courant et peuvent venir aider.
                     </p>
                 </div>
             </div>
@@ -87,8 +91,8 @@
                     <h2>Rejoins-nous !</h2>
                     <p class="explication-oblyk">
                         En rejoingnant oblyk tu auras librement accès à tous les infos de la communauté, te tenir au courant de ce qui se passe dans le
-                        monde de la grimpe, tu pourras tenir un carnet de croix pour t'aider à progresser ou pour le garde un souvenire de tes passages en falaise.<br>
-                        Mais tu pouras aussi participer à l'élaboration d'une grande base de connaissance commune en contribuant au site
+                        monde de la grimpe, tu pourras tenir un carnet de croix pour t'aider à progresser ou pour garder un souvenire de tes passages en falaise.<br>
+                        Et tu pouras participer à l'élaboration d'une grande base de connaissance commune des sites d'escalades de France et du monde !
                     </p>
                     <p class="center">
                         <a class="waves-effect waves-light btn">Créer un compte</a>
@@ -118,12 +122,12 @@
                 <div class="card hoverable">
                     <div class="card-image">
                         <img src="/img/oblyk-home-baume-rousse.jpg">
-                        <span class="card-title">Card Title</span>
+                        <span class="card-title">Oblyk 3.0</span>
                     </div>
                     <div class="card-content">
                         <p>
-                            I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.
+                            Après quelques mois de développement, le voici, Oblyk 3 !!,
+                            Avec lui plein d'améliorations arrivent, lisez la suite pour en savoir plus
                         </p>
                     </div>
                     <div class="card-action">
@@ -134,13 +138,13 @@
             <div class="col s12 m12 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="/img/oblyk-home-baume-rousse.jpg">
-                        <span class="card-title">Card Title</span>
+                        <img src="/img/photo-video-forum-escalade-conseil.jpg">
+                        <span class="card-title">Oblyk j-3</span>
                     </div>
                     <div class="card-content">
                         <p>
-                            I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.
+                            On y est presque, les derniers tests sont en cours, très bientôt vous découvrirez
+                            à quoi ressemble la nouvelle monture d'oblyk, rdv dans 3 Jours ...
                         </p>
                     </div>
                     <div class="card-action">
@@ -151,19 +155,22 @@
             <div class="col s12 m12 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="/img/oblyk-home-baume-rousse.jpg">
-                        <span class="card-title">Card Title</span>
+                        <img src="/img/evenement-escalade-forum-oblyk.jpg">
+                        <span class="card-title">Concours Photo</span>
                     </div>
                     <div class="card-content">
                         <p>
-                            I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.
+                            Vous n'êtes pas sans savoir qu'une nouvelle version d'oblyk est dans les tuyaux,
+                            pour sa sortie nous allons avoir besoin de quelques belles photo
                         </p>
                     </div>
                     <div class="card-action">
                         <a href="#">Lire la suite</a>
                     </div>
                 </div>
+            </div>
+            <div class="col s12 m12 l12 text-right">
+                <a>Plus d'actu</a>
             </div>
         </div>
 
