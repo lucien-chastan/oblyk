@@ -1,21 +1,38 @@
-.brand-logo{
-    font-family: 'Loved by the King', cursive;
-    font-size: 1em;
-    transition: opacity 0.3s;
+.oblyk-navbar{
 
-    .logo-de-oblyk{
-        margin-left: 10px;
-        vertical-align: middle;
+    .brand-logo{
+        font-family: 'Loved by the King', cursive;
+        font-size: 2em;
+        transition: opacity 0.3s;
+
+        .logo-de-oblyk{
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        &:hover{
+            opacity: 0.8;
+        }
     }
 
-    &:hover{
-        opacity: 0.8;
+    .dropdown-content{
+        white-space: nowrap;
+        a {
+            color: rgb(80,80,80) !important;
+        }
     }
-}
 
-//break point smartphone
-@media (max-width: 600px) {
-    .brand-logo {
-        display: none !important;
+    .dropD-180{width: 180px;}
+    .dropD-200{width: 200px;}
+    .dropD-210{width: 210px;}
+    .dropD-220{width: 220px;}
+    .dropD-auto{width: auto;}
+
+    //break point smartphone
+    @media (max-width: 600px) {
+        .brand-logo {
+            display: none !important;
+        }
     }
+
 }

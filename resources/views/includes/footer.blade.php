@@ -10,7 +10,7 @@
                 <li><a class="grey-text text-lighten-3" href="#!">Le projet</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">À propos</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Soutenir le projet</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons tiny red-text">favorite</i> Soutenir le projet</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">Développeur &amp; API</a></li>
             </ul>
         </div>
