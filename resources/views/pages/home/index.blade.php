@@ -206,12 +206,5 @@
 
 @section('script')
     {{--js particulier à la page--}}
-    <script>
-
-        $(document).ready(function(){
-            $('.parallax').parallax();
-        });
-
-    </script>
     <script type="text/javascript" src="/js/home.js"></script>
 @endsection

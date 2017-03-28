@@ -5,5 +5,10 @@
 {{--Ficher Js commun à toutes les pages--}}
 <script type="text/javascript" src="/js/app.js"></script>
 
+<script type="text/javascript">
+    {{--initialisation du paralax--}}
+    $(document).ready(function(){$('.parallax').parallax();});
+</script>
+
 {{--inclusion de script particulier à une page--}}
 @yield('script')

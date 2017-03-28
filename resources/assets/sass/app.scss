@@ -20,3 +20,13 @@
 .text-justify{text-align: justify;}
 .text-left{text-align: left;}
 .text-bold{font-weight: bold;}
+
+//parallax par defaut d'oblyk
+.parallax-default {
+    height:30vh !important;
+    .img-parallax-default{
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+    }
+}
