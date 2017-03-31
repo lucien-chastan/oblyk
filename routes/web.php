@@ -11,10 +11,23 @@
 |
 */
 
+//page d'accueille
 Route::get('/', function () {
     return view('pages.home.index');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+//Route::get('/home', 'HomeController@index');
+
+//page liée au projet
+Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
+Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
+Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
+Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
+Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
+Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('supportUs');
+Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
+Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+

@@ -23,13 +23,13 @@
 
     {{--DROPDOWN DU PROJET--}}
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
-        <li><a href="#!"><i class="material-icons left">landscape</i>Le projet</a></li>
-        <li><a href="#!"><i class="material-icons left">group</i>Qui sommes-nous ?</a></li>
-        <li><a href="#!"><i class="material-icons left">email</i>Conctact</a></li>
-        <li><a href="#!"><i class="material-icons left">donut_small</i>À propos</a></li>
-        <li><a href="#!"><i class="material-icons left">school</i>Aide</a></li>
-        <li><a href="#!"><i class="material-icons left red-text">favorite</i>Nous soutenire</a></li>
-        <li><a href="#!"><i class="material-icons left">code</i>Développeur &amp; API</a></li>
+        <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>Le projet</a></li>
+        <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>Qui sommes-nous ?</a></li>
+        <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>Conctact</a></li>
+        <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>À propos</a></li>
+        <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aide</a></li>
+        <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenire</a></li>
+        <li><a href="{{ route('developer') }}"><i class="material-icons left">code</i>Développeur &amp; API</a></li>
     </ul>
 
     {{--DROPDOWN DES OUTILS--}}
