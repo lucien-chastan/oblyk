@@ -95,7 +95,7 @@
                         Et tu pouras participer à l'élaboration d'une grande base de connaissance commune des sites d'escalades de France et du monde !
                     </p>
                     <p class="center">
-                        <a class="waves-effect waves-light btn">Créer un compte</a>
+                        <a href="{{ route('register') }}" class="waves-effect waves-light btn">Créer un compte</a>
                     </p>
                 </div>
 

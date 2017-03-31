@@ -53,6 +53,7 @@
                         <button type="submit" class="btn waves-effect waves-light">
                             Connexion
                         </button>
+                        <p class="text-center"><a href="{{ route('register') }}">Pas de compte ?</a></p>
                     </div>
                 </form>
             </div>
