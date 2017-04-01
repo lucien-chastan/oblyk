@@ -31,3 +31,5 @@ Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('sup
 Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
 Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
+//carte
+Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');

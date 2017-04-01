@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function crags(){
+        return $this->hasMany('App\Crag','user_id', 'id');
+    }
 }
