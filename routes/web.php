@@ -33,3 +33,6 @@ Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->
 
 //carte
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
+
+//outdoor
+Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage');

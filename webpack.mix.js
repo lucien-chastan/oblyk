@@ -19,7 +19,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')
-    .copy('resources/assets/js/home.js', 'public/js');
+    .copy('resources/assets/js/home.js', 'public/js')
+    .copy('resources/assets/js/map.js', 'public/js');
 
 //leaflet
 mix.copy('resources/assets/framework/leaflet/leaflet.css', 'public/framework/leaflet')
