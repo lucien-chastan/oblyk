@@ -6,9 +6,26 @@
 
 //style des popups pour la partie map
 .leaflet-popup-content{
+    margin : 0;
 
+    .crag-leaflet-info {
+        margin: 5px;
+    }
 }
 
-.leaflet-popup-tip-container {
-    display: none;
+.leaflet-popup-content-wrapper{
+    padding: 0 0 1px 0;
+}
+.photo-couve-site-leaflet{
+    width: 100%;
+    height: 100px;
+    min-width: 300px;
+    object-fit: cover;
+}
+
+.titre-crag-leaflet{
+    font-size: 2.5em;
+    margin: 0 0 5px 0;
+    text-align: center;
+    a { color: inherit;  }
 }
