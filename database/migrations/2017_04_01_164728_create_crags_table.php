@@ -23,6 +23,10 @@ class CreateCragsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->double('lat',9,6);
             $table->double('lng',9,6);
+            $table->boolean('type_voie');
+            $table->boolean('type_grande_voie');
+            $table->boolean('type_bloc');
+            $table->boolean('type_deep_water');
             $table->softDeletes();
             $table->timestamps();
 

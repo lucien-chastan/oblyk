@@ -20,6 +20,10 @@ class CragsTableSeeder extends Seeder
             'user_id' => 1,
             'lat' => 44.469432,
             'lng' => 5.057882,
+            'type_voie' => 1,
+            'type_grande_voie' => 1,
+            'type_bloc' => 0,
+            'type_deep_water' => 0,
         ]);
 
         DB::table('crags')->insert([
@@ -31,6 +35,10 @@ class CragsTableSeeder extends Seeder
             'user_id' => 2,
             'lat' => 44.473142,
             'lng' => 5.140590,
+            'type_voie' => 1,
+            'type_grande_voie' => 0,
+            'type_bloc' => 0,
+            'type_deep_water' => 0,
         ]);
     }
 }

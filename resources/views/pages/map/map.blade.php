@@ -21,9 +21,9 @@
         //chargement de la map
         loadMap();
 
-        //boucle sur les falaises
+        //boucle sur les falaises pour ajouter les marqueurs sur la carte
         @foreach($crags as $crag)
-            L.marker([{{$crag['lat']}},{{$crag['lng']}}]).bindPopup('<a href="/site-escalade/{{$crag['id']}}/{{str_slug($crag['label'])}}">{{$crag['label']}}</a>').addTo(map);
+            L.marker([{{$crag['lat']}},{{$crag['lng']}}], {icon: marker_{{$crag['type_voie']}}{{$crag['type_grande_voie']}}{{$crag['type_bloc']}}{{$crag['type_deep_water']}}}).bindPopup('<a href="/site-escalade/{{$crag['id']}}/{{str_slug($crag['label'])}}">{{$crag['label']}}</a><br>').addTo(map);
         @endforeach
 
         //passage de la barre de navigation en noir

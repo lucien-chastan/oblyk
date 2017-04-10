@@ -454,7 +454,7 @@
 .leaflet-popup-content-wrapper {
 	padding: 1px;
 	text-align: left;
-	border-radius: 12px;
+	border-radius: 0px;
 	}
 .leaflet-popup-content {
 	margin: 13px 19px;
