@@ -23,7 +23,9 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/map.js', 'public/js');
 
 //leaflet
-mix.copy('resources/assets/framework/leaflet/leaflet.css', 'public/framework/leaflet')
+mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/markercluster.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/leaflet.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
 

@@ -19,6 +19,7 @@ class CreateCragsTable extends Migration
             $table->integer('rock');
             $table->char('code_country',2);
             $table->string('country',255);
+            $table->string('city',255);
             $table->string('region',255);
             $table->integer('user_id')->unsigned();
             $table->double('lat',9,6);

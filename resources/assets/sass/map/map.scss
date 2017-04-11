@@ -23,9 +23,59 @@
     object-fit: cover;
 }
 
-.titre-crag-leaflet{
-    font-size: 2.5em;
-    margin: 0 0 5px 0;
-    text-align: center;
-    a { color: inherit;  }
+
+.crag-leaflet-info {
+
+    table {
+        td {
+            padding: 5px 3px 5px 0 !important;
+        }
+        tr {
+            border: 1px #c3c3c3;
+            border-top-style: solid;
+
+            td:first-child {
+                text-align: right;
+                font-weight: bold;
+            }
+        }
+
+        .btn-vers-crags {
+            text-align: right;
+            a{
+                margin-top: 5px;
+                color: white;
+            }
+        }
+        .material-icons {
+            vertical-align: sub;
+        }
+
+        .type-grimpe{
+            span{
+                font-weight: bold;
+                &:after {
+                    content: ', ';
+                    color: black;
+                    font-weight: normal;
+                }
+                &:last-child{
+                    &:after{
+                        display: none;
+                    }
+                }
+            }
+            .voie{color: #3771C8}
+            .grande-voie{color: #FF5555}
+            .bloc{color: #ffcc00}
+            .deep-water{color: #87cdde}
+        }
+    }
+
+    .titre-crag-leaflet{
+        font-size: 2.5em;
+        margin: 0 0 5px 0;
+        text-align: center;
+        a {color: inherit;}
+    }
 }
