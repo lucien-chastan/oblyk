@@ -1,0 +1,16 @@
+//parallax par defaut d'oblyk
+.crag-parallax {
+    height: 50vh !important;
+    .img-crag-parallax{
+        width: 100%;
+        height: 60vh;
+        object-fit: cover;
+    }
+}
+
+.info-crag{
+    h2 {
+        margin: 0;
+        font-size: 2em;
+    }
+}

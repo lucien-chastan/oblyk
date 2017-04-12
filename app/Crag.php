@@ -10,4 +10,8 @@ class Crag extends Model
         return $this->hasOne('App\User','id', 'user_id');
     }
 
+    public function rocks(){
+        return $this->hasOne('App\Rock','id', 'rock_id');
+    }
+
 }

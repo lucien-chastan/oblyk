@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Crag;
+use App\Rock_;
 use Illuminate\Http\Request;
 
 class CragController extends Controller
 {
-    function cragPage($crag_id, $crag_label){
+    function cragPage($crag_id, $crag_title){
 
-        $crag = Crag::findOrFail($crag_id);
+        $crag = Crag::where('id', $crag_id)->with('rocks')->first();
 
         $data = [
             'crag' => $crag,

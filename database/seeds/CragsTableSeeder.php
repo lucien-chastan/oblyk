@@ -13,7 +13,7 @@ class CragsTableSeeder extends Seeder
     {
         DB::table('crags')->insert([
             'label' => 'Rocher des Aures',
-            'rock' => 1,
+            'rock_id' => 3,
             'code_country' => 'fr',
             'city' => 'Roche-St-Secret',
             'country' => 'France',
@@ -29,7 +29,7 @@ class CragsTableSeeder extends Seeder
 
         DB::table('crags')->insert([
             'label' => 'Arzelier',
-            'rock' => 2,
+            'rock_id' => 8,
             'code_country' => 'fr',
             'city' => 'Teyssière',
             'country' => 'France',

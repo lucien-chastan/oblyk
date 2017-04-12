@@ -16,7 +16,7 @@ class CreateCragsTable extends Migration
         Schema::create('crags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label',255);
-            $table->integer('rock');
+            $table->integer('rock_id')->unsigned();
             $table->char('code_country',2);
             $table->string('country',255);
             $table->string('city',255);
@@ -33,6 +33,7 @@ class CreateCragsTable extends Migration
 
             //clé étrangère
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('rock_id')->references('id')->on('rocks');
         });
     }
 
@@ -44,6 +45,7 @@ class CreateCragsTable extends Migration
     public function down()
     {
         Schema::table('crags', function (Blueprint $table) {$table->dropForeign(['user_id']);});
+        Schema::table('crags', function (Blueprint $table) {$table->dropForeign(['rock_id']);});
         Schema::drop('crags');
     }
 }

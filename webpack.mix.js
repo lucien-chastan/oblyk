@@ -15,7 +15,8 @@ const { mix } = require('laravel-mix');
 mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/materialize/materialize.scss', 'public/css')
     .sass('resources/assets/sass/home/home.scss', 'public/css')
-    .sass('resources/assets/sass/map/map.scss', 'public/css');
+    .sass('resources/assets/sass/map/map.scss', 'public/css')
+    .sass('resources/assets/sass/crag/crag.scss', 'public/css');
 
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')
