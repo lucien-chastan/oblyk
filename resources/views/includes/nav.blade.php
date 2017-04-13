@@ -42,7 +42,7 @@
 
     {{--DROPDOWN DU PARTENAIRE--}}
     <ul id="dropdown_partenaire" class="dropdown-content dropD-220">
-        <li><a href="#!"><i class="material-icons left">map</i>Carte des grimpeurs</a></li>
+        <li><a href="#!"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
         <li><a href="#!"><i class="material-icons left">school</i>Comment ça marche</a></li>
     </ul>
 
