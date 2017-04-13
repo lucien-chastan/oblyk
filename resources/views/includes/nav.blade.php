@@ -61,7 +61,7 @@
             </a>
 
             {{--icone de menu quand on est sur smartphone--}}
-            <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i> <span>Menu</span></a>
 
             {{--menu type desktop--}}
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -81,67 +81,77 @@
             </ul>
 
             {{--menu type mobile--}}
-            <ul class="side-nav" id="side-nav">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
+            <div class="side-nav" id="side-nav">
+                <p class="center loved-king-font titre-nav-mobile"><a href="/">Oblyk</a></p>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">person</i>
+                            @if (Auth::guest())
+                                Connexion
+                            @else
+                                {{ Auth::user()->name }}
+                            @endif
+                        </div>
+                        <div class="collapsible-body">
+                            <ul>
+                                @if (Auth::guest())
+                                    <li><a href="{{ route('login') }}"><i class="material-icons left">person</i>Connexion</a></li>
+                                    <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>Créer un compte</a></li>
+                                @else
+                                    <li><a href="#!"><i class="material-icons left">person</i>Mon profil</a></li>
+                                    <li><a href="#!"><i class="material-icons left">shuffle</i>Flux</a></li>
+                                    <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
+                                    <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
+                                    <li><a href="#!"><i class="material-icons left">settings</i>Paramètres</a></li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">power_settings_new</i>Déconnexion</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">group</i>Partenaire de grimpe</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
+                                <li><a href="#!"><i class="material-icons left">school</i>Comment ça marche</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">map</i>Carte &amp; Outils</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>Carte des falaises</a></li>
+                                <li><a href="#!"><i class="material-icons left">forum</i>Forum</a></li>
+                                <li><a href="#!"><i class="material-icons left">text_format</i>Lexique</a></li>
+                                <li><a href="#!"><i class="material-icons left">search</i>Recherche avancée</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">landscape</i>Le projet</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>Le projet</a></li>
+                                <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>Qui sommes-nous ?</a></li>
+                                <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>Conctact</a></li>
+                                <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>À propos</a></li>
+                                <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aide</a></li>
+                                <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenire</a></li>
+                                <li><a href="{{ route('developer') }}"><i class="material-icons left">code</i>Développeur &amp; API</a></li>
+                                <li><a href="{{ route('termsOfUse') }}"><i class="material-icons left">gavel</i>Mentions légales</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>
-
-{{--<nav class="navbar navbar-default navbar-static-top">--}}
-    {{--<div class="container">--}}
-        {{--<div class="navbar-header">--}}
-
-            {{--<!-- Collapsed Hamburger -->--}}
-            {{--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">--}}
-                {{--<span class="sr-only">Toggle Navigation</span>--}}
-                {{--<span class="icon-bar"></span>--}}
-                {{--<span class="icon-bar"></span>--}}
-                {{--<span class="icon-bar"></span>--}}
-            {{--</button>--}}
-
-            {{--<!-- Branding Image -->--}}
-            {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-                {{--{{ config('app.name', 'Laravel') }}--}}
-            {{--</a>--}}
-        {{--</div>--}}
-
-        {{--<div class="collapse navbar-collapse" id="app-navbar-collapse">--}}
-            {{--<!-- Left Side Of Navbar -->--}}
-            {{--<ul class="nav navbar-nav">--}}
-                {{--&nbsp;--}}
-            {{--</ul>--}}
-
-            {{--<!-- Right Side Of Navbar -->--}}
-            {{--<ul class="nav navbar-nav navbar-right">--}}
-                {{--<!-- Authentication Links -->--}}
-                {{--@if (Auth::guest())--}}
-                    {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
-                    {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
-                {{--@else--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
-                            {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                        {{--</a>--}}
-
-                        {{--<ul class="dropdown-menu" role="menu">--}}
-                            {{--<li>--}}
-                                {{--<a href="{{ route('logout') }}"--}}
-                                   {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                    {{--Logout--}}
-                                {{--</a>--}}
-
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                    {{--{{ csrf_field() }}--}}
-                                {{--</form>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--@endif--}}
-            {{--</ul>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</nav>--}}

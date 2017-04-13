@@ -1,5 +1,12 @@
 .oblyk-navbar{
 
+    .button-collapse{
+        span {
+            position: absolute;
+            top: 1px;
+            left: 33px;
+        }
+    }
     .brand-logo{
         font-family: 'Loved by the King', cursive;
         font-size: 2em;
@@ -35,4 +42,44 @@
         }
     }
 
+    .side-nav{
+        a {
+            color: black;
+        }
+    }
+
+    .collapsible{
+        color: black;
+        margin-bottom: 70px !important;
+
+        .material-icons{
+            float: none;
+            display: inline;
+            vertical-align: bottom;
+        }
+    }
+
+    .titre-nav-mobile{
+        margin: 0 5px;
+        border: 1px rgb(220, 220, 220);
+        border-bottom-style: solid;
+        a {
+            font-size: 2em;
+            &:hover{
+                background-color: rgb(255,255,255);
+            }
+        }
+    }
+
+    .collapsible-body{
+        padding: 0 0 2rem 0;
+
+        .material-icons{
+            margin: 0 14px 0 0;
+        }
+
+        a{
+            font-weight: 400 !important;
+        }
+    }
 }
