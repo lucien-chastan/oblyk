@@ -25,6 +25,17 @@ body{
     }
 }
 
+.petites-infos-crag{
+    ul {
+        margin: 0;
+        i {
+            vertical-align: bottom;
+        }
+        li{
+            padding: 5px 0;
+        }
+    }
+}
 @media screen and (max-width:600px){
     .crag-menu{
         i {display: inline;}
