@@ -33,13 +33,21 @@
             <div class="col s12 m8">
                 <div class="card-panel">
 
-                    <h2 class="loved-king-font">Informations sur {{$crag['label']}}</h2>
-                    <p>{{$crag['label']}} est un site d'escalade de {{$crag['rocks']['label']}}, on y trouve x lignes de {{$crag['type_voie']}}</p>
+                    <h2 class="loved-king-font">Informations sur {{ $crag->label }}</h2>
+                    <p>{{$crag['label']}} est un site d'escalade de {{ $crag->rocks->label }}, on y trouve x lignes de {{$crag->type_voie }}</p>
                 </div>
             </div>
             <div class="col s12 m4">
                 <div class="card-panel">
-                    petite infos
+                    petites informations<br>
+                    {{ $crag->orientations->north }}
+                    {{ $crag->orientations->south }}
+                    {{ $crag->orientations->east }}
+                    {{ $crag->orientations->west }}
+                    {{ $crag->orientations->north_east }}
+                    {{ $crag->orientations->north_west }}
+                    {{ $crag->orientations->south_west }}
+                    {{ $crag->orientations->south_east }}
                 </div>
             </div>
         </div>

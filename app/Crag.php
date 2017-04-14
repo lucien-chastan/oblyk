@@ -14,4 +14,8 @@ class Crag extends Model
         return $this->hasOne('App\Rock','id', 'rock_id');
     }
 
+    public function orientations(){
+        return $this->morphOne('App\Orientation', 'orientable');
+    }
+
 }
