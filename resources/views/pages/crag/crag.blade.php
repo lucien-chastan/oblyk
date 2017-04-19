@@ -93,10 +93,14 @@
         <div class="row">
             <div class="col s12">
                 <div class="card-panel">
-                    <h2 class="loved-king-font">Déscription par ce qui y grimpe</h2>
-                    <p>
-                        bla bla
-                    </p>
+                    <h2 class="loved-king-font">Déscription par se qui y grimpe</h2>
+
+                    @foreach ($crag->descriptions as $description)
+                        <p>
+                            {{$description->description}}
+                        </p>
+                        <p>Posté par : {{$description->user_id}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

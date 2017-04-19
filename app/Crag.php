@@ -22,4 +22,8 @@ class Crag extends Model
         return $this->morphOne('App\Season', 'seasontable');
     }
 
+    public function descriptions(){
+        return $this->morphMany('App\Description', 'descriptive');
+    }
+
 }

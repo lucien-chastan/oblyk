@@ -14,6 +14,7 @@ class CragController extends Controller
             ->with('rocks')
             ->with('orientations')
             ->with('seasons')
+            ->with('descriptions')
             ->first();
 
         $data = [

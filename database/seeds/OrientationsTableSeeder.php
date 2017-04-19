@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class OrientationsSeeder extends Seeder
+class OrientationsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

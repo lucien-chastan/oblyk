@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RocksSeeder extends Seeder
+class RocksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
