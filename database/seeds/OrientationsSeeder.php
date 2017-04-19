@@ -33,8 +33,8 @@ class OrientationsSeeder extends Seeder
             'west' => 1,
             'north_east' => 0,
             'north_west' => 0,
-            'south_east' => 1,
-            'south_west' => 0,
+            'south_east' => 0,
+            'south_west' => 1,
         ]);
     }
 }

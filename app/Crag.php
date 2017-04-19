@@ -18,4 +18,8 @@ class Crag extends Model
         return $this->morphOne('App\Orientation', 'orientable');
     }
 
+    public function seasons(){
+        return $this->morphOne('App\Season', 'seasontable');
+    }
+
 }

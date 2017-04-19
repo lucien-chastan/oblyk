@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RocksSeeder::class);
         $this->call(OrientationsSeeder::class);
+        $this->call(SeasonsSeeder::class);
         $this->call(UsersTableSeeder::class);
          $this->call(CragsTableSeeder::class);
     }
