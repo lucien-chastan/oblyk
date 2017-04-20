@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
-use App\Rock_;
 use Illuminate\Http\Request;
 
 class CragController extends Controller
@@ -15,6 +14,7 @@ class CragController extends Controller
             ->with('orientations')
             ->with('seasons')
             ->with('descriptions')
+            ->with('users')
             ->first();
 
         $data = [

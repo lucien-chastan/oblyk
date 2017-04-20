@@ -1,7 +1,7 @@
 
 //initialisation des composants pour materialize
 $(".button-collapse").sideNav();
-
+$('.modal').modal();
 
 //on blanchie la barre de navigation au scroll
 var backgroundNav = function () {

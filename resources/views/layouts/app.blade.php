@@ -17,6 +17,8 @@
             @include('includes.footer')
         </footer>
 
+        @include('includes.modal')
+
         @include('includes.scripts')
 
     </body>

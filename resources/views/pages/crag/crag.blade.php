@@ -95,12 +95,17 @@
                 <div class="card-panel">
                     <h2 class="loved-king-font">Déscription par se qui y grimpe</h2>
 
-                    @foreach ($crag->descriptions as $description)
-                        <p>
-                            {{$description->description}}
-                        </p>
-                        <p>Posté par : {{$description->user_id}}</p>
-                    @endforeach
+                    <div>
+                        @foreach ($crag->descriptions as $description)
+                            <p>
+                                {{$description->description}}
+                            </p>
+                            <p>Posté par : {{$description->user_id}}</p>
+                        @endforeach
+                    </div>
+                    <div class="text-right">
+                        <a href="#modal" data-position="top" data-delay="50" data-tooltip="Rédiger une déscription"  class="btn-floating btn waves-effect waves-light tooltipped"><i class="material-icons">mode_edit</i></a>
+                    </div>
                 </div>
             </div>
         </div>
