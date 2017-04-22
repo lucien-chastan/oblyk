@@ -10,11 +10,10 @@ class CragController extends Controller
     function cragPage($crag_id, $crag_title){
 
         $crag = Crag::where('id', $crag_id)
-            ->with('rocks')
-            ->with('orientations')
-            ->with('seasons')
-            ->with('descriptions')
-            ->with('users')
+            ->with('rock')
+            ->with('orientation')
+            ->with('season')
+            ->with('descriptions.user')
             ->first();
 
         $data = [

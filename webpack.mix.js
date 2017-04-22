@@ -21,7 +21,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/home.js', 'public/js')
-    .copy('resources/assets/js/map.js', 'public/js');
+    .copy('resources/assets/js/map.js', 'public/js')
+    .copy('resources/assets/js/crag.js', 'public/js');
 
 //leaflet
 mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')
@@ -29,6 +30,9 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
     .copy('resources/assets/framework/leaflet/leaflet.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
+
+//axios
+mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axios');
 
 //image
 mix.copy('resources/assets/img/','public/img/');

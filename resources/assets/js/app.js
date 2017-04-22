@@ -29,3 +29,24 @@ $('.nav-dropdown').dropdown({
         stopPropagation: false // Stops event propagation
     }
 );
+
+
+//FONCTION D'OUVERUTRE DES MODALES PERMETTANTS L'ÉDITION DU CONTENUE DES TABLES
+function openModal(route, data) {
+
+    let loadModal = $('#load-modal'),
+        contentModal = $('#modal-content');
+
+    //on montre le loader et cache le contenu
+    loadModal.style.display = 'block';
+    contentModal.style.display = 'none';
+
+    axios.get(route, data).then(function (response) {
+
+        contentModal.innerHTML = response.data;
+
+        //on cache le loader et on montre le contenu
+        loadModal.style.display = 'none';
+        contentModal.style.display = 'block';
+    })
+}

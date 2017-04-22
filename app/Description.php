@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Description extends Model
 {
 
-    public function users(){
+    public function user(){
         return $this->hasOne('App\User','id', 'user_id');
     }
 
