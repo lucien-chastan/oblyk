@@ -12,9 +12,7 @@
 */
 
 //page d'accueille
-Route::get('/', function () {
-    return view('pages.home.index');
-});
+Route::get('/', function () {return view('pages.home.index');});
 
 Auth::routes();
 
@@ -31,8 +29,10 @@ Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('sup
 Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
 Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
+
 //carte
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
+
 
 //outdoor
 Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage');
