@@ -34,19 +34,35 @@ $('.nav-dropdown').dropdown({
 //FONCTION D'OUVERUTRE DES MODALES PERMETTANTS L'ÉDITION DU CONTENUE DES TABLES
 function openModal(route, data) {
 
-    let loadModal = $('#load-modal'),
-        contentModal = $('#modal-content');
+    let loadModal = document.getElementById('load-modal'),
+        contentModal = document.getElementById('modal-content');
 
     //on montre le loader et cache le contenu
     loadModal.style.display = 'block';
     contentModal.style.display = 'none';
 
-    axios.get(route, data).then(function (response) {
+    //on change les ' par des " pour pouvoir parser en JSON
+    data = JSON.parse(data.replace(/[']/g,'"'));
+
+    //requête ajax
+    axios.post(route, data).then(function (response) {
 
         contentModal.innerHTML = response.data;
 
         //on cache le loader et on montre le contenu
         loadModal.style.display = 'none';
         contentModal.style.display = 'block';
-    })
+    });
 }
+
+window.onload = function () {
+  let btnModal = document.getElementsByClassName('btnModal');
+
+  for(let i = 0 ; i < btnModal.length ; i++){
+
+      let route = btnModal[i].getAttribute('data-route'),
+          data = btnModal[i].getAttribute('data-modal');
+
+      btnModal[i].addEventListener('click', function() {openModal(route, data);});
+  }
+};

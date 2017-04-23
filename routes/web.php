@@ -39,4 +39,4 @@ Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage');
 
 
 //MODAL
-Route::get('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
+Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');

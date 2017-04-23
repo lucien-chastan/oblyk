@@ -104,7 +104,7 @@
                         @endforeach
                     </div>
                     <div class="text-right">
-                        <a href="#modal" id="description-btn-modal" data-position="top" data-delay="50" data-tooltip="Rédiger une déscription"  class="btn-floating btn waves-effect waves-light tooltipped"><i class="material-icons">mode_edit</i></a>
+                        <a data-modal="{'crag_id':{{$crag->id}}}" data-route="{{route('descriptionModal')}}" href="#modal" id="description-btn-modal" data-position="top" data-delay="50" data-tooltip="Rédiger une déscription"  class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">mode_edit</i></a>
                     </div>
                 </div>
             </div>

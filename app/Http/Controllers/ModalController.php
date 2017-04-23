@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 class ModalController extends Controller
 {
-    function descriptionModal(){
-        
+
+    function descriptionModal(Request $request){
+
+        $data = [
+            'test'=>'une valeur',
+            'request'=> $request->input('crag_id')
+        ];
+
+        return view('modal.description', $data);
     }
 }
