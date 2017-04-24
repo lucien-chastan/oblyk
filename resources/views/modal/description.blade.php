@@ -1,10 +1,6 @@
-<?php
-use App\Lib\Inputs;
-?>
-
+@inject('Inputs','App\Lib\InputTemplates')
 
 <p>test</p>
-
-{{Inputs::Text()}}
+{!!$Inputs::test()!!}
 <p>{{$test}}</p>
 <p>{{$request}}</p>

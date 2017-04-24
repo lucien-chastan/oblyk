@@ -1,22 +1,17 @@
 <?php
+
 namespace App\Lib;
 
-class Inputs
-{
-    public static function Text()
-    {
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\ServiceProvider;
 
-        //$id = $options->id;
+class InputTemplates extends ServiceProvider{
 
-        $html = '
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="test" type="text" class="validate">
-                    <label for="first_name">First Name</label>
-                </div>
-            </div>
-        ';
+    public function __construct(){
+        //
+    }
 
-        return $html;
+    public static function test(){
+        return '<p>ok</p>';
     }
 }
