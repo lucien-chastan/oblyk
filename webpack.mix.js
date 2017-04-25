@@ -34,5 +34,9 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
 //axios
 mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axios');
 
+//Simple Markdown Editor
+mix.copy('resources/assets/framework/simplemde/simplemde.min.js', 'public/framework/simplemde')
+    .copy('resources/assets/framework/simplemde/simplemde.min.css', 'public/framework/simplemde');
+
 //image
 mix.copy('resources/assets/img/','public/img/');

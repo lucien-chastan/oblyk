@@ -1,3 +1,4 @@
+var sMDE;
 
 //initialisation des composants pour materialize
 $(".button-collapse").sideNav();
@@ -13,6 +14,7 @@ var backgroundNav = function () {
         nav_barre.setAttribute('class', nav_barre.className.replace('nav-black','nav-white'));
     }
 };
+
 //changement de la couleur du fond de la nav bar au scroll
 window.addEventListener('scroll', backgroundNav);
 
@@ -49,6 +51,10 @@ function openModal(route, data) {
 
         contentModal.innerHTML = response.data;
 
+        //création des simpleMDE s'il y en a
+
+        simpleMdeCreator();
+        
         //on cache le loader et on montre le contenu
         loadModal.style.display = 'none';
         contentModal.style.display = 'block';
@@ -66,3 +72,16 @@ window.onload = function () {
       btnModal[i].addEventListener('click', function() {openModal(route, data);});
   }
 };
+
+//fonction d'initialisation des simpleMDE
+function simpleMdeCreator() {
+    let smde = document.getElementById('simplemde_id');
+
+    if(typeof smde != "undefined"){
+        sMDE = new SimpleMDE(
+            {
+                element : smde
+            }
+        );
+    }
+}

@@ -2,6 +2,7 @@
 
 @section('css')
     <link href="/css/crag.css" rel="stylesheet">
+    <link href="/framework/simplemde/simplemde.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -164,4 +165,5 @@
 
 @section('script')
     <script src="/js/crag.js"></script>
+    <script src="/framework/simplemde/simplemde.min.js"></script>
 @endsection
