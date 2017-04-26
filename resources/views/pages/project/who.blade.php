@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="/css/project.css" rel="stylesheet">
+@endsection
+
 @section('content')
 
     {{--parallax--}}
@@ -21,6 +25,8 @@
 
                 <h2 class="loved-king-font text-center grey-text text-darken-3">Fabio Carmouche : </h2>
 
+                <img alt="Fabio aux blocs de La Payre" src="/img/site-escalade-bloc-la-payre.jpg" class="img-qui-somme-nous right right-img">
+                
                 <p>
                     Étant issu d'une famille où la grimpe est loin d'être le sport prédominant, je l'ai découverte sur le tard. Mais ça a été le coup de foudre direct ! (celui que vous voyez dans les films, avec la scène en slow motion, la petite musique de fond, etc.)
                 </p>
@@ -41,6 +47,8 @@
                 <p>
                     Après avoir passé mes 3-4 premières années à faire principalement de la voie, et de la falaise, je me suis ensuite orienté vers le bloc, qui offre un paquet d'avantages selon moi :
                 </p>
+
+                <img alt="Fabio dans le surplomb de la coquille à Franchard Hautes Plaines" src="/img/escalade-bloc-fontainebleau.jpg" class="img-qui-somme-nous left left-img">
 
                 <ul class="oblyk-ul">
                    <li>on se fait une séance à 4 ou 5 potes, où on partage des méthodes, des chutes, on s'encourage dans les pas durs : bref c'est hyper convivial et on se tape des fous rires</li>
@@ -69,8 +77,14 @@
                     Voilà pourquoi j'ai décidé de me lancer à corps perdu dans ce projet, en septembre 2015. Aujourd'hui, j'espère que nous arriverons à rassembler suffisamment de grimpeurs autour du projet, pour pouvoir le développer à sa juste mesure, parce qu'il en vaut vraiment la peine ! :)
                 </p>
 
+                
+                <p class="text-center">
+                    <img class="responsive-img" src="/img/site-bloc-annot.jpg" alt="Fabio dans le toit du cul du loup (Annot)">
+                </p>
+                
                 <h2 class="loved-king-font text-center grey-text text-darken-3">Lucien Chastan : </h2>
 
+                <img src="/img/escalade-cret-des-roches-pont-de-roide.jpg" alt="Lucien aux Crèt des Roches à Pont de Roide" class="img-qui-somme-nous right right-img">
                 <p>
                     L'escalade et moi, c'est une histoire qui remonte déjà pas mal d'années en arrière !
                 </p>
@@ -99,6 +113,8 @@
                     Si je devais garder une date marquante de ma carrière de grimpeur, ce serait mon premier 7a en falaise, que j'ai enchaîné il y a quelques années à l'Alençon dans la Drôme. Bon, ok, la voie était loin d'être majeure, et faisait 10m de haut… mais toujours est-il que ça a déclenché une belle progression dans ma grimpe par la suite !
                 </p>
 
+                <img src="/img/bloc-escalade-pierre-de-laitre-vosges.jpg" alt="Lucien dans une dalle à la Pierre de Laitre (Vosges)" class="img-qui-somme-nous left left-img">
+
                 <p>
                     Même si j'ai commencé ma carrière de grimpeur par de la falaise, aujourd'hui, j'ai obtenu le label « pur bloqueur » : c'est là où je prends le plus de plaisir. Je dirais que le dicton « plus c'est long, plus c'est bon » ne s'applique pas trop dans mon cas ! ;)
                 </p>
@@ -118,6 +134,10 @@
                 <p>
                     En tout cas, je me sens vraiment investi dans le projet, et je suis sûr qu'il aboutira. Mon plus grand souhait, c'est de fournir à la communauté un super outil, grâce à l'expérience que j'ai pu engranger en programmation web, et en tant que grimpeur !
                 </p>
+
+                {{--<p class="text-center">--}}
+                    {{--<img class="responsive-img" src="/img/bloc-froide-fontaine-vosges.jpg" alt="lucien à Froide Fontaine (Vosges)">--}}
+                {{--</p>--}}
 
                 <h2 class="loved-king-font text-center grey-text text-darken-3">
                     Et niveau organisation, qui fait quoi ?
