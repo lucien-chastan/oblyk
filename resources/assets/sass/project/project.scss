@@ -10,3 +10,50 @@
 .left-img{
     margin-right: 20px;
 }
+
+.titre-2-terms{
+    font-size: 1.8em;
+}
+
+.h3-mentions{
+    font-size: 1.2em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.sommaire-mention{
+
+    a{
+        color: inherit;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    li{
+        list-style: disc !important;
+        margin-left: 15px;
+    }
+
+    .li_sous_menu_mentions{
+        list-style: none !important;
+
+        .sous_sommaire_mentions{
+
+            li{
+                list-style: circle !important;
+            }
+
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.lien-vers-sommaire{
+    vertical-align: top;
+    font-weight: normal;
+    font-size: 10pt;
+}
