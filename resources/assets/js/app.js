@@ -52,8 +52,7 @@ function openModal(route, data) {
         contentModal.innerHTML = response.data;
 
         //création des simpleMDE s'il y en a
-
-        simpleMdeCreator();
+        //simpleMdeCreator();
         
         //on cache le loader et on montre le contenu
         loadModal.style.display = 'none';
@@ -75,13 +74,13 @@ window.onload = function () {
 
 //fonction d'initialisation des simpleMDE
 function simpleMdeCreator() {
-    let smde = document.getElementById('simplemde_id');
-
-    if(typeof smde != "undefined"){
-        sMDE = new SimpleMDE(
-            {
-                element : smde
-            }
-        );
-    }
+    // let smde = document.getElementById('simplemde_id');
+    //
+    // if(typeof smde != "undefined"){
+    //     sMDE = new SimpleMDE(
+    //         {
+    //             element : smde
+    //         }
+    //     );
+    // }
 }

@@ -37,7 +37,9 @@ mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axio
 
 //Simple Markdown Editor
 mix.copy('resources/assets/framework/simplemde/simplemde.min.js', 'public/framework/simplemde')
-    .copy('resources/assets/framework/simplemde/simplemde.min.css', 'public/framework/simplemde');
+    .copy('resources/assets/framework/simplemde/simplemde.min.css', 'public/framework/simplemde')
+    .copy('resources/assets/framework/simplemde/French.aff', 'public/framework/simplemde')
+    .copy('resources/assets/framework/simplemde/French.dic', 'public/framework/simplemde');
 
 //image
 mix.copy('resources/assets/img/','public/img/');
