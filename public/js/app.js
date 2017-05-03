@@ -84,3 +84,24 @@ function simpleMdeCreator() {
     //     );
     // }
 }
+
+function submitData(route, callback) {
+    let inputData = document.getElementsByClassName('input-data'),
+        data = {};
+
+    //créer un talbeau JSON des données à passer en paramètre
+    for(let i in inputData){
+        console.log(inputData[i]);
+        data[inputData[i].name] = inputData[i].value;
+    }
+
+    //lance la fonction post
+    axios.post(route,data).then(function (response) {
+        callback();
+    });
+    console.log(data);
+}
+
+function refresh() {
+    window.location.reload();
+}

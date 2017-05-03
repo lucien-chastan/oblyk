@@ -17,7 +17,7 @@ class InputTemplates extends ServiceProvider{
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : '';
 
-        return '<input type="hidden" name="' . $name . '" id="' . $id . '" value="' . $value . '">';
+        return '<input type="hidden" class="input-data" name="' . $name . '" id="' . $id . '" value="' . $value . '">';
     }
 
     //INPUT DU TYPE TEXT
@@ -29,7 +29,7 @@ class InputTemplates extends ServiceProvider{
 
         return '
             <div class="input-field col s12">
-                <input placeholder="' . $label . '" value="' . $value . '" id="'. $id .'" name="' . $name . '" type="text" class="validate">
+                <input placeholder="' . $label . '" value="' . $value . '" id="'. $id .'" name="' . $name . '" type="text" class="input-data">
                 <label class="active" for="' . $id . '">' . $label . '</label>
             </div>
         ';
@@ -53,7 +53,7 @@ class InputTemplates extends ServiceProvider{
 
         return '
             <div class="input-field col s12">
-                <textarea name="' . $name . '" id="mdTextarea" class="materialize-textarea md-textarea">' . $value . '</textarea>
+                <textarea name="' . $name . '" id="mdTextarea" class="materialize-textarea md-textarea input-data">' . $value . '</textarea>
                 <label for="mdTextarea">' . $label . '</label>
             </div>
         ';

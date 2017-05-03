@@ -40,3 +40,6 @@ Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage');
 
 //MODAL
 Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
+
+//DATA
+Route::post('/ajax-data/description', 'DescriptionController@descriptionAjaxData')->name('descriptionAjaxData');

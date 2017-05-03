@@ -10,7 +10,6 @@ class ModalController extends Controller
     function descriptionModal(Request $request){
 
         $data = [
-            'test'=>'une valeur',
             'request'=> $request->input('crag_id')
         ];
 
