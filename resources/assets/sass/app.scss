@@ -47,3 +47,23 @@
 .md-textarea{
     height: 200px !important;
 }
+
+.error-popup-text {
+    background-color: rgb(255,100,100);
+    text-align: center;
+    margin: 10px 0;
+    color: #ffffff;
+    border-radius: 2px;
+    padding: 5px;
+    display: none;
+}
+
+.div-submit-loader{
+    display: none;
+
+    .submit-loader{
+        display: inline-block;
+        width: 153px;
+        text-align: center;
+    }
+}

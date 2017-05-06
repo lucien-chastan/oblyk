@@ -39,8 +39,8 @@ $primary-color-dark: darken($primary-color, 15%) !default;
 
 $secondary-color: color("blue", "base") !default;
 $secondary-color-light: lighten($secondary-color, 15%) !default;
-$success-color: color("oblyk-success", "base") !default;
-$error-color: color("oblyk-error", "base") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "lighten-1") !default;
 $link-color: color("light-blue", "darken-1") !default;
 
 

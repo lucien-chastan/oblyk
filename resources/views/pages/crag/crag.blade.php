@@ -101,7 +101,7 @@
                             <p>
                                 {{$description->description}}
                             </p>
-                            <p>Posté par : {{$description->user->name}}</p>
+                            <p>par : {{$description->user->name}} le {{$description->created_at}}</p>
                         @endforeach
                     </div>
                     <div class="text-right">

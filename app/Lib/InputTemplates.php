@@ -11,14 +11,41 @@ class InputTemplates extends ServiceProvider{
         //
     }
 
+
+    //TITRE DE LA POPUP
+    public static function popupTitle($options){
+        $title = $options['title'];
+
+        return '
+            <div class="row">
+                <h5 class="loved-king-font text-center popup-title">' . $title . '</h5>
+            </div>
+        ';
+    }
+
+
+    //DIV QUI AFFICHE LES ERREURS DE LA POPUP
+    public static function popupError($options){
+
+        return '
+            <div id="errorPopupText" class="error-popup-text">
+                Message d\'error
+            </div>
+        ';
+    }
+
+
     //INPUT DU TYPE HIDDEN
     public static function Hidden($options){
         $name = $options['name'];
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : '';
 
-        return '<input type="hidden" class="input-data" name="' . $name . '" id="' . $id . '" value="' . $value . '">';
+        return '
+            <input type="hidden" class="input-data" name="' . $name . '" id="' . $id . '" value="' . $value . '">
+        ';
     }
+
 
     //INPUT DU TYPE TEXT
     public static function text($options){
@@ -35,6 +62,7 @@ class InputTemplates extends ServiceProvider{
         ';
     }
 
+
     //INPUT DE TYPE SIMPLE MARKDOWN EDITOR
     public static function SimpleMde($options){
         $name = $options['name'];
@@ -45,6 +73,7 @@ class InputTemplates extends ServiceProvider{
         ';
     }
 
+
     //INPUT DU TYPE ÉDITEUR DE MARKDOWN
     public static function mdText($options){
         $name = $options['name'];
@@ -53,22 +82,40 @@ class InputTemplates extends ServiceProvider{
 
         return '
             <div class="input-field col s12">
-                <textarea name="' . $name . '" id="mdTextarea" class="materialize-textarea md-textarea input-data">' . $value . '</textarea>
+                <textarea name="' . $name . '" id="' . $name . '" class="materialize-textarea md-textarea input-data">' . $value . '</textarea>
                 <label for="mdTextarea">' . $label . '</label>
             </div>
         ';
     }
+
 
     //INPUT DU TYPE SUBMIT
     public static function submit($options){
         $label = (isset($options['label']))? $options['label'] : 'Envoyer';
 
         return '
-        <div class="row text-right">
-            <button class="btn waves-effect waves-light" type="submit" name="action">' . $label . '
-                <i class="material-icons right">send</i>
-            </button>
-        </div>
+            <div class="row text-right" id="submit-btn">
+                <button class="btn waves-effect waves-light" type="submit" name="action">' . $label . '
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+            <div class="row text-right div-submit-loader" id="submit-loader">
+                <div class="submit-loader">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
         ';
     }
 }
