@@ -12,6 +12,7 @@
                 <li><a class="grey-text text-lighten-3" href="{{ route('about') }}">À propos</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('supportUs') }}"><i class="material-icons tiny red-text">favorite</i> Soutenir le projet</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('developer') }}">Développeur &amp; API</a></li>
+                <li><a data-modal="{'id':'global', 'model':'Page'}" data-target="modal" data-route="{{route('problemModal')}}" class="grey-text text-lighten-3 btnModal">Signaler un problème</a></li>
             </ul>
         </div>
     </div>
