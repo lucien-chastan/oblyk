@@ -17,7 +17,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/home/home.scss', 'public/css')
     .sass('resources/assets/sass/map/map.scss', 'public/css')
     .sass('resources/assets/sass/project/project.scss', 'public/css')
-    .sass('resources/assets/sass/crag/crag.scss', 'public/css');
+    .sass('resources/assets/sass/crag/crag.scss', 'public/css')
+    .sass('resources/assets/sass/markdown.scss', 'public/css');
 
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')
@@ -34,6 +35,9 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
 
 //axios
 mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axios');
+
+//marked
+mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
 
 //Simple Markdown Editor
 mix.copy('resources/assets/framework/simplemde/simplemde.min.js', 'public/framework/simplemde')

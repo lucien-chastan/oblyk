@@ -69,6 +69,9 @@ function specialAction() {
     try {
         inputCurrentPage.value = location.href;
     }catch (e){}
+
+    //resize les textarea
+    $('.md-textarea').trigger('autoresize');
 }
 
 //ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
@@ -180,4 +183,15 @@ function refresh() {
 //CALLBACK CLASSIQUE QUI FERME LA MODAL OUVERTE
 function closeModal() {
     $('#modal').modal('close');
+}
+
+//CONVERTIE LES ZONE MARKDOWN EN MARKDOWN
+function convertMarkdownZone() {
+    let markdown = document.getElementsByClassName('markdownZone');
+    for(let i = 0 ; i < markdown.length ; i++){
+        if(markdown[i].getAttribute('data-parsed') !== 'true'){
+            markdown[i].setAttribute('data-parsed','true');
+            markdown[i].innerHTML = marked(markdown[i].innerHTML);
+        }
+    }
 }
