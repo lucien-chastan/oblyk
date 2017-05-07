@@ -7,14 +7,14 @@ Dans oblyk, les modales servent d'interface pour enregistrer créer, supprimer d
 Dans le bouton qui ouvre une modal il faut :
 
 ```html
-    href="#modal"
+    data-target="modal"
     data-route="route de la modal"
-    data-modal="tableau JSON des donées à passer"
+    data-modal="tableau JSON des données à passer"
 ```
 
 ### data-route
 
-Utiliser blade : `data-route="{{route('cragModal')}}"` (configuré dans le fichier web php)
+Utiliser blade : `data-route="{{url('cragModal')}}"` (configuré dans le fichier web php)
 
 ### data-modal
 

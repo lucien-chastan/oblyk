@@ -51,11 +51,24 @@ function openModal(route, data) {
     axios.post(route, data).then(function (response) {
 
         contentModal.innerHTML = response.data;
-        
+
+        //lie des actions particulière à la modal
+        specialAction();
+
         //on cache le loader et on montre le contenu
         loadModal.style.display = 'none';
         contentModal.style.display = 'block';
     });
+}
+
+//FUNCTION D'AJOUT D'ACTION SPÉCIAL
+function specialAction() {
+
+    //si nous avons un input du type lien de la page courante
+    let inputCurrentPage = document.getElementById('inputCurrentPage');
+    try {
+        inputCurrentPage.value = location.href;
+    }catch (e){}
 }
 
 //ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
@@ -76,7 +89,7 @@ window.onload = function () {
 //CETTE FONCTION GÉRE LE SUBMIT DES DONNÉES EN AJAX
 function submitData(form, callback) {
     let inputData = form.getElementsByClassName('input-data'),
-        method = form.getAttribute('method'),
+        method = document.getElementById('_method').value,
         route = form.getAttribute('data-route'),
         errorPopupText = document.getElementById('errorPopupText'),
         data = {};
@@ -161,4 +174,10 @@ function showSubmitLoader(visible) {
 //CALLBACK BASIC APRÈS UN SUBMIT EN AJAX : UN REFRESH DE LA PAGE
 function refresh() {
     window.location.reload();
+}
+
+
+//CALLBACK CLASSIQUE QUI FERME LA MODAL OUVERTE
+function closeModal() {
+    $('#modal').modal('close');
 }

@@ -83,12 +83,27 @@ class DescriptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //validation du formulaire
+        $this->validate($request, [
+            'descriptive_id' => 'required|Integer',
+            'descriptive_type' => 'required|String',
+            'id' => 'required|Integer',
+            'description' => 'required|min:1|max:2000'
+        ]);
+
+        //enregistrement des données
+        $description = Description::where('id', $request->input('id'))->first();
+
+        if($description->user_id == Auth::id()){
+            $description->description = $request->input('description');
+            $description->save();
+        }
+
+        return response()->json(json_encode($description));
     }
 
     /**
@@ -99,6 +114,10 @@ class DescriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $description = Description::where('id', $id)->first();
+
+        if($description->user_id == Auth::id()){
+            $description->delete();
+        }
     }
 }

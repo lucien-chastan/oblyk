@@ -1,15 +1,18 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
-{!! $Inputs::popupTitle(['title'=>'Ajouter une description']) !!}
+{!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" method="POST" data-route="/descriptions" onsubmit="submitData(this, refresh); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, refresh); return false">
+
+    {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
+    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
+    {!! $Inputs::Hidden(['name'=>'descriptive_type','value'=>'App\Crag']) !!}
+    {!! $Inputs::Hidden(['name'=>'descriptive_id','value'=>$dataModal['crag_id']]) !!}
+
     <div class="row">
-        {!! $Inputs::Hidden(['name'=>'id','value'=>'']) !!}
-        {!! $Inputs::Hidden(['name'=>'descriptive_type','value'=>'App\Crag']) !!}
-        {!! $Inputs::Hidden(['name'=>'descriptive_id','value'=>$request]) !!}
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>'', 'label'=>'Description']) !!}
-        {!! $Inputs::Submit(['label'=>'Ajouter']) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description']) !!}
+        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 </form>
