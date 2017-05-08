@@ -13,7 +13,7 @@ function openModal(route, data) {
     contentModal.style.display = 'none';
 
     //on change les ' par des " pour pouvoir parser en JSON
-    data = JSON.parse(data.replace(/[']/g,'"'));
+    if(typeof data != 'object') data = JSON.parse(data.replace(/[']/g,'"'));
 
     //requête ajax
     axios.post(route, data).then(function (response) {
@@ -21,16 +21,20 @@ function openModal(route, data) {
         contentModal.innerHTML = response.data;
 
         //lie des actions particulière à la modal
-        specialAction();
+        specialAction(data);
 
         //on cache le loader et on montre le contenu
         loadModal.style.display = 'none';
         contentModal.style.display = 'block';
+
+        //on donne le focus au premier input
+        document.getElementsByClassName('input-data')[0].focus();
+
     });
 }
 
 //FUNCTION D'AJOUT D'ACTION SPÉCIAL
-function specialAction() {
+function specialAction(data) {
 
     //si nous avons un input du type lien de la page courante
     let inputCurrentPage = document.getElementById('inputCurrentPage');
@@ -52,6 +56,10 @@ function specialAction() {
     setTimeout(function () {
         try {creatInputMap();}catch (e){}
     },500);
+
+    if(data['MapReverseGeoCoding'] == true){
+        MapReverseGeoCoding();
+    }
 }
 
 //ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
@@ -163,6 +171,15 @@ function refresh() {
 //CALLBACK CLASSIQUE QUI FERME LA MODAL OUVERTE
 function closeModal() {
     $('#modal').modal('close');
+}
+
+
+//CALLBACK AVEC MESSAGE DE REMERCIMENT
+function closeProblemModal() {
+    $('#modal').modal('close');
+    setTimeout(function () {
+        Materialize.toast('Merci de votre signalement !<br>On va corriger ça rapidement', 3000);
+    },1500);
 }
 
 

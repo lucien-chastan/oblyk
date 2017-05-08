@@ -161,7 +161,7 @@ class InputTemplates extends ServiceProvider{
 
     public static function orientations($options){
         $label = (isset($options['label']))? $options['label'] : 'Orientations';
-        $value = (isset($options['value']))? $options['value'] : ['north'=>0,'south'=>0,'west'=>0,'north_east'=>0,'north_west'=>0,'south_east'=>0,'south_west'=>0];
+        $value = (isset($options['value']))? $options['value'] : ['north'=>0,'south'=>0,'east'=>0,'west'=>0,'north_east'=>0,'north_west'=>0,'south_east'=>0,'south_west'=>0];
         $col = (isset($options['col']))? $options['col'] : 12;
         $orientable_type = $options['orientable_type'];
         $orientable_id = $options['orientable_id'];

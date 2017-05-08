@@ -8,13 +8,13 @@
     bottom: 0%;
   }
   @media #{$medium-only} {
-    left: 5%;
-    bottom: 7%;
+    right: 10px;
+    top: 62px;
     max-width: 90%;
   }
   @media #{$large-and-up} {
-    top: 10%;
-    right: 7%;
+    top: 62px;
+    right: 10px;
     max-width: 86%;
   }
 }
@@ -53,6 +53,7 @@
 
   @media #{$small-and-down} {
     width:100%;
+    text-align: center;
     border-radius: 0;
   }
   @media #{$medium-only} {

@@ -79,3 +79,30 @@
         a {color: inherit;}
     }
 }
+
+#map {
+    .leaflet-top {
+        top:62px;
+    }
+
+    label {
+        color: rgb(0,0,0);
+        font-size: 1em;
+    }
+
+    [type="radio"]:checked, [type="radio"]:not(:checked) {
+        position: relative;
+        left: inherit;
+        opacity: 1;
+    }
+}
+
+.btn-toast-add{
+    width: 100%;
+    margin: auto !important;
+}
+
+.btn-add-map{
+    left: 23px;
+    right: inherit;
+}

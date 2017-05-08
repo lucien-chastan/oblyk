@@ -4,12 +4,7 @@
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, refresh); return false">
-
-    {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
-    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['crag']->id]) !!}
-    {!! $Inputs::Hidden(['name'=>'code_country','value'=>$dataModal['crag']->code_country]) !!}
-    {!! $Inputs::Hidden(['name'=>'country','value'=>$dataModal['crag']->country]) !!}
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['crag']->label, 'label'=>'Nom du site', 'placeholder'=>'Nom du site (exemple : Omblèze)','type'=>'text']) !!}
@@ -21,4 +16,9 @@
         {!! $Inputs::localisation(['lat'=>$dataModal['crag']->lat, 'lng'=>$dataModal['crag']->lng, 'label'=>'Localisation (cliquez sur la carte pour changer la localisation)']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
+
+    {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
+    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['crag']->id]) !!}
+    {!! $Inputs::Hidden(['name'=>'code_country','value'=>$dataModal['crag']->code_country]) !!}
+    {!! $Inputs::Hidden(['name'=>'country','value'=>$dataModal['crag']->country]) !!}
 </form>

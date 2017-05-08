@@ -11,6 +11,15 @@
     {{--contenu de la page--}}
     <div id="map"></div>
 
+    <div class="fixed-action-btn btn-add-map">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+        <ul>
+            <li><a onclick="startAdd('sae')" data-position="right" data-delay="50" data-tooltip="Ajouter une salle" class="btn-floating purple tooltipped"><i class="material-icons">store_mall_directory</i></a></li>
+            <li><a onclick="startAdd('crag')" data-position="right" data-delay="50" data-tooltip="Ajouter un site" class="btn-floating blue tooltipped" class="btn-floating blue"><i class="material-icons">terrain</i></a></li>
+        </ul>
+    </div>
 @endsection
 
 

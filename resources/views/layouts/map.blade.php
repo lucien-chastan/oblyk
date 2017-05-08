@@ -12,6 +12,8 @@
         @yield('content')
     </main>
 
+    @include('includes.modal')
+
     @include('includes.scripts')
 
     </body>

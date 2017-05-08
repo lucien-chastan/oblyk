@@ -40,8 +40,55 @@ class CragController extends Controller
      */
     public function store(Request $request)
     {
+        //validation du formulaire
+        $this->validate($request, [
+            'label' => 'required|String|max:255',
+            'city' => 'required|String|max:255',
+            'region' => 'required|String|max:255'
+        ]);
 
+        //information sur la falaise
+        $crag = new Crag();
+        $crag->label = $request->input('label');
+        $crag->rock_id = $request->input('rock_id');
+        $crag->code_country = $request->input('code_country');
+        $crag->country = $request->input('country');
+        $crag->city = $request->input('city');
+        $crag->region = $request->input('region');
+        $crag->user_id = Auth::id();
+        $crag->lat = $request->input('lat');
+        $crag->lng = $request->input('lng');
+        $crag->type_voie = 0;
+        $crag->type_bloc = 0;
+        $crag->type_deep_water = 0;
+        $crag->type_grande_voie = 0;
+        $crag->save();
 
+        //information sur la saison
+        $season = new Season();
+        $season->seasontable_id = $crag->id;
+        $season->seasontable_type = 'App\Crag';
+        $season->summer = $request->input('summer');
+        $season->autumn = $request->input('autumn');
+        $season->winter = $request->input('winter');
+        $season->spring = $request->input('spring');
+        $season->save();
+
+        //information sur l'orientation
+        $orientation = new Orientation();
+        $orientation->orientable_id = $crag->id;
+        $orientation->orientable_type = 'App\Crag';
+        $orientation->north = $request->input('north');
+        $orientation->east = $request->input('east');
+        $orientation->south = $request->input('south');
+        $orientation->west = $request->input('west');
+        $orientation->north_east = $request->input('north_east');
+        $orientation->north_west = $request->input('north_west');
+        $orientation->south_east = $request->input('south_east');
+        $orientation->south_west = $request->input('south_west');
+        $orientation->save();
+
+        return response()->json(json_encode($crag));
     }
 
     /**
@@ -81,11 +128,12 @@ class CragController extends Controller
             'region' => 'required|String|max:255'
         ]);
 
-        //enregistrement des donnée de la falaise
+        //mise à jour des données de la falaise
         $crag = Crag::where('id', $request->input('id'))->first();
 
         $crag->label = $request->input('label');
         $crag->city = $request->input('city');
+        $crag->rock_id = $request->input('rock_id');
         $crag->region = $request->input('region');
         $crag->lat = $request->input('lat');
         $crag->lng = $request->input('lng');

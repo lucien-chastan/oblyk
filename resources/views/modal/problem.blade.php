@@ -4,12 +4,7 @@
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" data-route="{{ route('sendProblem') }}" onsubmit="submitData(this, closeModal); return false">
-
-    {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
-    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
-    {!! $Inputs::Hidden(['name'=>'model','value'=>$dataModal['model']]) !!}
-    {!! $Inputs::Hidden(['name'=>'page','value'=>'', 'id'=>'inputCurrentPage']) !!}
+<form class="submit-form" data-route="{{ route('sendProblem') }}" onsubmit="submitData(this, closeProblemModal); return false">
 
     <div class="row">
         <div class="col s12">
@@ -25,4 +20,9 @@
         {!! $Inputs::mdText(['name'=>'problem', 'value'=>'', 'label'=>'Problème', 'placeholder'=>'Dit-nous quel est le problème que tu as rencontré pour que nous puissions le résoudre']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
+
+    {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
+    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
+    {!! $Inputs::Hidden(['name'=>'model','value'=>$dataModal['model']]) !!}
+    {!! $Inputs::Hidden(['name'=>'page','value'=>'', 'id'=>'inputCurrentPage']) !!}
 </form>

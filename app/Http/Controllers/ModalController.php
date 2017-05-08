@@ -40,7 +40,15 @@ class ModalController extends Controller
     function cragModal(Request $request){
 
         $id = $request->input('id');
-        $crag = isset($id) ? Crag::where('id', $id)->with('orientation')->with('season')->first() : new Crag();
+        if(isset($id)){
+            $crag = Crag::where('id', $id)->with('orientation')->with('season')->first();
+            $callback = 'refresh';
+        }else{
+            $crag = new Crag();
+            $crag->lat = $request->input('lat');
+            $crag->lng = $request->input('lng');
+            $callback = 'refresh';
+        }
 
         //définition du chemin de sauvgarde
         $outputRoute = ($request->input('method') == 'POST')? '/crags' : '/crags/' . $id;
@@ -50,7 +58,8 @@ class ModalController extends Controller
                 'crag' => $crag,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
-                'route' => $outputRoute
+                'route' => $outputRoute,
+                'callback' => $callback
             ]
         ];
 
