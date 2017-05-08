@@ -7,7 +7,7 @@
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  max-height: calc(100% - 20px);
   width: 55%;
   margin: auto;
   overflow-y: auto;
@@ -16,7 +16,7 @@
   will-change: top, opacity;
 
   @media #{$medium-and-down} {
-   width: 80%;
+   width: calc(100% - 20px);
   }
 
   h1,h2,h3,h4 {
@@ -25,6 +25,11 @@
 
   .modal-content {
     padding: 24px;
+
+    @media #{$medium-and-down} {
+      padding: 0;
+    }
+
   }
   .modal-close {
     cursor: pointer;

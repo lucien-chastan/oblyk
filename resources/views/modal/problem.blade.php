@@ -22,7 +22,6 @@
 
     <div class="row">
         {!! $Inputs::text(['name'=>'email', 'value'=>$dataModal['email'], 'label'=>'Ton e-mail (optionel)', 'placeholder'=>'si tu veux un retour','type'=>'email']) !!}
-{{--        {!! $Inputs::text(['name'=>'page', 'id'=>'inputCurrentPage', 'value'=>'', 'label'=>'Page où il y a un problème', 'placeholder'=>'exemple : www.oblyk.org', 'type'=>'url']) !!}--}}
         {!! $Inputs::mdText(['name'=>'problem', 'value'=>'', 'label'=>'Problème', 'placeholder'=>'Dit-nous quel est le problème que tu as rencontré pour que nous puissions le résoudre']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>

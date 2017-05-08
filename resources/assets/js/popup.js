@@ -1,3 +1,6 @@
+var inputMap,
+    markerInputMap;
+
 
 //FONCTION D'OUVERUTRE DES MODALES PERMETTANTS L'ÉDITION DU CONTENUE DES TABLES
 function openModal(route, data) {
@@ -31,12 +34,24 @@ function specialAction() {
 
     //si nous avons un input du type lien de la page courante
     let inputCurrentPage = document.getElementById('inputCurrentPage');
-    try {
-        inputCurrentPage.value = location.href;
-    }catch (e){}
+    try {inputCurrentPage.value = location.href;}catch (e){}
 
     //resize les textarea
     $('.md-textarea').trigger('autoresize');
+
+    //init les selects
+    $('select').material_select();
+
+    //color les branches de la boussole dans l'input orientation
+    colorOrientation();
+
+    //color les icônes de saison
+    colorSaison();
+
+    //créer la map de localisation (s'il y en a une)
+    setTimeout(function () {
+        try {creatInputMap();}catch (e){}
+    },500);
 }
 
 //ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
@@ -148,4 +163,91 @@ function refresh() {
 //CALLBACK CLASSIQUE QUI FERME LA MODAL OUVERTE
 function closeModal() {
     $('#modal').modal('close');
+}
+
+
+//CHANGE L'ORIENTATION DANS UN INPUT DU TYPE ORIENTATION
+function switchOrientation(inputHidden) {
+    let input = document.getElementById(inputHidden);
+    input.value = (input.value == 1)? 0 : 1;
+    colorOrientation();
+}
+
+//COLOR LES BRANCHES DE LA BOUSSOLE SUIVANT SI SES INPUTS SONT À 1 OU 0
+function colorOrientation() {
+    let hiddenInput = document.getElementsByClassName('hidden_orientation_input'),
+        pathOrientation = document.querySelectorAll(".orientations-input path");
+
+    for(let i = 0 ; i < hiddenInput.length ; i++){
+        pathOrientation[i].style.fill = (hiddenInput[i].value == 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+    }
+}
+
+//CHANGE LA SAISON DANS UN INPUT DU TYPE SAISON
+function switchSaison(inputHidden) {
+    let input = document.getElementById(inputHidden);
+    input.value = (input.value == 1)? 0 : 1;
+    colorSaison();
+}
+
+//COLOR LES ICÔNES DE SAISON SUIVANT SI SES INPUTS SONT À 1 OU 0
+function colorSaison() {
+    let hiddenInput = document.getElementsByClassName('hidden_season_input'),
+        pathSaison = document.querySelectorAll(".season-input path");
+
+    for(let i = 0 ; i < hiddenInput.length ; i++){
+        pathSaison[i].style.fill = (hiddenInput[i].value == 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+    }
+}
+
+
+//CRÉATION DE LA MAP
+function creatInputMap() {
+    let lat = parseFloat(document.getElementById('lat-hidden-input').value),
+        lng = parseFloat(document.getElementById('lng-hidden-input').value),
+        defautLat = (lat == 0)? 46.927527 : lat,
+        defautLng = (lng == 0)? 2.871905 : lng,
+        defautZoom = (lat == 0 && lng == 0)? 5 : 16;
+
+    //définition des différents style de tuile
+    let carte = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
+        satellite   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+
+    //création de la map
+    inputMap = L.map('input-map',{ zoomControl : true, center:[defautLat, defautLng], zoom : defautZoom, layers: [carte]});
+
+    //création du controlleur de tuile
+    let baseMaps = {
+        "Relief": carte,
+        "Satellite": satellite
+    };
+
+    //ajout du controleur de tuile
+    L.control.layers(baseMaps).addTo(inputMap);
+
+    if(lat != 0 || lng != 0){
+        markerInputMap = L.marker([lat,lng], {}).addTo(inputMap);
+    }
+
+    inputMap.on('click', pointMarkerInputMap);
+
+    //on change le curseur pour une croix
+    document.getElementById('input-map').style.cursor = 'crosshair';
+
+}
+
+
+//CHANGE L'EMPLACEMENT DU POINT SUR LA CARTE
+function pointMarkerInputMap(e) {
+    let lat = document.getElementById('lat-hidden-input'),
+        lng = document.getElementById('lng-hidden-input');
+
+    lat.value = e['latlng']['lat'];
+    lng.value = e['latlng']['lng'];
+
+    try{
+        markerInputMap.setLatLng(e['latlng']);
+    }catch(e) {
+        markerInputMap = L.marker(e['latlng'], {}).addTo(inputMap);
+    }
 }

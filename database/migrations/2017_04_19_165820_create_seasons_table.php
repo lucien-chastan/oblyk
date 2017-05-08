@@ -21,6 +21,7 @@ class CreateSeasonsTable extends Migration
             $table->boolean('autumn');
             $table->boolean('winter');
             $table->boolean('spring');
+            $table->timestamps();
         });
     }
 

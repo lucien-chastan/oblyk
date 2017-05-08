@@ -1,5 +1,9 @@
 <div id="modal" class="modal">
+
+    <i class="material-icons right close-btn-popup" onclick="$('#modal').modal('close');">close</i>
+
     <div class="modal-content">
+
 
         {{--zone de load de la modal--}}
         <div id="load-modal" class="text-center">

@@ -50,6 +50,10 @@ body{
             word-spacing: -10px;
             font-size: 45px;
             background-color: rgba(0,0,0,0.7);
+
+            span {
+                display: none;
+            }
         }
 
         p{
@@ -81,13 +85,13 @@ body{
             vertical-align: bottom;
         }
         li{
-            padding: 5px 0;
-        }
-
-        .saison {
-            text-align: center;
+            padding: 0 0 10px 0;
         }
     }
+}
+
+.boussole {
+    margin-top: 4px;
 }
 
 .description-zone{
@@ -122,9 +126,56 @@ body{
 
 }
 
+.crag-type-grimpe{
+    span{
+        font-weight: bold;
+        &:after {
+            content: ', ';
+            color: black;
+            font-weight: normal;
+        }
+        &:last-child{
+            &:after{
+                display: none;
+            }
+        }
+    }
+    .type-voie{color: #3771C8}
+    .type-grande-voie{color: #FF5555}
+    .type-bloc{color: #ffcc00}
+    .type-deep-water{color: #87cdde}
+}
+
+.ligne-btn{
+    i {
+        opacity: 0.5;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 1;
+            color: #2196F3;
+        }
+    }
+}
+
+//version smartphone
 @media screen and (max-width:600px){
-    .crag-menu{
-        i {display: inline;}
-        span {display: none;}
+
+    .crag-menu-zone{
+        width: 100%;
+        .crag-menu{
+            i {display: inline;}
+            span {display: none;}
+        }
+    }
+
+    .entete-info{
+        margin-top: 60px;
+        .square-entete{display: none;}
+        .liste-info{display: block;}
+    }
+
+    .stretchCol{
+        flex-direction: column;
     }
 }

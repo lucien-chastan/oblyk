@@ -6,7 +6,7 @@
                 <img src="/img/site-{{$crag_type}}.svg" alt="">
             </div>
             <div class="liste-info">
-                <h1 class="loved-king-font">{{$label}}</h1>
+                <h1 class="loved-king-font"><span>site escalade </span>{{$label}}</h1>
                 <p>{{$city}}, {{$region}} ({{$code_country}})</p>
                 <p>x follower</p>
             </div>

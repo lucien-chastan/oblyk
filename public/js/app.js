@@ -3,7 +3,11 @@ var sMDE,
 
 //initialisation des composants pour materialize
 $(".button-collapse").sideNav();
-$('.modal').modal();
+$('.modal').modal(
+    {
+        endingTop: '10px', // Ending top style attribute
+    }
+);
 
 //on blanchie la barre de navigation au scroll
 var backgroundNav = function () {

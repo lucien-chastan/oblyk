@@ -3,6 +3,7 @@
 @section('css')
     <link href="/css/crag.css" rel="stylesheet">
     <link href="/css/markdown.css" rel="stylesheet">
+    <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/framework/simplemde/simplemde.min.css" rel="stylesheet">
 @endsection
 
@@ -21,13 +22,13 @@
     ))
 
     {{--Menu des falaises--}}
-    <div class="container">
+    <div class="container crag-menu-zone">
         @include('pages.crag.partials.nav')
     </div>
 
     {{--contenu de la page--}}
     <div class="container info-crag">
-        <div class="row">
+        <div class="row stretchCol">
 
             <div class="col s12 m7">
                 @include('pages.crag.partials.information')
@@ -42,7 +43,7 @@
             @include('pages.crag.partials.description')
         </div>
 
-        <div class="row">
+        <div class="row stretchCol">
             @include('pages.crag.partials.topos')
         </div>
 
@@ -50,7 +51,7 @@
             @include('pages.crag.partials.photos')
         </div>
 
-        <div class="row">
+        <div class="row stretchCol">
             @include('pages.crag.partials.graph')
         </div>
 
@@ -59,6 +60,7 @@
 @endsection
 
 @section('script')
+    <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/crag.js"></script>
     <script src="/framework/marked/marked.min.js"></script>
     <script>

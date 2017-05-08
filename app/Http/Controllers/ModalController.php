@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Crag;
 use App\Description;
 use App\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,26 @@ class ModalController extends Controller
         return view('modal.description', $data);
     }
 
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE FALAISE
+    function cragModal(Request $request){
+
+        $id = $request->input('id');
+        $crag = isset($id) ? Crag::where('id', $id)->with('orientation')->with('season')->first() : new Crag();
+
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/crags' : '/crags/' . $id;
+
+        $data = [
+            'dataModal' => [
+                'crag' => $crag,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute
+            ]
+        ];
+
+        return view('modal.crag', $data);
+    }
 
     //AFFICHE LA POPUP POUR SUPPRIMER UN ÉLÉMENT
     function deleteModal(Request $request){

@@ -77,3 +77,77 @@ footer {
         }
     }
 }
+
+.orientations-input{
+    path {
+        cursor: pointer;
+        transition: opacity 0.1s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.season-input {
+    svg {
+        vertical-align: bottom;
+        margin-right: 5px;
+    }
+
+    p {
+        cursor: pointer;
+        transition: opacity 0.1s;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}
+
+.close-btn-popup{
+    cursor: pointer;
+    margin-right: 5px;
+    margin-top: 5px;
+    transition: color 0.1s;
+    color : rgb(100,100,100);
+
+    &:hover{
+        color: red;
+    }
+}
+
+.input-map{
+    width: 100%;
+    height: 50vh;
+    margin-top: 5px;
+
+    label {
+        color: rgb(0,0,0);
+        font-size: 1em;
+    }
+
+    [type="radio"]:checked, [type="radio"]:not(:checked) {
+        position: relative;
+        left: inherit;
+        opacity: 1;
+    }
+}
+
+//pour que des colonnes placées côte à côte ai la même hauteur
+.stretchCol{
+    display: flex;
+    align-content: stretch;
+    flex-direction: row;
+
+    .card-panel {
+        height: calc(100% - 24px);
+    }
+}
+
+//version smartphone
+@media screen and (max-width:600px){
+    .stretchCol{
+        flex-direction: column;
+    }
+}

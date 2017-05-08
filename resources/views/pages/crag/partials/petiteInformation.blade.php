@@ -1,7 +1,8 @@
 <div class="card-panel">
     <div class="row">
-        <div class="col s5">
-            <svg version="1.1" viewBox="0 0 100.61393 100.61393" height="28.395487mm" width="28.395487mm">
+        <div class="col s5 m12 l5">
+            Orientation<br>
+            <svg class="boussole" version="1.1" viewBox="0 0 100.61393 100.61393" height="28.395487mm" width="28.395487mm">
                 <g transform="translate(-299.43062,-288.93568)">
                     <path class="tooltipped" data-position="top" data-delay="50" data-tooltip="Nord" style="fill:@if($crag->orientation->north){{'rgb(33,150,243)'}}@else{{'rgb(77,77,77)'}}@endif;fill-rule:evenodd;stroke:none" d="m 349.73758,288.93568 -11.20135,39.10561 11.20135,11.20135 0,-42.84708 9.54034,33.30673 1.66102,-1.661 z"></path>
                     <path class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ouest" style="fill:@if($crag->orientation->west){{'rgb(33,150,243)'}}@else{{'rgb(77,77,77)'}}@endif;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 338.53623,328.04129 -39.10561,11.20135 39.10561,11.20136 11.20135,-11.20136 -42.84704,0 33.30671,-9.54033 z"></path>
@@ -14,10 +15,11 @@
                 </g>
             </svg>
         </div>
-        <div class="col s7 petites-infos-crag">
+        <div class="col s7 m12 l7 petites-infos-crag">
             <ul>
-                <li><i class="material-icons">pin_drop</i> <a href="#!">{{$crag->lat}}, {{$crag->lng}}</a></li>
-                <li class="saison">
+                <li>Localisation<br> <a href="#!">{{$crag->lat}}, {{$crag->lng}}</a></li>
+                <li>
+                    Saisons favorable<br>
                     <svg class="tooltipped" data-position="top" data-delay="50" data-tooltip="Été" version="1.1" viewBox="0 0 24.999991 24.999999" height="7.0555553mm" width="7.055553mm">
                         <g transform="translate(-253.62697,-533.73525)">
                             <path style="fill:@if($crag->season->summer){{'rgb(33,150,243)'}}@else{{'rgb(77,77,77)'}}@endif;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 266.15215,533.73525 -2.49553,3.34322 -3.69292,-1.39604 -0.64907,3.94192 -3.8412,0.54834 1.24776,3.59222 -3.09422,2.74451 3.09422,2.39481 -1.4464,3.59501 4.03984,0.84769 0.64907,3.69293 3.69292,-1.29812 2.24653,2.99351 2.59345,-2.94315 3.89436,1.24776 0.54834,-3.79365 3.64256,-0.64906 -1.14704,-3.74048 3.19214,-2.24653 -3.2425,-2.84523 1.39604,-3.44114 -3.74049,-0.55114 -0.5987,-4.14056 -3.844,1.4464 -2.44516,-3.34322 z m -0.0419,4.328 a 8.2632674,8.2632674 0 0 1 8.26153,8.26153 8.2632674,8.2632674 0 0 1 -8.26153,8.26432 8.2632674,8.2632674 0 0 1 -8.26432,-8.26432 8.2632674,8.2632674 0 0 1 8.26432,-8.26153 z m 0,1.14705 a 7.1155426,7.1155426 0 0 0 -7.11728,7.11448 7.1155426,7.1155426 0 0 0 7.11728,7.11727 7.1155426,7.1155426 0 0 0 7.11448,-7.11727 7.1155426,7.1155426 0 0 0 -7.11448,-7.11448 z"></path>

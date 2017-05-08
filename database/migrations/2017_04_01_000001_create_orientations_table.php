@@ -25,6 +25,7 @@ class CreateOrientationsTable extends Migration
             $table->boolean('north_west');
             $table->boolean('south_east');
             $table->boolean('south_west');
+            $table->timestamps();
         });
     }
 

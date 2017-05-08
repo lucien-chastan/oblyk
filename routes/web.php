@@ -39,12 +39,14 @@ Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage');
 
 
 //MODAL
+Route::post('/modal/crag', 'ModalController@cragModal')->name('cragModal');
 Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
 Route::post('/modal/delete', 'ModalController@deleteModal')->name('deleteModal');
 Route::post('/modal/problem', 'ModalController@problemModal')->name('problemModal');
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');
+Route::resource('crags', 'CRUD\CragController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
