@@ -9,7 +9,16 @@
 @section('content')
 
     {{--parallax--}}
-    @include('includes.crag-parallax', array('imgSrc' => '/img/oblyk-home-baume-rousse.jpg', 'imgAlt' => 'Falaise de baume rousse'))
+    @include('includes.crag-parallax', array(
+        'imgSrc' => '/img/oblyk-home-baume-rousse.jpg',
+        'imgAlt' => 'Falaise de baume rousse',
+        'label' => $crag->label,
+        'city' => $crag->city,
+        'country' => $crag->country,
+        'region' => $crag->region,
+        'code_country' => $crag->code_country,
+        'crag_type' => $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water
+    ))
 
     {{--Menu des falaises--}}
     <div class="container">

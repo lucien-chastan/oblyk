@@ -12,6 +12,55 @@ body{
     background-color: rgb(248,248,248);
 }
 
+.entete-info{
+
+    margin-top: calc(50vh / 2 - 140px / 2);
+    position: relative;
+
+    .square-entete{
+        height: 140px;
+        width: 140px;
+        margin-right: 7px;
+        background-color: rgba(0,0,0,0.7);
+        display: inline-block;
+        text-align: center;
+
+        img{
+            max-height: 90px !important;
+            max-width: 90px !important;
+            display: inline;
+            margin-top: 20px;
+            position: relative;
+            min-width: 90px;
+            min-height: 90px;
+            transform: inherit;
+            left: inherit;
+            bottom: inherit;
+        }
+    }
+
+    .liste-info{
+        display: inline-block;
+        color: rgb(255,255,255);
+        vertical-align: top;
+
+        h1 {
+            margin: 0 0 9px 0;
+            padding: 5px 10px;
+            word-spacing: -10px;
+            font-size: 45px;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        p{
+            font-size: 14px;
+            margin: 0 0 9px 0;
+            background-color: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+        }
+    }
+}
+
 .crag-menu{
     i {
         vertical-align: text-bottom;

@@ -67,3 +67,13 @@
 .tiny-btn {
     font-size: 1.4em;
 }
+
+footer {
+    a {
+        cursor: pointer;
+        transition: opacity 0.1s;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
