@@ -63,6 +63,7 @@ class CragController extends Controller
         $crag->type_deep_water = 0;
         $crag->type_grande_voie = 0;
         $crag->save();
+        $crag->slug = str_slug($crag->label);
 
         //information sur la saison
         $season = new Season();

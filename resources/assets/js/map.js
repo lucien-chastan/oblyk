@@ -125,5 +125,6 @@ function MapReverseGeoCoding() {
 }
 
 function goToNewCrag(data) {
-    console.log(data);
+    let cragData = JSON.parse(data.data);
+    location.href = '/site-escalade/' + cragData.id + '/' + cragData.slug;
 }

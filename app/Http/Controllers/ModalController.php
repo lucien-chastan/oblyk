@@ -47,7 +47,9 @@ class ModalController extends Controller
             $crag = new Crag();
             $crag->lat = $request->input('lat');
             $crag->lng = $request->input('lng');
-            $callback = 'refresh';
+            $crag->code_country = 'NC';
+            $crag->country = 'Inconnu';
+            $callback = 'goToNewCrag';
         }
 
         //définition du chemin de sauvgarde
