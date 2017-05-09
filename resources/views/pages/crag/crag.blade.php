@@ -33,8 +33,8 @@
             @include('pages.crag.tabs.index')
         </div>
 
-        <div id="file-actu">
-            @include('pages.crag.tabs.file-actu')
+        <div id="fil-actu">
+            @include('pages.crag.tabs.fil-actu')
         </div>
 
         <div id="voies">

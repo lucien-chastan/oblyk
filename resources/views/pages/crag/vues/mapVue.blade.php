@@ -1,1 +1,1 @@
-C'est une vue !!
+vue de la map

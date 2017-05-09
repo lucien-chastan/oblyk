@@ -12,9 +12,23 @@ use Illuminate\Support\Facades\Auth;
 
 class CragVueController extends Controller
 {
-    //affiche la vue de la map
     function vueMap($id){
-
         return view('pages.crag.vues.mapVue');
+    }
+
+    function vueFilActu($id){
+        return view('pages.crag.vues.filActuVue');
+    }
+
+    function vueMedias($id){
+        return view('pages.crag.vues.mediasVue');
+    }
+
+    function vueLiens($id){
+        return view('pages.crag.vues.liensVue');
+    }
+
+    function vueTopos($id){
+        return view('pages.crag.vues.toposVue');
     }
 }
