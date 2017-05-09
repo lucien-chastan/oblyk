@@ -50,3 +50,6 @@ Route::resource('crags', 'CRUD\CragController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
+
+//VUE CRAG
+Route::get('/vue/crag/{crag_id}/map', 'Vue\CragVueController@vueMap')->name('vueMapCrag');

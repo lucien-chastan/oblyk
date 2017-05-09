@@ -1,5 +1,6 @@
 //parallax par defaut d'oblyk
 .crag-parallax {
+    min-height: 250px;
     height: 50vh !important;
     .img-crag-parallax{
         width: 100%;
@@ -92,6 +93,18 @@ body{
 
 .boussole {
     margin-top: 4px;
+}
+
+.icon-change-bandeau{
+    position: absolute;
+    bottom: 10px;
+    color: rgba(255,255,255,0.8);
+    transition: color 0.3s;
+    cursor: pointer;
+    right: 10px;
+    &:hover {
+        color: rgba(255,255,255,1);
+    }
 }
 
 .description-zone{

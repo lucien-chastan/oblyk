@@ -28,31 +28,33 @@
 
     {{--contenu de la page--}}
     <div class="container info-crag">
-        <div class="row stretchCol">
 
-            <div class="col s12 m7">
-                @include('pages.crag.partials.information')
-            </div>
-
-            <div class="col s12 m5">
-                @include('pages.crag.partials.petiteInformation')
-            </div>
+        <div id="index">
+            @include('pages.crag.tabs.index')
         </div>
 
-        <div class="row">
-            @include('pages.crag.partials.description')
+        <div id="file-actu">
+            @include('pages.crag.tabs.file-actu')
         </div>
 
-        <div class="row stretchCol">
-            @include('pages.crag.partials.topos')
+        <div id="voies">
+            @include('pages.crag.tabs.voies')
         </div>
 
-        <div class="row">
-            @include('pages.crag.partials.photos')
+        <div id="medias">
+            @include('pages.crag.tabs.medias')
         </div>
 
-        <div class="row stretchCol">
-            @include('pages.crag.partials.graph')
+        <div id="liens">
+            @include('pages.crag.tabs.liens')
+        </div>
+
+        <div id="topos">
+            @include('pages.crag.tabs.topos')
+        </div>
+
+        <div id="map">
+            @include('pages.crag.tabs.map')
         </div>
 
     </div>
@@ -62,6 +64,7 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/crag.js"></script>
+    <script src="/js/router.js"></script>
     <script src="/framework/marked/marked.min.js"></script>
     <script>
         convertMarkdownZone();

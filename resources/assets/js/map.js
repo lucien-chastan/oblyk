@@ -124,6 +124,7 @@ function MapReverseGeoCoding() {
     });
 }
 
+//Envoie sur la nouvelle page du site
 function goToNewCrag(data) {
     let cragData = JSON.parse(data.data);
     location.href = '/site-escalade/' + cragData.id + '/' + cragData.slug;

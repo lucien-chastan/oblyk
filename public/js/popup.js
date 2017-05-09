@@ -63,7 +63,7 @@ function specialAction(data) {
 }
 
 //ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
-window.onload = function () {
+window.addEventListener('load', function () {
     let btnModal = document.getElementsByClassName('btnModal');
 
     for(let i = 0 ; i < btnModal.length ; i++){
@@ -73,7 +73,7 @@ window.onload = function () {
 
         btnModal[i].addEventListener('click', function() {openModal(route, data);});
     }
-};
+});
 
 
 

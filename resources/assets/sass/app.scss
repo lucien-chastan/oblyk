@@ -145,6 +145,12 @@ footer {
     }
 }
 
+//loader ajax quand on change de route
+.ajax-loader{
+    padding: 50px 0;
+    text-align: center;
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{

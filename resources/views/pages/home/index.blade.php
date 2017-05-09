@@ -94,9 +94,11 @@
                         monde de la grimpe, tu pourras tenir un carnet de croix pour t'aider à progresser ou pour garder un souvenire de tes passages en falaise.<br>
                         Et tu pouras participer à l'élaboration d'une grande base de connaissance commune des sites d'escalades de France et du monde !
                     </p>
-                    <p class="center">
-                        <a href="{{ route('register') }}" class="waves-effect waves-light btn">Créer un compte</a>
-                    </p>
+                    @if(Auth::guest())
+                        <p class="center">
+                            <a href="{{ route('register') }}" class="waves-effect waves-light btn">Créer un compte</a>
+                        </p>
+                    @endif
                 </div>
 
                 <div class="col s12 m6 l6">
