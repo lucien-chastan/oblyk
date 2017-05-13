@@ -13,10 +13,11 @@ window.addEventListener('load', function () {
         if(routerTab[i].getAttribute('href') === ('#' + splitLocation[1])) {
 
             let route = routerTab[i].getAttribute('data-route'),
-                target = document.getElementById(splitLocation[1]);
+                target = document.getElementById(splitLocation[1]),
+                callback = routerTab[i].getAttribute('data-callback');
 
             //chargement du contenu de la page
-            ajaxRouter(route,target);
+            ajaxRouter(route,target, callback);
 
             //scoll de la page à zero
             window.scrollTo(0,0);
@@ -34,14 +35,29 @@ function loadTab() {
         loadedTab[tab.getAttribute('href')] = true;
 
         let route = tab.getAttribute('data-route'),
-            target = document.getElementById(tab.getAttribute('href').replace('#',''));
+            target = document.getElementById(tab.getAttribute('href').replace('#','')),
+            callback = tab.getAttribute('data-callback');
 
-        ajaxRouter(route,target);
+        ajaxRouter(route,target,callback);
 
     }
 }
 
 //FONCTION QUI CHARGE LE CONTENU DE L'ONGLET CIBLE
-function ajaxRouter(route, target) {
-    axios.get(route).then(function (response) {target.innerHTML = response.data;});
+function ajaxRouter(route, target,callback) {
+    axios.get(route).then(function (response) {
+        target.innerHTML = response.data;
+        if(callback !== '') callFunction(callback, window);
+    });
+}
+
+//APPEL UNE FUNCTION PAR SON NOM EN STRING
+function callFunction(functionName, context /*, args */) {
+    let args = [].slice.call(arguments).splice(2),
+        namespaces = functionName.split("."),
+        func = namespaces.pop();
+    for(let i = 0; i < namespaces.length; i++) {
+        context = context[namespaces[i]];
+    }
+    return context[func].apply(context, args);
 }
