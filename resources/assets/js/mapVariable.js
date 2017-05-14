@@ -20,6 +20,10 @@ let marker_1101 = L.icon({iconUrl: '/img/marker-1101.svg', iconSize: [24, 32], i
 let marker_1011 = L.icon({iconUrl: '/img/marker-1011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_0111 = L.icon({iconUrl: '/img/marker-0111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
+//marker de parking
+let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+
+
 //définition des différents style de tuile
 let carte = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
     satellite   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});

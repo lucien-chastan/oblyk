@@ -8,7 +8,7 @@
 </div>
 <div class="col s12 m5">
     <div class="card-panel">
-        <h2 class="loved-king-font">Topos web</h2>
+        <h2 class="loved-king-font">Topos web / PDF</h2>
         <p>
             liste des webs
         </p>

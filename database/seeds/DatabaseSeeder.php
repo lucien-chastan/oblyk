@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CragsTableSeeder::class);
         $this->call(DescriptionsTableSeeder::class);
         $this->call(LinksTableSeeder::class);
+        $this->call(ParkingsTableSeeder::class);
     }
 }

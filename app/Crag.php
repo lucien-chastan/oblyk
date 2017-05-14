@@ -31,6 +31,10 @@ class Crag extends Model
         return $this->morphMany('App\Link', 'linkable');
     }
 
+    public function parkings(){
+        return $this->hasMany('App\Parking','crag_id', 'id');
+    }
+
     public static function getCragsAroundPoint($lat, $lng, $rayon){
         //retourne les falaises dans un certain rayon
         $cragsInRayon = DB::select(

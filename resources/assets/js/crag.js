@@ -26,8 +26,22 @@ function initCragMap() {
                 [crags[i].lat,crags[i].lng],
                 {icon: markerIcon}
             ).bindPopup(buildPopup(crags[i])).addTo(cragMap);
-        }
 
+            if(crags[i].id == document.getElementById('cragId').value){
+                for(let j in crags[i].parkings){
+                    L.marker(
+                        [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
+                        {icon: marker_parking}
+                    ).bindPopup(`
+                        <div class="crag-leaflet-info parking-leaflet-info">
+                            <h2 class="loved-king-font titre-crag-leaflet"> Parking </h2>
+                            <div>${crags[i].parkings[j].description}</div>
+                        </div>
+                    `).addTo(cragMap);
+
+                }
+            }
+        }
     });
 
 }

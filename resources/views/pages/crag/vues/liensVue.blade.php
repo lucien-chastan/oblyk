@@ -3,8 +3,6 @@
 
         <div class="card-panel links-zone">
 
-            <h2 class="loved-king-font text-center">Les liens du site : {{$crag->label}}</h2>
-
             @foreach($crag->links as $link)
                 <div class="link-div">
                     <h6>{{$link->label}}</h6>

@@ -26,13 +26,13 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="138.56371"
-     inkscape:cy="586.14945"
+     inkscape:zoom="11.313708"
+     inkscape:cx="232.68024"
+     inkscape:cy="579.15833"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-center="true"
      inkscape:snap-bbox="true"
@@ -45,7 +45,8 @@
      inkscape:window-y="30"
      inkscape:window-maximized="1"
      inkscape:snap-page="true"
-     inkscape:snap-global="true">
+     inkscape:snap-global="false"
+     inkscape:bbox-paths="true">
     <sodipodi:guide
        position="38.949284,601.57032"
        orientation="1,0"
@@ -70,6 +71,22 @@
        position="152.00018,579.29193"
        orientation="0,1"
        id="guide6704" />
+    <sodipodi:guide
+       position="312,579.29191"
+       orientation="1,0"
+       id="guide6347" />
+    <sodipodi:guide
+       position="312.00018,589.75001"
+       orientation="0,1"
+       id="guide6355" />
+    <sodipodi:guide
+       position="301.5167,589.63868"
+       orientation="1,0"
+       id="guide6357" />
+    <sodipodi:guide
+       position="322.4833,589.59376"
+       orientation="1,0"
+       id="guide6359" />
   </sodipodi:namedview>
   <metadata
      id="metadata6246">
@@ -92,8 +109,8 @@
        id="rect6333"
        width="744.09448"
        height="150.8681"
-       x="1.5"
-       y="351.90045" />
+       x="18.4375"
+       y="354.46295" />
     <image
        y="0"
        x="0"
@@ -466,5 +483,13 @@
          d="m 152.00018,462.61221 c -5.78979,-1.6e-4 -10.48344,4.69332 -10.48348,10.48312 0.005,2.27913 0.73651,4.49464 2.11326,6.31097 l 0,0 8.37022,11.20591 8.36698,-11.20591 0,0 c 1.37532,-1.81682 2.11259,-4.0323 2.11614,-6.31097 -4e-5,-5.78966 -4.69347,-10.48308 -10.48312,-10.48312 z m 0,3.5095 c 3.8513,1.4e-4 6.97331,3.12232 6.97326,6.97362 5e-5,3.85129 -3.12196,6.97347 -6.97326,6.97361 -3.85144,5e-5 -6.97367,-3.12217 -6.97362,-6.97361 -5e-5,-3.85145 3.12218,-6.97367 6.97362,-6.97362 z"
          style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:1.50328279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:1.50328279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 215.77539 462.61133 C 214.21115 462.61133 212.95117 463.8713 212.95117 465.43555 L 212.95117 473.0957 L 212.95117 480.75586 C 212.95117 482.3201 214.21115 483.57812 215.77539 483.57812 L 218.18164 483.57812 L 223.43555 490.61133 L 228.6875 483.57812 L 231.09375 483.57812 C 232.658 483.57812 233.91797 482.3201 233.91797 480.75586 L 233.91797 473.0957 L 233.91797 465.43555 C 233.91797 463.8713 232.658 462.61133 231.09375 462.61133 L 223.43555 462.61133 L 215.77539 462.61133 z "
+       id="path6340" />
+    <path
+       style="fill:#0072bb;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 217.4375 465.33203 C 216.45866 465.33203 215.66992 466.11881 215.66992 467.09766 L 215.66992 479.0918 C 215.66992 480.07064 216.45866 480.85938 217.4375 480.85938 L 229.43164 480.85938 C 230.41049 480.85938 231.19922 480.07064 231.19922 479.0918 L 231.19922 467.09766 C 231.19922 466.11881 230.41049 465.33203 229.43164 465.33203 L 217.4375 465.33203 z M 219.21875 467.97266 L 223.60352 467.97266 C 224.90729 467.97266 225.90622 468.26277 226.60156 468.84375 C 227.30148 469.42016 227.65234 470.24398 227.65234 471.31445 C 227.65234 472.3895 227.30148 473.21785 226.60156 473.79883 C 225.90622 474.37523 224.90729 474.66406 223.60352 474.66406 L 221.85938 474.66406 L 221.85938 478.21875 L 219.21875 478.21875 L 219.21875 467.97266 z M 221.85938 469.88672 L 221.85938 472.74805 L 223.32227 472.74805 C 223.83463 472.74805 224.22876 472.62594 224.50781 472.37891 C 224.78687 472.1273 224.92773 471.77192 224.92773 471.31445 C 224.92773 470.85699 224.78687 470.50484 224.50781 470.25781 C 224.22876 470.01078 223.83463 469.88672 223.32227 469.88672 L 221.85938 469.88672 z "
+       id="rect6349" />
   </g>
 </svg>
