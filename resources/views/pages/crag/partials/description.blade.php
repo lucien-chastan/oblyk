@@ -2,11 +2,11 @@
     <div class="card-panel">
         <h2 class="loved-king-font">Déscription par ce qui y grimpe</h2>
 
-        <div class="description-zone">
+        <div class="blue-border-zone">
             @foreach ($crag->descriptions as $description)
-                <div class="description-div">
+                <div class="blue-border-div">
                     <div class="markdownZone">{{ $description->description }}</div>
-                    <p class="info-user-description grey-text">
+                    <p class="info-user grey-text">
                         par {{$description->user->name}} le {{$description->created_at->format('d M Y')}}
 
                         @if(Auth::check())

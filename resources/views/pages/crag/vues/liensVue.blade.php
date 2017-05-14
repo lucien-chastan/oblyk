@@ -3,14 +3,14 @@
 <div class="row">
     <div class="col s12">
 
-        <div class="card-panel links-zone">
+        <div class="card-panel blue-border-zone">
 
             @foreach($crag->links as $link)
-                <div class="link-div">
+                <div class="blue-border-div">
                     <h6>{{$link->label}}</h6>
                     <a target="_blank" href="{{$link->link}}">{{$link->link}}</a>
                     <div class="markdownZone">{{ $link->description }}</div>
-                    <p class="info-user-link grey-text">
+                    <p class="info-user grey-text">
                         ajouté par {{$link->user->name}} le {{$link->created_at->format('d M Y')}}
 
                         @if(Auth::check())

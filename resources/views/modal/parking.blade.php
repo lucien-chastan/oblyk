@@ -12,6 +12,7 @@
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 
+    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'crag_id','value'=>$dataModal['crag_id']]) !!}
 </form>
