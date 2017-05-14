@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Sector','user_id', 'id');
     }
 
+    public function lexiques(){
+        return $this->hasMany('App\Lexique','user_id', 'id');
+    }
+
     public function descriptions(){
         return $this->hasMany('App\Description','user_id', 'id');
     }
