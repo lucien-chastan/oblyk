@@ -1,3 +1,5 @@
+@inject('Helpers','App\Lib\HelpersTemplates')
+
 <div class="row">
     <div class="col s12">
 
@@ -12,10 +14,10 @@
                         ajouté par {{$link->user->name}} le {{$link->created_at->format('d M Y')}}
 
                         @if(Auth::check())
-                            <i data-modal="{'id':{{$link->id}}, 'model':'Link'}" data-route="{{route('problemModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Signaler un problème">flag</i>
+                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($link->user_id == Auth::id())
-                                <i data-modal="{'crag_id':{{$crag->id}}, 'link_id':{{$link->id}}, 'title':'Modifier le lien', 'method' : 'PUT'}" data-route="{{route('linkModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Modifier cette déscription">edit</i>
-                                <i data-modal="{'route' : '/links/{{$link->id}}'}" data-route="{{route('deleteModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Supprimer cette déscription">delete</i>
+                                <i {!! $Helpers::tooltip('Modifier ce lien') !!} {!! $Helpers::modal(route('linkModal'), ["crag_id"=>$crag->id, "link_id"=>$link->id, "title"=>"Modifier le lien", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip('Supprimer ce lien') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/links/" . $link->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @endif
                     </p>
@@ -25,7 +27,7 @@
             {{--BOUTON POUR AJOUTER UN LIEN--}}
             @if(Auth::check())
                 <div class="text-right">
-                    <a data-modal="{'crag_id':{{$crag->id}}, 'link_id':'', 'title':'Ajouter un lien', 'method' : 'POST'}" data-route="{{route('linkModal')}}" data-target="modal" id="description-btn-modal" data-position="top" data-delay="50" data-tooltip="Ajouter un lien"  class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
+                    <a {!! $Helpers::tooltip('Ajouter un lien') !!} {!! $Helpers::modal(route('linkModal'), ["crag_id"=>$crag->id, "link_id"=>"", "title"=>"Ajouter un lien", "method"=>"POST" ]) !!} id="description-btn-modal" class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
                 </div>
             @endif
         </div>

@@ -43,6 +43,7 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 Route::post('/modal/crag', 'ModalController@cragModal')->name('cragModal');
 Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
 Route::post('/modal/link', 'ModalController@linkModal')->name('linkModal');
+Route::post('/modal/parking', 'ModalController@parkingModal')->name('parkingModal');
 Route::post('/modal/delete', 'ModalController@deleteModal')->name('deleteModal');
 Route::post('/modal/problem', 'ModalController@problemModal')->name('problemModal');
 
@@ -50,6 +51,7 @@ Route::post('/modal/problem', 'ModalController@problemModal')->name('problemModa
 Route::resource('descriptions', 'CRUD\DescriptionController');
 Route::resource('links', 'CRUD\LinkController');
 Route::resource('crags', 'CRUD\CragController');
+Route::resource('parkings', 'CRUD\ParkingController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

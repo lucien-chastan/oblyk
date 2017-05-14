@@ -12,6 +12,10 @@ window.addEventListener('load', function () {
         //Si jamais le Hash est égale à l'élément du menu que l'on parcours, alors on charge l'onglet
         if(routerTab[i].getAttribute('href') === ('#' + splitLocation[1])) {
 
+            //on note comme quoi on charge l'onglet
+            loadedTab[routerTab[i].getAttribute('href')] = true;
+
+            //définition des paramètres de l'onglet
             let route = routerTab[i].getAttribute('data-route'),
                 target = document.getElementById(splitLocation[1]),
                 callback = routerTab[i].getAttribute('data-callback');
@@ -55,6 +59,8 @@ function ajaxRouter(route, target, callback) {
         //convertie les textes en markdown
         convertMarkdownZone();
 
+        //initialise les tooltip
+        $('.tooltipped').tooltip({delay: 50});
     });
 }
 

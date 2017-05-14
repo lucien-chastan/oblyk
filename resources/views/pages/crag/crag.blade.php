@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')
     <link href="/css/crag.css" rel="stylesheet">

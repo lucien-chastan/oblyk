@@ -25,7 +25,7 @@ class ParkingsTableSeeder extends Seeder
             'user_id' => 2,
             'lat' => 44.470047,
             'lng' => 5.136188,
-            'description' => 'Ne pas se garer ches les Gros',
+            'description' => 'Ne pas se garer chez les Gros',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
     }

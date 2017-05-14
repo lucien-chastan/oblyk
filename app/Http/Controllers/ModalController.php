@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Crag;
 use App\Description;
 use App\Link;
+use App\Parking;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -125,5 +126,37 @@ class ModalController extends Controller
         ];
 
         return view('modal.link', $data);
+    }
+
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN PARKING
+    function parkingModal(Request $request){
+
+        //construction de la définition (vide ou avec des infos)
+        $id_parking = $request->input('parking_id');
+        if (isset($id_parking)) {
+            $parking = Parking::where('id', $id_parking)->first();
+        } else {
+            $parking = new Parking();
+            $parking->lat = $request->input('lat');
+            $parking->lng = $request->input('lng');
+        }
+
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/parkings' : '/parkings/' . $id_parking;
+
+        $data = [
+            'dataModal' => [
+                'crag_id' => $request->input('crag_id'),
+                'lat' => $parking->lat,
+                'lng' => $parking->lng,
+                'description' => $parking->description,
+                'id' => $id_parking,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute
+            ]
+        ];
+
+        return view('modal.parking', $data);
     }
 }

@@ -10,10 +10,10 @@
                         par {{$description->user->name}} le {{$description->created_at->format('d M Y')}}
 
                         @if(Auth::check())
-                            <i data-modal="{'id':{{$description->id}}, 'model':'Description'}" data-route="{{route('problemModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Signaler un problème">flag</i>
+                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($description->user_id == Auth::id())
-                                <i data-modal="{'crag_id':{{$crag->id}}, 'description_id':{{$description->id}}, 'title':'Modifier la description', 'method' : 'PUT'}" data-route="{{route('descriptionModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Modifier cette déscription">edit</i>
-                                <i data-modal="{'route' : '/descriptions/{{$description->id}}'}" data-route="{{route('deleteModal')}}" data-target="modal" class="material-icons tiny-btn right tooltipped btnModal" data-position="top" data-delay="50" data-tooltip="Supprimer cette déscription">delete</i>
+                                <i {!! $Helpers::tooltip('Modifier cette déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["crag_id"=>$crag->id, "description_id"=>$description->id, "title"=>"Modifier la description", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip('Supprimer cette déscription') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/descriptions/".$description->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @endif
                     </p>
@@ -24,7 +24,7 @@
         {{--BOUTON POUR AJOUTER UNE DESCRIPTION--}}
         @if(Auth::check())
             <div class="text-right">
-                <a data-modal="{'crag_id':{{$crag->id}}, 'description_id':'', 'title':'Ajouter une description', 'method' : 'POST'}" data-route="{{route('descriptionModal')}}" data-target="modal" id="description-btn-modal" data-position="top" data-delay="50" data-tooltip="Rédiger une déscription"  class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">mode_edit</i></a>
+                <a {!! $Helpers::tooltip('Rédiger un déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["crag_id"=>$crag->id, "description_id"=>"", "title"=>"Ajouter une description", "method"=>"POST"]) !!} id="description-btn-modal"  class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">mode_edit</i></a>
             </div>
         @endif
     </div>

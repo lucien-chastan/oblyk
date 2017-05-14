@@ -12,7 +12,7 @@
     </p>
     @if(Auth::check())
         <div class="text-right ligne-btn">
-            <i data-modal="{'id':{{$crag->id}}, 'title':'Modifier ce site', 'method' : 'PUT'}" data-route="{{route('cragModal')}}" data-target="modal" data-position="top" data-delay="50" data-tooltip="Modifier les informations" class="material-icons tooltipped btnModal">edit</i>
+            <i {!! $Helpers::tooltip('Modifier les informations') !!} {!! $Helpers::modal(route('cragModal'), ["id"=>$crag->id, "title"=>"Modifier ce site", "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
         </div>
     @endif
 </div>
