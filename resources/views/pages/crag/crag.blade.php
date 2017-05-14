@@ -5,6 +5,7 @@
     <link href="/css/markdown.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/framework/simplemde/simplemde.min.css" rel="stylesheet">
+    <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -63,6 +64,7 @@
 
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
+    <script src="/js/mapVariable.js"></script>
     <script src="/js/crag.js"></script>
     <script src="/js/router.js"></script>
     <script src="/framework/marked/marked.min.js"></script>

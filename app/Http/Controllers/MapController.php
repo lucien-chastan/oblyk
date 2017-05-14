@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Crag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MapController extends Controller
 {
@@ -15,5 +16,17 @@ class MapController extends Controller
         ];
 
         return view('pages.map.map', $data);
+    }
+
+    //retourne les falaises dans un rayon autour d'un point donnée
+    public function getPopupMarkerAroundPoint($lat, $lng, $rayon){
+
+        $cragsInRayon = Crag::getCragsAroundPoint($lat, $lng, $rayon);
+        $crags = [];
+        foreach ($cragsInRayon as $crag) $crags[] = $crag->id;
+        $data = ['crags' => Crag::whereIn('id',$crags)->get()];
+
+        return response()->json($data);
+
     }
 }

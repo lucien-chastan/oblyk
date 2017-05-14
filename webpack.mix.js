@@ -16,6 +16,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/materialize/materialize.scss', 'public/css')
     .sass('resources/assets/sass/home/home.scss', 'public/css')
     .sass('resources/assets/sass/map/map.scss', 'public/css')
+    .sass('resources/assets/sass/map/popupMapStyle.scss', 'public/css')
     .sass('resources/assets/sass/project/project.scss', 'public/css')
     .sass('resources/assets/sass/crag/crag.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css');
@@ -26,7 +27,8 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/map.js', 'public/js')
     .copy('resources/assets/js/popup.js', 'public/js')
     .copy('resources/assets/js/router.js', 'public/js')
-    .copy('resources/assets/js/crag.js', 'public/js');
+    .copy('resources/assets/js/crag.js', 'public/js')
+    .copy('resources/assets/js/mapVariable.js', 'public/js');
 
 //leaflet
 mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Crag extends Model
 {
@@ -24,6 +25,20 @@ class Crag extends Model
 
     public function descriptions(){
         return $this->morphMany('App\Description', 'descriptive');
+    }
+
+    public static function getCragsAroundPoint($lat, $lng, $rayon){
+        //retourne les falaises dans un certain rayon
+        $cragsInRayon = DB::select(
+            'SELECT id FROM crags WHERE getRange(lat, lng, :lat, :lng) <= :rayon',
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'rayon' => $rayon * 1000
+            ]
+        );
+
+        return $cragsInRayon;
     }
 
 }

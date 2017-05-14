@@ -227,20 +227,20 @@ function creatInputMap() {
         defautZoom = (lat == 0 && lng == 0)? 5 : 16;
 
     //définition des différents style de tuile
-    let carte = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
-        satellite   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+    let cartePopupMap = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
+        satellitePopupMap   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
 
     //création de la map
-    inputMap = L.map('input-map',{ zoomControl : true, center:[defautLat, defautLng], zoom : defautZoom, layers: [carte]});
+    inputMap = L.map('input-map',{ zoomControl : true, center:[defautLat, defautLng], zoom : defautZoom, layers: [cartePopupMap]});
 
     //création du controlleur de tuile
-    let baseMaps = {
-        "Relief": carte,
-        "Satellite": satellite
+    let basePopUpMaps = {
+        "Relief": cartePopupMap,
+        "Satellite": satellitePopupMap
     };
 
     //ajout du controleur de tuile
-    L.control.layers(baseMaps).addTo(inputMap);
+    L.control.layers(basePopUpMaps).addTo(inputMap);
 
     if(lat != 0 || lng != 0){
         markerInputMap = L.marker([lat,lng], {}).addTo(inputMap);

@@ -17,10 +17,8 @@ window.addEventListener('load', function () {
                 callback = routerTab[i].getAttribute('data-callback');
 
             //chargement du contenu de la page
-            ajaxRouter(route,target, callback);
+            ajaxRouter(route, target, callback);
 
-            //scoll de la page à zero
-            window.scrollTo(0,0);
         }
     }
 
@@ -38,13 +36,13 @@ function loadTab() {
             target = document.getElementById(tab.getAttribute('href').replace('#','')),
             callback = tab.getAttribute('data-callback');
 
-        ajaxRouter(route,target,callback);
+        ajaxRouter(route,target, callback);
 
     }
 }
 
 //FONCTION QUI CHARGE LE CONTENU DE L'ONGLET CIBLE
-function ajaxRouter(route, target,callback) {
+function ajaxRouter(route, target, callback) {
     axios.get(route).then(function (response) {
         target.innerHTML = response.data;
         if(callback !== '') callFunction(callback, window);

@@ -3,6 +3,7 @@
 @section('css')
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
+    <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
 @endsection
 
@@ -28,6 +29,7 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/framework/leaflet/markercluster.js"></script>
+    <script src="/js/mapVariable.js"></script>
     <script src="/js/map.js"></script>
     <script>
 

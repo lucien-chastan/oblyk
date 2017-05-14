@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class CragVueController extends Controller
 {
     function vueMap($id){
-        return view('pages.crag.vues.mapVue');
+        $data = ['crag' => Crag::where('id',$id)->first()];
+        return view('pages.crag.vues.mapVue', $data);
     }
 
     function vueFilActu($id){
