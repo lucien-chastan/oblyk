@@ -16,7 +16,7 @@
                 <h2 class="loved-king-font">Les parkings</h2>
                 @foreach($crag->parkings as $parking)
                     <div class="blue-border-div">
-                        <i class="material-icons blue-text left">local_parking</i> {{$parking->lat}}, {{$parking->lng}}
+                        <i class="material-icons blue-text left">local_parking</i> <a class="tooltipped lien-parking" {!! $Helpers::tooltip('Cliquer pour afficher sur la carte', 'right') !!} onclick="cragMap.setView([{{$parking->lat}}, {{$parking->lng}}], 18)">{{$parking->lat}}, {{$parking->lng}}</a>
                         <div class="markdownZone">{{ $parking->description }}</div>
                         <p class="info-user grey-text">
                             ajouté par {{$parking->user->name}} le {{$parking->created_at->format('d M Y')}}
@@ -31,6 +31,11 @@
                         </p>
                     </div>
                 @endforeach
+
+                @if(count($crag->parkings) == 0)
+                    <p class="grey-text text-center">Il n'y a pas encore de parking référencé sur ce site</p>
+                @endif
+
             </div>
 
             {{--bouton d'ajout--}}

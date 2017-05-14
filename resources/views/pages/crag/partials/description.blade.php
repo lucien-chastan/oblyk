@@ -19,6 +19,11 @@
                     </p>
                 </div>
             @endforeach
+
+            @if(count($crag->descriptions) == 0)
+                <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé ici n'hésite pas à décrire ce site</p>
+            @endif
+
         </div>
 
         {{--BOUTON POUR AJOUTER UNE DESCRIPTION--}}

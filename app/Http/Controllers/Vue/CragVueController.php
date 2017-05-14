@@ -35,4 +35,8 @@ class CragVueController extends Controller
     function vueTopos($id){
         return view('pages.crag.vues.toposVue');
     }
+
+    function vueSecteur($id){
+        return view('pages.crag.vues.secteurVue');
+    }
 }

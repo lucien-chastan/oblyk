@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParkingsTable extends Migration
+class CreateSectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateParkingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('parkings', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('crag_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('description',2000);
+            $table->string('label',255);
             $table->double('lat',9,6);
             $table->double('lng',9,6);
             $table->timestamps();
@@ -35,6 +35,6 @@ class CreateParkingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('parkings');
+        Schema::drop('sectors');
     }
 }

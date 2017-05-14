@@ -35,6 +35,10 @@ class Crag extends Model
         return $this->hasMany('App\Parking','crag_id', 'id');
     }
 
+    public function sectors(){
+        return $this->hasMany('App\Sector','crag_id', 'id');
+    }
+
     public static function getCragsAroundPoint($lat, $lng, $rayon){
         //retourne les falaises dans un certain rayon
         $cragsInRayon = DB::select(
