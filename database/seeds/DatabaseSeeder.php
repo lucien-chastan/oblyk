@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OrientationsTableSeeder::class);
         $this->call(SeasonsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-         $this->call(CragsTableSeeder::class);
-         $this->call(DescriptionsTableSeeder::class);
+        $this->call(CragsTableSeeder::class);
+        $this->call(DescriptionsTableSeeder::class);
+        $this->call(LinksTableSeeder::class);
     }
 }

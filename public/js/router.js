@@ -45,7 +45,16 @@ function loadTab() {
 function ajaxRouter(route, target, callback) {
     axios.get(route).then(function (response) {
         target.innerHTML = response.data;
-        if(callback !== '') callFunction(callback, window);
+
+        //exécute le call back s'il y en a un
+        if(callback !== null) callFunction(callback, window);
+
+        //ajoute les événements open modal sur les boutons
+        initOpenModal();
+
+        //convertie les textes en markdown
+        convertMarkdownZone();
+
     });
 }
 

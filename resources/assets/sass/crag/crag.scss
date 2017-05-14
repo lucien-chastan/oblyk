@@ -139,6 +139,36 @@ body{
 
 }
 
+.links-zone {
+    margin-top: 20px;
+
+    .link-div{
+        border: 3px #2196F3;
+        border-left-style: solid;
+        margin : 15px 0;
+        padding-left: 10px;
+
+        i {
+            transition: opacity 0.3s;
+            opacity: 0;
+            cursor: pointer;
+
+            &:hover {
+                color: #2196F3;
+            }
+        }
+
+        .info-user-link{
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        &:hover i{
+            opacity: 1;
+        }
+    }
+}
+
 .crag-type-grimpe{
     span{
         font-weight: bold;

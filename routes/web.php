@@ -42,11 +42,13 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 //MODAL
 Route::post('/modal/crag', 'ModalController@cragModal')->name('cragModal');
 Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
+Route::post('/modal/link', 'ModalController@linkModal')->name('linkModal');
 Route::post('/modal/delete', 'ModalController@deleteModal')->name('deleteModal');
 Route::post('/modal/problem', 'ModalController@problemModal')->name('problemModal');
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');
+Route::resource('links', 'CRUD\LinkController');
 Route::resource('crags', 'CRUD\CragController');
 
 //PROBLEM

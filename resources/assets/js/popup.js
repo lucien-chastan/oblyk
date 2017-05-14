@@ -62,19 +62,31 @@ function specialAction(data) {
     }
 }
 
-//ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
+//AU CHARGEMENT DE LA PAGE, ON ACCROCHE LES ÉVÉNEMENTS OPEN MODAL SUR LES BTNMODAL
 window.addEventListener('load', function () {
+    initOpenModal();
+});
+
+
+//ACCROCHE LES ÉVÉNEMENTS ONCLICK POUR L'OUVERTURE DES MODALES
+function initOpenModal() {
     let btnModal = document.getElementsByClassName('btnModal');
 
     for(let i = 0 ; i < btnModal.length ; i++){
 
-        let route = btnModal[i].getAttribute('data-route'),
-            data = btnModal[i].getAttribute('data-modal');
+        //si l'événement openModal n'a pas déjà été ajouté
+        if(btnModal[i].getAttribute('data-parsed') !== 'true'){
+            let route = btnModal[i].getAttribute('data-route'),
+                data = btnModal[i].getAttribute('data-modal');
 
-        btnModal[i].addEventListener('click', function() {openModal(route, data);});
+            //on ajoute l'événement openModal à l'élément
+            btnModal[i].addEventListener('click', function() {openModal(route, data);});
+
+            //on note que l'événement openModal a été ajouté
+            btnModal[i].setAttribute('data-parsed', 'true');
+        }
     }
-});
-
+}
 
 
 //CETTE FONCTION GÉRE LE SUBMIT DES DONNÉES EN AJAX

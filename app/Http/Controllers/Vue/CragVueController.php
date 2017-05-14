@@ -26,7 +26,10 @@ class CragVueController extends Controller
     }
 
     function vueLiens($id){
-        return view('pages.crag.vues.liensVue');
+        $data = [
+            'crag' => Crag::where('id',$id)->with('links.user')->first()
+        ];
+        return view('pages.crag.vues.liensVue', $data);
     }
 
     function vueTopos($id){
