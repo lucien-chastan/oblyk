@@ -37,6 +37,9 @@ class CragVueController extends Controller
     }
 
     function vueSecteur($id){
-        return view('pages.crag.vues.secteurVue');
+        $data = [
+            'crag' => Crag::where('id',$id)->with('sectors')->first()
+        ];
+        return view('pages.crag.vues.secteurVue', $data);
     }
 }

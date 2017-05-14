@@ -15,4 +15,15 @@ class Sector extends Model
         return $this->hasOne('App\Crag','id', 'crag_id');
     }
 
+    public function orientation(){
+        return $this->morphOne('App\Orientation', 'orientable');
+    }
+
+    public function season(){
+        return $this->morphOne('App\Season', 'seasontable');
+    }
+
+    public function descriptions(){
+        return $this->morphMany('App\Description', 'descriptive');
+    }
 }

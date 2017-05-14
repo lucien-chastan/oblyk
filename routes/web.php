@@ -52,6 +52,7 @@ Route::resource('descriptions', 'CRUD\DescriptionController');
 Route::resource('links', 'CRUD\LinkController');
 Route::resource('crags', 'CRUD\CragController');
 Route::resource('parkings', 'CRUD\ParkingController');
+Route::resource('sectors', 'CRUD\SectorController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
