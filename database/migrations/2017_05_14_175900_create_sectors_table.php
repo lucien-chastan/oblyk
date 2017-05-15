@@ -18,6 +18,9 @@ class CreateSectorsTable extends Migration
             $table->integer('crag_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('label',255);
+            $table->integer('approach');
+            $table->integer('rain_id')->unsigned();
+            $table->integer('sun_id')->unsigned();
             $table->double('lat',9,6);
             $table->double('lng',9,6);
             $table->timestamps();
@@ -25,6 +28,8 @@ class CreateSectorsTable extends Migration
             //clé étrangère
             $table->foreign('crag_id')->references('id')->on('crags');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('rain_id')->references('id')->on('rains');
+            $table->foreign('sun_id')->references('id')->on('suns');
         });
     }
 

@@ -11,6 +11,21 @@
 
                 <h2 class="loved-king-font">{{$sector->label}}</h2>
 
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s3"><a class="active" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
+                            <li class="tab col s3"><a href="#voies-secteur-{{$sector->id}}">Voies</a></li>
+                            <li class="tab col s3"><a href="#description-secteur-{{$sector->id}}">Descriptions</a></li>
+                            <li class="tab col s3"><a href="#photos-secteur-{{$sector->id}}">Photos</a></li>
+                        </ul>
+                    </div>
+                    <div id="informations-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.partials.informations-sector')</div>
+                    <div id="voies-secteur-{{$sector->id}}" class="col s12">voies</div>
+                    <div id="description-secteur-{{$sector->id}}" class="col s12">descriptions</div>
+                    <div id="photos-secteur-{{$sector->id}}" class="col s12">photos</div>
+                </div>
+
             </div>
         </div>
     @endforeach

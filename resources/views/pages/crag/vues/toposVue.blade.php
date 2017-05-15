@@ -13,7 +13,7 @@
                         <i class="large material-icons">add</i>
                     </a>
                     <ul>
-                        <li><a {!! $Helpers::tooltip('Ajouter un topo papier') !!} class="tooltipped btn-floating blue"><i class="material-icons">local_library</i></a></li>
+                        <li><a {!! $Helpers::tooltip('Ajouter un topo papier') !!} class="tooltipped btn-floating blue"><i class="material-icons">import_contacts</i></a></li>
                         <li><a {!! $Helpers::tooltip('Ajouter un topo web') !!} class="tooltipped btn-floating blue"><i class="material-icons">link</i></a></li>
                     </ul>
                 </div>

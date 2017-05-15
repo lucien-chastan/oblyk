@@ -61,6 +61,9 @@ function ajaxRouter(route, target, callback) {
 
         //initialise les tooltip
         $('.tooltipped').tooltip({delay: 50});
+
+        //initialise les tabs
+        $('ul.tabs').tabs();
     });
 }
 

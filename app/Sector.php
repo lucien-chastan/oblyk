@@ -26,4 +26,12 @@ class Sector extends Model
     public function descriptions(){
         return $this->morphMany('App\Description', 'descriptive');
     }
+
+    public function rain(){
+        return $this->hasOne('App\Rain','id', 'rain_id');
+    }
+
+    public function sun(){
+        return $this->hasOne('App\Sun','id', 'sun_id');
+    }
 }
