@@ -10,6 +10,38 @@ use Illuminate\Support\Facades\Auth;
 
 class ParkingController extends Controller
 {
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN PARKING
+    function parkingModal(Request $request){
+
+        //construction de la définition (vide ou avec des infos)
+        $id_parking = $request->input('parking_id');
+        if (isset($id_parking)) {
+            $parking = Parking::where('id', $id_parking)->first();
+        } else {
+            $parking = new Parking();
+            $parking->lat = $request->input('lat');
+            $parking->lng = $request->input('lng');
+        }
+
+        //définition du chemin de sauvegarde
+        $outputRoute = ($request->input('method') == 'POST')? '/parkings' : '/parkings/' . $id_parking;
+
+        $data = [
+            'dataModal' => [
+                'crag_id' => $request->input('crag_id'),
+                'lat' => $parking->lat,
+                'lng' => $parking->lng,
+                'description' => $parking->description,
+                'id' => $id_parking,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute
+            ]
+        ];
+
+        return view('modal.parking', $data);
+    }
+
     /**
      * Display a listing of the resource.
      *

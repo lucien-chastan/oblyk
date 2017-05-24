@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\Auth;
 
 class LinkController extends Controller
 {
+
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN lien
+    function linkModal(Request $request){
+
+        //construction de la définition (vide ou avec des infos)
+        $id_link = $request->input('link_id');
+        $link = isset($id_link) ? Link::where('id', $id_link)->first() : new Link();
+
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/links' : '/links/' . $id_link;
+
+        $data = [
+            'dataModal' => [
+                'crag_id' => $request->input('crag_id'),
+                'label' => $link->label,
+                'link' => $link->link,
+                'description' => $link->description,
+                'id' => $id_link,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute
+            ]
+        ];
+
+        return view('modal.link', $data);
+    }
+
     /**
      * Display a listing of the resource.
      *

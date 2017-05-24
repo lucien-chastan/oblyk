@@ -12,3 +12,12 @@
     {{--GRAPHIQUE--}}
     <div class="col s12 m6"></div>
 </div>
+
+@if(Auth::check())
+    <div class="row no-bottom-margin">
+        <div class="col s12 text-right zone-action-secteur">
+            <i {!! $Helpers::tooltip('Modifier ce secteur') !!} {!! $Helpers::modal(route('sectorModal'),['title'=>'Modifier ce secteur','method'=>'PUT']) !!} class="tooltipped material-icons right btnModal">edit</i>
+            <i {!! $Helpers::tooltip('Signaler un problème') !!} class="tooltipped material-icons right">flag</i>
+        </div>
+    </div>
+@endif

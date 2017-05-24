@@ -7,11 +7,11 @@
     {{--LISTE DES SECTEURS--}}
     @foreach($crag->sectors as $sector)
         <div class="col s12">
-            <div class="card-panel">
+            <div class="card-panel div-secteur">
 
                 <h2 class="loved-king-font">{{$sector->label}}</h2>
 
-                <div class="row">
+                <div class="row no-bottom-margin">
                     <div class="col s12">
                         <ul class="tabs">
                             <li class="tab col s3"><a class="active" href="#informations-secteur-{{$sector->id}}">Informations</a></li>

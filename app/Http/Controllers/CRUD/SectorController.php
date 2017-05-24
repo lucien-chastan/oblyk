@@ -10,6 +10,41 @@ use Illuminate\Support\Facades\Auth;
 
 class SectorController extends Controller
 {
+
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN SECTEUR
+    function sectorModal(Request $request){
+
+        //construction de la définition (vide ou avec des infos)
+//        $id_sector = $request->input('sector_id');
+//        if (isset($id_sector)) {
+//            $sector = Sector::where('id', $id_sector)->first();
+//        } else {
+//            $sector = new Sector();
+//            $sector->lat = $request->input('lat');
+//            $sector->lng = $request->input('lng');
+//        }
+//
+//        //définition du chemin de sauvegarde
+//        $outputRoute = ($request->input('method') == 'POST')? '/parkings' : '/parkings/' . $id_sector;
+//
+//        $data = [
+//            'dataModal' => [
+//                'crag_id' => $request->input('crag_id'),
+//                'lat' => $sector->lat,
+//                'lng' => $sector->lng,
+//                'description' => $sector->description,
+//                'id' => $id_sector,
+//                'title' => $request->input('title'),
+//                'method' => $request->input('method'),
+//                'route' => $outputRoute
+//            ]
+//        ];
+
+        $data = [];
+
+        return view('modal.sector', $data);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -77,7 +112,9 @@ class SectorController extends Controller
      */
     public function edit($id)
     {
-        //see modal controller
+        $data = ['id'=>$id];
+
+        return view('modal.sector', $data);
     }
 
     /**

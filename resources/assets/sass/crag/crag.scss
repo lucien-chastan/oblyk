@@ -218,6 +218,23 @@ body{
     height: 80vh;
 }
 
+.div-secteur {
+
+    .zone-action-secteur i {
+        opacity: 0.25;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    &:hover .zone-action-secteur i {
+        opacity: 1;
+    }
+
+    .no-bottom-margin{
+        margin-bottom: 0;
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
 

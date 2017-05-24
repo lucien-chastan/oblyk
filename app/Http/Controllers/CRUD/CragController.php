@@ -12,6 +12,39 @@ use Illuminate\Support\Facades\Auth;
 
 class CragController extends Controller
 {
+
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE FALAISE
+    function cragModal(Request $request){
+
+        $id = $request->input('id');
+        if(isset($id)){
+            $crag = Crag::where('id', $id)->with('orientation')->with('season')->first();
+            $callback = 'refresh';
+        }else{
+            $crag = new Crag();
+            $crag->lat = $request->input('lat');
+            $crag->lng = $request->input('lng');
+            $crag->code_country = 'NC';
+            $crag->country = 'Inconnu';
+            $callback = 'goToNewCrag';
+        }
+
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/crags' : '/crags/' . $id;
+
+        $data = [
+            'dataModal' => [
+                'crag' => $crag,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute,
+                'callback' => $callback
+            ]
+        ];
+
+        return view('modal.crag', $data);
+    }
+
     /**
      * Display a listing of the resource.
      *

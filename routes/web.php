@@ -40,12 +40,13 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 
 
 //MODAL
-Route::post('/modal/crag', 'ModalController@cragModal')->name('cragModal');
-Route::post('/modal/description', 'ModalController@descriptionModal')->name('descriptionModal');
-Route::post('/modal/link', 'ModalController@linkModal')->name('linkModal');
-Route::post('/modal/parking', 'ModalController@parkingModal')->name('parkingModal');
-Route::post('/modal/delete', 'ModalController@deleteModal')->name('deleteModal');
-Route::post('/modal/problem', 'ModalController@problemModal')->name('problemModal');
+Route::post('/modal/crag', 'CRUD\CragController@cragModal')->name('cragModal');
+Route::post('/modal/description', 'CRUD\DescriptionController@descriptionModal')->name('descriptionModal');
+Route::post('/modal/link', 'CRUD\LinkController@linkModal')->name('linkModal');
+Route::post('/modal/parking', 'CRUD\ParkingController@parkingModal')->name('parkingModal');
+Route::post('/modal/delete', 'CRUD\DeleteController@deleteModal')->name('deleteModal');
+Route::post('/modal/problem', 'CRUD\ProblemController@problemModal')->name('problemModal');
+Route::post('/modal/sector', 'CRUD\SectorController@sectorModal')->name('sectorModal');
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');

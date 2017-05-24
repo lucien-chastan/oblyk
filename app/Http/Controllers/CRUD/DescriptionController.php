@@ -10,6 +10,31 @@ use Illuminate\Support\Facades\Auth;
 
 class DescriptionController extends Controller
 {
+
+    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN ÉLEMENT
+    function descriptionModal(Request $request){
+
+        //construction de la définition (vide ou avec des infos)
+        $id_description = $request->input('description_id');
+        $description = isset($id_description) ? Description::where('id', $id_description)->first() : new Description();
+
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/descriptions' : '/descriptions/' . $id_description;
+
+        $data = [
+            'dataModal' => [
+                'crag_id' => $request->input('crag_id'),
+                'description' => $description->description,
+                'id' => $id_description,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute
+            ]
+        ];
+
+        return view('modal.description', $data);
+    }
+
     /**
      * Display a listing of the resource.
      *
