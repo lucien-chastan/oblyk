@@ -2,7 +2,7 @@
 
 {!! $Inputs::popupError([]) !!}
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, refresh); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
     {!! $Inputs::popupTitle(['title'=>'Supprimer un élément']) !!}
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'DELETE']) !!}

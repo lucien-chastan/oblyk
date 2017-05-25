@@ -18,5 +18,13 @@ class DescriptionsTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
+        DB::table('descriptions')->insert([
+            'descriptive_id' => 1,
+            'descriptive_type' => 'App\Sector',
+            'description' => 'Super secteur, peut être le meilleur du site',
+            'user_id' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

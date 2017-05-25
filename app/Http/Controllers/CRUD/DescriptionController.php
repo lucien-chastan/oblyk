@@ -16,19 +16,23 @@ class DescriptionController extends Controller
 
         //construction de la définition (vide ou avec des infos)
         $id_description = $request->input('description_id');
+        $callback = $request->input('callback');
         $description = isset($id_description) ? Description::where('id', $id_description)->first() : new Description();
+        $callback = isset($callback) ? $callback : 'refresh';
 
         //définition du chemin de sauvgarde
         $outputRoute = ($request->input('method') == 'POST')? '/descriptions' : '/descriptions/' . $id_description;
 
         $data = [
             'dataModal' => [
-                'crag_id' => $request->input('crag_id'),
+                'descriptive_id' => $request->input('descriptive_id'),
+                'descriptive_type' => "App\\" . $request->input('descriptive_type'),
                 'description' => $description->description,
                 'id' => $id_description,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
-                'route' => $outputRoute
+                'route' => $outputRoute,
+                'callback' => $callback
             ]
         ];
 
@@ -140,9 +144,12 @@ class DescriptionController extends Controller
     public function destroy($id)
     {
         $description = Description::where('id', $id)->first();
+        $oldDescription = $description;
 
         if($description->user_id == Auth::id()){
             $description->delete();
         }
+
+        return response()->json(json_encode($oldDescription));
     }
 }

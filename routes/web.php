@@ -65,3 +65,8 @@ Route::get('/vue/crag/{crag_id}/medias', 'Vue\CragVueController@vueMedias')->nam
 Route::get('/vue/crag/{crag_id}/liens', 'Vue\CragVueController@vueLiens')->name('vueLiensCrag');
 Route::get('/vue/crag/{crag_id}/topos', 'Vue\CragVueController@vueTopos')->name('vueToposCrag');
 Route::get('/vue/crag/{crag_id}/secteur', 'Vue\CragVueController@vueSecteur')->name('vueSecteurCrag');
+
+//VUE SECTEUR
+Route::get('/vue/sector/{sector_id}/lines', 'Vue\SectorVueController@vueLines')->name('vueLinesSector');
+Route::get('/vue/sector/{sector_id}/descriptions', 'Vue\SectorVueController@vueDescriptions')->name('vueDescriptionsSector');
+Route::get('/vue/sector/{sector_id}/photos', 'Vue\SectorVueController@vuePhotos')->name('vuePhotosSector');

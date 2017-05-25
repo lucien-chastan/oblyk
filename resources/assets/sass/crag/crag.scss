@@ -235,6 +235,27 @@ body{
     }
 }
 
+.div-search-secteur{
+    padding: 5px 24px;
+
+    .row {
+        margin-bottom: 0;
+    }
+
+    .input-field input[type="search"]{
+        padding-left: 0;
+    }
+
+    p {
+        margin-top: 23px;
+
+        i {
+            cursor: pointer;
+        }
+    }
+
+}
+
 //version smartphone
 @media screen and (max-width:600px){
 

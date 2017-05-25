@@ -1,4 +1,5 @@
-let cragMap;
+let cragMap,
+    loadedSectorTab = [];
 
 function initCragMap() {
     let map = document.getElementById('crag-map'),
@@ -38,7 +39,6 @@ function initCragMap() {
                             <div>${crags[i].parkings[j].description}</div>
                         </div>
                     `).addTo(cragMap);
-
                 }
             }
         }
@@ -46,6 +46,58 @@ function initCragMap() {
 }
 
 //recharge l'onglet des secteurs quand on le met à jour par exemple
-function reloadSector() {
-    ajaxRouter('/vue/crag/' + document.getElementById('cragId').value + '/secteur', document.getElementById('voies'), 'closeModal');
+function reloadSector(response) {
+    let data = JSON.parse(response.data);
+    ajaxRouter('/vue/crag/' + data.id + '/secteur', document.getElementById('voies'), 'closeModal');
+}
+
+//Recharge l'onglet description qui a été mise à jour
+function reloadDescriptionSector(response) {
+    let data = JSON.parse(response.data);
+    ajaxRouter('/vue/sector/' + data.descriptive_id + '/descriptions', document.getElementById('description-secteur-' + data.descriptive_id ), 'closeModal');
+}
+
+//Affiche la vues d'un onglet de secteur
+function loadSectorVue(tab) {
+
+
+    if(!loadedSectorTab[tab.getAttribute('href')]){
+        loadedSectorTab[tab.getAttribute('href')] = true;
+
+        let route = tab.getAttribute('data-route'),
+            target = document.getElementById(tab.getAttribute('href').replace('#','')),
+            callback = tab.getAttribute('data-callback');
+
+        console.log(route);
+
+        ajaxRouter(route, target, callback);
+
+    }
+}
+
+function changeAffichageSecteur(typeAffichage) {
+    let secteurDiv = document.getElementsByClassName('div-secteur'),
+        btLarge = document.getElementById('btnLargeAffichage'),
+        btCondense = document.getElementById('btnCondenseAffichage');
+
+    for(let i = 0 ; i < secteurDiv.length ; i++) {
+        if(typeAffichage === 'condense') {
+            secteurDiv[i].style.maxHeight = '70px';
+            secteurDiv[i].style.overflowY = 'hidden';
+            btLarge.setAttribute('class', btLarge.className.replace('blue-text','grey-text'));
+            btCondense.setAttribute('class', btCondense.className.replace('grey-text','blue-text'));
+        }else{
+            secteurDiv[i].style.maxHeight = '';
+            secteurDiv[i].style.overflowY = 'auto';
+            btCondense.setAttribute('class', btCondense.className.replace('blue-text','grey-text'));
+            btLarge.setAttribute('class', btLarge.className.replace('grey-text','blue-text'));
+        }
+    }
+}
+
+function extendSectorDiv(sectorId) {
+    let secteurDiv = document.getElementById('div-secteur-' + sectorId);
+
+    secteurDiv.style.maxHeight = '';
+    secteurDiv.style.overflowY = 'auto';
 }

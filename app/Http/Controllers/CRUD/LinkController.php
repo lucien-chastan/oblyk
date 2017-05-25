@@ -23,7 +23,8 @@ class LinkController extends Controller
 
         $data = [
             'dataModal' => [
-                'crag_id' => $request->input('crag_id'),
+                'linkable_id' => $request->input('linkable_id'),
+                'linkable_type' => "App\\" . $request->input('linkable_type'),
                 'label' => $link->label,
                 'link' => $link->link,
                 'description' => $link->description,

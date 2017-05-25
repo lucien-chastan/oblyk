@@ -16,7 +16,7 @@
                         @if(Auth::check())
                             <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($link->user_id == Auth::id())
-                                <i {!! $Helpers::tooltip('Modifier ce lien') !!} {!! $Helpers::modal(route('linkModal'), ["crag_id"=>$crag->id, "link_id"=>$link->id, "title"=>"Modifier le lien", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip('Modifier ce lien') !!} {!! $Helpers::modal(route('linkModal'), ["linkable_id"=>$crag->id, "linkable_type"=>"Crag", "link_id"=>$link->id, "title"=>"Modifier le lien", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                 <i {!! $Helpers::tooltip('Supprimer ce lien') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/links/" . $link->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @endif
@@ -31,7 +31,7 @@
             {{--BOUTON POUR AJOUTER UN LIEN--}}
             @if(Auth::check())
                 <div class="text-right">
-                    <a {!! $Helpers::tooltip('Ajouter un lien') !!} {!! $Helpers::modal(route('linkModal'), ["crag_id"=>$crag->id, "link_id"=>"", "title"=>"Ajouter un lien", "method"=>"POST" ]) !!} id="description-btn-modal" class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
+                    <a {!! $Helpers::tooltip('Ajouter un lien') !!} {!! $Helpers::modal(route('linkModal'), ["linkable_id"=>$crag->id, "linkable_type"=>"Crag", "link_id"=>"", "title"=>"Ajouter un lien", "method"=>"POST" ]) !!} id="description-btn-modal" class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
                 </div>
             @endif
         </div>

@@ -15,6 +15,6 @@
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
-    {!! $Inputs::Hidden(['name'=>'linkable_type','value'=>'App\Crag']) !!}
-    {!! $Inputs::Hidden(['name'=>'linkable_id','value'=>$dataModal['crag_id']]) !!}
+    {!! $Inputs::Hidden(['name'=>'linkable_type','value'=>$dataModal['linkable_type']]) !!}
+    {!! $Inputs::Hidden(['name'=>'linkable_id','value'=>$dataModal['linkable_id']]) !!}
 </form>
