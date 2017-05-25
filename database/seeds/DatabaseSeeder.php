@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SunsTableSeeder::class);
         $this->call(SectorsTableSeeder::class);
         $this->call(LexiqueTableSeeder::class);
+        $this->call(ClimbsTableSeeder::class);
+        $this->call(RoutesTableSeeder::class);
+        $this->call(RouteSectionsTableSeeder::class);
     }
 }
