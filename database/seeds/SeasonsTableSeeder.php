@@ -52,5 +52,14 @@ class SeasonsTableSeeder extends Seeder
             'winter' => 1,
             'spring' => 1,
         ]);
+
+        DB::table('seasons')->insert([
+            'seasontable_id' => 3,
+            'seasontable_type' => 'App\Sector',
+            'summer' => 0,
+            'autumn' => 0,
+            'winter' => 0,
+            'spring' => 0,
+        ]);
     }
 }

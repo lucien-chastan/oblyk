@@ -6,7 +6,15 @@
         <p><i class="material-icons left">brightness_low</i> {{$sector->sun->label}}</p>
         <p><i class="material-icons left">filter_drama</i> {{$sector->rain->label}}</p>
         <p><i class="material-icons left">equalizer</i> 7 lignes de 6a à 7a</p>
-        <p><i class="material-icons left">explore</i>
+        <p>
+            <i class="material-icons left">local_florist</i>
+            <span class="@if($sector->season['summer'] === 1) blue-text @else text-through @endif">Été</span> -
+            <span class="@if($sector->season['autumn'] === 1) blue-text @else text-through @endif">Automne</span> -
+            <span class="@if($sector->season['winter'] === 1) blue-text @else text-through @endif">Hiver</span> -
+            <span class="@if($sector->season['spring'] === 1) blue-text @else text-through @endif">Printemps</span>
+        </p>
+        <p>
+            <i class="material-icons left">explore</i>
             <svg class="boussole" version="1.1" viewBox="0 0 100.61393 100.61393" height="28.395487mm" width="28.395487mm">
                 <g transform="translate(-299.43062,-288.93568)">
                     <path class="tooltipped" data-position="top" data-delay="50" data-tooltip="Nord" style="fill:@if($sector->orientation['north']){{'rgb(33,150,243)'}}@else{{'rgb(77,77,77)'}}@endif;fill-rule:evenodd;stroke:none" d="m 349.73758,288.93568 -11.20135,39.10561 11.20135,11.20135 0,-42.84708 9.54034,33.30673 1.66102,-1.661 z"></path>
