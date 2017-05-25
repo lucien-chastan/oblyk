@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Orientation;
+use App\Season;
 use App\Sector;
 use Validator;
 use Illuminate\Http\Request;
@@ -84,14 +86,47 @@ class SectorController extends Controller
             'label' => 'required|max:255'
         ]);
 
-        //enregistrement des données
+        //Modification du secteur
         $sector = Sector::where('id', $request->input('id'))->first();
-        if($sector->user_id == Auth::id()){
-            $sector->label = $request->input('label');
-            $sector->lat = $request->input('lat');
-            $sector->lng = $request->input('lng');
-            $sector->save();
-        }
+        $sector->label = $request->input('label');
+        $sector->approach = $request->input('approach');
+        $sector->rain_id = $request->input('rain_id');
+        $sector->sun_id = $request->input('sun_id');
+        $sector->lat = $request->input('lat');
+        $sector->lng = $request->input('lng');
+        $sector->save();
+
+        //mise à jour des données des saisons
+        $season = Season::where(
+            [
+                ['seasontable_id', $request->input('seasontable_id')],
+                ['seasontable_type', $request->input('seasontable_type')]
+            ]
+        )->first();
+
+        $season->summer = $request->input('summer');
+        $season->autumn = $request->input('autumn');
+        $season->winter = $request->input('winter');
+        $season->spring = $request->input('spring');
+        $season->save();
+
+        //mise à jour des données d'orientation
+        $orientation = Orientation::where(
+            [
+                ['orientable_id', $request->input('orientable_id')],
+                ['orientable_type', $request->input('orientable_type')]
+            ]
+        )->first();
+
+        $orientation->north = $request->input('north');
+        $orientation->east = $request->input('east');
+        $orientation->south = $request->input('south');
+        $orientation->west = $request->input('west');
+        $orientation->north_east = $request->input('north_east');
+        $orientation->north_west = $request->input('north_west');
+        $orientation->south_east = $request->input('south_east');
+        $orientation->south_west = $request->input('south_west');
+        $orientation->save();
 
         return response()->json(json_encode($sector));
     }
