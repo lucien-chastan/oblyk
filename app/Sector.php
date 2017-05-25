@@ -27,7 +27,7 @@ class Sector extends Model
     }
 
     public function rain(){
-        return $this->hasOne('App\Rain','id', 'rain_id');
+        return $this->hasOne('App\RainExposure','id', 'rain_id');
     }
 
     public function sun(){

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRainsTable extends Migration
+class CreateRainExposuresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRainsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rains', function (Blueprint $table) {
+        Schema::create('rain_exposures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label',255);
         });
@@ -26,6 +26,6 @@ class CreateRainsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('rains');
+        Schema::drop('rain_exposures');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Lib;
 
+use App\RainExposure;
 use App\Rock;
+use App\Sun;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -148,6 +150,60 @@ class InputTemplates extends ServiceProvider{
         foreach ($Rock as $rock){
             $selected = ($rock->id == $value)? 'selected' : '';
             $html .= '<option ' . $selected . ' value="' . $rock->id . '">' . ucfirst($rock->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //SELECT DE L'ENSOLEILLEMENT
+    public static function suns($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+
+        $Suns = Sun::all();
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Suns as $sun){
+            $selected = ($sun->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $sun->id . '">' . ucfirst($sun->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //SELECT DE L'ENSOLEILLEMENT
+    public static function rains($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+
+        $Rains = RainExposure::all();
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Rains as $rain){
+            $selected = ($rain->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $rain->id . '">' . ucfirst($rain->label) . '</option>';
         }
 
         $html .= '

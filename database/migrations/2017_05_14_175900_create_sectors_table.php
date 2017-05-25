@@ -28,7 +28,7 @@ class CreateSectorsTable extends Migration
             //clé étrangère
             $table->foreign('crag_id')->references('id')->on('crags');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('rain_id')->references('id')->on('rains');
+            $table->foreign('rain_id')->references('id')->on('rain_exposures');
             $table->foreign('sun_id')->references('id')->on('suns');
         });
     }

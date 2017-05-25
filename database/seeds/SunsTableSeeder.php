@@ -11,7 +11,7 @@ class SunsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('suns')->insert(['label' => 'ensoleillement non renseigné']);
+        DB::table('suns')->insert(['label' => 'ensoleillement inconnu']);
         DB::table('suns')->insert(['label' => 'ensoleillé toute la journée']);
         DB::table('suns')->insert(['label' => 'à l\'ombre toute la journée']);
         DB::table('suns')->insert(['label' => 'au soleil l\'après-midi']);

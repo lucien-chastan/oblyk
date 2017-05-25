@@ -14,55 +14,31 @@ class SectorController extends Controller
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN SECTEUR
     function sectorModal(Request $request){
 
-        //construction de la définition (vide ou avec des infos)
-//        $id_sector = $request->input('sector_id');
-//        if (isset($id_sector)) {
-//            $sector = Sector::where('id', $id_sector)->first();
-//        } else {
-//            $sector = new Sector();
-//            $sector->lat = $request->input('lat');
-//            $sector->lng = $request->input('lng');
-//        }
-//
-//        //définition du chemin de sauvegarde
-//        $outputRoute = ($request->input('method') == 'POST')? '/parkings' : '/parkings/' . $id_sector;
-//
-//        $data = [
-//            'dataModal' => [
-//                'crag_id' => $request->input('crag_id'),
-//                'lat' => $sector->lat,
-//                'lng' => $sector->lng,
-//                'description' => $sector->description,
-//                'id' => $id_sector,
-//                'title' => $request->input('title'),
-//                'method' => $request->input('method'),
-//                'route' => $outputRoute
-//            ]
-//        ];
+        $id = $request->input('id');
+        if(isset($id)){
+            $sector = Sector::where('id', $id)->with('orientation')->with('season')->first();
+            $callback = 'refresh';
+        }else{
+            $sector = new Sector();
+            $sector->lat = $request->input('lat');
+            $sector->lng = $request->input('lng');
+            $callback = 'openNewSector';
+        }
 
-        $data = [];
+        //définition du chemin de sauvgarde
+        $outputRoute = ($request->input('method') == 'POST')? '/sectors' : '/sectors/' . $id;
+
+        $data = [
+            'dataModal' => [
+                'sector' => $sector,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute,
+                'callback' => $callback
+            ]
+        ];
 
         return view('modal.sector', $data);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //see modal controller
     }
 
     /**
@@ -91,30 +67,6 @@ class SectorController extends Controller
 
         return response()->json(json_encode($sector));
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $data = ['id'=>$id];
-
-        return view('modal.sector', $data);
     }
 
     /**
