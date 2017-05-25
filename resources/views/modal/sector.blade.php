@@ -19,4 +19,5 @@
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['sector']->id]) !!}
+    {!! $Inputs::Hidden(['name'=>'crag_id','value'=>$dataModal['sector']->crag_id]) !!}
 </form>

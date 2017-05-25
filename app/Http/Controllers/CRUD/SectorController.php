@@ -19,12 +19,13 @@ class SectorController extends Controller
         $id = $request->input('id');
         if(isset($id)){
             $sector = Sector::where('id', $id)->with('orientation')->with('season')->first();
-            $callback = 'refresh';
+            $callback = 'reloadSector';
         }else{
             $sector = new Sector();
-            $sector->lat = $request->input('lat');
-            $sector->lng = $request->input('lng');
-            $callback = 'openNewSector';
+            $sector->crag_id = $request->input('crag_id');
+            $sector->lat = 0;
+            $sector->lng = 0;
+            $callback = 'reloadSector';
         }
 
         //définition du chemin de sauvgarde
@@ -64,8 +65,35 @@ class SectorController extends Controller
         $sector->lat = $request->input('lat');
         $sector->lng = $request->input('lng');
         $sector->label = $request->input('label');
+        $sector->approach = $request->input('approach');
+        $sector->rain_id = $request->input('rain_id');
+        $sector->sun_id = $request->input('sun_id');
         $sector->user_id = Auth::id();
         $sector->save();
+
+        //information sur la saison
+        $season = new Season();
+        $season->seasontable_id = $sector->id;
+        $season->seasontable_type = 'App\Sector';
+        $season->summer = $request->input('summer');
+        $season->autumn = $request->input('autumn');
+        $season->winter = $request->input('winter');
+        $season->spring = $request->input('spring');
+        $season->save();
+
+        //information sur l'orientation
+        $orientation = new Orientation();
+        $orientation->orientable_id = $sector->id;
+        $orientation->orientable_type = 'App\Sector';
+        $orientation->north = $request->input('north');
+        $orientation->east = $request->input('east');
+        $orientation->south = $request->input('south');
+        $orientation->west = $request->input('west');
+        $orientation->north_east = $request->input('north_east');
+        $orientation->north_west = $request->input('north_west');
+        $orientation->south_east = $request->input('south_east');
+        $orientation->south_west = $request->input('south_west');
+        $orientation->save();
 
         return response()->json(json_encode($sector));
 

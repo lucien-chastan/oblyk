@@ -43,5 +43,9 @@ function initCragMap() {
             }
         }
     });
+}
 
+//recharge l'onglet des secteurs quand on le met à jour par exemple
+function reloadSector() {
+    ajaxRouter('/vue/crag/' + document.getElementById('cragId').value + '/secteur', document.getElementById('voies'), 'closeModal');
 }
