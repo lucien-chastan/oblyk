@@ -33,4 +33,8 @@ class Sector extends Model
     public function sun(){
         return $this->hasOne('App\Sun','id', 'sun_id');
     }
+
+    public function routes(){
+        return $this->hasMany('App\Route','route_id','id');
+    }
 }

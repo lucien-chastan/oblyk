@@ -36,7 +36,7 @@
                     <div class="col s12">
                         <ul class="tabs">
                             <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-route="{{route('vueLinesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a></li>
+                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a></li>
                             <li class="tab col s3"><a onclick="loadSectorVue(this)" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a></li>
                             <li class="tab col s3"><a onclick="loadSectorVue(this)" data-route="{{route('vuePhotosSector',[$sector->id])}}" href="#photos-secteur-{{$sector->id}}">Photos</a></li>
                         </ul>
