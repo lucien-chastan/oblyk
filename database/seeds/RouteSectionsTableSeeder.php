@@ -16,12 +16,12 @@ class RouteSectionsTableSeeder extends Seeder
             'grade' => '6b',
             'sub_grade' => '+',
             'grade_val' => 45,
-            'sections_height' => 0,
+            'section_height' => 0,
             'nb_point' => 0,
             'type_point' => 1,
             'type_anchor' => 1,
             'steepness' => 3,
-            'sections_order' => 1,
+            'section_order' => 1,
         ]);
 
         DB::table('route_sections')->insert([
@@ -29,12 +29,12 @@ class RouteSectionsTableSeeder extends Seeder
             'grade' => '6a',
             'sub_grade' => '/+',
             'grade_val' => 45,
-            'sections_height' => 0,
+            'section_height' => 0,
             'nb_point' => 0,
             'type_point' => 1,
             'type_anchor' => 1,
             'steepness' => 3,
-            'sections_order' => 1,
+            'section_order' => 1,
         ]);
     }
 }
