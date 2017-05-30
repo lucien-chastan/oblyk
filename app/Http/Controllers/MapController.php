@@ -10,7 +10,7 @@ class MapController extends Controller
 {
     public function mapPage(){
         $data = [
-            'crags' => Crag::get(),
+            'crags' => Crag::withCount('routes')->get(),
             'meta_title' => 'Carte des falaises',
             'meta_description' => 'Voir la carte interactive des sites naturels de grimpe et des salles d\'escalade sur Oblyk, que ce soit en France, ou dans le Monde, et voir leurs informations détaillées'
         ];

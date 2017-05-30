@@ -18,12 +18,17 @@
             @if(count($route->routeSections) > 1)
                 {!! count($route->routeSections) !!} L.
             @else
-                {{$route->routeSections[0]->grade}}{{$route->routeSections[0]->sub_grade}}
+                <span class="color-grade-{{$route->routeSections[0]->grade_val}}">{{$route->routeSections[0]->grade}}{{$route->routeSections[0]->sub_grade}}</span>
             @endif
         </td>
         <td>{{$route->label}}</td>
-        <td>{{$route->climb_id}}</td>
-        <td>{{$route->height}} mètres</td>
+        <td><img src="/img/climb-{{$route->climb_id}}.png" alt="" class="type-ligne"> {{$route->climb->label}}</td>
+        <td>
+            @if(count($route->routeSections) == 1 && $route->height >= 35)
+                <i {!! $Helpers::tooltip('Attention voie de plus de 35 mètres') !!} class="tooltipped material-icons red-text left">report_problem</i>
+            @endif
+            {{$route->height}} mètres
+        </td>
         <td>{{$route->open_year}}</td>
         <td>{{$route->opener}}</td>
     </tr>

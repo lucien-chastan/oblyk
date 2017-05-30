@@ -65,7 +65,10 @@
                         </tr>
                         <tr>
                             <td>Lignes &amp; Cotations : </td>
-                            <td>150 lignes, de 5a <i class="material-icons tiny">arrow_forward</i> 6a</td>
+                            <td>
+                                {{$crag['routes_count']}} lignes
+                                @if($crag['routes_count'] > 0 ), de 5a <i class="material-icons tiny">arrow_forward</i> 6a @endif
+                            </td>
                         </tr>
                         <tr>
                             <td></td>

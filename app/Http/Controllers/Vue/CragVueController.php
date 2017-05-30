@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vue;
 use App\Crag;
 use App\Orientation;
 use App\Season;
+use App\Sector;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,7 +39,14 @@ class CragVueController extends Controller
 
     function vueSecteur($id){
         $data = [
-            'crag' => Crag::where('id',$id)->with('sectors.sun')->with('sectors.rain')->with('sectors.orientation')->with('sectors.season')->first()
+            'sectors' => Sector::where('crag_id',$id)
+                ->with('sun')
+                ->with('rain')
+                ->with('orientation')
+                ->withCount('routes')
+                ->with('season')
+                ->get(),
+            'crag' => Crag::where('id',$id)->first()
         ];
         return view('pages.crag.vues.secteurVue', $data);
     }

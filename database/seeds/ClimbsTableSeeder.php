@@ -18,5 +18,6 @@ class ClimbsTableSeeder extends Seeder
         DB::table('climbs')->insert(['label' => 'trad']);
         DB::table('climbs')->insert(['label' => 'artif']);
         DB::table('climbs')->insert(['label' => 'deep-water']);
+        DB::table('climbs')->insert(['label' => 'via-ferrata']);
     }
 }

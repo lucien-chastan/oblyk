@@ -35,6 +35,7 @@ class Sector extends Model
     }
 
     public function routes(){
-        return $this->hasMany('App\Route','route_id','id');
+        return $this->hasMany('App\Route','sector_id','id');
     }
+
 }

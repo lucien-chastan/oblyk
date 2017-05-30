@@ -19,6 +19,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/map/popupMapStyle.scss', 'public/css')
     .sass('resources/assets/sass/project/project.scss', 'public/css')
     .sass('resources/assets/sass/crag/crag.scss', 'public/css')
+    .sass('resources/assets/sass/crag/cotation.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css');
 
 //fichier Js

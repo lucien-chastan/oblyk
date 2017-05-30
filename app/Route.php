@@ -21,4 +21,8 @@ class Route extends Model
     public function routeSections(){
         return $this->hasMany('App\RouteSection','route_id','id');
     }
+
+    public function climb(){
+        return $this->hasOne('App\Climb','id', 'climb_id');
+    }
 }

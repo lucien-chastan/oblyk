@@ -10,7 +10,7 @@ class SectorVueController extends Controller
 {
     function vueRoutes($id){
         $data = [
-            "routes" => Route::where('sector_id',$id)->with('routeSections')->get()
+            "routes" => Route::where('sector_id',$id)->with('routeSections')->with('climb')->get()
         ];
 
         return view('pages.crag.vues.sector-vues.sectorLinesVue', $data);

@@ -5,7 +5,7 @@
         <p><i class="material-icons left">directions_walk</i> @if($sector->approach != 0) {{$sector->approach}} minutes d'approche @else <cite>temps d'approche non-renseigné</cite> @endif</p>
         <p><i class="material-icons left">brightness_low</i> {{$sector->sun->label}}</p>
         <p><i class="material-icons left">filter_drama</i> {{$sector->rain->label}}</p>
-        <p><i class="material-icons left">equalizer</i> 7 lignes de 6a à 7a</p>
+        <p><i class="material-icons left">equalizer</i> {{$sector->routes_count}} lignes de 6a à 7a</p>
         <p>
             <i class="material-icons left">local_florist</i>
             <span class="@if($sector->season['summer'] === 1) blue-text @else text-through @endif">Été</span> -

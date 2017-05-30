@@ -19,5 +19,6 @@
 {{--css globale de l'application--}}
 <link href="/css/app.css" rel="stylesheet">
 <link href="/css/materialize.css" rel="stylesheet">
+<link href="/css/cotation.css" rel="stylesheet">
 
 @yield('css')

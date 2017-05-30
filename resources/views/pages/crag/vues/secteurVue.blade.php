@@ -26,7 +26,7 @@
 <div class="row">
 
     {{--LISTE DES SECTEURS--}}
-    @foreach($crag->sectors as $sector)
+    @foreach($sectors as $sector)
         <div class="col s12">
             <div class="card-panel div-secteur" id="div-secteur-{{$sector->id}}" onclick="extendSectorDiv({{$sector->id}})">
 
