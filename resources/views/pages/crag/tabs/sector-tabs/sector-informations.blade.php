@@ -31,7 +31,11 @@
     </div>
 
     {{--GRAPHIQUE--}}
-    <div class="col s12 m6 l8"></div>
+    <div class="col s12 m6 l8">
+        <div class="sectorChart">
+            <canvas data-sector-id="{{$sector->id}}" class="sector-graph-canvas" id="gradeSectorGraph-{{$sector->id}}"></canvas>
+        </div>
+    </div>
 </div>
 
 @if(Auth::check())

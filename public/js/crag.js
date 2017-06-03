@@ -116,3 +116,15 @@ function getGraphCrag(crag_id) {
         let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),JSON.parse(response.data));
     });
 }
+
+//VA CHERCHER LES DONNÉES DES GRAPHS SECTOR À AFFICHER
+function getSectorChart() {
+    let sectors = document.getElementsByClassName('sector-graph-canvas');
+
+    for(let i = 0 ; i < sectors.length ; i++){
+        let sectorId = sectors[i].getAttribute('data-sector-id');
+        axios.get('/chart/sector/' + sectorId + '/grade').then(function (response) {
+            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),JSON.parse(response.data));
+        });
+    }
+}
