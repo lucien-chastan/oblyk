@@ -41,6 +41,9 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
 //axios
 mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axios');
 
+//chartJs
+mix.copy('resources/assets/framework/chartJs/Chart.min.js', 'public/framework/chartJs');
+
 //marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
 
