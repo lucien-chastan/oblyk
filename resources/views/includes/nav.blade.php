@@ -10,6 +10,7 @@
             <li><a href="#!"><i class="material-icons left">shuffle</i>Flux</a></li>
             <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
             <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
+            <li><a href="#!"><i class="material-icons left">notifications</i>Notification</a></li>
             <li><a href="#!"><i class="material-icons left">settings</i>Paramètres</a></li>
             <li class="divider"></li>
             <li>
@@ -103,6 +104,7 @@
                                     <li><a href="#!"><i class="material-icons left">shuffle</i>Flux</a></li>
                                     <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
                                     <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
+                                    <li><a href="#!"><i class="material-icons left">notifications</i>Notification</a></li>
                                     <li><a href="#!"><i class="material-icons left">settings</i>Paramètres</a></li>
                                     <li class="divider"></li>
                                     <li>
