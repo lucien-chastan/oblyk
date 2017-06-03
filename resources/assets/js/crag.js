@@ -101,3 +101,12 @@ function extendSectorDiv(sectorId) {
     secteurDiv.style.maxHeight = '';
     secteurDiv.style.overflowY = 'auto';
 }
+
+function getGraphCrag(crag_id) {
+
+    let ctx = document.getElementById("gradeGraph").getContext('2d');
+
+    axios.get('/chart/crag/' + crag_id + '/grade').then(function (response) {
+        new Chart(ctx,JSON.parse(response.data));
+    });
+}

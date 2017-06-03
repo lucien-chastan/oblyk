@@ -72,5 +72,8 @@
     <script src="/framework/marked/marked.min.js"></script>
     <script>
         convertMarkdownZone();
+        window.addEventListener('load', function () {
+            getGraphCrag({{$crag->id}});
+        });
     </script>
 @endsection

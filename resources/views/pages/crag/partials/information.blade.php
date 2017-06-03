@@ -8,7 +8,7 @@
             @if($crag['type_bloc'] == 1)<span class="type-bloc">bloc</span>@endif
             @if($crag['type_deep_water'] == 1)<span class="type-deep-water">deep-water</span>@endif
         </span> de {{ $crag->rock->label }}, situé à {{$crag->city}} dans le département {{$crag->region}} ({{$crag->code_country}})<br>
-        On y trouve {{ $crag->routes_count }} lignes allant de <strong class="color-grade-{{ $crag->gapGrade->min_grade_val }}">{{ $crag->gapGrade->min_grade_text }}</strong> à <strong class="color-grade-{{ $crag->gapGrade->max_grade_val }}">{{ $crag->gapGrade->max_grade_text }}</strong>
+        On y trouve {{ $crag->routes_count }} lignes @if($crag->routes_count > 0) allant de <strong class="color-grade-{{ $crag->gapGrade->min_grade_val }}">{{ $crag->gapGrade->min_grade_text }}</strong> à <strong class="color-grade-{{ $crag->gapGrade->max_grade_val }}">{{ $crag->gapGrade->max_grade_text }}</strong> @endif
     </p>
     @if(Auth::check())
         <div class="text-right ligne-btn">

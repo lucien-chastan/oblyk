@@ -8,9 +8,7 @@
 </div>
 <div class="col s12 m8">
     <div class="card-panel">
-        <h2 class="loved-king-font">Cotations</h2>
-        <p>
-            graphe
-        </p>
+        <h2 class="loved-king-font">Nombre de ligne par cotations</h2>
+        <canvas id="gradeGraph"></canvas>
     </div>
 </div>
