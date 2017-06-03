@@ -13,6 +13,8 @@ class CragController extends Controller
             ->with('rock')
             ->with('orientation')
             ->with('season')
+            ->withCount('routes')
+            ->with('gapGrade')
             ->with('descriptions.user')
             ->first();
 

@@ -22,6 +22,10 @@ class Sector extends Model
         return $this->morphOne('App\Season', 'seasontable');
     }
 
+    public function gapGrade(){
+        return $this->morphOne('App\GapGrade', 'spreadable');
+    }
+
     public function descriptions(){
         return $this->morphMany('App\Description', 'descriptive');
     }

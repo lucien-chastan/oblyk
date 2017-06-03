@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClimbsTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
         $this->call(RouteSectionsTableSeeder::class);
+        $this->call(GapGradesTableSeeder::class);
     }
 }

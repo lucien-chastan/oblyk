@@ -44,6 +44,7 @@ class CragVueController extends Controller
                 ->with('rain')
                 ->with('orientation')
                 ->withCount('routes')
+                ->with('gapGrade')
                 ->with('season')
                 ->get(),
             'crag' => Crag::where('id',$id)->first()

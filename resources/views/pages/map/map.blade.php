@@ -67,7 +67,7 @@
                             <td>Lignes &amp; Cotations : </td>
                             <td>
                                 {{$crag['routes_count']}} lignes
-                                @if($crag['routes_count'] > 0 ), de 5a <i class="material-icons tiny">arrow_forward</i> 6a @endif
+                                @if($crag['routes_count'] > 0 ), de <strong class="text-bold color-grade-{{$crag->gapGrade->min_grade_val}}">{{$crag->gapGrade->min_grade_text}}</strong> <i class="material-icons tiny">arrow_forward</i> <strong class="text-bold color-grade-{{$crag->gapGrade->max_grade_val}}">{{$crag->gapGrade->max_grade_text}}</strong> @endif
                             </td>
                         </tr>
                         <tr>
