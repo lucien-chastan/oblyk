@@ -20,5 +20,6 @@
 <link href="/css/app.css" rel="stylesheet">
 <link href="/css/materialize.css" rel="stylesheet">
 <link href="/css/cotation.css" rel="stylesheet">
+<link href="/css/route.css" rel="stylesheet">
 
 @yield('css')

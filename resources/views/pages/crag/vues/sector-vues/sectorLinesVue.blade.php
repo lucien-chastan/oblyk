@@ -12,7 +12,7 @@
     </tr>
 @foreach($routes as $route)
 
-    <tr>
+    <tr data-activates="slide-route" class="button-open-route">
         <td><img {!! $Helpers::tooltip('Évaluation sur ' . $route->nb_note . ' note(s)') !!} src="/img/note_{{$route->note}}.png" alt="" class="tooltipped img-note-route-sector"></td>
         <td>
             @if(count($route->routeSections) > 1)

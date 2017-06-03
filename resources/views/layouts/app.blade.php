@@ -17,6 +17,8 @@
             @include('includes.footer')
         </footer>
 
+        @include('pages.route.route')
+
         @include('includes.modal')
 
         @include('includes.scripts')

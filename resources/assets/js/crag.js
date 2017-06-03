@@ -68,8 +68,6 @@ function loadSectorVue(tab) {
             target = document.getElementById(tab.getAttribute('href').replace('#','')),
             callback = tab.getAttribute('data-callback');
 
-        console.log(route);
-
         ajaxRouter(route, target, callback);
 
     }

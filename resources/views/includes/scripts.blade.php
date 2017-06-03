@@ -9,7 +9,15 @@
 
 <script type="text/javascript">
     {{--initialisation du paralax--}}
-    $(document).ready(function(){$('.parallax').parallax();});
+    $(document).ready(function(){
+        $('.parallax').parallax();
+        $(".button-open-route").sideNav({
+            menuWidth: 500,
+            edge: 'right',
+            closeOnClick: false,
+            draggable: false
+        });
+    });
 </script>
 
 {{--inclusion de script particulier à une page--}}

@@ -15,18 +15,18 @@ class GapGradesTableSeeder extends Seeder
             'spreadable_id' => 1,
             'spreadable_type' => 'App\Sector',
             'min_grade_val' => 32,
-            'max_grade_val' => 34,
+            'max_grade_val' => 39,
             'min_grade_text' => '6a/+',
-            'max_grade_text' => '6b+',
+            'max_grade_text' => '7b',
         ]);
 
         DB::table('gap_grades')->insert([
             'spreadable_id' => 1,
             'spreadable_type' => 'App\Crag',
             'min_grade_val' => 32,
-            'max_grade_val' => 34,
+            'max_grade_val' => 39,
             'min_grade_text' => '6a/+',
-            'max_grade_text' => '6b+',
+            'max_grade_text' => '7b',
         ]);
     }
 }

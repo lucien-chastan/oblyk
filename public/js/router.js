@@ -63,7 +63,17 @@ function ajaxRouter(route, target, callback) {
         $('.tooltipped').tooltip({delay: 50});
 
         //initialise les tabs
-        $('ul.tabs').tabs();
+        setTimeout(function () {
+            $('ul.tabs').tabs();
+        },300);
+
+        //initialisation des boutons pour ouvrir la zone d'affichage d'une ligne
+        $(".button-open-route").sideNav({
+            menuWidth: 500,
+            edge: 'right',
+            closeOnClick: false,
+            draggable: false
+        });
     });
 }
 
