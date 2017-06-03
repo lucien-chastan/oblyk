@@ -21,6 +21,6 @@
     @include('pages.crag.partials.photos')
 </div>
 
-<div class="row stretchCol">
+<div class="row">
     @include('pages.crag.partials.graph')
 </div>

@@ -102,11 +102,17 @@ function extendSectorDiv(sectorId) {
     secteurDiv.style.overflowY = 'auto';
 }
 
+
+//VA CHERCHER LES DONNÉES DES GRAPHIQUES ET LES AFFICHES
 function getGraphCrag(crag_id) {
 
-    let ctx = document.getElementById("gradeGraph").getContext('2d');
-
+    //Graphique des cotations
     axios.get('/chart/crag/' + crag_id + '/grade').then(function (response) {
-        new Chart(ctx,JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),JSON.parse(response.data));
+    });
+
+    //Graphique des type de grimpe
+    axios.get('/chart/crag/' + crag_id + '/climb').then(function (response) {
+        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),JSON.parse(response.data));
     });
 }
