@@ -30,6 +30,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/popup.js', 'public/js')
     .copy('resources/assets/js/router.js', 'public/js')
     .copy('resources/assets/js/crag.js', 'public/js')
+    .copy('resources/assets/js/route.js', 'public/js')
     .copy('resources/assets/js/mapVariable.js', 'public/js');
 
 //leaflet

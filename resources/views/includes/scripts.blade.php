@@ -5,6 +5,7 @@
 {{--Ficher Js commun à toutes les pages--}}
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
+<script type="text/javascript" src="/js/route.js"></script>
 <script type="text/javascript" src="/framework/axios/axios.min.js"></script>
 
 <script type="text/javascript">
