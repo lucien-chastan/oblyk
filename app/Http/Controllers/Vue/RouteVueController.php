@@ -8,7 +8,7 @@ use App\Route;
 class RouteVueController extends Controller
 {
     function vueRoute($id){
-        $data = ['route' => Route::where('id',$id)->with('routeSections')->first()];
+        $data = ['route' => Route::where('id',$id)->with('routeSections')->with('crag')->with('sector')->first()];
         return view('pages.route.vues.route', $data);
     }
 

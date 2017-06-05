@@ -10,4 +10,40 @@
     .tabs a {
         font-weight: normal;
     }
+
+    .type-ligne-route {
+        height: 0.5em;
+        vertical-align: middle;
+    }
+
+    .information-route {
+        margin-top: 20px;
+        p {
+            border: 1px rgb(220, 220, 220);
+            border-bottom-style: solid;
+            margin: 0;
+            padding: 9px 0;
+        }
+
+        .oblyk-icon {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    }
+
+    .route-tab{
+        a {
+            display: inline;
+            font-size: inherit;
+            font-weight: inherit;
+            height: auto;
+            line-height: normal;
+            padding: 0;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+    }
 }

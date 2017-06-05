@@ -1,0 +1,229 @@
+@import "variables";
+
+@font-face {
+  font-family: 'oblyk';
+  src:  url('#{$icomoon-font-path}/oblyk.eot?nsre2h');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?nsre2h#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/oblyk.ttf?nsre2h') format('truetype'),
+    url('#{$icomoon-font-path}/oblyk.woff?nsre2h') format('woff'),
+    url('#{$icomoon-font-path}/oblyk.svg?nsre2h#oblyk') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.oblyk-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'oblyk' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-climb_1 {
+  &:before {
+    content: $icon-climb_1;
+  }
+}
+.icon-climb_2 {
+  &:before {
+    content: $icon-climb_2;
+  }
+}
+.icon-climb_3 {
+  &:before {
+    content: $icon-climb_3;
+  }
+}
+.icon-climb_4 {
+  &:before {
+    content: $icon-climb_4;
+  }
+}
+.icon-climb_5 {
+  &:before {
+    content: $icon-climb_5;
+  }
+}
+.icon-climb_6 {
+  &:before {
+    content: $icon-climb_6;
+  }
+}
+.icon-climb_7 {
+  &:before {
+    content: $icon-climb_7;
+  }
+}
+.icon-climb_8 {
+  &:before {
+    content: $icon-climb_8;
+  }
+}
+.icon-inclinaison_1 {
+  &:before {
+    content: $icon-inclinaison_1;
+  }
+}
+.icon-inclinaison_2 {
+  &:before {
+    content: $icon-inclinaison_2;
+  }
+}
+.icon-inclinaison_3 {
+  &:before {
+    content: $icon-inclinaison_3;
+  }
+}
+.icon-inclinaison_4 {
+  &:before {
+    content: $icon-inclinaison_4;
+  }
+}
+.icon-inclinaison_5 {
+  &:before {
+    content: $icon-inclinaison_5;
+  }
+}
+.icon-inclinaison_6 {
+  &:before {
+    content: $icon-inclinaison_6;
+  }
+}
+.icon-point_1 {
+  &:before {
+    content: $icon-point_1;
+  }
+}
+.icon-point_2 {
+  &:before {
+    content: $icon-point_2;
+  }
+}
+.icon-point_4 {
+  &:before {
+    content: $icon-point_4;
+  }
+}
+.icon-point_3 {
+  &:before {
+    content: $icon-point_3;
+  }
+}
+.icon-point_5 {
+  &:before {
+    content: $icon-point_5;
+  }
+}
+.icon-relais_1 {
+  &:before {
+    content: $icon-relais_1;
+  }
+}
+.icon-relais_2 {
+  &:before {
+    content: $icon-relais_2;
+  }
+}
+.icon-relais_3 {
+  &:before {
+    content: $icon-relais_3;
+  }
+}
+.icon-relais_4 {
+  &:before {
+    content: $icon-relais_4;
+  }
+}
+.icon-relais_5 {
+  &:before {
+    content: $icon-relais_5;
+  }
+}
+.icon-note {
+  &:before {
+    content: $icon-note;
+  }
+}
+.icon-boulder_height {
+  &:before {
+    content: $icon-boulder_height;
+  }
+}
+.icon-brosseur {
+  &:before {
+    content: $icon-brosseur;
+  }
+}
+.icon-nb_longueur {
+  &:before {
+    content: $icon-nb_longueur;
+  }
+}
+.icon-reception {
+  &:before {
+    content: $icon-reception;
+  }
+}
+.icon-stronger {
+  &:before {
+    content: $icon-stronger;
+  }
+}
+.icon-stronger-2 {
+  &:before {
+    content: $icon-stronger-2;
+  }
+}
+.icon-type_anchor {
+  &:before {
+    content: $icon-type_anchor;
+  }
+}
+.icon-opener {
+  &:before {
+    content: $icon-opener;
+  }
+}
+.icon-open_year {
+  &:before {
+    content: $icon-open_year;
+  }
+}
+.icon-point {
+  &:before {
+    content: $icon-point;
+  }
+}
+.icon-sector {
+  &:before {
+    content: $icon-sector;
+  }
+}
+.icon-crag {
+  &:before {
+    content: $icon-crag;
+  }
+}
+.icon-nom {
+  &:before {
+    content: $icon-nom;
+  }
+}
+.icon-route {
+  &:before {
+    content: $icon-route;
+  }
+}
+.icon-route_height {
+  &:before {
+    content: $icon-route_height;
+  }
+}
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24"
+   height="24"
+   viewBox="0 0 6.3499999 6.3500002"
+   version="1.1"
+   id="svg6992"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="point_3.svg">
+  <defs
+     id="defs6986" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-52.333372"
+     inkscape:cy="26.465085"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="738"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6989">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-290.64997)">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2.5071104,291.87545 c -0.25214,0.0218 -0.5538101,0.13381 -0.72502,0.27027 -0.63604,0.50695 -1.24987998,1.061 -1.25262998,1.77767 -0.003,0.70845 0.3162,1.39695 0.99838998,1.72857 0.42839,0.20825 0.81541,0.12349 1.16788,0 0.25329,-0.0887 0.29345,-0.32446 0.29042,-0.50281 l -0.0357,-2.08618 h 2.8701101 v -0.66559 H 2.9390804 l -0.004,-0.25166 c 0.0266,-0.22371 -0.17574,-0.29208 -0.42788,-0.27027 z m -0.67902,1.28002 a 0.59944659,0.84335935 0 0 1 0.59944,0.84336 0.59944659,0.84335935 0 0 1 -0.59944,0.84336 0.59944659,0.84335935 0 0 1 -0.59945,-0.84336 0.59944659,0.84335935 0 0 1 0.59945,-0.84336 z"
+       id="path7649-5" />
+  </g>
+</svg>

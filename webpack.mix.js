@@ -57,3 +57,10 @@ mix.copy('resources/assets/framework/simplemde/simplemde.min.js', 'public/framew
 
 //image
 mix.copy('resources/assets/img/','public/img/');
+
+//font oblyk
+mix.sass('resources/assets/font/oblyk/style.scss', 'public/font/oblyk');
+mix.copy('resources/assets/font/oblyk/fonts/oblyk.eot','public/font/oblyk/fonts')
+    .copy('resources/assets/font/oblyk/fonts/oblyk.svg','public/font/oblyk/fonts')
+    .copy('resources/assets/font/oblyk/fonts/oblyk.ttf','public/font/oblyk/fonts')
+    .copy('resources/assets/font/oblyk/fonts/oblyk.woff','public/font/oblyk/fonts');
