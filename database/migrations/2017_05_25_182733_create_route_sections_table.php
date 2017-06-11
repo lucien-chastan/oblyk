@@ -21,13 +21,19 @@ class CreateRouteSectionsTable extends Migration
             $table->integer('grade_val');
             $table->integer('section_height');
             $table->integer('nb_point');
-            $table->integer('type_point');
-            $table->integer('type_anchor');
-            $table->integer('steepness');
+            $table->integer('point_id')->unsigned();
+            $table->integer('anchor_id')->unsigned();
+            $table->integer('incline_id')->unsigned();
+            $table->integer('reception_id')->unsigned();
+            $table->integer('start_id')->unsigned();
             $table->integer('section_order');
 
             //clé étrangère
             $table->foreign('route_id')->references('id')->on('routes');
+            $table->foreign('anchor_id')->references('id')->on('anchors');
+            $table->foreign('point_id')->references('id')->on('points');
+            $table->foreign('reception_id')->references('id')->on('receptions');
+            $table->foreign('start_id')->references('id')->on('starts');
         });
     }
 

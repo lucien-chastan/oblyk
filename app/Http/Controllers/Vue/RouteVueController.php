@@ -13,7 +13,16 @@ class RouteVueController extends Controller
     }
 
     function vueInformation($id){
-        $data = ['route' => Route::where('id',$id)->with('routeSections')->first()];
+        $data = [
+            'route' => Route::where('id',$id)
+                ->with('routeSections')
+                ->with('routeSections.anchor')
+                ->with('routeSections.point')
+                ->with('routeSections.incline')
+                ->with('routeSections.reception')
+                ->with('routeSections.start')
+                ->first()
+        ];
         return view('pages.route.vues.informationVue', $data);
     }
 

@@ -13,7 +13,7 @@
     $(document).ready(function(){
         $('.parallax').parallax();
         $(".button-open-route").sideNav({
-            menuWidth: 500,
+            menuWidth: 580,
             edge: 'right',
             closeOnClick: false,
             draggable: false

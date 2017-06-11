@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'oblyk';
-  src:  url('#{$icomoon-font-path}/oblyk.eot?nsre2h');
-  src:  url('#{$icomoon-font-path}/oblyk.eot?nsre2h#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/oblyk.ttf?nsre2h') format('truetype'),
-    url('#{$icomoon-font-path}/oblyk.woff?nsre2h') format('woff'),
-    url('#{$icomoon-font-path}/oblyk.svg?nsre2h#oblyk') format('svg');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?nx4ozy');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?nx4ozy#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/oblyk.ttf?nx4ozy') format('truetype'),
+    url('#{$icomoon-font-path}/oblyk.woff?nx4ozy') format('woff'),
+    url('#{$icomoon-font-path}/oblyk.svg?nx4ozy#oblyk') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +26,41 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-depart_1 {
+  &:before {
+    content: $icon-depart_1;
+  }
+}
+.icon-depart_2 {
+  &:before {
+    content: $icon-depart_2;
+  }
+}
+.icon-depart_3 {
+  &:before {
+    content: $icon-depart_3;
+  }
+}
+.icon-depart_4 {
+  &:before {
+    content: $icon-depart_4;
+  }
+}
+.icon-depart_5 {
+  &:before {
+    content: $icon-depart_5;
+  }
+}
+.icon-point_6 {
+  &:before {
+    content: $icon-point_6;
+  }
+}
+.icon-relais_6 {
+  &:before {
+    content: $icon-relais_6;
+  }
+}
 .icon-climb_1 {
   &:before {
     content: $icon-climb_1;
