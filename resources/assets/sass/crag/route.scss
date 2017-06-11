@@ -18,11 +18,15 @@
 
     .information-route {
         margin-top: 20px;
-        p {
-            border: 1px rgb(220, 220, 220);
-            border-bottom-style: solid;
-            margin: 0;
-            padding: 9px 0;
+        padding-bottom: 4em;
+
+        .table-des-informations {
+            p {
+                border: 1px rgb(220, 220, 220);
+                border-bottom-style: solid;
+                margin: 0;
+                padding: 9px 0;
+            }
         }
 
         .oblyk-icon {
@@ -50,6 +54,12 @@
                 background-color: inherit;
             }
         }
+    }
+
+    .note-description {
+        height: 1em;
+        margin-right: 0.5em;
+        vertical-align: middle;
     }
 }
 

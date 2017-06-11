@@ -1,6 +1,12 @@
+@inject('Helpers','App\Lib\HelpersTemplates')
+
 <div class="information-route">
 
-    <div class="row">
+
+
+    {{--PREMIÈRE PARTIE DES INFOS--}}
+
+    <div class="row table-des-informations">
         <div class="col s12 m6">
 
             {{--NOM DE LA LIGNE + COTATION + TYPE--}}
@@ -117,7 +123,13 @@
         </div>
     </div>
 
-    <div class="row">
+
+
+
+
+    {{--SECONDE PARTIE AVEC LES OUVREURS ET L'ANNÉE D'OUVERTURE--}}
+
+    <div class="row table-des-informations">
         <div class="col s12 m6">
 
             {{--OUVREUR--}}
@@ -156,7 +168,10 @@
     </div>
 
 
+
+
     {{--LISTE DES LONGUEURS--}}
+
     @if(count($route->routeSections) > 1)
 
         <h5 class="loved-king-font">Liste des longueurs</h5>
@@ -191,15 +206,42 @@
 
 
 
+
     {{--PARTIE DESCRIPTION--}}
+
     <div class="row">
 
         <h5 class="loved-king-font">Description des grimpeurs</h5>
 
         <div class="col s12">
-            description
+            <div class="blue-border-zone">
+                @foreach ($route->descriptions as $description)
+                    <div class="blue-border-div">
+                        <div class="markdownZone">{{ $description->description }}</div>
+                        <p class="info-user grey-text">
+                            @if($description->note != 0)
+                                <img class="note-description" src="/img/note_{{$description->note}}.png" alt="">
+                            @endif
+                            par {{$description->user->name}} le {{$description->created_at->format('d M Y')}}
+
+                            @if(Auth::check())
+                                <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                @if($description->user_id == Auth::id())
+                                    <i {!! $Helpers::tooltip('Modifier cette déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$route->id, "descriptive_type"=>"Route", "description_id"=>$description->id, "title"=>"Modifier la description", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                    <i {!! $Helpers::tooltip('Supprimer cette déscription') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/descriptions/".$description->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                @endif
+                            @endif
+                        </p>
+                    </div>
+                @endforeach
+
+                @if(count($route->descriptions) == 0)
+                    <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé cette ligne pas à la décrire</p>
+                @endif
+
+            </div>
         </div>
 
     </div>
-
 </div>
+

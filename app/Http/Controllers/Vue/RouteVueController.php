@@ -15,6 +15,8 @@ class RouteVueController extends Controller
     function vueInformation($id){
         $data = [
             'route' => Route::where('id',$id)
+                ->with('descriptions')
+                ->with('descriptions.user')
                 ->with('routeSections')
                 ->with('routeSections.anchor')
                 ->with('routeSections.point')

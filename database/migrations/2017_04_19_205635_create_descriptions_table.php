@@ -19,6 +19,7 @@ class CreateDescriptionsTable extends Migration
             $table->string('descriptive_type',100);
             $table->text('description');
             $table->integer('user_id')->unsigned();
+            $table->integer('note');
             $table->timestamps();
 
             //clé étrangère

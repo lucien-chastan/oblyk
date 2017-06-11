@@ -25,4 +25,8 @@ class Route extends Model
     public function climb(){
         return $this->hasOne('App\Climb','id', 'climb_id');
     }
+
+    public function descriptions(){
+        return $this->morphMany('App\Description', 'descriptive');
+    }
 }
