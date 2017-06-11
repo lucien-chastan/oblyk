@@ -17,7 +17,12 @@ class DescriptionController extends Controller
         //construction de la définition (vide ou avec des infos)
         $id_description = $request->input('description_id');
         $callback = $request->input('callback');
-        $description = isset($id_description) ? Description::where('id', $id_description)->first() : new Description();
+        if (isset($id_description)) {
+            $description = Description::where('id', $id_description)->first();
+        } else {
+            $description = new Description();
+            $description->note = 0;
+        }
         $callback = isset($callback) ? $callback : 'refresh';
 
         //définition du chemin de sauvgarde
@@ -28,6 +33,7 @@ class DescriptionController extends Controller
                 'descriptive_id' => $request->input('descriptive_id'),
                 'descriptive_type' => "App\\" . $request->input('descriptive_type'),
                 'description' => $description->description,
+                'note' => $description->note,
                 'id' => $id_description,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
@@ -80,6 +86,7 @@ class DescriptionController extends Controller
         $description->descriptive_id = $request->input('descriptive_id');
         $description->descriptive_type = $request->input('descriptive_type');
         $description->description = $request->input('description');
+        $description->note = $request->input('note');
         $description->user_id = Auth::id();
         $description->save();
 
@@ -129,6 +136,7 @@ class DescriptionController extends Controller
 
         if($description->user_id == Auth::id()){
             $description->description = $request->input('description');
+            $description->note = $request->input('note');
             $description->save();
         }
 

@@ -26,3 +26,10 @@ function loadTabRoute(id_route, tab, callback) {
 
     }
 }
+
+function reloadRouteInformationTab() {
+    let route_id = document.getElementById('info-route-id');
+    closeModal();
+    loadTabRoute(route_id.value, 'information', null);
+    return false;
+}

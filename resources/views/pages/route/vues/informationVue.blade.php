@@ -2,7 +2,7 @@
 
 <div class="information-route">
 
-
+    <input type="hidden" id="info-route-id" value="{{$route->id}}">
 
     {{--PREMIÈRE PARTIE DES INFOS--}}
 
@@ -209,7 +209,7 @@
 
     {{--PARTIE DESCRIPTION--}}
 
-    <div class="row">
+    <div class="row route-description-zone">
 
         <h5 class="loved-king-font">Description des grimpeurs</h5>
 
@@ -227,8 +227,8 @@
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                 @if($description->user_id == Auth::id())
-                                    <i {!! $Helpers::tooltip('Modifier cette déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$route->id, "descriptive_type"=>"Route", "description_id"=>$description->id, "title"=>"Modifier la description", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                                    <i {!! $Helpers::tooltip('Supprimer cette déscription') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/descriptions/".$description->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                    <i {!! $Helpers::tooltip('Modifier cette déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$route->id, "descriptive_type"=>"Route", "description_id"=>$description->id, "title"=>"Modifier la description", "method" => "PUT", "callback"=>"reloadRouteInformationTab"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                    <i {!! $Helpers::tooltip('Supprimer cette déscription') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/descriptions/".$description->id, "callback"=>"reloadRouteInformationTab"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                                 @endif
                             @endif
                         </p>
@@ -241,6 +241,13 @@
 
             </div>
         </div>
+
+        {{--BOUTON POUR AJOUTER UNE DESCRIPTION--}}
+        @if(Auth::check())
+            <div class="text-right btn-route-add">
+                <a {!! $Helpers::tooltip('Rédiger un déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$route->id, "descriptive_type"=>'Route', "description_id"=>"", "title"=>"Ajouter une description", "method"=>"POST", "callback"=>"reloadRouteInformationTab"]) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">mode_edit</i></a>
+            </div>
+        @endif
 
     </div>
 </div>

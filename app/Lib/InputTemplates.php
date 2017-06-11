@@ -161,6 +161,43 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
+
+    //SELECT D'UNE NOTE
+    public static function note($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+
+        $notes = [
+            0 => 'pas de note',
+            1 => 'Horrible !',
+            2 => 'Moche',
+            3 => 'Bof',
+            4 => 'Normal',
+            5 => 'Belle',
+            6 => 'Très belle',
+            7 => 'Majeur !'
+        ];
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">';
+
+        foreach ($notes as $key => $note){
+            $selected = ($value == $key ) ? 'selected' : '' ;
+            $html .= '<option class="left icon-modal-note" data-icon="/img/note_' . $key . '.png" ' . $selected . ' value="' . $key . '">' . $note . '</option>';
+        }
+
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
     //SELECT DE L'ENSOLEILLEMENT
     public static function suns($options){
         $name = $options['name'];

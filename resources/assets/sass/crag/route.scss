@@ -56,10 +56,37 @@
         }
     }
 
-    .note-description {
-        height: 1em;
-        margin-right: 0.5em;
-        vertical-align: middle;
+    .route-description-zone {
+        a {
+            display: inline;
+            font-size: inherit;
+            font-weight: inherit;
+            height: auto;
+            line-height: normal;
+            padding: 0;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+
+        .note-description {
+            height: 1em;
+            margin-right: 0.5em;
+            vertical-align: middle;
+        }
+    }
+
+    .btn-route-add{
+
+        a {
+            height: 40px;
+            display: inline-block;
+
+            &:hover{
+                background-color: #2196F3;
+            }
+        }
     }
 }
 
