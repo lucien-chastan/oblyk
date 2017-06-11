@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Route;
 use Validator;
 use App\Description;
 use Illuminate\Http\Request;
@@ -90,6 +91,9 @@ class DescriptionController extends Controller
         $description->user_id = Auth::id();
         $description->save();
 
+        //si c'est sur une ligne, on met à jour la note
+        if($description->descriptive_type == 'App\Route') $this->updateNote($description->descriptive_id);
+
         return response()->json(json_encode($description));
     }
 
@@ -138,7 +142,12 @@ class DescriptionController extends Controller
             $description->description = $request->input('description');
             $description->note = $request->input('note');
             $description->save();
+
+            //si c'est sur une ligne, on met à jour la note
+            if($description->descriptive_type == 'App\Route') $this->updateNote($description->descriptive_id);
         }
+
+
 
         return response()->json(json_encode($description));
     }
@@ -155,9 +164,40 @@ class DescriptionController extends Controller
         $oldDescription = $description;
 
         if($description->user_id == Auth::id()){
+            $descriptive_id = $description->descriptive_id;
+            $descriptive_type = $description->descriptive_type;
             $description->delete();
+
+            //si c'est sur une ligne, on met à jour la note
+            if($descriptive_type == 'App\Route') $this->updateNote($descriptive_id);
+
         }
 
         return response()->json(json_encode($oldDescription));
+    }
+
+
+    //FONCTION DE MISE À JOUR DE LA NOTE ET DU NOMBRE DE NOTE
+    function updateNote($route_id){
+
+        $descriptions = Description::where([
+            ['descriptive_type', '=' , 'App\Route'],
+            ['descriptive_id', '=' , $route_id],
+        ])->get();
+
+        $NbNote = $somme = 0;
+        foreach ($descriptions as $description){
+            if($description->note != 0) {
+                $NbNote++;
+                $somme += $description->note;
+            }
+        }
+
+        $avgNote = ($somme != 0) ? round($somme / $NbNote,0) : 0;
+
+        $route = Route::where('id',$route_id)->first();
+        $route->nb_note = $NbNote;
+        $route->note = $avgNote;
+        $route->save();
     }
 }

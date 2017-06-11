@@ -30,6 +30,15 @@ function loadTabRoute(id_route, tab, callback) {
 function reloadRouteInformationTab() {
     let route_id = document.getElementById('info-route-id');
     closeModal();
-    loadTabRoute(route_id.value, 'information', null);
+    loadTabRoute(route_id.value, 'information', 'initInformationRouteTab');
     return false;
+}
+
+function initInformationRouteTab() {
+
+    //ajoute les événements open modal sur les boutons
+    initOpenModal();
+
+    //convertie les textes en markdown
+    convertMarkdownZone();
 }
