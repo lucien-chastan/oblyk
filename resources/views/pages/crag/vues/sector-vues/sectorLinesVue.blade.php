@@ -47,7 +47,7 @@
 @if(Auth::check())
     <div class="row">
         <div class="text-right col s12">
-            <a {!! $Helpers::tooltip('Ajouter une voie') !!} class="btn-floating btn waves-effect waves-light tooltipped"><i class="material-icons">add</i></a>
+            <a {!! $Helpers::tooltip('Ajouter une voie') !!} {!! $Helpers::modal(route('routeModal'),['sector_id' => $sector->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
         </div>
     </div>
 @endif

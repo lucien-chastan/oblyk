@@ -89,6 +89,18 @@
         }
     }
 }
+.ligne-bt-route{
+    i {
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.3s;
+    }
+    &:hover {
+        i {
+            opacity: 1;
+        }
+    }
+}
 
 .climb-color-1 {color : rgb(184,184,184);}
 .climb-color-2 {color : rgb(255,204,0);}

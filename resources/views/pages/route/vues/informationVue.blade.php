@@ -125,8 +125,6 @@
 
 
 
-
-
     {{--SECONDE PARTIE AVEC LES OUVREURS ET L'ANNÉE D'OUVERTURE--}}
 
     <div class="row table-des-informations">
@@ -168,13 +166,20 @@
     </div>
 
 
+    {{--BOUTON POUR LA MODIFICATION--}}
+    <div class="ligne-bt-route">
+        <p class="text-right">
+            <i {!! $Helpers::tooltip('Modifier cette ligne') !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>'Modifier cette ligne','method'=>'PUT']) !!} class="material-icons tooltipped btnModal">edit</i>
+            <i {!! $Helpers::tooltip('Signaler un problème') !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal">flag</i>
+        </p>
+    </div>
 
 
     {{--LISTE DES LONGUEURS--}}
 
     @if(count($route->routeSections) > 1)
 
-        <h5 class="loved-king-font">Liste des longueurs</h5>
+        <h5 class="loved-king-font">Les longueurs</h5>
 
         <div class="row">
             <div class="col s12">

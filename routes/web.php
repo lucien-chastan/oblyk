@@ -47,6 +47,7 @@ Route::post('/modal/parking', 'CRUD\ParkingController@parkingModal')->name('park
 Route::post('/modal/delete', 'CRUD\DeleteController@deleteModal')->name('deleteModal');
 Route::post('/modal/problem', 'CRUD\ProblemController@problemModal')->name('problemModal');
 Route::post('/modal/sector', 'CRUD\SectorController@sectorModal')->name('sectorModal');
+Route::post('/modal/route', 'CRUD\RouteController@routeModal')->name('routeModal');
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');
@@ -54,6 +55,7 @@ Route::resource('links', 'CRUD\LinkController');
 Route::resource('crags', 'CRUD\CragController');
 Route::resource('parkings', 'CRUD\ParkingController');
 Route::resource('sectors', 'CRUD\SectorController');
+Route::resource('routes', 'CRUD\RouteController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

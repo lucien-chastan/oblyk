@@ -9,6 +9,7 @@
             @else
                 <strong class="color-grade-{{$route->routeSections[0]->grade_val}}">{{$route->routeSections[0]->grade}}{{$route->routeSections[0]->sub_grade}}</strong>
             @endif
+
         </h4>
 
         <div class="row">
