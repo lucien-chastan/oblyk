@@ -43,11 +43,13 @@
     <p class="grey-text text-center">Il n'y a pas de ligne référencée sur ce secteur,<br> vous pouvez en ajouter en cliquant sur le bouton +</p>
 
 @endif
+
+
 {{--BOUTON POUR AJOUTER UN LIGNE--}}
 @if(Auth::check())
     <div class="row">
         <div class="text-right col s12">
-            <a {!! $Helpers::tooltip('Ajouter une voie') !!} {!! $Helpers::modal(route('routeModal'),['sector_id' => $sector->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
+            <a {!! $Helpers::tooltip('Ajouter une voie') !!} {!! $Helpers::modal(route('routeModal'),['sector_id' => $sector->id, 'crag_id' => $sector->crag_id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
         </div>
     </div>
 @endif

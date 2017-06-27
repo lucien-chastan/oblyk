@@ -20,6 +20,8 @@ class RouteController extends Controller
             $callback = 'refresh';
         }else{
             $route = new Route();
+            $route->crag_id = $request->input('crag_id');
+            $route->sector_id = $request->input('sector_id');
             $callback = 'refresh';
         }
 

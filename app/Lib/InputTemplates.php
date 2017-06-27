@@ -2,8 +2,10 @@
 
 namespace App\Lib;
 
+use App\Climb;
 use App\RainExposure;
 use App\Rock;
+use App\Sector;
 use App\Sun;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -134,6 +136,7 @@ class InputTemplates extends ServiceProvider{
         ';
     }
 
+
     //SELECT DU TYPE DE ROCHE
     public static function rocks($options){
         $name = $options['name'];
@@ -161,6 +164,33 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
+
+    //SELECT DU TYPE DE GRIMPE
+    public static function climbs($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+
+        $climbs = Climb::all();
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($climbs as $climb){
+            $selected = ($climb->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $climb->id . '">' . ucfirst($climb->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
 
     //SELECT D'UNE NOTE
     public static function note($options){
@@ -198,6 +228,7 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
+
     //SELECT DE L'ENSOLEILLEMENT
     public static function suns($options){
         $name = $options['name'];
@@ -225,7 +256,8 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
-    //SELECT DE L'ENSOLEILLEMENT
+
+    //SELECT DE L'EXPOSITION À LA PLUIE
     public static function rains($options){
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
@@ -252,6 +284,8 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
+
+    //INPUT TYPE ORIENTATION
     public static function orientations($options){
         $label = (isset($options['label']))? $options['label'] : 'Orientations';
         $value = (isset($options['value']))? $options['value'] : ['north'=>0,'south'=>0,'east'=>0,'west'=>0,'north_east'=>0,'north_west'=>0,'south_east'=>0,'south_west'=>0];
@@ -294,6 +328,7 @@ class InputTemplates extends ServiceProvider{
     }
 
 
+    //INPUT TYPE SAISON
     public static function saisons($options){
         $label = (isset($options['label']))? $options['label'] : 'Saisons';
         $value = (isset($options['value']))? $options['value'] : ['summer'=>0,'autumn'=>0,'winter'=>0,'spring'=>0];
@@ -357,6 +392,7 @@ class InputTemplates extends ServiceProvider{
     }
 
 
+    //INPUT TYPE LOCALISATION SUR UNE CARTE
     public static function localisation($options){
         $label = (isset($options['label']))? $options['label'] : 'Localisation';
         $lat = (isset($options['lat']))? $options['lat'] : 0;
@@ -373,5 +409,126 @@ class InputTemplates extends ServiceProvider{
                 </div>
             </div>
         ';
+    }
+
+
+    //INPUT DU TYPE LISTE DES SECTORS
+    public static function sectors($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+
+
+        $Sectors = Sector::where('crag_id', $options['crag_id'])->get();
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Sectors as $sector){
+            $selected = ($sector->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $sector->id . '">' . ucfirst($sector->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //COTATION
+    public static function grades($options){
+        $grade = (isset($options['grade']))? $options['grade'] : 2;
+        $sub_grade = (isset($options['sub_grade']))? $options['sub_grade'] : '';
+        $sub_grades = ['', '+', '-', '/+', '/-', '+/b', '+/c', '?', '+/?', '-/?'];
+        $cat_grades = [
+            'Cotation Française' => [
+                '2', '2a', '2b' , '2c',
+                '3', '3a', '3b' , '3c',
+                '4', '4a', '4b' , '4c',
+                '5', '5a', '5b' , '5c',
+                '6', '6a', '6b' , '6c',
+                '7', '7a', '7b' , '7c',
+                '8', '8a', '8b' , '8c',
+                '9', '9a', '9b' , '9c',
+            ],
+            'Projet' => [
+                '?'
+            ],
+            'Grande voie' => [
+                'PD', 'AD', 'D', 'TD', 'ED', 'ABO'
+            ],
+            'Peak District / Annot' => [
+                'B0', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B14', 'B15', 'B16', 'B17', 'B18', 'B19', 'B20'
+            ],
+            'USA Bloc' => [
+                'VB', 'V0', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10', 'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18', 'V19', 'V20'
+            ],
+            'USA Voie' => [
+                '5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7', '5.8', '5.9',
+                '5.10a', '5.10b', '5.10c', '5.10d',
+                '5.11a', '5.11b', '5.11c', '5.11d',
+                '5.12a', '5.12b', '5.12c', '5.12d',
+                '5.13a', '5.13b', '5.13c', '5.13d',
+                '5.14a', '5.14b', '5.14c', '5.14d',
+                '5.15a', '5.15b', '5.15c', '5.15d',
+            ],
+            'Angleterre' => [
+                'M', 'D', 'VD', 'S', 'HS', 'VS', 'HVS',
+                'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11',
+            ],
+            'UIAA' => [
+                'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'
+            ],
+            'Artificiel' => [
+                'A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+            ],
+            'Entre cotation' => [
+                '2/3', '3/4', '4/5', '5/6', '6/7', '7/8', '8/9',
+                '2c+/3a', '3c+/4a', '4c+/5a', '5c+/6a', '6c+/7a', '7c+/8a', '8c+/9a'
+            ]
+        ];
+
+        $html = '
+            <div class="row">
+                <div class="input-field col s9">
+                    <select class="input-data browser-default" name="grade">';
+
+        foreach ($cat_grades as $key => $cotations){
+            $html .= '<optgroup label="' . $key . '">';
+
+            foreach ($cotations as $cotation){
+                $selected = ($cotation == $grade)? 'selected' : '';
+                $html .= '<option ' . $selected . ' value="' . $cotation . '">' . $cotation . '</option>';
+            }
+
+            $html .= '</optgroup>';
+        }
+
+        $html .=
+                    '</select>
+                    <label class="active">Cotation</label>
+                </div>
+                <div class="input-field col s3">
+                    <select class="input-data browser-default" name="sub_grade">';
+
+        foreach ($sub_grades as $sub){
+            $selected = ($sub == $sub_grade)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $sub . '">' . $sub . '</option>';
+        }
+
+        $html .=
+                    '</select>
+                    <label class="active">+ / -</label>
+                </div>
+            </div>
+        ';
+
+        return $html;
     }
 }

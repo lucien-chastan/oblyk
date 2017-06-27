@@ -60,7 +60,7 @@
         </a>
         <ul>
             <li><a {!! $Helpers::tooltip('Ajouter un secteur') !!}} {!! $Helpers::modal(route('sectorModal'),['crag_id' => $crag->id ,'title'=>'Ajouter un secteur','method'=>'POST']) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">terrain</i></a></li>
-            <li><a {!! $Helpers::tooltip('Ajouter une ligne') !!}} {!! $Helpers::modal(route('routeModal'),['crag_id' => $crag->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
+            <li><a {!! $Helpers::tooltip('Ajouter une ligne') !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
         </ul>
     </div>
 @endif
