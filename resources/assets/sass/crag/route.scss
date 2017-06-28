@@ -110,3 +110,39 @@
 .climb-color-6 {color : rgb(212,0,0);}
 .climb-color-7 {color : rgb(135,205,222);}
 .climb-color-8 {color : rgb(55,200,113);}
+
+.condense-select {
+    .dropdown-content {
+        li {
+            span {
+                padding: 3px 16px;
+            }
+            min-height: 1em;
+        }
+    }
+}
+
+.entete-popup-longueur-route{
+    th{
+        text-align: center;
+    }
+    span{
+        font-size: 2em;
+    }
+}
+
+#popup-route-table-longueur {
+    td {padding: 0;}
+    .select-dropdown{margin-bottom: 0;}
+    .input-field {margin-top: 0;}
+    input[type="number"] {margin-bottom: 0;}
+    table{margin-bottom: 3em;}
+    .col {padding: 0 2px;}
+    .width-50{width: 50px;}
+}
+
+#popup-route-type-cotation {
+    p {
+        margin-bottom: 1em;
+    }
+}

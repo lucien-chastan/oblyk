@@ -32,6 +32,7 @@ class CreateRouteSectionsTable extends Migration
             $table->foreign('route_id')->references('id')->on('routes');
             $table->foreign('anchor_id')->references('id')->on('anchors');
             $table->foreign('point_id')->references('id')->on('points');
+            $table->foreign('incline_id')->references('id')->on('inclines');
             $table->foreign('reception_id')->references('id')->on('receptions');
             $table->foreign('start_id')->references('id')->on('starts');
         });

@@ -2,10 +2,15 @@
 
 namespace App\Lib;
 
+use App\Anchor;
 use App\Climb;
+use App\Incline;
+use App\Point;
 use App\RainExposure;
+use App\Reception;
 use App\Rock;
 use App\Sector;
+use App\Start;
 use App\Sun;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -52,6 +57,21 @@ class InputTemplates extends ServiceProvider{
     }
 
 
+    //INPUT TYPE CHECKBOX
+    public static function checkbox($options){
+        $name = $options['name'];
+        $checked = (isset($options['checked']) && $options['checked'] == 'true')? 'checked' : '';
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $id = (isset($options['id']))? $options['id'] : $options['name'];
+        $align = (isset($options['align'])) ? 'text-' . $options['align'] : 'text-left';
+
+        return '
+        <p class="' . $align . '">
+            <input name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
+            <label for="' . $id . '">' . $label .'</label>
+        </p>';
+    }
+
     //INPUT DU TYPE TEXT
     public static function text($options){
         $name = $options['name'];
@@ -61,9 +81,11 @@ class InputTemplates extends ServiceProvider{
         $type = (isset($options['type']))? $options['type'] : 'text';
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $classLabel = ($value != '' || $placeholder != '')? 'active' : '';
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         return '
             <div class="input-field col s12">
+                ' . $icon . '
                 <input placeholder="' . $placeholder . '" value="' . $value . '" id="'. $id .'" name="' . $name . '" type="' . $type . '" class="input-data">
                 <label class="' . $classLabel . '" for="' . $id . '">' . $label . '</label>
             </div>
@@ -142,11 +164,13 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $Rock = Rock::all();
 
         $html = '
             <div class="input-field col s12">
+                ' . $icon . '
                 <select class="input-data" name="' . $name . '">
         ';
 
@@ -170,17 +194,21 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $climbs = Climb::all();
 
         $html = '
             <div class="input-field col s12">
-                <select class="input-data" name="' . $name . '">
+                ' . $icon . '
+                <select onchange="optimisePopupRoute()" id="select-climbs-popup-route" class="input-data" name="' . $name . '">
         ';
 
-        foreach ($climbs as $climb){
-            $selected = ($climb->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $climb->id . '">' . ucfirst($climb->label) . '</option>';
+        foreach ($climbs as $key => $climb){
+            if($key != 0){
+                $selected = ($climb->id == $value)? 'selected' : '';
+                $html .= '<option class="left" data-icon="/img/icon-climb-' . ($key + 1) . '.png" ' . $selected . ' value="' . $climb->id . '">' . ucfirst($climb->label) . '</option>';
+            }
         }
 
         $html .= '
@@ -197,6 +225,7 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $notes = [
             0 => 'pas de note',
@@ -211,6 +240,7 @@ class InputTemplates extends ServiceProvider{
 
         $html = '
             <div class="input-field col s12">
+                ' . $icon . '
                 <select class="input-data" name="' . $name . '">';
 
         foreach ($notes as $key => $note){
@@ -234,11 +264,13 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $Suns = Sun::all();
 
         $html = '
             <div class="input-field col s12">
+                ' . $icon . '
                 <select class="input-data" name="' . $name . '">
         ';
 
@@ -262,11 +294,13 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $Rains = RainExposure::all();
 
         $html = '
             <div class="input-field col s12">
+                ' . $icon . '
                 <select class="input-data" name="' . $name . '">
         ';
 
@@ -417,12 +451,14 @@ class InputTemplates extends ServiceProvider{
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
 
         $Sectors = Sector::where('crag_id', $options['crag_id'])->get();
 
         $html = '
             <div class="input-field col s12">
+                ' . $icon . '
                 <select class="input-data" name="' . $name . '">
         ';
 
@@ -442,10 +478,12 @@ class InputTemplates extends ServiceProvider{
 
 
     //COTATION
-    public static function grades($options){
+    public static function cotation($options){
         $grade = (isset($options['grade']))? $options['grade'] : 2;
-        $sub_grade = (isset($options['sub_grade']))? $options['sub_grade'] : '';
-        $sub_grades = ['', '+', '-', '/+', '/-', '+/b', '+/c', '?', '+/?', '-/?'];
+        $col = (isset($options['col']))? $options['col'] : 's12 m6 l8';
+        $name = (isset($options['name']))? $options['name'] : 'grade';
+        $label = (isset($options['label']))? $options['label'] : '<label>Cotation</label>';
+        $icon = (isset($options['icon']))? $options['icon'] : '<i class="oblyk-icon icon-cotation prefix"></i>';
         $cat_grades = [
             'Cotation Française' => [
                 '2', '2a', '2b' , '2c',
@@ -495,9 +533,9 @@ class InputTemplates extends ServiceProvider{
         ];
 
         $html = '
-            <div class="row">
-                <div class="input-field col s9">
-                    <select class="input-data browser-default" name="grade">';
+            <div class="input-field col ' . $col . ' condense-select">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">';
 
         foreach ($cat_grades as $key => $cotations){
             $html .= '<optgroup label="' . $key . '">';
@@ -511,11 +549,29 @@ class InputTemplates extends ServiceProvider{
         }
 
         $html .=
-                    '</select>
-                    <label class="active">Cotation</label>
-                </div>
-                <div class="input-field col s3">
-                    <select class="input-data browser-default" name="sub_grade">';
+                '</select>
+                ' . $label . '
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //PONDERATION
+    public static function ponderation($options){
+        $sub_grade = (isset($options['sub_grade']))? $options['sub_grade'] : '';
+        $sub_grades = ['', '+', '-', '/+', '/-', '+/b', '+/c', '?', '+/?', '-/?'];
+        $col = (isset($options['col']))? $options['col'] : 's12 m6 l4';
+        $name = (isset($options['name']))? $options['name'] : 'sub_grade';
+        $label = (isset($options['label']))? $options['label'] : '<label>Pondération</label>';
+        $icon = (isset($options['icon']))? $options['icon'] : '<i class="oblyk-icon icon-ponderation prefix"></i>';
+
+        $html =
+            '
+            <div class="input-field col ' . $col . ' condense-select">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">';
 
         foreach ($sub_grades as $sub){
             $selected = ($sub == $sub_grade)? 'selected' : '';
@@ -523,9 +579,157 @@ class InputTemplates extends ServiceProvider{
         }
 
         $html .=
-                    '</select>
-                    <label class="active">+ / -</label>
-                </div>
+                '</select>
+                ' . $label . '
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //INCLINAISON DE LA LIGNE
+    public static function inclinaison($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Inclines = Incline::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Inclines as $key => $incline){
+            $selected = ($incline->id == $value)? 'selected' : '';
+            $html .= '<option class="left" data-icon="/img/incline-' . ($key + 1) . '.png" ' . $selected . ' value="' . $incline->id . '">' . ucfirst($incline->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //TYPE DE POINT
+    public static function point($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? '<label>' . $options['label'] . '</label>' : '';
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Points = Point::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Points as $key=>$point){
+            $selected = ($point->id == $value)? 'selected' : '';
+            $html .= '<option class="left" data-icon="/img/point-' . ($key + 1) . '.png" ' . $selected . ' value="' . $point->id . '">' . ucfirst($point->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                ' . $label . '
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //TYPE DE RELAIS
+    public static function relais($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? '<label>' . $options['label'] . '</label>' : '';
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Anchors = Anchor::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Anchors as $key=>$anchor){
+            $selected = ($anchor->id == $value)? 'selected' : '';
+            $html .= '<option class="left" data-icon="/img/relais-' . ($key + 1) . '.png" ' . $selected . ' value="' . $anchor->id . '">' . ucfirst($anchor->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                ' . $label . '
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //TYPE DE RÉCEPTION
+    public static function reception($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Receptions = Reception::all();
+
+        $html = '
+            <div class="input-field col s12 condense-select">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Receptions as $reception){
+            $selected = ($reception->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $reception->id . '">' . ucfirst($reception->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //TYPE DE DÉPART
+    public static function start($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Starts = Start::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Starts as $key=>$start){
+            $selected = ($start->id == $value)? 'selected' : '';
+            $html .= '<option class="left" data-icon="/img/start-' . ($key + 1) . '.png" ' . $selected . ' value="' . $start->id . '">' . ucfirst($start->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
             </div>
         ';
 

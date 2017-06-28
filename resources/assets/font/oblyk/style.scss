@@ -2,16 +2,16 @@
 
 @font-face {
   font-family: 'oblyk';
-  src:  url('#{$icomoon-font-path}/oblyk.eot?nx4ozy');
-  src:  url('#{$icomoon-font-path}/oblyk.eot?nx4ozy#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/oblyk.ttf?nx4ozy') format('truetype'),
-    url('#{$icomoon-font-path}/oblyk.woff?nx4ozy') format('woff'),
-    url('#{$icomoon-font-path}/oblyk.svg?nx4ozy#oblyk') format('svg');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?p7on1a');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?p7on1a#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/oblyk.ttf?p7on1a') format('truetype'),
+    url('#{$icomoon-font-path}/oblyk.woff?p7on1a') format('woff'),
+    url('#{$icomoon-font-path}/oblyk.svg?p7on1a#oblyk') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.oblyk-icon {
+[class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'oblyk' !important;
   speak: none;
@@ -26,39 +26,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-depart_1 {
+.icon-inclinaison {
   &:before {
-    content: $icon-depart_1;
+    content: $icon-inclinaison;
   }
 }
-.icon-depart_2 {
+.icon-nb_point {
   &:before {
-    content: $icon-depart_2;
+    content: $icon-nb_point;
   }
 }
-.icon-depart_3 {
+.icon-boulder_height {
   &:before {
-    content: $icon-depart_3;
+    content: $icon-boulder_height;
   }
 }
-.icon-depart_4 {
+.icon-brosseur {
   &:before {
-    content: $icon-depart_4;
-  }
-}
-.icon-depart_5 {
-  &:before {
-    content: $icon-depart_5;
-  }
-}
-.icon-point_6 {
-  &:before {
-    content: $icon-point_6;
-  }
-}
-.icon-relais_6 {
-  &:before {
-    content: $icon-relais_6;
+    content: $icon-brosseur;
   }
 }
 .icon-climb_1 {
@@ -101,6 +86,41 @@
     content: $icon-climb_8;
   }
 }
+.icon-cotation {
+  &:before {
+    content: $icon-cotation;
+  }
+}
+.icon-crag {
+  &:before {
+    content: $icon-crag;
+  }
+}
+.icon-depart_1 {
+  &:before {
+    content: $icon-depart_1;
+  }
+}
+.icon-depart_2 {
+  &:before {
+    content: $icon-depart_2;
+  }
+}
+.icon-depart_3 {
+  &:before {
+    content: $icon-depart_3;
+  }
+}
+.icon-depart_4 {
+  &:before {
+    content: $icon-depart_4;
+  }
+}
+.icon-depart_5 {
+  &:before {
+    content: $icon-depart_5;
+  }
+}
 .icon-inclinaison_1 {
   &:before {
     content: $icon-inclinaison_1;
@@ -131,6 +151,36 @@
     content: $icon-inclinaison_6;
   }
 }
+.icon-nb_longueur {
+  &:before {
+    content: $icon-nb_longueur;
+  }
+}
+.icon-nom {
+  &:before {
+    content: $icon-nom;
+  }
+}
+.icon-note {
+  &:before {
+    content: $icon-note;
+  }
+}
+.icon-opener {
+  &:before {
+    content: $icon-opener;
+  }
+}
+.icon-open_year {
+  &:before {
+    content: $icon-open_year;
+  }
+}
+.icon-point {
+  &:before {
+    content: $icon-point;
+  }
+}
 .icon-point_1 {
   &:before {
     content: $icon-point_1;
@@ -141,19 +191,34 @@
     content: $icon-point_2;
   }
 }
-.icon-point_4 {
-  &:before {
-    content: $icon-point_4;
-  }
-}
 .icon-point_3 {
   &:before {
     content: $icon-point_3;
   }
 }
+.icon-point_4 {
+  &:before {
+    content: $icon-point_4;
+  }
+}
 .icon-point_5 {
   &:before {
     content: $icon-point_5;
+  }
+}
+.icon-point_6 {
+  &:before {
+    content: $icon-point_6;
+  }
+}
+.icon-ponderation {
+  &:before {
+    content: $icon-ponderation;
+  }
+}
+.icon-reception {
+  &:before {
+    content: $icon-reception;
   }
 }
 .icon-relais_1 {
@@ -181,29 +246,24 @@
     content: $icon-relais_5;
   }
 }
-.icon-note {
+.icon-relais_6 {
   &:before {
-    content: $icon-note;
+    content: $icon-relais_6;
   }
 }
-.icon-boulder_height {
+.icon-route {
   &:before {
-    content: $icon-boulder_height;
+    content: $icon-route;
   }
 }
-.icon-brosseur {
+.icon-route_height {
   &:before {
-    content: $icon-brosseur;
+    content: $icon-route_height;
   }
 }
-.icon-nb_longueur {
+.icon-sector {
   &:before {
-    content: $icon-nb_longueur;
-  }
-}
-.icon-reception {
-  &:before {
-    content: $icon-reception;
+    content: $icon-sector;
   }
 }
 .icon-stronger {
@@ -221,44 +281,14 @@
     content: $icon-type_anchor;
   }
 }
-.icon-opener {
+.icon-type_depart {
   &:before {
-    content: $icon-opener;
+    content: $icon-type_depart;
   }
 }
-.icon-open_year {
+.icon-type_grimpe {
   &:before {
-    content: $icon-open_year;
-  }
-}
-.icon-point {
-  &:before {
-    content: $icon-point;
-  }
-}
-.icon-sector {
-  &:before {
-    content: $icon-sector;
-  }
-}
-.icon-crag {
-  &:before {
-    content: $icon-crag;
-  }
-}
-.icon-nom {
-  &:before {
-    content: $icon-nom;
-  }
-}
-.icon-route {
-  &:before {
-    content: $icon-route;
-  }
-}
-.icon-route_height {
-  &:before {
-    content: $icon-route_height;
+    content: $icon-type_grimpe;
   }
 }
 

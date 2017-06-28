@@ -19,9 +19,21 @@ class RouteController extends Controller
             $route = Route::where('id', $id)->with('routeSections')->first();
             $callback = 'refresh';
         }else{
+
+            //créer une fausse section de ligne
+            $routeSections = new class{};
+            $routeSections->nb_point = 0;
+            $routeSections->point_id = 1;
+            $routeSections->anchor_id = 1;
+            $routeSections->incline_id = 1;
+            $routeSections->reception_id = 1;
+            $routeSections->start_id = 1;
+
             $route = new Route();
             $route->crag_id = $request->input('crag_id');
             $route->sector_id = $request->input('sector_id');
+            $route->routeSections = [$routeSections];
+            $route->nb_longueur = 1;
             $callback = 'refresh';
         }
 

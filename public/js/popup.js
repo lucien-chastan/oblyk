@@ -52,12 +52,18 @@ function specialAction(data) {
     //color les icônes de saison
     colorSaison();
 
+    //optimise l'affichage de la popup route
+    try {
+        optimisePopupRoute();
+        document.getElementById('type-cotation-longeur').addEventListener('change', optimisePopupRoute);
+    }catch (e){}
+
     //créer la map de localisation (s'il y en a une)
     setTimeout(function () {
         try {creatInputMap();}catch (e){}
     },500);
 
-    if(data['MapReverseGeoCoding'] == true){
+    if(data['MapReverseGeoCoding'] === true){
         MapReverseGeoCoding();
     }
 }

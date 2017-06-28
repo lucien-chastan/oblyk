@@ -24,6 +24,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => 'François Crespo',
             'note' => 6,
             'nb_note' => 1,
+            'nb_longueur' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -39,6 +40,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => 'François Crespo',
             'note' => 3,
             'nb_note' => 2,
+            'nb_longueur' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -54,6 +56,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => '',
             'note' => 1,
             'nb_note' => 1,
+            'nb_longueur' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -69,6 +72,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => '',
             'note' => 1,
             'nb_note' => 1,
+            'nb_longueur' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -84,6 +88,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => '',
             'note' => 1,
             'nb_note' => 1,
+            'nb_longueur' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -99,6 +104,7 @@ class RoutesTableSeeder extends Seeder
             'opener' => 'JM Belle',
             'note' => 5,
             'nb_note' => 2,
+            'nb_longueur' => 2,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
     }

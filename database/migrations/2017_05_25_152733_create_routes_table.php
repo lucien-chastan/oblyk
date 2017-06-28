@@ -25,6 +25,7 @@ class CreateRoutesTable extends Migration
             $table->text('opener');
             $table->integer('note');
             $table->integer('nb_note');
+            $table->integer('nb_longueur');
             $table->timestamps();
 
             //clé étrangère
