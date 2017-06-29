@@ -30,6 +30,27 @@ class Route extends Model
         return $this->morphMany('App\Description', 'descriptive');
     }
 
+    public static function similarRoute($crag_id, $route_id , $label){
+
+        $routes = Route::where([
+            ['crag_id','=',$crag_id],
+            ['id','!=',$route_id],
+            ['label','like','%' . $label . '%']
+        ])->get();
+
+        $similar_label = '';
+
+        foreach ($routes as $route){
+            similar_text(strtolower($label), strtolower($route->label), $similar);
+            if($similar > 90){
+                $similar_label = $route->label;
+                break;
+            }
+        }
+
+        return $similar_label;
+    }
+
     //convertie une cotation en valeur
     public static function gradeToVal($grade, $sub_grade){
         $val = 0;

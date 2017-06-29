@@ -59,6 +59,7 @@ function specialAction(data) {
         document.getElementById('type_cotation_longeur').addEventListener('change', optimisePopupRoute);
         document.getElementById('nb_longueur').addEventListener('change', setJsonLongueur);
         document.getElementById('nb_longueur').addEventListener('change', dupliqueLongueurLine);
+        document.getElementById('popup_line_name').addEventListener('keyup', getSimilarRoute);
     }catch (e){}
 
     //créer la map de localisation (s'il y en a une)

@@ -76,6 +76,6 @@
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'crag_id','value'=>$dataModal['ligne']->crag_id]) !!}
-    {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['ligne']->id]) !!}
+    {!! $Inputs::Hidden(['name'=>'id', 'id'=>'popup_id_ligne', 'value'=>$dataModal['ligne']->id]) !!}
     {!! $Inputs::Hidden(['name'=>'jsonLongueur','value'=>$dataModal['ligne']->tabLongueur]) !!}
 </form>

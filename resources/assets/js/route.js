@@ -1,4 +1,5 @@
-let loadedRouteTab = [];
+let loadedRouteTab = [],
+    timeToGetSimilar;
 
 //charge la structure d'une ligne
 function loadRoute(id_route) {
@@ -236,4 +237,31 @@ function prepareNewLine(response) {
 
     popup_line_name.value = '';
     popup_line_name.focus();
+}
+
+
+function getSimilarRoute() {
+    clearTimeout(timeToGetSimilar);
+    let errorPopupText = document.getElementById('errorPopupText'),
+        label = document.getElementById('popup_line_name');
+
+    if(label.value.length > 3){
+        timeToGetSimilar = setTimeout(function () {
+            axios.post('/similar/route', {
+                crag_id : document.getElementById('crag_id').value,
+                route_id : document.getElementById('popup_id_ligne').value,
+                label : label.value
+            }).then(function (response) {
+
+                let data = JSON.parse(response.data);
+
+                if(data !== '' ){
+                    errorPopupText.style.display = 'block';
+                    errorPopupText.innerHTML = 'Attention ! une ligne s\'appelle : ' + response.data;
+                }else{
+                    errorPopupText.style.display = 'none';
+                }
+            });
+        }, 300);
+    }
 }

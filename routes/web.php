@@ -84,3 +84,6 @@ Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->n
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
 Route::get('/chart/sector/{sector_id}/grade', 'Chart\SectorChartController@gradeChart')->name('gradeSectorChart');
+
+//SIMILAR
+Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');
