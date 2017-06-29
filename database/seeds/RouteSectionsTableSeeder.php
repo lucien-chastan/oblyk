@@ -26,6 +26,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 1,
             'incline_id' => 1,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         // 2 - Crespin
@@ -42,6 +43,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 2,
             'incline_id' => 2,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
 
@@ -59,6 +61,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 3,
             'incline_id' => 3,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         // 4 - Joly
@@ -75,6 +78,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 4,
             'incline_id' => 4,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         // 5 - L'attrape cœur
@@ -91,6 +95,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 5,
             'incline_id' => 5,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         // 6 - Lavandière
@@ -107,6 +112,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 1,
             'incline_id' => 3,
             'section_order' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         DB::table('route_sections')->insert([
@@ -122,6 +128,7 @@ class RouteSectionsTableSeeder extends Seeder
             'start_id' => 1,
             'incline_id' => 2,
             'section_order' => 2,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
     }
 }

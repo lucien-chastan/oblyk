@@ -52,7 +52,7 @@ function optimisePopupRoute() {
         nbLongueur = document.getElementById('popup-route-nb-longueur'),
         zoneBloc = document.getElementById('popup-route-bloc-zone'),
         tableLongeur = document.getElementById('popup-route-table-longueur'),
-        checkTypeCotation = document.getElementById('type-cotation-longeur');
+        checkTypeCotation = document.getElementById('type_cotation_longeur');
 
     //Type bloc
     if(climbSelect.value === '2'){
@@ -215,4 +215,25 @@ function getJsonLongueur() {
             height_longueur[i].value = tempTab[6];
         }catch (e){}
     }
+}
+
+function prepareNewLine(response) {
+    let popup_line_name = document.getElementById('popup_line_name');
+
+    showSubmitLoader(false);
+
+    let data = JSON.parse(response.data);
+
+    //recharge la liste des lignes en arrière fond
+    if(document.getElementById('voies-secteur-' + data.sector_id) !== 'undefined'){
+        axios.get('/vue/sector/' + data.sector_id + '/lines').then(function (response) {
+            document.getElementById('voies-secteur-' + data.sector_id).innerHTML = response.data;
+        });
+    }
+
+    Materialize.toast('<p>' + popup_line_name.value + ' ajouté</p>', 10000);
+    $(".button-collapse").sideNav();
+
+    popup_line_name.value = '';
+    popup_line_name.focus();
 }

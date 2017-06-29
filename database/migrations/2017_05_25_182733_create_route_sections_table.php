@@ -16,17 +16,18 @@ class CreateRouteSectionsTable extends Migration
         Schema::create('route_sections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('route_id')->unsigned();
-            $table->string('grade',10);
-            $table->string('sub_grade',5);
-            $table->integer('grade_val');
-            $table->integer('section_height');
-            $table->integer('nb_point');
+            $table->string('grade',10)->nullable();
+            $table->string('sub_grade',5)->nullable();
+            $table->integer('grade_val')->nullable();
+            $table->integer('section_height')->nullable();
+            $table->integer('nb_point')->nullable();
             $table->integer('point_id')->unsigned();
             $table->integer('anchor_id')->unsigned();
             $table->integer('incline_id')->unsigned();
             $table->integer('reception_id')->unsigned();
             $table->integer('start_id')->unsigned();
-            $table->integer('section_order');
+            $table->integer('section_order')->nullable();
+            $table->timestamps();
 
             //clé étrangère
             $table->foreign('route_id')->references('id')->on('routes');

@@ -28,6 +28,7 @@ class CreateCragsTable extends Migration
             $table->boolean('type_grande_voie');
             $table->boolean('type_bloc');
             $table->boolean('type_deep_water');
+            $table->boolean('type_via_ferrata');
             $table->softDeletes();
             $table->timestamps();
 

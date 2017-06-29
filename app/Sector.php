@@ -42,4 +42,47 @@ class Sector extends Model
         return $this->hasMany('App\Route','sector_id','id');
     }
 
+
+    //MET À JOUR LES INFORMATIONS STOCKÉES DU SECTEUR (ÉCART DE COTATION)
+    public static function majInformation($sector_id){
+        $routes = Route::where('sector_id',$sector_id)->with('routeSections')->get();
+        $sector = Sector::where('id', $sector_id)->with('gapGrade')->first();
+
+        //min et max
+        $min_grade_val = 100;
+        $min_grade_text = '';
+        $max_grade_val = 0;
+        $max_grade_text = '';
+
+        foreach ($routes as $route){
+            foreach ($route->routeSections as $section){
+                if($section->grade_val < $min_grade_val){
+                    $min_grade_val = $section->grade_val;
+                    $min_grade_text = $section->grade . $section->sub_grade;
+                }
+                if($section->grade_val > $max_grade_val){
+                    $max_grade_val = $section->grade_val;
+                    $max_grade_text = $section->grade . $section->sub_grade;
+                }
+            }
+        }
+
+        //MISE À JOUR DE L'ÉCART DE COTATION
+        if(isset($sector->gapGrade)){
+            $sector->gapGrade->min_grade_val = $min_grade_val;
+            $sector->gapGrade->min_grade_text = $min_grade_text;
+            $sector->gapGrade->max_grade_val = $max_grade_val;
+            $sector->gapGrade->max_grade_text = $max_grade_text;
+            $sector->gapGrade->save();
+        }else{
+            $gapGrade = new GapGrade();
+            $gapGrade->spreadable_id = $sector->id;
+            $gapGrade->spreadable_type = 'App\Sector';
+            $gapGrade->min_grade_val = $min_grade_val;
+            $gapGrade->min_grade_text = $min_grade_text;
+            $gapGrade->max_grade_val = $max_grade_val;
+            $gapGrade->max_grade_text = $max_grade_text;
+            $gapGrade->save();
+        }
+    }
 }

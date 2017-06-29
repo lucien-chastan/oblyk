@@ -57,6 +57,7 @@ function reloadDescriptionSector(response) {
     ajaxRouter('/vue/sector/' + data.descriptive_id + '/descriptions', document.getElementById('description-secteur-' + data.descriptive_id ), 'closeModal');
 }
 
+
 //Affiche la vues d'un onglet de secteur
 function loadSectorVue(tab) {
 

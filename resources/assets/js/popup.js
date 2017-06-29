@@ -56,7 +56,7 @@ function specialAction(data) {
     try {
         optimisePopupRoute();
         dupliqueLongueurLine();
-        document.getElementById('type-cotation-longeur').addEventListener('change', optimisePopupRoute);
+        document.getElementById('type_cotation_longeur').addEventListener('change', optimisePopupRoute);
         document.getElementById('nb_longueur').addEventListener('change', setJsonLongueur);
         document.getElementById('nb_longueur').addEventListener('change', dupliqueLongueurLine);
     }catch (e){}

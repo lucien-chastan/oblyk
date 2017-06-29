@@ -46,6 +46,7 @@ class CragVueController extends Controller
                 ->withCount('routes')
                 ->with('gapGrade')
                 ->with('season')
+                ->orderBy('label')
                 ->get(),
             'crag' => Crag::where('id',$id)->first()
         ];

@@ -20,12 +20,12 @@ class CreateRoutesTable extends Migration
             $table->integer('sector_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('climb_id')->unsigned();
-            $table->integer('height');
-            $table->integer('open_year');
-            $table->text('opener');
-            $table->integer('note');
-            $table->integer('nb_note');
-            $table->integer('nb_longueur');
+            $table->integer('height')->nullable();
+            $table->integer('open_year')->nullable();
+            $table->text('opener')->nullable();
+            $table->integer('note')->nullable();
+            $table->integer('nb_note')->nullable();
+            $table->integer('nb_longueur')->nullable();
             $table->timestamps();
 
             //clé étrangère

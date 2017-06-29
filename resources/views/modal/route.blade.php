@@ -4,10 +4,10 @@
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="setJsonLongueur();submitData(this, {{ $dataModal['callback'] }}); return false">
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['ligne']->label, 'label'=>'Nom de la ligne', 'icon'=>'icon-nom', 'placeholder'=>'Nom de la ligne (exemple : Biographie)','type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'label', 'id'=>'popup_line_name', 'value'=>$dataModal['ligne']->label, 'label'=>'Nom de la ligne', 'icon'=>'icon-nom', 'placeholder'=>'Nom de la ligne (exemple : Biographie)','type'=>'text']) !!}
         {!! $Inputs::sectors(['name'=>'sector_id', 'value'=>$dataModal['ligne']->sector_id, 'label'=>'Secteur', 'icon'=>'icon-sector', 'crag_id'=>1]) !!}
         {!! $Inputs::climbs(['name'=>'climb_id', 'value'=>$dataModal['ligne']->climb_id, 'label'=>'Type de grimpe', 'icon'=>'icon-type_grimpe',]) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['ligne']->height, 'label'=>'Hauteur', 'icon'=>'icon-route_height', 'placeholder'=>'Hauteur en mètre','type'=>'number']) !!}
@@ -17,7 +17,7 @@
         </div>
 
         <div id="popup-route-type-cotation">
-            {!! $Inputs::checkbox(['name'=>'type-cotation-longeur', 'label'=>'Une cotation par longueur', 'checked' => $dataModal['ligne']->typeCotation, 'align' => 'right']) !!}
+            {!! $Inputs::checkbox(['name'=>'type_cotation_longeur', 'label'=>'Une cotation par longueur', 'checked' => $dataModal['ligne']->typeCotation, 'align' => 'right']) !!}
         </div>
 
         <div id="popup-route-table-longueur">

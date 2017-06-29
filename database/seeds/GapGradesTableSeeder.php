@@ -18,6 +18,7 @@ class GapGradesTableSeeder extends Seeder
             'max_grade_val' => 39,
             'min_grade_text' => '6a/+',
             'max_grade_text' => '7b',
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         DB::table('gap_grades')->insert([
@@ -27,6 +28,7 @@ class GapGradesTableSeeder extends Seeder
             'max_grade_val' => 39,
             'min_grade_text' => '6a/+',
             'max_grade_text' => '7b',
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
     }
 }

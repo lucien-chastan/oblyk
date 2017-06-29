@@ -67,10 +67,11 @@ class InputTemplates extends ServiceProvider{
 
         return '
         <p class="' . $align . '">
-            <input name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
+            <input class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
             <label for="' . $id . '">' . $label .'</label>
         </p>';
     }
+
 
     //INPUT DU TYPE TEXT
     public static function text($options){
@@ -219,6 +220,7 @@ class InputTemplates extends ServiceProvider{
 
         return $html;
     }
+
 
     //SELECT D'UNE NOTE
     public static function note($options){

@@ -21,6 +21,7 @@ class CreateGapGradesTable extends Migration
             $table->integer('max_grade_val');
             $table->string('min_grade_text',100);
             $table->string('max_grade_text',100);
+            $table->timestamps();
         });
     }
 

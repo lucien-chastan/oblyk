@@ -25,6 +25,7 @@ class CragsTableSeeder extends Seeder
             'type_grande_voie' => 1,
             'type_bloc' => 0,
             'type_deep_water' => 0,
+            'type_via_ferrata' => 0,
         ]);
 
         DB::table('crags')->insert([
@@ -41,6 +42,7 @@ class CragsTableSeeder extends Seeder
             'type_grande_voie' => 0,
             'type_bloc' => 0,
             'type_deep_water' => 0,
+            'type_via_ferrata' => 0,
         ]);
     }
 }

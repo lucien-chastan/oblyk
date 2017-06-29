@@ -158,7 +158,7 @@
                 @if($route->open_year != 0)
                     {{$route->open_year}}
                 @else
-                    année non-renseignée
+                    <span class="grey-text text-italic">année non-renseignée</span>
                 @endif
             </p>
         </div>
