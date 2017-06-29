@@ -145,17 +145,74 @@ function optimisePopupRoute() {
 
 function dupliqueLongueurLine() {
     let trTable = document.querySelectorAll('#popup-route-table-longueur tbody tr'),
-        tbodyTable = document.querySelectorAll('#popup-route-table-longueur tbody')[0],
+        tbodyTable = document.getElementById('tbody-liste-longueur'),
         nb_longueur = document.getElementById('nb_longueur'),
-        saveLine = trTable[0];
+        saveLine = '';
 
-    console.log(tbodyTable);
-
-    tbodyTable.innerHTML = '';
-    console.log(tbodyTable);
-    for(let i = 0 ; i < nb_longueur.value ; i++){
-        console.log(i);
-        tbodyTable.appendChild(saveLine);
+    if(nb_longueur.value >= 1){
+        $('#tbody-liste-longueur select').material_select('destroy');
+        saveLine = trTable[0].innerHTML;
+        tbodyTable.innerHTML = '';
+        for(let i = 0 ; i < nb_longueur.value ; i++){
+            tbodyTable.innerHTML += saveLine.replace('L.1','L.' + (i + 1));
+        }
     }
-    console.log(trTable);
+
+    getJsonLongueur();
+
+    //réinitialise les selects
+    $('select').material_select();
+}
+
+function setJsonLongueur() {
+    let cotation_longueur = document.getElementsByName('cotation_longueur'),
+        ponderation_longueur = document.getElementsByName('ponderation_longueur'),
+        relais_longueur = document.getElementsByName('relais_longueur'),
+        point_longueur = document.getElementsByName('point_longueur'),
+        nb_point_longueur = document.getElementsByName('nb_point_longueur'),
+        incline_id_longeur = document.getElementsByName('incline_id_longeur'),
+        height_longueur = document.getElementsByName('height_longueur'),
+        jsonLongueur = document.getElementById('jsonLongueur'),
+        tableJson = [];
+
+    for(let i = 0 ; i < cotation_longueur.length ; i++){
+        let tempTab = [
+            cotation_longueur[i].value,
+            ponderation_longueur[i].value,
+            relais_longueur[i].value,
+            point_longueur[i].value,
+            nb_point_longueur[i].value,
+            incline_id_longeur[i].value,
+            height_longueur[i].value
+        ];
+        tableJson.push(tempTab.join(';'));
+    }
+
+    jsonLongueur.value = tableJson.join('||');
+
+}
+
+function getJsonLongueur() {
+    let cotation_longueur = document.getElementsByName('cotation_longueur'),
+        ponderation_longueur = document.getElementsByName('ponderation_longueur'),
+        relais_longueur = document.getElementsByName('relais_longueur'),
+        point_longueur = document.getElementsByName('point_longueur'),
+        nb_point_longueur = document.getElementsByName('nb_point_longueur'),
+        incline_id_longeur = document.getElementsByName('incline_id_longeur'),
+        height_longueur = document.getElementsByName('height_longueur'),
+        jsonLongueur = document.getElementById('jsonLongueur'),
+        tableJson = jsonLongueur.value.split('||');
+
+    for(let i = 0 ; i < tableJson.length ; i++){
+        let tempTab = tableJson[i].split(';');
+        try {
+            cotation_longueur[i].value = tempTab[0];
+            ponderation_longueur[i].value = tempTab[1];
+            relais_longueur[i].value = tempTab[2];
+            point_longueur[i].value = tempTab[3];
+            nb_point_longueur[i].value = tempTab[4];
+            incline_id_longeur[i].value = tempTab[5];
+            height_longueur[i].value = tempTab[6];
+        }catch (e){}
+    }
 }

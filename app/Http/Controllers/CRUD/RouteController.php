@@ -17,11 +17,36 @@ class RouteController extends Controller
         $id = $request->input('id');
         if(isset($id)){
             $route = Route::where('id', $id)->with('routeSections')->first();
+
+            //compose le tableau des longeurs
+            $tabLongueur = [];
+            foreach ($route->routeSections as $section){
+                $temTap = [
+                    $section->grade,
+                    $section->sub_grade,
+                    $section->anchor_id,
+                    $section->point_id,
+                    $section->nb_point,
+                    $section->incline_id,
+                    $section->section_height,
+                ];
+                $tabLongueur[] = implode(';', $temTap);
+            }
+            $route->tabLongueur = implode('||', $tabLongueur);
+
+            if(count($route->routeSections) > 1 && ($route->climb_id == 4 || $route->climb_id == 5 || $route->climb_id == 6)){
+                $route->typeCotation = true;
+            }else{
+                $route->typeCotation = false;
+            }
+
             $callback = 'refresh';
         }else{
 
             //créer une fausse section de ligne
             $routeSections = new class{};
+            $routeSections->grade = '2a';
+            $routeSections->sub_grade = '';
             $routeSections->nb_point = 0;
             $routeSections->point_id = 1;
             $routeSections->anchor_id = 1;
@@ -34,6 +59,8 @@ class RouteController extends Controller
             $route->sector_id = $request->input('sector_id');
             $route->routeSections = [$routeSections];
             $route->nb_longueur = 1;
+            $route->tabLongueur = '2a;;1;1;0;1;0';
+            $route->typeCotation = true;
             $callback = 'refresh';
         }
 

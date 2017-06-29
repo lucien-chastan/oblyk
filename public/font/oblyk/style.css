@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'oblyk';
-  src: url(/fonts/oblyk.eot?00f7810aaad93aff823f359548999c65);
-  src: url(/fonts/oblyk.eot?00f7810aaad93aff823f359548999c65) format("embedded-opentype"), url(/fonts/oblyk.ttf?f543887dd968cf5aa61f683c6678e450) format("truetype"), url(/fonts/oblyk.woff?53e8ff1685f1c4553b919cdd4f727f33) format("woff"), url(/fonts/oblyk.svg?75af961411acbf8f3e43de53696e6a2d) format("svg");
+  src: url(/fonts/oblyk.eot?3b0ea0bba9f5d281793dd1e454197239);
+  src: url(/fonts/oblyk.eot?3b0ea0bba9f5d281793dd1e454197239) format("embedded-opentype"), url(/fonts/oblyk.ttf?71ae634af972b584670f00f7bfbbec95) format("truetype"), url(/fonts/oblyk.woff?c48ee5e229617eca81600e5c4eb29642) format("woff"), url(/fonts/oblyk.svg?6809cbbb7495d5c72b900ddf8303a041) format("svg");
   font-weight: normal;
   font-style: normal;
 }

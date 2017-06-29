@@ -17,7 +17,7 @@
         </div>
 
         <div id="popup-route-type-cotation">
-            {!! $Inputs::checkbox(['name'=>'type-cotation-longeur', 'label'=>'Une cotation par longueur', 'checked' => true, 'align' => 'right']) !!}
+            {!! $Inputs::checkbox(['name'=>'type-cotation-longeur', 'label'=>'Une cotation par longueur', 'checked' => $dataModal['ligne']->typeCotation, 'align' => 'right']) !!}
         </div>
 
         <div id="popup-route-table-longueur">
@@ -35,13 +35,13 @@
                         <th class="width-50"><span class="oblyk-icon icon-route_height"></span></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody-liste-longueur">
                     <tr>
                         <td>L.1</td>
                         <td>{!! $Inputs::cotation(['grade'=>'2a', 'col'=>'s12', 'name'=>'cotation_longueur', 'label'=>'', 'icon'=>'']) !!}</td>
                         <td>{!! $Inputs::ponderation(['sub_grade'=>'', 'col'=>'s12', 'name'=>'ponderation_longueur', 'label'=>'', 'icon'=>'']) !!}</td>
-                        <td>{!! $Inputs::relais(['name'=>'relais_longueur', 'value'=>'', 'label'=>'']) !!}</td>
-                        <td>{!! $Inputs::point(['name'=>'point_longueur', 'value'=>'', 'label'=>'']) !!}</td>
+                        <td>{!! $Inputs::relais(['name'=>'relais_longueur', 'value'=>'1', 'label'=>'']) !!}</td>
+                        <td>{!! $Inputs::point(['name'=>'point_longueur', 'value'=>'1', 'label'=>'']) !!}</td>
                         <td>{!! $Inputs::text(['name'=>'nb_point_longueur', 'value'=>0, 'label'=>'', 'placeholder'=>'Année d\'ouverture','type'=>'number']) !!}</td>
                         <td>{!! $Inputs::inclinaison(['name'=>'incline_id_longeur', 'value'=>1, 'label'=>'']) !!}</td>
                         <td>{!! $Inputs::text(['name'=>'height_longueur', 'value'=>0, 'label'=>'', 'placeholder'=>'Hauteur en mètre','type'=>'number']) !!}</td>
@@ -52,8 +52,8 @@
 
         <div id="popup-route-cotation-incline">
             <div class="row">
-                {!! $Inputs::cotation(['grade'=>'2a']) !!}
-                {!! $Inputs::ponderation(['sub_grade'=>'']) !!}
+                {!! $Inputs::cotation(['grade'=>$dataModal['ligne']->routeSections[0]->grade]) !!}
+                {!! $Inputs::ponderation(['sub_grade'=>$dataModal['ligne']->routeSections[0]->sub_grade]) !!}
             </div>
             {!! $Inputs::inclinaison(['name'=>'incline_id', 'value'=>$dataModal['ligne']->routeSections[0]->incline_id, 'label'=>'Inclinaison de la ligne', 'icon'=>'icon-inclinaison']) !!}
         </div>
@@ -77,4 +77,5 @@
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'crag_id','value'=>$dataModal['ligne']->crag_id]) !!}
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['ligne']->id]) !!}
+    {!! $Inputs::Hidden(['name'=>'jsonLongueur','value'=>$dataModal['ligne']->tabLongueur]) !!}
 </form>

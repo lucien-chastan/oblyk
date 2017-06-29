@@ -55,7 +55,10 @@ function specialAction(data) {
     //optimise l'affichage de la popup route
     try {
         optimisePopupRoute();
+        dupliqueLongueurLine();
         document.getElementById('type-cotation-longeur').addEventListener('change', optimisePopupRoute);
+        document.getElementById('nb_longueur').addEventListener('change', setJsonLongueur);
+        document.getElementById('nb_longueur').addEventListener('change', dupliqueLongueurLine);
     }catch (e){}
 
     //créer la map de localisation (s'il y en a une)
