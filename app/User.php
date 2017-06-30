@@ -50,4 +50,12 @@ class User extends Authenticatable
     public function descriptions(){
         return $this->hasMany('App\Description','user_id', 'id');
     }
+
+    public function albums(){
+        return $this->hasMany('App\Album','user_id', 'id');
+    }
+
+    public function photos(){
+        return $this->hasMany('App\Photo','user_id', 'id');
+    }
 }

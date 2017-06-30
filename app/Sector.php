@@ -30,6 +30,10 @@ class Sector extends Model
         return $this->morphMany('App\Description', 'descriptive');
     }
 
+    public function photos(){
+        return $this->morphMany('App\Photo', 'illustrable');
+    }
+
     public function rain(){
         return $this->hasOne('App\RainExposure','id', 'rain_id');
     }

@@ -17,6 +17,7 @@ class CreateCragsTable extends Migration
             $table->increments('id');
             $table->string('label',255);
             $table->integer('rock_id')->unsigned();
+            $table->integer('photo_id')->nullable()->unsigned();
             $table->char('code_country',2);
             $table->string('country',255);
             $table->string('city',255);
@@ -35,6 +36,7 @@ class CreateCragsTable extends Migration
             //clé étrangère
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('rock_id')->references('id')->on('rocks');
+            $table->foreign('photo_id')->references('id')->on('photos');
         });
     }
 

@@ -30,6 +30,10 @@ class Route extends Model
         return $this->morphMany('App\Description', 'descriptive');
     }
 
+    public function photos(){
+        return $this->morphMany('App\Photo', 'illustrable');
+    }
+
     public static function similarRoute($crag_id, $route_id , $label){
 
         $routes = Route::where([

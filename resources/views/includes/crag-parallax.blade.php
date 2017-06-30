@@ -13,6 +13,6 @@
         </div>
     </div>
     @if(Auth::check())
-        <i data-position="bottom" data-delay="50" data-tooltip="Changer la photo de bandeau" class="tooltipped material-icons right icon-change-bandeau">wallpaper</i>
+        <i data-position="bottom" data-delay="50" data-tooltip="Changer la photo de bandeau" class="icon-change-bandeau tooltipped material-icons right">wallpaper</i>
     @endif
 </div>
