@@ -8,6 +8,7 @@ use App\Photo;
 use App\Route;
 use App\Sector;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Validator;
 use Illuminate\Http\Request;
@@ -148,6 +149,7 @@ class PhotoController extends Controller
 
             //Image en 1300px de large
             Image::make($request->file('file'))
+                ->orientate()
                 ->resize(1300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
@@ -156,6 +158,7 @@ class PhotoController extends Controller
 
             //Image en 200px de haut
             Image::make($request->file('file'))
+                ->orientate()
                 ->resize(null, 200, function ($constraint) {
                     $constraint->aspectRatio();
                 })
@@ -164,12 +167,14 @@ class PhotoController extends Controller
 
             //Crop de l'image en 100 * 100
             Image::make($request->file('file'))
+                ->orientate()
                 ->fit(100, 100)
                 ->encode('jpg', 75)
                 ->save(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
 
             //Crop de l'image en 50 * 50
             Image::make($request->file('file'))
+                ->orientate()
                 ->fit(50, 50)
                 ->encode('jpg', 75)
                 ->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
@@ -219,6 +224,18 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
+        $photo = Photo::where('id', $id)->first();
 
+        if($photo->user_id == Auth::id()){
+
+            Storage::delete([
+                'public/photos/crags/50/' . $photo->slug_label,
+                'public/photos/crags/100/' . $photo->slug_label,
+                'public/photos/crags/200/' . $photo->slug_label,
+                'public/photos/crags/1300/' . $photo->slug_label
+            ]);
+
+            $photo->delete();
+        }
     }
 }

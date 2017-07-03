@@ -1,5 +1,6 @@
 let cragMap,
-    loadedSectorTab = [];
+    loadedSectorTab = [],
+    cragVisionneuse;
 
 function initCragMap() {
     let map = document.getElementById('crag-map'),
@@ -126,4 +127,22 @@ function getSectorChart() {
             let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),JSON.parse(response.data));
         });
     }
+}
+
+//INITIALISE LA VISIONNEUSE PHOTOTHEQUE
+function initPhotothequeCrag() {
+    cragVisionneuse = new Phototheque('#cragPhototheque',
+        {
+            "maxHeight" : "200px","gouttiere" : "3px",
+            "lastRow" : "center",
+            "visiotheque" : true,
+            "visiotheque-option" : {
+                "legende" : "data-legende"
+            }
+        }
+    );
+}
+
+function rien() {
+    
 }

@@ -21,7 +21,7 @@ function uploadPhoto(form, callback) {
     };
 
     axios.post(route, data, config).then(
-        function (res) {
+        function (response) {
             closeModal();
             callback(response);
         }

@@ -47,6 +47,11 @@ mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axio
 //chartJs
 mix.copy('resources/assets/framework/chartJs/Chart.min.js', 'public/framework/chartJs');
 
+//Phototheque
+mix.copy('resources/assets/framework/phototheque/phototheque.js', 'public/framework/phototheque')
+    .copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
+
+
 //marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
 
