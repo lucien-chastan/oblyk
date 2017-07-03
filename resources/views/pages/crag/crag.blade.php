@@ -20,7 +20,7 @@
         'country' => $crag->country,
         'region' => $crag->region,
         'code_country' => $crag->code_country,
-        'crag_type' => $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water
+        'crag_type' => $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water . $crag->type_via_ferrata
     ))
 
     {{--Menu des falaises--}}

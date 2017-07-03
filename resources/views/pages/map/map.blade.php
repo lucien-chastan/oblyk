@@ -40,7 +40,7 @@
         @foreach($crags as $crag)
             var point = L.marker(
                 [{{$crag['lat']}},{{$crag['lng']}}],
-                {icon: marker_{{$crag['type_voie']}}{{$crag['type_grande_voie']}}{{$crag['type_bloc']}}{{$crag['type_deep_water']}}}
+                {icon: marker_{{$crag['type_voie']}}{{$crag['type_grande_voie']}}{{$crag['type_bloc']}}{{$crag['type_deep_water']}}{{$crag['type_via_ferrata']}}}
             )
             .bindPopup(
                 `
