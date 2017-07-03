@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vue;
 
 use App\Crag;
 use App\Orientation;
+use App\Photo;
 use App\Season;
 use App\Sector;
 use Validator;
@@ -23,7 +24,12 @@ class CragVueController extends Controller
     }
 
     function vueMedias($id){
-        return view('pages.crag.vues.mediasVue');
+
+        $data = [
+            'crag' => Crag::where('id', $id)->with('photos')->first()
+        ];
+
+        return view('pages.crag.vues.mediasVue', $data);
     }
 
     function vueLiens($id){

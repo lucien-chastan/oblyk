@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Album;
 use App\Anchor;
 use App\Climb;
 use App\Incline;
@@ -13,6 +14,7 @@ use App\Sector;
 use App\Start;
 use App\Sun;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class InputTemplates extends ServiceProvider{
@@ -70,6 +72,81 @@ class InputTemplates extends ServiceProvider{
             <input class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
             <label for="' . $id . '">' . $label .'</label>
         </p>';
+    }
+
+
+    //INPUT ALBUMS
+    public static function albums($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 0;
+        $mois = ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+        $Albums = Album::where('user_id', Auth::id())->get();
+        $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
+        $optionNewAlbum = '';
+        $trouver = false;
+        foreach ($Albums as $album){
+            if($newAlbumName == $album->label) {
+                $trouver = true;
+                if($options['value'] == 0) $value = $album->id;
+            }
+        }
+
+        if(!$trouver) $optionNewAlbum = '<option value="0">'. $mois[date('n') - 1] . ' ' . date('Y') . '</option>';
+
+        $html = '
+            <div class="input-field col s12">
+                <select class="input-data" name="' . $name . '">
+                ' . $optionNewAlbum . '
+                    
+        ';
+
+        foreach ($Albums as $album){
+            $selected = ($album->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $album->id . '">' . ucfirst($album->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //INPUT TYPE FILE
+    public static function upload($options){
+        $name = $options['name'];
+        $value = (isset($options['value']))? $options['value'] : '';
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $id = (isset($options['id']))? $options['id'] : $options['name'];
+
+        return '
+        <div class="file-field input-field">
+            
+            <div class="btn">
+                <span>' . $label . '</span>
+                <input value="' . $value . '" type="file" name="' . $name . '" id="' . $id .'">
+            </div>
+            
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+            
+        </div>
+        ';
+    }
+
+    public static function progressbar($options){
+        $id = (isset($options['id']))? $options['id'] : 'popup-progressloader';
+        $value = (isset($options['value']))? $options['value'] : 0;
+
+        return '
+            <div class="progress">
+                <div class="determinate" id="' . $id . '" style="width: ' . $value . '%"></div>
+            </div>';
     }
 
 
