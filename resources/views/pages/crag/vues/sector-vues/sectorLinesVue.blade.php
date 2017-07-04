@@ -11,6 +11,7 @@
             <th>Hauteur</th>
             <th>Année</th>
             <th>Ouvreur</th>
+            <th></th>
         </tr>
     @foreach($routes as $route)
 
@@ -33,6 +34,14 @@
             </td>
             <td>{{$route->open_year}}</td>
             <td>{{$route->opener}}</td>
+            <td>
+                @if($route->descriptions_count > 0)
+                    <i {!! $Helpers::tooltip('il y a ' . $route->descriptions_count . ' descriptions sur cette ligne') !!} class="tooltipped material-icons tiny">comment</i>
+                @endif
+                @if($route->photos_count > 0)
+                    <i {!! $Helpers::tooltip('il y a ' . $route->photos_count . ' photos sur cette ligne') !!} class="tooltipped material-icons tiny">photo_camera</i>
+                @endif
+            </td>
         </tr>
 
     @endforeach

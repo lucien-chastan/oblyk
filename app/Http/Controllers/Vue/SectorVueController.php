@@ -10,7 +10,13 @@ class SectorVueController extends Controller
 {
     function vueRoutes($id){
         $data = [
-            "routes" => Route::where('sector_id',$id)->with('routeSections')->with('climb')->orderBy('label')->get(),
+            "routes" => Route::where('sector_id',$id)
+                ->with('routeSections')
+                ->with('climb')
+                ->withCount('descriptions')
+                ->withCount('photos')
+                ->orderBy('label')
+                ->get(),
             "sector" => Sector::where('id', $id)->first()
         ];
 

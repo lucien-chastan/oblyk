@@ -36,9 +36,9 @@
                     <div class="col s12">
                         <ul class="tabs">
                             <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">Photos</a></li>
+                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a><span class="count-tab-ettiquette">{{$sector->routes_count}}</span></li>
+                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a><span class="count-tab-ettiquette">{{$sector->descriptions_count}}</span></li>
+                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">Photos</a><span class="count-tab-ettiquette">{{$sector->photos_count}}</span></li>
                         </ul>
                     </div>
                     <div id="informations-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-informations')</div>
