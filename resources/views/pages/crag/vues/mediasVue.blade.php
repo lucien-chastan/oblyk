@@ -61,6 +61,32 @@
 
             <h2 class="loved-king-font text-center">Vidéos</h2>
 
+            <div class="row">
+
+                @if(count($crag->videos) > 0)
+                    @foreach($crag->videos as $video)
+                        <div class="col s12 m12 l6">
+                            <div class="video-container">
+                                <iframe width="853" height="480" src="{{$video->iframe}}" allowfullscreen frameborder="0"></iframe>
+                            </div>
+                            <p class="i-cursor">
+                                {{$video->description}}<br>
+                                posté par {{$video->user->name}}<br>
+                                @if(Auth::check())
+                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                    @if(Auth::id() == $photo->user_id)
+                                        <i {!! $Helpers::tooltip('Modifier la vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>$video->id, "title"=>"Modifier une vidéo", "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                        <i {!! $Helpers::tooltip('Supprimer la vidéo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/videos/" . $video->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                    @endif
+                                @endif
+                            </p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-center grey-text">Il n'y a pas de vidéo postée sur ce site pour l'instant</p>
+                @endif
+            </div>
+
             {{--bouton d'ajout--}}
             @if(Auth::check())
                 <div class="fixed-action-btn horizontal">
@@ -69,7 +95,7 @@
                     </a>
                     <ul>
                         <li><a {!! $Helpers::tooltip('Ajouter une photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Crag", "photo_id"=>'', "title"=>"Ajouter une photo", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">photo_camera</i></a></li>
-                        <li><a {!! $Helpers::tooltip('Ajouter une vidéo') !!} class="tooltipped btn-floating blue"><i class="material-icons">videocam</i></a></li>
+                        <li><a {!! $Helpers::tooltip('Ajouter une vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>'', "title"=>"Ajouter une vidéo", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">videocam</i></a></li>
                     </ul>
                 </div>
             @endif

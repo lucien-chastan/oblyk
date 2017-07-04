@@ -16,6 +16,7 @@ class CragController extends Controller
             ->withCount('routes')
             ->withCount('links')
             ->withCount('photos')
+            ->withCount('videos')
             ->with('photos')
             ->with('gapGrade')
             ->with('descriptions.user')

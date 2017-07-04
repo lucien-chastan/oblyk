@@ -49,6 +49,7 @@ Route::post('/modal/problem', 'CRUD\ProblemController@problemModal')->name('prob
 Route::post('/modal/sector', 'CRUD\SectorController@sectorModal')->name('sectorModal');
 Route::post('/modal/route', 'CRUD\RouteController@routeModal')->name('routeModal');
 Route::post('/modal/photo', 'CRUD\PhotoController@photoModal')->name('photoModal');
+Route::post('/modal/video', 'CRUD\VideoController@videoModal')->name('videoModal');
 Route::post('/modal/bandeau', 'CRUD\CragController@bandeauModal')->name('bandeauModal');
 
 //CRUD AJAX
@@ -59,6 +60,7 @@ Route::resource('parkings', 'CRUD\ParkingController');
 Route::resource('sectors', 'CRUD\SectorController');
 Route::resource('routes', 'CRUD\RouteController');
 Route::resource('photos', 'CRUD\PhotoController');
+Route::resource('videos', 'CRUD\VideoController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

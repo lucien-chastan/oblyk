@@ -26,7 +26,7 @@ class CragVueController extends Controller
     function vueMedias($id){
 
         $data = [
-            'crag' => Crag::where('id', $id)->with('photos')->first()
+            'crag' => Crag::where('id', $id)->with('photos')->with('videos')->with('videos.user')->first()
         ];
 
         return view('pages.crag.vues.mediasVue', $data);

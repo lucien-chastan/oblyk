@@ -35,6 +35,10 @@ class Crag extends Model
         return $this->morphMany('App\Photo', 'illustrable');
     }
 
+    public function videos(){
+        return $this->morphMany('App\Video', 'viewable');
+    }
+
     public function links(){
         return $this->morphMany('App\Link', 'linkable');
     }
