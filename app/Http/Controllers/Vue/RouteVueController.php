@@ -44,7 +44,7 @@ class RouteVueController extends Controller
     }
 
     function vueVideos($id){
-        $data = ['route' => Route::where('id',$id)->first()];
+        $data = ['route' => Route::where('id',$id)->with('videos')->first()];
         return view('pages.route.vues.videosVue', $data);
     }
 }

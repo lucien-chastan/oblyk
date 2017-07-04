@@ -65,7 +65,7 @@
 
                 @if(count($crag->videos) > 0)
                     @foreach($crag->videos as $video)
-                        <div class="col s12 m12 l6">
+                        <div class="col s12 m6 l6">
                             <div class="video-container">
                                 <iframe width="853" height="480" src="{{$video->iframe}}" allowfullscreen frameborder="0"></iframe>
                             </div>
@@ -74,7 +74,7 @@
                                 posté par {{$video->user->name}}<br>
                                 @if(Auth::check())
                                     <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
-                                    @if(Auth::id() == $photo->user_id)
+                                    @if(Auth::id() == $video->user_id)
                                         <i {!! $Helpers::tooltip('Modifier la vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>$video->id, "title"=>"Modifier une vidéo", "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
                                         <i {!! $Helpers::tooltip('Supprimer la vidéo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/videos/" . $video->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
                                     @endif

@@ -17,6 +17,8 @@ class VideoController extends Controller
         //construction de la définition (vide ou avec des infos)
         $id_video = $request->input('video_id');
         $video = isset($id_video) ? Video::where('id', $id_video)->first() : new Video();
+        $callback = $request->input('callback');
+        $callback = isset($callback) ? $request->input('callback') : 'refresh';
 
         //définition du chemin de sauvgarde
         $outputRoute = ($request->input('method') == 'POST')? '/videos' : '/videos/' . $id_video;
@@ -30,7 +32,8 @@ class VideoController extends Controller
                 'id' => $id_video,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
-                'route' => $outputRoute
+                'route' => $outputRoute,
+                'callback' => $callback,
             ]
         ];
 

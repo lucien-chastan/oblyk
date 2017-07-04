@@ -4,7 +4,7 @@
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, refresh); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
     <div class="row">
         {!! $Inputs::text(['name'=>'iframe', 'value'=>$dataModal['iframe'], 'label'=>'Url de la vidéo', 'type'=>'text']) !!}

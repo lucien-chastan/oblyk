@@ -41,6 +41,9 @@
                 @if($route->photos_count > 0)
                     <i {!! $Helpers::tooltip('il y a ' . $route->photos_count . ' photos sur cette ligne') !!} class="tooltipped material-icons tiny">photo_camera</i>
                 @endif
+                @if($route->videos_count > 0)
+                    <i {!! $Helpers::tooltip('il y a ' . $route->videos_count . ' vidéos sur cette ligne') !!} class="tooltipped material-icons tiny">videocam</i>
+                @endif
             </td>
         </tr>
 

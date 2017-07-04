@@ -15,6 +15,7 @@ class SectorVueController extends Controller
                 ->with('climb')
                 ->withCount('descriptions')
                 ->withCount('photos')
+                ->withCount('videos')
                 ->orderBy('label')
                 ->get(),
             "sector" => Sector::where('id', $id)->first()

@@ -35,6 +35,13 @@ function reloadRouteInformationTab() {
     return false;
 }
 
+function reloadRouteVideoTab() {
+    let route_id = document.getElementById('info-route-id');
+    closeModal();
+    loadTabRoute(route_id.value, 'videos', 'initVideoRouteTab');
+    return false;
+}
+
 function reloadRoutePhotoTab() {
     let route_id = document.getElementById('info-route-id');
 
@@ -53,6 +60,12 @@ function initInformationRouteTab() {
 
     //convertie les textes en markdown
     convertMarkdownZone();
+}
+
+function initVideoRouteTab() {
+
+    //ajoute les événements open modal sur les boutons
+    initOpenModal();
 }
 
 function initRoutePhototheque() {

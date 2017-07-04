@@ -34,6 +34,10 @@ class Route extends Model
         return $this->morphMany('App\Photo', 'illustrable');
     }
 
+    public function videos(){
+        return $this->morphMany('App\Video', 'viewable');
+    }
+
     public static function similarRoute($crag_id, $route_id , $label){
 
         $routes = Route::where([
