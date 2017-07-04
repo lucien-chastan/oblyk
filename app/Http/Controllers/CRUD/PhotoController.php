@@ -267,7 +267,9 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
+
         $photo = Photo::where('id', $id)->first();
+        $savePhoto = $photo;
 
         if($photo->user_id == Auth::id()){
 
@@ -288,5 +290,7 @@ class PhotoController extends Controller
 
             $photo->delete();
         }
+
+        return response()->json(json_encode($savePhoto));
     }
 }

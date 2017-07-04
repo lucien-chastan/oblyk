@@ -51,7 +51,7 @@ function ajaxRouter(route, target, callback) {
         target.innerHTML = response.data;
 
         //exécute le call back s'il y en a un
-        if(callback !== null) callFunction(callback, window);
+        if(callback !== null) callFunction(callback, window, response);
 
         //ajoute les événements open modal sur les boutons
         initOpenModal();
@@ -78,7 +78,7 @@ function ajaxRouter(route, target, callback) {
 }
 
 //APPEL UNE FUNCTION PAR SON NOM EN STRING
-function callFunction(functionName, context /*, args */) {
+function callFunction(functionName, context, arguments) {
     let args = [].slice.call(arguments).splice(2),
         namespaces = functionName.split("."),
         func = namespaces.pop();

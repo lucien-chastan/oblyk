@@ -1,5 +1,6 @@
 let cragMap,
     loadedSectorTab = [],
+    loadedSectorId,
     cragVisionneuse;
 
 function initCragMap() {
@@ -58,10 +59,19 @@ function reloadDescriptionSector(response) {
     ajaxRouter('/vue/sector/' + data.descriptive_id + '/descriptions', document.getElementById('description-secteur-' + data.descriptive_id ), 'closeModal');
 }
 
+//Recharge l'onglet description qui a été mise à jour
+function reloadPhotoSector(response) {
+    let data = JSON.parse(response.data);
+    ajaxRouter('/vue/sector/' + data.illustrable_id + '/photos', document.getElementById('photos-secteur-' + data.illustrable_id ), 'closeModalInitPhototheque');
+}
+
+function closeModalInitPhototheque() {
+    closeModal();
+    initSectorPhototheque();
+}
 
 //Affiche la vues d'un onglet de secteur
 function loadSectorVue(tab) {
-
 
     if(!loadedSectorTab[tab.getAttribute('href')]){
         loadedSectorTab[tab.getAttribute('href')] = true;
@@ -70,9 +80,29 @@ function loadSectorVue(tab) {
             target = document.getElementById(tab.getAttribute('href').replace('#','')),
             callback = tab.getAttribute('data-callback');
 
+        loadedSectorId = tab.getAttribute('data-sector-id');
+
         ajaxRouter(route, target, callback);
 
     }
+}
+
+function initSectorPhototheque() {
+
+    if(document.getElementById('sectorPhototheque-' + loadedSectorId) !== null){
+
+        new Phototheque('#sectorPhototheque-' + loadedSectorId,
+            {
+                "maxHeight" : "150px","gouttiere" : "3px",
+                "lastRow" : "center",
+                "visiotheque" : true,
+                "visiotheque-option" : {
+                    "legende" : "data-legende"
+                }
+            }
+        );
+    }
+
 }
 
 function changeAffichageSecteur(typeAffichage) {
@@ -153,5 +183,18 @@ function showPhotoEditor(visible) {
         document.getElementById("zone-photo-editor").style.display = 'none';
         document.getElementById("zone-crag-gallerie").style.display = 'block';
         document.getElementById("bt-show-crag-gallerie-editor").style.display = 'block';
+    }
+}
+
+function showPhotoSectorEditor(visible, sector_id) {
+
+    if (visible){
+        document.getElementById("zone-sector-photo-editor-" + sector_id).style.display = 'block';
+        document.getElementById("zone-sector-gallerie-" + sector_id).style.display = 'none';
+        document.getElementById("bt-show-sector-gallerie-editor-" + sector_id).style.display = 'none';
+    }else{
+        document.getElementById("zone-sector-photo-editor-" + sector_id).style.display = 'none';
+        document.getElementById("zone-sector-gallerie-" + sector_id).style.display = 'block';
+        document.getElementById("bt-show-sector-gallerie-editor-" + sector_id).style.display = 'block';
     }
 }

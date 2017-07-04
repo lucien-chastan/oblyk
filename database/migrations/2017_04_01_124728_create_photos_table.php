@@ -20,7 +20,7 @@ class CreatePhotosTable extends Migration
             $table->string('slug_label',255);
             $table->integer('user_id')->unsigned();
             $table->integer('album_id')->unsigned();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             //clé étrangère

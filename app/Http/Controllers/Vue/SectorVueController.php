@@ -27,6 +27,11 @@ class SectorVueController extends Controller
     }
 
     function vuePhotos($id){
-        return view('pages.crag.vues.sector-vues.sectorPhotosVue');
+
+        $data = [
+            'sector' => Sector::where('id',$id)->with('photos')->first()
+        ];
+
+        return view('pages.crag.vues.sector-vues.sectorPhotosVue', $data);
     }
 }
