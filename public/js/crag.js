@@ -133,7 +133,7 @@ function getSectorChart() {
 function initPhotothequeCrag() {
     cragVisionneuse = new Phototheque('#cragPhototheque',
         {
-            "maxHeight" : "200px","gouttiere" : "3px",
+            "maxHeight" : "150px","gouttiere" : "3px",
             "lastRow" : "center",
             "visiotheque" : true,
             "visiotheque-option" : {

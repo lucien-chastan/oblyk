@@ -1,1 +1,1 @@
-photo
+photo du secteur
