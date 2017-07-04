@@ -38,13 +38,14 @@
 
         //boucle sur les falaises pour ajouter les marqueurs sur la carte
         @foreach($crags as $crag)
+
             var point = L.marker(
                 [{{$crag['lat']}},{{$crag['lng']}}],
                 {icon: marker_{{$crag['type_voie']}}{{$crag['type_grande_voie']}}{{$crag['type_bloc']}}{{$crag['type_deep_water']}}{{$crag['type_via_ferrata']}}}
             )
             .bindPopup(
                 `
-                <img class="photo-couve-site-leaflet" src="/storage/photos/crags/oblyk-home-baume-rousse.jpg" alt="photo de couverture de {{$crag['label']}}">
+                <img class="photo-couve-site-leaflet" src="{{str_replace('/crags/1300/', '/crags/200/', $crag['bandeau'])}}" alt="photo de couverture de {{$crag['label']}}">
                 <div class="crag-leaflet-info">
                     <h2 class="loved-king-font titre-crag-leaflet">
                         <a href="/site-escalade/{{$crag['id']}}/{{str_slug($crag['label'])}}">{{$crag['label']}}</a>

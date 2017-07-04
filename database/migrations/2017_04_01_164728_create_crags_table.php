@@ -18,6 +18,7 @@ class CreateCragsTable extends Migration
             $table->string('label',255);
             $table->integer('rock_id')->unsigned();
             $table->integer('photo_id')->nullable()->unsigned();
+            $table->string('bandeau', 255)->nullable();
             $table->char('code_country',2);
             $table->string('country',255);
             $table->string('city',255);

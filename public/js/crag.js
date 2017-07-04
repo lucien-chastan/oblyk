@@ -143,6 +143,15 @@ function initPhotothequeCrag() {
     );
 }
 
-function rien() {
-    
+function showPhotoEditor(visible) {
+
+    if (visible){
+        document.getElementById("zone-photo-editor").style.display = 'block';
+        document.getElementById("zone-crag-gallerie").style.display = 'none';
+        document.getElementById("bt-show-crag-gallerie-editor").style.display = 'none';
+    }else{
+        document.getElementById("zone-photo-editor").style.display = 'none';
+        document.getElementById("zone-crag-gallerie").style.display = 'block';
+        document.getElementById("bt-show-crag-gallerie-editor").style.display = 'block';
+    }
 }

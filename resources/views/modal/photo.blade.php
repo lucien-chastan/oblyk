@@ -4,14 +4,20 @@
 {!! $Inputs::popupError([]) !!}
 
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="uploadPhoto(this, {{ $dataModal['callback'] }}); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="{{ $dataModal['submit'] }}(this, {{ $dataModal['callback'] }}); return false">
 
     <div class="row">
-        {!! $Inputs::upload(['name'=>'file', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
-        {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>'Album']) !!}
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description de la photo']) !!}
-        {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        @if($dataModal['id'] == '')
+            {!! $Inputs::upload(['name'=>'file', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
+        @endif
+            {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>'Album']) !!}
+            {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description de la photo']) !!}
+
+            @if($dataModal['id'] == '')
+                {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo']) !!}
+            @endif
+
+            {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

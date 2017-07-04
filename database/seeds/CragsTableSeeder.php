@@ -14,6 +14,7 @@ class CragsTableSeeder extends Seeder
         DB::table('crags')->insert([
             'label' => 'Rocher des Aures',
             'rock_id' => 3,
+            'bandeau' => '/img/default-crag-bandeau.jpg',
             'code_country' => 'fr',
             'city' => 'Roche-St-Secret',
             'country' => 'France',
@@ -31,6 +32,7 @@ class CragsTableSeeder extends Seeder
         DB::table('crags')->insert([
             'label' => 'Arzelier',
             'rock_id' => 8,
+            'bandeau' => '/img/default-crag-bandeau.jpg',
             'code_country' => 'fr',
             'city' => 'Teyssière',
             'country' => 'France',

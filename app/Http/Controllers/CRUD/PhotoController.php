@@ -29,7 +29,13 @@ class PhotoController extends Controller
 
 
         //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/photos' : '/photos/' . $id_photo;
+        if (($request->input('method') == 'POST')) {
+            $outputRoute = '/photos';
+            $submitFunction = 'uploadPhoto';
+        } else {
+            $outputRoute = '/photos/' . $id_photo;
+            $submitFunction = 'submitData';
+        }
 
         $data = [
             'dataModal' => [
@@ -39,6 +45,7 @@ class PhotoController extends Controller
                 'description' => $photo->description,
                 'album_id' => $photo->album_id,
                 'id' => $id_photo,
+                'submit' => $submitFunction,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
                 'callback' => $callback,
@@ -213,7 +220,43 @@ class PhotoController extends Controller
      */
     public function update(Request $request)
     {
+        //enregistrement des données
+        $photo = Photo::where('id', $request->input('id'))->first();
 
+        //on va chercher l'album
+        $album_id = 0;
+        if ($request->input('album_id') != 0) {
+            $album_id = $request->input('album_id');
+        } else {
+            $Albums = Album::where('user_id', Auth::id())->get();
+            $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+            $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
+            $trouver = false;
+
+            foreach ($Albums as $album) {
+                if ($newAlbumName == $album->label) {
+                    $trouver = true;
+                    $album_id = $album->id;
+                }
+            }
+
+            if (!$trouver) {
+                $album = new Album();
+                $album->label = $newAlbumName;
+                $album->description = '';
+                $album->user_id = Auth::id();
+                $album->save();
+                $album_id = $album->id;
+            }
+        }
+
+        if($photo->user_id == Auth::id()){
+            $photo->description = $request->input('description');
+            $photo->album_id = $album_id;
+            $photo->save();
+        }
+
+        return response()->json(json_encode($photo));
     }
 
     /**
@@ -228,6 +271,14 @@ class PhotoController extends Controller
 
         if($photo->user_id == Auth::id()){
 
+            //si c'était la photo par défaut du site, on remet à null
+            $crags = Crag::where('photo_id',$photo->id)->get();
+            foreach ($crags as $crag){
+                $crag->photo_id = null;
+                $crag->save();
+            }
+
+            //suppression des photos dans le storage
             Storage::delete([
                 'public/photos/crags/50/' . $photo->slug_label,
                 'public/photos/crags/100/' . $photo->slug_label,

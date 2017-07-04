@@ -24,6 +24,12 @@
 .text-italic{font-style: italic;}
 .text-through{text-decoration: line-through;}
 
+.i-cursor {
+    i {
+        cursor: pointer;
+    }
+}
+
 //parallax par defaut d'oblyk
 .parallax-default {
     height:30vh !important;

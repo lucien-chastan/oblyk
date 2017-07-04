@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
 use App\Orientation;
+use App\Photo;
 use App\Season;
 use Validator;
 use Illuminate\Http\Request;
@@ -44,6 +45,36 @@ class CragController extends Controller
 
         return view('modal.crag', $data);
     }
+
+
+    //MODAL DE CONFIRMATION DU BANDEAU DU SITE
+    function bandeauModal(Request $request){
+
+        $crag = Crag::where('id', $request->input('crag_id'))->first();
+        $photo = Photo::where('id', $request->input('photo_id'))->first();
+        $callback = 'refresh';
+
+        $data = [
+            'dataModal' => [
+                'crag' => $crag,
+                'photo' => $photo,
+                'route' => '/bandeau/define',
+                'callback' => $callback
+            ]
+        ];
+
+        return view('modal.bandeau', $data);
+    }
+
+    //ENREGISTREMENT DU BANDEAU
+    function defineBandeau(Request $request){
+        $crag = Crag::where('id', $request->input('crag_id'))->first();
+        $photo = Photo::where('id', $request->input('photo_id'))->first();
+        $crag->photo_id = $photo->id;
+        $crag->bandeau = '/storage/photos/crags/1300/' . $photo->slug_label;
+        $crag->save();
+    }
+
 
     /**
      * Display a listing of the resource.

@@ -49,6 +49,7 @@ Route::post('/modal/problem', 'CRUD\ProblemController@problemModal')->name('prob
 Route::post('/modal/sector', 'CRUD\SectorController@sectorModal')->name('sectorModal');
 Route::post('/modal/route', 'CRUD\RouteController@routeModal')->name('routeModal');
 Route::post('/modal/photo', 'CRUD\PhotoController@photoModal')->name('photoModal');
+Route::post('/modal/bandeau', 'CRUD\CragController@bandeauModal')->name('bandeauModal');
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');
@@ -61,6 +62,10 @@ Route::resource('photos', 'CRUD\PhotoController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
+
+//BANDEAU
+Route::post('/bandeau/define', 'CRUD\CragController@defineBandeau')->name('defineBandeau');
+
 
 //VUE CRAG
 Route::get('/vue/crag/{crag_id}/map', 'Vue\CragVueController@vueMap')->name('vueMapCrag');

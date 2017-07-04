@@ -14,8 +14,8 @@
 
     {{--parallax--}}
     @include('includes.crag-parallax', array(
-        'imgSrc' => '/img/oblyk-home-baume-rousse.jpg',
-        'imgAlt' => 'Falaise de baume rousse',
+        'imgSrc' => $crag->bandeau,
+        'imgAlt' => 'falaise escalade ' . $crag->label,
         'label' => $crag->label,
         'city' => $crag->city,
         'country' => $crag->country,

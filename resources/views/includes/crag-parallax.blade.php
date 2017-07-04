@@ -12,7 +12,4 @@
             </div>
         </div>
     </div>
-    @if(Auth::check())
-        <i data-position="bottom" data-delay="50" data-tooltip="Changer la photo de bandeau" class="icon-change-bandeau tooltipped material-icons right">wallpaper</i>
-    @endif
 </div>

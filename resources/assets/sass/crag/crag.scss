@@ -95,19 +95,6 @@ body{
     margin-top: 4px;
 }
 
-.icon-change-bandeau{
-    font-family : 'Material Icons', sans-serif !important;
-    position: absolute;
-    bottom: 10px;
-    color: rgba(255,255,255,0.8);
-    transition: color 0.3s;
-    cursor: pointer;
-    right: 10px;
-    &:hover {
-        color: rgba(255,255,255,1);
-    }
-}
-
 .description-zone{
 
     margin-top: 20px;
@@ -137,7 +124,6 @@ body{
             opacity: 1;
         }
     }
-
 }
 
 .lien-parking{
@@ -149,6 +135,9 @@ body{
     }
 }
 
+.zone-photo-editor {
+    display: none;
+}
 
 .blue-border-zone {
     margin-top: 20px;
