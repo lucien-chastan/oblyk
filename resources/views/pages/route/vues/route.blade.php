@@ -16,7 +16,7 @@
             <div>
                 <ul class="tabs tabs-fixed-width">
                     <li class="tab col s3"><a class="active" href="#route-tab-information">Informations</a></li>
-                    <li class="tab col s3"><a onclick="loadTabRoute({{$route->id}},'photos',null)" href="#route-tab-photos">Photos</a><span class="count-tab-ettiquette">{{$route->photos_count}}</span></li>
+                    <li class="tab col s3"><a onclick="loadTabRoute({{$route->id}},'photos','initRoutePhototheque')" href="#route-tab-photos">Photos</a><span class="count-tab-ettiquette">{{$route->photos_count}}</span></li>
                     <li class="tab col s3"><a onclick="loadTabRoute({{$route->id}},'videos',null)" href="#route-tab-videos">Vidéos</a></li>
                 </ul>
             </div>

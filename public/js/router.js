@@ -78,7 +78,7 @@ function ajaxRouter(route, target, callback) {
 }
 
 //APPEL UNE FUNCTION PAR SON NOM EN STRING
-function callFunction(functionName, context, arguments) {
+function callFunction(functionName, context, /*arguments*/) {
     let args = [].slice.call(arguments).splice(2),
         namespaces = functionName.split("."),
         func = namespaces.pop();

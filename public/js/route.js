@@ -35,6 +35,17 @@ function reloadRouteInformationTab() {
     return false;
 }
 
+function reloadRoutePhotoTab() {
+    let route_id = document.getElementById('info-route-id');
+
+    loadedRouteTab['photos'] = false;
+
+    closeModal();
+    loadTabRoute(route_id.value, 'photos', 'initRoutePhototheque');
+    return false;
+}
+
+
 function initInformationRouteTab() {
 
     //ajoute les événements open modal sur les boutons
@@ -42,6 +53,26 @@ function initInformationRouteTab() {
 
     //convertie les textes en markdown
     convertMarkdownZone();
+}
+
+function initRoutePhototheque() {
+
+    if(document.getElementById('routePhototheque') !== null){
+
+        new Phototheque('#routePhototheque',
+            {
+                "maxHeight" : "150px","gouttiere" : "3px",
+                "lastRow" : "center",
+                "visiotheque" : true,
+                "visiotheque-option" : {
+                    "legende" : "data-legende"
+                }
+            }
+        );
+    }
+
+    initOpenModal();
+
 }
 
 
@@ -263,5 +294,17 @@ function getSimilarRoute() {
                 }
             });
         }, 300);
+    }
+}
+
+function showRoutePhotoEditor(visible) {
+    if (visible){
+        document.getElementById("zone-route-photo-editor").style.display = 'block';
+        document.getElementById("zone-route-gallerie").style.display = 'none';
+        document.getElementById("bt-show-route-gallerie-editor").style.display = 'none';
+    }else{
+        document.getElementById("zone-route-photo-editor").style.display = 'none';
+        document.getElementById("zone-route-gallerie").style.display = 'block';
+        document.getElementById("bt-show-route-gallerie-editor").style.display = 'block';
     }
 }

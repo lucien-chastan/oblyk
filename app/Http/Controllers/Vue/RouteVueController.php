@@ -39,7 +39,7 @@ class RouteVueController extends Controller
     }
 
     function vuePhotos($id){
-        $data = ['route' => Route::where('id',$id)->first()];
+        $data = ['route' => Route::where('id',$id)->with('photos')->first()];
         return view('pages.route.vues.photosVue', $data);
     }
 
