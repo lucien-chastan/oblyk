@@ -23,7 +23,7 @@ function initCragMap() {
         //ajoute les markeurs à la carte
         for(let i in crags){
 
-            let markerIcon = styleIcon(crags[i].type_voie + '' + crags[i].type_grande_voie + '' + crags[i].type_bloc + '' + crags[i].type_deep_water);
+            let markerIcon = styleIcon(crags[i].type_voie + '' + crags[i].type_grande_voie + '' + crags[i].type_bloc + '' + crags[i].type_deep_water + '' + crags[i].type_via_ferrata);
 
             L.marker(
                 [crags[i].lat,crags[i].lng],
