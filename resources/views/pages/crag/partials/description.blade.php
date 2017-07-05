@@ -1,6 +1,6 @@
 <div class="col s12">
     <div class="card-panel">
-        <h2 class="loved-king-font">Déscription par ce qui y grimpe</h2>
+        <h2 class="loved-king-font">Description par ce qui y grimpe</h2>
 
         <div class="blue-border-zone">
             @foreach ($crag->descriptions as $description)

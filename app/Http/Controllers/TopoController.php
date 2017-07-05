@@ -9,7 +9,11 @@ class TopoController extends Controller
 {
     function topoPage($topo_id, $topo_title){
 
-        $topo = Topo::where('id', $topo_id)->first();
+        $topo = Topo::where('id', $topo_id)
+            ->with('descriptions')
+            ->withCount('links')
+            ->withCount('crags')
+            ->first();
 
         $data = [
             'topo' => $topo,

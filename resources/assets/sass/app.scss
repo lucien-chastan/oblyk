@@ -50,6 +50,50 @@
 
 }
 
+.ligne-btn{
+    i {
+        opacity: 0.5;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 1;
+            color: #2196F3;
+        }
+    }
+}
+
+.blue-border-zone {
+    margin-top: 20px;
+
+    .blue-border-div{
+        border: 3px #2196F3;
+        border-left-style: solid;
+        margin : 15px 0;
+        padding-left: 10px;
+
+        .info-user{
+
+            margin: 0;
+            font-size: 0.9em;
+
+            i {
+                transition: opacity 0.3s;
+                opacity: 0;
+                cursor: pointer;
+
+                &:hover {
+                    color: #2196F3;
+                }
+            }
+
+        }
+
+        &:hover i{
+            opacity: 1;
+        }
+    }
+}
+
 .oblyk-ul{
     li{
         list-style: disc !important;

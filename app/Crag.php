@@ -51,6 +51,10 @@ class Crag extends Model
         return $this->hasMany('App\Sector','crag_id', 'id');
     }
 
+    public function topos(){
+        return $this->hasMany('App\TopoCrag','crag_id', 'id');
+    }
+
     public function routes(){
         return $this->hasMany('App\Route','crag_id', 'id');
     }

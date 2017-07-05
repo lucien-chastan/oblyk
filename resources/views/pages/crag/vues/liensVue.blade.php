@@ -24,7 +24,7 @@
                 </div>
             @endforeach
 
-            @if(count($link) == 0)
+            @if(count($crag->links) == 0)
                 <p class="grey-text text-center">Il n'y a pas encore de lien posté sur ce site</p>
             @endif
 

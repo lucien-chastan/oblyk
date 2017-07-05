@@ -18,4 +18,8 @@ class Topo extends Model
     public function links(){
         return $this->morphMany('App\Link', 'linkable');
     }
+
+    public function crags(){
+        return $this->hasMany('App\TopoCrag','topo_id', 'id');
+    }
 }

@@ -17,10 +17,10 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->integer('linkable_id');
             $table->string('linkable_type',100);
-            $table->text('label');
+            $table->text('label')->nullable();
             $table->text('link');
             $table->integer('user_id')->unsigned();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             //clé étrangère
