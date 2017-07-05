@@ -5,7 +5,7 @@
     <link href="/css/crag.css" rel="stylesheet">
     <link href="/css/markdown.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
-    <link href="/framework/simplemde/simplemde.min.css" rel="stylesheet">
+    {{--<link href="/framework/simplemde/simplemde.min.css" rel="stylesheet">--}}
     <link href="/framework/phototheque/phototheque.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
