@@ -130,7 +130,7 @@ class VideoController extends Controller
         $video = Video::where('id', $request->input('id'))->first();
         if($video->user_id == Auth::id()){
             $video->description = $request->input('description');
-            $video->iframe = $request->input('iframe');
+            $video->iframe = Video::convertUrl($request->input('iframe'));
             $video->save();
         }
 

@@ -30,6 +30,9 @@ function loadTabRoute(id_route, tab, callback) {
 
 function reloadRouteInformationTab() {
     let route_id = document.getElementById('info-route-id');
+
+    loadedRouteTab['information'] = false;
+
     closeModal();
     loadTabRoute(route_id.value, 'information', 'initInformationRouteTab');
     return false;
@@ -37,6 +40,9 @@ function reloadRouteInformationTab() {
 
 function reloadRouteVideoTab() {
     let route_id = document.getElementById('info-route-id');
+
+    loadedRouteTab['videos'] = false;
+
     closeModal();
     loadTabRoute(route_id.value, 'videos', 'initVideoRouteTab');
     return false;

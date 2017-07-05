@@ -11,6 +11,7 @@ class RouteVueController extends Controller
         $data = ['route' => Route::where('id',$id)
             ->with('routeSections')
             ->withCount('photos')
+            ->withCount('videos')
             ->with('crag')
             ->with('sector')
             ->first()];
