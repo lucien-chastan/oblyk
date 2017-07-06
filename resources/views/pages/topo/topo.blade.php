@@ -5,6 +5,7 @@
     <link href="/css/markdown.css" rel="stylesheet">
     <link href="/css/topo.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
+    <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -45,6 +46,10 @@
 
         <div id="sites">
             @include('pages.topo.tabs.sites')
+        </div>
+
+        <div id="map">
+            @include('pages.topo.tabs.map')
         </div>
 
     </div>

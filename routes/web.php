@@ -38,7 +38,12 @@ Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
 Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
 Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
 Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAroundPoint')->name('APIMarkerMap');
+Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
+Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 
+
+//UPLOAD
+Route::post('/upload/topoCouverture', 'CRUD\TopoController@uploadCouvertureTopo')->name('uploadCouvertureTopo');
 
 //MODAL
 Route::post('/modal/crag', 'CRUD\CragController@cragModal')->name('cragModal');
@@ -53,6 +58,9 @@ Route::post('/modal/photo', 'CRUD\PhotoController@photoModal')->name('photoModal
 Route::post('/modal/video', 'CRUD\VideoController@videoModal')->name('videoModal');
 Route::post('/modal/bandeau', 'CRUD\CragController@bandeauModal')->name('bandeauModal');
 Route::post('/modal/topo', 'CRUD\TopoController@topoModal')->name('topoModal');
+Route::post('/modal/topoSale', 'CRUD\TopoSaleController@topoSaleModal')->name('topoSaleModal');
+Route::post('/modal/topoCouverture', 'CRUD\TopoController@topoCouvertureModal')->name('topoCouvertureModal');
+
 
 //CRUD AJAX
 Route::resource('descriptions', 'CRUD\DescriptionController');
@@ -64,6 +72,8 @@ Route::resource('routes', 'CRUD\RouteController');
 Route::resource('photos', 'CRUD\PhotoController');
 Route::resource('videos', 'CRUD\VideoController');
 Route::resource('topos', 'CRUD\TopoController');
+Route::resource('topoCrags', 'CRUD\TopoCragController');
+Route::resource('topoSales', 'CRUD\TopoSaleController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
@@ -97,6 +107,7 @@ Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->n
 Route::get('/vue/topo/{topo_id}/liens','Vue\TopoVueController@vueLiens')->name('vueLiensTopo');
 Route::get('/vue/topo/{topo_id}/sites','Vue\TopoVueController@vueSites')->name('vueSitesTopo');
 Route::get('/vue/topo/{topo_id}/acheter','Vue\TopoVueController@vueAcheter')->name('vueAcheterTopo');
+Route::get('/vue/topo/{topo_id}/map','Vue\TopoVueController@vueMap')->name('vueMapTopo');
 
 
 //CHART

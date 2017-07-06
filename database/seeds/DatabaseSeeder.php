@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GapGradesTableSeeder::class);
         $this->call(ToposTableSeeder::class);
         $this->call(TopoCragsTableSeeder::class);
+        $this->call(TopoSalesTableSeeder::class);
     }
 }

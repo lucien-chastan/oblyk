@@ -12,6 +12,8 @@
         {!! $Inputs::text(['name'=>'editor', 'value'=>$dataModal['editor'], 'label'=>'Éditeur du topo', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'editionYear', 'value'=>$dataModal['editionYear'], 'label'=>'Année d\'édition', 'type'=>'number']) !!}
         {!! $Inputs::text(['name'=>'price', 'value'=>$dataModal['price'], 'label'=>'Année d\'édition', 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'page', 'value'=>$dataModal['page'], 'label'=>'Nombre de page', 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'weight', 'value'=>$dataModal['weight'], 'label'=>'Poids en gramme', 'type'=>'number']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 

@@ -18,6 +18,8 @@ class ToposTableSeeder extends Seeder
             'editor' => 'FFME 26',
             'editionYear' => 2014,
             'price' => 25,
+            'page' => 250,
+            'weight' => 150,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -28,6 +30,8 @@ class ToposTableSeeder extends Seeder
             'editor' => 'Fontainebook',
             'editionYear' => 2010,
             'price' => 20,
+            'page' => 99,
+            'weight' => 85,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 

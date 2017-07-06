@@ -1,5 +1,7 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
+<input type="hidden" value="{{$topo->id}}" id="id-topo-sites">
+
 <div class="row">
     <div class="col s12">
 
@@ -14,6 +16,7 @@
                         <th>Département</th>
                         <th>Ville</th>
                         <th>Rocher</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,20 +28,16 @@
                             <td>{{$liaison->crag->region}}</td>
                             <td>{{$liaison->crag->city}}</td>
                             <td>{{ucfirst($liaison->crag->rock->label)}}</td>
+                            <td class="ligne-btn">
+                                @if(Auth::check())
+                                    <i {!! $Helpers::tooltip('Enlever ce site du topo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col s12">
-
-        <div class="card-panel">
-            <div id="topo-map" class="topo-map">Map</div>
         </div>
     </div>
 </div>

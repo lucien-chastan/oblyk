@@ -6,9 +6,34 @@
 
             <p>
                 {{$topo->label}} est un topo édité par {{$topo->editor}} en {{$topo->editionYear}}<br>
-                <strong>Nombre de site présent dans ce topo : </strong> 5<br>
-                <strong>Auteur : </strong> {{$topo->author}}<br>
-                <strong>Prix conseillé : </strong> {{$topo->price}} €
+                <strong>Nombre de site d'oblyk présent dans ce topo : </strong> {{$topo->crags_count}}<br>
+                <strong>Auteur : </strong>
+                @if($topo->author != '')
+                    {{$topo->author}}
+                @else
+                    <span class="grey-text text-italic">auteur non renseigné</span>
+                @endif
+                <br>
+                <strong>Prix conseillé : </strong>
+                @if($topo->price != 0)
+                    {{$topo->price}} €
+                @else
+                    <span class="grey-text text-italic">prix non renseigné</span>
+                @endif
+                <br>
+                <strong>Nombre de page : </strong>
+                @if($topo->page != 0)
+                    {{$topo->page}} pages
+                @else
+                    <span class="grey-text text-italic">nombre de page non renseigné</span>
+                @endif
+                <br>
+                <strong>Poids : </strong>
+                @if($topo->weight != 0)
+                    {{$topo->weight}} grammes
+                @else
+                    <span class="grey-text text-italic">poids non renseigné</span>
+                @endif
             </p>
 
             @if(Auth::check())
@@ -57,7 +82,17 @@
     <div class="col s12 m12 l5">
 
         <div class="card-panel">
-            <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/topo-1.jpg">
+            @if(file_exists(storage_path('app/public/topos/700/topo-' . $topo->id.'.jpg')))
+                <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/700/topo-1.jpg">
+            @else
+                <img class="responsive-img z-depth-3" alt="" src="/img/default-topo-couverture.svg">
+            @endif
+
+                @if(Auth::check())
+                    <p class="text-center">
+                        <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>"Changer la couverture du topo"]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i> Changer la couverture</a>
+                    </p>
+                @endif
         </div>
 
     </div>

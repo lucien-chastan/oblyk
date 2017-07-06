@@ -218,14 +218,14 @@ function colorOrientation() {
         pathOrientation = document.querySelectorAll(".orientations-input path");
 
     for(let i = 0 ; i < hiddenInput.length ; i++){
-        pathOrientation[i].style.fill = (hiddenInput[i].value == 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+        pathOrientation[i].style.fill = (hiddenInput[i].value === 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
     }
 }
 
 //CHANGE LA SAISON DANS UN INPUT DU TYPE SAISON
 function switchSaison(inputHidden) {
     let input = document.getElementById(inputHidden);
-    input.value = (input.value == 1)? 0 : 1;
+    input.value = (input.value === 1)? 0 : 1;
     colorSaison();
 }
 
@@ -235,7 +235,7 @@ function colorSaison() {
         pathSaison = document.querySelectorAll(".season-input path");
 
     for(let i = 0 ; i < hiddenInput.length ; i++){
-        pathSaison[i].style.fill = (hiddenInput[i].value == 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+        pathSaison[i].style.fill = (hiddenInput[i].value === 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
     }
 }
 
@@ -244,13 +244,21 @@ function colorSaison() {
 function creatInputMap() {
     let lat = parseFloat(document.getElementById('lat-hidden-input').value),
         lng = parseFloat(document.getElementById('lng-hidden-input').value),
-        defautLat = (lat == 0)? 46.927527 : lat,
-        defautLng = (lng == 0)? 2.871905 : lng,
-        defautZoom = (lat == 0 && lng == 0)? 5 : 16;
+        defautLat = (lat === 0)? 46.927527 : lat,
+        defautLng = (lng === 0)? 2.871905 : lng,
+        defautZoom = (lat === 0 && lng === 0)? 5 : 16;
 
     //définition des différents style de tuile
     let cartePopupMap = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
         satellitePopupMap   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+
+    //si la carte existe déjà on la détruit
+    if(typeof inputMap !== "undefined"){
+        markerInputMap.remove();
+        inputMap.remove();
+
+        markerInputMap = undefined;
+    }
 
     //création de la map
     inputMap = L.map('input-map',{ zoomControl : true, center:[defautLat, defautLng], zoom : defautZoom, layers: [cartePopupMap]});
@@ -264,7 +272,7 @@ function creatInputMap() {
     //ajout du controleur de tuile
     L.control.layers(basePopUpMaps).addTo(inputMap);
 
-    if(lat != 0 || lng != 0){
+    if(lat !== 0 || lng !== 0){
         markerInputMap = L.marker([lat,lng], {}).addTo(inputMap);
     }
 
@@ -284,9 +292,9 @@ function pointMarkerInputMap(e) {
     lat.value = e['latlng']['lat'];
     lng.value = e['latlng']['lng'];
 
-    try{
+    if(typeof markerInputMap !== "undefined"){
         markerInputMap.setLatLng(e['latlng']);
-    }catch(e) {
+    }else{
         markerInputMap = L.marker(e['latlng'], {}).addTo(inputMap);
     }
 }

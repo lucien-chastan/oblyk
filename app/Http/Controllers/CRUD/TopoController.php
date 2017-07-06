@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Topo;
+use Intervention\Image\Facades\Image;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,8 @@ class TopoController extends Controller
                 'editor' => $topo->editor,
                 'editionYear' => $topo->editionYear,
                 'price' => $topo->price,
+                'page' => $topo->page,
+                'weight' => $topo->weight,
                 'id' => $id_topo,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
@@ -39,6 +42,64 @@ class TopoController extends Controller
         ];
 
         return view('modal.topo', $data);
+    }
+
+
+    //AFFICHE LA MODAL POUR UPLOADER UNE COUVERTURE
+    function topoCouvertureModal(Request $request){
+        $id_topo = $request->input('topo_id');
+
+        $data = [
+            'dataModal' => [
+                'topo_id' => $id_topo,
+                'title' => $request->input('title'),
+            ]
+        ];
+
+        return view('modal.topoCouverture', $data);
+    }
+
+
+    //FONCTION POUR UPLOADER UNE CONVERTURE
+    function uploadCouvertureTopo(Request $request){
+
+        $topo_id = $request->input('topo_id');
+
+        if ($request->hasFile('file')) {
+
+            //Image en 700px de haut
+            Image::make($request->file('file'))
+                ->orientate()
+                ->resize(null, 700, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/topos/700/topo-' . $topo_id . '.jpg'));
+
+            //Image en 200px de haut
+            Image::make($request->file('file'))
+                ->orientate()
+                ->resize(null, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/topos/200/topo-' . $topo_id . '.jpg'));
+
+            //Crop de l'image en 100 * 100
+            Image::make($request->file('file'))
+                ->orientate()
+                ->fit(100, 100)
+                ->encode('jpg', 75)
+                ->save(storage_path('app/public/topos/100/topo-' . $topo_id . '.jpg'));
+
+            //Crop de l'image en 50 * 50
+            Image::make($request->file('file'))
+                ->orientate()
+                ->fit(50, 50)
+                ->encode('jpg', 75)
+                ->save(storage_path('app/public/topos/50/topo-' . $topo_id . '.jpg'));
+        }
+
     }
 
     /**
@@ -81,6 +142,8 @@ class TopoController extends Controller
         $topo->editor = $request->input('editor');
         $topo->editionYear = $request->input('editionYear');
         $topo->price = $request->input('price');
+        $topo->page = $request->input('page');
+        $topo->weight = $request->input('weight');
         $topo->user_id = Auth::id();
         $topo->save();
 
@@ -131,6 +194,8 @@ class TopoController extends Controller
             $topo->editor = $request->input('editor');
             $topo->editionYear = $request->input('editionYear');
             $topo->price = $request->input('price');
+            $topo->page = $request->input('page');
+            $topo->weight = $request->input('weight');
             $topo->save();
         }
 

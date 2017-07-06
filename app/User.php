@@ -58,4 +58,12 @@ class User extends Authenticatable
     public function photos(){
         return $this->hasMany('App\Photo','user_id', 'id');
     }
+
+    public function sales(){
+        return $this->hasMany('App\Sale','user_id', 'id');
+    }
+
+    public function topos(){
+        return $this->hasMany('App\Topo','user_id', 'id');
+    }
 }

@@ -31,8 +31,15 @@ class TopoVueController extends Controller
 
     function vueAcheter($id){
         $data = [
-            'topo' => Topo::where('id',$id)->first()
+            'topo' => Topo::where('id',$id)->with('sales.user')->first()
         ];
         return view('pages.topo.vues.acheterVue', $data);
+    }
+
+    function vueMap($id){
+        $data = [
+            'topo' => Topo::where('id',$id)->first()
+        ];
+        return view('pages.topo.vues.mapVue', $data);
     }
 }

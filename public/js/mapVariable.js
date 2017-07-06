@@ -5,6 +5,7 @@ let marker_10000 = L.icon({iconUrl: '/img/marker-10000.svg', iconSize: [24, 32],
 let marker_01000 = L.icon({iconUrl: '/img/marker-01000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00100 = L.icon({iconUrl: '/img/marker-00100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00010 = L.icon({iconUrl: '/img/marker-00010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_00001 = L.icon({iconUrl: '/img/marker-00001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
 //Marker double
 let marker_11000 = L.icon({iconUrl: '/img/marker-11000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -22,6 +23,7 @@ let marker_01110 = L.icon({iconUrl: '/img/marker-01110.svg', iconSize: [24, 32],
 
 //marker de parking
 let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_sale = L.icon({iconUrl: '/img/marker-sale.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
 
 //définition des différents style de tuile
@@ -37,7 +39,7 @@ let baseMaps = {
 //créer la popup html avec les données d'une falaise
 function buildPopup(crag) {
     let html = `
-        <img class="photo-couve-site-leaflet" src="/storage/photos/crags/oblyk-home-baume-rousse.jpg" alt="photo de couverture de ${crag.label}">
+        <img class="photo-couve-site-leaflet" src="${crag.bandeau}" alt="photo de couverture de ${crag.label}">
         <div class="crag-leaflet-info">
             <h2 class="loved-king-font titre-crag-leaflet">
                 <a href="/site-escalade/${crag.id}/${string_to_slug(crag.label)}">${crag.label}</a>
@@ -81,14 +83,15 @@ function styleIcon(type) {
 
     let point;
     if(type === '00000') point = marker_00000;
+    if(type === '00001') point = marker_00001;
     if(type === '00010') point = marker_00010;
     if(type === '00100') point = marker_00100;
-    if(type === '00110') point = marker_00110;
     if(type === '01000') point = marker_01000;
+    if(type === '10000') point = marker_10000;
+    if(type === '00110') point = marker_00110;
     if(type === '01010') point = marker_01010;
     if(type === '01100') point = marker_01100;
     if(type === '01110') point = marker_01110;
-    if(type === '10000') point = marker_10000;
     if(type === '10010') point = marker_10010;
     if(type === '10100') point = marker_10100;
     if(type === '10110') point = marker_10110;

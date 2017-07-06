@@ -22,4 +22,8 @@ class Topo extends Model
     public function crags(){
         return $this->hasMany('App\TopoCrag','topo_id', 'id');
     }
+
+    public function sales(){
+        return $this->hasMany('App\TopoSale','topo_id', 'id');
+    }
 }
