@@ -11,6 +11,8 @@ class ToposTableSeeder extends Seeder
      */
     public function run()
     {
+
+        //1
         DB::table('topos')->insert([
             'user_id' => 1,
             'label' => 'Topo de la drôme provençale',
@@ -23,6 +25,7 @@ class ToposTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+        //2
         DB::table('topos')->insert([
             'user_id' => 2,
             'label' => '7 + 8',
@@ -35,5 +38,31 @@ class ToposTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+
+        //3
+        DB::table('topos')->insert([
+            'user_id' => 1,
+            'label' => 'Saou et ses environs',
+            'author' => 'CAF',
+            'editor' => 'FFME',
+            'editionYear' => 2012,
+            'price' => 25,
+            'page' => 120,
+            'weight' => 100,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        //4
+        DB::table('topos')->insert([
+            'user_id' => 1,
+            'label' => 'St Ferréol, Esson',
+            'author' => 'Club',
+            'editor' => '',
+            'editionYear' => 2008,
+            'price' => 12,
+            'page' => 50,
+            'weight' => 40,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

@@ -82,8 +82,8 @@
     <div class="col s12 m12 l5">
 
         <div class="card-panel">
-            @if(file_exists(storage_path('app/public/topos/700/topo-' . $topo->id.'.jpg')))
-                <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/700/topo-1.jpg">
+            @if(file_exists(storage_path('app/public/topos/700/topo-' . $topo->id . '.jpg')))
+                <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/700/topo-{{$topo->id}}.jpg">
             @else
                 <img class="responsive-img z-depth-3" alt="" src="/img/default-topo-couverture.svg">
             @endif

@@ -198,3 +198,31 @@ function showPhotoSectorEditor(visible, sector_id) {
         document.getElementById("bt-show-sector-gallerie-editor-" + sector_id).style.display = 'block';
     }
 }
+
+
+function getTopoArround() {
+    let lat = document.getElementById('lat-search-topo'),
+        lng = document.getElementById('lng-search-topo'),
+        rayon = document.getElementById('rayon-search-topo'),
+        id = document.getElementById('id-search-topo'),
+        loader = document.getElementById('loader-liste-topo'),
+        liste = document.getElementById('liste-topo-proche');
+
+    liste.innerHTML = '';
+    liste.style.display = "none";
+    loader.style.display = "block";
+
+    axios.get('/API/topos/' + lat.value + '/' + lng.value + '/' + rayon.value + '/' + id.value).then(function (response) {
+
+        liste.innerHTML = response.data;
+
+        liste.style.display = "block";
+        loader.style.display = "none";
+
+        rayon.value = parseInt(rayon.value) + 50;
+    });
+}
+
+function selectTopo(topo_id) {
+
+}

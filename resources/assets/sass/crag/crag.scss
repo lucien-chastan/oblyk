@@ -79,6 +79,15 @@ body{
     }
 }
 
+.topo-panel{
+    padding: 1.5em 0 !important;
+
+    img {
+        height: 200px;
+        object-fit: contain;
+    }
+}
+
 .petites-infos-crag{
     ul {
         margin: 0;

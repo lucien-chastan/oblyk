@@ -14,24 +14,13 @@ class TopoCragController extends Controller
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN lien
     function topoCragModal(Request $request){
 
-        //construction de la définition (vide ou avec des infos)
-        $id_topo_crag = $request->input('topo_id');
-        $topo_crag = isset($id_topo_crag) ? TopoCrag::where('id', $id_topo_crag)->first() : new TopoCrag();
-        $callback = $request->input('callback');
-        $callback = isset($callback) ? $request->input('callback') : 'refresh';
-
-        //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/topoCrags' : '/topoCrags/' . $id_topo_crag;
-
         $data = [
             'dataModal' => [
-                'crag_id' => $topo_crag->crag_id,
-                'topo_id' => $topo_crag->topo_id,
-                'id' => $id_topo_crag,
+                'crag_id' => $request->input('crag_id'),
                 'title' => $request->input('title'),
-                'method' => $request->input('method'),
-                'route' => $outputRoute,
-                'callback' => $callback,
+                'lat' => $request->input('lat'),
+                'lng' => $request->input('lng'),
+                'rayon' => $request->input('rayon'),
             ]
         ];
 

@@ -32,6 +32,32 @@ class SeasonsTableSeeder extends Seeder
             'spring' => 0,
         ]);
 
+        DB::table('seasons')->insert([
+            'seasontable_id' => 3,
+            'seasontable_type' => 'App\Crag',
+            'summer' => 1,
+            'autumn' => 0,
+            'winter' => 1,
+            'spring' => 0,
+        ]);
+
+        DB::table('seasons')->insert([
+            'seasontable_id' => 4,
+            'seasontable_type' => 'App\Crag',
+            'summer' => 1,
+            'autumn' => 0,
+            'winter' => 1,
+            'spring' => 0,
+        ]);
+
+        DB::table('seasons')->insert([
+            'seasontable_id' => 5,
+            'seasontable_type' => 'App\Crag',
+            'summer' => 1,
+            'autumn' => 0,
+            'winter' => 1,
+            'spring' => 0,
+        ]);
 
         //SAISON SUR SECTEUR
 

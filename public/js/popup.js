@@ -62,6 +62,11 @@ function specialAction(data) {
         document.getElementById('popup_line_name').addEventListener('keyup', getSimilarRoute);
     }catch (e){}
 
+    //va chercher la liste des topos proches d'un point
+    try {
+        getTopoArround();
+    }catch (e){}
+
     //créer la map de localisation (s'il y en a une)
     setTimeout(function () {
         try {creatInputMap();}catch (e){}

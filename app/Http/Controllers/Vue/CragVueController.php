@@ -40,7 +40,10 @@ class CragVueController extends Controller
     }
 
     function vueTopos($id){
-        return view('pages.crag.vues.toposVue');
+        $data = [
+            'crag' => Crag::where('id',$id)->with('topos.topo.user')->first()
+        ];
+        return view('pages.crag.vues.toposVue', $data);
     }
 
     function vueSecteur($id){

@@ -55,5 +55,14 @@ class DescriptionsTableSeeder extends Seeder
             'note' => 2,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
+        DB::table('descriptions')->insert([
+            'descriptive_id' => 1,
+            'descriptive_type' => 'App\Topo',
+            'description' => 'Topo très fourni, qui regroupe 13 sites d\'escalade (voie et grande voie), en Drôme provençale. On y trouve de nombreuses informations comme le type d\'équipement, des commentaires sur les voies, etc. Merci au CD26 pour cette mine d\'or',
+            'user_id' => 1,
+            'note' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

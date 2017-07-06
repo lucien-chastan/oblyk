@@ -40,6 +40,7 @@ Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->
 Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAroundPoint')->name('APIMarkerMap');
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
+Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
 
 
 //UPLOAD
@@ -59,6 +60,7 @@ Route::post('/modal/video', 'CRUD\VideoController@videoModal')->name('videoModal
 Route::post('/modal/bandeau', 'CRUD\CragController@bandeauModal')->name('bandeauModal');
 Route::post('/modal/topo', 'CRUD\TopoController@topoModal')->name('topoModal');
 Route::post('/modal/topoSale', 'CRUD\TopoSaleController@topoSaleModal')->name('topoSaleModal');
+Route::post('/modal/topoCrag', 'CRUD\TopoCragController@topoCragModal')->name('topoCragModal');
 Route::post('/modal/topoCouverture', 'CRUD\TopoController@topoCouvertureModal')->name('topoCouvertureModal');
 
 

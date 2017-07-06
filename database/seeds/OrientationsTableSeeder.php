@@ -40,6 +40,45 @@ class OrientationsTableSeeder extends Seeder
             'south_west' => 1,
         ]);
 
+        DB::table('orientations')->insert([
+            'orientable_id' => 3,
+            'orientable_type' => 'App\Crag',
+            'north' => 0,
+            'east' => 0,
+            'south' => 0,
+            'west' => 1,
+            'north_east' => 0,
+            'north_west' => 0,
+            'south_east' => 0,
+            'south_west' => 1,
+        ]);
+
+        DB::table('orientations')->insert([
+            'orientable_id' => 4,
+            'orientable_type' => 'App\Crag',
+            'north' => 0,
+            'east' => 0,
+            'south' => 0,
+            'west' => 1,
+            'north_east' => 0,
+            'north_west' => 0,
+            'south_east' => 0,
+            'south_west' => 1,
+        ]);
+
+        DB::table('orientations')->insert([
+            'orientable_id' => 5,
+            'orientable_type' => 'App\Crag',
+            'north' => 0,
+            'east' => 0,
+            'south' => 0,
+            'west' => 1,
+            'north_east' => 0,
+            'north_west' => 0,
+            'south_east' => 0,
+            'south_west' => 1,
+        ]);
+
         //ORIENTATION DES SECTEURS
 
         DB::table('orientations')->insert([
