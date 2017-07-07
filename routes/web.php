@@ -17,8 +17,6 @@ Route::get('/', function () {return view('pages.home.index');});
 Auth::routes();
 
 
-//Route::get('/home', 'HomeController@index');
-
 //page liée au projet
 Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
 Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
@@ -28,6 +26,9 @@ Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
 Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('supportUs');
 Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
 Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+
+//LE LEXIQUE
+Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
 
 //carte
@@ -77,6 +78,7 @@ Route::post('/modal/topoPdf', 'CRUD\TopoPdfController@topoPdfModal')->name('topo
 Route::post('/modal/topoCouverture', 'CRUD\TopoController@topoCouvertureModal')->name('topoCouvertureModal');
 Route::post('/modal/massive', 'CRUD\MassiveController@massiveModal')->name('massiveModal');
 Route::post('/modal/massiveCrag', 'CRUD\MassiveCragController@massiveCragModal')->name('massiveCragModal');
+Route::post('/modal/word', 'CRUD\WordController@wordModal')->name('wordModal');
 
 
 //CRUD AJAX
@@ -95,6 +97,7 @@ Route::resource('topoWebs', 'CRUD\TopoWebController');
 Route::resource('topoPdfs', 'CRUD\TopoPdfController');
 Route::resource('massives', 'CRUD\MassiveController');
 Route::resource('massiveCrags', 'CRUD\MassiveCragController');
+Route::resource('words', 'CRUD\WordController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

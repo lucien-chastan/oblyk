@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     public function lexiques(){
-        return $this->hasMany('App\Lexique','user_id', 'id');
+        return $this->hasMany('App\Word','user_id', 'id');
     }
 
     public function descriptions(){

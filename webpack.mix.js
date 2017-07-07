@@ -23,6 +23,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/massive/massive.scss', 'public/css')
     .sass('resources/assets/sass/crag/cotation.scss', 'public/css')
     .sass('resources/assets/sass/crag/route.scss', 'public/css')
+    .sass('resources/assets/sass/lexique/lexique.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css');
 
 //fichier Js

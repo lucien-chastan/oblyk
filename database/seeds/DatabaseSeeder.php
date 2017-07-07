@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RainExposuresTableSeeder::class);
         $this->call(SunsTableSeeder::class);
         $this->call(SectorsTableSeeder::class);
-        $this->call(LexiqueTableSeeder::class);
+        $this->call(WordsTableSeeder::class);
         $this->call(ClimbsTableSeeder::class);
         $this->call(AnchorsTableSeeder::class);
         $this->call(PointsTableSeeder::class);

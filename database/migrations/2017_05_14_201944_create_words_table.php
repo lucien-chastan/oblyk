@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLexiqueTable extends Migration
+class CreateWordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLexiqueTable extends Migration
      */
     public function up()
     {
-        Schema::create('lexique', function (Blueprint $table) {
+        Schema::create('words', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label',255);
             $table->string('definition',4000);
@@ -32,6 +32,6 @@ class CreateLexiqueTable extends Migration
      */
     public function down()
     {
-        Schema::drop('lexique');
+        Schema::drop('words');
     }
 }

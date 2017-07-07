@@ -37,7 +37,7 @@
     <ul id="dropdown_outils" class="dropdown-content dropD-210">
         <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>Carte des falaises</a></li>
         <li><a href="#!"><i class="material-icons left">forum</i>Forum</a></li>
-        <li><a href="#!"><i class="material-icons left">text_format</i>Lexique</a></li>
+        <li><a href="{{ route('lexique') }}"><i class="material-icons left">text_format</i>Lexique</a></li>
         <li><a href="#!"><i class="material-icons left">search</i>Recherche avancée</a></li>
     </ul>
 
@@ -133,7 +133,7 @@
                             <ul>
                                 <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>Carte des falaises</a></li>
                                 <li><a href="#!"><i class="material-icons left">forum</i>Forum</a></li>
-                                <li><a href="#!"><i class="material-icons left">text_format</i>Lexique</a></li>
+                                <li><a href="{{ route('lexique') }}"><i class="material-icons left">text_format</i>Lexique</a></li>
                                 <li><a href="#!"><i class="material-icons left">search</i>Recherche avancée</a></li>
                             </ul>
                         </div>
