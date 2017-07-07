@@ -64,6 +64,7 @@ Route::post('/modal/bandeau', 'CRUD\CragController@bandeauModal')->name('bandeau
 Route::post('/modal/topo', 'CRUD\TopoController@topoModal')->name('topoModal');
 Route::post('/modal/topoSale', 'CRUD\TopoSaleController@topoSaleModal')->name('topoSaleModal');
 Route::post('/modal/topoCrag', 'CRUD\TopoCragController@topoCragModal')->name('topoCragModal');
+Route::post('/modal/topoWeb', 'CRUD\TopoWebController@topoWebModal')->name('topoWebModal');
 Route::post('/modal/topoCouverture', 'CRUD\TopoController@topoCouvertureModal')->name('topoCouvertureModal');
 
 
@@ -79,6 +80,7 @@ Route::resource('videos', 'CRUD\VideoController');
 Route::resource('topos', 'CRUD\TopoController');
 Route::resource('topoCrags', 'CRUD\TopoCragController');
 Route::resource('topoSales', 'CRUD\TopoSaleController');
+Route::resource('topoWebs', 'CRUD\TopoWebController');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

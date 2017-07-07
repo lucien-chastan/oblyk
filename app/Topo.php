@@ -26,10 +26,4 @@ class Topo extends Model
     public function sales(){
         return $this->hasMany('App\TopoSale','topo_id', 'id');
     }
-
-    public static function searcheArrondPoint($lat, $lng, $rayon, $crag_id){
-
-
-        //return $topos;
-    }
 }
