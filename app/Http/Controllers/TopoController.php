@@ -58,4 +58,5 @@ class TopoController extends Controller
         return view('pages.crag.partials.liste-topos', $data);
 
     }
+
 }

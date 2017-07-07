@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Crag;
+use App\Topo;
 use App\TopoCrag;
 use Validator;
 use Illuminate\Http\Request;
@@ -126,5 +128,30 @@ class TopoCragController extends Controller
         if($topo_crag->user_id == Auth::id()){
             $topo_crag->delete();
         }
+    }
+
+    function createLiaison(Request $request){
+        $topo = Topo::where('id', $request->input('topo_id'))->first();
+        $crag = Crag::where('id', $request->input('crag_id'))->first();
+        $topo->slug_label = str_slug($topo->label);
+
+        $liaison = new TopoCrag();
+        $liaison->crag_id = $crag->id;
+        $liaison->topo_id = $topo->id;
+        $liaison->user_id = Auth::id();
+        $liaison->save();
+
+        $data = [
+            'crag' => $crag,
+            'topo' => $topo,
+            'liaison' => $liaison
+        ];
+
+        return response()->json($data);
+    }
+
+    function deleteLiaison(Request $request){
+        $liaison = TopoCrag::where('id', $request->input('id'))->first();
+        $liaison->delete();
     }
 }

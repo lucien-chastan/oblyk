@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Crag;
 use App\Topo;
+use App\TopoCrag;
 use Intervention\Image\Facades\Image;
 use Validator;
 use Illuminate\Http\Request;
@@ -18,8 +20,12 @@ class TopoController extends Controller
         //construction de la définition (vide ou avec des infos)
         $id_topo = $request->input('topo_id');
         $topo = isset($id_topo) ? Topo::where('id', $id_topo)->first() : new Topo();
+
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
+
+        $crag_id = $request->input('crag_id');
+        $crag_id = isset($crag_id) ? $request->input('crag_id') : '';
 
         //définition du chemin de sauvgarde
         $outputRoute = ($request->input('method') == 'POST')? '/topos' : '/topos/' . $id_topo;
@@ -36,6 +42,7 @@ class TopoController extends Controller
                 'id' => $id_topo,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
+                'crag_id' => $crag_id,
                 'route' => $outputRoute,
                 'callback' => $callback,
             ]
@@ -146,6 +153,15 @@ class TopoController extends Controller
         $topo->weight = $request->input('weight');
         $topo->user_id = Auth::id();
         $topo->save();
+        $topo->slug_label = str_slug($topo->label);
+
+        if($request->input('crag_id') != ''){
+            $liaison = new TopoCrag();
+            $liaison->user_id = Auth::id();
+            $liaison->topo_id = $topo->id;
+            $liaison->crag_id = $request->input('crag_id');
+            $liaison->save();
+        }
 
         return response()->json(json_encode($topo));
 
@@ -216,4 +232,5 @@ class TopoController extends Controller
             $topo->delete();
         }
     }
+
 }

@@ -205,24 +205,83 @@ function getTopoArround() {
         lng = document.getElementById('lng-search-topo'),
         rayon = document.getElementById('rayon-search-topo'),
         id = document.getElementById('id-search-topo'),
-        loader = document.getElementById('loader-liste-topo'),
+        zoneValidation = document.getElementById('validation-liaison-topo'),
+        zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
+        zoneListe = document.getElementById('zone-topo-est-il-present'),
+        zoneLoader = document.getElementById('loader-liste-topo'),
         liste = document.getElementById('liste-topo-proche');
 
     liste.innerHTML = '';
     liste.style.display = "none";
-    loader.style.display = "block";
+    zoneValidation.style.display = "none";
+    zoneCreerTopo.style.display = "block";
+    zoneListe.style.display = "block";
+    zoneLoader.style.display = "block";
 
     axios.get('/API/topos/' + lat.value + '/' + lng.value + '/' + rayon.value + '/' + id.value).then(function (response) {
 
         liste.innerHTML = response.data;
 
         liste.style.display = "block";
-        loader.style.display = "none";
+        zoneLoader.style.display = "none";
 
         rayon.value = parseInt(rayon.value) + 50;
     });
 }
 
 function selectTopo(topo_id) {
+    let zoneListe = document.getElementById('zone-topo-est-il-present'),
+        zoneValidation = document.getElementById('validation-liaison-topo'),
+        zoneLoader = document.getElementById('loader-liste-topo'),
+        zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
+        nomSite = document.getElementById('nom-site-liaison'),
+        rayon = document.getElementById('rayon-search-topo'),
+        versTopo = document.getElementById('lien-vers-topo'),
+        idLiaison = document.getElementById('id-new-liaison'),
+        nomTopo = document.getElementById('nom-topo-liaison');
 
+    zoneListe.style.display = 'none';
+    zoneLoader.style.display = 'block';
+    zoneCreerTopo.style.display = 'none';
+    zoneValidation.style.display = 'none';
+
+    axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
+
+        zoneLoader.style.display = 'none';
+        zoneValidation.style.display = 'block';
+
+        let data = response.data;
+
+        nomSite.textContent = data.crag.label;
+        nomTopo.textContent = data.topo.label;
+
+        versTopo.href = '/topo-escalade/' + data.topo.id + '/' + data.topo.slug_label;
+
+        rayon.value = '50';
+
+        idLiaison.value = data.liaison.id;
+
+    });
+}
+
+function deleteLiaison() {
+    let idLiaison = document.getElementById('id-new-liaison'),
+        zoneListe = document.getElementById('zone-topo-est-il-present'),
+        zoneValidation = document.getElementById('validation-liaison-topo'),
+        zoneLoader = document.getElementById('loader-liste-topo'),
+        zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo');
+
+    zoneListe.style.display = 'none';
+    zoneLoader.style.display = 'block';
+    zoneCreerTopo.style.display = 'none';
+    zoneValidation.style.display = 'none';
+
+    axios.post('/topo/delete-liaison', {id : idLiaison.value}).then(function () {
+        getTopoArround();
+    });
+}
+
+function goToNewTopo(response) {
+    let data = JSON.parse(response.data);
+    window.location.href = '/topo-escalade/' + data.id + '/' + data.slug_label;
 }
