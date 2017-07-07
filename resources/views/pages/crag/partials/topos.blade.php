@@ -43,8 +43,29 @@
         </div>
 
         <h2 class="loved-king-font">Topos PDF</h2>
-        <p>
-            liste des topo webs et PDF
-        </p>
+        <div class="blue-border-zone">
+
+            @foreach($crag->topoPdfs as $topoPdf)
+                <div class="blue-border-div">
+                    <h6 class="text-bold">{{$topoPdf->label}}</h6>
+                    Fichier : <a target="_blank" href="/storage/topos/PDF/{{$topoPdf->slug_label}}">{{$topoPdf->slug_label}}</a>
+                    <p class="info-user grey-text">
+                        ajouté par {{$topoPdf->user->name}} le {{$topoPdf->created_at->format('d M Y')}}
+
+                        @if(Auth::check())
+                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoPdf->id, "model"=>"TopoPdf"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            @if($topoPdf->user_id == Auth::id())
+                                <i {!! $Helpers::tooltip('Modifier ce topo PDF') !!} {!! $Helpers::modal(route('topoPdfModal'), ["topo_pdf_id"=>$topoPdf->id, "crag_id"=>$crag->id, "title"=>"Modifier le topo Pdf", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip('Supprimer ce topo PDF') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoPdfs/" . $topoPdf->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                            @endif
+                        @endif
+                    </p>
+                </div>
+            @endforeach
+
+            @if(count($crag->topoWebs) == 0)
+                <p class="grey-text text-center">Aucun n'a été uploadé sur Oblyk pour l'instant</p>
+            @endif
+        </div>
     </div>
 </div>

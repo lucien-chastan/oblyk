@@ -7,7 +7,7 @@
 <form class="submit-form" onsubmit="uploadCouverture(this, refresh); return false">
 
     <div class="row">
-        {!! $Inputs::upload(['name'=>'file', 'id'=>'upload-input-couverture-topo' ,'label'=>'Couverture']) !!}
+        {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>'Couverture']) !!}
         {!! $Inputs::progressbar(['id'=>'progressbar-upload-couverture']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>

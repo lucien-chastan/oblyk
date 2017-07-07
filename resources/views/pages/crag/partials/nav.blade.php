@@ -6,7 +6,7 @@
             <li class="tab col s2"><a data-route="{{route('vueSecteurCrag',[$crag->id])}}" data-callback="getSectorChart" class="router-link" href="#voies"><i class="material-icons">format_list_bulleted</i><span>Secteurs &amp; Voies</span></a><span class="count-tab-ettiquette">{{$crag->routes_count}}</span></li>
             <li class="tab col s2"><a data-route="{{route('vueMediasCrag',[$crag->id])}}" data-callback="initPhotothequeCrag" class="router-link" href="#medias"><i class="material-icons">collections</i><span>Médias</span></a><span class="count-tab-ettiquette">{{$crag->photos_count + $crag->videos_count}}</span></li>
             <li class="tab col s2"><a data-route="{{route('vueLiensCrag',[$crag->id])}}" class="router-link" href="#liens"><i class="material-icons">link</i><span>Liens</span></a><span class="count-tab-ettiquette">{{$crag->links_count}}</span></li>
-            <li class="tab col s2"><a data-route="{{route('vueToposCrag',[$crag->id])}}" class="router-link" href="#topos"><i class="material-icons">local_library</i><span>Topos</span></a><span class="count-tab-ettiquette">{{$crag->topos_count + count($crag->topoWebs)}}</span></li>
+            <li class="tab col s2"><a data-route="{{route('vueToposCrag',[$crag->id])}}" class="router-link" href="#topos"><i class="material-icons">local_library</i><span>Topos</span></a><span class="count-tab-ettiquette">{{$crag->topos_count + count($crag->topoPdfs) + count($crag->topoWebs)}}</span></li>
             <li class="tab col s2"><a data-route="{{route('vueMapCrag',[$crag->id])}}" data-callback="initCragMap" class="router-link" href="#map"><i class="material-icons">map</i><span>Map</span></a></li>
         </ul>
     </div>

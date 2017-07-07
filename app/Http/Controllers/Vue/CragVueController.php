@@ -41,7 +41,7 @@ class CragVueController extends Controller
 
     function vueTopos($id){
         $data = [
-            'crag' => Crag::where('id',$id)->with('topos.topo.user')->with('topoWebs.user')->first()
+            'crag' => Crag::where('id',$id)->with('topos.topo.user')->with('topoWebs.user')->with('topoPdfs.user')->first()
         ];
         return view('pages.crag.vues.toposVue', $data);
     }

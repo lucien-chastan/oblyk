@@ -4,6 +4,9 @@
     <div class="col s12">
         <div class="card-panel">
 
+
+
+            {{--TOPO PAPIER--}}
             <div class="row">
 
                 <h2 class="loved-king-font text-center">Topos Papiers</h2>
@@ -24,6 +27,11 @@
                 @endif
             </div>
 
+
+
+
+
+            {{--TOPO WEB--}}
             <div class="row">
                 <h2 class="loved-king-font text-center">Topos web</h2>
 
@@ -48,24 +56,55 @@
                     @endforeach
 
                     @if(count($crag->topoWebs) == 0)
-                        <p class="grey-text text-center">Aucun site internet présente le topo de cette falaise</p>
+                        <p class="grey-text text-center">Aucun site internet présente le topo de cette falaise pour l'instant</p>
                     @endif
                 </div>
             </div>
 
+
+
+
+            {{--TOPO PDF--}}
             <div class="row">
                 <h2 class="loved-king-font text-center">Topos PDF</h2>
-                <p class="text-center grey-text">Aucun topo PDF n'a été uploadé sur Oblyk</p>
+                <div class="blue-border-zone">
+
+                    @foreach($crag->topoPdfs as $topoPdf)
+                        <div class="blue-border-div">
+                            <h6 class="text-bold">{{$topoPdf->label}}</h6>
+                            <div class="markdownZone">{{$topoPdf->description}}</div>
+                            Fichier : <a target="_blank" href="/storage/topos/PDF/{{$topoPdf->slug_label}}">{{$topoPdf->slug_label}}</a>
+                            <p class="info-user grey-text">
+                                ajouté par {{$topoPdf->user->name}} le {{$topoPdf->created_at->format('d M Y')}}
+
+                                @if(Auth::check())
+                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoPdf->id, "model"=>"TopoPdf"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                    @if($topoPdf->user_id == Auth::id())
+                                        <i {!! $Helpers::tooltip('Modifier ce topo PDF') !!} {!! $Helpers::modal(route('topoPdfModal'), ["topo_pdf_id"=>$topoPdf->id, "crag_id"=>$crag->id, "title"=>"Modifier le topo Pdf", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                        <i {!! $Helpers::tooltip('Supprimer ce topo PDF') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoPdfs/" . $topoPdf->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                    @endif
+                                @endif
+                            </p>
+                        </div>
+                    @endforeach
+
+                    @if(count($crag->topoWebs) == 0)
+                        <p class="grey-text text-center">Aucun n'a été uploadé sur Oblyk pour l'instant</p>
+                    @endif
+                </div>
             </div>
 
-            {{--bouton d'ajout--}}
+
+
+
+            {{--BOUTON D'AJOUT--}}
             @if(Auth::check())
                 <div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-large red">
                         <i class="large material-icons">add</i>
                     </a>
                     <ul>
-                        <li><a {!! $Helpers::tooltip('Ajouter un topo PDF') !!} class="tooltipped btn-floating blue"><i class="material-icons">picture_as_pdf</i></a></li>
+                        <li><a {!! $Helpers::tooltip('Modifier ce topo PDF') !!} {!! $Helpers::modal(route('topoPdfModal'), ["topo_pdf_id"=>'', "crag_id"=>$crag->id, "title"=>"Ajouter un topo Pdf", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">picture_as_pdf</i></a></li>
                         <li><a {!! $Helpers::tooltip('Ajouter un topo web') !!} {!! $Helpers::modal(route('topoWebModal'), ["topo_web_id"=>'', "crag_id"=>$crag->id, "title"=>"Ajouter un topo Web", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">link</i></a></li>
                         <li><a {!! $Helpers::tooltip('Ajouter un topo papier') !!} {!! $Helpers::modal(route('topoCragModal'), ["crag_id"=>$crag->id, "lat"=>$crag->lat, "lng"=>$crag->lng, "rayon"=>50, "title"=>"Lié à un topo papier"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">import_contacts</i></a></li>
                     </ul>

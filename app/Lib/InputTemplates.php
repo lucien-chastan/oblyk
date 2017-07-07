@@ -122,13 +122,14 @@ class InputTemplates extends ServiceProvider{
         $value = (isset($options['value']))? $options['value'] : '';
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $id = (isset($options['id']))? $options['id'] : $options['name'];
+        $filter =  (isset($options['filter']))? 'accept="' . $options['filter'] . '"' : '';
 
         return '
         <div class="file-field input-field">
             
             <div class="btn">
                 <span>' . $label . '</span>
-                <input value="' . $value . '" type="file" name="' . $name . '" id="' . $id .'">
+                <input ' . $filter . ' value="' . $value . '" type="file" name="' . $name . '" id="' . $id .'">
             </div>
             
             <div class="file-path-wrapper">

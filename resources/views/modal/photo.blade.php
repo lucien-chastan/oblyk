@@ -8,7 +8,7 @@
 
     <div class="row">
         @if($dataModal['id'] == '')
-            {!! $Inputs::upload(['name'=>'file', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
+            {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
         @endif
             {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>'Album']) !!}
             {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description de la photo']) !!}
