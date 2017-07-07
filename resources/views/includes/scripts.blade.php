@@ -6,14 +6,24 @@
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript" src="/js/route.js"></script>
+<script type="text/javascript" src="/js/global-search.js"></script>
 <script type="text/javascript" src="/framework/axios/axios.min.js"></script>
 
 <script type="text/javascript">
     {{--initialisation du paralax--}}
     $(document).ready(function(){
+
         $('.parallax').parallax();
+
         $(".button-open-route").sideNav({
             menuWidth: 580,
+            edge: 'right',
+            closeOnClick: false,
+            draggable: false
+        });
+
+        $(".button-open-global-search").sideNav({
+            menuWidth: 400,
             edge: 'right',
             closeOnClick: false,
             draggable: false

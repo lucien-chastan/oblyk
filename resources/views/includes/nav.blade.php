@@ -79,7 +79,7 @@
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
-                <li><a><i class="material-icons">search</i></a></li>
+                <li><a href="#" data-activates="global-search" class="button-open-global-search"><i class="material-icons">search</i></a></li>
             </ul>
 
             {{--menu type mobile--}}

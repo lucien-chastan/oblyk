@@ -21,6 +21,7 @@
 <link href="/css/materialize.css" rel="stylesheet">
 <link href="/css/cotation.css" rel="stylesheet">
 <link href="/css/route.css" rel="stylesheet">
+<link href="/css/global-search.css" rel="stylesheet">
 <link href="/font/oblyk/style.css" rel="stylesheet">
 
 @yield('css')

@@ -30,6 +30,9 @@ Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->
 //LE LEXIQUE
 Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
+//LA RECHERCHE
+Route::get('/API/search/{search}', 'searchController@search')->name('globalSearch');
+
 
 //carte
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');

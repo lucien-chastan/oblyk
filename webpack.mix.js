@@ -24,6 +24,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/crag/cotation.scss', 'public/css')
     .sass('resources/assets/sass/crag/route.scss', 'public/css')
     .sass('resources/assets/sass/lexique/lexique.scss', 'public/css')
+    .sass('resources/assets/sass/globalSearch/global-search.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css');
 
 //fichier Js
@@ -37,6 +38,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/massive.js', 'public/js')
     .copy('resources/assets/js/route.js', 'public/js')
     .copy('resources/assets/js/photo.js', 'public/js')
+    .copy('resources/assets/js/global-search.js', 'public/js')
     .copy('resources/assets/js/mapVariable.js', 'public/js');
 
 //leaflet
