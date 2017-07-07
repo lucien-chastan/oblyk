@@ -2,55 +2,59 @@
 
 <input hidden id="cragId" value="{{$crag->id}}">
 
-<div class="row">
-    <div class="col s12">
-        <div class="card-panel div-search-secteur">
-            <div class="row">
-                <div class="input-field col s12 l9">
-                    <i class="material-icons prefix">search</i>
-                    <input id="secteurSearche" type="search">
-                    <label for="secteurSearche">Chercher dans les secteurs</label>
-                </div>
-                <div class="col s12 l3 text-right">
-                    <p>
-                        <label>Affichage :</label>
-                        <i id="btnCondenseAffichage" onclick="changeAffichageSecteur('condense')" {!! $Helpers::tooltip('Affichage condensé') !!} class="material-icons grey-text right tooltipped">view_headline</i>
-                        <i id="btnLargeAffichage" onclick="changeAffichageSecteur('large')" {!! $Helpers::tooltip('Afficahge large') !!} class="material-icons right blue-text tooltipped">view_stream</i>
-                    </p>
+@if(count($sectors) > 0)
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel div-search-secteur">
+                <div class="row">
+                    <div class="input-field col s12 l9">
+                        <i class="material-icons prefix">search</i>
+                        <input id="secteurSearche" type="search">
+                        <label for="secteurSearche">Chercher dans les secteurs</label>
+                    </div>
+                    <div class="col s12 l3 text-right">
+                        <p>
+                            <label>Affichage :</label>
+                            <i id="btnCondenseAffichage" onclick="changeAffichageSecteur('condense')" {!! $Helpers::tooltip('Affichage condensé') !!} class="material-icons grey-text right tooltipped">view_headline</i>
+                            <i id="btnLargeAffichage" onclick="changeAffichageSecteur('large')" {!! $Helpers::tooltip('Afficahge large') !!} class="material-icons right blue-text tooltipped">view_stream</i>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
+    <div class="row">
 
-    {{--LISTE DES SECTEURS--}}
-    @foreach($sectors as $sector)
-        <div class="col s12">
-            <div class="card-panel div-secteur" id="div-secteur-{{$sector->id}}" onclick="extendSectorDiv({{$sector->id}})">
+        {{--LISTE DES SECTEURS--}}
+        @foreach($sectors as $sector)
+            <div class="col s12">
+                <div class="card-panel div-secteur" id="div-secteur-{{$sector->id}}" onclick="extendSectorDiv({{$sector->id}})">
 
-                <h2 class="loved-king-font">{{$sector->label}}</h2>
+                    <h2 class="loved-king-font">{{$sector->label}}</h2>
 
-                <div class="row no-bottom-margin">
-                    <div class="col s12">
-                        <ul class="tabs">
-                            <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a><span class="count-tab-ettiquette">{{$sector->routes_count}}</span></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a><span class="count-tab-ettiquette">{{$sector->descriptions_count}}</span></li>
-                            <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">Photos</a><span class="count-tab-ettiquette">{{$sector->photos_count}}</span></li>
-                        </ul>
+                    <div class="row no-bottom-margin">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a><span class="count-tab-ettiquette">{{$sector->routes_count}}</span></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a><span class="count-tab-ettiquette">{{$sector->descriptions_count}}</span></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">Photos</a><span class="count-tab-ettiquette">{{$sector->photos_count}}</span></li>
+                            </ul>
+                        </div>
+                        <div id="informations-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-informations')</div>
+                        <div id="voies-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-lines')</div>
+                        <div id="description-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-descriptions')</div>
+                        <div id="photos-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-photos')</div>
                     </div>
-                    <div id="informations-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-informations')</div>
-                    <div id="voies-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-lines')</div>
-                    <div id="description-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-descriptions')</div>
-                    <div id="photos-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-photos')</div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    @endforeach
-</div>
+        @endforeach
+    </div>
+@else
+    <p class="text-center grey-text">Il n'y à encore aucune ligne ni secteur posté sur ce site.<br>Utilise le bouton "+" en bas à droite pour ajouter un secteur</p>
+@endif
 
 {{--bouton d'ajout--}}
 @if(Auth::check())
@@ -60,7 +64,9 @@
         </a>
         <ul>
             <li><a {!! $Helpers::tooltip('Ajouter un secteur') !!}} {!! $Helpers::modal(route('sectorModal'),['crag_id' => $crag->id ,'title'=>'Ajouter un secteur','method'=>'POST']) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">terrain</i></a></li>
-            <li><a {!! $Helpers::tooltip('Ajouter une ligne') !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
+            @if(count($sectors) > 0)
+                <li><a {!! $Helpers::tooltip('Ajouter une ligne') !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
+            @endif
         </ul>
     </div>
 @endif

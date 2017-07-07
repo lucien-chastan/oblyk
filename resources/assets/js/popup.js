@@ -219,7 +219,7 @@ function closeProblemModal() {
 //CHANGE L'ORIENTATION DANS UN INPUT DU TYPE ORIENTATION
 function switchOrientation(inputHidden) {
     let input = document.getElementById(inputHidden);
-    input.value = (input.value == 1)? 0 : 1;
+    input.value = (input.value === '1')? 0 : 1;
     colorOrientation();
 }
 
@@ -229,14 +229,14 @@ function colorOrientation() {
         pathOrientation = document.querySelectorAll(".orientations-input path");
 
     for(let i = 0 ; i < hiddenInput.length ; i++){
-        pathOrientation[i].style.fill = (hiddenInput[i].value === 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+        pathOrientation[i].style.fill = (hiddenInput[i].value === '1')? 'rgb(33,150,243)' : 'rgb(77,77,77)';
     }
 }
 
 //CHANGE LA SAISON DANS UN INPUT DU TYPE SAISON
 function switchSaison(inputHidden) {
     let input = document.getElementById(inputHidden);
-    input.value = (input.value === 1)? 0 : 1;
+    input.value = (input.value === '1')? 0 : 1;
     colorSaison();
 }
 
@@ -246,7 +246,7 @@ function colorSaison() {
         pathSaison = document.querySelectorAll(".season-input path");
 
     for(let i = 0 ; i < hiddenInput.length ; i++){
-        pathSaison[i].style.fill = (hiddenInput[i].value === 1)? 'rgb(33,150,243)' : 'rgb(77,77,77)';
+        pathSaison[i].style.fill = (hiddenInput[i].value === '1')? 'rgb(33,150,243)' : 'rgb(77,77,77)';
     }
 }
 
