@@ -67,6 +67,12 @@ function specialAction(data) {
         getTopoArround();
     }catch (e){}
 
+    //va chercher la liste des massif proches d'un point
+    try {
+        getMassiveArround();
+    }catch (e){}
+
+
     //créer la map de localisation (s'il y en a une)
     setTimeout(function () {
         try {creatInputMap();}catch (e){}

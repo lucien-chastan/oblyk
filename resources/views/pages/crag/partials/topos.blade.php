@@ -12,6 +12,10 @@
                 <a href="{{route('topoPage',['topo_id'=>$liaison->topo->id,'topo_label'=>str_slug($liaison->topo->label)])}}"><h5 title="{{$liaison->topo->label}}" class="loved-king-font truncate text-center">{{$liaison->topo->label}}</h5></a>
             </div>
         @endforeach
+
+        @if(count($crag->topos) == 0)
+            <p class="grey-text text-center">Ce site n'est référencé dans aucun topo papier</p>
+        @endif
     </div>
 </div>
 <div class="col s12 m5">
@@ -63,8 +67,8 @@
                 </div>
             @endforeach
 
-            @if(count($crag->topoWebs) == 0)
-                <p class="grey-text text-center">Aucun n'a été uploadé sur Oblyk pour l'instant</p>
+            @if(count($crag->topoPdfs) == 0)
+                <p class="grey-text text-center">Aucun topo PDF n'a été uploadé sur Oblyk pour l'instant</p>
             @endif
         </div>
     </div>

@@ -20,6 +20,7 @@ class CragController extends Controller
             ->withCount('topos')
             ->with('photos')
             ->with('topos.topo')
+            ->with('massives.massive')
             ->with('topoWebs.user')
             ->with('topoPdfs.user')
             ->with('gapGrade')

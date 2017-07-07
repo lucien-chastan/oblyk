@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Massive;
 use App\Topo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,16 @@ class MapController extends Controller
         $data = [];
         $cragsTopo = Topo::where('id',$topo_id)->with('crags.crag')->first();
         foreach ($cragsTopo->crags as $liaison) $data[] = $liaison->crag;
+
+        return response()->json($data);
+    }
+
+
+    //RETOURNE LES SITES D'ESCALADE D'UN GROUPEMENT DE SITE
+    public function getPopupMarkerCragsMassive($massive_id){
+        $data = [];
+        $cragsMassive = Massive::where('id',$massive_id)->with('crags.crag')->first();
+        foreach ($cragsMassive->crags as $liaison) $data[] = $liaison->crag;
 
         return response()->json($data);
     }

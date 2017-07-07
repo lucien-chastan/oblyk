@@ -229,6 +229,36 @@ function getTopoArround() {
     });
 }
 
+
+function getMassiveArround() {
+    let lat = document.getElementById('lat-search-massive'),
+        lng = document.getElementById('lng-search-massive'),
+        rayon = document.getElementById('rayon-search-massive'),
+        id = document.getElementById('id-search-massive'),
+        zoneValidation = document.getElementById('validation-liaison-massive'),
+        zoneCreerMassive = document.getElementById('zone-creer-un-nouveau-massive'),
+        zoneListe = document.getElementById('zone-massive-est-il-present'),
+        zoneLoader = document.getElementById('loader-liste-massive'),
+        liste = document.getElementById('liste-massive-proche');
+
+    liste.innerHTML = '';
+    liste.style.display = "none";
+    zoneValidation.style.display = "none";
+    zoneCreerMassive.style.display = "block";
+    zoneListe.style.display = "block";
+    zoneLoader.style.display = "block";
+
+    axios.get('/API/massives/' + lat.value + '/' + lng.value + '/' + rayon.value + '/' + id.value).then(function (response) {
+
+        liste.innerHTML = response.data;
+
+        liste.style.display = "block";
+        zoneLoader.style.display = "none";
+
+        rayon.value = parseInt(rayon.value) + 50;
+    });
+}
+
 function selectTopo(topo_id) {
     let zoneListe = document.getElementById('zone-topo-est-il-present'),
         zoneValidation = document.getElementById('validation-liaison-topo'),
@@ -264,6 +294,41 @@ function selectTopo(topo_id) {
     });
 }
 
+function selectMassive(massive_id) {
+    let zoneListe = document.getElementById('zone-massive-est-il-present'),
+        zoneValidation = document.getElementById('validation-liaison-massive'),
+        zoneLoader = document.getElementById('loader-liste-massive'),
+        zoneCreerMassive = document.getElementById('zone-creer-un-nouveau-massive'),
+        nomSite = document.getElementById('nom-site-liaison'),
+        rayon = document.getElementById('rayon-search-massive'),
+        versMassive = document.getElementById('lien-vers-massive'),
+        idLiaison = document.getElementById('id-new-liaison'),
+        nomTopo = document.getElementById('nom-massive-liaison');
+
+    zoneListe.style.display = 'none';
+    zoneLoader.style.display = 'block';
+    zoneCreerMassive.style.display = 'none';
+    zoneValidation.style.display = 'none';
+
+    axios.post('/massive/create-liaison',{massive_id : massive_id, crag_id : document.getElementById('id-search-massive').value}).then(function (response) {
+
+        zoneLoader.style.display = 'none';
+        zoneValidation.style.display = 'block';
+
+        let data = response.data;
+
+        nomSite.textContent = data.crag.label;
+        nomTopo.textContent = data.massive.label;
+
+        versMassive.href = '/massive-escalade/' + data.massive.id + '/' + data.massive.slug_label;
+
+        rayon.value = '50';
+
+        idLiaison.value = data.liaison.id;
+
+    });
+}
+
 function deleteLiaison() {
     let idLiaison = document.getElementById('id-new-liaison'),
         zoneListe = document.getElementById('zone-topo-est-il-present'),
@@ -281,11 +346,33 @@ function deleteLiaison() {
     });
 }
 
+function deleteMassiveLiaison() {
+    let idLiaison = document.getElementById('id-new-liaison'),
+        zoneListe = document.getElementById('zone-massive-est-il-present'),
+        zoneValidation = document.getElementById('validation-liaison-massive'),
+        zoneLoader = document.getElementById('loader-liste-massive'),
+        zoneCreerMassive = document.getElementById('zone-creer-un-nouveau-massive');
+
+    zoneListe.style.display = 'none';
+    zoneLoader.style.display = 'block';
+    zoneCreerMassive.style.display = 'none';
+    zoneValidation.style.display = 'none';
+
+    axios.post('/massive/delete-liaison', {id : idLiaison.value}).then(function () {
+        getMassiveArround();
+    });
+}
+
+
 function goToNewTopo(response) {
     let data = JSON.parse(response.data);
     window.location.href = '/topo-escalade/' + data.id + '/' + data.slug_label;
 }
 
+function goToNewMassive(response) {
+    let data = JSON.parse(response.data);
+    window.location.href = '/sites-escalade/' + data.id + '/' + data.slug_label;
+}
 
 function uploadTopoPdf(form, callback) {
     let route = form.getAttribute('data-route'),

@@ -40,5 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TopoSalesTableSeeder::class);
         $this->call(TopoWebsTableSeeder::class);
         $this->call(TopoPdfsTableSeeder::class);
+        $this->call(MassivesTableSeeder::class);
+        $this->call(MassiveCragsTableSeeder::class);
     }
 }
