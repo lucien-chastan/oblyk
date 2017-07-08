@@ -79,4 +79,35 @@
             margin: 2px 0;
         }
     }
+
+    .blue-border-search{
+        border-left-style: solid;
+        border-color: #2196F3;
+        margin: 0.7em 0;
+        padding-left: 0.5em;
+    }
+
+    .crag-result {
+        img.circle {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            margin-right: 0.5em;
+        }
+
+        a {
+            font-weight: 500 !important;
+        }
+    }
+
+    .search-climb-type {
+        height: 0.78em;
+        margin-right: 0.1em;
+    }
+
+    .rideau-animation{
+        transform: translateY(-30px);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.3s ;
+    }
 }
