@@ -110,4 +110,16 @@
         opacity: 0;
         transition: transform 0.3s, opacity 0.3s ;
     }
+
+    .couverture-topo {
+        max-height: 40px;
+        margin-top: 3px;
+        max-width: 40px;
+        margin-right: 0.5em;
+    }
+
+    .para-type-search-topo {
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
 }

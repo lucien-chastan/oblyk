@@ -12,7 +12,7 @@ class TopoPdf extends Model
     }
 
     public function crag(){
-        return $this->hasOne('App\Crag','crag_id', 'id');
+        return $this->hasOne('App\Crag','id', 'crag_id');
     }
 
 }

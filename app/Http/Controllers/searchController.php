@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Crag;
 use App\Massive;
 use App\Route;
+use App\Topo;
+use App\TopoPdf;
+use App\TopoWeb;
 use App\User;
 use App\Word;
 use Illuminate\Http\Request;
@@ -39,6 +42,33 @@ class searchController extends Controller
 
 
         //RECHERCHE SUR LES TOPOS
+        $topos = [];
+        $findTopos = Topo::where('label','like','%' . $search . '%')->get();
+        foreach ($findTopos as $topo){
+            $topo->url = route('topoPage', ['topo_id'=>$topo->id, 'crag_label'=>str_slug($topo->label)]);
+            $topo->couverture = (file_exists(storage_path('app/public/topos/50/topo-' . $topo->id . '.jpg'))) ? '/storage/topos/50/topo-' . $topo->id . '.jpg' : '/img/default-topo-couverture.svg';
+            $topos[] = $topo;
+        }
+
+
+        //RECHERCHE SUR LES TOPOS PDF
+        $topoPdfs = [];
+        $findTopoPdfs = TopoPdf::where('label','like','%' . $search . '%')->with('crag')->get();
+        foreach ($findTopoPdfs as $pdf){
+            $pdf->url = '/storage/topos/PDF/' . $pdf->slug_label;
+            $pdf->CragUrl = route('cragPage', ['crag_id'=>$pdf->crag->id, 'crag_label'=>str_slug($pdf->crag->label)]);
+            $pdf->couverture = '/img/default-topo-pdf-couverture.svg';
+            $topoPdfs[] = $pdf;
+        }
+
+        //RECHERCHE SUR LES TOPOS WEB
+        $topoWebs = [];
+        $findTopoWebs = TopoWeb::where('label','like','%' . $search . '%')->with('crag')->get();
+        foreach ($findTopoWebs as $web){
+            $web->CragUrl = route('cragPage', ['crag_id'=>$web->crag->id, 'crag_label'=>str_slug($web->crag->label)]);
+            $web->couverture = '/img/default-topo-web-couverture.svg';
+            $topoWebs[] = $web;
+        }
 
         //RECHERCHE SUR LES ROUTES
         $routes = [];
@@ -71,12 +101,18 @@ class searchController extends Controller
                 'crags' => count($crags),
                 'massives' => count($massives),
                 'routes' => count($routes),
+                'topos' => count($topos),
+                'topoPdfs' => count($topoPdfs),
+                'topoWebs' => count($topoWebs),
                 'users' => count($users),
                 'words' => count($words),
                 'aides' => 0,
             ],
             'crags' => $crags,
             'massives' => $massives,
+            'topos' => $topos,
+            'topoPdfs' => $topoPdfs,
+            'topoWebs' => $topoWebs,
             'words' => $words,
             'routes' => $routes,
             'users' => $users,

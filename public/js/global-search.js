@@ -20,12 +20,14 @@ function globalSearche(searchInput) {
     let progress = document.getElementById('progressSearch'),
         nbCrag = document.getElementById('nb-result-global-search-crag'),
         nbRoute = document.getElementById('nb-result-global-search-route'),
+        nbTopo = document.getElementById('nb-result-global-search-topo'),
         nbUser = document.getElementById('nb-result-global-search-user'),
         nbLexique = document.getElementById('nb-result-global-search-lexique'),
         nbAide = document.getElementById('nb-result-global-search-aide'),
         cragZone = document.getElementById('global-search-crag'),
         lexiqueZone = document.getElementById('global-search-lexique'),
         routeZone = document.getElementById('global-search-route'),
+        topoZone = document.getElementById('global-search-topo'),
         userZone = document.getElementById('global-search-user');
 
     //on annule la frappe précédente
@@ -40,6 +42,7 @@ function globalSearche(searchInput) {
     //on fait disparaitre les étiquettes de nombres
     scaleTransition(nbCrag, 'out');
     scaleTransition(nbRoute, 'out');
+    scaleTransition(nbTopo, 'out');
     scaleTransition(nbUser, 'out');
     scaleTransition(nbLexique, 'out');
     scaleTransition(nbAide, 'out');
@@ -62,6 +65,7 @@ function globalSearche(searchInput) {
             //on inscrit le nombre de résultat
             nbCrag.textContent = data.nombre.crags + data.nombre.massives;
             nbRoute.textContent = data.nombre.routes;
+            nbTopo.textContent = data.nombre.topos + data.nombre.topoPdfs + data.nombre.topoWebs;
             nbUser.textContent = data.nombre.users;
             nbLexique.textContent = data.nombre.words;
             nbAide.textContent = data.nombre.aides;
@@ -98,6 +102,39 @@ function globalSearche(searchInput) {
             }else{
                 routeZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les lignes</p>`
             }
+
+
+            //RÉSULTAT SUR LES TOPOS
+            topoZone.innerHTML = '';
+            if(data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0){
+                scaleTransition(nbTopo, 'in');
+
+                //TOPO PAPIER
+                if(data.nombre.topos > 0){
+                    for(let i = 0 ; i < data.nombre.topos ; i++) {
+                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topos[i].couverture}"><a href="${data.topos[i].url}">${data.topos[i].label}</a><br><span class="grey-text">${data.topos[i].author}, ${data.topos[i].editor} ${data.topos[i].editionYear}</span></div>`;
+                    }
+                }
+
+                //TOPO PDF
+                if(data.nombre.topoPdfs > 0){
+                    for(let i = 0 ; i < data.nombre.topoPdfs ; i++) {
+                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoPdfs[i].couverture}"><a href="${data.topoPdfs[i].url}">${data.topoPdfs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoPdfs[i].cragUrl}">${data.topoPdfs[i].crag.label}</a></span></div>`;
+                    }
+                }
+
+                //TOPO WEB
+                if(data.nombre.topoWebs > 0){
+                    for(let i = 0 ; i < data.nombre.topoWebs ; i++) {
+                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoWebs[i].couverture}"><a href="${data.topoWebs[i].url}">${data.topoWebs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoWebs[i].cragUrl}">${data.topoWebs[i].crag.label}</a></span></div>`;
+                    }
+                }
+
+                rideau(document.querySelectorAll('#global-search-topo .rideau-animation'));
+            }else{
+                topoZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les topos</p>`
+            }
+
 
 
             //RÉSULTAT SUR LES GRIMPEURS
@@ -156,6 +193,7 @@ function changeTab(data) {
     //si la tab active à des résultats alors on reste sur celle-ci
     if(activeTab.id === 'tab-global-search-crag' && (data.nombre.crags > 0 || data.nombre.massives > 0)) return false;
     if(activeTab.id === 'tab-global-search-route' && data.nombre.routes > 0) return false;
+    if(activeTab.id === 'tab-global-search-topo' && (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0)) return false;
     if(activeTab.id === 'tab-global-search-user' && data.nombre.users > 0) return false;
     if(activeTab.id === 'tab-global-search-lexique' && data.nombre.words > 0) return false;
 
@@ -165,6 +203,8 @@ function changeTab(data) {
         $('ul.tabs').tabs('select_tab', 'global-search-crag');
     } else if (data.nombre.routes > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-route');
+    } else if (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0) {
+        $('ul.tabs').tabs('select_tab', 'global-search-topo');
     } else if (data.nombre.users > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-user');
     } else if (data.nombre.words > 0) {

@@ -92,17 +92,21 @@ class TopoController extends Controller
                 ->encode('jpg', 85)
                 ->save(storage_path('app/public/topos/200/topo-' . $topo_id . '.jpg'));
 
-            //Crop de l'image en 100 * 100
+            //Image en 100px de haut
             Image::make($request->file('file'))
                 ->orientate()
-                ->fit(100, 100)
+                ->resize(null, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('jpg', 75)
                 ->save(storage_path('app/public/topos/100/topo-' . $topo_id . '.jpg'));
 
-            //Crop de l'image en 50 * 50
+            //Image en 50px de haut
             Image::make($request->file('file'))
                 ->orientate()
-                ->fit(50, 50)
+                ->resize(null, 50, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('jpg', 75)
                 ->save(storage_path('app/public/topos/50/topo-' . $topo_id . '.jpg'));
         }
