@@ -147,5 +147,10 @@ Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart'
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
 Route::get('/chart/sector/{sector_id}/grade', 'Chart\SectorChartController@gradeChart')->name('gradeSectorChart');
 
+
 //SIMILAR
 Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');
+
+
+//FOLLOW
+Route::post('/follow/user','FollowController@getUserFollows')->name('followUser');

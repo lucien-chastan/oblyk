@@ -7,11 +7,12 @@ window.onload = function () {
     for(let i = 0 ; i < openBt.length ; i++){
         openBt[i].addEventListener('click', function () {
             let iptSearch = document.getElementById('input-text-global-search');
-            $('ul.tabs').tabs('select_tab', 'global-search-historique');
+            $('ul.tabs').tabs('select_tab', 'global-search-follow');
             iptSearch.value = '';
             iptSearch.focus();
         });
     }
+    getUserFollows();
 };
 
 
@@ -96,7 +97,7 @@ function globalSearche(searchInput) {
             if(data.nombre.routes > 0){
                 scaleTransition(nbRoute, 'in');
                 for(let i = 0 ; i < data.nombre.routes ; i++) {
-                    routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a class="button-open-route" data-activates="slide-route" class="button-open-route" onclick="loadRoute(${data.routes[i].id})"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">sur le site <a href="${data.routes[i].cragUrl}">${data.routes[i].crag.label}</a>, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
+                    routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a class="button-open-route text-cursor" data-activates="slide-route" class="button-open-route" onclick="loadRoute(${data.routes[i].id})"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">sur le site <a href="${data.routes[i].cragUrl}">${data.routes[i].crag.label}</a>, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
                 }
                 rideau(document.querySelectorAll('#global-search-route .rideau-animation'));
                 initRouteOpener();
@@ -226,5 +227,25 @@ function rideau(listes) {
                 listes[i].style.transform = 'translateY(0)';
             }, delais * i);
         })(i,listes,delais);
+    }
+}
+
+
+//CHARGE LES FAVORIS
+function getUserFollows() {
+    let userId = document.getElementById('id-user-global-search'),
+        followZone = document.getElementById('global-search-follow');
+
+    if(userId.value !== "0"){
+        axios.post('/follow/user', {user_id : userId.value}).then(function (response) {
+
+            let data = response.data;
+
+            followZone.innerHTML = '';
+            for(let i = 0 ; i < data.follows.length ; i++){
+                followZone.innerHTML += `<div class="col s12 blue-border-search crag-result"><img class="left circle" src="${data.follows[i].followIcon}"><a href="${data.follows[i].followUrl}">${data.follows[i].followName}</a><br><span class="grey-text">${data.follows[i].followInformation}</span></div>`;
+            }
+
+        });
     }
 }

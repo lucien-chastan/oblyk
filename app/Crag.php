@@ -43,6 +43,10 @@ class Crag extends Model
         return $this->morphMany('App\Link', 'linkable');
     }
 
+    public function follows(){
+        return $this->morphMany('App\Follow', 'followed');
+    }
+
     public function parkings(){
         return $this->hasMany('App\Parking','crag_id', 'id');
     }

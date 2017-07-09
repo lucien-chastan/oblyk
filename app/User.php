@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Album','user_id', 'id');
     }
 
+    public function follows(){
+        return $this->hasMany('App\Follow','user_id', 'id');
+    }
+
     public function photos(){
         return $this->hasMany('App\Photo','user_id', 'id');
     }
