@@ -20,7 +20,7 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES MASSIFS
         $massives = [];
-        $findMassives = Massive::where('label', 'like', '%' . $search . '%')->withCount('crags')->get();
+        $findMassives = Massive::where('label', 'like', '%' . $search . '%')->withCount('crags')->orderBy('views', 'desc')->get();
         foreach ($findMassives as $massive){
             $massive->url = route('massivePage', ['massive_id'=>$massive->id, 'massive_label'=>str_slug($massive->label)]);
             $massives[] = $massive;
@@ -28,7 +28,7 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES FALAISES
         $crags = [];
-        $findCrags = Crag::where('label', 'like', '%' . $search . '%')->get();
+        $findCrags = Crag::where('label', 'like', '%' . $search . '%')->orderBy('views', 'desc')->get();
         foreach ($findCrags as $crag){
             $crag->url = route('cragPage', ['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]);
             $crag->bandeau = ($crag->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $crag->bandeau);
@@ -38,12 +38,12 @@ class searchController extends Controller
 
 
         //RECHERCHE SUR LES MOTS DU LEXIQUE
-        $words = Word::where('label', 'like', '%' . $search . '%')->get();
+        $words = Word::where('label', 'like', '%' . $search . '%')->orderBy('label')->get();
 
 
         //RECHERCHE SUR LES TOPOS
         $topos = [];
-        $findTopos = Topo::where('label','like','%' . $search . '%')->get();
+        $findTopos = Topo::where('label','like','%' . $search . '%')->orderBy('views', 'desc')->get();
         foreach ($findTopos as $topo){
             $topo->url = route('topoPage', ['topo_id'=>$topo->id, 'crag_label'=>str_slug($topo->label)]);
             $topo->couverture = (file_exists(storage_path('app/public/topos/50/topo-' . $topo->id . '.jpg'))) ? '/storage/topos/50/topo-' . $topo->id . '.jpg' : '/img/default-topo-couverture.svg';
@@ -53,7 +53,7 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES TOPOS PDF
         $topoPdfs = [];
-        $findTopoPdfs = TopoPdf::where('label','like','%' . $search . '%')->with('crag')->get();
+        $findTopoPdfs = TopoPdf::where('label','like','%' . $search . '%')->with('crag')->orderBy('label', 'asc')->get();
         foreach ($findTopoPdfs as $pdf){
             $pdf->url = '/storage/topos/PDF/' . $pdf->slug_label;
             $pdf->CragUrl = route('cragPage', ['crag_id'=>$pdf->crag->id, 'crag_label'=>str_slug($pdf->crag->label)]);
@@ -63,7 +63,7 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES TOPOS WEB
         $topoWebs = [];
-        $findTopoWebs = TopoWeb::where('label','like','%' . $search . '%')->with('crag')->get();
+        $findTopoWebs = TopoWeb::where('label','like','%' . $search . '%')->with('crag')->orderBy('label', 'asc')->get();
         foreach ($findTopoWebs as $web){
             $web->CragUrl = route('cragPage', ['crag_id'=>$web->crag->id, 'crag_label'=>str_slug($web->crag->label)]);
             $web->couverture = '/img/default-topo-web-couverture.svg';
@@ -72,9 +72,10 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES ROUTES
         $routes = [];
-        $findRoutes = Route::where('label','like','%' . $search . '%')->with('routeSections')->with('crag')->get();
+        $findRoutes = Route::where('label','like','%' . $search . '%')->with('routeSections')->with('crag')->orderBy('views', 'desc')->get();
         foreach ($findRoutes as $route){
-            $route->url = route('cragPage', ['crag_id'=>$route->crag->id, 'crag_label'=>str_slug($route->crag->label)]);
+            $route->cragUrl = route('cragPage', ['crag_id'=>$route->crag->id, 'crag_label'=>str_slug($route->crag->label)]);
+            $route->url = route('vueRouteRoute', ['route_id'=>$route->id]);
             $route->bandeau = ($route->crag->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $route->crag->bandeau);
             if(count($route->routeSections) == 1){
                 $route->cotation = $route->routeSections[0]->grade . $route->routeSections[0]->sub_grade;
@@ -88,7 +89,7 @@ class searchController extends Controller
 
         //RECHERCHE SUR LES UTILISATEURS
         $users = [];
-        $findUsers = User::where('name','like','%' . $search . '%')->get();
+        $findUsers = User::where('name','like','%' . $search . '%')->orderBy('name', 'asc')->get();
         foreach ($findUsers as $user){
             $user->url = '/';
             $user->photo = '/img/icon-search-user.svg';

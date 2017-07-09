@@ -8,13 +8,20 @@ use App\Route;
 class RouteVueController extends Controller
 {
     function vueRoute($id){
-        $data = ['route' => Route::where('id',$id)
+
+        $route = Route::where('id',$id)
             ->with('routeSections')
             ->withCount('photos')
             ->withCount('videos')
             ->with('crag')
             ->with('sector')
-            ->first()];
+            ->first();
+
+        $route->views++;
+        $route->save();
+
+        $data = ['route' => $route];
+
         return view('pages.route.vues.route', $data);
     }
 

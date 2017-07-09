@@ -13,7 +13,7 @@
 
         <div class="col s12 tab-search-ligne">
             <ul class="tabs tabs-fixed-width text-center">
-                <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-historique" href="#global-search-historique"><i class="material-icons">youtube_searched_for</i></a></li>
+                <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-historique" href="#global-search-historique"><i class="material-icons">star</i></a></li>
                 <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-crag" href="#global-search-crag"><i class="material-icons">terrain</i></a><span class="count-tab-ettiquette scale-transition scale-out" id="nb-result-global-search-crag">0</span></li>
                 <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-route" href="#global-search-route"><i class="material-icons">timeline</i></a><span class="count-tab-ettiquette scale-transition scale-out" id="nb-result-global-search-route">0</span></li>
                 <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-topo" href="#global-search-topo"><i class="material-icons">local_library</i></a><span class="count-tab-ettiquette scale-transition scale-out" id="nb-result-global-search-topo">0</span></li>

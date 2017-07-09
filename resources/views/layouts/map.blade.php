@@ -12,6 +12,10 @@
         @yield('content')
     </main>
 
+    @include('pages.route.route')
+
+    @include('pages.global-search.globalSearch')
+
     @include('includes.modal')
 
     @include('includes.scripts')

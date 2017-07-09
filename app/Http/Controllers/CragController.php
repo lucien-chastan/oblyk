@@ -27,6 +27,10 @@ class CragController extends Controller
             ->with('descriptions.user')
             ->first();
 
+        //on ajoute une vue à la falaise
+        $crag->views++;
+        $crag->save();
+
         $data = [
             'crag' => $crag,
             'meta_title' => $crag['label'],

@@ -67,7 +67,6 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/crag.js"></script>
-    <script src="/js/router.js"></script>
     <script src="/js/photo.js"></script>
     <script src="/framework/chartJs/Chart.min.js"></script>
     <script src="/framework/marked/marked.min.js"></script>

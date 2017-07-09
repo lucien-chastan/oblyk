@@ -17,6 +17,9 @@ class MassiveController extends Controller
             ->withCount('crags')
             ->first();
 
+        $massive->views++;
+        $massive->save();
+
         $objRegions = Massive::distincRegions($massive->id);
         $regions = [];
         foreach ($objRegions as $region) $regions[] = $region->region;

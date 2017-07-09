@@ -1,6 +1,37 @@
 let loadedRouteTab = [],
     timeToGetSimilar;
 
+function initRouteOpener() {
+    let btns = document.getElementsByClassName('button-open-route');
+
+    for(let i = 0 ; i < btns.length ; i++){
+        if(btns[i].getAttribute('data-parsed') !== 'true'){
+            btns[i].setAttribute('data-parsed', 'true');
+            btns[i].addEventListener('click', openSideRoute);
+        }
+    }
+}
+
+function openSideRoute(opened = true) {
+    let overlay = document.getElementById('overlay-side-route'),
+        side = document.getElementById('slide-route');
+
+    if(opened){
+        overlay.style.display = 'block';
+        setTimeout(function () {
+            side.style.transform = 'translateX(0)';
+            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        },10);
+    }else{
+        overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+        side.style.transform = 'translateX(100%)';
+        setTimeout(function () {
+            overlay.style.display = 'none';
+        },300);
+    }
+}
+
+
 //charge la structure d'une ligne
 function loadRoute(id_route) {
     let route = '/vue/route/' + id_route + '/route',

@@ -18,6 +18,9 @@ class TopoController extends Controller
             ->withCount('sales')
             ->first();
 
+        $topo->views++;
+        $topo->save();
+
         $data = [
             'topo' => $topo,
             'meta_title' => $topo['label'],

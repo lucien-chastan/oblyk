@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMassivesTable extends Migration
+class CreateFollowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMassivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('massives', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('followed_id');
+            $table->string('followed_type',100);
             $table->integer('user_id')->unsigned();
-            $table->string('label', 255);
-            $table->integer('views')->nullable()->default(0);
             $table->timestamps();
 
             //clé étrangère
@@ -32,6 +32,6 @@ class CreateMassivesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('massives');
+        Schema::drop('follows');
     }
 }

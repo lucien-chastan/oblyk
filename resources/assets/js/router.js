@@ -68,12 +68,7 @@ function ajaxRouter(route, target, callback) {
         },300);
 
         //initialisation des boutons pour ouvrir la zone d'affichage d'une ligne
-        $(".button-open-route").sideNav({
-            menuWidth: 580,
-            edge: 'right',
-            closeOnClick: false,
-            draggable: false
-        });
+        initRouteOpener();
     });
 }
 

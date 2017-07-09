@@ -23,6 +23,7 @@ class CreateToposTable extends Migration
             $table->decimal('price',5,2)->nullable();
             $table->integer('page')->nullable();
             $table->integer('weight')->nullable();
+            $table->integer('views')->nullable()->default(0);
             $table->timestamps();
 
             //clé étrangère

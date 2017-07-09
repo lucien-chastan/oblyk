@@ -1,94 +1,118 @@
-.side-route{
-    max-width: calc(100% - 25px) !important;
+.overlay-side-route{
+    position: fixed;
+    display: none;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.3s;
 
-    h4 {
-        font-size: 2em;
-        margin-bottom: 10px;
-        text-align: center;
-    }
+    .side-route{
+        max-width: calc(100% - 25px) !important;
+        width: 500px;
+        height: 100%;
+        overflow-y: auto;
+        will-change: transform;
+        position: fixed;
+        top:0;
+        right: 0;
+        transform: translateX(100%);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        background-color: rgb(255,255,255);
+        transition: transform 0.3s;
 
-    .tabs a {
-        font-weight: normal;
-    }
-
-    .type-ligne-route {
-        height: 0.5em;
-        vertical-align: middle;
-    }
-
-    .information-route {
-        margin-top: 20px;
-        padding-bottom: 4em;
-
-        .table-des-informations {
-            p {
-                border: 1px rgb(220, 220, 220);
-                border-bottom-style: solid;
-                margin: 0;
-                padding: 9px 0;
-            }
-        }
-
-        .oblyk-icon {
-            font-size: 1.5em;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        h5 {
-            margin-top: 2em;
+        h4 {
+            font-size: 2em;
+            margin-bottom: 10px;
             text-align: center;
         }
-    }
 
-    .route-tab{
-        a {
-            display: inline;
-            font-size: inherit;
-            font-weight: inherit;
-            height: auto;
-            line-height: normal;
-            padding: 0;
-
-            &:hover {
-                background-color: inherit;
-            }
-        }
-    }
-
-    .route-description-zone {
-        a {
-            display: inline;
-            font-size: inherit;
-            font-weight: inherit;
-            height: auto;
-            line-height: normal;
-            padding: 0;
-
-            &:hover {
-                background-color: inherit;
-            }
+        .tabs a {
+            font-weight: normal;
         }
 
-        .note-description {
-            height: 1em;
-            margin-right: 0.5em;
+        .type-ligne-route {
+            height: 0.5em;
             vertical-align: middle;
         }
-    }
 
-    .btn-route-add{
+        .information-route {
+            margin-top: 20px;
+            padding-bottom: 4em;
 
-        a {
-            height: 40px;
-            display: inline-block;
+            .table-des-informations {
+                p {
+                    border: 1px rgb(220, 220, 220);
+                    border-bottom-style: solid;
+                    margin: 0;
+                    padding: 9px 0;
+                }
+            }
 
-            &:hover{
-                background-color: #2196F3;
+            .oblyk-icon {
+                font-size: 1.5em;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+            h5 {
+                margin-top: 2em;
+                text-align: center;
+            }
+        }
+
+        .route-tab{
+            a {
+                display: inline;
+                font-size: inherit;
+                font-weight: inherit;
+                height: auto;
+                line-height: normal;
+                padding: 0;
+
+                &:hover {
+                    background-color: inherit;
+                }
+            }
+        }
+
+        .route-description-zone {
+            a {
+                display: inline;
+                font-size: inherit;
+                font-weight: inherit;
+                height: auto;
+                line-height: normal;
+                padding: 0;
+
+                &:hover {
+                    background-color: inherit;
+                }
+            }
+
+            .note-description {
+                height: 1em;
+                margin-right: 0.5em;
+                vertical-align: middle;
+            }
+        }
+
+        .btn-route-add{
+
+            a {
+                height: 40px;
+                display: inline-block;
+
+                &:hover{
+                    background-color: #2196F3;
+                }
             }
         }
     }
 }
+
 .ligne-bt-route{
     i {
         cursor: pointer;

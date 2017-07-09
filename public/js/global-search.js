@@ -96,9 +96,10 @@ function globalSearche(searchInput) {
             if(data.nombre.routes > 0){
                 scaleTransition(nbRoute, 'in');
                 for(let i = 0 ; i < data.nombre.routes ; i++) {
-                    routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a href="${data.routes[i].url}"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">${data.routes[i].crag.label}, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
+                    routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a class="button-open-route" data-activates="slide-route" class="button-open-route" onclick="loadRoute(${data.routes[i].id})"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">sur le site <a href="${data.routes[i].cragUrl}">${data.routes[i].crag.label}</a>, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
                 }
                 rideau(document.querySelectorAll('#global-search-route .rideau-animation'));
+                initRouteOpener();
             }else{
                 routeZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les lignes</p>`
             }

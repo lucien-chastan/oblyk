@@ -49,7 +49,6 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
-    <script src="/js/router.js"></script>
     <script src="/js/massive.js"></script>
     <script src="/framework/marked/marked.min.js"></script>
     <script>

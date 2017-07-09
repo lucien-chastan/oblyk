@@ -26,6 +26,7 @@ class CreateRoutesTable extends Migration
             $table->integer('note')->nullable();
             $table->integer('nb_note')->nullable();
             $table->integer('nb_longueur')->nullable();
+            $table->integer('views')->nullable()->default(0);
             $table->timestamps();
 
             //clé étrangère
