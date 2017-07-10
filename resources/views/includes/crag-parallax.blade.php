@@ -8,8 +8,8 @@
             <p>{{$city}}, {{$region}} ({{$code_country}})</p>
             @if(Auth::check())
                 <p onclick="followedElement(this, 'Crag', {{$crag->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
-                    <span id="followed-element"><i class="material-icons amber-text">star</i> ne plus suivre ce site</span>
-                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> suivre ce site</span>
+                    <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce site</span>
+                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce site</span>
                 </p>
             @else
                 <p>Connectez-vous pour suivre ce site</p>

@@ -2,7 +2,6 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')
-    <link href="/css/markdown.css" rel="stylesheet">
     <link href="/css/lexique.css" rel="stylesheet">
 @endsection
 
@@ -79,7 +78,6 @@
 @endsection
 
 @section('script')
-    <script src="/framework/marked/marked.min.js"></script>
     <script>
         convertMarkdownZone();
     </script>

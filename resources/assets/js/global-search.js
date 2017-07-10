@@ -29,7 +29,8 @@ function globalSearche(searchInput) {
         lexiqueZone = document.getElementById('global-search-lexique'),
         routeZone = document.getElementById('global-search-route'),
         topoZone = document.getElementById('global-search-topo'),
-        userZone = document.getElementById('global-search-user');
+        userZone = document.getElementById('global-search-user'),
+        aideZone = document.getElementById('global-search-aide');
 
     //on annule la frappe précédente
     clearTimeout(timToGlobalSearch);
@@ -165,6 +166,24 @@ function globalSearche(searchInput) {
                 lexiqueZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans le lexique</p>`;
             }
 
+            //RÉSULTAT SUR L'AIDE
+            aideZone.innerHTML = '';
+            if(data.nombre.aides > 0){
+                scaleTransition(nbAide, 'in');
+                for(let i = 0 ; i < data.nombre.aides ; i++){
+                    aideZone.innerHTML += `<div class="blue-border-search rideau-animation"><strong>${data.aides[i].label}</strong><div class="markdownZone">${data.aides[i].contents}</div></div>`;
+                }
+                aideZone.innerHTML += '<div class="rideau-animation"><p class="text-right">voir <a href="/aides">l\'aide</a></p></div>';
+                rideau(document.querySelectorAll('#global-search-aide .rideau-animation'));
+            }else{
+                aideZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans l'aide</p>`;
+            }
+
+
+            //On compil les markdowns si nous avons des résultats sur le lexique ou sur l'aide
+            if(data.nombre.aides > 0 || data.nombre.words > 0){
+                convertMarkdownZone();
+            }
 
             //CHAGEMENT D'ONGLET AU MIEUX
             changeTab(data);
@@ -198,6 +217,7 @@ function changeTab(data) {
     if(activeTab.id === 'tab-global-search-topo' && (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0)) return false;
     if(activeTab.id === 'tab-global-search-user' && data.nombre.users > 0) return false;
     if(activeTab.id === 'tab-global-search-lexique' && data.nombre.words > 0) return false;
+    if(activeTab.id === 'tab-global-search-aide' && data.nombre.aides > 0) return false;
 
 
     // Si l'onglet actif n'a pas de résultat on cherche le meilleur onglet
@@ -211,6 +231,8 @@ function changeTab(data) {
         $('ul.tabs').tabs('select_tab', 'global-search-user');
     } else if (data.nombre.words > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-lexique');
+    } else if (data.nombre.aides > 0) {
+        $('ul.tabs').tabs('select_tab', 'global-search-aide');
     }
 
 }

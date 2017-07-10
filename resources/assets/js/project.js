@@ -16,5 +16,4 @@ function openHelp(element) {
             helpSection.style.display = 'none';
         },300);
     }
-
 }

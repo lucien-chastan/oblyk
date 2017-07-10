@@ -28,8 +28,8 @@
         <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>Qui sommes-nous ?</a></li>
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>Conctact</a></li>
         <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>À propos</a></li>
-        <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aide</a></li>
-        <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenire</a></li>
+        <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aides</a></li>
+        <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenir</a></li>
         <li><a href="{{ route('developer') }}"><i class="material-icons left">code</i>Développeur &amp; API</a></li>
     </ul>
 
@@ -144,8 +144,8 @@
                                 <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>Qui sommes-nous ?</a></li>
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>Conctact</a></li>
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>À propos</a></li>
-                                <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aide</a></li>
-                                <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenire</a></li>
+                                <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>Aides</a></li>
+                                <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>Nous soutenir</a></li>
                                 <li><a href="{{ route('developer') }}"><i class="material-icons left">code</i>Développeur &amp; API</a></li>
                                 <li><a href="{{ route('termsOfUse') }}"><i class="material-icons left">gavel</i>Mentions légales</a></li>
                             </ul>

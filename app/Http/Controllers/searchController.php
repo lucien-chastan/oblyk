@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Help;
 use App\Massive;
 use App\Route;
 use App\Topo;
@@ -11,6 +12,7 @@ use App\TopoWeb;
 use App\User;
 use App\Word;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
 
 class searchController extends Controller
 {
@@ -96,6 +98,9 @@ class searchController extends Controller
             $users[] = $user;
         }
 
+        //RECHERCHE SUR LES AIDES
+        $helps = Help::where('label','like','%' . $search . '%')->orWhere('category','like','%' . $search . '%')->orderBy('label', 'asc')->get();
+
         $data = [
             'search' => $search,
             'nombre' => [
@@ -107,7 +112,7 @@ class searchController extends Controller
                 'topoWebs' => count($topoWebs),
                 'users' => count($users),
                 'words' => count($words),
-                'aides' => 0,
+                'aides' => count($helps),
             ],
             'crags' => $crags,
             'massives' => $massives,
@@ -117,6 +122,7 @@ class searchController extends Controller
             'words' => $words,
             'routes' => $routes,
             'users' => $users,
+            'aides' => $helps,
         ];
 
         return response()->json($data);

@@ -23,5 +23,6 @@
 <link href="/css/route.css" rel="stylesheet">
 <link href="/css/global-search.css" rel="stylesheet">
 <link href="/font/oblyk/style.css" rel="stylesheet">
+<link href="/css/markdown.css" rel="stylesheet">
 
 @yield('css')

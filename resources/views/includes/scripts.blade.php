@@ -9,19 +9,13 @@
 <script type="text/javascript" src="/js/router.js"></script>
 <script type="text/javascript" src="/js/global-search.js"></script>
 <script type="text/javascript" src="/framework/axios/axios.min.js"></script>
+<script src="/framework/marked/marked.min.js"></script>
 
 <script type="text/javascript">
     {{--initialisation du paralax--}}
     $(document).ready(function(){
 
         $('.parallax').parallax();
-
-        $(".button-open-route").sideNav({
-            menuWidth: 580,
-            edge: 'right',
-            closeOnClick: false,
-            draggable: false
-        });
 
         $(".button-open-global-search").sideNav({
             menuWidth: 400,

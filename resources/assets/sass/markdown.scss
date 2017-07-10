@@ -14,7 +14,10 @@
         margin: 0.5em 0;
         padding-left: 15px;
 
-        li {list-style: disc;}
+        li {
+            list-style: disc;
+            line-height: inherit;
+        }
     }
 
     img {

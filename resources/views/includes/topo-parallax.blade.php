@@ -8,8 +8,8 @@
             <p>{{$author}}, {{$editor}} ({{$editionYear}})</p>
             @if(Auth::check())
                 <p onclick="followedElement(this, 'Topo', {{$topo->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
-                    <span id="followed-element"><i class="material-icons amber-text">star</i> ne plus suivre ce topo</span>
-                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> suivre ce topo</span>
+                    <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce topo</span>
+                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce topo</span>
                 </p>
             @else
                 <p>Connectez-vous pour suivre ce topo</p>

@@ -4,7 +4,6 @@
 
 @section('css')
     <link href="/css/project.css" rel="stylesheet">
-    <link href="/css/markdown.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -33,7 +32,10 @@
                                         @else
                                             créé le {{$help->created_at->format('d M Y')}}
                                         @endif
-                                        <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$help->id, "model"=>"Help"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+
+                                        @if(Auth::check())
+                                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$help->id, "model"=>"Help"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                        @endif
                                     </p>
                                 </div>
                             </div>

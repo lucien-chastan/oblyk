@@ -2,7 +2,6 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')
-    <link href="/css/markdown.css" rel="stylesheet">
     <link href="/css/massive.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
@@ -50,7 +49,6 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/massive.js"></script>
-    <script src="/framework/marked/marked.min.js"></script>
     <script>
         convertMarkdownZone();
         initMassiveMap({{$massive->id}});
