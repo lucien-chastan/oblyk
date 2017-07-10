@@ -188,6 +188,25 @@ footer {
     }
 }
 
+.follow-paragraphe {
+    cursor: pointer;
+    i {
+        vertical-align : bottom;
+        margin-right: 0.2em;
+    }
+
+}
+
+.follow-paragraphe[data-followed="true"] {
+    #followed-element {display: inline;}
+    #not-followed-element {display: none;}
+}
+
+.follow-paragraphe[data-followed="false"] {
+    #followed-element {display: none;}
+    #not-followed-element {display: inline;}
+}
+
 .input-map{
     width: 100%;
     height: 50vh;

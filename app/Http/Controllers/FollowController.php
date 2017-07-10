@@ -35,6 +35,14 @@ class FollowController extends Controller
                 $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
             }
 
+            //MASSIF
+            if($follow->followed_type == 'App\Massive'){
+                $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
+                $follow->followName = $follow->followed->label;
+                $follow->followIcon = '/img/icon-search-massive.svg';
+                $follow->followInformation = 'regroupement de site';
+            }
+
             $follows[] = $follow;
         }
 

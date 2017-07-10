@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Follow;
 use App\Massive;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MassiveController extends Controller
@@ -17,6 +19,16 @@ class MassiveController extends Controller
             ->withCount('crags')
             ->first();
 
+        //on va chercher si l'utilisateur follow ce regroupement
+        $userFollow = Follow::where(
+            [
+                ['user_id', '=', Auth::id()],
+                ['followed_type', '=', 'App\Massive'],
+                ['followed_id', '=', $massive->id]
+            ]
+        )->first();
+        $userFollow = (isset($userFollow)) ? 'true' : 'false';
+
         $massive->views++;
         $massive->save();
 
@@ -28,7 +40,8 @@ class MassiveController extends Controller
             'massive' => $massive,
             'regions' => $regions,
             'meta_title' => $massive['label'],
-            'meta_description' => 'description de ' . $massive['label']
+            'meta_description' => 'description de ' . $massive['label'],
+            'user_follow' => $userFollow
         ];
 
         return view('pages.massive.massive', $data);

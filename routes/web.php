@@ -101,6 +101,10 @@ Route::resource('topoPdfs', 'CRUD\TopoPdfController');
 Route::resource('massives', 'CRUD\MassiveController');
 Route::resource('massiveCrags', 'CRUD\MassiveCragController');
 Route::resource('words', 'CRUD\WordController');
+Route::resource('follows', 'CRUD\FollowController');
+
+//FOLLOW (DELETE)
+Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');

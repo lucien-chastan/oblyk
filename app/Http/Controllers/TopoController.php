@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Follow;
 use App\Topo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TopoController extends Controller
@@ -18,13 +20,24 @@ class TopoController extends Controller
             ->withCount('sales')
             ->first();
 
+        //on va chercher si l'utilisateur follow ce topo
+        $userFollow = Follow::where(
+            [
+                ['user_id', '=', Auth::id()],
+                ['followed_type', '=', 'App\Topo'],
+                ['followed_id', '=', $topo->id]
+            ]
+        )->first();
+        $userFollow = (isset($userFollow)) ? 'true' : 'false';
+
         $topo->views++;
         $topo->save();
 
         $data = [
             'topo' => $topo,
             'meta_title' => $topo['label'],
-            'meta_description' => 'description de ' . $topo['label']
+            'meta_description' => 'description de ' . $topo['label'],
+            'user_follow' => $userFollow
         ];
 
         return view('pages.topo.topo', $data);

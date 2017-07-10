@@ -67,3 +67,26 @@ function string_to_slug(str) {
 
     return str;
 }
+
+//Follow un élément
+function followedElement(DomElement, followed_type, followed_id) {
+    if(DomElement.getAttribute('data-followed') === 'false'){
+        DomElement.setAttribute('data-followed', 'true');
+        Materialize.toast('Vous suivez cet élément', 4000);
+        axios.post('/follows',
+            {
+                followed_id : followed_id,
+                followed_type: 'App\\' + followed_type
+            }
+        );
+    }else{
+        DomElement.setAttribute('data-followed', 'false');
+        Materialize.toast('Vous ne suivez plus cet élément', 4000);
+        axios.post('/follow/delete',
+            {
+                followed_id : followed_id,
+                followed_type: 'App\\' + followed_type
+            }
+        );
+    }
+}
