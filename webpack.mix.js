@@ -38,6 +38,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/massive.js', 'public/js')
     .copy('resources/assets/js/route.js', 'public/js')
     .copy('resources/assets/js/photo.js', 'public/js')
+    .copy('resources/assets/js/project.js', 'public/js')
     .copy('resources/assets/js/global-search.js', 'public/js')
     .copy('resources/assets/js/mapVariable.js', 'public/js');
 

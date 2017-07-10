@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Help;
 use Illuminate\Http\Request;
 
 class ProjectPagesController extends Controller
@@ -28,7 +29,17 @@ class ProjectPagesController extends Controller
     }
 
     public function helpPage(){
-        $data = ['meta_title' => 'Aide',];
+
+        //on va chercher les aides et on les groupes par catégorie
+        $helpCategory = [];
+        $helps = Help::where('id','>','0')->orderBy('category')->get();
+        foreach ($helps as $help) $helpCategory[$help->category][] = $help;
+
+        $data = [
+            'meta_title' => 'Aide',
+            'helpCategory' => $helpCategory
+        ];
+
         return view('pages.project.help', $data);
     }
 

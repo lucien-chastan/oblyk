@@ -43,5 +43,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MassivesTableSeeder::class);
         $this->call(MassiveCragsTableSeeder::class);
         $this->call(FollowsTableSeeder::class);
+        $this->call(HelpsTableSeeder::class);
     }
 }

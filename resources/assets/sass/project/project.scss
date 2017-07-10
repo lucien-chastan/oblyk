@@ -57,3 +57,26 @@
     font-weight: normal;
     font-size: 10pt;
 }
+
+
+
+//AIDES
+
+.section-aide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.titre-2-helps{
+    font-size: 1.9em;
+    margin-top: 2em;
+}
+
+.titre-6-helps {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    &:hover{
+        opacity: 0.8;
+    }
+}
