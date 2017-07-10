@@ -1,0 +1,80 @@
+.full-height-row {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.full-height-row #user-nav {
+  box-shadow: 1px 0 10px 2px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  width: 250px;
+  overflow-y: auto;
+  padding: 0;
+  color: white;
+}
+
+.full-height-row #user-nav .collapsible {
+  border: none;
+  box-shadow: none;
+}
+
+.full-height-row #user-nav .collapsible .collapsible-header {
+  background-color: transparent;
+  border: none;
+}
+
+.full-height-row #user-nav .collapsible .collapsible-body {
+  border: none;
+  padding: 0.3rem 0 0 3.8rem;
+}
+
+.full-height-row #user-nav .user-bandeau {
+  height: 200px;
+  background-color: #969696;
+  background-image: url("/img/oblyk-home-baume-rousse.jpg");
+  background-size: cover;
+  padding-top: 84px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.full-height-row #user-nav .user-bandeau .left-col {
+  display: inline-block;
+  width: 100px;
+}
+
+.full-height-row #user-nav .user-bandeau .right-col {
+  padding-top: 13px;
+  vertical-align: top;
+  display: inline-block;
+  width: calc(100% - 110px);
+}
+
+.full-height-row #user-nav .user-bandeau img {
+  border-style: solid;
+  border-width: 4px;
+  border-color: white;
+  height: 90px;
+}
+
+.full-height-row #user-nav .user-bandeau p {
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 0 0 0.5em 0;
+  padding: 0.2em 0.2em;
+}
+
+.full-height-row #user-content {
+  padding-top: 75px;
+}

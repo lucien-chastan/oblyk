@@ -11,13 +11,13 @@
 |
 */
 
-//page d'accueille
+//PAGE D'ACCUIELLE
 Route::get('/', function () {return view('pages.home.index');});
 
 Auth::routes();
 
 
-//page liée au projet
+//PAGE LIÉES AU POJET
 Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
 Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
 Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
@@ -33,12 +33,15 @@ Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique'
 //LA RECHERCHE
 Route::get('/API/search/{search}', 'searchController@search')->name('globalSearch');
 
+//LE POFIL
+Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
 
-//carte
+
+//LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
 
 
-//outdoor
+//OUTDOOD
 Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
 Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
 Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');

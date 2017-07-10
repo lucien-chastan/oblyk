@@ -6,7 +6,7 @@
             <li><a href="{{ route('login') }}"><i class="material-icons left">person</i>Connexion</a></li>
             <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>Créer un compte</a></li>
         @else
-            <li><a href="#!"><i class="material-icons left">person</i>Mon profil</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}"><i class="material-icons left">person</i>Mon profil</a></li>
             <li><a href="#!"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
             <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
             <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
@@ -100,7 +100,7 @@
                                     <li><a href="{{ route('login') }}"><i class="material-icons left">person</i>Connexion</a></li>
                                     <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>Créer un compte</a></li>
                                 @else
-                                    <li><a href="#!"><i class="material-icons left">person</i>Mon profil</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}"><i class="material-icons left">person</i>Mon profil</a></li>
                                     <li><a href="#!"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
                                     <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
                                     <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
