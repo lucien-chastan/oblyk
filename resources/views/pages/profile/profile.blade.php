@@ -7,11 +7,33 @@
 @section('content')
 
     <div class="row full-height-row">
+
+        {{--COLONNE DU MENU DE GAUCHE--}}
         <div id="user-nav" class="col s2 grey darken-4">
             @include('pages.profile.partials.nav')
         </div>
-        <div id="user-content" class="col s10 grey lighten-4">
-            zone des boîtes
+
+        {{--COLONNE DU CONTENU DU PROFIL--}}
+        <div id="content-user-zone" class="col s10 grey lighten-4">
+
+            {{--ZONE D'INSERTION DES BOITES--}}
+            <div id="user-content"></div>
+
+            {{--LOADER DES BOITES--}}
+            <div id="loade-user-content" class="text-center">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -19,6 +41,7 @@
 
 @section('script')
     <script src="/js/profile.js"></script>
+    <script src="/js/profile-router.js"></script>
     <script>
 
         //passage de la barre de navigation en noir

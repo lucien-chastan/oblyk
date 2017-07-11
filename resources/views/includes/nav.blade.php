@@ -7,11 +7,11 @@
             <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>Créer un compte</a></li>
         @else
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}"><i class="material-icons left">person</i>Mon profil</a></li>
-            <li><a href="#!"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
-            <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
-            <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
-            <li><a href="#!"><i class="material-icons left">notifications</i>Notification</a></li>
-            <li><a href="#!"><i class="material-icons left">settings</i>Paramètres</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#fil-actu"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#analytiks"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#messages"><i class="material-icons left">email</i>Messagerie</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#notifications"><i class="material-icons left">notifications</i>Notification</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#editer-profil"><i class="material-icons left">settings</i>Paramètres</a></li>
             <li class="divider"></li>
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">power_settings_new</i>Déconnexion</a>
@@ -101,11 +101,11 @@
                                     <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>Créer un compte</a></li>
                                 @else
                                     <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}"><i class="material-icons left">person</i>Mon profil</a></li>
-                                    <li><a href="#!"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
-                                    <li><a href="#!"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
-                                    <li><a href="#!"><i class="material-icons left">email</i>Messagerie</a></li>
-                                    <li><a href="#!"><i class="material-icons left">notifications</i>Notification</a></li>
-                                    <li><a href="#!"><i class="material-icons left">settings</i>Paramètres</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#fil-actu"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#analytiks"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#messages"><i class="material-icons left">email</i>Messagerie</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#notifications"><i class="material-icons left">notifications</i>Notification</a></li>
+                                    <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#editer-profil"><i class="material-icons left">settings</i>Paramètres</a></li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">power_settings_new</i>Déconnexion</a>

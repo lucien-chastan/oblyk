@@ -26,18 +26,35 @@
 }
 
 .full-height-row #user-nav .collapsible {
+  margin-top: 0;
   border: none;
   box-shadow: none;
 }
 
 .full-height-row #user-nav .collapsible .collapsible-header {
   background-color: transparent;
-  border: none;
+  border: 4px none transparent;
+  border-left-style: solid;
+}
+
+.full-height-row #user-nav .collapsible .collapsible-header.active-item {
+  border-color: #2196F3;
 }
 
 .full-height-row #user-nav .collapsible .collapsible-body {
+  padding: 0.3rem 0 0 1.6rem;
+  background-color: transparent;
   border: none;
-  padding: 0.3rem 0 0 3.8rem;
+}
+
+.full-height-row #user-nav .collapsible .collapsible-body .row {
+  padding-left: 0.9em;
+  border: 4px none transparent;
+  border-left-style: solid;
+}
+
+.full-height-row #user-nav .collapsible .collapsible-body .row.active-item {
+  border-color: #2196F3;
 }
 
 .full-height-row #user-nav .user-bandeau {
@@ -75,6 +92,83 @@
   padding: 0.2em 0.2em;
 }
 
-.full-height-row #user-content {
+.full-height-row #user-nav div {
+  cursor: pointer;
+}
+
+.full-height-row #user-nav .collapsible-header {
+  transition: background-color 0.3s;
+}
+
+.full-height-row #user-nav .collapsible-header:hover {
+  background-color: #2196F3;
+}
+
+.full-height-row #user-nav .collapsible-body .row {
+  transition: background-color 0.3s;
+  margin-bottom: 0;
+  padding: 0.5em 0.1em;
+}
+
+.full-height-row #user-nav .collapsible-body .row:hover {
+  background-color: #2196F3;
+}
+
+#content-user-zone {
+  overflow-y: auto;
   padding-top: 75px;
+}
+
+#content-user-zone #user-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.08s;
+}
+
+#content-user-zone #user-content .blue-card-panel {
+  border-radius: 0 0 2px 2px;
+  border-top-style: solid;
+  border-width: 3px;
+  border-color: #2196F3;
+}
+
+#content-user-zone #user-content .titre-profile-boite-vue {
+  font-size: 1.9em;
+  margin-top: 0;
+}
+
+#content-user-zone #loade-user-content {
+  height: calc(100vh - 85px);
+}
+
+#content-user-zone #loade-user-content .preloader-wrapper {
+  margin-top: 30vh;
+}
+
+#content-user-zone .titre-nb-suivi {
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #c8c8c8;
+  padding-bottom: 5px;
+}
+
+#content-user-zone .follow-div img {
+  height: 40px;
+  width: 40px;
+  margin-right: 0.5em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#content-user-zone .follow-div i {
+  transition: opacity 0.3s;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 1.15em;
+  vertical-align: text-top;
+  margin-left: 0.5em;
+}
+
+#content-user-zone .follow-div:hover i {
+  opacity: 1;
 }

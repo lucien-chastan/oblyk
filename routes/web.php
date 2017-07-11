@@ -36,6 +36,23 @@ Route::get('/API/search/{search}', 'searchController@search')->name('globalSearc
 //LE POFIL
 Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
 
+//VUE DU PROFIL
+Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
+Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
+Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
+Route::get('/vue/profile/{profile_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
+Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
+Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')->name('vueCroixUser');
+Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
+Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
+Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
+Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessages')->name('vueMessagesUser');
+Route::get('/vue/profile/{profile_id}/message-parametres', 'Vue\UserVueController@vueMessageParametres')->name('vueMessageParametresUser');
+Route::get('/vue/profile/{profile_id}/mes-lieux', 'Vue\UserVueController@vueLieux')->name('vueLieuxUser');
+Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueController@vuePartenaireParametres')->name('vuePartenaireParametresUser');
+Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
+Route::get('/vue/profile/{profile_id}/editer-profil', 'Vue\UserVueController@vueEditProfile')->name('vueEditProfileUser');
+Route::get('/vue/profile/{profile_id}/supprimer-profil', 'Vue\UserVueController@vueDeleteProfile')->name('vueDeleteProfileUser');
 
 //LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');

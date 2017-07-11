@@ -18,17 +18,32 @@
         color: rgb(255,255,255);
 
         .collapsible {
+            margin-top: 0;
             border: none;
             box-shadow: none;
 
             .collapsible-header{
                 background-color: rgba(0,0,0,0);
-                border: none;
+                border: 4px none transparent;
+                border-left-style: solid;
+                &.active-item{
+                    border-color: #2196F3;
+                }
             }
 
             .collapsible-body {
+                padding: 0.3rem 0 0 1.6rem;
+                background-color: rgba(0,0,0,0);
                 border: none;
-                padding: 0.3rem 0 0 3.8rem;
+
+                .row {
+                    padding-left: 0.9em;
+                    border: 4px none transparent;
+                    border-left-style: solid;
+                    &.active-item{
+                        border-color: #2196F3;
+                    }
+                }
             }
         }
 
@@ -66,9 +81,89 @@
                 padding: 0.2em 0.2em;
             }
         }
+
+        div {
+            cursor: pointer;
+        }
+
+        .collapsible-header {
+            transition: background-color 0.3s;
+            &:hover{
+                background-color: #2196F3;
+            }
+        }
+        .collapsible-body {
+            .row {
+                transition: background-color 0.3s;
+                margin-bottom: 0;
+                padding: 0.5em 0.1em;
+
+                &:hover{
+                    background-color: #2196F3;
+                }
+            }
+        }
+    }
+}
+
+#content-user-zone{
+    overflow-y: auto;
+    padding-top: 75px;
+
+    #user-content{
+
+        display: none;
+        opacity: 0;
+        transition: opacity 0.08s;
+
+        .blue-card-panel {
+            border-radius: 0 0 2px 2px;
+            border-top-style: solid;
+            border-width: 3px;
+            border-color: #2196F3;
+        }
+
+        .titre-profile-boite-vue {
+            font-size: 1.9em;
+            margin-top: 0;
+        }
     }
 
-    #user-content {
-        padding-top: 75px;
+    #loade-user-content {
+        height:calc(100vh - 85px);
+
+        .preloader-wrapper{
+            margin-top: 30vh;
+        }
+    }
+
+    .titre-nb-suivi {
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-color: rgb(200,200,200);
+        padding-bottom: 5px;
+    }
+
+    .follow-div {
+
+        img {
+            height: 40px;
+            width: 40px;
+            margin-right: 0.5em;
+            object-fit: cover;
+        }
+
+        i {
+            transition: opacity 0.3s;
+            opacity: 0;
+            cursor: pointer;
+            font-size: 1.15em;
+            vertical-align: text-top;
+            margin-left: 0.5em;
+        }
+
+        &:hover i{
+            opacity: 1;
+        }
     }
 }
