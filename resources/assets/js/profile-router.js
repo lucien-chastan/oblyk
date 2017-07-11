@@ -22,33 +22,35 @@ window.addEventListener('load', function () {
 
 
 //CHARGE UNE VUE
-function loadProfileRoute(element) {
+function loadProfileRoute(element, forced = false) {
     let route = element.getAttribute('data-route'),
         target = document.getElementById('user-content');
 
-    showUserLoader(true);
+    if(currentVue !== element || forced){
+        showUserLoader(true);
 
-    setTimeout(function () {
-        axios.get(route).then(function (response) {
+        setTimeout(function () {
+            axios.get(route).then(function (response) {
 
-            //enregistre la vue courante
-            currentVue = element;
+                //enregistre la vue courante
+                currentVue = element;
 
-            //ecrit les données
-            target.innerHTML = response.data;
+                //ecrit les données
+                target.innerHTML = response.data;
 
-            //passe le hash à la page
-            location.href = '#' + route.split('/')[route.split('/').length - 1];
+                //passe le hash à la page
+                location.href = '#' + route.split('/')[route.split('/').length - 1];
 
-            //faite des actions poste chargement
-            afterLoad();
+                //faite des actions poste chargement
+                afterLoad();
 
-            activeMenu(element);
+                activeMenu(element);
 
-            //cache le loader
-            showUserLoader(false);
-        });
-    },120);
+                //cache le loader
+                showUserLoader(false);
+            });
+        },120);
+    }
 }
 
 
@@ -60,6 +62,11 @@ function afterLoad() {
 
     //ajoute les événements open modal sur les boutons
     initOpenModal();
+
+    //charge les boxes du dashboard
+    try {
+        loadDashBoxs();
+    }catch (e){}
 
 }
 
@@ -94,5 +101,5 @@ function showUserLoader(visible) {
 //RECHARGE LA VUE COURANTE
 function reloadCurrentVue() {
     closeModal();
-    loadProfileRoute(currentVue);
+    loadProfileRoute(currentVue, true);
 }

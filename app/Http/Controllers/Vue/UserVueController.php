@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Crag;
+use App\Topo;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -60,9 +62,17 @@ class UserVueController extends Controller
 
     function vueDashboard($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',$user_id)->with('settings')->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardVue', $data);
+
+    }
+
+    function vuePersonnaliserDashboard($user_id){
+
+        $user = User::where('id',$user_id)->with('settings')->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.personnaliserDashboardVue', $data);
 
     }
 
@@ -176,5 +186,108 @@ class UserVueController extends Controller
         $data = ['user' => $user,];
         return view('pages.profile.vues.deleteProfileVue', $data);
 
+    }
+
+
+
+
+    //LES SOUS VUES DU DASHBOARD
+
+    function subVueWelcome($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.welcome', $data);
+    }
+
+    function subVueCroixPote($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.croixPote', $data);
+    }
+
+    function subVueMesCroix($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.mesCroix', $data);
+    }
+
+    function subVueForumLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.forum-last', $data);
+    }
+
+    function subVueNewsOblyk($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.news-oblyk', $data);
+    }
+
+    function subVuephotosLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.photos-last', $data);
+    }
+
+    function subVueVideosLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.videos-last', $data);
+    }
+
+    function subVueCommentsLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.comments-last', $data);
+    }
+
+    function subVueRoutesLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.routes-last', $data);
+    }
+
+    function subVueCragsLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $crags = Crag::where('id','>','0')->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
+        $data = [
+            'user' => $user,
+            'crags' => $crags
+        ];
+        return view('pages.profile.vues.dashboardBox.boxVues.crags-last', $data);
+    }
+
+    function subVueToposLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $topos = Topo::where('id','>',0)->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
+        $data = [
+            'user' => $user,
+            'topos' => $topos,
+            ];
+        return view('pages.profile.vues.dashboardBox.boxVues.topos-last', $data);
+    }
+
+    function subVueUsersLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
+    }
+
+    function subVueSaeLast($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.sae-last', $data);
+    }
+
+    function subVueListCragSae($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user];
+        return view('pages.profile.vues.dashboardBox.boxVues.list-crag-sae', $data);
+    }
+
+    function subVuePartenaire($user_id){
+        $user = User::where('id',$user_id)->first();
+        $data = ['user' => $user,];
+        return view('pages.profile.vues.dashboardBox.boxVues.partenaire', $data);
     }
 }

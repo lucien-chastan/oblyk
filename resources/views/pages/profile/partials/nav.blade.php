@@ -12,6 +12,9 @@
 <ul class="collapsible" data-collapsible="accordion">
     <li>
         <div data-route="{{route('vueDashboardUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">dashboard</i>Dashboard</div>
+        <div class="collapsible-body">
+            <div data-route="{{route('vuePersonnaliserDashboardUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">settings</i> Personnaliser</div>
+        </div>
     </li>
     <li>
         <div data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">shuffle</i>Fil d'actualité</div>

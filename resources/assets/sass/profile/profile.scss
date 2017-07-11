@@ -166,4 +166,64 @@
             opacity: 1;
         }
     }
+
+    .explication-dash-option{
+        p{
+            margin: 0;
+        }
+    }
+
+    .flexDashBoxs {
+        display: flex; /* crée un contexte flex pour ses enfants */
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        height: 1000px;
+        box-sizing: border-box;
+
+        .dashbox {
+
+            box-sizing: border-box;
+            flex: 1 0 auto;
+            width: calc(50% - 20px);
+            margin: 10px;
+            display: block;
+
+            .blue-card-panel {
+                background-color: white;
+                border-radius: 0 0 2px 2px;
+                padding: 1em;
+                height: 100%;
+            }
+
+            .titre-box-dashboard{
+                font-size: 1.8em;
+                margin-top: 0;
+            }
+
+            .titre-box-dashboard i {
+                opacity: 0;
+                cursor: pointer;
+                transition: opacity 0.3s;
+            }
+
+            &:hover .titre-box-dashboard i{
+                opacity: 0.5;
+            }
+
+            .circle-40 {
+                height: 40px;
+                width: 40px;
+                object-fit: cover;
+                margin-right: 0.8em;
+            }
+
+            .couverture-40 {
+                max-height: 40px;
+                max-width: 40px;
+                margin-right: 0.8em;
+            }
+        }
+
+    }
 }

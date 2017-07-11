@@ -131,7 +131,13 @@ function submitData(form, callback) {
 
         //créer un talbeau JSON des données à passer en paramètre
         for(let i in inputData){
-            if(typeof inputData[i].value != "undefined") data[inputData[i].name] = inputData[i].value;
+            if(typeof inputData[i].value != "undefined"){
+                if(inputData[i].getAttribute('type') === 'checkbox'){
+                    data[inputData[i].name] = inputData[i].checked;
+                }else{
+                    data[inputData[i].name] = inputData[i].value;
+                }
+            }
         }
 
         //lance la fonction ajax
@@ -164,9 +170,12 @@ function submitData(form, callback) {
                 //on ajout au tableau l'erreur courante
                 errorArray.push(error.response.data[detailError]);
 
-                //on ajoute la class invalid au champs qui ne sont pas bon
-                let errorInput = document.querySelector('.submit-form #description');
-                errorInput.setAttribute('class', errorInput.className + ' invalid');
+                console.log(error.response.data);
+                try {
+                    //on ajoute la class invalid au champs qui ne sont pas bon
+                    let errorInput = document.querySelector('.submit-form #description');
+                    errorInput.setAttribute('class', errorInput.className + ' invalid');
+                }catch (e){}
             }
 
             //compil les erreurs

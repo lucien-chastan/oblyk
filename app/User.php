@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function topos(){
         return $this->hasMany('App\Topo','user_id', 'id');
     }
+
+    public function settings(){
+        return $this->hasOne('App\UserSettings','user_id', 'id');
+    }
 }

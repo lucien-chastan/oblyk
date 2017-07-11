@@ -29,6 +29,7 @@ class CragsTableSeeder extends Seeder
             'type_bloc' => 0,
             'type_deep_water' => 0,
             'type_via_ferrata' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         //2
@@ -48,6 +49,7 @@ class CragsTableSeeder extends Seeder
             'type_bloc' => 0,
             'type_deep_water' => 0,
             'type_via_ferrata' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         //3
@@ -67,6 +69,7 @@ class CragsTableSeeder extends Seeder
             'type_bloc' => 0,
             'type_deep_water' => 0,
             'type_via_ferrata' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         //4
@@ -86,6 +89,7 @@ class CragsTableSeeder extends Seeder
             'type_bloc' => 0,
             'type_deep_water' => 0,
             'type_via_ferrata' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
         //5
@@ -105,6 +109,7 @@ class CragsTableSeeder extends Seeder
             'type_bloc' => 0,
             'type_deep_water' => 0,
             'type_via_ferrata' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
     }
 }

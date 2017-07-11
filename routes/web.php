@@ -39,6 +39,7 @@ Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name(
 //VUE DU PROFIL
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
 Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
+Route::get('/vue/profile/{profile_id}/personnaliser-dashboard', 'Vue\UserVueController@vuePersonnaliserDashboard')->name('vuePersonnaliserDashboardUser');
 Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
 Route::get('/vue/profile/{profile_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
 Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
@@ -53,6 +54,27 @@ Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueContro
 Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
 Route::get('/vue/profile/{profile_id}/editer-profil', 'Vue\UserVueController@vueEditProfile')->name('vueEditProfileUser');
 Route::get('/vue/profile/{profile_id}/supprimer-profil', 'Vue\UserVueController@vueDeleteProfile')->name('vueDeleteProfileUser');
+
+//SOUS VUE DES BOÎTES DU DASHBORD
+Route::get('/vue/dashboard/{profile_id}/welcome', 'Vue\UserVueController@subVueWelcome')->name('subVueWelcomeUser');
+Route::get('/vue/dashboard/{profile_id}/croix-pote', 'Vue\UserVueController@subVueCroixPote')->name('subVueCroixPoteUser');
+Route::get('/vue/dashboard/{profile_id}/mes-croix', 'Vue\UserVueController@subVueMesCroix')->name('subVueMesCroixUser');
+Route::get('/vue/dashboard/{profile_id}/forum-last', 'Vue\UserVueController@subVueForumLast')->name('subVueForumLastUser');
+Route::get('/vue/dashboard/{profile_id}/news-oblyk', 'Vue\UserVueController@subVueNewsOblyk')->name('subVueNewsOblykUser');
+Route::get('/vue/dashboard/{profile_id}/photos-last', 'Vue\UserVueController@subVuephotosLast')->name('subVuephotosLastUser');
+Route::get('/vue/dashboard/{profile_id}/videos-last', 'Vue\UserVueController@subVueVideosLast')->name('subVueVideosLastUser');
+Route::get('/vue/dashboard/{profile_id}/comments-last', 'Vue\UserVueController@subVueCommentsLast')->name('subVueCommentsLastUser');
+Route::get('/vue/dashboard/{profile_id}/routes-last', 'Vue\UserVueController@subVueRoutesLast')->name('subVueRoutesLastUser');
+Route::get('/vue/dashboard/{profile_id}/crags-last', 'Vue\UserVueController@subVueCragsLast')->name('subVueCragsLastUser');
+Route::get('/vue/dashboard/{profile_id}/topos-last', 'Vue\UserVueController@subVueToposLast')->name('subVueToposLastUser');
+Route::get('/vue/dashboard/{profile_id}/users-last', 'Vue\UserVueController@subVueUsersLast')->name('subVueUsersLastUser');
+Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVueSaeLast')->name('subVueSaeLastUser');
+Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
+Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
+
+//CRUD USER
+Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
+
 
 //LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
