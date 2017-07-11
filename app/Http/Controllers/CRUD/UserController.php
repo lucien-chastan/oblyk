@@ -17,9 +17,7 @@ class UserController extends Controller
 
         $settings = UserSettings::where('user_id', Auth::id())->first();
 
-        $dash_welcome = $request->input('dash_welcome');
-
-        $settings->dash_welcome = isset($dash_welcome) == true ? 1 : 0;
+        $settings->dash_welcome = $request->input('dash_welcome');
         $settings->save();
 
         return response()->json($settings);
