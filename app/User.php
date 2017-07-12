@@ -39,5 +39,6 @@ class User extends Authenticatable
     public function sectors() { return $this->hasMany('App\Sector','user_id', 'id'); }
     public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
     public function topos() { return $this->hasMany('App\Topo','user_id', 'id'); }
+    public function tickLists() { return $this->hasMany('App\TickList','user_id', 'id'); }
     public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }
 }

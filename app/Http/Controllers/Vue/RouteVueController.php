@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Vue;
 
 use App\Http\Controllers\Controller;
 use App\Route;
+use App\TickList;
+use Illuminate\Support\Facades\Auth;
 
 class RouteVueController extends Controller
 {
@@ -17,10 +19,20 @@ class RouteVueController extends Controller
             ->with('sector')
             ->first();
 
+        //route dans la ticklist du connecté
+        $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
+
+        $count_carnet = 0;
+        if(isset($tickList)) $count_carnet = 1;
+
         $route->views++;
         $route->save();
 
-        $data = ['route' => $route];
+        $data = [
+            'route' => $route,
+            'ticklist' => $tickList,
+            'count_carnet' => $count_carnet
+        ];
 
         return view('pages.route.vues.route', $data);
     }
@@ -54,5 +66,18 @@ class RouteVueController extends Controller
     function vueVideos($id){
         $data = ['route' => Route::where('id',$id)->with('videos')->first()];
         return view('pages.route.vues.videosVue', $data);
+    }
+
+    function vueCarnet($id){
+
+        $route = Route::where('id',$id)->first();
+        $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
+
+        $data = [
+            'route' => $route,
+            'ticklist'=>$tickList
+        ];
+
+        return view('pages.route.vues.carnetVue', $data);
     }
 }

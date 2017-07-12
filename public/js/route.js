@@ -33,12 +33,16 @@ function openSideRoute(opened = true) {
 
 
 //charge la structure d'une ligne
-function loadRoute(id_route) {
+function loadRoute(id_route, load_tab = false) {
     let route = '/vue/route/' + id_route + '/route',
         target = document.getElementById('slide-route'),
         callback = null;
 
     loadedRouteTab = [];
+
+    if(load_tab !== false){
+        if(load_tab === 'carnet') callback = 'reloadRouteCarnetTab';
+    }
 
     ajaxRouter(route, target, callback);
 }
@@ -54,6 +58,16 @@ function loadTabRoute(id_route, tab, callback) {
         axios.get(route).then(function (response) {
             target.innerHTML = response.data;
             if(callback !== null) callFunction(callback, window);
+
+            //ajoute les événements open modal sur les boutons
+            initOpenModal();
+
+            //convertie les textes en markdown
+            convertMarkdownZone();
+
+            //initialise les tooltip
+            $('.tooltipped').tooltip({delay: 50});
+
         });
 
     }
@@ -90,6 +104,16 @@ function reloadRoutePhotoTab() {
 }
 
 
+function reloadRouteCarnetTab() {
+    let route_id = document.getElementById('info-route-id');
+
+    loadedRouteTab['carnet'] = false;
+
+    closeModal();
+    loadTabRoute(route_id.value, 'carnet', 'initCarnetRouteTab');
+    return false;
+}
+
 function initInformationRouteTab() {
 
     //ajoute les événements open modal sur les boutons
@@ -100,9 +124,16 @@ function initInformationRouteTab() {
 }
 
 function initVideoRouteTab() {
-
     //ajoute les événements open modal sur les boutons
     initOpenModal();
+}
+
+function initCarnetRouteTab() {
+    //ajoute les événements open modal sur les boutons
+    initOpenModal();
+
+    console.log('ok');
+    $('ul.tabs').tabs('select_tab', 'route-tab-carnet');
 }
 
 function initRoutePhototheque() {
@@ -357,4 +388,13 @@ function showRoutePhotoEditor(visible) {
         document.getElementById("zone-route-gallerie").style.display = 'block';
         document.getElementById("bt-show-route-gallerie-editor").style.display = 'block';
     }
+}
+
+function addInTickList(route_id) {
+    axios.post('/tick-list/add',{route_id:route_id}).then(function (response) {
+        let data = response.data;
+
+        Materialize.toast(data.label + ' à été ajoutée à ma ticklist', 4000);
+        reloadRouteCarnetTab();
+    })
 }

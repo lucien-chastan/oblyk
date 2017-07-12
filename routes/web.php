@@ -151,9 +151,15 @@ Route::resource('massiveCrags', 'CRUD\MassiveCragController');
 Route::resource('words', 'CRUD\WordController');
 Route::resource('follows', 'CRUD\FollowController');
 Route::resource('albums', 'CRUD\AlbumController');
+Route::resource('tickLists', 'CRUD\TickListController');
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');
+
+//TICK LISTS (DELETE)
+Route::post('/tick-list/delete', 'CRUD\TickListController@deleteTickList')->name('deleteTickList');
+Route::post('/tick-list/add', 'CRUD\TickListController@addTickList')->name('addTickList');
+
 
 //PROBLEM
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
@@ -181,6 +187,7 @@ Route::get('/vue/route/{route_id}/information','Vue\RouteVueController@vueInform
 Route::get('/vue/route/{route_id}/comments','Vue\RouteVueController@vueComments')->name('vueCommentsRoute');
 Route::get('/vue/route/{route_id}/photos','Vue\RouteVueController@vuePhotos')->name('vuePhotosRoute');
 Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->name('vueVideosRoute');
+Route::get('/vue/route/{route_id}/carnet','Vue\RouteVueController@vueCarnet')->name('vueCarnetRoute');
 
 //VUE TOPO
 Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');

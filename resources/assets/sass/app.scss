@@ -25,9 +25,12 @@
 .text-italic{font-style: italic;}
 .text-through{text-decoration: line-through;}
 .text-cursor{cursor: pointer;}
-.text-hyphens{hyphens: auto}
-.no-margin{margin: 0}
-.no-padding{padding: 0}
+.text-hyphens{hyphens: auto;}
+.no-margin{margin: 0;}
+.no-padding{padding: 0;}
+.no-scroll-x{overflow-x: hidden !important;}
+.no-scroll-y{overflow-y: hidden !important;}
+.no-scroll{overflow: hidden !important;}
 
 .i-cursor {
     i {

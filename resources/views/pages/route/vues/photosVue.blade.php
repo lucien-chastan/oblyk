@@ -32,11 +32,11 @@
                             </div>
                             <div class="card-content i-cursor">
                                 <p>
-                                    <i {!! $Helpers::tooltip('Définir comme bandeau du site') !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$route->crag_id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
-                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                    <i {!! $Helpers::tooltip('Définir comme bandeau du site') !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$route->crag_id]) !!} class="material-icons tiny-btn tooltipped btnModal" onclick="$('#modal').modal('open');">wallpaper</i>
+                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>
                                     @if(Auth::id() == $photo->user_id)
-                                        <i {!! $Helpers::tooltip('Modifier la photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$route->id, "illustrable_type"=>"Crag", "photo_id"=>$photo->id, "title"=>"Modifier une photo", "method"=>"PUT", "callback"=>"reloadRoutePhotoTab"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
-                                        <i {!! $Helpers::tooltip('Supprimer la photo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id, "callback"=>"reloadRoutePhotoTab"]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                        <i {!! $Helpers::tooltip('Modifier la photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$route->id, "illustrable_type"=>"Crag", "photo_id"=>$photo->id, "title"=>"Modifier une photo", "method"=>"PUT", "callback"=>"reloadRoutePhotoTab"]) !!} class="material-icons tiny-btn tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
+                                        <i {!! $Helpers::tooltip('Supprimer la photo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id, "callback"=>"reloadRoutePhotoTab"]) !!} class="material-icons tiny-btn tooltipped btnModal" onclick="$('#modal').modal('open');">delete</i>
                                     @endif
                                 </p>
                             </div>
@@ -47,7 +47,7 @@
 
             <div class="row">
                 <div class="info-user grey-text i-cursor col s12">
-                    <i {!! $Helpers::tooltip('fermer l\'édition des photos') !!} onclick="showRoutePhotoEditor(false)" class="material-icons tiny-btn right tooltipped">clear</i>
+                    <i {!! $Helpers::tooltip('fermer l\'édition des photos') !!} onclick="showRoutePhotoEditor(false)" class="material-icons tiny-btn right tooltipped" onclick="$('#modal').modal('open');">clear</i>
                 </div>
             </div>
         </div>
@@ -60,6 +60,6 @@
 {{--BOUTON POUR AJOUTER UNE PHOTO--}}
 @if(Auth::check())
     <div class="text-right btn-route-add">
-        <a {!! $Helpers::tooltip('Ajouter une photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$route->id, "illustrable_type"=>"Route", "photo_id"=>'', "title"=>"Ajouter une photo", "method"=>"POST", "callback"=>"reloadRoutePhotoTab"]) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
+        <a {!! $Helpers::tooltip('Ajouter une photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$route->id, "illustrable_type"=>"Route", "photo_id"=>'', "title"=>"Ajouter une photo", "method"=>"POST", "callback"=>"reloadRoutePhotoTab"]) !!} class="btn-floating btn waves-effect waves-light tooltipped btnModal" onclick="$('#modal').modal('open');"><i class="material-icons">add</i></a>
     </div>
 @endif

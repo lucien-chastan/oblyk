@@ -46,5 +46,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HelpsTableSeeder::class);
         $this->call(UserSettingsTableSeeder::class);
         $this->call(ArticlesTableSeeder::class);
+        $this->call(TickListsTableSeeder::class);
     }
 }

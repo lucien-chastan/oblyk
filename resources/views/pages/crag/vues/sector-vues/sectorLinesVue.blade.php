@@ -4,6 +4,7 @@
 
     <table class="striped responsive-table">
         <tr>
+            <th></th>
             <th>Note</th>
             <th>Cote</th>
             <th>Nom</th>
@@ -16,6 +17,11 @@
     @foreach($routes as $route)
 
         <tr class="button-open-route" onclick="loadRoute({{$route->id}})">
+            <td class="button-open-route" onclick="loadRoute({{$route->id}},'carnet');event.stopPropagation();">
+                @if($route->ticked)
+                    <i {!! $Helpers::tooltip('Fait partie de ma tick-list') !!} class="material-icons tooltipped">crop_free</i>
+                @endif
+            </td>
             <td><img {!! $Helpers::tooltip('Évaluation sur ' . $route->nb_note . ' note(s)') !!} src="/img/note_{{$route->note}}.png" alt="" class="tooltipped img-note-route-sector"></td>
             <td>
                 @if(count($route->routeSections) > 1)
