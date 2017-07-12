@@ -285,3 +285,19 @@
   display: inline-block;
   width: calc(100% - 135px);
 }
+
+#content-user-zone .tickliste-zone .row {
+  margin-bottom: 5px;
+}
+
+#content-user-zone .tickliste-zone .img-tick-list {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 0.5em;
+}
+
+#content-user-zone .tickliste-zone .liste-tick-ticklist {
+  margin-left: 47px;
+}

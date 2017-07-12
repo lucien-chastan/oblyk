@@ -51,4 +51,8 @@ class HelpersTemplates extends ServiceProvider
 
         return $str;
     }
+
+    public static function pre($array){
+        return '<pre>' . json_encode($array) . '</pre>';
+    }
 }

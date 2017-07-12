@@ -264,4 +264,22 @@
         display: inline-block;
         width: calc(100% - 135px);
     }
+
+    .tickliste-zone {
+
+        .row {
+            margin-bottom: 5px;
+        }
+
+        .img-tick-list {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            margin-right: 0.5em;
+        }
+
+        .liste-tick-ticklist {
+            margin-left: 47px;
+        }
+    }
 }

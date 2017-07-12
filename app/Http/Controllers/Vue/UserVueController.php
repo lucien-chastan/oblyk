@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vue;
 use App\Album;
 use App\Article;
 use App\Crag;
+use App\TickList;
 use App\Topo;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -125,8 +126,18 @@ class UserVueController extends Controller
 
     function vueTickList($user_id){
 
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $tickLists = TickList::where('user_id',$user_id)->with('route.crag')->with('route.routeSections')->get();
+
+        $crags = [];
+
+        foreach ($tickLists as $ticks){
+            $crags[$ticks->route->crag_id][] = $ticks;
+        }
+
+        $data = [
+            'crags' => $crags
+        ];
+
         return view('pages.profile.vues.tickListVue', $data);
 
     }
