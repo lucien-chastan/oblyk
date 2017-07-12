@@ -13,7 +13,7 @@ class VideosTableSeeder extends Seeder
     {
         DB::table('videos')->insert([
             'viewable_id' => 1,
-            'viewable_type' => 'App\Crag',
+            'viewable_type' => 'App\Route',
             'user_id' => 1,
             'iframe' => 'https://www.youtube.com/embed/wuwTbBCrQus',
             'description' => 'vidéo youtube',

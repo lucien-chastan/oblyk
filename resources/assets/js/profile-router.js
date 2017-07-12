@@ -68,6 +68,11 @@ function afterLoad() {
         loadDashBoxs();
     }catch (e){}
 
+    //Intialise l'opener de route
+    try {
+        initRouteOpener();
+    }catch (e){}
+
 }
 
 

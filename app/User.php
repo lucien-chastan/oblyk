@@ -27,51 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function crags(){
-        return $this->hasMany('App\Crag','user_id', 'id');
-    }
-
-    public function parkings(){
-        return $this->hasMany('App\Parking','user_id', 'id');
-    }
-
-    public function sectors(){
-        return $this->hasMany('App\Sector','user_id', 'id');
-    }
-
-    public function routes(){
-        return $this->hasMany('App\Route','user_id', 'id');
-    }
-
-    public function lexiques(){
-        return $this->hasMany('App\Word','user_id', 'id');
-    }
-
-    public function descriptions(){
-        return $this->hasMany('App\Description','user_id', 'id');
-    }
-
-    public function albums(){
-        return $this->hasMany('App\Album','user_id', 'id');
-    }
-
-    public function follows(){
-        return $this->hasMany('App\Follow','user_id', 'id');
-    }
-
-    public function photos(){
-        return $this->hasMany('App\Photo','user_id', 'id');
-    }
-
-    public function sales(){
-        return $this->hasMany('App\Sale','user_id', 'id');
-    }
-
-    public function topos(){
-        return $this->hasMany('App\Topo','user_id', 'id');
-    }
-
-    public function settings(){
-        return $this->hasOne('App\UserSettings','user_id', 'id');
-    }
+    public function albums() { return $this->hasMany('App\Album','user_id', 'id'); }
+    public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }
+    public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }
+    public function follows() { return $this->hasMany('App\Follow','user_id', 'id'); }
+    public function lexiques() { return $this->hasMany('App\Word','user_id', 'id'); }
+    public function parkings() { return $this->hasMany('App\Parking','user_id', 'id'); }
+    public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
+    public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }
+    public function sales() { return $this->hasMany('App\Sale','user_id', 'id'); }
+    public function sectors() { return $this->hasMany('App\Sector','user_id', 'id'); }
+    public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
+    public function topos() { return $this->hasMany('App\Topo','user_id', 'id'); }
+    public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }
 }

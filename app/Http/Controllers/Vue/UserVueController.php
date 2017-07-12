@@ -96,7 +96,7 @@ class UserVueController extends Controller
 
     function vueVideos($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',$user_id)->with('videos')->with('videos.viewable')->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.videosVue', $data);
 
