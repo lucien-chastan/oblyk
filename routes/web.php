@@ -12,7 +12,7 @@
 */
 
 //PAGE D'ACCUIELLE
-Route::get('/', function () {return view('pages.home.index');});
+Route::get('/', 'HomeController@indexPage')->name('index');
 
 Auth::routes();
 

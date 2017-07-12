@@ -120,60 +120,29 @@
         </div>
 
         <div class="row">
-            <div class="col s12 m12 l4">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="/img/oblyk-home-baume-rousse.jpg">
-                        <span class="card-title">Oblyk 3.0</span>
-                    </div>
-                    <div class="card-content">
-                        <p>
-                            Après quelques mois de développement, le voici, Oblyk 3 !!,
-                            Avec lui plein d'améliorations arrivent, lisez la suite pour en savoir plus
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Lire la suite</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m12 l4">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="/img/photo-video-forum-escalade-conseil.jpg">
-                        <span class="card-title">Oblyk j-3</span>
-                    </div>
-                    <div class="card-content">
-                        <p>
-                            On y est presque, les derniers tests sont en cours, très bientôt vous découvrirez
-                            à quoi ressemble la nouvelle monture d'oblyk, rdv dans 3 Jours ...
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Lire la suite</a>
+
+            @foreach($articles as $article)
+                <div class="col s12 m12 l4">
+                    <div class="card hoverable">
+                        <div class="card-image">
+                            @if(file_exists(storage_path('app/public/articles/200/article-' . $article->id . '.jpg')))
+                                <img src="/storage/articles/1300/article-{{$article->id}}.jpg" alt="article {{$article->label}}">
+                            @else
+                                <img src="/img/default-article-bandeau.jpg" alt="article {{$article->label}}">
+                            @endif
+                        </div>
+                        <div class="card-content">
+                            <span title="{{$article->label}}" class="card-title truncate">{{$article->label}}</span>
+                            <p>
+                                {{ str_limit($article->description, $limit = 150, $end = '...') }}
+                            </p>
+                        </div>
+                        <div class="card-action text-right">
+                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label' => str_slug($article->label)])}}">Lire la suite</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col s12 m12 l4">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="/img/evenement-escalade-forum-oblyk.jpg">
-                        <span class="card-title">Concours Photo</span>
-                    </div>
-                    <div class="card-content">
-                        <p>
-                            Vous n'êtes pas sans savoir qu'une nouvelle version d'oblyk est dans les tuyaux,
-                            pour sa sortie nous allons avoir besoin de quelques belles photo
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Lire la suite</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m12 l12 text-right">
-                <a>Plus d'actu</a>
-            </div>
+            @endforeach
         </div>
 
         {{--PARTIE CHIFFRE D'OBLYK--}}

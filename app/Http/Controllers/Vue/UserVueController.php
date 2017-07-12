@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Article;
 use App\Crag;
 use App\Topo;
 use App\User;
@@ -220,7 +221,13 @@ class UserVueController extends Controller
 
     function subVueNewsOblyk($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $articles = Article::where([['id','>','0'],['publish','=',1]])->withCount('descriptions')->orderBy('created_at','desc')->skip(0)->take(3)->get();
+
+        $data = [
+            'user' => $user,
+            'articles' => $articles,
+        ];
+
         return view('pages.profile.vues.dashboardBox.boxVues.news-oblyk', $data);
     }
 
