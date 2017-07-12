@@ -301,3 +301,12 @@
 #content-user-zone .tickliste-zone .liste-tick-ticklist {
   margin-left: 47px;
 }
+
+#content-user-zone .ic-tab-parametre-profile {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+#content-user-zone .tabs-settings-compte {
+  margin-bottom: 2em !important;
+}

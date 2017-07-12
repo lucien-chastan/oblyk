@@ -42,7 +42,6 @@ Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name(
 //VUE DU PROFIL
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
 Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
-Route::get('/vue/profile/{profile_id}/personnaliser-dashboard', 'Vue\UserVueController@vuePersonnaliserDashboard')->name('vuePersonnaliserDashboardUser');
 Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
 Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
 Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
@@ -52,12 +51,10 @@ Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTick
 Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
 Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
 Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessages')->name('vueMessagesUser');
-Route::get('/vue/profile/{profile_id}/message-parametres', 'Vue\UserVueController@vueMessageParametres')->name('vueMessageParametresUser');
 Route::get('/vue/profile/{profile_id}/mes-lieux', 'Vue\UserVueController@vueLieux')->name('vueLieuxUser');
 Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueController@vuePartenaireParametres')->name('vuePartenaireParametresUser');
 Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
-Route::get('/vue/profile/{profile_id}/editer-profil', 'Vue\UserVueController@vueEditProfile')->name('vueEditProfileUser');
-Route::get('/vue/profile/{profile_id}/supprimer-profil', 'Vue\UserVueController@vueDeleteProfile')->name('vueDeleteProfileUser');
+Route::get('/vue/profile/{profile_id}/parametres', 'Vue\UserVueController@vueSettings')->name('vueEditSettingsUser');
 
 //SOUS VUE DES BOÎTES DU DASHBORD
 Route::get('/vue/dashboard/{profile_id}/welcome', 'Vue\UserVueController@subVueWelcome')->name('subVueWelcomeUser');

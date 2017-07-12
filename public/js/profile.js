@@ -66,10 +66,14 @@ function dimDashboard() {
     },100);
 }
 
-//CHARGE L'ONGLET DASHBOARDS
-function loadDashboard() {
-    loadProfileRoute(document.getElementById('item-dashboard-menu'));
+//INDICATION QUE LE DASHBOARD
+function majSettingsDashboard() {
+    Materialize.toast('Les paramètres du dashboard ont été mis à jour', 4000);
+    showSubmitLoader(false);
 }
+
+
+
 
 //OUVRE UN PROFIL
 function openAlbum(route) {

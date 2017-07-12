@@ -72,14 +72,6 @@ class UserVueController extends Controller
 
     }
 
-    function vuePersonnaliserDashboard($user_id){
-
-        $user = User::where('id',$user_id)->with('settings')->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.personnaliserDashboardVue', $data);
-
-    }
-
     function vueFilActu($user_id){
 
         $user = User::where('id',$user_id)->first();
@@ -166,14 +158,6 @@ class UserVueController extends Controller
 
     }
 
-    function vueMessageParametres($user_id){
-
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.messageParametresVue', $data);
-
-    }
-
     function vueLieux($user_id){
 
         $user = User::where('id',$user_id)->first();
@@ -198,19 +182,11 @@ class UserVueController extends Controller
 
     }
 
-    function vueEditProfile($user_id){
+    function vueSettings($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',$user_id)->with('settings')->first();
         $data = ['user' => $user,];
-        return view('pages.profile.vues.editProfileVue', $data);
-
-    }
-
-    function vueDeleteProfile($user_id){
-
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.deleteProfileVue', $data);
+        return view('pages.profile.vues.settingsVue', $data);
 
     }
 

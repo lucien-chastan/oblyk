@@ -60,6 +60,8 @@ function afterLoad() {
     //initialise les tooltips
     $('.tooltipped').tooltip({delay: 50});
 
+    $('ul.tabs').tabs();
+
     //ajoute les événements open modal sur les boutons
     initOpenModal();
 
