@@ -241,3 +241,11 @@
   max-width: 40px;
   margin-right: 0.8em;
 }
+
+#content-user-zone .flexDashBoxs .dashbox .img-news {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 0.8em;
+}

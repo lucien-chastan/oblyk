@@ -257,7 +257,7 @@ class UserVueController extends Controller
 
     function subVueCragsLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $crags = Crag::where('id','>','0')->with('user')->orderBy('created_at','desc')->skip(0)->take(10)->get();
+        $crags = Crag::where('id','>','0')->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
         $data = [
             'user' => $user,
             'crags' => $crags
@@ -267,7 +267,7 @@ class UserVueController extends Controller
 
     function subVueToposLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $topos = Topo::where('id','>',0)->with('user')->orderBy('created_at','desc')->skip(0)->take(10)->get();
+        $topos = Topo::where('id','>',0)->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
         $data = [
             'user' => $user,
             'topos' => $topos,
@@ -277,7 +277,7 @@ class UserVueController extends Controller
 
     function subVueUsersLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $users = User::where('id','>',0)->orderBy('created_at','desc')->skip(0)->take(10)->get();
+        $users = User::where('id','>',0)->orderBy('created_at','desc')->skip(0)->take(5)->get();
         $data = ['user' => $user,'users'=>$users];
         return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
     }
