@@ -102,6 +102,12 @@
                         <p>Affiche les dernières vidéos postées sur oblyk</p>
                     </div>
 
+                    {{--MOT AU HASARD--}}
+                    <div class="blue-border-div">
+                        {!! $Inputs::checkbox(['name'=>'dash_random_word', 'label'=>'Le mot au hasard', 'checked' => ($user->settings->dash_random_word == 1) ? true : false, 'align' => 'left']) !!}
+                        <p>Un boîte qui te présente un mot au hasard du lexique de l'escalade </p>
+                    </div>
+
                     {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
 
                     <div class="row">

@@ -32,6 +32,7 @@ class CreateUserSettingsTable extends Migration
             $table->boolean('dash_topos')->nullable()->default(1);
             $table->boolean('dash_users')->nullable()->default(1);
             $table->boolean('dash_videos')->nullable()->default(0);
+            $table->boolean('dash_random_word')->nullable()->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

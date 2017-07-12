@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vue;
 use App\Crag;
 use App\Topo;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -249,7 +250,7 @@ class UserVueController extends Controller
 
     function subVueCragsLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $crags = Crag::where('id','>','0')->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
+        $crags = Crag::where('id','>','0')->with('user')->orderBy('created_at','desc')->skip(0)->take(10)->get();
         $data = [
             'user' => $user,
             'crags' => $crags
@@ -259,7 +260,7 @@ class UserVueController extends Controller
 
     function subVueToposLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $topos = Topo::where('id','>',0)->with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
+        $topos = Topo::where('id','>',0)->with('user')->orderBy('created_at','desc')->skip(0)->take(10)->get();
         $data = [
             'user' => $user,
             'topos' => $topos,
@@ -269,7 +270,8 @@ class UserVueController extends Controller
 
     function subVueUsersLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $users = User::where('id','>',0)->orderBy('created_at','desc')->skip(0)->take(10)->get();
+        $data = ['user' => $user,'users'=>$users];
         return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
     }
 
@@ -289,5 +291,12 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.partenaire', $data);
+    }
+
+    function subVueRandomWord($user_id){
+        $user = User::where('id',$user_id)->first();
+        $word = DB::table('words')->inRandomOrder()->first();
+        $data = ['user' => $user,'word'=>$word];
+        return view('pages.profile.vues.dashboardBox.boxVues.random-word', $data);
     }
 }

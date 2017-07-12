@@ -8,6 +8,7 @@
   "/css/project.css": "/css/project.css",
   "/css/crag.css": "/css/crag.css",
   "/css/topo.css": "/css/topo.css",
+  "/css/article.css": "/css/article.css",
   "/css/massive.css": "/css/massive.css",
   "/css/profile.css": "/css/profile.css",
   "/css/cotation.css": "/css/cotation.css",
@@ -15,5 +16,6 @@
   "/css/lexique.css": "/css/lexique.css",
   "/css/global-search.css": "/css/global-search.css",
   "/css/markdown.css": "/css/markdown.css",
+  "/css/article-markdown.css": "/css/article-markdown.css",
   "/font/oblyk/style.css": "/font/oblyk/style.css"
 }

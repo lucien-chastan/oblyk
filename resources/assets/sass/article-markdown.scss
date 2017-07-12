@@ -1,0 +1,41 @@
+.article-markdown{
+    h1 {font-size: 1.5em;}
+    h2 {font-size: 1.4em;}
+    h3 {font-size: 1.3em;}
+    h4 {font-size: 1.2em;}
+    h5 {font-size: 1.1em;}
+    h6 {font-size: 1em;}
+
+    p{
+        margin: 0.5em 0;
+        text-align: justify;
+        hyphens: auto;
+    }
+
+    ul{
+        margin: 0.5em 0;
+        padding-left: 15px;
+
+        li {
+            list-style: disc;
+            line-height: inherit;
+        }
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    img[alt='center'] {
+        display: block;
+        margin: auto;
+    }
+
+    img[alt='left'] {
+        float: left;
+    }
+
+    img[alt="rigth"]{
+        float: right;
+    }
+}

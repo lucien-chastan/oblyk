@@ -27,6 +27,9 @@ Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('sup
 Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
 Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
+//UN ARTICLE
+Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+
 //LE LEXIQUE
 Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
@@ -71,6 +74,7 @@ Route::get('/vue/dashboard/{profile_id}/users-last', 'Vue\UserVueController@subV
 Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVueSaeLast')->name('subVueSaeLastUser');
 Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
 Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
+Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

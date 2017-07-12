@@ -64,5 +64,14 @@ class DescriptionsTableSeeder extends Seeder
             'note' => 0,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
+        DB::table('descriptions')->insert([
+            'descriptive_id' => 1,
+            'descriptive_type' => 'App\Article',
+            'description' => 'Je ne suis pas d\'accord !!',
+            'user_id' => 1,
+            'note' => 0,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

@@ -1,6 +1,7 @@
 let chargedBox = 0,
     nbBox = 0;
 
+//CHANGE L'INDICATEUR DU MENU ACTIF
 function activeMenu(element) {
     let navHeadItem = document.getElementsByClassName('collapsible-header'),
         navBodyItem = document.querySelectorAll('.collapsible-body .row');
@@ -11,8 +12,11 @@ function activeMenu(element) {
     element.setAttribute('class', element.className + ' active-item');
 }
 
+
+//CHARGE LES BOXS DU DASHBOARD
 function loadDashBoxs() {
     let targetBoxs = document.getElementsByClassName('target-box'),
+        refreshTargetBox = document.getElementsByClassName('refresh-target-box'),
         flexDashBoxs = document.getElementById('flexDashBoxs');
 
     flexDashBoxs.style.height = 'auto';
@@ -22,17 +26,31 @@ function loadDashBoxs() {
     for(let i = 0 ; i < targetBoxs.length ; i++){
         let route = targetBoxs[i].getAttribute('data-sub-route');
         loadBox(route,targetBoxs[i]);
+        refreshTargetBox[i].addEventListener('click', ()=> {refreshBox(route, targetBoxs[i]);});
     }
 }
 
+
+//CHARGE UNE BOX
 function loadBox(target, element) {
     axios.get(target).then(function (response) {
         chargedBox++;
         element.innerHTML = response.data;
+        element.style.height = 'auto';
         if(nbBox === chargedBox) dimDashboard();
     });
 }
 
+
+//RAFRAICHI UNE BOX
+function refreshBox(route, element) {
+    element.style.height = element.offsetHeight + 'px';
+    element.innerHTML = '<div class="text-center"><div class="preloader-wrapper small active"> <div class="spinner-layer spinner-blue-only"> <div class="circle-clipper left"><div class="circle"></div> </div><div class="gap-patch"><div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div></div></div></div></div>';
+    setTimeout(function () {loadBox(route,element);},300);
+}
+
+
+//FONCTION DE CALCUL DE LA HAUTEUR DU DASHBOARD
 function dimDashboard() {
     setTimeout(function () {
         let targetBoxs = document.getElementsByClassName('target-box'),

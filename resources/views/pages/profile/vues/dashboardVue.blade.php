@@ -62,4 +62,8 @@
         @include('pages.profile.vues.dashboardBox.box',['routeTitle'=>'Ma recherche de partenaire','routeBox'=>route('subVuePartenaireUser', ['user_id'=>$user->id])])
     @endif
 
+    @if($user->settings->dash_random_word)
+        @include('pages.profile.vues.dashboardBox.box',['routeTitle'=>'Un mot au hasard','routeBox'=>route('subVueRandomWordUser', ['user_id'=>$user->id])])
+    @endif
+
 </div>
