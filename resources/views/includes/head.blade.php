@@ -24,5 +24,6 @@
 <link href="/css/global-search.css" rel="stylesheet">
 <link href="/font/oblyk/style.css" rel="stylesheet">
 <link href="/css/markdown.css" rel="stylesheet">
+<link href="/framework/phototheque/phototheque.css" rel="stylesheet">
 
 @yield('css')

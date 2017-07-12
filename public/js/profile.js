@@ -70,3 +70,22 @@ function dimDashboard() {
 function loadDashboard() {
     loadProfileRoute(document.getElementById('item-dashboard-menu'));
 }
+
+//OUVRE UN PROFIL
+function openAlbum(route) {
+    let target = document.getElementById('user-content');
+    axios.get(route).then(function (response) {
+        target.innerHTML = response.data;
+
+        new Phototheque('#albumPhototheque',
+            {
+                "maxHeight" : "150px","gouttiere" : "3px",
+                "lastRow" : "center",
+                "visiotheque" : true,
+                "visiotheque-option" : {
+                    "legende" : "data-legende"
+                }
+            }
+        );
+    });
+}

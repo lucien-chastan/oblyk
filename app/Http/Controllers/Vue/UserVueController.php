@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Album;
 use App\Article;
 use App\Crag;
 use App\Topo;
@@ -86,10 +87,22 @@ class UserVueController extends Controller
 
     }
 
-    function vuePhotos($user_id){
+    function vueAlbums($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->first();
         $data = ['user' => $user,];
+        return view('pages.profile.vues.albumsVue', $data);
+
+    }
+
+    function vuePhotos($user_id, $album_id){
+
+        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->first();
+        $album = Album::where('id',$album_id)->with('photos')->first();
+        $data = [
+            'user' => $user,
+            'album' => $album
+        ];
         return view('pages.profile.vues.photosVue', $data);
 
     }

@@ -25,7 +25,7 @@
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">photo_camera</i>Médias</div>
         <div class="collapsible-body">
-            <div data-route="{{route('vuePhotosUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">photo_camera</i> Photos</div>
+            <div data-route="{{route('vueAlbumsUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">photo_camera</i> Photos</div>
             <div data-route="{{route('vueVideosUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">videocam</i> Vidéos</div>
         </div>
     </li>

@@ -44,7 +44,8 @@ Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow'
 Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
 Route::get('/vue/profile/{profile_id}/personnaliser-dashboard', 'Vue\UserVueController@vuePersonnaliserDashboard')->name('vuePersonnaliserDashboardUser');
 Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
-Route::get('/vue/profile/{profile_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
+Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
+Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
 Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
 Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')->name('vueCroixUser');
 Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
@@ -128,6 +129,7 @@ Route::post('/modal/topoCouverture', 'CRUD\TopoController@topoCouvertureModal')-
 Route::post('/modal/massive', 'CRUD\MassiveController@massiveModal')->name('massiveModal');
 Route::post('/modal/massiveCrag', 'CRUD\MassiveCragController@massiveCragModal')->name('massiveCragModal');
 Route::post('/modal/word', 'CRUD\WordController@wordModal')->name('wordModal');
+Route::post('/modal/album', 'CRUD\AlbumController@albumModal')->name('albumModal');
 
 
 //CRUD AJAX
@@ -148,6 +150,7 @@ Route::resource('massives', 'CRUD\MassiveController');
 Route::resource('massiveCrags', 'CRUD\MassiveCragController');
 Route::resource('words', 'CRUD\WordController');
 Route::resource('follows', 'CRUD\FollowController');
+Route::resource('albums', 'CRUD\AlbumController');
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');

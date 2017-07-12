@@ -4,7 +4,6 @@
 @section('css')
     <link href="/css/crag.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
-    <link href="/framework/phototheque/phototheque.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
 
@@ -68,7 +67,6 @@
     <script src="/js/crag.js"></script>
     <script src="/js/photo.js"></script>
     <script src="/framework/chartJs/Chart.min.js"></script>
-    <script src="/framework/phototheque/phototheque.js"></script>
     <script>
         convertMarkdownZone();
         window.addEventListener('load', function () {
