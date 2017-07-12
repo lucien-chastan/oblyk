@@ -1,6 +1,5 @@
 //Marker simple
 let marker_00000 = L.icon({iconUrl: '/img/marker-00000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_11110 = L.icon({iconUrl: '/img/marker-11110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_10000 = L.icon({iconUrl: '/img/marker-10000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01000 = L.icon({iconUrl: '/img/marker-01000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00100 = L.icon({iconUrl: '/img/marker-00100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -11,15 +10,35 @@ let marker_00001 = L.icon({iconUrl: '/img/marker-00001.svg', iconSize: [24, 32],
 let marker_11000 = L.icon({iconUrl: '/img/marker-11000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01100 = L.icon({iconUrl: '/img/marker-01100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00110 = L.icon({iconUrl: '/img/marker-00110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_10010 = L.icon({iconUrl: '/img/marker-10010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_01010 = L.icon({iconUrl: '/img/marker-01010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_00011 = L.icon({iconUrl: '/img/marker-00011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_10100 = L.icon({iconUrl: '/img/marker-10100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10010 = L.icon({iconUrl: '/img/marker-10010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10001 = L.icon({iconUrl: '/img/marker-10001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_01010 = L.icon({iconUrl: '/img/marker-01010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_01001 = L.icon({iconUrl: '/img/marker-01001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_00101 = L.icon({iconUrl: '/img/marker-00101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
 //marker triple
 let marker_11100 = L.icon({iconUrl: '/img/marker-11100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_11010 = L.icon({iconUrl: '/img/marker-11010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_10110 = L.icon({iconUrl: '/img/marker-10110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01110 = L.icon({iconUrl: '/img/marker-01110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_00111 = L.icon({iconUrl: '/img/marker-00111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10110 = L.icon({iconUrl: '/img/marker-10110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10011 = L.icon({iconUrl: '/img/marker-10011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_11010 = L.icon({iconUrl: '/img/marker-11010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_11001 = L.icon({iconUrl: '/img/marker-11001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10101 = L.icon({iconUrl: '/img/marker-10101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_01101 = L.icon({iconUrl: '/img/marker-01101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_01011 = L.icon({iconUrl: '/img/marker-01011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+
+//marker quadruple
+let marker_11110 = L.icon({iconUrl: '/img/marker-11110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_11101 = L.icon({iconUrl: '/img/marker-11101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_11011 = L.icon({iconUrl: '/img/marker-11011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_10111 = L.icon({iconUrl: '/img/marker-10111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_01111 = L.icon({iconUrl: '/img/marker-01111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+
+//le cintuple
+let marker_11111 = L.icon({iconUrl: '/img/marker-11111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
 //marker de parking
 let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -57,6 +76,7 @@ function buildPopup(crag) {
     if(crag.type_grande_voie === 1) html += '<span class="grande-voie">grande-voie</span>';
     if(crag.type_bloc === 1) html += '<span class="bloc">bloc</span>';
     if(crag.type_deep_water === 1) html += '<span class="deep-water">deep-water</span>';
+    if(crag.type_via_ferrata === 1) html += '<span class="via-ferrata">via-ferrata</span>';
 
     html +=
                     `</td>
@@ -99,6 +119,21 @@ function styleIcon(type) {
     if(type === '11010') point = marker_11010;
     if(type === '11100') point = marker_11100;
     if(type === '11110') point = marker_11110;
+    if(type === '00011') point = marker_00011;
+    if(type === '10001') point = marker_10001;
+    if(type === '01001') point = marker_01001;
+    if(type === '00101') point = marker_00101;
+    if(type === '00111') point = marker_00111;
+    if(type === '10011') point = marker_10011;
+    if(type === '11001') point = marker_11001;
+    if(type === '10101') point = marker_10101;
+    if(type === '01101') point = marker_01101;
+    if(type === '01011') point = marker_01011;
+    if(type === '11101') point = marker_11101;
+    if(type === '11011') point = marker_11011;
+    if(type === '10111') point = marker_10111;
+    if(type === '01111') point = marker_01111;
+    if(type === '11111') point = marker_11111;
 
     return point;
 }

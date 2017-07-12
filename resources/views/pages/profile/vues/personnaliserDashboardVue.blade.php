@@ -6,7 +6,7 @@
         <div class="card-panel blue-card-panel">
             <h2 class="loved-king-font titre-profile-boite-vue">Personnaliser mon dashboard</h2>
 
-            <form class="submit-form" data-route="{{route('saveUserSettings')}}" onsubmit="submitData(this, null); return false">
+            <form class="submit-form" data-route="{{route('saveUserSettings')}}" onsubmit="submitData(this, loadDashboard); return false">
 
                 {!! $Inputs::popupError([]) !!}
 

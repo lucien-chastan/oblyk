@@ -18,6 +18,20 @@ class UserController extends Controller
         $settings = UserSettings::where('user_id', Auth::id())->first();
 
         $settings->dash_welcome = $request->input('dash_welcome');
+        $settings->dash_comments = $request->input('dash_comments');
+        $settings->dash_crags = $request->input('dash_crags');
+        $settings->dash_friend_cross = $request->input('dash_friend_cross');
+        $settings->dash_forum = $request->input('dash_forum');
+        $settings->dash_list_crag_sae = $request->input('dash_list_crag_sae');
+        $settings->dash_my_cross = $request->input('dash_my_cross');
+        $settings->dash_oblyk_news = $request->input('dash_oblyk_news');
+        $settings->dash_partenaire = $request->input('dash_partenaire');
+        $settings->dash_photos = $request->input('dash_photos');
+        $settings->dash_routes = $request->input('dash_routes');
+        $settings->dash_sae = $request->input('dash_sae');
+        $settings->dash_topos = $request->input('dash_topos');
+        $settings->dash_users = $request->input('dash_users');
+        $settings->dash_videos = $request->input('dash_videos');
         $settings->save();
 
         return response()->json($settings);

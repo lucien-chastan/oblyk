@@ -47,3 +47,8 @@ function dimDashboard() {
         flexDashBoxs.style.height = (somme / 2) + 'px';
     },100);
 }
+
+//CHARGE L'ONGLET DASHBOARDS
+function loadDashboard() {
+    loadProfileRoute(document.getElementById('item-dashboard-menu'));
+}
