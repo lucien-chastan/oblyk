@@ -1,4 +1,5 @@
-let currentVue;
+let currentVue,
+    activeSettingsTab;
 
 
 //INSCRIT LES ÉVENEMENTS SUR LES ITEMS DU MENU + CHARGE LA BONNE ROUTE
@@ -62,6 +63,9 @@ function afterLoad() {
 
     //initialise les tabs
     $('ul.tabs').tabs();
+
+    //on change pour le dernier onglet selectionné
+    $('ul.tabs').tabs('select_tab', activeSettingsTab);
 
     //initialise les selects
     $('select').material_select();

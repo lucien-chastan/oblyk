@@ -11,6 +11,7 @@ use App\RainExposure;
 use App\Reception;
 use App\Rock;
 use App\Sector;
+use App\SocialNetwork;
 use App\Start;
 use App\Sun;
 use Illuminate\Support\Facades\App;
@@ -715,6 +716,35 @@ class InputTemplates extends ServiceProvider{
         foreach ($Inclines as $key => $incline){
             $selected = ($incline->id == $value)? 'selected' : '';
             $html .= '<option class="left" data-icon="/img/incline-' . ($key + 1) . '.png" ' . $selected . ' value="' . $incline->id . '">' . ucfirst($incline->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //RÉSEAUX SOCIAUX
+    public static function social($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Socials = SocialNetwork::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Socials as $key => $social){
+            $selected = ($social->id == $value)? 'selected' : '';
+            $html .= '<option class="left" data-icon="/img/social-' . $social->id . '.svg" ' . $selected . ' value="' . $social->id . '">' . ucfirst($social->label) . '</option>';
         }
 
         $html .= '

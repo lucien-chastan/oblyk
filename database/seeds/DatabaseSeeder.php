@@ -47,5 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSettingsTableSeeder::class);
         $this->call(ArticlesTableSeeder::class);
         $this->call(TickListsTableSeeder::class);
+        $this->call(SocialNetworksTableSeeder::class);
+        $this->call(UserSocialNetworksTableSeeder::class);
     }
 }

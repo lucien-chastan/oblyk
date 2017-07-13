@@ -184,7 +184,7 @@ class UserVueController extends Controller
 
     function vueSettings($user_id){
 
-        $user = User::where('id',$user_id)->with('settings')->first();
+        $user = User::where('id',$user_id)->with('settings')->with('socialNetworks.socialNetwork')->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.settingsVue', $data);
 

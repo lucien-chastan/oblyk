@@ -124,6 +124,7 @@ Route::post('/modal/massive', 'CRUD\MassiveController@massiveModal')->name('mass
 Route::post('/modal/massiveCrag', 'CRUD\MassiveCragController@massiveCragModal')->name('massiveCragModal');
 Route::post('/modal/word', 'CRUD\WordController@wordModal')->name('wordModal');
 Route::post('/modal/album', 'CRUD\AlbumController@albumModal')->name('albumModal');
+Route::post('/modal/socialNetwork', 'CRUD\SocialNetworkController@socialNetworkModal')->name('socialNetworkModal');
 
 
 //CRUD AJAX
@@ -147,6 +148,7 @@ Route::resource('follows', 'CRUD\FollowController');
 Route::resource('albums', 'CRUD\AlbumController');
 Route::resource('tickLists', 'CRUD\TickListController');
 Route::resource('users', 'CRUD\UserController');
+Route::resource('socialNetworks', 'CRUD\SocialNetworkController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
