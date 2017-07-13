@@ -90,6 +90,12 @@ function majSettingsMessagerie() {
     showSubmitLoader(false, document.getElementById('form-messagerie-setting'));
 }
 
+//INDICATION QUE LES OPTIONS DE CONFIDENTIALITÉ ONT ÉTÉES MIS À JOUR
+function majSettingsConfidentialite() {
+    Materialize.toast('Vos options de confidentialités ont étées mis à jour', 4000);
+    showSubmitLoader(false, document.getElementById('form-confidentialite-setting'));
+}
+
 
 
 

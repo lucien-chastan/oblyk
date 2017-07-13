@@ -4,7 +4,7 @@
     </div>
     <div class="right-col">
         <p class="truncate">{{$user->name}}</p>
-        <p class="truncate">Homme, 27 ans</p>
+        <p class="truncate">{{$user->genre}}, {{$user->age}} ans</p>
     </div>
 </div>
 

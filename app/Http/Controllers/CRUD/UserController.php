@@ -91,6 +91,17 @@ class UserController extends Controller
         return response()->json($settings);
     }
 
+    //ENREGISTRE LES PARAMÈTRES DE CONFIDENTIALITÉ
+    function saveUserConfidentialiteSettings(Request $request){
+
+        $settings = UserSettings::where('user_id', Auth::id())->first();
+
+        $settings->public = $request->input('public');
+        $settings->save();
+
+        return response()->json($settings);
+    }
+
 
     /**
      * Display a listing of the resource.

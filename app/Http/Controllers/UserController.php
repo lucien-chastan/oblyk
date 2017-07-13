@@ -12,6 +12,12 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)->first();
 
+        if($user->sex == 0) $user->genre = 'Inféfini';
+        if($user->sex == 1) $user->genre = 'Femme';
+        if($user->sex == 2) $user->genre = 'Homme';
+
+        $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
+
         $data = [
             'user' => $user,
             'meta_title' => $user['name'],
