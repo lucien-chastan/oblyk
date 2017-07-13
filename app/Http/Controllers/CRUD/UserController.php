@@ -7,6 +7,7 @@ use App\UserSettings;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,6 +104,63 @@ class UserController extends Controller
     }
 
 
+    //UPLOAD DU BANDEAU
+    function uploadBandeau(Request $request){
+        $user_id = Auth::id();
+
+        if ($request->hasFile('bandeau')) {
+
+            //Image en 1300px de large
+            Image::make($request->file('bandeau'))
+                ->orientate()
+                ->resize(1300, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/1300/bandeau-' . $user_id . '.jpg'));
+
+            //Image en 500px de large
+            Image::make($request->file('bandeau'))
+                ->orientate()
+                ->resize(500, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/500/bandeau-' . $user_id . '.jpg'));
+        }
+    }
+
+    //UPLOAD DE LA PHOTOD DE PROFIL
+    function uploadPhotoProfile(Request $request){
+        $user_id = Auth::id();
+
+        if ($request->hasFile('photo')) {
+
+            //Image en 1000px
+            Image::make($request->file('photo'))
+                ->orientate()
+                ->fit(1000, 1000)
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/1000/user-' . $user_id . '.jpg'));
+
+            //Image en 200px
+            Image::make($request->file('photo'))
+                ->orientate()
+                ->fit(200, 200)
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/200/user-' . $user_id . '.jpg'));
+
+            //Image en 100px
+            Image::make($request->file('photo'))
+                ->orientate()
+                ->fit(100, 100)
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/100/user-' . $user_id . '.jpg'));
+
+            //Image en 50px
+            Image::make($request->file('photo'))
+                ->orientate()
+                ->fit(50, 50)
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/users/50/user-' . $user_id . '.jpg'));
+        }
+    }
     /**
      * Display a listing of the resource.
      *

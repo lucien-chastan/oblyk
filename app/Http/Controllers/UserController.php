@@ -18,6 +18,9 @@ class UserController extends Controller
 
         $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
 
+        $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
+        $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg' : '';
+
         $data = [
             'user' => $user,
             'meta_title' => $user['name'],

@@ -20,6 +20,42 @@
 
 </form>
 
+{{--UPLOAD DES PHOTOS DE PROFIL ET BANDEAU--}}
+<h2 class="loved-king-font titre-profile-boite-vue">Photo de profil &amp; Bandeau</h2>
+
+<form id="form-upload-photo-profil-setting" class="submit-form row" onsubmit="return false">
+
+    {!! $Inputs::popupError([]) !!}
+
+    <div class="row">
+        <div class="upload-settings-col-image">
+            <img src="{{$user->image}}?cache={{date('Ymdhis')}}" alt="" class="circle left img-settings">
+        </div>
+        <div class="upload-settings-col-input">
+            {!! $Inputs::upload(['name'=>'image', 'filter'=>'image/*', 'id'=>'upload-photo-profil' ,'label'=>'Photo de profil', 'onchange'=>'uploadImageProfile()']) !!}
+            {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo-profil']) !!}
+        </div>
+    </div>
+
+</form>
+
+<form id="form-upload-photo-bandeau-setting" class="submit-form row" onsubmit="return false">
+
+    {!! $Inputs::popupError([]) !!}
+
+    <div class="row">
+        <div class="upload-settings-col-image">
+            <div class="left img-settings grey darken-1" style="background-image: url('{{$user->bandeau}}')">
+
+            </div>
+        </div>
+        <div class="upload-settings-col-input">
+            {!! $Inputs::upload(['name'=>'bandeau', 'filter'=>'image/*', 'id'=>'upload-photo-bandeau' ,'label'=>'Bandeau', 'onchange'=>'uploadBandeau()']) !!}
+            {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo-bandeau']) !!}
+        </div>
+    </div>
+
+</form>
 
 {{--SUPPRIMER SON COMPTE--}}
 <form class="submit-form row" data-route="" onsubmit="submitData(this, majSettingsDashboard); return false">

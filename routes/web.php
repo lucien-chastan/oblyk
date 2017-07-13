@@ -155,6 +155,8 @@ Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('sa
 Route::post('/user/settings/messagerie', 'CRUD\UserController@saveUserMessagerieSettings')->name('saveUserMessagerieSettings');
 Route::post('/user/settings/confidentialite', 'CRUD\UserController@saveUserConfidentialiteSettings')->name('saveUserConfidentialiteSettings');
 Route::post('/user/settings/mail-password', 'CRUD\UserController@saveMailPassword')->name('saveMailPassword');
+Route::post('/upload/userBandeau', 'CRUD\UserController@uploadBandeau')->name('uploadBandeau');
+Route::post('/upload/userPhotoProfile', 'CRUD\UserController@uploadPhotoProfile')->name('uploadPhotoProfile');
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');

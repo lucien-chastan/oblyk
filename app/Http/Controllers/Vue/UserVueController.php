@@ -136,7 +136,7 @@ class UserVueController extends Controller
 
     function vueProjet($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.projetVue', $data);
 
@@ -144,7 +144,7 @@ class UserVueController extends Controller
 
     function vueAnalytiks($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.analytiksVue', $data);
 
@@ -152,7 +152,7 @@ class UserVueController extends Controller
 
     function vueMessages($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.messagesVue', $data);
 
@@ -160,7 +160,7 @@ class UserVueController extends Controller
 
     function vueLieux($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.lieuxVue', $data);
 
@@ -168,7 +168,7 @@ class UserVueController extends Controller
 
     function vuePartenaireParametres($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.partenaireParametresVue', $data);
 
@@ -176,7 +176,7 @@ class UserVueController extends Controller
 
     function vueNotifications($user_id){
 
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id',Auth::id())->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.notificationsVue', $data);
 
@@ -184,7 +184,11 @@ class UserVueController extends Controller
 
     function vueSettings($user_id){
 
-        $user = User::where('id',$user_id)->with('settings')->with('socialNetworks.socialNetwork')->first();
+        $user = User::where('id',Auth::id())->with('settings')->with('socialNetworks.socialNetwork')->first();
+
+        $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
+        $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg?cache=' . date('Ymdhis') : '';
+
         $data = ['user' => $user,];
         return view('pages.profile.vues.settingsVue', $data);
 

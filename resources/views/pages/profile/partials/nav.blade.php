@@ -1,6 +1,6 @@
-<div class="user-bandeau">
+<div class="user-bandeau grey darken-1" style="background-image: url('{{$user->bandeau}}')">
     <div class="left-col">
-        <img src="/storage/users/user-1.jpg" class="circle img-nav-user z-depth-3">
+        <img src="{{$user->image}}" alt="phoot de profil de {{$user->name}} " class="circle img-nav-user z-depth-3">
     </div>
     <div class="right-col">
         <p class="truncate">{{$user->name}}</p>

@@ -49,8 +49,6 @@
 
         .user-bandeau{
             height: 200px;
-            background-color: rgb(150,150,150);
-            background-image: url("/img/oblyk-home-baume-rousse.jpg");
             background-size: cover;
             padding-top: 84px;
             padding-left: 10px;
@@ -294,5 +292,23 @@
 
     .titre-ajouter-liens {
         margin-top: 2em !important;
+    }
+
+    .img-settings {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+        background-size: cover;
+    }
+
+    .upload-settings-col-image {
+        width: 120px;
+        display: inline-block;
+    }
+
+    .upload-settings-col-input {
+        width: calc(100% - 130px);
+        display: inline-block;
+        vertical-align: top;
     }
 }

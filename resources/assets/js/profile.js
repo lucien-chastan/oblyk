@@ -129,3 +129,66 @@ function showChangeMdp() {
         zoneMdp.style.display = 'block';
     }
 }
+
+function uploadBandeau() {
+    let form = document.getElementById('form-upload-photo-bandeau-setting'),
+        inputData = form.getElementsByClassName('input-data'),
+        data = new FormData();
+
+    data.append('foo', 'bar');
+    data.append('bandeau', document.getElementById('upload-photo-bandeau').files[0]);
+
+    //ajout les autres données à passage de la form
+    for(let i in inputData){
+        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+    }
+
+    let config = {
+        onUploadProgress: function(progressEvent) {
+            let percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            document.getElementById('progressbar-upload-photo-bandeau').style.width = percentCompleted + '%';
+        }
+    };
+
+    axios.post('/upload/userBandeau', data, config).then(
+        function (response) {
+            reloadCurrentVue();
+        }
+    ).catch(
+        function (err) {
+            console.log(err.message);
+        }
+    );
+}
+
+
+function uploadImageProfile() {
+    let form = document.getElementById('form-upload-photo-profil-setting'),
+        inputData = form.getElementsByClassName('input-data'),
+        data = new FormData();
+
+    data.append('foo', 'bar');
+    data.append('photo', document.getElementById('upload-photo-profil').files[0]);
+
+    //ajout les autres données à passage de la form
+    for(let i in inputData){
+        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+    }
+
+    let config = {
+        onUploadProgress: function(progressEvent) {
+            let percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            document.getElementById('progressbar-upload-photo-profil').style.width = percentCompleted + '%';
+        }
+    };
+
+    axios.post('/upload/userPhotoProfile', data, config).then(
+        function (response) {
+            reloadCurrentVue();
+        }
+    ).catch(
+        function (err) {
+            console.log(err.message);
+        }
+    );
+}
