@@ -93,8 +93,15 @@ class searchController extends Controller
         $users = [];
         $findUsers = User::where('name','like','%' . $search . '%')->orderBy('name', 'asc')->get();
         foreach ($findUsers as $user){
-            $user->url = '/';
-            $user->photo = '/img/icon-search-user.svg';
+            $user->url = route('userPage', ['user_id'=>$user->id,'user_label'=>str_slug($user->name)]);
+
+            if($user->sex == 0) $user->genre = "Indéfini";
+            if($user->sex == 1) $user->genre = "Femme";
+            if($user->sex == 2) $user->genre = "Homme";
+
+            $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
+            $user->photo = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
+
             $users[] = $user;
         }
 

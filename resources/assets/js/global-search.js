@@ -145,7 +145,7 @@ function globalSearche(searchInput) {
             if(data.nombre.users > 0){
                 scaleTransition(nbUser, 'in');
                 for(let i = 0 ; i < data.nombre.users ; i++) {
-                    userZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.users[i].photo}"><a href="${data.users[i].url}">${data.users[i].name}</a><br><span class="grey-text">information</span></div>`;
+                    userZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.users[i].photo}"><a href="${data.users[i].url}">${data.users[i].name}</a><br><span class="grey-text">${data.users[i].genre}, ${data.users[i].age} ans</span></div>`;
                 }
                 rideau(document.querySelectorAll('#global-search-user .rideau-animation'));
             }else{
