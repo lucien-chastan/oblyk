@@ -1,10 +1,11 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
 
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         @if($dataModal['descriptive_type'] == 'App\Route')

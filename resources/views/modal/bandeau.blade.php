@@ -1,8 +1,9 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
-{!! $Inputs::popupError([]) !!}
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     {!! $Inputs::popupTitle(['title'=>'Définir comme bandeau']) !!}
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}

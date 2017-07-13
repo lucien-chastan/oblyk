@@ -1,10 +1,10 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form" onsubmit="uploadCouverture(this, refresh); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>'Couverture']) !!}

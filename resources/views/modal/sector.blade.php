@@ -1,10 +1,10 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['sector']->label, 'label'=>'Nom du secteur', 'placeholder'=>'Nom du secteur (exemple : Face Nord)','type'=>'text']) !!}

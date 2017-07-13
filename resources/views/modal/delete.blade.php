@@ -1,10 +1,11 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
-{!! $Inputs::popupError([]) !!}
+{!! $Inputs::popupTitle(['title'=>'Supprimer un élément']) !!}
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupTitle(['title'=>'Supprimer un élément']) !!}
+    {!! $Inputs::popupError([]) !!}
+
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'DELETE']) !!}
 
     <div class="row">

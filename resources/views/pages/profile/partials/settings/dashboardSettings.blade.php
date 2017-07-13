@@ -1,4 +1,4 @@
-<form class="submit-form" data-route="{{route('saveUserSettings')}}" onsubmit="submitData(this, majSettingsDashboard); return false">
+<form id="form-dashboard-setting" class="submit-form" data-route="{{route('saveUserSettings')}}" onsubmit="submitData(this, majSettingsDashboard); return false">
 
     <h2 class="loved-king-font titre-profile-boite-vue">Choix des boîtes qui sont affichées sur mon Dashboard</h2>
 

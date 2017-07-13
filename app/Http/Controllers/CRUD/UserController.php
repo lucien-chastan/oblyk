@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\User;
 use App\UserSettings;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,6 +36,44 @@ class UserController extends Controller
         $settings->save();
 
         return response()->json($settings);
+    }
+
+    function saveMailPassword(Request $request){
+
+        $user = User::where('id',Auth::id())->first();
+
+        if($request->input('change_mpd')){
+
+            $this->validate($request, [
+                'password_old'=>"required",
+                'password_new'=>"required|same:password_confirm|min:8|max:255",
+                'password_confirm'=>"required|same:password_new|min:8|max:255",
+                'email'=>"required|unique:users,email,$user->id|max:255|email",
+            ]);
+
+            $currentPassword = $user->password;
+            $newPassword = $request->input('password_new');
+            $checkPassword = $request->input('password_old');
+
+            if(Hash::check($checkPassword, $currentPassword)) {
+                $user->password = Hash::make($newPassword);
+                $user->email = $request->input('email');
+                $user->save();
+            } else {
+                return response()->json(['password_old' => ['Erreur dans l\'ancien mot de passe']], 422);
+            }
+
+        }else{
+
+            $this->validate($request, [
+                'email'=>"required|unique:users,email,$user->id|max:255|email",
+            ]);
+
+            $user->email = $request->input('email');
+            $user->save();
+        }
+
+        return response()->json($user);
     }
 
     /**
@@ -99,11 +138,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
+        $user = User::where('id', Auth::id())->first();
+
         $this->validate($request, [
-            'name'=>'required|unique:users,name,' . Auth::id() . '|max:255'
+            'name'=>"required|unique:users,name,$user->id|max:255"
         ]);
 
-        $user = User::where('id', Auth::id())->first();
         $user->name = $request->input('name');
         $user->localisation = $request->input('localisation');
         $user->birth = $request->input('birth');

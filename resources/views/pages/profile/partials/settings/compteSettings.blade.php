@@ -1,6 +1,6 @@
 
 {{--INFORMATIONS GÉNÉRALES--}}
-<form class="submit-form row" data-route="/users/{{$user->id}}" onsubmit="submitData(this, majSettingsCompte); return false">
+<form id="form-compte-setting" class="submit-form row" data-route="/users/{{$user->id}}" onsubmit="submitData(this, majSettingsCompte); return false">
 
     <h2 class="loved-king-font titre-profile-boite-vue">Mes informations</h2>
 

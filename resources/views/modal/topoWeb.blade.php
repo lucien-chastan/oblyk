@@ -1,10 +1,10 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{$dataModal['callback']}}); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du topo', 'type'=>'text']) !!}

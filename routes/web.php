@@ -150,6 +150,7 @@ Route::resource('users', 'CRUD\UserController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
+Route::post('/user/settings/mail-password', 'CRUD\UserController@saveMailPassword')->name('saveMailPassword');
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');

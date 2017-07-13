@@ -113,9 +113,9 @@ function initOpenModal() {
 //CETTE FONCTION GÉRE LE SUBMIT DES DONNÉES EN AJAX
 function submitData(form, callback) {
     let inputData = form.getElementsByClassName('input-data'),
-        method = document.getElementById('_method').value,
+        method = form.querySelector('#_method').value,
         route = form.getAttribute('data-route'),
-        errorPopupText = document.getElementById('errorPopupText'),
+        errorPopupText = form.getElementsByClassName('error-popup-text')[0],
         data = {};
 
     //Si nous ne somme pas déjà entrain de soumettre un formulaire
@@ -124,7 +124,7 @@ function submitData(form, callback) {
         ajaxSubmited = true;
 
         //on affiche un loader à la place du bouton submit
-        showSubmitLoader(true);
+        showSubmitLoader(true, form);
 
         //on cache le message d'erreur
         errorPopupText.style.display = 'none';
@@ -162,7 +162,7 @@ function submitData(form, callback) {
 
             //on renseigne comme quoi nous ne somme plus entrain de soumettre un forumlaire
             ajaxSubmited = false;
-            showSubmitLoader(false);
+            showSubmitLoader(false, form);
 
             if(error.response.status === 422){
 
@@ -177,7 +177,7 @@ function submitData(form, callback) {
 
                     try {
                         //on ajoute la class invalid au champs qui ne sont pas bon
-                        let errorInput = document.querySelector(".submit-form input[name='" + key + "']");
+                        let errorInput = form.querySelector("input[name='" + key + "']");
                         errorInput.setAttribute('class', errorInput.className + ' invalid');
                     }catch (e){}
                 }
@@ -198,9 +198,9 @@ function submitData(form, callback) {
 }
 
 //MONTRE OU CACHE LE LOADER AU SUBMIT D'UN FORM EN AJAX
-function showSubmitLoader(visible) {
-    let submitBtn = document.getElementById('submit-btn'),
-        submitLoader = document.getElementById('submit-loader');
+function showSubmitLoader(visible, form = document.getElementsByClassName('submit-form')[0]) {
+    let submitBtn = form.querySelector('#submit-btn'),
+        submitLoader = form.querySelector('#submit-loader');
 
     if(visible){
         submitBtn.style.display = 'none';

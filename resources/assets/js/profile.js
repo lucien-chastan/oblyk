@@ -69,13 +69,19 @@ function dimDashboard() {
 //INDICATION QUE LE DASHBOARD À ÉTÉ MIS À JOUR
 function majSettingsDashboard() {
     Materialize.toast('Les paramètres du dashboard ont été mis à jour', 4000);
-    showSubmitLoader(false);
+    showSubmitLoader(false, document.getElementById('form-dashboard-setting'));
 }
 
 //INDICATION QUE LE COMPTE À ÉTÉ MIS À JOUR
 function majSettingsCompte() {
     Materialize.toast('Votre compte a été mis à jour', 4000);
-    showSubmitLoader(false);
+    showSubmitLoader(false, document.getElementById('form-compte-setting'));
+}
+
+//INDICATION QUE L'EMAIL À ÉTÉ MIS À JOUR
+function majSettingsEmail() {
+    Materialize.toast('Vos options de connexion ont étées mise à jour', 4000);
+    showSubmitLoader(false, document.getElementById('form-password-setting'));
 }
 
 
@@ -98,4 +104,16 @@ function openAlbum(route) {
             }
         );
     });
+}
+
+function showChangeMdp() {
+    let zoneMdp = document.getElementById('zone-change-mdp');
+
+    if(zoneMdp.getAttribute('data-visible') === 'true'){
+        zoneMdp.setAttribute('data-visible', 'false');
+        zoneMdp.style.display = 'none';
+    }else{
+        zoneMdp.setAttribute('data-visible', 'true');
+        zoneMdp.style.display = 'block';
+    }
 }

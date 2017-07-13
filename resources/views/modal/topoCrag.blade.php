@@ -1,12 +1,12 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form">
-    <div class="row">
 
+    {!! $Inputs::popupError([]) !!}
+
+    <div class="row">
 
         {{--LISTE DES TOPOS--}}
         <div id="zone-topo-est-il-present">

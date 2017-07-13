@@ -1,10 +1,10 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>'Signaler un problème']) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form" data-route="{{ route('sendProblem') }}" onsubmit="submitData(this, closeProblemModal); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         <div class="col s12">

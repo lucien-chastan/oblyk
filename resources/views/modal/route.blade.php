@@ -1,10 +1,10 @@
 @inject('Inputs','App\Lib\InputTemplates')
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
-{!! $Inputs::popupError([]) !!}
-
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="setJsonLongueur();submitData(this, {{ $dataModal['callback'] }}); return false">
+
+    {!! $Inputs::popupError([]) !!}
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'id'=>'popup_line_name', 'value'=>$dataModal['ligne']->label, 'label'=>'Nom de la ligne', 'icon'=>'icon-nom', 'placeholder'=>'Nom de la ligne (exemple : Biographie)','type'=>'text']) !!}

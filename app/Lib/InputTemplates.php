@@ -66,10 +66,11 @@ class InputTemplates extends ServiceProvider{
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $align = (isset($options['align'])) ? 'text-' . $options['align'] : 'text-left';
+        $onchange = (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : "";
 
         return '
         <p class="' . $align . '">
-            <input class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
+            <input ' . $onchange . ' class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
             <label for="' . $id . '">' . $label .'</label>
         </p>';
     }
