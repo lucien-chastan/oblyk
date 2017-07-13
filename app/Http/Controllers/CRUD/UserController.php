@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
-    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN lien
+    //ENREGISTRE LES PARAMÈTRES DU DASH
     function saveSettings(Request $request){
 
         $settings = UserSettings::where('user_id', Auth::id())->first();
@@ -38,6 +38,7 @@ class UserController extends Controller
         return response()->json($settings);
     }
 
+    //ENREGISTRE LES PARAMÈTRES DE CONNEXION
     function saveMailPassword(Request $request){
 
         $user = User::where('id',Auth::id())->first();
@@ -75,6 +76,21 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+
+
+    //ENREGISTRE LES PARAMÈTRES DE LA MESSAGERIE
+    function saveUserMessagerieSettings(Request $request){
+
+        $settings = UserSettings::where('user_id', Auth::id())->first();
+
+        $settings->mail_new_conversation = $request->input('mail_new_conversation');
+        $settings->mail_new_message = $request->input('mail_new_message');
+        $settings->sound_alert = $request->input('sound_alert');
+        $settings->save();
+
+        return response()->json($settings);
+    }
+
 
     /**
      * Display a listing of the resource.

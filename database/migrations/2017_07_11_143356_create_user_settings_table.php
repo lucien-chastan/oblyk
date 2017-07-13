@@ -17,6 +17,10 @@ class CreateUserSettingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->boolean('partenaire')->nullable()->default(0);
+            $table->boolean('mail_new_conversation')->nullable()->default(1);
+            $table->boolean('mail_new_message')->nullable()->default(0);
+            $table->boolean('sound_alert')->nullable()->default(1);
+            $table->boolean('public')->nullable()->default(1);
             $table->boolean('dash_welcome')->nullable()->default(1);
             $table->boolean('dash_comments')->nullable()->default(0);
             $table->boolean('dash_crags')->nullable()->default(1);

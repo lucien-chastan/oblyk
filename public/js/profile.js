@@ -84,6 +84,12 @@ function majSettingsEmail() {
     showSubmitLoader(false, document.getElementById('form-password-setting'));
 }
 
+//INDICATION QUE LES OPTIONS DE MESSAGERIE À ÉTÉ MIS À JOUR
+function majSettingsMessagerie() {
+    Materialize.toast('Vos options de messagerie ont étées mis à jour', 4000);
+    showSubmitLoader(false, document.getElementById('form-messagerie-setting'));
+}
+
 
 
 
