@@ -8,6 +8,7 @@ use App\Crag;
 use App\TickList;
 use App\Topo;
 use App\User;
+use App\UserConversation;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
@@ -153,7 +154,11 @@ class UserVueController extends Controller
     function vueMessages($user_id){
 
         $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
+        $conversations = UserConversation::where('user_id', $user->id)->with('conversation.userConversations.user')->get();
+        $data = [
+            'user' => $user,
+            'conversations' => $conversations
+        ];
         return view('pages.profile.vues.messagesVue', $data);
 
     }

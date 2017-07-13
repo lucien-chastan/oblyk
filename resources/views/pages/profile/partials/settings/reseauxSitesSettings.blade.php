@@ -26,7 +26,7 @@
     </table>
 </div>
 
-<h2 class="loved-king-font titre-profile-boite-vue titre-ajouter-liens">Ajouter un liens</h2>
+<h2 class="loved-king-font titre-profile-boite-vue titre-ajouter-liens">Ajouter un lien</h2>
 
 <form class="submit-form row" data-route="/socialNetworks" onsubmit="submitData(this, reloadCurrentVue); return false">
 

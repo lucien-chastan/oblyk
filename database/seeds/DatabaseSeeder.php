@@ -49,5 +49,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TickListsTableSeeder::class);
         $this->call(SocialNetworksTableSeeder::class);
         $this->call(UserSocialNetworksTableSeeder::class);
+        $this->call(ConversationsTableSeeder::class);
+        $this->call(UserConversationsTableSeeder::class);
+        $this->call(MessagesTableSeeder::class);
     }
 }
