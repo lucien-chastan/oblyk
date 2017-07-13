@@ -122,12 +122,12 @@ function submitData(form, callback) {
     if(!ajaxSubmited){
 
         ajaxSubmited = true;
+
+        //on affiche un loader à la place du bouton submit
         showSubmitLoader(true);
 
         //on cache le message d'erreur
         errorPopupText.style.display = 'none';
-
-        //on affiche un loader à la place du bouton submit
 
         //créer un talbeau JSON des données à passer en paramètre
         for(let i in inputData){
@@ -137,6 +137,9 @@ function submitData(form, callback) {
                 }else{
                     data[inputData[i].name] = inputData[i].value;
                 }
+
+                //on enleve le invalid s'il y a
+                inputData[i].setAttribute('class', inputData[i].className.replace(' invalid', ''));
             }
         }
 
@@ -161,29 +164,34 @@ function submitData(form, callback) {
             ajaxSubmited = false;
             showSubmitLoader(false);
 
-            //table des erreurs
-            let errorArray = [];
+            if(error.response.status === 422){
 
-            //on boucle sur les erreurs renvoyées
-            for(let detailError in error.response.data){
+                //table des erreurs
+                let errorArray = [];
 
-                //on ajout au tableau l'erreur courante
-                errorArray.push(error.response.data[detailError]);
+                // on boucle sur les erreurs renvoyées
+                for(let key in error.response.data){
 
-                console.log(error.response.data);
-                try {
-                    //on ajoute la class invalid au champs qui ne sont pas bon
-                    let errorInput = document.querySelector('.submit-form #description');
-                    errorInput.setAttribute('class', errorInput.className + ' invalid');
-                }catch (e){}
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(error.response.data[key]);
+
+                    try {
+                        //on ajoute la class invalid au champs qui ne sont pas bon
+                        let errorInput = document.querySelector(".submit-form input[name='" + key + "']");
+                        errorInput.setAttribute('class', errorInput.className + ' invalid');
+                    }catch (e){}
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                errorPopupText.style.display = 'block';
+                errorPopupText.innerHTML = textError;
+            }else{
+                errorPopupText.style.display = 'block';
+                errorPopupText.innerHTML = 'Erreur ' + error.response.status;
             }
-
-            //compil les erreurs
-            let textError = errorArray.join('<br>');
-
-            //on affiche les erreurs
-            errorPopupText.style.display = 'block';
-            errorPopupText.innerHTML = textError;
 
         });
     }

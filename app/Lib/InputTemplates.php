@@ -267,6 +267,34 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
+    //SELECT DU TYPE DE ROCHE
+    public static function sex($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 0;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+        $tabSexs = ['indéfinie','femme','homme'];
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($tabSexs as $key => $sex){
+            $selected = ($key == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $key . '">' . ucfirst($sex) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
 
     //SELECT DU TYPE DE GRIMPE
     public static function climbs($options){

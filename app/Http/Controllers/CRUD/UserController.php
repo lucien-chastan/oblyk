@@ -98,7 +98,20 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'name'=>'required|unique:users,name,' . Auth::id() . '|max:255'
+        ]);
+
+        $user = User::where('id', Auth::id())->first();
+        $user->name = $request->input('name');
+        $user->localisation = $request->input('localisation');
+        $user->birth = $request->input('birth');
+        $user->sex = $request->input('sex');
+        $user->description = $request->input('description');
+        $user->save();
+
+        return response()->json(json_encode($user));
     }
 
     /**

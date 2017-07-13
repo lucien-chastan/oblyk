@@ -66,9 +66,15 @@ function dimDashboard() {
     },100);
 }
 
-//INDICATION QUE LE DASHBOARD
+//INDICATION QUE LE DASHBOARD À ÉTÉ MIS À JOUR
 function majSettingsDashboard() {
     Materialize.toast('Les paramètres du dashboard ont été mis à jour', 4000);
+    showSubmitLoader(false);
+}
+
+//INDICATION QUE LE COMPTE À ÉTÉ MIS À JOUR
+function majSettingsCompte() {
+    Materialize.toast('Votre compte a été mis à jour', 4000);
     showSubmitLoader(false);
 }
 

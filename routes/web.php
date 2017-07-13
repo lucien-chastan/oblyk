@@ -74,9 +74,6 @@ Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@s
 Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
 Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
 
-//CRUD USER
-Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
-
 
 //LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
@@ -149,6 +146,10 @@ Route::resource('words', 'CRUD\WordController');
 Route::resource('follows', 'CRUD\FollowController');
 Route::resource('albums', 'CRUD\AlbumController');
 Route::resource('tickLists', 'CRUD\TickListController');
+Route::resource('users', 'CRUD\UserController');
+
+//CRUD USER
+Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');

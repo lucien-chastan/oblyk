@@ -15,6 +15,10 @@ class UsersTableSeeder extends Seeder
             'name' => 'Lucien',
             'email' => 'chastanlucien@gmail.com',
             'password' => bcrypt('Lucien'),
+            'localisation' => 'Drôme, Vosges, Alpes Maritime',
+            'birth' => 1990,
+            'sex' => 2,
+            'description' => 'Bonjour, je suis Lucien !',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -29,6 +33,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'Léna',
             'email' => 'lena@gmail.com',
             'password' => bcrypt('mdpLéna'),
+            'birth' => 1991,
+            'sex' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
     }
