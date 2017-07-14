@@ -11,4 +11,8 @@ class Conversation extends Model
         return $this->hasMany('App\UserConversation','conversation_id', 'id');
     }
 
+    public function messages(){
+        return $this->hasMany('App\Message','conversation_id', 'id');
+    }
+
 }

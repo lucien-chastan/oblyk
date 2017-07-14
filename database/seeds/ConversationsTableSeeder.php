@@ -13,7 +13,7 @@ class ConversationsTableSeeder extends Seeder
     {
         // Lucien(1) + léna(3)
         DB::table('conversations')->insert([
-            'label' => 'Conversation avec Léna',
+            'label' => 'Oblyk la nouvelle version',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -24,7 +24,7 @@ class ConversationsTableSeeder extends Seeder
 
         //Lucien(1) + Oblyk(2) + Léna(3)
         DB::table('conversations')->insert([
-            'label' => 'Lucien, Oblyk et Léna',
+            'label' => 'Discussion à trois',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
     }

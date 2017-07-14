@@ -78,6 +78,11 @@ function afterLoad() {
         loadDashBoxs();
     }catch (e){}
 
+    //charge les conversations de la messagerie
+    try {
+        loadConversation();
+    }catch (e){}
+
     //Intialise l'opener de route
     try {
         initRouteOpener();

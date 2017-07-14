@@ -106,6 +106,7 @@
 
 #content-user-zone{
     overflow-y: auto;
+    overflow-x: hidden;
     padding-top: 75px;
 
     #user-content{
@@ -310,27 +311,5 @@
         width: calc(100% - 130px);
         display: inline-block;
         vertical-align: top;
-    }
-}
-
-
-
-//ZONE DE LA MESSAGERIE
-.messagerie {
-    .list-participant-conversation {
-        span {
-
-            &:after{
-                content: ', ';
-            }
-
-            &:nth-last-child(2)::after{
-                content: ' et ';
-            }
-
-            &:last-child::after{
-                content: '';
-            }
-        }
     }
 }

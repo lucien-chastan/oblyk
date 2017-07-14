@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col l6 s12">
+        <div class="col l6 s12 text-cursor" onclick="backToTop()">
             <h5 class="white-text">Il est temps de remonter !</h5>
             <img src="/img/grimpeur-footer.svg" height="200px">
         </div>

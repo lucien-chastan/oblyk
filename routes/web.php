@@ -50,7 +50,7 @@ Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')-
 Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
 Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
 Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
-Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessages')->name('vueMessagesUser');
+Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessagerie')->name('vueMessagesUser');
 Route::get('/vue/profile/{profile_id}/mes-lieux', 'Vue\UserVueController@vueLieux')->name('vueLieuxUser');
 Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueController@vuePartenaireParametres')->name('vuePartenaireParametresUser');
 Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
@@ -73,6 +73,13 @@ Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVue
 Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
 Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
 Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
+
+
+//VUES DE LA MESSAGERIE
+Route::post('/messagerie/conversations', 'Vue\UserVueController@vueConversations')->name('vueConversations');
+Route::post('/messagerie/messages', 'Vue\UserVueController@vueMessages')->name('vueMessages');
+Route::get('/messagerie/userSearch/{conversation_id}/{search}', 'CRUD\UserConversationController@userSearch')->name('userSearchConversation');
+Route::post('/messagerie/addUser', 'CRUD\UserConversationController@addUser')->name('addUserConversation');
 
 
 //LA CARTE
@@ -125,6 +132,8 @@ Route::post('/modal/massiveCrag', 'CRUD\MassiveCragController@massiveCragModal')
 Route::post('/modal/word', 'CRUD\WordController@wordModal')->name('wordModal');
 Route::post('/modal/album', 'CRUD\AlbumController@albumModal')->name('albumModal');
 Route::post('/modal/socialNetwork', 'CRUD\SocialNetworkController@socialNetworkModal')->name('socialNetworkModal');
+Route::post('/modal/conversation', 'CRUD\ConversationController@conversationModal')->name('conversationModal');
+Route::post('/modal/userConversation', 'CRUD\UserConversationController@userConversationModal')->name('userConversationModal');
 
 
 //CRUD AJAX
@@ -149,6 +158,9 @@ Route::resource('albums', 'CRUD\AlbumController');
 Route::resource('tickLists', 'CRUD\TickListController');
 Route::resource('users', 'CRUD\UserController');
 Route::resource('socialNetworks', 'CRUD\SocialNetworkController');
+Route::resource('conversations', 'CRUD\ConversationController');
+Route::resource('userConversations', 'CRUD\UserConversationController');
+Route::resource('messages', 'CRUD\MessageController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

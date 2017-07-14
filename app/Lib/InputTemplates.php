@@ -164,11 +164,12 @@ class InputTemplates extends ServiceProvider{
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $classLabel = ($value != '' || $placeholder != '')? 'active' : '';
         $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+        $onkeyup = (isset($options['onkeyup']))? ' onkeyup="' . $options['onkeyup'] . '"' : '';
 
         return '
             <div class="input-field col s12">
                 ' . $icon . '
-                <input placeholder="' . $placeholder . '" value="' . $value . '" id="'. $id .'" name="' . $name . '" type="' . $type . '" class="input-data">
+                <input ' . $onkeyup . ' placeholder="' . $placeholder . '" value="' . $value . '" id="'. $id .'" name="' . $name . '" type="' . $type . '" class="input-data">
                 <label class="' . $classLabel . '" for="' . $id . '">' . $label . '</label>
             </div>
         ';

@@ -90,3 +90,12 @@ function followedElement(DomElement, followed_type, followed_id) {
         );
     }
 }
+
+//scroll jusqu'au haut de la page
+function backToTop() {
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
+}

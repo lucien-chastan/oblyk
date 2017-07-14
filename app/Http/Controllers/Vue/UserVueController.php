@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vue;
 
 use App\Album;
 use App\Article;
+use App\Conversation;
 use App\Crag;
 use App\TickList;
 use App\Topo;
@@ -151,14 +152,10 @@ class UserVueController extends Controller
 
     }
 
-    function vueMessages($user_id){
+    function vueMessagerie($user_id){
 
         $user = User::where('id',Auth::id())->first();
-        $conversations = UserConversation::where('user_id', $user->id)->with('conversation.userConversations.user')->get();
-        $data = [
-            'user' => $user,
-            'conversations' => $conversations
-        ];
+        $data = ['user' => $user];
         return view('pages.profile.vues.messagesVue', $data);
 
     }
@@ -314,5 +311,33 @@ class UserVueController extends Controller
         $word = DB::table('words')->inRandomOrder()->first();
         $data = ['user' => $user,'word'=>$word];
         return view('pages.profile.vues.dashboardBox.boxVues.random-word', $data);
+    }
+
+
+    //FONCTION AJAX LIÉ À LA MESSAGERIE
+    function vueConversations(){
+        $user = User::where('id',Auth::id())->first();
+        $conversations = UserConversation::where('user_id', $user->id)->with('conversation.userConversations.user')->orderBy('new_messages', 'desc')->get();
+        $data = [
+            'user' => $user,
+            'conversations' => $conversations
+        ];
+        return view('pages.profile.vues.messagerie.conversations', $data);
+    }
+
+    function vueMessages(Request $request){
+        $user = User::where('id',Auth::id())->first();
+        $conversation = Conversation::where('id', $request->input('conversation_id'))->with('messages.user')->with('userConversations.user')->first();
+
+        //on passe à lu la conversation
+        $userConversation = UserConversation::where([['user_id', Auth::id()],['conversation_id',$conversation->id]])->first();
+        $userConversation->new_messages = 0;
+        $userConversation->save();
+
+        $data = [
+            'user' => $user,
+            'conversation' => $conversation
+        ];
+        return view('pages.profile.vues.messagerie.messages', $data);
     }
 }
