@@ -340,4 +340,5 @@ class UserVueController extends Controller
         ];
         return view('pages.profile.vues.messagerie.messages', $data);
     }
+
 }

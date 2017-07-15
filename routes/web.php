@@ -80,6 +80,7 @@ Route::post('/messagerie/conversations', 'Vue\UserVueController@vueConversations
 Route::post('/messagerie/messages', 'Vue\UserVueController@vueMessages')->name('vueMessages');
 Route::get('/messagerie/userSearch/{conversation_id}/{search}', 'CRUD\UserConversationController@userSearch')->name('userSearchConversation');
 Route::post('/messagerie/addUser', 'CRUD\UserConversationController@addUser')->name('addUserConversation');
+Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@newInConversation')->name('newInConversation');
 
 
 //LA CARTE

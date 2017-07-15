@@ -104,6 +104,22 @@ class UserConversationController extends Controller
 
     }
 
+    //regarde s'il y a des nouveaux message dans la conversation en cour
+    function newInConversation(Request $request){
+        //compte du nombre de message non lu
+        $userConversation = UserConversation::where([
+            ['user_id','=',Auth::id()],
+            ['new_messages','=',1],
+            ['conversation_id','=',$request->input('conversation_id')]
+        ])->get();
+
+        $data = [
+            'new_message' => (count($userConversation) > 0) ? true : false
+        ];
+
+        return response()->json($data);
+    }
+
     /**
      * Display a listing of the resource.
      *

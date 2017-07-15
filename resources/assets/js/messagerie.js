@@ -1,5 +1,6 @@
-let currentConversation,
-    timToUserSearch;
+let currentConversation = null,
+    timToUserSearch,
+    timToGetNewMessage;
 
 function loadConversation() {
     let insertConversations = document.getElementById('insert-conversation-list'),
@@ -13,6 +14,7 @@ function loadConversation() {
 
         loader.style.display = 'none';
         insertConversations.style.display = 'block';
+        timIntervalToGetMessage();
 
     });
 }
@@ -155,4 +157,21 @@ function addUserInConversation(user_id) {
     getMessages(currentConversation);
     closeModal();
 
+}
+
+function timIntervalToGetMessage() {
+    clearInterval(timToGetNewMessage);
+
+    timToGetNewMessage = setInterval(function () {
+        getNewMessageInCurrentConversation()
+    },5000);
+}
+
+//va cherche les nouveaux messages de la conversation en cours
+function getNewMessageInCurrentConversation() {
+    if(currentConversation !== null){
+        axios.post('/messagerie/newInConversation',{ conversation_id : currentConversation }).then(function (response) {
+            if(response.data.new_message) getMessages(currentConversation);
+        });
+    }
 }

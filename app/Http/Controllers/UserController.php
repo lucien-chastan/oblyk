@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserConversation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,10 +22,14 @@ class UserController extends Controller
         $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
         $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg' : '';
 
+        //compte du nombre de message non lu
+        $userConversation = UserConversation::where([['user_id',$user->id],['new_messages',1]])->get();
+
         $data = [
             'user' => $user,
             'meta_title' => $user['name'],
-            'meta_description' => 'description de ' . $user['name']
+            'meta_description' => 'description de ' . $user['name'],
+            'count_messages' => count($userConversation)
         ];
 
         return view('pages.profile.profile', $data);

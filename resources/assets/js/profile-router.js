@@ -42,6 +42,9 @@ function loadProfileRoute(element, forced = false) {
                 //passe le hash à la page
                 location.href = '#' + route.split('/')[route.split('/').length - 1];
 
+                //arrête le checker de nouveau message
+                if(route.split('/')[route.split('/').length - 1] !== 'messages') clearInterval(timToGetNewMessage);
+
                 //faite des actions poste chargement
                 afterLoad();
 

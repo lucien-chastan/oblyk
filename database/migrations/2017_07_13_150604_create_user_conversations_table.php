@@ -17,7 +17,7 @@ class CreateUserConversationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('conversation_id')->unsigned();
-            $table->boolean('new_messages')->default(0);
+            $table->boolean('new_messages')->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

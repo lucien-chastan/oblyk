@@ -36,7 +36,13 @@
         </div>
     </li>
     <li>
-        <div data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">email</i>Messagerie</div>
+        <div data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
+            @if($count_messages > 0)
+                <span class="badge red-text text-lighten-1">{{$count_messages}}</span>
+            @endif
+            <i class="material-icons">email</i>
+            Messagerie
+        </div>
     </li>
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">people</i>Recherche de partenaire</div>
