@@ -89,6 +89,8 @@ function getMessages(conversation_id) {
         initOpenModal();
 
         goToLastMessage();
+
+        getNewNotificationAndMessage();
     });
 }
 

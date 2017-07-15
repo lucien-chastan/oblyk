@@ -23,6 +23,14 @@ var backgroundNav = function () {
 //changement de la couleur du fond de la nav bar au scroll
 window.addEventListener('scroll', backgroundNav);
 
+//check les messages et notification toutes les 30 secondes
+window.addEventListener('load', function () {
+   setTimeout(function () {
+      setInterval(function () {
+          getNewNotificationAndMessage();
+      },30000);
+   },30000);
+});
 
 //INITIALISATION ET STYLE DES DROP DOWN DU MENU
 $('.nav-dropdown').dropdown({
@@ -97,5 +105,28 @@ function backToTop() {
         top: 0,
         left: 0,
         behavior: 'smooth'
+    });
+}
+
+//regarde les nouveaux messages
+function getNewNotificationAndMessage() {
+    let nbMessage = document.getElementById('badge-nb-new-message'),
+        global = document.getElementById('global-badge-notification-message'),
+        badgeUserMessage = document.getElementById('badge-message-user-profile');
+
+    axios.post('/new/notifications-and-messages').then(function (response) {
+        let data = response.data;
+
+        nbMessage.textContent = data.messages !== 0 ? data.messages : '';
+        global.textContent = data.messages + data.notifications;
+
+        //cache ou affiche le badge des messages et notification
+        global.style.display = data.messages + data.notifications === 0 ? 'none' : 'inline-block';
+
+        //affichage du nombre de message dans la partie profil
+        try{
+            badgeUserMessage.textContent = data.messages !== 0 ? data.messages : '';
+        }catch (e){}
+
     });
 }

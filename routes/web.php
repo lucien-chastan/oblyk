@@ -83,6 +83,10 @@ Route::post('/messagerie/addUser', 'CRUD\UserConversationController@addUser')->n
 Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@newInConversation')->name('newInConversation');
 
 
+//NOUVEAU MESSAGE ET NOTIFICATION
+Route::post('/new/notifications-and-messages', 'UserController@getNewNotificationAndMessage')->name('getNewNotificationAndMessage');
+
+
 //LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
 

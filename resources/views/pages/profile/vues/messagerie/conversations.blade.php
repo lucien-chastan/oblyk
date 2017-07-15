@@ -1,7 +1,7 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @foreach($conversations as $conversation)
-    <div class="blue-border-convesation-div @if($conversation->new_messages == 1) text-bold @endif" id="conversation-div-{{$conversation->conversation->id}}" onclick="showLoaderMessage(true);getMessages({{$conversation->conversation->id}})">
+    <div class="blue-border-convesation-div @if($conversation->new_messages == 1) text-bold @endif" id="conversation-div-{{$conversation->conversation->id}}" onclick="showLoaderMessage(true);getMessages({{$conversation->conversation->id}});">
 
         <p class="no-margin truncate" title="{{$conversation->conversation->label}}">
             @if($conversation->conversation->label != '')

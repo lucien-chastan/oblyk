@@ -34,4 +34,24 @@ class UserController extends Controller
 
         return view('pages.profile.profile', $data);
     }
+
+
+    //regarde les nouvelles notifications et messages
+    function getNewNotificationAndMessage(){
+
+        //compte du nombre de message non lu
+        $userConversation = UserConversation::where([
+            ['user_id', Auth::id()],
+            ['new_messages', 1]
+        ])->get();
+
+        //compte le nombre de notification
+
+        $data = [
+            'notifications'=>0,
+            'messages'=>count($userConversation),
+        ];
+
+        return response()->json($data);
+    }
 }

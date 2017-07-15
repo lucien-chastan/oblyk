@@ -108,6 +108,24 @@
     }
 }
 
+.global-badge-in-navbar{
+    color: white;
+    border-radius: 50%;
+    margin-left: 0.5em;
+    padding-top: 3px;
+    font-size: 0.9em;
+    height: 1.3em;
+    width: 1.3em;
+    text-align: center;
+    display: none;
+    vertical-align: text-top;
+    line-height: 1em;
+}
+
+.badge-dropdown-navbar {
+    margin-left: 0.5em;
+}
+
 .oblyk-ul{
     li{
         list-style: disc !important;

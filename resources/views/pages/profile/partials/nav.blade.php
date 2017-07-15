@@ -37,9 +37,7 @@
     </li>
     <li>
         <div data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
-            @if($count_messages > 0)
-                <span class="badge red-text text-lighten-1">{{$count_messages}}</span>
-            @endif
+            <span id="badge-message-user-profile" class="badge red-text text-lighten-1"></span>
             <i class="material-icons">email</i>
             Messagerie
         </div>

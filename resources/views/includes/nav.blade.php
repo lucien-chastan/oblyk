@@ -9,7 +9,7 @@
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}"><i class="material-icons left">person</i>Mon profil</a></li>
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#fil-actu"><i class="material-icons left">shuffle</i>Fil d'actu</a></li>
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#analytiks"><i class="material-icons left">playlist_add_check</i>Mes croix</a></li>
-            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#messages"><i class="material-icons left">email</i>Messagerie</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#messages"><i class="material-icons left">email</i>Messagerie <span class="red-text badge-dropdown-navbar" id="badge-nb-new-message"></span></a></li>
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#notifications"><i class="material-icons left">notifications</i>Notification</a></li>
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#parametres"><i class="material-icons left">settings</i>Paramètres</a></li>
             <li class="divider"></li>
@@ -73,7 +73,7 @@
                         @if (Auth::guest())
                             Connexion
                         @else
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->name }} <span id="global-badge-notification-message" class="global-badge-in-navbar red"></span>
                         @endif
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>

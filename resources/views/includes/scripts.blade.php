@@ -25,6 +25,10 @@
             draggable: false
         });
     });
+
+    //check s'il y a de nouveau message et notification
+    getNewNotificationAndMessage();
+
 </script>
 
 {{--inclusion de script particulier à une page--}}
