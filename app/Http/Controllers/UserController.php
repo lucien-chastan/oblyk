@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use App\User;
 use App\UserConversation;
 use Illuminate\Http\Request;
@@ -46,9 +47,13 @@ class UserController extends Controller
         ])->get();
 
         //compte le nombre de notification
+        $notifications = Notification::where([
+            ['user_id', Auth::id()],
+            ['read', 0]
+        ])->get();
 
         $data = [
-            'notifications'=>0,
+            'notifications'=>count($notifications),
             'messages'=>count($userConversation),
         ];
 

@@ -313,3 +313,13 @@
         vertical-align: top;
     }
 }
+
+.notification-zone {
+    .circle {
+        margin-top: 10px;
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        margin-right: 0.7em;
+    }
+}

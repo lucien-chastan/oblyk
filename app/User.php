@@ -33,6 +33,7 @@ class User extends Authenticatable
     public function follows() { return $this->hasMany('App\Follow','user_id', 'id'); }
     public function lexiques() { return $this->hasMany('App\Word','user_id', 'id'); }
     public function messages(){ return $this->hasMany('App\Message','user_id', 'id'); }
+    public function notifications(){ return $this->hasMany('App\Notification','user_id', 'id'); }
     public function parkings() { return $this->hasMany('App\Parking','user_id', 'id'); }
     public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
     public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }

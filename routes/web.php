@@ -85,6 +85,7 @@ Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@ne
 
 //NOUVEAU MESSAGE ET NOTIFICATION
 Route::post('/new/notifications-and-messages', 'UserController@getNewNotificationAndMessage')->name('getNewNotificationAndMessage');
+Route::post('/notification/read', 'CRUD\NotificationController@notificationAsRead')->name('notificationAsRead');
 
 
 //LE FIL D'ACTUALITÉ
@@ -173,6 +174,7 @@ Route::resource('conversations', 'CRUD\ConversationController');
 Route::resource('userConversations', 'CRUD\UserConversationController');
 Route::resource('messages', 'CRUD\MessageController');
 Route::resource('posts', 'CRUD\PostController');
+Route::resource('notifications', 'CRUD\NotificationController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

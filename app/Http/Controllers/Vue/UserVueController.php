@@ -178,8 +178,19 @@ class UserVueController extends Controller
 
     function vueNotifications($user_id){
 
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
+        $user = User::where('id',Auth::id())->with('notifications')->first();
+
+        $notifications = [];
+        foreach ($user->notifications as $notification){
+            $notification->data = json_decode($notification->data);
+            $notifications[] = $notification;
+        }
+
+        $data = [
+            'user' => $user,
+            'notifications' => $notifications
+        ];
+
         return view('pages.profile.vues.notificationsVue', $data);
 
     }

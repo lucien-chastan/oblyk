@@ -50,7 +50,11 @@
         </div>
     </li>
     <li>
-        <div data-route="{{route('vueNotificationsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">notifications</i>Notifications</div>
+        <div data-route="{{route('vueNotificationsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
+            <span id="badge-notification-user-profile" class="badge red-text text-lighten-1"></span>
+            <i class="material-icons">notifications</i>
+            Notifications
+        </div>
     </li>
     <li>
         <div data-route="{{route('vueEditSettingsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">settings</i>Paramètres</div>

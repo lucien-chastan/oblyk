@@ -111,13 +111,16 @@ function backToTop() {
 //regarde les nouveaux messages
 function getNewNotificationAndMessage() {
     let nbMessage = document.getElementById('badge-nb-new-message'),
+        nbNotification = document.getElementById('badge-nb-new-notification'),
         global = document.getElementById('global-badge-notification-message'),
-        badgeUserMessage = document.getElementById('badge-message-user-profile');
+        badgeUserMessage = document.getElementById('badge-message-user-profile'),
+        badgeUserNotification = document.getElementById('badge-notification-user-profile');
 
     axios.post('/new/notifications-and-messages').then(function (response) {
         let data = response.data;
 
         nbMessage.textContent = data.messages !== 0 ? data.messages : '';
+        nbNotification.textContent = data.notifications !== 0 ? data.notifications : '';
         global.textContent = data.messages + data.notifications;
 
         //cache ou affiche le badge des messages et notification
@@ -126,6 +129,7 @@ function getNewNotificationAndMessage() {
         //affichage du nombre de message dans la partie profil
         try{
             badgeUserMessage.textContent = data.messages !== 0 ? data.messages : '';
+            badgeUserNotification.textContent = data.notifications !== 0 ? data.notifications : '';
         }catch (e){}
 
     });
