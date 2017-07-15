@@ -20,7 +20,10 @@ class CragVueController extends Controller
     }
 
     function vueFilActu($id){
-        return view('pages.crag.vues.filActuVue');
+        $data = [
+            'crag' => Crag::where('id', $id)->first()
+        ];
+        return view('pages.crag.vues.filActuVue',$data);
     }
 
     function vueMedias($id){

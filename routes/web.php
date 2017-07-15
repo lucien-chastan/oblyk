@@ -87,6 +87,11 @@ Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@ne
 Route::post('/new/notifications-and-messages', 'UserController@getNewNotificationAndMessage')->name('getNewNotificationAndMessage');
 
 
+//LE FIL D'ACTUALITÉ
+Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
+Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
+
+
 //LA CARTE
 Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
 
@@ -139,6 +144,7 @@ Route::post('/modal/album', 'CRUD\AlbumController@albumModal')->name('albumModal
 Route::post('/modal/socialNetwork', 'CRUD\SocialNetworkController@socialNetworkModal')->name('socialNetworkModal');
 Route::post('/modal/conversation', 'CRUD\ConversationController@conversationModal')->name('conversationModal');
 Route::post('/modal/userConversation', 'CRUD\UserConversationController@userConversationModal')->name('userConversationModal');
+Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
 
 
 //CRUD AJAX
@@ -166,6 +172,7 @@ Route::resource('socialNetworks', 'CRUD\SocialNetworkController');
 Route::resource('conversations', 'CRUD\ConversationController');
 Route::resource('userConversations', 'CRUD\UserConversationController');
 Route::resource('messages', 'CRUD\MessageController');
+Route::resource('posts', 'CRUD\PostController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

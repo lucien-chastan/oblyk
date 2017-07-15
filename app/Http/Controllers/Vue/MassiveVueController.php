@@ -12,7 +12,10 @@ class MassiveVueController extends Controller
 {
 
     function vueFilActu($id){
-        return view('pages.massive.vues.filActuVue');
+        $data = [
+            'massive' => Massive::where('id',$id)->first()
+        ];
+        return view('pages.massive.vues.filActuVue',$data);
     }
 
     function vueLiens($id){

@@ -23,6 +23,10 @@ class Topo extends Model
         return $this->morphMany('App\Follow', 'followed');
     }
 
+    public function posts(){
+        return $this->morphMany('App\Post', 'postable');
+    }
+
     public function crags(){
         return $this->hasMany('App\TopoCrag','topo_id', 'id');
     }

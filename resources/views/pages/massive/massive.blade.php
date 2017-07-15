@@ -3,6 +3,7 @@
 
 @section('css')
     <link href="/css/massive.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
@@ -49,6 +50,7 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/massive.js"></script>
+    <script src="/js/post.js"></script>
     <script>
         convertMarkdownZone();
         initMassiveMap({{$massive->id}});

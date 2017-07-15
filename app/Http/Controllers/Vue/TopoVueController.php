@@ -12,7 +12,10 @@ class TopoVueController extends Controller
 {
 
     function vueFilActu($id){
-        return view('pages.topo.vues.filActuVue');
+        $data = [
+            'topo' => Topo::where('id',$id)->first()
+        ];
+        return view('pages.topo.vues.filActuVue', $data);
     }
 
     function vueLiens($id){

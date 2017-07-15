@@ -408,3 +408,7 @@ function uploadTopoPdf(form, callback) {
         }
     );
 }
+
+function getCragPosts(){
+    getPosts('Crag',document.getElementById('id-crag-actualite').value, document.getElementById('insert-posts-zone'));
+}

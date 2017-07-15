@@ -20,6 +20,7 @@ class CragController extends Controller
             ->withCount('photos')
             ->withCount('videos')
             ->withCount('topos')
+            ->withCount('posts')
             ->with('photos')
             ->with('topos.topo')
             ->with('massives.massive')

@@ -1,0 +1,17 @@
+//Ficher scss du flux
+
+.commentaire-post-zone{
+    padding-left: 2vw;
+
+    .comment-btn {
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+
+    .commentaire-post-div {
+        transition: background-color 0.3s;
+        &:hover{
+            background-color: rgb(245,245,245);
+        }
+    }
+}

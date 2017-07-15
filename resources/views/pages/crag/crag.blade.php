@@ -3,6 +3,7 @@
 
 @section('css')
     <link href="/css/crag.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
@@ -65,6 +66,7 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/crag.js"></script>
+    <script src="/js/post.js"></script>
     <script src="/js/photo.js"></script>
     <script src="/framework/chartJs/Chart.min.js"></script>
     <script>

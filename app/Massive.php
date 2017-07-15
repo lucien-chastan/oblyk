@@ -19,6 +19,10 @@ class Massive extends Model
         return $this->morphMany('App\Link', 'linkable');
     }
 
+    public function posts(){
+        return $this->morphMany('App\Post', 'postable');
+    }
+
     public function follows(){
         return $this->morphMany('App\Follow', 'followed');
     }

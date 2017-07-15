@@ -38,3 +38,7 @@ function initMassiveMap(id_massive) {
 
     });
 }
+
+function getMassivePosts(){
+    getPosts('Massive',document.getElementById('id-massive-actualite').value, document.getElementById('insert-posts-zone'));
+}

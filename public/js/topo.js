@@ -90,3 +90,7 @@ function uploadCouverture(form, callback) {
         }
     );
 }
+
+function getTopoPosts() {
+    getPosts('Topo',document.getElementById('id-topo-actualite').value, document.getElementById('insert-posts-zone'));
+}

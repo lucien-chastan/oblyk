@@ -18,5 +18,6 @@
   "/css/global-search.css": "/css/global-search.css",
   "/css/markdown.css": "/css/markdown.css",
   "/css/article-markdown.css": "/css/article-markdown.css",
-  "/font/oblyk/style.css": "/font/oblyk/style.css"
+  "/font/oblyk/style.css": "/font/oblyk/style.css",
+  "/css/post.css": "/css/post.css"
 }

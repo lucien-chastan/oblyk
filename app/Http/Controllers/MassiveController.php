@@ -17,6 +17,7 @@ class MassiveController extends Controller
             ->with('descriptions')
             ->withCount('links')
             ->withCount('crags')
+            ->withCount('posts')
             ->first();
 
         //on va chercher si l'utilisateur follow ce regroupement

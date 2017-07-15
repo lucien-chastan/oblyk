@@ -17,6 +17,7 @@ class TopoController extends Controller
             ->with('descriptions')
             ->withCount('links')
             ->withCount('crags')
+            ->withCount('posts')
             ->withCount('sales')
             ->first();
 
