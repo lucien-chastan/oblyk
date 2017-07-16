@@ -192,3 +192,8 @@ function uploadImageProfile() {
         }
     );
 }
+
+//Vue d'un post
+function vuePost(post_id) {
+    console.log('vue du post ' + post_id);
+}

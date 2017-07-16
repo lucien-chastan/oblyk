@@ -31,7 +31,12 @@
 .no-scroll-x{overflow-x: hidden !important;}
 .no-scroll-y{overflow-y: hidden !important;}
 .no-scroll{overflow: hidden !important;}
-
+.text-hover{
+    transition: opacity 0.3s;
+    &:hover{
+        opacity: 0.65;
+    }
+}
 .i-cursor {
     i {
         cursor: pointer;

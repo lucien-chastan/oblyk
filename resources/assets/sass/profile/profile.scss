@@ -316,10 +316,20 @@
 
 .notification-zone {
     .circle {
+        cursor: pointer;
         margin-top: 10px;
         height: 50px;
         width: 50px;
         object-fit: cover;
         margin-right: 0.7em;
+    }
+
+    .new-notification {
+        background-color: #FFF3E0;
+
+        .title-notification  {
+            font-weight: bold;
+        }
+
     }
 }

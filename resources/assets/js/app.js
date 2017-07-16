@@ -123,8 +123,18 @@ function getNewNotificationAndMessage() {
         nbNotification.textContent = data.notifications !== 0 ? data.notifications : '';
         global.textContent = data.messages + data.notifications;
 
+        //enleve l'ancienne notification du title de la page
+        document.title = document.title.replace(/^(\([0-9]+\))\s/,'');
+
         //cache ou affiche le badge des messages et notification
-        global.style.display = data.messages + data.notifications === 0 ? 'none' : 'inline-block';
+        if (data.messages + data.notifications === 0) {
+            global.style.display = 'none';
+        } else {
+            global.style.display = 'inline-block';
+
+            //inscrit le nombre de notification dans le haut de la page
+            document.title = '(' + (parseInt(data.messages) + parseInt(data.notifications))  + ') ' +  document.title
+        }
 
         //affichage du nombre de message dans la partie profil
         try{

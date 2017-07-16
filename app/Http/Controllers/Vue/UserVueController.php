@@ -6,6 +6,7 @@ use App\Album;
 use App\Article;
 use App\Conversation;
 use App\Crag;
+use App\Notification;
 use App\TickList;
 use App\Topo;
 use App\User;
@@ -178,11 +179,13 @@ class UserVueController extends Controller
 
     function vueNotifications($user_id){
 
-        $user = User::where('id',Auth::id())->with('notifications')->first();
+        $user = User::where('id',Auth::id())->first();
+        $findNotifications = Notification::where('user_id',$user->id)->orderBy('read')->orderBy('created_at', 'desc')->get();
 
         $notifications = [];
-        foreach ($user->notifications as $notification){
+        foreach ($findNotifications as $notification){
             $notification->data = json_decode($notification->data);
+            $notification->background = ($notification->read == 0) ? 'new-notification' : '';
             $notifications[] = $notification;
         }
 
