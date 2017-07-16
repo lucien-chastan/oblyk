@@ -203,6 +203,20 @@ class InputTemplates extends ServiceProvider{
         ';
     }
 
+    //INPUT DU TYPE ÉDITEUR DE MARKDOWN
+    public static function trumbowyg($options){
+        $name = $options['name'];
+        $id = (isset($options['id']))? $options['id'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : '';
+        $class = (isset($options['class']))? $options['class'] : 'trumbowyg-editor';
+        $placeholder = (isset($options['placeholder']))? $options['placeholder'] : '';
+
+        return '
+            <div class="col s12">
+                <textarea placeholder="' . $placeholder . '" id="' . $id . '" class="input-data ' . $class . '">' . $value . '</textarea>
+            </div>
+        ';
+    }
 
     //INPUT DU TYPE SUBMIT
     public static function submit($options){

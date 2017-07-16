@@ -72,6 +72,30 @@ function specialAction(data) {
         getMassiveArround();
     }catch (e){}
 
+    //initialise l'éiteur wysiwyg
+    try{
+        $('.trumbowyg-post-editor').trumbowyg({
+            lang: 'fr',
+            autogrow: true,
+            btnsDef: {
+                // Customizables dropdowns
+                image: {
+                    dropdown: ['insertImage', 'upload', 'base64'],
+                    ico: 'insertImage'
+                }
+            },
+            btns: ['formatting',
+                '|', 'btnGrp-design',
+                '|', 'superscript',
+                '|', 'link',
+                '|', 'image',
+                '|', 'btnGrp-justify',
+                '|', 'btnGrp-lists',
+                '|', 'horizontalRule',
+                '|', 'removeformat'
+            ],
+        });
+    }catch (e){}
 
     //créer la map de localisation (s'il y en a une)
     setTimeout(function () {
@@ -143,6 +167,13 @@ function submitData(form, callback) {
             }
         }
 
+        //on va chercher les valeurs des wysiwyg
+        let wysiwyg = document.getElementsByClassName('trumbowyg-post-editor');
+        if(wysiwyg.length > 0){
+            data['trumbowyg-post-editor'] = $('#trumbowyg-post-editor').trumbowyg('html');
+        }
+
+
         //lance la fonction ajax
         axios(
             {
@@ -192,7 +223,6 @@ function submitData(form, callback) {
                 errorPopupText.style.display = 'block';
                 errorPopupText.innerHTML = 'Erreur ' + error.response.status;
             }
-
         });
     }
 }

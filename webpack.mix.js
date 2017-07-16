@@ -66,6 +66,12 @@ mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axio
 //chartJs
 mix.copy('resources/assets/framework/chartJs/Chart.min.js', 'public/framework/chartJs');
 
+//trumbowyg
+mix.copy('resources/assets/framework/trumbowyg/trumbowyg.js', 'public/framework/trumbowyg/')
+    .copy('resources/assets/framework/trumbowyg/langs/', 'public/framework/trumbowyg/langs/')
+    .copy('resources/assets/framework/trumbowyg/ui/', 'public/framework/trumbowyg/ui/')
+    .copy('resources/assets/framework/trumbowyg/plugins/upload/trumbowyg.upload.js', 'public/framework/trumbowyg/plugins/trumbowyg.upload.js');
+
 //Phototheque
 mix.copy('resources/assets/framework/phototheque/phototheque.js', 'public/framework/phototheque')
     .copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
@@ -73,12 +79,6 @@ mix.copy('resources/assets/framework/phototheque/phototheque.js', 'public/framew
 
 //marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
-
-//Simple Markdown Editor
-mix.copy('resources/assets/framework/simplemde/simplemde.min.js', 'public/framework/simplemde')
-    .copy('resources/assets/framework/simplemde/simplemde.min.css', 'public/framework/simplemde')
-    .copy('resources/assets/framework/simplemde/French.aff', 'public/framework/simplemde')
-    .copy('resources/assets/framework/simplemde/French.dic', 'public/framework/simplemde');
 
 //image
 mix.copy('resources/assets/img/','public/img/');

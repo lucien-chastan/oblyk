@@ -51,7 +51,7 @@
 
 
 {{--CONTENU DU POST--}}
-<div class="markdownZone">@markdown($post->content)</div>
+<div class="markdownZone">{!! $post->content !!}</div>
 
 
 {{--LES COMMENTAIRES--}}

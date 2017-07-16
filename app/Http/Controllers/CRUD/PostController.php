@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Description;
 use App\Post;
 use Validator;
 use Illuminate\Http\Request;
@@ -40,6 +41,13 @@ class PostController extends Controller
         return view('modal.post', $data);
     }
 
+
+    function uploadPostImage(Request $request){
+
+        return response()->json($request);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,14 +80,17 @@ class PostController extends Controller
         $this->validate($request, [
             'postable_id' => 'required|Integer',
             'postable_type' => 'required|String',
-            'content' => 'required',
+            'trumbowyg-post-editor' => 'required',
         ]);
+
+        $content = str_replace("&lt;script&gt;", '', $request->input('trumbowyg-post-editor'));
+        $content = str_replace("&lt;/script&gt;", '', $content);
 
         //enregistrement des données
         $post = new Post();
         $post->postable_id = $request->input('postable_id');
         $post->postable_type = $request->input('postable_type');
-        $post->content = $request->input('content');
+        $post->content = $content;
         $post->user_id = Auth::id();
         $post->save();
 
@@ -121,13 +132,16 @@ class PostController extends Controller
         $this->validate($request, [
             'postable_id' => 'required|Integer',
             'postable_type' => 'required|String',
-            'content' => 'required',
+            'trumbowyg-post-editor' => 'required',
         ]);
+
+        $content = str_replace("&lt;script&gt;", '', $request->input('trumbowyg-post-editor'));
+        $content = str_replace("&lt;/script&gt;", '', $content);
 
         //enregistrement des données
         $post = Post::where('id', $request->input('id'))->first();
         if($post->user_id == Auth::id()){
-            $post->content = $request->input('content');
+            $post->content = $content;
             $post->save();
         }
 
@@ -145,6 +159,14 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
 
         if($post->user_id == Auth::id()){
+
+            //suppression des commentaires liés
+            $comments = Description::where([['descriptive_id',$post->id],['descriptive_type','App\Post']])->get();
+            foreach ($comments as $comment){
+                $comment->delete();
+            }
+
+            //suppression du post
             $post->delete();
         }
     }

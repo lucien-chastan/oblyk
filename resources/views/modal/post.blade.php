@@ -7,7 +7,7 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::mdText(['name'=>'content', 'value'=>$dataModal['content'], 'label'=>'Post']) !!}
+        {!! $Inputs::trumbowyg(['name'=>'content','id'=>'trumbowyg-post-editor', 'value'=>$dataModal['content'], 'class'=>'trumbowyg-post-editor']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 
