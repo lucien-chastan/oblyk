@@ -1,17 +1,89 @@
 //Ficher scss du flux
 
-.commentaire-post-zone{
-    padding-left: 2vw;
+#insert-posts-zone {
 
-    .comment-btn {
-        margin-bottom: 0;
-        margin-top: 5px;
+    .card-panel {
+        margin-bottom: 5px;
+        padding-bottom: 0;
+        padding-top: 3px;
     }
 
-    .commentaire-post-div {
-        transition: background-color 0.3s;
-        &:hover{
-            background-color: rgb(245,245,245);
+    .post-title-barre {
+        img {
+            margin-right: 0.7em;
+
+            &.circle {
+                height: 45px;
+                width: 45px;
+                object-fit: cover;
+            }
+
+            &.couverture-topo{
+                max-height: 45px;
+                max-width: 45px;
+            }
+        }
+
+        .lien-title-post {
+            color: black;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s;
+
+            &:hover{
+                color: #2196F3;
+            }
         }
     }
+
+
+    .span-nb-commentaire-post {
+        font-size: 0.7em;
+        color: rgb(150,150,150);
+    }
+
+    .commentaire-post-zone{
+
+        border: 1px rgb(230, 230, 230);
+        border-top-style: solid;
+        padding-left: 2vw;
+
+        .commentaire-post-div {
+            padding: 1px 5px 8px 5px;
+            margin: 2px 0;
+            transition: background-color 0.3s;
+            &:hover{
+                background-color: rgb(245,245,245);
+
+                i {opacity: 1;}
+            }
+
+            i {
+                color: rgb(180,180,180);
+                transition: opacity 0.3s;
+                opacity: 0;
+            }
+
+            .user-comment-info {
+                margin: -8px 0 0;
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    .action-post-barre {
+        border: 1px rgb(230, 230, 230);
+        border-top-style: solid;
+        padding: 0.5em 0;
+
+        span {
+            cursor: pointer;
+            color: rgb(180,180,180);
+            transition: color 0.3s;
+            &:hover {
+                color: #2196F3;
+            }
+        }
+    }
+
 }

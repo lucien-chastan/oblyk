@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'birth' => 1990,
             'sex' => 2,
             'description' => 'Bonjour, je suis Lucien !',
+            'last_fil_read' => date('Y-m-d H:m:s'),
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -26,6 +27,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Oblyk',
             'email' => 'ekip@oblyk.net',
             'password' => bcrypt('EkipOblyk'),
+            'last_fil_read' => date('Y-m-d H:m:s'),
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -35,6 +37,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('mdpLéna'),
             'birth' => 1991,
             'sex' => 1,
+            'last_fil_read' => date('Y-m-d H:m:s'),
             'created_at' => date('Y-m-d H:m:s'),
         ]);
     }

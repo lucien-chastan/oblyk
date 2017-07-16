@@ -91,6 +91,7 @@ Route::post('/notification/read', 'CRUD\NotificationController@notificationAsRea
 //LE FIL D'ACTUALITÉ
 Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
 Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
+Route::post('/user/actuality', 'PostController@userActuality')->name('userActuality');
 
 
 //LA CARTE

@@ -91,6 +91,10 @@ function afterLoad() {
         initRouteOpener();
     }catch (e){}
 
+    //Liste les actus
+    try {
+        getMyActuality();
+    }catch (e){}
 
 }
 

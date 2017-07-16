@@ -33,6 +33,11 @@
                     </div>
                 @endforeach
             </div>
+
+            @if(count($notifications) == 0)
+                <p class="grey-text text-center">Vous n'avez pas de notification</p>
+            @endif
+
         </div>
     </div>
 </div>

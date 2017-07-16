@@ -7,6 +7,7 @@ use App\Article;
 use App\Conversation;
 use App\Crag;
 use App\Notification;
+use App\Post;
 use App\TickList;
 use App\Topo;
 use App\User;
@@ -26,36 +27,39 @@ class UserVueController extends Controller
         $follows = [];
         foreach ($user->follows as $follow){
 
-            $catTitre = '';
+            if($follow->followed_type != 'App\User'){
 
-            //FALAISE
-            if($follow->followed_type == 'App\Crag'){
-                $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
-                $follow->followName = $follow->followed->label;
-                $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
-                $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
-                $catTitre = 'sites';
+                $catTitre = '';
+
+                //FALAISE
+                if($follow->followed_type == 'App\Crag'){
+                    $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
+                    $follow->followName = $follow->followed->label;
+                    $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
+                    $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
+                    $catTitre = 'sites';
+                }
+
+                //TOPO
+                if($follow->followed_type == 'App\Topo'){
+                    $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
+                    $follow->followName = $follow->followed->label;
+                    $follow->followIcon = (file_exists(storage_path('app/public/topos/50/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/50/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
+                    $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
+                    $catTitre = 'topos';
+                }
+
+                //MASSIF
+                if($follow->followed_type == 'App\Massive'){
+                    $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
+                    $follow->followName = $follow->followed->label;
+                    $follow->followIcon = '/img/icon-search-massive.svg';
+                    $follow->followInformation = 'regroupement de site';
+                    $catTitre = 'regroupements';
+                }
+
+                $follows[$catTitre][] = $follow;
             }
-
-            //TOPO
-            if($follow->followed_type == 'App\Topo'){
-                $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
-                $follow->followName = $follow->followed->label;
-                $follow->followIcon = (file_exists(storage_path('app/public/topos/50/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/50/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
-                $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
-                $catTitre = 'topos';
-            }
-
-            //MASSIF
-            if($follow->followed_type == 'App\Massive'){
-                $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
-                $follow->followName = $follow->followed->label;
-                $follow->followIcon = '/img/icon-search-massive.svg';
-                $follow->followInformation = 'regroupement de site';
-                $catTitre = 'regroupements';
-            }
-
-            $follows[$catTitre][] = $follow;
         }
 
         $data = [
@@ -77,8 +81,10 @@ class UserVueController extends Controller
 
     function vueFilActu($user_id){
 
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $user = User::where('id',Auth::id())->first();
+
+        $data = ['user' => $user];
+
         return view('pages.profile.vues.filActuVue', $data);
 
     }

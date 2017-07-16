@@ -1,7 +1,7 @@
 
 //va chercher les posts
-function getPosts(type, id, target, start = 0, skip = 5) {
-    axios.post('/post/getVue',{postable_type : type, postable_id : id, start : start, skip : skip}).then(function (response) {
+function getPosts(type, id, target, start = 0, skip = 5, route = '/post/getVue') {
+    axios.post(route,{postable_type : type, postable_id : id, start : start, skip : skip}).then(function (response) {
         target.innerHTML += response.data;
         afterGetPost();
     });

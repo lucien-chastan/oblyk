@@ -197,3 +197,14 @@ function uploadImageProfile() {
 function vuePost(post_id) {
     console.log('vue du post ' + post_id);
 }
+
+function getMyActuality(){
+    getPosts(
+        'User',
+        document.getElementById('id-user-actualite').value,
+        document.getElementById('insert-posts-zone'),
+        0,
+        5,
+        '/user/actuality'
+    );
+}

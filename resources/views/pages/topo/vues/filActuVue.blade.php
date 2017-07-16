@@ -3,12 +3,11 @@
 <input type="hidden" value="{{$topo->id}}" id="id-topo-actualite">
 
 <div class="row">
-    <div class="col s12">
 
-        <div class="card-panel" id="insert-posts-zone">
+    <div id="insert-posts-zone">
 
-        </div>
     </div>
+
 </div>
 
 {{--BOUTON POUR AJOUTER UN POST AU FIL D'ACTUALITÉ--}}

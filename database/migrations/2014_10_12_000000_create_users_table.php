@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('birth')->nullable();
             $table->integer('sex')->nullable();
             $table->text('description')->nullable();
+            $table->dateTime('last_fil_read')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

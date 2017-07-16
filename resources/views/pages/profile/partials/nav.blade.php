@@ -17,7 +17,7 @@
         <div data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">shuffle</i>Fil d'actualité</div>
     </li>
     <li>
-        <div data-route="{{route('vueFollowUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">star</i>Mes suivis</div>
+        <div id="item-follow-menu" data-route="{{route('vueFollowUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">star</i>Mes suivis</div>
     </li>
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">photo_camera</i>Médias</div>

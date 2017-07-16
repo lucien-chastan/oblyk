@@ -2,6 +2,7 @@
 
 @section('css')
     <link href="/css/profile.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
     <link href="/css/messagerie.css" rel="stylesheet">
 @endsection
 
@@ -38,6 +39,7 @@
 @section('script')
     <script src="/js/profile.js"></script>
     <script src="/js/messagerie.js"></script>
+    <script src="/js/post.js"></script>
     <script src="/js/notification.js"></script>
     <script src="/js/profile-router.js"></script>
     <script>

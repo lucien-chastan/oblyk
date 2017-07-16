@@ -3,11 +3,11 @@
 <input type="hidden" value="{{$crag->id}}" id="id-crag-actualite">
 
 <div class="row">
-    <div class="col s12">
-        <div class="card-panel" id="insert-posts-zone">
 
-        </div>
+    <div id="insert-posts-zone">
+
     </div>
+
 </div>
 
 {{--BOUTON POUR AJOUTER UN POST AU FIL D'ACTUALITÉ--}}
