@@ -14,7 +14,11 @@
         <div id="item-dashboard-menu" data-route="{{route('vueDashboardUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">dashboard</i>Dashboard</div>
     </li>
     <li>
-        <div data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">shuffle</i>Fil d'actualité</div>
+        <div data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
+            <span id="badge-post-user-profile" class="badge red-text text-lighten-1"></span>
+            <i class="material-icons">shuffle</i>
+            Fil d'actualité <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
+        </div>
     </li>
     <li>
         <div id="item-follow-menu" data-route="{{route('vueFollowUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">star</i>Mes suivis</div>
@@ -39,7 +43,7 @@
         <div data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
             <span id="badge-message-user-profile" class="badge red-text text-lighten-1"></span>
             <i class="material-icons">email</i>
-            Messagerie
+            Messagerie <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
         </div>
     </li>
     <li>
@@ -53,7 +57,7 @@
         <div data-route="{{route('vueNotificationsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
             <span id="badge-notification-user-profile" class="badge red-text text-lighten-1"></span>
             <i class="material-icons">notifications</i>
-            Notifications
+            Notifications <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
         </div>
     </li>
     <li>

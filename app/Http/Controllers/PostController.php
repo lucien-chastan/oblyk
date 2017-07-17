@@ -49,6 +49,15 @@ class PostController extends Controller
         $skip = $request->input('skip');
         $take = $request->input('take');
 
+        //on sauvegarde la valeur de l'ancienne lecture
+        $old_last_fil_read = $user->last_fil_read;
+
+        //si notre skip est à zero alors on va enregistrer dans le profil la dernière date de lecture
+        if($skip == 0){
+            $user->last_fil_read = date('Y-m-d H:i:s');
+            $user->save();
+        }
+
         //Liste des id dans les éléments que l'utilisateur suit
         foreach ($user->follows as $follow){
             if($follow->followed_type == 'App\\Crag') $crags[] = $follow->followed_id;
@@ -82,7 +91,8 @@ class PostController extends Controller
             'postable_type' => 'App\User',
             'postable_id' => $user->id,
             'skip' => $skip,
-            'take' => $take
+            'take' => $take,
+            'last_read' => $old_last_fil_read
         ];
 
         return view('pages.posts.posts', $data);

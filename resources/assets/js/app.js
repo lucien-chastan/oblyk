@@ -112,8 +112,10 @@ function backToTop() {
 function getNewNotificationAndMessage() {
     let nbMessage = document.getElementById('badge-nb-new-message'),
         nbNotification = document.getElementById('badge-nb-new-notification'),
+        nbPost = document.getElementById('badge-nb-new-posts'),
         global = document.getElementById('global-badge-notification-message'),
         badgeUserMessage = document.getElementById('badge-message-user-profile'),
+        badgeUserPost = document.getElementById('badge-post-user-profile'),
         badgeUserNotification = document.getElementById('badge-notification-user-profile');
 
     axios.post('/new/notifications-and-messages').then(function (response) {
@@ -121,25 +123,27 @@ function getNewNotificationAndMessage() {
 
         nbMessage.textContent = data.messages !== 0 ? data.messages : '';
         nbNotification.textContent = data.notifications !== 0 ? data.notifications : '';
-        global.textContent = data.messages + data.notifications;
+        nbPost.textContent = data.posts !== 0 ? data.posts : '';
+        global.textContent = data.messages + data.notifications + data.posts;
 
         //enleve l'ancienne notification du title de la page
         document.title = document.title.replace(/^(\([0-9]+\))\s/,'');
 
         //cache ou affiche le badge des messages et notification
-        if (data.messages + data.notifications === 0) {
+        if (data.messages + data.notifications + data.posts === 0) {
             global.style.display = 'none';
         } else {
             global.style.display = 'inline-block';
 
             //inscrit le nombre de notification dans le haut de la page
-            document.title = '(' + (parseInt(data.messages) + parseInt(data.notifications))  + ') ' +  document.title
+            document.title = '(' + (parseInt(data.messages) + parseInt(data.notifications) + parseInt(data.posts))  + ') ' +  document.title
         }
 
         //affichage du nombre de message dans la partie profil
         try{
             badgeUserMessage.textContent = data.messages !== 0 ? data.messages : '';
             badgeUserNotification.textContent = data.notifications !== 0 ? data.notifications : '';
+            badgeUserPost.textContent = data.posts !== 0 ? data.posts : '';
         }catch (e){}
 
     });

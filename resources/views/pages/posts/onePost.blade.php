@@ -3,6 +3,12 @@
 {{--LE POST--}}
 <div class="post-title-barre">
 
+    @if($postable_type == 'App\User' && $postable_id == Auth::id())
+        @if($last_read < $post->created_at)
+            <span class="badge new red"></span>
+        @endif
+    @endif
+
     {{--IMAGE DE L'ÉLEMENT--}}
     @if($post->postable_type == 'App\\Crag')
         @if(($post->postable->bandeau == "/img/default-crag-bandeau.jpg"))
@@ -48,7 +54,6 @@
         </span>
     </p>
 </div>
-
 
 {{--CONTENU DU POST--}}
 <div class="markdownZone">{!! $post->content !!}</div>

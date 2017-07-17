@@ -22,12 +22,27 @@
             border: none;
             box-shadow: none;
 
+            .refresh-btn {
+                display: none;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                transition: transform 0.5s;
+
+                &:hover {
+                    transform: rotate(180deg);
+                }
+            }
+
             .collapsible-header{
                 background-color: rgba(0,0,0,0);
                 border: 4px none transparent;
                 border-left-style: solid;
                 &.active-item{
                     border-color: #2196F3;
+
+                    .refresh-btn {
+                        display: inline;
+                    }
                 }
             }
 
@@ -42,6 +57,10 @@
                     border-left-style: solid;
                     &.active-item{
                         border-color: #2196F3;
+
+                        .refresh-btn {
+                            display: inline;
+                        }
                     }
                 }
             }
