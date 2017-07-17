@@ -8,6 +8,28 @@
 
     </div>
 
+    <div id="btn-see-more-post" class="text-center text-bold btn-see-more-post">
+        <div id="btn-a-see-more-post">
+            <a class="btn-flat grey-text" onclick="showLoadedMorePost(true);getMassivePosts()">
+                <i class="material-icons left">vertical_align_bottom</i>
+                Voir les posts plus anciens
+            </a>
+        </div>
+        <div id="div-loader-more-post" class="div-loader-more-post">
+            <div class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {{--BOUTON POUR AJOUTER UN POST AU FIL D'ACTUALITÉ--}}

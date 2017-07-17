@@ -14,6 +14,9 @@ class PostController extends Controller
     //Retourne la vue de plusieurs post
     function postsVue(Request $request){
 
+        $skip = $request->input('skip');
+        $take = $request->input('take');
+
         $posts = Post::where([
             ['postable_type','App\\' . $request->input('postable_type')],
             ['postable_id',$request->input('postable_id')]
@@ -22,12 +25,16 @@ class PostController extends Controller
             ->with('postable')
             ->with('comments.user')
             ->orderBy('created_at','desc')
+            ->skip($skip)
+            ->take($take)
             ->get();
 
         $data = [
             'posts' => $posts,
             'postable_type' => $request->input('postable_type'),
-            'postable_id' => $request->input('postable_id')
+            'postable_id' => $request->input('postable_id'),
+            'skip' => $skip,
+            'take' => $take
         ];
 
         return view('pages.posts.posts', $data);
@@ -38,6 +45,9 @@ class PostController extends Controller
         $user = User::where('id', Auth::id())->with('follows')->first();
 
         $crags = $users = $topos = $massives = $comments = [];
+
+        $skip = $request->input('skip');
+        $take = $request->input('take');
 
         //Liste des id dans les éléments que l'utilisateur suit
         foreach ($user->follows as $follow){
@@ -63,12 +73,16 @@ class PostController extends Controller
             ->with('postable')
             ->with('comments.user')
             ->orderBy('created_at','desc')
+            ->skip($skip)
+            ->take($take)
             ->get();
 
         $data = [
             'posts' => $posts,
             'postable_type' => 'App\User',
-            'postable_id' => $user->id
+            'postable_id' => $user->id,
+            'skip' => $skip,
+            'take' => $take
         ];
 
         return view('pages.posts.posts', $data);

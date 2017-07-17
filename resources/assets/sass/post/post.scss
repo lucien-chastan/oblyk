@@ -2,6 +2,10 @@
 
 #insert-posts-zone {
 
+    .col:last-child{
+        margin-bottom: 1em;
+    }
+
     .card-panel {
         margin-bottom: 5px;
         padding-bottom: 0;
@@ -85,5 +89,16 @@
             }
         }
     }
+}
 
+.btn-see-more-post {
+    a {
+        margin-top: 1em;
+        width: 100%;
+        margin-bottom: 70px;
+    }
+
+    .div-loader-more-post {
+        display: none;
+    }
 }

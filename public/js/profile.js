@@ -203,8 +203,6 @@ function getMyActuality(){
         'User',
         document.getElementById('id-user-actualite').value,
         document.getElementById('insert-posts-zone'),
-        0,
-        5,
         '/user/actuality'
     );
 }
