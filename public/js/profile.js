@@ -195,7 +195,29 @@ function uploadImageProfile() {
 
 //Vue d'un post
 function vuePost(post_id) {
-    console.log('vue du post ' + post_id);
+    let innerTarget = document.getElementById('user-content'),
+        itemNav = document.getElementById('item-fil-actu-menu');
+
+    showUserLoader(true);
+
+    axios.post('/post/vueOnePost', {id:post_id}).then(function (response) {
+
+        //ecrit les données
+        innerTarget.innerHTML = response.data;
+
+        location.href = '#fil-actu';
+
+        //faite des actions poste chargement
+        afterLoad();
+
+        currentVue = itemNav;
+
+        activeMenu(itemNav);
+
+        //cache le loader
+        showUserLoader(false);
+    });
+
 }
 
 function getMyActuality(){

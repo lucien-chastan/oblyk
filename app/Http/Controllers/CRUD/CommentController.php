@@ -85,7 +85,7 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->save();
 
-        //si c'est sur un post on notifi l'utilisateur
+        //Notification sur un post
         if($comment->commentable_type == 'App\Post') {
             $post = Post::where('id',$comment->commentable_id)->with('user')->with('postable')->first();
             if($post->user->id != Auth::id()){
@@ -103,6 +103,9 @@ class CommentController extends Controller
                 $notification->save();
             }
         };
+
+        //on récupère l'élément commenté au passage
+        $comment = Comment::where('id', $comment->id)->with('commentable')->first();
 
         return response()->json(json_encode($comment));
     }
@@ -146,7 +149,7 @@ class CommentController extends Controller
         ]);
 
         //enregistrement des données
-        $comment = Comment::where('id', $request->input('id'))->first();
+        $comment = Comment::where('id', $request->input('id'))->with('commentable')->first();
 
         if($comment->user_id == Auth::id()){
             $comment->comment = $request->input('comment');

@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
 
-    //Retourne la vue de plusieurs post
+    //RETOURNE LA VUE D'UN FLUX EN PARTICULIER (USER, CRAG, MASSIVE, TOPO ...ETC)
     function postsVue(Request $request){
+
+        $user = User::where('id',Auth::id())->first();
 
         $skip = $request->input('skip');
         $take = $request->input('take');
@@ -24,6 +26,7 @@ class PostController extends Controller
             ->with('user')
             ->with('postable')
             ->with('comments.user')
+            ->with('comments.comments.user')
             ->orderBy('created_at','desc')
             ->skip($skip)
             ->take($take)
@@ -34,12 +37,15 @@ class PostController extends Controller
             'postable_type' => $request->input('postable_type'),
             'postable_id' => $request->input('postable_id'),
             'skip' => $skip,
-            'take' => $take
+            'take' => $take,
+            'last_read' => $user->last_fil_read
         ];
 
         return view('pages.posts.posts', $data);
     }
 
+
+    //RETOURNE LA VUE DE TOUS LES POSTS QUI CONCERNE L'UTILISATEUR CONNECTÉ
     function userActuality(Request $request){
 
         $user = User::where('id', Auth::id())->with('follows')->first();
@@ -81,6 +87,7 @@ class PostController extends Controller
             ->with('user')
             ->with('postable')
             ->with('comments.user')
+            ->with('comments.comments.user')
             ->orderBy('created_at','desc')
             ->skip($skip)
             ->take($take)
@@ -99,14 +106,41 @@ class PostController extends Controller
     }
 
 
-    //Retourne la vue d'un post
+    //RETOURNE LA VUE D'UN POST APRÈS UN RELOAD
     function getOnePost(Request $request){
-        $post = Post::where('id', $request->input('id'))->with('comments.user')->first();
+
+        $user = User::where('id',Auth::id())->first();
+
+        $post = Post::where('id', $request->input('id'))
+            ->with('comments.user')
+            ->with('comments.comments.user')
+            ->first();
         $data = [
-            'post' => $post
+            'post' => $post,
+            'postable_type' => $post->postable_type,
+            'postable_id' => $post->postable_id,
+            'last_read' => $user->last_fil_read
         ];
 
         return view('pages.posts.onePost', $data);
     }
 
+
+    //RETOURNE LA VUE D'UN POST (APRÈS LE CLIC SUR UNE NOTIFICATION PAR EXEMPLE)
+    function vueOnePost(Request $request){
+        $user = User::where('id',Auth::id())->first();
+
+        $post = Post::where('id', $request->input('id'))
+            ->with('comments.user')
+            ->with('comments.comments.user')
+            ->first();
+        $data = [
+            'post' => $post,
+            'postable_type' => $post->postable_type,
+            'postable_id' => $post->postable_id,
+            'last_read' => $user->last_fil_read
+        ];
+
+        return view('pages.posts.vueOnePost', $data);
+    }
 }

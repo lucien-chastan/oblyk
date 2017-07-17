@@ -50,7 +50,7 @@
 
         border: 1px rgb(230, 230, 230);
         border-top-style: solid;
-        padding-left: 2vw;
+        padding-left: 1vw;
 
         .commentaire-post-div {
             padding: 1px 5px 8px 5px;
@@ -63,15 +63,33 @@
             }
 
             i {
-                color: rgb(180,180,180);
-                transition: opacity 0.3s;
+                cursor: pointer;
                 opacity: 0;
+                color: rgb(180,180,180);
+                transition: color 0.3s, opacity 0.3s;
+
+                &:hover {
+                    color: #2196F3;
+                }
             }
 
             .user-comment-info {
                 margin: -8px 0 0;
                 font-size: 0.8em;
             }
+
+            .ic-repondre-commentaire {
+                vertical-align: bottom;
+                margin-left: 0.6em;
+
+            }
+        }
+
+        .sous-commentaire {
+            padding-left: 1.1vw;
+            margin-left: 6px;
+            border: 2px rgb(230, 230, 230);
+            border-left-style: solid;
         }
     }
 

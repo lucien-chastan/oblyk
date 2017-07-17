@@ -40,6 +40,9 @@ function reloadPost(response) {
     let data = JSON.parse(response.data),
         id = data.commentable_id !== undefined ? data.commentable_id : data.id;
 
+    //si c'est une réponse à un commentaire
+    if(data.commentable_type === 'App\\Comment') id = data.commentable.commentable_id;
+
     axios.post('/post/getOne',{id:id}).then(function (response) {
         document.getElementById('zone-post-' + id).innerHTML = response.data;
         afterGetPost();
