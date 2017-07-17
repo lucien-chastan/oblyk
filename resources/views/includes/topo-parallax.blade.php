@@ -7,12 +7,12 @@
             <h1 class="loved-king-font">{{$label}}</h1>
             <p>{{$author}}, {{$editor}} ({{$editionYear}})</p>
             @if(Auth::check())
-                <p onclick="followedElement(this, 'Topo', {{$topo->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
-                    <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce topo</span>
-                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce topo</span>
+                <p onclick="followedElement(this, 'Topo', {{$topo->id}}, 'Topo ajouter à ma Topothèque', 'Topo retiré de ma Topothèque')" class="follow-paragraphe" data-followed="{{$user_follow}}">
+                    <span id="followed-element"><i class="material-icons amber-text">photo_album</i> Retirer de ma Topothèque</span>
+                    <span id="not-followed-element"><i class="material-icons with-text">photo_album</i> Ajouter à ma Topothèque</span>
                 </p>
             @else
-                <p>Connectez-vous pour suivre ce topo</p>
+                <p>Connectez-vous pour ajouter ce topo à votre Topothèque</p>
             @endif
         </div>
     </div>

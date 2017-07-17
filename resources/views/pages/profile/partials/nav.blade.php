@@ -10,9 +10,13 @@
 
 
 <ul class="collapsible" data-collapsible="accordion">
+
+    {{--DASHBOARD--}}
     <li>
         <div id="item-dashboard-menu" data-route="{{route('vueDashboardUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">dashboard</i>Dashboard</div>
     </li>
+
+    {{--FIL D'ACTUALITÉ--}}
     <li>
         <div id="item-fil-actu-menu" data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
             <span id="badge-post-user-profile" class="badge red-text text-lighten-1"></span>
@@ -20,9 +24,18 @@
             Fil d'actualité <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
         </div>
     </li>
+
+    {{--TOPOTHEQUE--}}
+    <li>
+        <div id="item-topotheque-menu" data-route="{{route('vueTopothequeUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">photo_album</i>Topothèque</div>
+    </li>
+
+    {{--SUIVI--}}
     <li>
         <div id="item-follow-menu" data-route="{{route('vueFollowUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">star</i>Mes suivis</div>
     </li>
+
+    {{--MEDIAS (PHOTO + VIDEO)--}}
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">photo_camera</i>Médias</div>
         <div class="collapsible-body">
@@ -30,6 +43,8 @@
             <div data-route="{{route('vueVideosUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">videocam</i> Vidéos</div>
         </div>
     </li>
+
+    {{--CROIX (TICKLIST + PROJET + ANALYTIKS + LISTE CROIX)--}}
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">playlist_add_check</i>Croix &amp; Ticklist</div>
         <div class="collapsible-body">
@@ -39,6 +54,8 @@
             <div data-route="{{route('vueAnalytiksUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">equalizer</i> Analytiks</div>
         </div>
     </li>
+
+    {{--MESSAGERIE--}}
     <li>
         <div data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
             <span id="badge-message-user-profile" class="badge red-text text-lighten-1"></span>
@@ -46,6 +63,8 @@
             Messagerie <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
         </div>
     </li>
+
+    {{--RECHERCHE D'UN PARTENAIRE--}}
     <li>
         <div class="collapsible-header truncate"><i class="material-icons">people</i>Recherche de partenaire</div>
         <div class="collapsible-body">
@@ -53,6 +72,8 @@
             <div data-route="{{route('vuePartenaireParametresUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link"><i class="left material-icons">accessibility</i>Qui je suis</div>
         </div>
     </li>
+
+    {{--NOTIFICATIONS--}}
     <li>
         <div data-route="{{route('vueNotificationsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
             <span id="badge-notification-user-profile" class="badge red-text text-lighten-1"></span>
@@ -60,7 +81,10 @@
             Notifications <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
         </div>
     </li>
+
+    {{--PARAMÈTRES--}}
     <li>
         <div data-route="{{route('vueEditSettingsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">settings</i>Paramètres</div>
     </li>
+
 </ul>

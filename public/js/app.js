@@ -77,10 +77,10 @@ function string_to_slug(str) {
 }
 
 //Follow un élément
-function followedElement(DomElement, followed_type, followed_id) {
+function followedElement(DomElement, followed_type, followed_id, addToast = 'Vous suivez cet élément', deleteToast = 'Vous ne suivez plus cet élément') {
     if(DomElement.getAttribute('data-followed') === 'false'){
         DomElement.setAttribute('data-followed', 'true');
-        Materialize.toast('Vous suivez cet élément', 4000);
+        Materialize.toast(addToast, 4000);
         axios.post('/follows',
             {
                 followed_id : followed_id,
@@ -89,7 +89,7 @@ function followedElement(DomElement, followed_type, followed_id) {
         );
     }else{
         DomElement.setAttribute('data-followed', 'false');
-        Materialize.toast('Vous ne suivez plus cet élément', 4000);
+        Materialize.toast(deleteToast, 4000);
         axios.post('/follow/delete',
             {
                 followed_id : followed_id,

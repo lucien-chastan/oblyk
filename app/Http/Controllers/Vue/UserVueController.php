@@ -27,7 +27,7 @@ class UserVueController extends Controller
         $follows = [];
         foreach ($user->follows as $follow){
 
-            if($follow->followed_type != 'App\User'){
+            if($follow->followed_type != 'App\User' && $follow->followed_type != 'App\Topo'){
 
                 $catTitre = '';
 
@@ -38,15 +38,6 @@ class UserVueController extends Controller
                     $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
                     $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
                     $catTitre = 'sites';
-                }
-
-                //TOPO
-                if($follow->followed_type == 'App\Topo'){
-                    $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
-                    $follow->followName = $follow->followed->label;
-                    $follow->followIcon = (file_exists(storage_path('app/public/topos/50/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/50/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
-                    $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
-                    $catTitre = 'topos';
                 }
 
                 //MASSIF
@@ -70,6 +61,30 @@ class UserVueController extends Controller
         return view('pages.profile.vues.followVue', $data);
     }
 
+    function vueTopotheque($user_id){
+
+        $user = User::where('id',$user_id)->with('follows.followed')->first();
+
+        $topos = [];
+
+        foreach ($user->follows as $follow){
+            if($follow->followed_type == 'App\Topo'){
+                $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
+                $follow->followName = $follow->followed->label;
+                $follow->followIcon = (file_exists(storage_path('app/public/topos/200/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/200/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
+                $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
+                $topos[] = $follow;
+            }
+        }
+
+        $data = [
+            'user' => $user,
+            'topos' => $topos
+        ];
+
+        return view('pages.profile.vues.topothequeVue', $data);
+
+    }
 
     function vueDashboard($user_id){
 
