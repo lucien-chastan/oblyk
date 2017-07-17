@@ -11,6 +11,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+
+        //1
         DB::table('posts')->insert([
             'postable_id' => 1,
             'postable_type' => 'App\Crag',
@@ -38,6 +40,8 @@ Dans la descente, à peine arrivé au fond du vallon, quitter le GR et prendre l
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+
+        //2
         DB::table('posts')->insert([
             'postable_id' => 1,
             'postable_type' => 'App\Topo',
@@ -53,6 +57,7 @@ Cet ouvrage a pu sortir de son rêve grâce à une étroite collaboration entre 
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+        //3
         DB::table('posts')->insert([
             'postable_id' => 1,
             'postable_type' => 'App\Massive',
@@ -68,6 +73,8 @@ venez et participez à l\'activité de l\'association
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+
+        //4
         DB::table('posts')->insert([
             'postable_id' => 1,
             'postable_type' => 'App\User',
@@ -82,6 +89,8 @@ Salut Lucien, je post sur ton mur !
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+
+        //5
         DB::table('posts')->insert([
             'postable_id' => 1,
             'postable_type' => 'App\User',
@@ -94,6 +103,8 @@ Je post sur mon mur
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+
+        //6
         DB::table('posts')->insert([
             'postable_id' => 2,
             'postable_type' => 'App\User',
@@ -110,7 +121,7 @@ Je suis sur la fin de ma formation de développeur web, et au vu de toutes les c
 </p>
 
 <p>
-Du coup, c\'est reparti pour une refonte totale du monstre ! ; )
+<strong>Du coup, c\'est reparti pour une refonte totale du monstre ! ; )</strong>
 </p>
 
 <p>

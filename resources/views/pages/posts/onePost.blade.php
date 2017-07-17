@@ -55,19 +55,19 @@
 
 
 {{--LES COMMENTAIRES--}}
-@if(count($post->descriptions) > 0)
+@if(count($post->comments) > 0)
 
     {{--PETIT TITRE COMME QUOI IL Y A DES COMMENTAIRES--}}
-    <span class="span-nb-commentaire-post">{{count($post->descriptions)}} COMMENTAIRES</span>
+    <span class="span-nb-commentaire-post">{{count($post->comments)}} COMMENTAIRES</span>
 
     {{--ZONE DES COMMENTAIRES--}}
     <div class="commentaire-post-zone">
-        @foreach($post->descriptions as $commentaire)
+        @foreach($post->comments as $commentaire)
 
             <div class="commentaire-post-div">
 
                 {{--CONTENU DU COMMENTAIRE--}}
-                <div class="markdownZone">@markdown($commentaire->description)</div>
+                <div class="markdownZone">@markdown($commentaire->comment)</div>
 
                 {{--INFORMATION SUR CELUI QUI À POSTÉ LE COMMENTAIRE--}}
                 <p class="user-comment-info grey-text">
@@ -75,10 +75,10 @@
 
                     @if(Auth::check())
                         @if($commentaire->user_id == Auth::id())
-                            <i {!! $Helpers::tooltip('Modifier ce commentaire') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$commentaire->id, "descriptive_type"=>explode('\\',$post->postable_type)[1],"description_id"=>$commentaire->id, "title"=>"Modifier ce commentaire", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                            <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/descriptions/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                            <i {!! $Helpers::tooltip('Modifier ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$commentaire->id, "title"=>"Modifier ce commentaire", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                            <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                         @else
-                            <i {!! $Helpers::tooltip('Signaler un problème sur ce problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$commentaire->id, "model"=>"Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip('Signaler un problème sur ce commentaire') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$commentaire->id, "model"=>"Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                         @endif
                     @endif
                 </p>
@@ -92,12 +92,12 @@
 {{--BARRE D'ACTION DU POST--}}
 <div class="action-post-barre">
     @if(Auth::check())
-        <span class="btn-commenter tooltipped btnModal" {!! $Helpers::tooltip('Commenter ce post') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$post->id, "descriptive_type"=>"Post", "description_id"=>"", "title"=>"Commenter ce post", "method"=>"POST", "callback"=>"reloadPost"]) !!}><i class="material-icons tiny-btn left">reply</i> commenter</span>
+        <span class="btn-commenter tooltipped btnModal" {!! $Helpers::tooltip('Commenter ce post') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$post->id, "commentable_type"=>"Post", "comment_id"=>"", "title"=>"Commenter ce post", "method"=>"POST", "callback"=>"reloadPost"]) !!}><i class="material-icons tiny-btn left">reply</i> commenter</span>
         @if($post->user_id == Auth::id())
             <span><i {!! $Helpers::tooltip('Modifier ce post') !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$post->postable_id, "postable_type"=>explode('\\',$post->postable_type)[1], "post_id"=>$post->id, "title"=>"Modifier ce post", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i></span>
             <span><i {!! $Helpers::tooltip('Supprimer ce post') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/posts/" . $post->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i></span>
         @else
-            <span><i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$post->id, "model"=>"Post"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i></span>
+            <span><i {!! $Helpers::tooltip('Signaler un problème sur ce post') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$post->id, "model"=>"Post"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i></span>
         @endif
     @endif
 </div>

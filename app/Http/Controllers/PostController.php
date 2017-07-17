@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Description;
+use App\Comment;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class PostController extends Controller
         ])
             ->with('user')
             ->with('postable')
-            ->with('descriptions.user')
+            ->with('comments.user')
             ->orderBy('created_at','desc')
             ->get();
 
@@ -48,9 +48,9 @@ class PostController extends Controller
         }
 
         //liste des id que l'utilisateur à commenté
-        $findComments = Description::where([['descriptive_type', 'App\\Post'],['user_id',$user->id]])->get();
+        $findComments = Comment::where([['commentable_type', 'App\\Post'],['user_id',$user->id]])->get();
         foreach ($findComments as $comment){
-            $comments[] = $comment->descriptive_id;
+            $comments[] = $comment->commentable_id;
         }
 
         $posts = Post::where(function ($query) use ( $crags ) {$query->where('postable_type', '=', 'App\\Crag')->whereIn('postable_id', $crags);})
@@ -61,7 +61,7 @@ class PostController extends Controller
             ->orWhere('user_id',$user->id)
             ->with('user')
             ->with('postable')
-            ->with('descriptions.user')
+            ->with('comments.user')
             ->orderBy('created_at','desc')
             ->get();
 
@@ -77,7 +77,7 @@ class PostController extends Controller
 
     //Retourne la vue d'un post
     function getOnePost(Request $request){
-        $post = Post::where('id', $request->input('id'))->with('descriptions.user')->first();
+        $post = Post::where('id', $request->input('id'))->with('comments.user')->first();
         $data = [
             'post' => $post
         ];

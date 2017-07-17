@@ -53,5 +53,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserConversationsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
         $this->call(PostsTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
     }
 }
