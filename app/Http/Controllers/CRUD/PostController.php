@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Description;
+use App\Comment;
 use App\Post;
+use App\PostPhoto;
+use Illuminate\Support\Facades\Storage;
 use Validator;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -42,9 +45,42 @@ class PostController extends Controller
     }
 
 
+    //Upload d'une photo dans une actualité
     function uploadPostImage(Request $request){
 
-        return response()->json($request);
+        if ($request->hasFile('fileToUpload')) {
+
+            $post_photo = new PostPhoto();
+            $post_photo->description = $request->input('alt');
+            $post_photo->slug_label = 'temp.jpg';
+            $post_photo->user_id = Auth::id();
+            $post_photo->save();
+
+            $post_photo->slug_label = 'post-photo-' . $post_photo->id . '.jpg';
+            $post_photo->save();
+
+            //Image en 800px de large
+            Image::make($request->file('fileToUpload'))
+                ->orientate()
+                ->resize(800, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('jpg', 70)
+                ->save(storage_path('app/public/post-photos/' . $post_photo->slug_label));
+
+            //retourne les valeurs
+            $data = [
+                'success' => true,
+                'file' => '/storage/post-photos/' . $post_photo->slug_label
+            ];
+
+
+        }else{
+            $data = array(
+                'success' => false,
+                'message' => 'Vous n\'avez pas envoyé de photo',
+            );
+        }
+
+        return response()->json($data);
 
     }
 
@@ -93,6 +129,13 @@ class PostController extends Controller
         $post->content = $content;
         $post->user_id = Auth::id();
         $post->save();
+
+        //on va chercher les post_photos qui on 0 dans post_id pour les attribuer à ce post
+        $post_photos = PostPhoto::where([['user_id', Auth::id()],['post_id',0]])->get();
+        foreach ($post_photos as $photo){
+            $photo->post_id = $post->id;
+            $photo->save();
+        }
 
         return response()->json(json_encode($post));
 
@@ -145,6 +188,13 @@ class PostController extends Controller
             $post->save();
         }
 
+        //on va chercher les post_photos qui on 0 dans post_id pour les attribuer à ce post
+        $post_photos = PostPhoto::where([['user_id', Auth::id()],['post_id',0]])->get();
+        foreach ($post_photos as $photo){
+            $photo->post_id = $post->id;
+            $photo->save();
+        }
+
         return response()->json(json_encode($post));
     }
 
@@ -161,9 +211,16 @@ class PostController extends Controller
         if($post->user_id == Auth::id()){
 
             //suppression des commentaires liés
-            $comments = Description::where([['descriptive_id',$post->id],['descriptive_type','App\Post']])->get();
+            $comments = Comment::where([['commentable_id',$post->id],['commentable_type','App\Post']])->get();
             foreach ($comments as $comment){
                 $comment->delete();
+            }
+
+            //on va supprimer les photos liées
+            $post_photos = PostPhoto::where('post_id',$post->id)->get();
+            foreach ($post_photos as $photo){
+                Storage::delete(['public/post-photos/' . $photo->slug_label]);
+                $photo->delete();
             }
 
             //suppression du post

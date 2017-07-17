@@ -18,7 +18,7 @@
         serverPath: '/post/upload',
         fileFieldName: 'fileToUpload',
         data: [],                       // Additional data for ajax [{name: 'key', value: 'value'}]
-        headers: {},                    // Additional headers
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},                    // Additional headers
         xhrFields: {},                  // Additional fields
         urlPropertyName: 'file',        // How to get url from the json response (for instance 'url' for {url: ....})
         statusPropertyName: 'success',  // How to get status from the json response 
