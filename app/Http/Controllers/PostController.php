@@ -25,8 +25,11 @@ class PostController extends Controller
         ])
             ->with('user')
             ->with('postable')
+            ->with('likes')
             ->with('comments.user')
+            ->with('comments.likes')
             ->with('comments.comments.user')
+            ->with('comments.comments.likes')
             ->orderBy('created_at','desc')
             ->skip($skip)
             ->take($take)
@@ -86,8 +89,11 @@ class PostController extends Controller
             ->orWhere('user_id',$user->id)
             ->with('user')
             ->with('postable')
+            ->with('likes')
             ->with('comments.user')
+            ->with('comments.likes')
             ->with('comments.comments.user')
+            ->with('comments.comments.likes')
             ->orderBy('created_at','desc')
             ->skip($skip)
             ->take($take)
@@ -112,8 +118,11 @@ class PostController extends Controller
         $user = User::where('id',Auth::id())->first();
 
         $post = Post::where('id', $request->input('id'))
+            ->with('likes')
             ->with('comments.user')
+            ->with('comments.likes')
             ->with('comments.comments.user')
+            ->with('comments.comments.likes')
             ->first();
         $data = [
             'post' => $post,
@@ -131,8 +140,11 @@ class PostController extends Controller
         $user = User::where('id',Auth::id())->first();
 
         $post = Post::where('id', $request->input('id'))
+            ->with('likes')
             ->with('comments.user')
+            ->with('comments.likes')
             ->with('comments.comments.user')
+            ->with('comments.comments.likes')
             ->first();
         $data = [
             'post' => $post,

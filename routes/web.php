@@ -95,6 +95,7 @@ Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
 Route::post('/user/actuality', 'PostController@userActuality')->name('userActuality');
 Route::post('/post/upload', 'CRUD\PostController@uploadPostImage')->name('uploadPostImage');
 Route::post('/post/vueOnePost', 'PostController@vueOnePost')->name('vueOnePost');
+Route::post('/like/add', 'LikeController@addLike')->name('addLike');
 
 
 //LA CARTE

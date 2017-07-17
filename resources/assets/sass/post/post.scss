@@ -46,11 +46,26 @@
         color: rgb(150,150,150);
     }
 
+    .btn-like-comment-repost {
+        i {
+            vertical-align: middle;
+            margin-right: 0.2em;
+        }
+        span {
+            margin-right: 2em;
+        }
+    }
+
     .commentaire-post-zone{
 
         border: 1px rgb(230, 230, 230);
         border-top-style: solid;
         padding-left: 1vw;
+
+        cite {
+            margin-left: 0.7em;
+            font-style: normal;
+        }
 
         .commentaire-post-div {
             padding: 1px 5px 8px 5px;
@@ -105,6 +120,11 @@
             &:hover {
                 color: #2196F3;
             }
+        }
+
+        cite {
+            color: rgb(180,180,180);
+            font-style: normal;
         }
     }
 }

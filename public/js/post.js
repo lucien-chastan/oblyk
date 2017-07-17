@@ -67,3 +67,24 @@ function showLoadedMorePost(visible) {
         }
     }
 }
+
+//Like un post ou un commentaire
+function like(likable_id, likable_type, likable, post_id) {
+
+    axios.post('/like/add', {likable_id : likable_id, likable_type: likable_type, likable : likable}).then(function (response) {
+
+        //Message de confirmation
+        if(likable){
+            Materialize.toast('"J\'aime" ajouté', 4000);
+        }else{
+            Materialize.toast('"J\'aime" retiré', 4000);
+        }
+
+        //Reload du post
+        axios.post('/post/getOne',{id:post_id}).then(function (response) {
+            document.getElementById('zone-post-' + post_id).innerHTML = response.data;
+            afterGetPost();
+        });
+    });
+
+}
