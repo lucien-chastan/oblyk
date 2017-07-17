@@ -81,7 +81,9 @@
                     @if(Auth::check())
                         @if($commentaire->user_id == Auth::id())
                             <i {!! $Helpers::tooltip('Modifier ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$commentaire->id, "title"=>"Modifier ce commentaire", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                            <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                            @if(count($commentaire->comments) == 0)
+                                <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                            @endif
                         @else
                             <i {!! $Helpers::tooltip('Signaler un problème sur ce commentaire') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$commentaire->id, "model"=>"Comment"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                         @endif
@@ -156,7 +158,9 @@
         </span>
         @if($post->user_id == Auth::id())
             <span><i {!! $Helpers::tooltip('Modifier ce post') !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$post->postable_id, "postable_type"=>explode('\\',$post->postable_type)[1], "post_id"=>$post->id, "title"=>"Modifier ce post", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i></span>
-            <span><i {!! $Helpers::tooltip('Supprimer ce post') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/posts/" . $post->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i></span>
+            @if(count($post->comments) == 0)
+                <span><i {!! $Helpers::tooltip('Supprimer ce post') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/posts/" . $post->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i></span>
+            @endif
         @else
             <span><i {!! $Helpers::tooltip('Signaler un problème sur ce post') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$post->id, "model"=>"Post"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i></span>
         @endif

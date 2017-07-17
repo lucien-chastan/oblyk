@@ -206,15 +206,33 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('id', $id)->with('likes')->with('comments.likes')->with('comments.comments.likes')->first();
 
         if($post->user_id == Auth::id()){
 
-            //suppression des commentaires liés
-            $comments = Comment::where([['commentable_id',$post->id],['commentable_type','App\Post']])->get();
-            foreach ($comments as $comment){
+            //loop sur les commentaires de premier niveau
+            foreach ($post->comments as $comment){
+
+                //loop sur les commentaire de deuxième niveau
+                foreach ($comment->comments as $subComment) {
+
+                    //suppresion des likes deuxièmes niveau
+                    foreach ($subComment->likes as $subLike) $subLike->delete();
+
+                    //suppression du commentaire de deuxième niveau
+                    $subComment->delete();
+
+                }
+
+                //suppresion des likes premier niveau
+                foreach ($comment->likes as $comLike) $comLike->delete();
+
+                //suppression du commentaire premier niveau
                 $comment->delete();
             }
+
+            //suppression des likes du post
+            foreach ($post->likes as $postLike) $post->delete();
 
             //on va supprimer les photos liées
             $post_photos = PostPhoto::where('post_id',$post->id)->get();

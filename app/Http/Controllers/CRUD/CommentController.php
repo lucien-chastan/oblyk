@@ -167,10 +167,21 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::where('id', $id)->first();
+        $comment = Comment::where('id', $id)->with('commentable')->with('likes')->with('comments')->with('comments.likes')->with('comments.commentable')->first();
         $oldComment = $comment;
 
         if($comment->user_id == Auth::id()){
+
+            //suppression des commentaires et like des commentaires liée
+            foreach ($comment->comments as $subComment){
+                foreach ($subComment->likes as $like) $like->delete();
+                $subComment->delete();
+            }
+
+            //suppresion des likes
+            foreach ($comment->likes as $like) $like->delete();
+
+            //suppression du commentaire
             $comment->delete();
         }
 
