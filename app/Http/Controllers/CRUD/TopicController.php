@@ -2,36 +2,34 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Link;
+use App\ForumTopic;
+use App\Route;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class LinkController extends Controller
+class TopicController extends Controller
 {
 
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN lien
-    function linkModal(Request $request){
+    function topicModal(Request $request){
 
         //construction de la définition (vide ou avec des infos)
-        $id_link = $request->input('link_id');
-        $link = isset($id_link) ? Link::where('id', $id_link)->first() : new Link();
+        $id_topic = $request->input('topic_id');
+        $topic = isset($id_topic) ? ForumTopic::where('id', $id_topic)->first() : new ForumTopic();
 
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
 
         //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/links' : '/links/' . $id_link;
+        $outputRoute = ($request->input('method') == 'POST')? '/topics' : '/topics/' . $id_topic;
 
         $data = [
             'dataModal' => [
-                'linkable_id' => $request->input('linkable_id'),
-                'linkable_type' => "App\\" . $request->input('linkable_type'),
-                'label' => $link->label,
-                'link' => $link->link,
-                'description' => $link->description,
-                'id' => $id_link,
+                'label' => $topic->label,
+                'category_id' => $topic->category_id,
+                'id' => $id_topic,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
                 'route' => $outputRoute,
@@ -39,7 +37,7 @@ class LinkController extends Controller
             ]
         ];
 
-        return view('modal.link', $data);
+        return view('modal.topic', $data);
     }
 
     /**
@@ -72,23 +70,20 @@ class LinkController extends Controller
     {
         //validation du formulaire
         $this->validate($request, [
-            'linkable_id' => 'required|Integer',
-            'linkable_type' => 'required|String',
             'label' => 'required|max:255',
-            'link' => 'required|max:255'
+            'category_id' => 'required|Integer'
         ]);
 
         //enregistrement des données
-        $link = new Link();
-        $link->linkable_id = $request->input('linkable_id');
-        $link->linkable_type = $request->input('linkable_type');
-        $link->description = $request->input('description');
-        $link->label = $request->input('label');
-        $link->link = $request->input('link');
-        $link->user_id = Auth::id();
-        $link->save();
+        $topic = new ForumTopic();
+        $topic->label = $request->input('label');
+        $topic->category_id = $request->input('category_id');
+        $topic->user_id = Auth::id();
+        $topic->save();
 
-        return response()->json(json_encode($link));
+        $topic->location = route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]);
+
+        return response()->json(json_encode($topic));
 
     }
 
@@ -124,22 +119,19 @@ class LinkController extends Controller
     {
         //validation du formulaire
         $this->validate($request, [
-            'linkable_id' => 'required|Integer',
-            'linkable_type' => 'required|String',
             'label' => 'required|max:255',
-            'link' => 'required|max:255'
+            'category_id' => 'required|Integer'
         ]);
 
         //enregistrement des données
-        $link = Link::where('id', $request->input('id'))->first();
-        if($link->user_id == Auth::id()){
-            $link->description = $request->input('description');
-            $link->label = $request->input('label');
-            $link->link = $request->input('link');
-            $link->save();
+        $topic = ForumTopic::where('id', $request->input('id'))->first();
+        if($topic->user_id == Auth::id()){
+            $topic->label = $request->input('label');
+            $topic->category_id = $request->input('category_id');
+            $topic->save();
         }
 
-        return response()->json(json_encode($link));
+        return response()->json(json_encode($topic));
     }
 
     /**
@@ -150,10 +142,10 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        $link = Link::where('id', $id)->first();
+        $topic = ForumTopic::where('id', $id)->first();
 
-        if($link->user_id == Auth::id()){
-            $link->delete();
+        if($topic->user_id == Auth::id()){
+            $topic->delete();
         }
     }
 }

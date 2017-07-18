@@ -24,6 +24,12 @@
         @endif
     @elseif($post->postable_type == 'App\\Massive')
         <img src="/img/icon-search-massive.svg" class="circle left" alt="">
+    @elseif($post->postable_type == 'App\\ForumTopic')
+        @if(file_exists(storage_path('app/public/users/50/user-' . $post->user->id . '.jpg')))
+            <img src="/storage/users/50/user-{{$post->user->id}}.jpg" class="circle left" alt="">
+        @else
+            <img src="/img/icon-search-user.svg" class="circle left" alt="">
+        @endif
     @elseif($post->postable_type == 'App\\User')
         @if(file_exists(storage_path('app/public/users/50/user-' . $post->postable->id . '.jpg')))
             <img src="/storage/users/50/user-{{$post->postable->id}}.jpg" class="circle left" alt="">
@@ -41,7 +47,11 @@
         @elseif($post->postable_type == 'App\\Massive')
             <a class="lien-title-post" href="{{route('massivePage',['massive_id'=>$post->postable->id, 'massive_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a> <span class="grey-text">regroupement de site</span>
         @elseif($post->postable_type == 'App\\User')
-            <a class="lien-title-post" href="{{route('userPage',['userg_id'=>$post->postable->id, 'userg_label'=>str_slug($post->postable->name)])}}">{{$post->postable->name}}</a>
+            <a class="lien-title-post" href="{{route('userPage',['user_id'=>$post->postable->id, 'user_label'=>str_slug($post->postable->name)])}}">{{$post->postable->name}}</a>
+        @elseif($post->postable_type == 'App\\ForumTopic')
+            @if($postable_type != 'ForumTopic')
+                <a class="lien-title-post" href="{{route('topicPage',['topic_id'=>$post->postable->id, 'topic_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a>
+            @endif
         @endif
         <br>
         <span class="grey-text">

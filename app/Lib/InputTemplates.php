@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Album;
 use App\Anchor;
 use App\Climb;
+use App\ForumGeneralCategory;
 use App\Incline;
 use App\Point;
 use App\RainExposure;
@@ -274,6 +275,42 @@ class InputTemplates extends ServiceProvider{
         foreach ($Rock as $rock){
             $selected = ($rock->id == $value)? 'selected' : '';
             $html .= '<option ' . $selected . ' value="' . $rock->id . '">' . ucfirst($rock->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+    //SELECT DU D'UNE CATEGORY
+    public static function categories($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $generalCategories = ForumGeneralCategory::with('categories')->with('categories')->get();;
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($generalCategories as $generalCategory){
+
+            $html .= '<optgroup label="' . $generalCategory->label . '">';
+
+            foreach ($generalCategory->categories as $category){
+                $selected = ($category->id == $value)? 'selected' : '';
+                $html .= '<option ' . $selected . ' value="' . $category->id . '">' . ucfirst($category->label) . '</option>';
+            }
+
+            $html .= '</optgroup>';
         }
 
         $html .= '

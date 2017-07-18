@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Comment;
+use App\ForumTopic;
 use App\Post;
 use App\PostPhoto;
 use Illuminate\Support\Facades\Storage;
@@ -135,6 +136,14 @@ class PostController extends Controller
         foreach ($post_photos as $photo){
             $photo->post_id = $post->id;
             $photo->save();
+        }
+
+        //Si c'est un post sur le forum, alors on ajoute +1 au nombre de vu du topic et on rafraichi sa dernière lecture
+        if($post->postable_type == 'App\ForumTopic'){
+            $topic = ForumTopic::where('id',$post->postable_id)->first();
+            $topic->nb_post = $topic->nb_post + 1;
+            $topic->last_post = date('Y-m-d H:m:s');
+            $topic->save();
         }
 
         return response()->json(json_encode($post));

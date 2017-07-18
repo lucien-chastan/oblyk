@@ -3,7 +3,7 @@
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
 
 
-<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, refresh); return false">
+<form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, $dataModal['callback']); return false">
 
     {!! $Inputs::popupError([]) !!}
 

@@ -196,6 +196,8 @@ function submitData(form, callback) {
             ajaxSubmited = false;
             showSubmitLoader(false, form);
 
+            console.log(error);
+
             if(error.response.status === 422){
 
                 //table des erreurs

@@ -54,5 +54,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MessagesTableSeeder::class);
         $this->call(PostsTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(ForumGeneralCategoriesTableSeeder::class);
+        $this->call(ForumCategoriesTableSeeder::class);
+        $this->call(ForumTopicsTableSeeder::class);
     }
 }

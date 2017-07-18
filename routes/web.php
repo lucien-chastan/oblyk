@@ -111,6 +111,16 @@ Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo'
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 
+
+//FORUM
+Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
+Route::get('/forum-escalade/accueil', 'ForumController@forumPage')->name('forum');
+Route::get('/forum-escalade/les-categories', 'ForumController@categoryPage')->name('forumCategories');
+Route::get('/forum-escalade/les-sujets', 'ForumController@topicsPage')->name('forumTopics');
+Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
+Route::get('/forum-escalade/creer-un-sujet', 'ForumController@createdPage')->name('createTopics');
+
+
 //TOPO (VERS LES SCRIPTS DE LIAISON)
 Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
 Route::post('/topo/create-liaison', 'CRUD\TopoCragController@createLiaison')->name('ScriptCreateLiaison');
@@ -153,6 +163,7 @@ Route::post('/modal/conversation', 'CRUD\ConversationController@conversationModa
 Route::post('/modal/userConversation', 'CRUD\UserConversationController@userConversationModal')->name('userConversationModal');
 Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
 Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
+Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal');
 
 
 //CRUD AJAX
@@ -183,6 +194,7 @@ Route::resource('userConversations', 'CRUD\UserConversationController');
 Route::resource('messages', 'CRUD\MessageController');
 Route::resource('posts', 'CRUD\PostController');
 Route::resource('notifications', 'CRUD\NotificationController');
+Route::resource('topics', 'CRUD\TopicController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
