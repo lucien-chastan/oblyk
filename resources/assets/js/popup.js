@@ -28,7 +28,8 @@ function openModal(route, data) {
         contentModal.style.display = 'block';
 
         //on donne le focus au premier input
-        document.getElementsByClassName('input-data')[0].focus();
+        let inputDatas = document.getElementsByClassName('input-data');
+        if(inputDatas.length > 0 ) inputDatas[0].focus();
 
     });
 }

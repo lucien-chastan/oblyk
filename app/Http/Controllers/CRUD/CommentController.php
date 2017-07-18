@@ -91,14 +91,13 @@ class CommentController extends Controller
             if($post->user->id != Auth::id()){
                 $notification = new Notification();
                 $notification->user_id = $post->user->id;
-                $notification->type = 'new_comment';
-                $notification->data = json_encode(
-                    [
-                        'title'=> Auth::user()->name . ' à commenté(e) votre post sur ' . $post->postable->label,
-                        'icon'=>'/img/icon-fil-actu.svg',
-                        'content' => 'posté par <a href="' . route('userPage',['user_id'=>Auth::id(),'user_label'=>Auth::user()->name]) . '">' . Auth::user()->name . '</a>',
-                        'action' => 'vuePost(' . $post->id . ')'
-                    ]
+                $notification->type = 'new_post_comment';
+                $notification->data = Notification::jsonData(
+                    'new_post_comment',
+                    [Auth::user()->name, $post->postable->label],
+                    '/img/icon-fil-actu.svg',
+                    [route('userPage',['user_id'=>Auth::id(),'user_label'=>Auth::user()->name]), Auth::user()->name],
+                    [$post->id]
                 );
                 $notification->save();
             }

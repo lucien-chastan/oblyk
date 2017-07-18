@@ -152,6 +152,7 @@ Route::post('/modal/socialNetwork', 'CRUD\SocialNetworkController@socialNetworkM
 Route::post('/modal/conversation', 'CRUD\ConversationController@conversationModal')->name('conversationModal');
 Route::post('/modal/userConversation', 'CRUD\UserConversationController@userConversationModal')->name('userConversationModal');
 Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
+Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
 
 
 //CRUD AJAX

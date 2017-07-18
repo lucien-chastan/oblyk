@@ -105,6 +105,17 @@
             margin-left: 6px;
             border: 2px rgb(230, 230, 230);
             border-left-style: solid;
+
+            .para-ajouter-reponse {
+                font-size: 0.8em;
+                margin-top: 5px;
+                margin-left: 3px;
+
+                i {
+                    vertical-align: middle;
+                    margin-right: 0.6em;
+                }
+            }
         }
     }
 

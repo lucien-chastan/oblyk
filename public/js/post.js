@@ -69,9 +69,17 @@ function showLoadedMorePost(visible) {
 }
 
 //Like un post ou un commentaire
-function like(likable_id, likable_type, likable, post_id) {
+function like(likable_id, likable_type, likable, post_id, type) {
 
-    axios.post('/like/add', {likable_id : likable_id, likable_type: likable_type, likable : likable}).then(function (response) {
+    axios.post('/like/add',
+        {
+            likable_id : likable_id,
+            likable_type: likable_type,
+            likable : likable,
+            post_id : post_id,
+            type : type
+        }
+    ).then(function (response) {
 
         //Message de confirmation
         if(likable){

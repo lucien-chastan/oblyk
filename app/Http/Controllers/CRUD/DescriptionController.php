@@ -96,25 +96,6 @@ class DescriptionController extends Controller
         //si c'est sur une ligne, on met à jour la note
         if($description->descriptive_type == 'App\Route') $this->updateNote($description->descriptive_id);
 
-        //si c'est sur un post on notifi l'utilisateur
-        if($description->descriptive_type == 'App\Post') {
-            $post = Post::where('id',$description->descriptive_id)->with('user')->with('postable')->first();
-            if($post->user->id != Auth::id()){
-                $notification = new Notification();
-                $notification->user_id = $post->user->id;
-                $notification->type = 'new_comment';
-                $notification->data = json_encode(
-                    [
-                        'title'=> Auth::user()->name . ' à commenté(e) votre post sur ' . $post->postable->label,
-                        'icon'=>'/img/icon-fil-actu.svg',
-                        'content' => 'posté par <a href="' . route('userPage',['user_id'=>Auth::id(),'user_label'=>Auth::user()->name]) . '">' . Auth::user()->name . '</a>',
-                        'action' => 'vuePost(' . $post->id . ')'
-                    ]
-                );
-                $notification->save();
-            }
-        };
-
         return response()->json(json_encode($description));
     }
 
