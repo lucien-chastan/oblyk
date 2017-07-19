@@ -4,7 +4,11 @@
     <div class="col s12">
         <div class="card-panel blue-card-panel">
 
-            <h2 class="loved-king-font titre-profile-boite-vue">Mes albums</h2>
+            @if(Auth::id() == $user->id)
+                <h2 class="loved-king-font titre-profile-boite-vue">Mes albums</h2>
+            @else
+                <h2 class="loved-king-font titre-profile-boite-vue">Les albums de {{$user->name}}</h2>
+            @endif
 
             <div class="blue-border-zone row">
                 @foreach($user->albums as $album)
@@ -37,6 +41,14 @@
                     </div>
                 @endforeach
             </div>
+
+            @if(count($user->albums) == 0)
+                @if(Auth::id() == $user->id)
+                    <p class="grey-text text-center">Tu n'as pas encore d'album photo</p>
+                @else
+                    <p class="grey-text text-center">{{$user->name}} pas encore d'album photo</p>
+                @endif
+            @endif
 
         </div>
     </div>

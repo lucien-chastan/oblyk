@@ -6,6 +6,7 @@ use App\Album;
 use App\Article;
 use App\Conversation;
 use App\Crag;
+use App\Follow;
 use App\Notification;
 use App\Post;
 use App\TickList;
@@ -98,14 +99,52 @@ class UserVueController extends Controller
     function vueDashboard($user_id){
 
         $user = User::where('id',$user_id)->with('settings')->first();
+
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardVue', $data);
 
     }
 
+    function vueAPropos($user_id){
+
+        $user = User::where('id',$user_id)
+            ->with('settings')
+            ->with('socialNetworks')
+            ->with('socialNetworks.socialNetwork')
+            ->withCount('crags')
+            ->withCount('routes')
+            ->withCount('descriptions')
+            ->withCount('photos')
+            ->withCount('videos')
+            ->withCount('topos')
+            ->withCount('topoWebs')
+            ->withCount('topoPdfs')
+            ->withCount('posts')
+            ->first();
+
+        //On va chercher si l'auth est amis avec l'user
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
+
+        if($user->sex == 0) $user->genre = 'Inféfini';
+        if($user->sex == 1) $user->genre = 'Femme';
+        if($user->sex == 2) $user->genre = 'Homme';
+
+        $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
+
+        $user->image = file_exists(storage_path('app/public/users/200/user-' . $user->id . '.jpg')) ? '/storage/users/200/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
+        $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg' : '';
+
+        $data = [
+            'user' => $user,
+            'relationStatus' => $relationStatus
+        ];
+        return view('pages.profile.vues.aProposVue', $data);
+
+    }
+
     function vueFilActu($user_id){
 
-        $user = User::where('id',Auth::id())->first();
+        $user = User::where('id', $user_id)->first();
 
         $data = ['user' => $user];
 
@@ -326,9 +365,20 @@ class UserVueController extends Controller
     }
 
     function subVueUsersLast($user_id){
-        $user = User::where('id',$user_id)->first();
-        $users = User::orderBy('created_at','desc')->skip(0)->take(5)->get();
-        $data = ['user' => $user,'users'=>$users];
+
+        $profile = User::where('id',$user_id)->first();
+
+        $users = [];
+        $findUsers = User::orderBy('created_at','desc')->skip(0)->take(5)->get();
+        foreach($findUsers as $user){
+            if($user->sex == 0) $user->genre = 'Indéfini';
+            if($user->sex == 1) $user->genre = 'Femme';
+            if($user->sex == 2) $user->genre = 'Homme';
+            $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
+            $users[] = $user;
+        }
+
+        $data = ['user' => $profile,'users'=>$users];
         return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
     }
 

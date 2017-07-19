@@ -9,7 +9,7 @@
             @endif
             <div class="text-bold"><a href="{{route('userPage',['user_id'=>$newUser->id,'user_label'=>$newUser->name])}}">{{$newUser->name}}</a></div>
             <p class="info-user grey-text">
-                Homme, x ans arrivé le {{$newUser->created_at->format('d M Y')}}
+                {{$newUser->genre}}, {{$newUser->age}} ans arrivé le {{$newUser->created_at->format('d M Y')}}
             </p>
         </div>
 

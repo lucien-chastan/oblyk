@@ -3,7 +3,12 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel blue-card-panel">
-            <h2 class="loved-king-font titre-profile-boite-vue">Mes vidéos</h2>
+
+            @if(Auth::id() == $user->id)
+                <h2 class="loved-king-font titre-profile-boite-vue">Mes vidéos</h2>
+            @else
+                <h2 class="loved-king-font titre-profile-boite-vue">Vidéos de {{$user->name}}</h2>
+            @endif
 
             <div class="row">
                 @if(count($user->videos) > 0)
@@ -33,7 +38,11 @@
                         </div>
                     @endforeach
                 @else
-                    <p class="text-center grey-text">Tu n'a pas encore posté de vidéo</p>
+                    @if(Auth::id() == $user->id)
+                        <p class="text-center grey-text">Tu n'as pas encore posté de vidéo</p>
+                    @else
+                        <p class="text-center grey-text">{{ $user->name }} n'as pas encore posté de vidéo</p>
+                    @endif
                 @endif
             </div>
         </div>

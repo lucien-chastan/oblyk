@@ -43,6 +43,7 @@ Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name(
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
 Route::get('/vue/profile/{profile_id}/topotheque', 'Vue\UserVueController@vueTopotheque')->name('vueTopothequeUser');
 Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
+Route::get('/vue/profile/{profile_id}/a-propos', 'Vue\UserVueController@vueAPropos')->name('vueAProposUser');
 Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
 Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
 Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
@@ -206,6 +207,7 @@ Route::post('/upload/userPhotoProfile', 'CRUD\UserController@uploadPhotoProfile'
 
 //FOLLOW (DELETE)
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');
+Route::post('/user/relation', 'CRUD\FollowController@userRelation')->name('userRelation');
 
 //TICK LISTS (DELETE)
 Route::post('/tick-list/delete', 'CRUD\TickListController@deleteTickList')->name('deleteTickList');

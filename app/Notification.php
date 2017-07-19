@@ -84,6 +84,26 @@ class Notification extends Model
             ];
         }
 
+        //DEMANDE D'AMIS
+        if($notification_type == 'demande_amis'){
+            $data = [
+                'title' => $title[0] . ' vous demande en amis',
+                'icon' => $icon,
+                'content' => 'son profil : <a href="' . $content[0] . '">' . $content[1] . '</a>',
+                'action' => 'vueProfile(' . $action[0] . ')'
+            ];
+        }
+
+        //ACCEPTE DEMANDE D'AMIS
+        if($notification_type == 'accepte_demande_amis'){
+            $data = [
+                'title' => $title[0] . ' à accepté votre demande d\'amis',
+                'icon' => $icon,
+                'content' => 'voir son profil : <a href="' . $content[0] . '">' . $content[1] . '</a>',
+                'action' => 'vueProfile(' . $action[0] . ')'
+            ];
+        }
+
         return json_encode($data);
     }
 }

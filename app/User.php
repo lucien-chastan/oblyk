@@ -35,6 +35,7 @@ class User extends Authenticatable
     public function messages(){ return $this->hasMany('App\Message','user_id', 'id'); }
     public function notifications(){ return $this->hasMany('App\Notification','user_id', 'id'); }
     public function parkings() { return $this->hasMany('App\Parking','user_id', 'id'); }
+    public function posts() { return $this->hasMany('App\Post','user_id', 'id'); }
     public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
     public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }
     public function sales() { return $this->hasMany('App\Sale','user_id', 'id'); }
@@ -42,6 +43,8 @@ class User extends Authenticatable
     public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
     public function socialNetworks(){ return $this->hasMany('App\UserSocialNetwork','user_id', 'id'); }
     public function topos() { return $this->hasMany('App\Topo','user_id', 'id'); }
+    public function topoWebs() { return $this->hasMany('App\TopoWeb','user_id', 'id'); }
+    public function topoPdfs() { return $this->hasMany('App\TopoPdf','user_id', 'id'); }
     public function tickLists() { return $this->hasMany('App\TickList','user_id', 'id'); }
     public function userConversations(){ return $this->hasMany('App\UserConversation','user_id', 'id'); }
     public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }

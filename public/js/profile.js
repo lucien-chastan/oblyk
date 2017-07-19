@@ -232,3 +232,22 @@ function getMyActuality(){
 function vueTopic(topic_id) {
     location.href = '/forum-escalade/' + topic_id +  '/sujet';
 }
+
+function vueProfile(profil_id) {
+    location.href = '/grimpeur/' + profil_id +  '/profil';
+}
+
+function changeRelation(user_id, relation_status) {
+    axios.post('/user/relation', {user_id : user_id , relation_status : relation_status}).then(function () {
+
+        //affiche un message
+        if(relation_status === 0) Materialize.toast('Demande envoyée !', 4000);
+        if(relation_status === 1) Materialize.toast('Demande annulée', 4000);
+        if(relation_status === 2) Materialize.toast('Vous êtes désormais amis', 4000);
+        if(relation_status === 3) Materialize.toast('Vous n\'êtes plus amis', 4000);
+
+        //reload la vue
+        reloadCurrentVue();
+
+    });
+}
