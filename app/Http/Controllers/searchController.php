@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\ForumTopic;
 use App\Help;
 use App\Massive;
 use App\Route;
@@ -105,8 +106,21 @@ class searchController extends Controller
             $users[] = $user;
         }
 
+        //RECHERCHE SUR LE FORUM
+        $topics = [];
+        $findTopics = ForumTopic::where([['label','like','%' . $search . '%'],['nb_post','>',0]])->with('user')->orderBy('label', 'asc')->get();
+        foreach ($findTopics as $topic){
+            $topic->url = route('topicPage', ['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]);
+            $topic->user->url = route('userPage', ['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)]);
+            $topic->icon = '/img/icon-search-user.svg';
+
+            $topics[] = $topic;
+        }
+
         //RECHERCHE SUR LES AIDES
         $helps = Help::where('label','like','%' . $search . '%')->orWhere('category','like','%' . $search . '%')->orderBy('label', 'asc')->get();
+
+
 
         $data = [
             'search' => $search,
@@ -119,6 +133,7 @@ class searchController extends Controller
                 'topoWebs' => count($topoWebs),
                 'users' => count($users),
                 'words' => count($words),
+                'topics' => count($topics),
                 'aides' => count($helps),
             ],
             'crags' => $crags,
@@ -128,6 +143,7 @@ class searchController extends Controller
             'topoWebs' => $topoWebs,
             'words' => $words,
             'routes' => $routes,
+            'topics' => $topics,
             'users' => $users,
             'aides' => $helps,
         ];

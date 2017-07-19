@@ -42,7 +42,7 @@ class ForumController extends Controller
             $topics = ForumTopic::where([['nb_post','>',0],['category_id',$filter]])->orWhere([['user_id',Auth::id()],['category_id',$filter]])->with('category')->with('user')->orderBy('last_post', 'desc')->paginate(2);
             $filter_categorie = ForumCategory::where('id',$filter)->first();
         }else{
-            $topics = ForumTopic::where('nb_post','>',0)->orWhere('user_id',Auth::id())->with('category')->with('user')->orderBy('last_post', 'desc')->paginate(2);
+            $topics = ForumTopic::where('nb_post','>',0)->orWhere('user_id',Auth::id())->with('category')->with('user')->orderBy('last_post', 'desc')->paginate(20);
             $filter = 'no-filtre';
             $filter_categorie = '';
         }

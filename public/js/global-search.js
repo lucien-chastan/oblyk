@@ -25,10 +25,12 @@ function globalSearche(searchInput) {
         nbUser = document.getElementById('nb-result-global-search-user'),
         nbLexique = document.getElementById('nb-result-global-search-lexique'),
         nbAide = document.getElementById('nb-result-global-search-aide'),
+        nbTopic = document.getElementById('nb-result-global-search-topic'),
         cragZone = document.getElementById('global-search-crag'),
         lexiqueZone = document.getElementById('global-search-lexique'),
         routeZone = document.getElementById('global-search-route'),
         topoZone = document.getElementById('global-search-topo'),
+        topicZone = document.getElementById('global-search-topic'),
         userZone = document.getElementById('global-search-user'),
         aideZone = document.getElementById('global-search-aide');
 
@@ -47,6 +49,7 @@ function globalSearche(searchInput) {
     scaleTransition(nbTopo, 'out');
     scaleTransition(nbUser, 'out');
     scaleTransition(nbLexique, 'out');
+    scaleTransition(nbTopic, 'out');
     scaleTransition(nbAide, 'out');
 
     //si notre champs de recherche est vide, on s'arrête
@@ -71,6 +74,7 @@ function globalSearche(searchInput) {
             nbUser.textContent = data.nombre.users;
             nbLexique.textContent = data.nombre.words;
             nbAide.textContent = data.nombre.aides;
+            nbTopic.textContent = data.nombre.topics;
 
 
             //RÉSULTAT SUR LES FALAISES
@@ -180,6 +184,20 @@ function globalSearche(searchInput) {
             }
 
 
+
+            //RÉSULTAT SUR LE FORUM
+            topicZone.innerHTML = '';
+            if(data.nombre.topics > 0){
+                scaleTransition(nbTopic, 'in');
+                for(let i = 0 ; i < data.nombre.topics ; i++) {
+                    topicZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.topics[i].icon}"><a href="${data.topics[i].url}">${data.topics[i].label}</a><br><span class="grey-text">proposé par <a class="text-normal" href="${data.topics[i].user.url}">${data.topics[i].user.name}</a></span></div>`;
+                }
+                rideau(document.querySelectorAll('#global-search-topic .rideau-animation'));
+            }else{
+                topicZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans le forum</p>`
+            }
+
+
             //On compil les markdowns si nous avons des résultats sur le lexique ou sur l'aide
             if(data.nombre.aides > 0 || data.nombre.words > 0){
                 convertMarkdownZone();
@@ -216,6 +234,7 @@ function changeTab(data) {
     if(activeTab.id === 'tab-global-search-route' && data.nombre.routes > 0) return false;
     if(activeTab.id === 'tab-global-search-topo' && (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0)) return false;
     if(activeTab.id === 'tab-global-search-user' && data.nombre.users > 0) return false;
+    if(activeTab.id === 'tab-global-search-topic' && data.nombre.topics > 0) return false;
     if(activeTab.id === 'tab-global-search-lexique' && data.nombre.words > 0) return false;
     if(activeTab.id === 'tab-global-search-aide' && data.nombre.aides > 0) return false;
 
@@ -229,6 +248,8 @@ function changeTab(data) {
         $('ul.tabs').tabs('select_tab', 'global-search-topo');
     } else if (data.nombre.users > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-user');
+    } else if (data.nombre.topics > 0) {
+        $('ul.tabs').tabs('select_tab', 'global-search-topic');
     } else if (data.nombre.words > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-lexique');
     } else if (data.nombre.aides > 0) {
