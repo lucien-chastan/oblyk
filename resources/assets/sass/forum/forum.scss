@@ -64,4 +64,50 @@ h1.loved-king-font {
 
 .title-topic-bar{
     margin-bottom: 2em;
+
+    .info-topic {
+        i {
+            vertical-align: middle;
+            margin-left: 0.5em;
+            cursor: pointer;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #2196F3
+            }
+        }
+    }
+}
+
+.following-topic {
+    display: inline-block;
+}
+
+.nine-commandements-list {
+
+    border: 1px rgb(210, 210, 210);
+    border-top-style: solid;
+    border-bottom-style: solid;
+    padding: 1em 0;
+    margin: 2em 0;
+
+    i {
+        font-size: 2.5em;
+        margin-top: 5px;
+    }
+}
+
+.page-forum {
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .div-image-explication-forum {
+        margin-top: 4em;
+        margin-bottom: 2.5em;
+
+        i {
+            margin-top: 4px;
+        }
+    }
 }

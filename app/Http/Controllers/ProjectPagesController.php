@@ -32,7 +32,7 @@ class ProjectPagesController extends Controller
 
         //on va chercher les aides et on les groupes par catégorie
         $helpCategory = [];
-        $helps = Help::where('id','>','0')->orderBy('category')->get();
+        $helps = Help::orderBy('category')->get();
         foreach ($helps as $help) $helpCategory[$help->category][] = $help;
 
         $data = [

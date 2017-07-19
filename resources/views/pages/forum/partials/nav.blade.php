@@ -8,7 +8,7 @@
                 <li class="tab col s2"><a target="_self" href="{{route('topicPage',['topic_id'=>$topic->id, 'topic_label'=>str_slug($topic->label)])}}" @if($active == 'topic') class="active" @endif >{{$topic->label}}</a></li>
             @endif
             @if(Auth::check())
-                <li class="tab col s2"><a target="_self" href="{{route('createTopics')}}" @if($active == 'create_topics') class="active" @endif >Créer un sujet</a></li>
+                <li class="tab col s2"><a target="_self" rel="nofollow" href="{{route('createTopics',['category_id'=>1])}}" @if($active == 'create_topics') class="active" @endif >Créer un sujet</a></li>
             @endif
             <li class="tab col s2"><a target="_self" href="{{route('forumRules')}}" @if($active == 'rules') class="active" @endif >Régles</a></li>
         </ul>

@@ -1,5 +1,4 @@
-var sMDE,
-    ajaxSubmited = false;
+let ajaxSubmited = false;
 
 //initialisation des composants pour materialize
 $(".button-collapse").sideNav();
@@ -10,7 +9,7 @@ $('.modal').modal(
 );
 
 //on blanchie la barre de navigation au scroll
-var backgroundNav = function () {
+let backgroundNav = function () {
     let nav_barre = document.getElementById('nav_barre');
 
     if(window.pageYOffset > 0){

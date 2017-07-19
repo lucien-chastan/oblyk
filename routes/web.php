@@ -113,12 +113,12 @@ Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo'
 
 
 //FORUM
-Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
+Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');
 Route::get('/forum-escalade/accueil', 'ForumController@forumPage')->name('forum');
 Route::get('/forum-escalade/les-categories', 'ForumController@categoryPage')->name('forumCategories');
 Route::get('/forum-escalade/les-sujets', 'ForumController@topicsPage')->name('forumTopics');
 Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
-Route::get('/forum-escalade/creer-un-sujet', 'ForumController@createdPage')->name('createTopics');
+Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
 
 
 //TOPO (VERS LES SCRIPTS DE LIAISON)

@@ -27,14 +27,13 @@
                     Tu es sur le point de créer un nouveau sujet sur le forum d'escalade d'Oblyk. Avant d'aller plus loin, merci de vérifier que le sujet n'existe pas déjà (tu peux utiliser la recherche), Assure-toi d'avoir bien lu les quelques règles à respecter sur le forum. Les grimpeurs d'Oblyk auront sûrement la réponse à ta question ! ; )
                 </p>
 
-
                 <form class="submit-form" data-route="/topics" onsubmit="submitData(this, gotToNewTopics); return false">
 
                     {!! $Inputs::popupError([]) !!}
 
                     <div class="row">
-                        {!! $Inputs::text(['name'=>'label', 'value'=>'', 'label'=>'Titre de ton sujet', 'type'=>'text']) !!}
-                        {!! $Inputs::categories(['name'=>'category_id', 'value'=>1, 'label'=>'Categories du sujet']) !!}
+                        {!! $Inputs::text(['name'=>'label', 'id'=>'label-new-sujet' , 'value'=>'', 'label'=>'Titre de ton sujet', 'type'=>'text']) !!}
+                        {!! $Inputs::categories(['name'=>'category_id', 'value'=>$category_id, 'label'=>'Categories du sujet']) !!}
                         <div class="row">
                             {!! $Inputs::Submit(['label'=>'Créer', 'cancelable'=>false]) !!}
                         </div>
@@ -56,5 +55,6 @@
     <script src="/js/post.js"></script>
     <script>
         $('select').material_select();
+        document.getElementById('label-new-sujet').focus();
     </script>
 @endsection

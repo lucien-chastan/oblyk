@@ -213,7 +213,7 @@ class InputTemplates extends ServiceProvider{
         $placeholder = (isset($options['placeholder']))? $options['placeholder'] : '';
 
         return '
-            <div class="col s12">
+            <div class="col s12 markdownZone">
                 <textarea placeholder="' . $placeholder . '" id="' . $id . '" class="input-data ' . $class . '">' . $value . '</textarea>
             </div>
         ';

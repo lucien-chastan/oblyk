@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Follow;
 use App\ForumTopic;
 use App\Route;
+use Carbon\Carbon;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,10 +80,19 @@ class TopicController extends Controller
         $topic = new ForumTopic();
         $topic->label = $request->input('label');
         $topic->category_id = $request->input('category_id');
+        $topic->last_post = Carbon::now();
         $topic->user_id = Auth::id();
         $topic->save();
 
         $topic->location = route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]);
+
+        //on ajout automatiquement le topic au élément suivi par l'auteur
+        $follow = new Follow();
+        $follow->followed_id = $topic->id;
+        $follow->followed_type = 'App\ForumTopic';
+        $follow->user_id = Auth::id();
+        $follow->save();
+
 
         return response()->json(json_encode($topic));
 

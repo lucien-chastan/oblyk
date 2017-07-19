@@ -20,7 +20,7 @@ class CreateForumTopicsTable extends Migration
             $table->string('label',255);
             $table->integer('nb_post')->default(0);
             $table->integer('views')->default(0);
-            $table->timestamp('last_post');
+            $table->dateTime('last_post');
             $table->timestamps();
 
             //clé étrangère

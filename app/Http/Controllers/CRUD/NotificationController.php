@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Notification;
+use Carbon\Carbon;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,7 @@ class NotificationController extends Controller
 
         if($notification->user_id == Auth::id()){
             $notification->read = $request->input('read');
+            $notification->read_at = Carbon::now();
             $notification->save();
         }
 

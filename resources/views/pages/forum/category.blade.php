@@ -52,9 +52,9 @@
                                         </div>
                                         <div class="card-action">
                                             @if(Auth::check())
-                                                <a href="#">Créer un sujet</a>
+                                                <a rel="nofollow" href="{{route('createTopics',['category_id'=>$category->id])}}">Créer un sujet</a>
                                             @endif
-                                            <a href="#">voir les sujets</a>
+                                            <a rel="nofollow" href="{{route('forumTopics')}}?categorie={{$category->id}}">voir les sujets</a>
                                         </div>
                                     </div>
                                 </div>

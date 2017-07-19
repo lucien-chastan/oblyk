@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class ForumTopic extends Model
 {
+    protected $dates = [
+        'last_post'
+    ];
+
     public function user(){
         return $this->hasOne('App\User','id', 'user_id');
     }

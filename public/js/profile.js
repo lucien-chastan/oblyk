@@ -228,3 +228,7 @@ function getMyActuality(){
         '/user/actuality'
     );
 }
+
+function vueTopic(topic_id) {
+    location.href = '/forum-escalade/' + topic_id +  '/sujet';
+}

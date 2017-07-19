@@ -24,17 +24,28 @@
 
                 <div class="title-topic-bar">
                     <h1 class="loved-king-font text-center grey-text text-darken-3 titre-topic">{{$topic->label}}</h1>
-                    <p class="text-center grey-text no-margin">
+                    <p class="text-center grey-text no-margin info-topic">
                         Proposé par <a href="{{ route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)]) }}">{{$topic->user->name}}</a>
                         , {{$topic->nb_post}} posts
                         , vu {{$topic->views}} fois
+                        @if(Auth::check())
+                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $topic->id , "model"=> "ForumTopic"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                            @if(Auth::id() == $topic->user_id)
+                                <i {!! $Helpers::tooltip('Modifier titre ou catégorie de ce topic') !!} {!! $Helpers::modal(route('topicModal'), ["topic_id"=>$topic->id, "title"=>"Modifier ce topic", "method" => "PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                @if(count($posts) == 0)
+                                    <i {!! $Helpers::tooltip('Supprimer ce topic') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/topics/".$topic->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                @endif
+                            @endif
+                        @endif
                     </p>
 
                     @if(Auth::check())
-                        <p onclick="followedElement(this, 'ForumTopic', {{$topic->id}})" class="follow-paragraphe no-margin text-center" data-followed="{{$user_follow}}">
-                            <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce sujet</span>
-                            <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce sujet</span>
-                        </p>
+                        <div class="text-center">
+                            <p onclick="followedElement(this, 'ForumTopic', {{$topic->id}})" class="follow-paragraphe no-margin following-topic" data-followed="{{$user_follow}}">
+                                <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce sujet</span>
+                                <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce sujet</span>
+                            </p>
+                        </div>
                     @else
                         <p class="no-margin text-center">Connectez-vous pour suivre ce sujet</p>
                     @endif

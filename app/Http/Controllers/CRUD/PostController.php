@@ -4,8 +4,11 @@ namespace App\Http\Controllers\CRUD;
 
 use App\Comment;
 use App\ForumTopic;
+use App\Notification;
 use App\Post;
 use App\PostPhoto;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use Intervention\Image\Facades\Image;
@@ -142,8 +145,25 @@ class PostController extends Controller
         if($post->postable_type == 'App\ForumTopic'){
             $topic = ForumTopic::where('id',$post->postable_id)->first();
             $topic->nb_post = $topic->nb_post + 1;
-            $topic->last_post = date('Y-m-d H:m:s');
+            $topic->last_post = Carbon::now();
             $topic->save();
+
+            $user = User::where('id',Auth::id())->first();
+
+            //on notifi l'auteur du sujet
+            if($topic->user_id != $post->user_id){
+                $notification = new Notification();
+                $notification->type = 'new_post_in_forum';
+                $notification->user_id = $topic->user_id;
+                $notification->data = Notification::jsonData(
+                    'new_post_in_forum',
+                    [$user->name,$topic->label],
+                    '/img/icon-search-user.svg',
+                    [route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]),$user->name],
+                    [$topic->id]
+                );
+                $notification->save();
+            }
         }
 
         return response()->json(json_encode($post));
@@ -248,6 +268,13 @@ class PostController extends Controller
             foreach ($post_photos as $photo){
                 Storage::delete(['public/post-photos/' . $photo->slug_label]);
                 $photo->delete();
+            }
+
+            //Si c'est un post sur le forum, alors on enleve -1 au nombre de vu du topic et on rafraichi sa dernière lecture
+            if($post->postable_type == 'App\ForumTopic'){
+                $topic = ForumTopic::where('id',$post->postable_id)->first();
+                $topic->nb_post = $topic->nb_post - 1;
+                $topic->save();
             }
 
             //suppression du post
