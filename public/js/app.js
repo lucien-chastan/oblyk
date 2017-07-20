@@ -147,3 +147,12 @@ function getNewNotificationAndMessage() {
 
     });
 }
+
+function newMessage(user_id, btn) {
+
+    btn.style.display = 'none';
+
+    axios.post('/message/new',{user_id : user_id}).then(function (response) {
+        location.href = response.data.url + "#messages";
+    });
+}

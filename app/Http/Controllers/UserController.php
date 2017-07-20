@@ -56,7 +56,7 @@ class UserController extends Controller
         ])->count();
 
         //compte le nombre de nouvelle actualite
-        $crags = $users = $topos = $massives = [];
+        $crags = $users = $topos = $massives = $topics = [];
 
         //Liste des id dans les éléments que l'utilisateur suit
         foreach ($user->follows as $follow){
@@ -64,6 +64,7 @@ class UserController extends Controller
             if($follow->followed_type == 'App\\Topo') $topos[] = $follow->followed_id;
             if($follow->followed_type == 'App\\User') $users[] = $follow->followed_id;
             if($follow->followed_type == 'App\\Massive') $massives[] = $follow->followed_id;
+            if($follow->followed_type == 'App\\ForumTopic') $topics[] = $follow->followed_id;
         }
 
         $last_read = $user->last_fil_read;
@@ -72,6 +73,7 @@ class UserController extends Controller
             ->orWhere(function ($query) use ( $topos, $last_read ) {$query->where([['postable_type', '=', 'App\\Topo'],['created_at','>',$last_read]])->whereIn('postable_id', $topos);})
             ->orWhere(function ($query) use ( $users, $last_read ) {$query->where([['postable_type', '=', 'App\\User'],['created_at','>',$last_read]])->whereIn('postable_id', $users);})
             ->orWhere(function ($query) use ( $massives, $last_read ) {$query->where([['postable_type', '=', 'App\\Massive'],['created_at','>',$last_read]])->whereIn('postable_id', $massives);})
+            ->orWhere(function ($query) use ( $topics, $last_read ) {$query->where([['postable_type', '=', 'App\\ForumTopic'],['created_at','>',$last_read]])->whereIn('postable_id', $topics);})
             ->count();
 
         $data = [

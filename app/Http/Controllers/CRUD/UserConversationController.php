@@ -6,6 +6,7 @@ use App\Conversation;
 use App\Mail\sendConversation;
 use App\User;
 use App\UserConversation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Validator;
 use Illuminate\Http\Request;
@@ -115,6 +116,78 @@ class UserConversationController extends Controller
 
         $data = [
             'new_message' => (count($userConversation) > 0) ? true : false
+        ];
+
+        return response()->json($data);
+    }
+
+
+    //nouveau message depuis ailleurs sur le site
+    function newMessage(Request $request){
+
+        //user Auth :
+        $authUser = User::where('id', Auth::id())->first();
+
+        //ON VA CHERCHER LES CONVERSATIONS OU LES DEUX USER SONT CONCERNÉS
+        $conversation_ids = DB::select('
+            SELECT AutConversation.conversation_id AS conversation_id 
+            FROM 
+              user_conversations AS AutConversation,
+              user_conversations AS TargetConversation
+            WHERE 
+              AutConversation.conversation_id = TargetConversation.conversation_id AND
+              AutConversation.user_id = :authId AND TargetConversation.user_id = :targetId
+        ',[
+            'authId' => $authUser->id,
+            'targetId'=> $request->input('user_id')
+        ]);
+
+        //on convertie l'objet en array simple
+        $ids = [];
+        foreach ($conversation_ids as $conversation_id) $ids[] = $conversation_id->conversation_id;
+
+
+        //on parcours les conversations trouvé en comptant leurs relations
+        $conversations = Conversation::whereIn('id', $ids)->withCount('userConversations')->get();
+        $conversation_id = 0;
+        foreach ($conversations as $conversation) {
+            //s'il n'y a que deux relation alors on séléctionne cette conversation
+            if($conversation->user_conversations_count == 2) $conversation_id = $conversation->id;
+        }
+
+        //si nous n'avons pas trouvé de conversation qui concerne uniquement les deux user, alors on créer une conversation
+        if($conversation_id == 0) {
+
+            //on créer une nouvelle conversation
+            $conversation = New Conversation();
+            $conversation->save();
+
+
+            //on créer une connexion avec l'Auth
+            $authConversation = New UserConversation();
+            $authConversation->user_id = $authUser->id;
+            $authConversation->conversation_id = $conversation->id;
+            $authConversation->new_messages = 1;
+            $authConversation->save();
+
+            //on créer une connexion avec l'autre user
+            $targetConversation = New UserConversation();
+            $targetConversation->conversation_id = $conversation->id;
+            $targetConversation->user_id = $request->input('user_id');
+            $targetConversation->new_messages = 0;
+            $targetConversation->save();
+
+            $conversation_id = $conversation->id;
+        }else{
+
+            //on met la UserConversation à nouveau message (pour qu'elle remonte et qu'elle soit en gras)
+            $goodUserConversation = UserConversation::where([['conversation_id', $conversation_id],['user_id',$authUser->id]])->first();
+            $goodUserConversation->new_messages = 1;
+            $goodUserConversation->save();
+        }
+
+        $data = [
+            'url' => route('userPage',['user_id'=> $authUser->id, 'user_label'=>str_slug($authUser->name)])
         ];
 
         return response()->json($data);

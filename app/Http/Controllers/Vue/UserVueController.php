@@ -122,6 +122,8 @@ class UserVueController extends Controller
             ->withCount('posts')
             ->first();
 
+        $user->sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count + $user->posts_count;
+
         //On va chercher si l'auth est amis avec l'user
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
@@ -410,12 +412,20 @@ class UserVueController extends Controller
 
     //FONCTION AJAX LIÉ À LA MESSAGERIE
     function vueConversations(){
+
         $user = User::where('id',Auth::id())->first();
-        $conversations = UserConversation::where('user_id', $user->id)->with('conversation.userConversations.user')->orderBy('new_messages', 'desc')->get();
+
+        $conversations = UserConversation::where('user_id', $user->id)
+            ->with('conversation.userConversations.user')
+            ->orderBy('new_messages', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
         $data = [
             'user' => $user,
             'conversations' => $conversations
         ];
+
         return view('pages.profile.vues.messagerie.conversations', $data);
     }
 

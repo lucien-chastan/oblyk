@@ -83,6 +83,7 @@ Route::post('/messagerie/messages', 'Vue\UserVueController@vueMessages')->name('
 Route::get('/messagerie/userSearch/{conversation_id}/{search}', 'CRUD\UserConversationController@userSearch')->name('userSearchConversation');
 Route::post('/messagerie/addUser', 'CRUD\UserConversationController@addUser')->name('addUserConversation');
 Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@newInConversation')->name('newInConversation');
+Route::post('/message/new', 'CRUD\UserConversationController@newMessage')->name('newMessage');
 
 
 //NOUVEAU MESSAGE ET NOTIFICATION

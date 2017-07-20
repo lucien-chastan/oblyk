@@ -46,11 +46,11 @@
                 @if($user->description != '')
                     <p>{{ $user->description }}</p>
                 @else
-                    <p class="grey-text text-center">{{ $user->name }} n'as pas encore renseigné sa mini-bio</p>
+                    <p class="grey-text text-center">{{ $user->name }} n'as pas encore renseigné(e) sa mini-bio</p>
                 @endif
 
                 <p class="text-right">
-                    <a class="btn-flat blue-text waves-effect"><i class="material-icons left">email</i> Contacter</a>
+                    <a class="btn-flat blue-text waves-effect" onclick="newMessage({{ $user->id }}, this)"><i class="material-icons left">email</i> Contacter</a>
                 </p>
             </div>
         </div>
@@ -118,60 +118,69 @@
 
                 <div class="row">
 
-                    {{--NOMBRE DE SITE DE GRIMPE--}}
-                    @if($user->crags_count > 0)
+                    @if($user->somme_add != 0)
+
+                        {{--NOMBRE DE SITE DE GRIMPE--}}
+                        @if($user->crags_count > 0)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">terrain</i> <span class="blue-text">+ {{ $user->crags_count }}</span> sites de grimpe</p>
+                            </div>
+                        @endif
+
+                        {{--NOMBRE DE LIGNES--}}
+                        @if($user->routes_count > 0)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">timeline</i> <span class="blue-text">+ {{ $user->routes_count }}</span> lignes</p>
+                            </div>
+                        @endif
+
+                        {{--NOMBRE DE COMMENTAIRE--}}
+                        @if($user->descriptions_count > 0)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">comment</i> <span class="blue-text">+ {{ $user->descriptions_count }}</span> commentaires</p>
+                            </div>
+                        @endif
+
+                        {{--NOMBRE DE PHOTOS--}}
+                        @if($user->photos_count > 0)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">photo_camera</i> <span class="blue-text">+ {{ $user->photos_count }}</span> photos</p>
+                            </div>
+                        @endif
+
+                        {{--NOMBRE DE VIDÉOS--}}
+                        @if($user->videos_count)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">videocam</i> <span class="blue-text">+ {{ $user->videos_count }}</span> vidéos</p>
+                            </div>
+                        @endif
+
+                        {{--NOMBRE DE TOPO (PAPIER, WEB, PDF--}}
+                        @if($user->topos_count + $user->topoWebs_count + $user->topoPdfs_count)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count }}</span> topos</p>
+                            </div>
+                        @endif
+
+
+                        {{--NOMBRE DE SALLE DE GRIMPE--}}
                         <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">terrain</i> <span class="blue-text">+ {{ $user->crags_count }}</span> sites de grimpe</p>
+                            <p><i class="material-icons left">home</i> <span class="blue-text">+ x</span> salle de grimpe</p>
                         </div>
+
+                        {{--NOMBRE D'ACTU--}}
+                        @if($user->posts_count)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> actus postées</p>
+                            </div>
+                        @endif
+
+                    @else
+
+                        <p class="grey-text text-center">{{ $user->name }} n'as pas encore contribué sur oblyk</p>
+
                     @endif
 
-                    {{--NOMBRE DE LIGNES--}}
-                    @if($user->routes_count > 0)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">timeline</i> <span class="blue-text">+ {{ $user->routes_count }}</span> lignes</p>
-                        </div>
-                    @endif
-
-                    {{--NOMBRE DE COMMENTAIRE--}}
-                    @if($user->descriptions_count > 0)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">comment</i> <span class="blue-text">+ {{ $user->descriptions_count }}</span> commentaires</p>
-                        </div>
-                    @endif
-
-                    {{--NOMBRE DE PHOTOS--}}
-                    @if($user->photos_count > 0)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">photo_camera</i> <span class="blue-text">+ {{ $user->photos_count }}</span> photos</p>
-                        </div>
-                    @endif
-
-                    {{--NOMBRE DE VIDÉOS--}}
-                    @if($user->videos_count)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">videocam</i> <span class="blue-text">+ {{ $user->videos_count }}</span> vidéos</p>
-                        </div>
-                    @endif
-
-                    {{--NOMBRE DE TOPO (PAPIER, WEB, PDF--}}
-                    @if($user->topos_count + $user->topoWebs_count + $user->topoPdfs_count)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count }}</span> topos</p>
-                        </div>
-                    @endif
-
-
-                    {{--NOMBRE DE SALLE DE GRIMPE--}}
-                    <div class="col s12 m4 l3">
-                        <p><i class="material-icons left">home</i> <span class="blue-text">+ x</span> salle de grimpe</p>
-                    </div>
-
-                    {{--NOMBRE D'ACTU--}}
-                    @if($user->posts_count)
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> actus postées</p>
-                        </div>
-                    @endif
 
                 </div>
 
