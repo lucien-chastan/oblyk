@@ -88,12 +88,14 @@ class PostController extends Controller
                 $comments[] = $comment->commentable_id;
             }
 
+
             $posts = Post::where(function ($query) use ( $crags ) {$query->where('postable_type', '=', 'App\\Crag')->whereIn('postable_id', $crags);})
                 ->orWhere(function ($query) use ( $topos ) {$query->where('postable_type', '=', 'App\\Topo')->whereIn('postable_id', $topos);})
                 ->orWhere(function ($query) use ( $users ) {$query->where('postable_type', '=', 'App\\User')->whereIn('postable_id', $users);})
                 ->orWhere(function ($query) use ( $massives ) {$query->where('postable_type', '=', 'App\\Massive')->whereIn('postable_id', $massives);})
                 ->orWhere(function ($query) use ( $topics ) {$query->where('postable_type', '=', 'App\\ForumTopic')->whereIn('postable_id', $topics);})
                 ->orWhere(function ($query) use ( $comments ) {$query->whereIn('id', $comments);})
+                ->orWhere([['postable_type','App\\User'],['postable_id',$user->id]])
                 ->orWhere('user_id',$user->id)
                 ->with('user')
                 ->with('postable')

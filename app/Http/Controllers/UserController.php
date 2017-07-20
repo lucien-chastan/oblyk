@@ -74,6 +74,7 @@ class UserController extends Controller
             ->orWhere(function ($query) use ( $users, $last_read ) {$query->where([['postable_type', '=', 'App\\User'],['created_at','>',$last_read]])->whereIn('postable_id', $users);})
             ->orWhere(function ($query) use ( $massives, $last_read ) {$query->where([['postable_type', '=', 'App\\Massive'],['created_at','>',$last_read]])->whereIn('postable_id', $massives);})
             ->orWhere(function ($query) use ( $topics, $last_read ) {$query->where([['postable_type', '=', 'App\\ForumTopic'],['created_at','>',$last_read]])->whereIn('postable_id', $topics);})
+            ->orWhere([['postable_type','App\\User'],['postable_id',$user->id]])
             ->count();
 
         $data = [
