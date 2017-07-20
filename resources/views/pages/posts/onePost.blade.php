@@ -25,10 +25,14 @@
     @elseif($post->postable_type == 'App\\Massive')
         <img src="/img/icon-search-massive.svg" class="circle left" alt="">
     @elseif($post->postable_type == 'App\\ForumTopic')
-        @if(file_exists(storage_path('app/public/users/50/user-' . $post->user->id . '.jpg')))
-            <img src="/storage/users/50/user-{{$post->user->id}}.jpg" class="circle left" alt="">
+        @if($postable_type != 'ForumTopic')
+            <img src="/img/forum-{{ $post->postable->category_id }}.svg" class="circle left" alt="">
         @else
-            <img src="/img/icon-search-user.svg" class="circle left" alt="">
+            @if(file_exists(storage_path('app/public/users/50/user-' . $post->user->id . '.jpg')))
+                <img src="/storage/users/50/user-{{$post->user->id}}.jpg" class="circle left" alt="">
+            @else
+                <img src="/img/icon-search-user.svg" class="circle left" alt="">
+            @endif
         @endif
     @elseif($post->postable_type == 'App\\User')
         @if(file_exists(storage_path('app/public/users/50/user-' . $post->postable->id . '.jpg')))

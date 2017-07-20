@@ -59,7 +59,7 @@ class PostController extends Controller
 
             $user = User::where('id', Auth::id())->with('follows')->first();
 
-            $crags = $users = $topos = $massives = $comments = [];
+            $crags = $users = $topos = $massives = $comments = $topics = [];
 
             $skip = $request->input('skip');
             $take = $request->input('take');
@@ -79,6 +79,7 @@ class PostController extends Controller
                 if($follow->followed_type == 'App\\Topo') $topos[] = $follow->followed_id;
                 if($follow->followed_type == 'App\\User') $users[] = $follow->followed_id;
                 if($follow->followed_type == 'App\\Massive') $massives[] = $follow->followed_id;
+                if($follow->followed_type == 'App\\ForumTopic') $topics[] = $follow->followed_id;
             }
 
             //liste des id que l'utilisateur à commenté
@@ -91,6 +92,7 @@ class PostController extends Controller
                 ->orWhere(function ($query) use ( $topos ) {$query->where('postable_type', '=', 'App\\Topo')->whereIn('postable_id', $topos);})
                 ->orWhere(function ($query) use ( $users ) {$query->where('postable_type', '=', 'App\\User')->whereIn('postable_id', $users);})
                 ->orWhere(function ($query) use ( $massives ) {$query->where('postable_type', '=', 'App\\Massive')->whereIn('postable_id', $massives);})
+                ->orWhere(function ($query) use ( $topics ) {$query->where('postable_type', '=', 'App\\ForumTopic')->whereIn('postable_id', $topics);})
                 ->orWhere(function ($query) use ( $comments ) {$query->whereIn('id', $comments);})
                 ->orWhere('user_id',$user->id)
                 ->with('user')

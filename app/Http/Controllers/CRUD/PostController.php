@@ -158,7 +158,7 @@ class PostController extends Controller
                 $notification->data = Notification::jsonData(
                     'new_post_in_forum',
                     [$user->name,$topic->label],
-                    '/img/icon-search-user.svg',
+                    '/img/forum-' . $topic->category_id . '.svg',
                     [route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]),$user->name],
                     [$topic->id]
                 );

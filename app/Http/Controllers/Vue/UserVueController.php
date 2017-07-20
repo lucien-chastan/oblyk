@@ -54,7 +54,7 @@ class UserVueController extends Controller
                 if($follow->followed_type == 'App\ForumTopic'){
                     $follow->followUrl = route('topicPage', ['topic_id'=>$follow->followed_id, 'topic_label'=>str_slug($follow->followed->label)]);
                     $follow->followName = $follow->followed->label;
-                    $follow->followIcon = '/img/icon-search-user.svg';
+                    $follow->followIcon = '/img/forum-' . $follow->followed->category_id . '.svg';
                     $follow->followInformation = 'sujet sur le forum';
                     $catTitre = 'topics';
                 }

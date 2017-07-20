@@ -307,7 +307,7 @@ class InputTemplates extends ServiceProvider{
 
             foreach ($generalCategory->categories as $category){
                 $selected = ($category->id == $value)? 'selected' : '';
-                $html .= '<option ' . $selected . ' value="' . $category->id . '">' . ucfirst($category->label) . '</option>';
+                $html .= '<option data-icon="/img/forum-' . $category->id . '.svg" class="circle left" ' . $selected . ' value="' . $category->id . '">' . ucfirst($category->label) . '</option>';
             }
 
             $html .= '</optgroup>';

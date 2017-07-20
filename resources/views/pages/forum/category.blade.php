@@ -40,7 +40,7 @@
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="title-bar">
-                                                <img src="/img/icon-search-crag.svg" alt="" class="left">
+                                                <img src="/img/forum-{{$category->id}}.svg" alt="" class="left">
                                                 <h3 class="loved-king-font truncate"> {{$category->label}}</h3>
                                                 @if(count($category->topics) > 0)
                                                     <p class="no-margin grey-text">{{count($category->topics)}} sujets postés</p>
