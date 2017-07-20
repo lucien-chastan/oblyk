@@ -76,6 +76,7 @@ Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVue
 Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
 Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
 Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
+Route::get('/vue/dashboard/{profile_id}/contribution', 'Vue\UserVueController@subVueContribution')->name('subVueContributionUser');
 
 
 //VUES DE LA MESSAGERIE

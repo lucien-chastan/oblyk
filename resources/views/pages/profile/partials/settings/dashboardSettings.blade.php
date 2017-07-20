@@ -102,6 +102,12 @@
             <p>Un boîte qui te présente un mot au hasard du lexique de l'escalade </p>
         </div>
 
+        {{--LES CONTRIBUTIONS--}}
+        <div class="blue-border-div">
+            {!! $Inputs::checkbox(['name'=>'dash_contribution', 'label'=>'Votre contribution à oblyk', 'checked' => ($user->settings->dash_contribution == 1) ? true : false, 'align' => 'left']) !!}
+            <p>Un boîte donne en quelques chiffres les éléments que vous avez ajouté sur oblyk </p>
+        </div>
+
         {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
 
         <div class="row">

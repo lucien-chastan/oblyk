@@ -34,6 +34,8 @@ class UserController extends Controller
         $settings->dash_topos = $request->input('dash_topos');
         $settings->dash_users = $request->input('dash_users');
         $settings->dash_videos = $request->input('dash_videos');
+        $settings->dash_random_word = $request->input('dash_random_word');
+        $settings->dash_contribution = $request->input('dash_contribution');
         $settings->save();
 
         return response()->json($settings);

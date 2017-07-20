@@ -496,30 +496,62 @@ class UserVueController extends Controller
 
     //**************************
 
+
+    // BOX : BIENVENUE
     function subVueWelcome($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.welcome', $data);
     }
 
+
+    // BOX : LES CROIX DES POTES
     function subVueCroixPote($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.croixPote', $data);
     }
 
+    // BOX : MES CROIX À MOI
     function subVueMesCroix($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.mesCroix', $data);
     }
 
+    // BOX : LES DERNIERS SUJET DU FORUM
     function subVueForumLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.forum-last', $data);
     }
 
+    // BOX : MES CONTRIBUTIONS
+    function subVueContribution($user_id){
+
+        $user = User::where('id',$user_id)
+            ->withCount('crags')
+            ->withCount('routes')
+            ->withCount('descriptions')
+            ->withCount('photos')
+            ->withCount('videos')
+            ->withCount('topos')
+            ->withCount('topoWebs')
+            ->withCount('topoPdfs')
+            ->withCount('posts')
+            ->first();
+
+        $sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count + $user->posts_count;
+
+        $data = [
+            'user' => $user,
+            'somme' => $sommeAdd
+        ];
+        return view('pages.profile.vues.dashboardBox.boxVues.contribution', $data);
+    }
+
+
+    // BOX : LES DERNIÈRES NEWS
     function subVueNewsOblyk($user_id){
         $user = User::where('id',$user_id)->first();
         $articles = Article::where([['id','>','0'],['publish','=',1]])->withCount('descriptions')->orderBy('created_at','desc')->skip(0)->take(3)->get();
@@ -532,30 +564,35 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.news-oblyk', $data);
     }
 
+    // BOX : LES DERNIÈRES PHOTOS
     function subVuephotosLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.photos-last', $data);
     }
 
+    // BOX : LES DERNIÈRES VIDÉOS
     function subVueVideosLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.videos-last', $data);
     }
 
+    // BOX : LES DERNIERS COMMENTAIRES
     function subVueCommentsLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.comments-last', $data);
     }
 
+    // BOX : LES DERNIÈRES LIGNES
     function subVueRoutesLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.routes-last', $data);
     }
 
+    // BOX : LES DERNIÈRES FALAISES
     function subVueCragsLast($user_id){
         $user = User::where('id',$user_id)->first();
         $crags = Crag::with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
@@ -566,6 +603,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.crags-last', $data);
     }
 
+    // BOX : LES DERNIERS TOPOS
     function subVueToposLast($user_id){
         $user = User::where('id',$user_id)->first();
         $topos = Topo::with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
@@ -576,6 +614,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.topos-last', $data);
     }
 
+    // BOX : LES DERNIERS GRIMPEURS
     function subVueUsersLast($user_id){
 
         $profile = User::where('id',$user_id)->first();
@@ -594,24 +633,28 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
     }
 
+    // BOX : LES DERNIÈRES SAE
     function subVueSaeLast($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.sae-last', $data);
     }
 
+    // BOX : LA LISTE DES SITE ET SALLE D'ESCALADE
     function subVueListCragSae($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user];
         return view('pages.profile.vues.dashboardBox.boxVues.list-crag-sae', $data);
     }
 
+    // BOX : RÉSUMÉ DE LA RECHERCHE DE PARTENAIRE
     function subVuePartenaire($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
         return view('pages.profile.vues.dashboardBox.boxVues.partenaire', $data);
     }
 
+    // BOX : UN MOT AU HASARD
     function subVueRandomWord($user_id){
         $user = User::where('id',$user_id)->first();
         $word = DB::table('words')->inRandomOrder()->first();
