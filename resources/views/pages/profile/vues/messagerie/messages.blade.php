@@ -3,15 +3,15 @@
 
 {{--TITRE DE LA CONVERSATION--}}
 <div class="div-titre-conversation" id="div-titre-conversation">
-    <p class="text-bold no-margin">
+    <p class="text-bold no-margin truncate">
 
         @if($conversation->label != '')
-            {{$conversation->label}}
+            <span class="hide-on-small-only">{{$conversation->label}}</span>
         @else
-            <cite class="grey-text text-normal">Pas de titre</cite>
+            <cite class="grey-text text-normal hide-on-small-only">Pas de titre</cite>
         @endif
 
-        <span class="grey-text text-normal virgule-span">
+        <span class="grey-text text-normal virgule-span hide-on-small-only">
             avec :
             @foreach($conversation->userConversations as $userConversation)
                 @if($userConversation->user->id != Auth::id())

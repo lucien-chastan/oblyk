@@ -39,7 +39,7 @@
     <div class="row stretchCol">
 
         {{--INFORMATION--}}
-        <div class="col s8">
+        <div class="col s12 m6 l8">
             <div class="card-panel blue-card-panel information-div">
                 <h3 class="loved-king-font title-3-a-propos">Ma mini-bio</h3>
 
@@ -56,7 +56,7 @@
         </div>
 
         {{--LIEN WEB--}}
-        <div class="col s4">
+        <div class="col s12 m6 l4">
             <div class="card-panel blue-card-panel">
                 <h3 class="loved-king-font title-3-a-propos">Je suis ailleur sur le web</h3>
 

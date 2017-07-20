@@ -6,7 +6,7 @@
             <tr>
                 <th class="text-center">type</th>
                 <th>nom</th>
-                <th>url</th>
+                <th class="hide-on-small-only">url</th>
                 <th class="text-center">action</th>
             </tr>
         </thead>
@@ -15,7 +15,7 @@
                 <tr>
                     <td class="text-center"><img title="{{$network->socialNetwork->label}}" src="/img/social-{{$network->socialNetwork->id}}.svg" height="30"></td>
                     <td>{{$network->label}}</td>
-                    <td><a target="_blank" href="{{$network->url}}">{{$network->url}}</a></td>
+                    <td class="hide-on-small-only"><a target="_blank" href="{{$network->url}}">{{$network->url}}</a></td>
                     <td class="text-center i-cursor">
                         <i {!! $Helpers::tooltip('Modifier ce lien') !!} {!! $Helpers::modal(route('socialNetworkModal'), ["social_id"=> $network->id, "title"=>"Modifier ce lien", "method"=>"PUT", "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">edit</i>
                         <i {!! $Helpers::tooltip('Supprimer ce lien') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/socialNetworks/" . $network->id, "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">delete</i>

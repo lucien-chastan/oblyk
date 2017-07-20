@@ -53,16 +53,36 @@ function refreshBox(route, element) {
 //FONCTION DE CALCUL DE LA HAUTEUR DU DASHBOARD
 function dimDashboard() {
     setTimeout(function () {
-        let targetBoxs = document.getElementsByClassName('target-box'),
-            flexDashBoxs = document.getElementById('flexDashBoxs'),
-            somme = 0;
 
-        for(let i = 0 ; i < targetBoxs.length ; i++){
-            console.log(targetBoxs[i].offsetHeight);
-            somme += targetBoxs[i].offsetHeight + 200;
+        let largeur_ecran = windowWidth(),
+            flexDashBoxs = document.getElementById('flexDashBoxs');
+
+        if(largeur_ecran > 1000){
+
+            let targetBoxs = document.getElementsByClassName('dashbox'),
+                somme = 0,
+                additionnel = 20;
+
+            for(let i = 0 ; i < targetBoxs.length ; i++){
+                somme += targetBoxs[i].offsetHeight + additionnel;
+                console.log(targetBoxs[i].offsetHeight)
+            }
+
+            let newSomme = 0,
+                goodHeight = 0,
+                trouver = false;
+            for(let i = 0 ; i < targetBoxs.length ; i++){
+                newSomme += targetBoxs[i].offsetHeight + additionnel;
+                if(newSomme > somme / 2 && trouver === false) {
+                    goodHeight = newSomme;
+                    trouver = true;
+                }
+            }
+
+            flexDashBoxs.style.height = (goodHeight + 50) + 'px';
+        }else{
+            flexDashBoxs.style.height = 'auto';
         }
-
-        flexDashBoxs.style.height = (somme / 2) + 'px';
     },100);
 }
 

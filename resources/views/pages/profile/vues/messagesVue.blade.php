@@ -1,7 +1,7 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 <div class="row messagerie">
-    <div class="col s3 col-conversation flex-col">
+    <div class="col s12 m6 l3 col-conversation flex-col">
         <div class="card-panel blue-card-panel">
             <div class="blue-border-zone">
                 <div id="insert-conversation-list">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="col s9 col-messagerie flex-col">
+    <div class="col s12 m6 l9 col-messagerie flex-col">
         <div class="card-panel blue-card-panel">
 
             <div class="list-n-titre">

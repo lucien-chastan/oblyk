@@ -156,3 +156,14 @@ function newMessage(user_id, btn) {
         location.href = response.data.url + "#messages";
     });
 }
+
+windowWidth = function (){
+    if(window.innerWidth)
+        return window.innerWidth;
+    else if (document.documentElement.clientWidth)
+        return document.documentElement.clientWidth;
+    else if(document.body.clientWidth)
+        return document.body.clientWidth;
+    else
+        return -1;
+}

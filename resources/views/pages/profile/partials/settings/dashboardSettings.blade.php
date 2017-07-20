@@ -86,7 +86,7 @@
 
         {{--DERNIERS GRIMPEURS--}}
         <div class="blue-border-div">
-            {!! $Inputs::checkbox(['name'=>'dash_users', 'label'=>'Derniers topos', 'checked' => ($user->settings->dash_users == 1) ? true : false, 'align' => 'left']) !!}
+            {!! $Inputs::checkbox(['name'=>'dash_users', 'label'=>'Derniers grimpeurs', 'checked' => ($user->settings->dash_users == 1) ? true : false, 'align' => 'left']) !!}
             <p>Affiche les derniers grimpeurs arrivés sur oblyk</p>
         </div>
 
