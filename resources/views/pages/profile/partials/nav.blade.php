@@ -136,7 +136,7 @@
         {{--RECHERCHE D'UN PARTENAIRE--}}
         <li>
             <div class="collapsible-header truncate">
-                <i class="material-icons">people</i>
+                <i class="material-icons">person_pin</i>
                 <span class="hidden-1000">
                     Recherche de partenaire
                 </span>

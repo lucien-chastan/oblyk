@@ -90,7 +90,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $topos = [];
 
@@ -126,7 +126,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $friends = [];
 
@@ -227,7 +227,7 @@ class UserVueController extends Controller
         $user = User::where('id', $user_id)->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $data = ['user' => $user];
 
@@ -249,7 +249,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $data = ['user' => $user,];
             return view('pages.profile.vues.albumsVue', $data);
@@ -268,7 +268,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $album = Album::where('id',$album_id)->with('photos')->first();
             $data = [
@@ -292,7 +292,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('videos')->with('videos.viewable')->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $data = ['user' => $user,];
             return view('pages.profile.vues.videosVue', $data);
@@ -311,7 +311,7 @@ class UserVueController extends Controller
         $user = User::where('id',$user_id)->with('settings')->first();
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($relationStatus == 3 || $user->settings->public == 1){
+        if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
             $data = ['user' => $user,];
             return view('pages.profile.vues.croixVue', $data);
