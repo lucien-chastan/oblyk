@@ -27,6 +27,11 @@
             </div>
         </li>
 
+        {{--LES AMIS--}}
+        <li>
+            <div id="item-friend-menu" data-route="{{route('vueFriendUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">people</i>Amis</div>
+        </li>
+
         {{--TOPOTHEQUE--}}
         <li>
             <div id="item-topotheque-menu" data-route="{{route('vueTopothequeUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">photo_album</i>Topothèque</div>
@@ -109,6 +114,11 @@
                 <i class="material-icons">shuffle</i>
                 Fil d'actualité <img title="actualiser la vue" onclick="reloadCurrentVue()" class="refresh-btn" src="/img/refresh.svg" alt="">
             </div>
+        </li>
+
+        {{--LES AMIS--}}
+        <li>
+            <div id="item-friend-menu" data-route="{{route('vueFriendUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link"><i class="material-icons">people</i>Amis</div>
         </li>
 
         {{--TOPOTHEQUE--}}

@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function userPage($user_id, $user_title){
 
         $user = User::where('id', $user_id)->first();
@@ -74,7 +80,7 @@ class UserController extends Controller
             ->orWhere(function ($query) use ( $users, $last_read ) {$query->where([['postable_type', '=', 'App\\User'],['created_at','>',$last_read]])->whereIn('postable_id', $users);})
             ->orWhere(function ($query) use ( $massives, $last_read ) {$query->where([['postable_type', '=', 'App\\Massive'],['created_at','>',$last_read]])->whereIn('postable_id', $massives);})
             ->orWhere(function ($query) use ( $topics, $last_read ) {$query->where([['postable_type', '=', 'App\\ForumTopic'],['created_at','>',$last_read]])->whereIn('postable_id', $topics);})
-            ->orWhere([['postable_type','App\\User'],['postable_id',$user->id]])
+            ->orWhere([['postable_type','App\\User'],['postable_id',$user->id],['created_at','>',$last_read]])
             ->count();
 
         $data = [

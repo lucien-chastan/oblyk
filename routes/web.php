@@ -41,6 +41,7 @@ Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name(
 
 //VUE DU PROFIL
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
+Route::get('/vue/profile/{profile_id}/friend', 'Vue\UserVueController@vueFriend')->name('vueFriendUser');
 Route::get('/vue/profile/{profile_id}/topotheque', 'Vue\UserVueController@vueTopotheque')->name('vueTopothequeUser');
 Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
 Route::get('/vue/profile/{profile_id}/a-propos', 'Vue\UserVueController@vueAPropos')->name('vueAProposUser');

@@ -25,6 +25,18 @@
                     @endforeach
                 </div>
             @endforeach
+
+            @if(count($follows) == 0)
+                <p class="text-center grey-text text-bold">
+                    Vous ne suivez aucun élément<br>
+                    Pour suivre un élément, rendez-vous sur la page d'une falaise ou d'une salle d'escalade et cliquez sur :
+                </p>
+                <p class="text-bold text-center grey-text">
+                    <i class="material-icons ic-exemple-ajouter-topo">star_border</i> Suivre ce site
+                </p>
+                <p class="text-center grey-text text-bold">Suivre un élément vous permet d'être au courant de ce qui si passe !</p>
+            @endif
+
         </div>
     </div>
 </div>

@@ -42,7 +42,7 @@ class PostController extends Controller
             'postable_id' => $request->input('postable_id'),
             'skip' => $skip,
             'take' => $take,
-            'last_read' => $user->last_fil_read
+            'last_read' => Carbon::now()
         ];
 
         return view('pages.posts.posts', $data);
@@ -69,7 +69,7 @@ class PostController extends Controller
 
             //si notre skip est à zero alors on va enregistrer dans le profil la dernière date de lecture
             if($skip == 0){
-                $user->last_fil_read = date('Y-m-d H:i:s');
+                $user->last_fil_read = Carbon::now();
                 $user->save();
             }
 

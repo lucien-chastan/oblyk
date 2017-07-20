@@ -29,8 +29,10 @@
         });
     });
 
-    //check s'il y a de nouveau message et notification
-    getNewNotificationAndMessage();
+    @if(Auth::check())
+        //check s'il y a de nouveau message et notification
+        getNewNotificationAndMessage();
+    @endif
 
 </script>
 

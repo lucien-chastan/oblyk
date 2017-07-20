@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = [
+        'last_fil_read'
+    ];
+
     public function albums() { return $this->hasMany('App\Album','user_id', 'id'); }
     public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }
     public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }

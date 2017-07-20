@@ -21,90 +21,166 @@ use Illuminate\Support\Facades\Auth;
 
 class UserVueController extends Controller
 {
+
+
+    //VUE : LES SUIVIS
     function vueFollow($user_id){
 
-        $user = User::where('id',$user_id)->with('follows.followed')->first();
+        if(Auth::id() == $user_id){
 
-        $follows = [];
-        foreach ($user->follows as $follow){
+            $user = User::where('id',$user_id)->with('follows.followed')->first();
 
-            if($follow->followed_type != 'App\User' && $follow->followed_type != 'App\Topo'){
+            $follows = [];
 
-                $catTitre = '';
+            foreach ($user->follows as $follow){
 
-                //FALAISE
-                if($follow->followed_type == 'App\Crag'){
-                    $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
-                    $follow->followName = $follow->followed->label;
-                    $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
-                    $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
-                    $catTitre = 'sites';
+                if($follow->followed_type != 'App\User' && $follow->followed_type != 'App\Topo'){
+
+                    $catTitre = '';
+
+                    //FALAISE
+                    if($follow->followed_type == 'App\Crag'){
+                        $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
+                        $follow->followName = $follow->followed->label;
+                        $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
+                        $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
+                        $catTitre = 'sites';
+                    }
+
+                    //MASSIF
+                    if($follow->followed_type == 'App\Massive'){
+                        $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
+                        $follow->followName = $follow->followed->label;
+                        $follow->followIcon = '/img/icon-search-massive.svg';
+                        $follow->followInformation = 'regroupement de site';
+                        $catTitre = 'regroupements';
+                    }
+
+                    //FORUM
+                    if($follow->followed_type == 'App\ForumTopic'){
+                        $follow->followUrl = route('topicPage', ['topic_id'=>$follow->followed_id, 'topic_label'=>str_slug($follow->followed->label)]);
+                        $follow->followName = $follow->followed->label;
+                        $follow->followIcon = '/img/forum-' . $follow->followed->category_id . '.svg';
+                        $follow->followInformation = 'sujet sur le forum';
+                        $catTitre = 'topics';
+                    }
+
+                    $follows[$catTitre][] = $follow;
                 }
-
-                //MASSIF
-                if($follow->followed_type == 'App\Massive'){
-                    $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
-                    $follow->followName = $follow->followed->label;
-                    $follow->followIcon = '/img/icon-search-massive.svg';
-                    $follow->followInformation = 'regroupement de site';
-                    $catTitre = 'regroupements';
-                }
-
-                //FORUM
-                if($follow->followed_type == 'App\ForumTopic'){
-                    $follow->followUrl = route('topicPage', ['topic_id'=>$follow->followed_id, 'topic_label'=>str_slug($follow->followed->label)]);
-                    $follow->followName = $follow->followed->label;
-                    $follow->followIcon = '/img/forum-' . $follow->followed->category_id . '.svg';
-                    $follow->followInformation = 'sujet sur le forum';
-                    $catTitre = 'topics';
-                }
-
-                $follows[$catTitre][] = $follow;
             }
+
+            $data = [
+                'user' => $user,
+                'follows' => $follows
+            ];
+
+            return view('pages.profile.vues.followVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
         }
-
-        $data = [
-            'user' => $user,
-            'follows' => $follows
-        ];
-
-        return view('pages.profile.vues.followVue', $data);
     }
 
+
+    //VUE : LA TOPOTHÈQUE
     function vueTopotheque($user_id){
 
-        $user = User::where('id',$user_id)->with('follows.followed')->first();
+        $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        $topos = [];
+        if($relationStatus == 3 || $user->settings->public == 1){
 
-        foreach ($user->follows as $follow){
-            if($follow->followed_type == 'App\Topo'){
-                $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
-                $follow->followName = $follow->followed->label;
-                $follow->followIcon = (file_exists(storage_path('app/public/topos/200/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/200/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
-                $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
-                $topos[] = $follow;
+            $topos = [];
+
+            foreach ($user->follows as $follow){
+                if($follow->followed_type == 'App\Topo'){
+                    $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
+                    $follow->followName = $follow->followed->label;
+                    $follow->followIcon = (file_exists(storage_path('app/public/topos/200/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/200/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
+                    $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
+                    $topos[] = $follow;
+                }
             }
+
+            $data = [
+                'user' => $user,
+                'topos' => $topos
+            ];
+
+            return view('pages.profile.vues.topothequeVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
         }
 
-        $data = [
-            'user' => $user,
-            'topos' => $topos
-        ];
-
-        return view('pages.profile.vues.topothequeVue', $data);
-
     }
 
+
+    //VUE : LES AMIS
+    function vueFriend($user_id){
+
+        $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
+
+        if($relationStatus == 3 || $user->settings->public == 1){
+
+            $friends = [];
+
+            foreach ($user->follows as $follow){
+                if($follow->followed_type == 'App\User'){
+
+                    $genre = '';
+                    if($follow->followed->sex == 0) $genre = 'Inféfini';
+                    if($follow->followed->sex == 1) $genre = 'Femme';
+                    if($follow->followed->sex == 2) $genre = 'Homme';
+
+                    $age = $follow->followed->birth != 0 ? date('Y') - $follow->followed->birth : '?';
+
+                    $image = file_exists(storage_path('app/public/users/100/user-' . $follow->followed->id . '.jpg')) ? '/storage/users/100/user-' . $follow->followed->id . '.jpg' : '/img/icon-search-user.svg';
+
+                    $follow->followUrl = route('userPage', ['user_id'=>$follow->followed_id, 'user_label'=>str_slug($follow->followed->name)]);
+                    $follow->followName = $follow->followed->name;
+                    $follow->followIcon = $image;
+                    $follow->followInformation = $genre . ', ' . $age . ' ans';
+                    $friends[] = $follow;
+                }
+            }
+
+            $data = [
+                'user' => $user,
+                'friends' => $friends
+            ];
+
+            return view('pages.profile.vues.friendVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+    }
+
+    //VUE : LE DASHBOARD
     function vueDashboard($user_id){
 
-        $user = User::where('id',$user_id)->with('settings')->first();
+        if(Auth::id() == $user_id){
 
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.dashboardVue', $data);
+            $user = User::where('id',$user_id)->with('settings')->first();
 
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.dashboardVue', $data);
+
+        }else{
+            return view('pages.profile.vues.noRight');
+        }
     }
 
+
+    //VUE : A PROPOS
     function vueAPropos($user_id){
 
         $user = User::where('id',$user_id)
@@ -144,147 +220,281 @@ class UserVueController extends Controller
 
     }
 
+
+    //VUE : FIL D'ACTUALITÉ
     function vueFilActu($user_id){
 
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $user_id)->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        $data = ['user' => $user];
+        if($relationStatus == 3 || $user->settings->public == 1){
 
-        return view('pages.profile.vues.filActuVue', $data);
+            $data = ['user' => $user];
+
+            return view('pages.profile.vues.filActuVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+
 
     }
 
+
+    //VUE : LES ALBUMS
     function vueAlbums($user_id){
 
-        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.albumsVue', $data);
+        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
+        if($relationStatus == 3 || $user->settings->public == 1){
+
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.albumsVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
     }
 
+
+    //VUE : LES PHOTOS
     function vuePhotos($user_id, $album_id){
 
-        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->first();
-        $album = Album::where('id',$album_id)->with('photos')->first();
-        $data = [
-            'user' => $user,
-            'album' => $album
-        ];
-        return view('pages.profile.vues.photosVue', $data);
+        $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
+        if($relationStatus == 3 || $user->settings->public == 1){
+
+            $album = Album::where('id',$album_id)->with('photos')->first();
+            $data = [
+                'user' => $user,
+                'album' => $album
+            ];
+
+            return view('pages.profile.vues.photosVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
     }
 
+
+    // VUE : LES VIDÉOS
     function vueVideos($user_id){
 
-        $user = User::where('id',$user_id)->with('videos')->with('videos.viewable')->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.videosVue', $data);
+        $user = User::where('id',$user_id)->with('videos')->with('videos.viewable')->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
+        if($relationStatus == 3 || $user->settings->public == 1){
+
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.videosVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
     }
 
+
+    //VUE : LES CROIX
     function vueCroix($user_id){
 
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.croixVue', $data);
+        $user = User::where('id',$user_id)->with('settings')->first();
+        $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
+        if($relationStatus == 3 || $user->settings->public == 1){
+
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.croixVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
     }
 
+
+    //VUE : LA TICK LIST
     function vueTickList($user_id){
 
-        $tickLists = TickList::where('user_id',$user_id)->with('route.crag')->with('route.routeSections')->get();
+        if(Auth::id() == $user_id){
 
-        $crags = [];
+            $tickLists = TickList::where('user_id',$user_id)->with('route.crag')->with('route.routeSections')->get();
 
-        foreach ($tickLists as $ticks){
-            $crags[$ticks->route->crag_id][] = $ticks;
+            $crags = [];
+
+            foreach ($tickLists as $ticks){
+                $crags[$ticks->route->crag_id][] = $ticks;
+            }
+
+            $data = [
+                'crags' => $crags
+            ];
+
+            return view('pages.profile.vues.tickListVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
         }
-
-        $data = [
-            'crags' => $crags
-        ];
-
-        return view('pages.profile.vues.tickListVue', $data);
-
     }
 
+
+    //VUE : PROJET
     function vueProjet($user_id){
 
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.projetVue', $data);
+        if(Auth::id() == $user_id){
 
+            $user = User::where('id',Auth::id())->first();
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.projetVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
     }
 
+
+    //VUE ANALYTIKS
     function vueAnalytiks($user_id){
 
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.analytiksVue', $data);
+        if(Auth::id() == $user_id){
 
-    }
+            $user = User::where('id',Auth::id())->first();
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.analytiksVue', $data);
 
-    function vueMessagerie($user_id){
+        }else{
 
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user];
-        return view('pages.profile.vues.messagesVue', $data);
+            return view('pages.profile.vues.noRight');
 
-    }
-
-    function vueLieux($user_id){
-
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.lieuxVue', $data);
-
-    }
-
-    function vuePartenaireParametres($user_id){
-
-        $user = User::where('id',Auth::id())->first();
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.partenaireParametresVue', $data);
-
-    }
-
-    function vueNotifications($user_id){
-
-        $user = User::where('id',Auth::id())->first();
-        $findNotifications = Notification::where('user_id',$user->id)->orderBy('read')->orderBy('created_at', 'desc')->get();
-
-        $notifications = [];
-        foreach ($findNotifications as $notification){
-            $notification->data = json_decode($notification->data);
-            $notification->background = ($notification->read == 0) ? 'new-notification' : '';
-            $notifications[] = $notification;
         }
 
-        $data = [
-            'user' => $user,
-            'notifications' => $notifications
-        ];
-
-        return view('pages.profile.vues.notificationsVue', $data);
-
     }
 
+
+    //VUE : MESSAGERIE
+    function vueMessagerie($user_id){
+
+        if(Auth::id() == $user_id){
+
+            $user = User::where('id',Auth::id())->first();
+            $data = ['user' => $user];
+            return view('pages.profile.vues.messagesVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+    }
+
+
+    //VUE : RECHERCHE DE PARTENAIRE : LES LIEUX
+    function vueLieux($user_id){
+
+        if(Auth::id() == $user_id){
+
+            $user = User::where('id',Auth::id())->first();
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.lieuxVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+    }
+
+
+    //VUE : RECHERCHE DE PARTENAIRE : QUI JE SUIS
+    function vuePartenaireParametres($user_id){
+
+        if(Auth::id() == $user_id){
+
+            $user = User::where('id',Auth::id())->first();
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.partenaireParametresVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+    }
+
+
+    //VUE : LES NOTIFICATIONS
+    function vueNotifications($user_id){
+
+        if(Auth::id() == $user_id){
+
+            $user = User::where('id',Auth::id())->first();
+            $findNotifications = Notification::where('user_id',$user->id)->orderBy('read')->orderBy('created_at', 'desc')->get();
+
+            $notifications = [];
+            foreach ($findNotifications as $notification){
+                $notification->data = json_decode($notification->data);
+                $notification->background = ($notification->read == 0) ? 'new-notification' : '';
+                $notifications[] = $notification;
+            }
+
+            $data = [
+                'user' => $user,
+                'notifications' => $notifications
+            ];
+
+            return view('pages.profile.vues.notificationsVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
+    }
+
+
+    //VUE : PARAMETRES
     function vueSettings($user_id){
 
-        $user = User::where('id',Auth::id())->with('settings')->with('socialNetworks.socialNetwork')->first();
+        if(Auth::id() == $user_id){
 
-        $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
-        $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg?cache=' . date('Ymdhis') : '';
+            $user = User::where('id',Auth::id())->with('settings')->with('socialNetworks.socialNetwork')->first();
 
-        $data = ['user' => $user,];
-        return view('pages.profile.vues.settingsVue', $data);
+            $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
+            $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg?cache=' . date('Ymdhis') : '';
+
+            $data = ['user' => $user,];
+            return view('pages.profile.vues.settingsVue', $data);
+
+        }else{
+
+            return view('pages.profile.vues.noRight');
+
+        }
 
     }
 
 
 
+    //**************************
 
     //LES SOUS VUES DU DASHBOARD
+
+    //**************************
 
     function subVueWelcome($user_id){
         $user = User::where('id',$user_id)->first();
@@ -410,7 +620,14 @@ class UserVueController extends Controller
     }
 
 
-    //FONCTION AJAX LIÉ À LA MESSAGERIE
+
+
+    //********************
+
+    //VUE DE LA MESSAGERIE
+
+    //********************
+
     function vueConversations(){
 
         $user = User::where('id',Auth::id())->first();

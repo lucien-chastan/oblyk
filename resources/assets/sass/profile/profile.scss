@@ -389,6 +389,28 @@
 
 }
 
+.friend-box {
+
+    i {
+        opacity: 0;
+        vertical-align: bottom;
+        margin-right: -1.1em;
+        margin-top: -2px;
+        transition: color 0.3s, opacity 0.3s;
+        cursor: pointer;
+
+        &:hover{
+            color: #2196F3;
+        }
+    }
+
+    &:hover {
+        i {
+            opacity: 1;
+        }
+    }
+}
+
 .ic-exemple-ajouter-topo {
     vertical-align: middle;
     margin-right: 0.2em;
