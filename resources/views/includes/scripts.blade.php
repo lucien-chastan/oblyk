@@ -14,6 +14,13 @@
 <script src="/framework/trumbowyg/trumbowyg.js"></script>
 <script src="/framework/trumbowyg/plugins/trumbowyg.upload.js"></script>
 <script type="text/javascript" src="/framework/trumbowyg/langs/fr.min.js"></script>
+<script type="text/javascript" id="cookiebanner"
+        src="/framework/cookiebanner/cookiebanner.min.js"
+        data-height="32px" data-position="bottom"
+        data-moreinfo="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser"
+        data-linkmsg="en savoir plus"
+        data-message='Oblyk utilise des cookies à des fins internes ou pour améliorer votre navigation, en continuant vous acceptez les <img rel="nofollow" alt="cookies" title="cookies" class="cookie-in-cookiebanner" src="/img/cookie.png">'>
+</script>
 
 <script type="text/javascript">
     {{--initialisation du paralax--}}

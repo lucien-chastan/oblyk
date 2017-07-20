@@ -78,6 +78,8 @@ mix.copy('resources/assets/framework/trumbowyg/trumbowyg.js', 'public/framework/
 mix.copy('resources/assets/framework/phototheque/phototheque.js', 'public/framework/phototheque')
     .copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
 
+//Cookiebanner
+mix.copy('resources/assets/framework/cookiebanner/cookiebanner.min.js', 'public/framework/cookiebanner');
 
 //marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
