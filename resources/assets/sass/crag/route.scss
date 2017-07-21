@@ -111,6 +111,77 @@
             }
         }
     }
+
+    .band-bt-add-carnet {
+
+        padding-top: 1.5em;
+
+        .btn-add-in-cross-book {
+            i {
+                vertical-align: bottom;
+                margin-right: 0.5em;
+            }
+        }
+    }
+
+    .crosses-zone {
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .div-one-cross {
+            .circle-date {
+                vertical-align: top;
+                margin-top: 5px;
+                color: rgb(255,255,255);
+                font-size: 12px;
+                font-weight: bold;
+                height: 45px;
+                width: 45px;
+                line-height: 45px;
+                text-align: center;
+                display: inline-block;
+
+                p {
+                    line-height: 12px;
+                    vertical-align: middle;
+                    display: inherit;
+                }
+            }
+
+            .info-cross {
+                display: inline-block;
+                width: calc(100% - 55px);
+                margin-left: 5px;
+
+                .title-date-cross {
+                    margin-top: 0;
+                    margin-bottom: 4px;
+
+                    i {
+                        margin-left: 0.5em;
+                        cursor: pointer;
+                        transition: color 0.3s;
+                        &:hover {color: #2196F3;}
+                    }
+                }
+            }
+
+            .virgule {
+                span {
+                    &:after{
+                        content: ', ';
+                    }
+
+                    &:last-child::after{
+                        content: '';
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 .ligne-bt-route{

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CrossStatus extends Model
 {
-    public function crossSections(){
-        return $this->hasMany('App\CrossSection','status_id', 'id');
+    public function crosses(){
+        return $this->hasMany('App\Cross','status_id', 'id');
     }
 }

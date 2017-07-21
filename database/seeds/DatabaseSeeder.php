@@ -87,9 +87,9 @@ class DatabaseSeeder extends Seeder
         //Carnet de croix
         $this->call(TickListsTableSeeder::class);
         $this->call(CrossModesTableSeeder::class);
-        $this->call(CrossHardnessTableSeeder::class);
-        $this->call(CrossStatusTableSeeder::class);
-        $this->call(CrossTableSeeder::class);
+        $this->call(CrossHardnessesTableSeeder::class);
+        $this->call(CrossStatusesTableSeeder::class);
+        $this->call(CrossesTableSeeder::class);
         $this->call(CrossSectionsTableSeeder::class);
         $this->call(CrossUsersTableSeeder::class);
     }

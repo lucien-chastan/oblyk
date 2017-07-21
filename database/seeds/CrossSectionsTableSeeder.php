@@ -15,7 +15,6 @@ class CrossSectionsTableSeeder extends Seeder
         //La croix sur blue de lucien
         DB::table('cross_sections')->insert([
             'cross_id' => 1,
-            'status_id' => 1, //en projet
             'mode_id' => 2, //en moulinette
             'hardness_id' => 2, //juste bien côté
             'route_section_id' => 1,
@@ -25,7 +24,6 @@ class CrossSectionsTableSeeder extends Seeder
         //La croix sur blue par Léna
         DB::table('cross_sections')->insert([
             'cross_id' => 2,
-            'status_id' => 5, //à vue
             'mode_id' => 1, //en tête
             'hardness_id' => 1, //facile bien côté
             'route_section_id' => 1,
@@ -35,7 +33,6 @@ class CrossSectionsTableSeeder extends Seeder
         //croix sur la lavandière (voie de 2 longueur)
         DB::table('cross_sections')->insert([
             'cross_id' => 3,
-            'status_id' => 3, //après travail
             'mode_id' => 3, //en leader
             'hardness_id' => 3, //dur pour la cotation
             'route_section_id' => 6,
@@ -44,7 +41,6 @@ class CrossSectionsTableSeeder extends Seeder
 
         DB::table('cross_sections')->insert([
             'cross_id' => 3,
-            'status_id' => 4, //après travail
             'mode_id' => 4, //en second
             'hardness_id' => 1, //facile pour la cotation
             'route_section_id' => 7,

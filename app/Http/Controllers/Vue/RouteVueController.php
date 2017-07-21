@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Cross;
 use App\Http\Controllers\Controller;
 use App\Route;
 use App\TickList;
@@ -22,8 +23,10 @@ class RouteVueController extends Controller
         //route dans la ticklist du connecté
         $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
 
-        $count_carnet = 0;
-        if(isset($tickList)) $count_carnet = 1;
+        $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])->get();
+
+        $count_carnet = count($crosses);
+        if(isset($tickList)) $count_carnet++;
 
         $route->views++;
         $route->save();
@@ -70,12 +73,22 @@ class RouteVueController extends Controller
 
     function vueCarnet($id){
 
-        $route = Route::where('id',$id)->first();
+        $route = Route::where('id',$id)->withCount('routeSections')->first();
         $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
+        $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])
+            ->with('crossSections')
+            ->with('crossSections.crossMode')
+            ->with('crossSections.crossHardness')
+            ->with('crossSections.routeSection')
+            ->with('crossUsers.user')
+            ->with('crossStatus')
+            ->orderBy('release_at')
+            ->get();
 
         $data = [
             'route' => $route,
-            'ticklist'=>$tickList
+            'ticklist'=>$tickList,
+            'crosses'=>$crosses
         ];
 
         return view('pages.route.vues.carnetVue', $data);

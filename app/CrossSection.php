@@ -10,10 +10,6 @@ class CrossSection extends Model
         return $this->hasOne('App\Cross','id', 'cross_id');
     }
 
-    public function crossStatus(){
-        return $this->hasOne('App\CrossStatus','id', 'status_id');
-    }
-
     public function crossMode(){
         return $this->hasOne('App\CrossMode','id', 'mode_id');
     }

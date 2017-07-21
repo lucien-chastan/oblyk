@@ -46,7 +46,7 @@
                 @if($user->description != '')
                     <p>{{ $user->description }}</p>
                 @else
-                    <p class="grey-text text-center">{{ $user->name }} n'as pas encore renseigné(e) sa mini-bio</p>
+                    <p class="grey-text text-center">{{ $user->name }} n'as pas encore renseigné sa mini-bio</p>
                 @endif
 
                 <p class="text-right">
@@ -75,7 +75,7 @@
                     @endforeach
 
                     @if(count($user->socialNetworks) == 0)
-                        <p class="text-center grey-text">{{ $user->name }} n'as pas renseigné(e) ses autres sites web</p>
+                        <p class="text-center grey-text">{{ $user->name }} n'as pas renseigné ses autres sites web</p>
                     @endif
                 </div>
             </div>

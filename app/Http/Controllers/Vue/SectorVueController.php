@@ -5,35 +5,25 @@ namespace App\Http\Controllers\Vue;
 use App\Http\Controllers\Controller;
 use App\Route;
 use App\Sector;
+use DebugBar;
 use Illuminate\Support\Facades\Auth;
 
 class SectorVueController extends Controller
 {
     function vueRoutes($id){
 
-        $getRoutes = Route::where('sector_id',$id)
+        $authId = Auth::id();
+
+        $routes = Route::where('sector_id',$id)
             ->with('routeSections')
             ->with('climb')
-            ->with('tickLists')
+            ->with(['tickLists' => function ($query) use ($authId) {$query->where('user_id', $authId);}])
+            ->with(['crosses' => function ($query) use ($authId) {$query->where('user_id', $authId);}])
             ->withCount('descriptions')
             ->withCount('photos')
             ->withCount('videos')
             ->orderBy('label')
             ->get();
-
-        //on fait la liste des routes
-        $tickRoutes = Route::where('sector_id',$id)->whereHas('tickLists', function ($query) {$query->where('user_id', '=', Auth::id());})->get();
-
-        //on parcours la liste des routes et on regarde si elles sont dans la site des routes tickée
-        $routes = [];
-        foreach ($getRoutes as $route){
-            foreach ($tickRoutes as $tick){
-                if($tick->id == $route->id){
-                    $route->ticked = true;
-                }
-            }
-            $routes[] = $route;
-        }
 
         $data = [
             "routes" => $routes,

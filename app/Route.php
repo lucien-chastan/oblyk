@@ -26,7 +26,7 @@ class Route extends Model
         return $this->hasMany('App\TickList','route_id','id');
     }
 
-    public function cross(){
+    public function crosses(){
         return $this->hasMany('App\Cross','route_id','id');
     }
 

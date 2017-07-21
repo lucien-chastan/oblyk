@@ -20,7 +20,7 @@ class CreateCrossUsersTable extends Migration
             $table->timestamps();
 
             //clé étrangère
-            $table->foreign('cross_id')->references('id')->on('cross');
+            $table->foreign('cross_id')->references('id')->on('crosses');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
