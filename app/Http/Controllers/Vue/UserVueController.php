@@ -6,14 +6,18 @@ use App\Album;
 use App\Article;
 use App\Conversation;
 use App\Crag;
+use App\Description;
 use App\Follow;
 use App\ForumTopic;
 use App\Notification;
+use App\Photo;
 use App\Post;
+use App\Route;
 use App\TickList;
 use App\Topo;
 use App\User;
 use App\UserConversation;
+use App\Video;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
@@ -572,29 +576,78 @@ class UserVueController extends Controller
     // BOX : LES DERNIÈRES PHOTOS
     function subVuephotosLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $photos = Photo::where('illustrable_type', 'App\User')
+            ->with('user')
+            ->with('illustrable')
+            ->orderBy('created_at', 'desc')
+            ->skip(0)
+            ->take(8)
+            ->get();
+
+        $data = [
+            'user' => $user,
+            'photos' => $photos
+        ];
+
         return view('pages.profile.vues.dashboardBox.boxVues.photos-last', $data);
     }
 
     // BOX : LES DERNIÈRES VIDÉOS
     function subVueVideosLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+
+        $videos = Video::where('viewable_type', '!=', 'App\User')
+            ->with('user')
+            ->with('viewable')
+            ->orderBy('created_at', 'desc')
+            ->skip(0)
+            ->take(4)
+            ->get();
+
+        $data = [
+            'user' => $user,
+            'videos'=>$videos
+        ];
         return view('pages.profile.vues.dashboardBox.boxVues.videos-last', $data);
     }
 
     // BOX : LES DERNIERS COMMENTAIRES
     function subVueCommentsLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+
+        $descriptions = Description::where('descriptive_type', 'App\Route')
+            ->with('descriptive')
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->skip(0)
+            ->take(5)
+            ->get();
+
+        $data = [
+            'user' => $user,
+            'descriptions' => $descriptions,
+        ];
         return view('pages.profile.vues.dashboardBox.boxVues.comments-last', $data);
     }
 
     // BOX : LES DERNIÈRES LIGNES
     function subVueRoutesLast($user_id){
+
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $routes = Route::with('routeSections')
+            ->with('user')
+            ->with('climb')
+            ->with('crag')
+            ->skip(0)
+            ->take(10)
+            ->orderBy('created_at','desc')
+            ->get();
+        $data = [
+            'user' => $user,
+            'routes' => $routes,
+        ];
         return view('pages.profile.vues.dashboardBox.boxVues.routes-last', $data);
+
     }
 
     // BOX : LES DERNIÈRES FALAISES

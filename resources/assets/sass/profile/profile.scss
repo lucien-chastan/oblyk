@@ -200,7 +200,6 @@
         .dashbox {
 
             box-sizing: border-box;
-            //flex: 1 0 auto;
             width: calc(50% - 20px);
             margin: 10px;
             display: block;
@@ -245,6 +244,12 @@
                 width: 100px;
                 object-fit: cover;
                 margin-right: 0.8em;
+            }
+
+            .table-list-last-route {
+                td {
+                    padding: 5px 5px;
+                }
             }
         }
     }

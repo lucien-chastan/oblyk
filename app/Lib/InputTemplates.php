@@ -5,6 +5,9 @@ namespace App\Lib;
 use App\Album;
 use App\Anchor;
 use App\Climb;
+use App\CrossHardness;
+use App\CrossMode;
+use App\CrossStatus;
 use App\ForumGeneralCategory;
 use App\Incline;
 use App\Point;
@@ -285,6 +288,97 @@ class InputTemplates extends ServiceProvider{
 
         return $html;
     }
+
+
+    //SELECT DU TYPE DE status
+    public static function crossStatuses($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Statuses = CrossStatus::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Statuses as $status){
+            $selected = ($status->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $status->id . '">' . ucfirst($status->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //SELECT DU TYPE DE DURETÉ
+    public static function crossHardnesses($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Hardnesses = CrossHardness::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Hardnesses as $hardness){
+            $selected = ($hardness->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $hardness->id . '">' . ucfirst($hardness->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
+    //SELECT DU TYPE DE MODE
+    public static function crossModes($options){
+        $name = $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : 1;
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Modes = CrossMode::all();
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Modes as $mode){
+            $selected = ($mode->id == $value)? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $mode->id . '">' . ucfirst($mode->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
 
     //SELECT DU D'UNE CATEGORY
     public static function categories($options){

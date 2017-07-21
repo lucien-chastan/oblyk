@@ -168,6 +168,7 @@ Route::post('/modal/userConversation', 'CRUD\UserConversationController@userConv
 Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
 Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
 Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal');
+Route::post('/modal/cross', 'CRUD\CrossController@crossModal')->name('crossModal');
 
 
 //CRUD AJAX
@@ -199,6 +200,7 @@ Route::resource('messages', 'CRUD\MessageController');
 Route::resource('posts', 'CRUD\PostController');
 Route::resource('notifications', 'CRUD\NotificationController');
 Route::resource('topics', 'CRUD\TopicController');
+Route::resource('crosses', 'CRUD\CrossController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

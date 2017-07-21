@@ -34,29 +34,32 @@
                             Croix du {{$cross->release_at->format('d M Y')}}
 
                             <span class="grey-text">
-                                <i {!! $Helpers::tooltip('Modifier ma croix') !!} class="material-icons tiny tooltipped">edit</i>
-                                <i {!! $Helpers::tooltip('Supprimer ma croix') !!} class="material-icons tiny tooltipped">delete</i>
+                                <i {!! $Helpers::modal(route('crossModal'), ["cross_id"=>$cross->id, "route_id"=>$route->id, 'title'=>'Modifier ma croix', 'method'=>'PUT']) !!} {!! $Helpers::tooltip('Modifier ma croix') !!} onclick="$('#modal').modal('open');" class="material-icons tiny tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::modal(route('deleteModal'), ["route"=>"/crosses/" . $cross->id, "callback"=>"reloadRoutePhotoTab"]) !!} {!! $Helpers::tooltip('Supprimer ma croix') !!} onclick="$('#modal').modal('open');" class="material-icons tiny tooltipped btnModal">delete</i>
                             </span>
                         </p>
 
                         <strong>Status : </strong> {{ ucfirst($cross->crossStatus->label) }}<br>
 
                         @if($route->route_sections_count == 1)
+
                             {{--Si voie d'un longueur--}}
                             <strong>Mode : </strong> {{ ucfirst($cross->crossSections[0]->crossMode->label) }}<br>
 
                         @else
+
                             {{--Si voie de plusieur longueur--}}
-                            @if($route->route_sections_count == count($cross->crossSections))
+                            @if($route->route_sections_count != count($cross->crossSections))
                                 <strong>J'ai fais les {{ $route->route_sections_count }} longueurs</strong><br>
                             @else
                                 <strong>Longueurs faites :</strong>
                                 <ul>
                                     @foreach($cross->crossSections as $section)
-                                        <li>L.{{$section->routeSection->section_order}} {{$section->routeSection->grade}}{{$section->routeSection->sub_grade}}</li>
+                                        <li>L.{{$section->routeSection->section_order}} <span class="text-bold color-grade-{{$section->routeSection->grade_val}}">{{$section->routeSection->grade}}{{$section->routeSection->sub_grade}}</span> {{$section->routeSection->height}} mètres</li>
                                     @endforeach
                                 </ul>
                             @endif
+
                         @endif
 
                         <strong>J'étais avec :</strong>
@@ -74,11 +77,11 @@
 
     @if(count($crosses) == 0)
         <div class="text-center band-bt-add-carnet">
-            <a class="btn-flat waves-effect text-cursor btn-add-in-cross-book"><i class="material-icons">done</i> Ajouter à mon carnet de croix</a>
+            <a {!! $Helpers::modal(route('crossModal'), ["cross_id"=>'', "route_id"=>$route->id, 'title'=>'Ajouter une croix', 'method'=>'POST']) !!} class="btn-flat waves-effect text-cursor btn-add-in-cross-book btnModal" onclick="$('#modal').modal('open');"><i class="material-icons">done</i> Ajouter à mon carnet de croix</a>
         </div>
     @else
         <div class="text-center band-bt-add-carnet">
-            <a class="btn-flat waves-effect text-cursor btn-add-in-cross-book"><i class="material-icons">repeat</i> Ajouter une répétition</a>
+            <a {!! $Helpers::modal(route('crossModal'), ["cross_id"=>'', "route_id"=>$route->id, 'title'=>'Ajouter une croix', 'method'=>'POST']) !!} class="btn-flat waves-effect text-cursor btn-add-in-cross-book btnModal" onclick="$('#modal').modal('open');"><i class="material-icons">repeat</i> Ajouter une répétition</a>
         </div>
     @endif
 

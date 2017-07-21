@@ -95,7 +95,7 @@ function dimDashboard() {
             flexDashBoxs.style.height = 'auto';
 
         }
-    },100);
+    },500);
 }
 
 //INDICATION QUE LE DASHBOARD À ÉTÉ MIS À JOUR
