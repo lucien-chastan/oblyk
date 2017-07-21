@@ -27,6 +27,7 @@ class CreateRouteSectionsTable extends Migration
             $table->integer('reception_id')->unsigned();
             $table->integer('start_id')->unsigned();
             $table->integer('section_order')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             //clé étrangère

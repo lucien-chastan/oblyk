@@ -98,7 +98,7 @@ class RouteSectionsTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
-        // 6 - Lavandière
+        // 6 - Lavandière L1
         DB::table('route_sections')->insert([
             'route_id' => 6,
             'grade' => '6a',
@@ -115,6 +115,7 @@ class RouteSectionsTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+        // 7 - Lavandière L2
         DB::table('route_sections')->insert([
             'route_id' => 6,
             'grade' => '5c',

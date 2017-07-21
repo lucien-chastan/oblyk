@@ -11,21 +11,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RocksTableSeeder::class);
-        $this->call(OrientationsTableSeeder::class);
-        $this->call(SeasonsTableSeeder::class);
+        //User
         $this->call(UsersTableSeeder::class);
+
+        //Photo, vidéo, liens, description
         $this->call(AlbumsTableSeeder::class);
         $this->call(PhotosTableSeeder::class);
         $this->call(VideosTableSeeder::class);
-        $this->call(CragsTableSeeder::class);
         $this->call(DescriptionsTableSeeder::class);
         $this->call(LinksTableSeeder::class);
+
+        //Falaise, secteur, orientation, rocher, etc.
+        $this->call(RocksTableSeeder::class);
+        $this->call(OrientationsTableSeeder::class);
+        $this->call(SeasonsTableSeeder::class);
+        $this->call(CragsTableSeeder::class);
         $this->call(ParkingsTableSeeder::class);
         $this->call(RainExposuresTableSeeder::class);
         $this->call(SunsTableSeeder::class);
         $this->call(SectorsTableSeeder::class);
+
+        //Lexique
         $this->call(WordsTableSeeder::class);
+
+        //Ligne et section
         $this->call(ClimbsTableSeeder::class);
         $this->call(AnchorsTableSeeder::class);
         $this->call(PointsTableSeeder::class);
@@ -35,27 +44,53 @@ class DatabaseSeeder extends Seeder
         $this->call(RoutesTableSeeder::class);
         $this->call(RouteSectionsTableSeeder::class);
         $this->call(GapGradesTableSeeder::class);
+
+        //Topo
         $this->call(ToposTableSeeder::class);
         $this->call(TopoCragsTableSeeder::class);
         $this->call(TopoSalesTableSeeder::class);
         $this->call(TopoWebsTableSeeder::class);
         $this->call(TopoPdfsTableSeeder::class);
+
+        //Massif
         $this->call(MassivesTableSeeder::class);
         $this->call(MassiveCragsTableSeeder::class);
+
+        //Follow système
         $this->call(FollowsTableSeeder::class);
+
+        //Aide
         $this->call(HelpsTableSeeder::class);
+
+        //Paramètre utilisateur & Lien sociaux
         $this->call(UserSettingsTableSeeder::class);
-        $this->call(ArticlesTableSeeder::class);
-        $this->call(TickListsTableSeeder::class);
         $this->call(SocialNetworksTableSeeder::class);
         $this->call(UserSocialNetworksTableSeeder::class);
+
+        //Article
+        $this->call(ArticlesTableSeeder::class);
+
+        //Messagerie
         $this->call(ConversationsTableSeeder::class);
         $this->call(UserConversationsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
+
+        //Fil d'actualité
         $this->call(PostsTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+
+        //Forum
         $this->call(ForumGeneralCategoriesTableSeeder::class);
         $this->call(ForumCategoriesTableSeeder::class);
         $this->call(ForumTopicsTableSeeder::class);
+
+        //Carnet de croix
+        $this->call(TickListsTableSeeder::class);
+        $this->call(CrossModesTableSeeder::class);
+        $this->call(CrossHardnessTableSeeder::class);
+        $this->call(CrossStatusTableSeeder::class);
+        $this->call(CrossTableSeeder::class);
+        $this->call(CrossSectionsTableSeeder::class);
+        $this->call(CrossUsersTableSeeder::class);
     }
 }

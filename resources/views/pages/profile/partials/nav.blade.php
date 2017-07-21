@@ -102,13 +102,13 @@
                     </span>
                 </div>
                 <div data-route="{{route('vueTickListUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
-                    <i class="left material-icons">reorder</i>
+                    <i class="left material-icons">crop_free</i>
                     <span class="hidden-1000">
                         Ticklist
                     </span>
                 </div>
                 <div data-route="{{route('vueProjetUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
-                    <i class="left material-icons">crop_free</i>
+                    <i class="left material-icons">crop_square</i>
                     <span class="hidden-1000">
                         Projets
                     </span>

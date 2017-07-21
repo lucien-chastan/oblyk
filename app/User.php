@@ -33,6 +33,7 @@ class User extends Authenticatable
 
     public function albums() { return $this->hasMany('App\Album','user_id', 'id'); }
     public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }
+    public function cross(){ return $this->hasMany('App\Cross','user_id', 'id'); }
     public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }
     public function follows() { return $this->hasMany('App\Follow','user_id', 'id'); }
     public function lexiques() { return $this->hasMany('App\Word','user_id', 'id'); }
