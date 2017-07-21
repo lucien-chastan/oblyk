@@ -1,6 +1,14 @@
 let chargedBox = 0,
     nbBox = 0;
 
+//AJOUT UN ÉVÉNEMENT AU ONRESEIZE POUR REDIMENSIONNER LE DASHBOAD
+window.addEventListener('resize', function () {
+    let flexDashBoxs = document.getElementById('flexDashBoxs');
+    if (flexDashBoxs !== null){
+        dimDashboard();
+    }
+});
+
 //CHANGE L'INDICATEUR DU MENU ACTIF
 function activeMenu(element) {
     let navHeadItem = document.getElementsByClassName('collapsible-header'),
@@ -61,16 +69,15 @@ function dimDashboard() {
 
             let targetBoxs = document.getElementsByClassName('dashbox'),
                 somme = 0,
-                additionnel = 20;
-
-            for(let i = 0 ; i < targetBoxs.length ; i++){
-                somme += targetBoxs[i].offsetHeight + additionnel;
-                console.log(targetBoxs[i].offsetHeight)
-            }
-
-            let newSomme = 0,
+                additionnel = 20,
+                newSomme = 0,
                 goodHeight = 0,
                 trouver = false;
+
+            //Calcul de la somme des hauteurs des boites
+            for(let i = 0 ; i < targetBoxs.length ; i++) somme += targetBoxs[i].offsetHeight + additionnel;
+
+            //On parcours les boîtes et on s'arrête quand la somme des hauteurs des boîtes et supérieurs à la moitité de la hauteur total
             for(let i = 0 ; i < targetBoxs.length ; i++){
                 newSomme += targetBoxs[i].offsetHeight + additionnel;
                 if(newSomme > somme / 2 && trouver === false) {
@@ -79,9 +86,14 @@ function dimDashboard() {
                 }
             }
 
+            //on attribut la hauteur à la zone des boites
             flexDashBoxs.style.height = (goodHeight + 50) + 'px';
+
         }else{
+
+            //si la largeur d'écran est en dessous de 1000px on passe en hauteur auto (une seul colonne)
             flexDashBoxs.style.height = 'auto';
+
         }
     },100);
 }

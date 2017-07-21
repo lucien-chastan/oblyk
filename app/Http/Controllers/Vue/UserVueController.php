@@ -7,6 +7,7 @@ use App\Article;
 use App\Conversation;
 use App\Crag;
 use App\Follow;
+use App\ForumTopic;
 use App\Notification;
 use App\Post;
 use App\TickList;
@@ -522,7 +523,11 @@ class UserVueController extends Controller
     // BOX : LES DERNIERS SUJET DU FORUM
     function subVueForumLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $topics = ForumTopic::where('nb_post','>',0)->orWhere('user_id',$user->id)->with('category')->with('user')->orderBy('last_post', 'desc')->skip(0)->take(10)->get();
+        $data = [
+            'user' => $user,
+            'topics' => $topics,
+        ];
         return view('pages.profile.vues.dashboardBox.boxVues.forum-last', $data);
     }
 
