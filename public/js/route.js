@@ -398,3 +398,19 @@ function addInTickList(route_id) {
         reloadRouteCarnetTab();
     })
 }
+
+function parsePitch() {
+    let checkPitch = document.getElementsByName('crossPopupPitch'),
+        crossPitchs = document.getElementById('crossPitchs'),
+        arrayCrossPitchs = [];
+
+    for(let i = 0 ; i < checkPitch.length ; i++){
+        if(checkPitch[i].checked === true){
+            arrayCrossPitchs.push(checkPitch[i].value);
+        }
+    }
+
+    crossPitchs.value = arrayCrossPitchs.join(';');
+
+    console.log(crossPitchs.value);
+}

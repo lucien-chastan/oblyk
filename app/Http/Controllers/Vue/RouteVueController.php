@@ -77,12 +77,13 @@ class RouteVueController extends Controller
         $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
         $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])
             ->with('crossSections')
-            ->with('crossSections.crossMode')
-            ->with('crossSections.crossHardness')
             ->with('crossSections.routeSection')
             ->with('crossUsers.user')
+            ->with('crossHardness')
+            ->with('crossMode')
+            ->with('description')
             ->with('crossStatus')
-            ->orderBy('release_at')
+            ->orderBy('release_at', 'DESC')
             ->get();
 
         $data = [

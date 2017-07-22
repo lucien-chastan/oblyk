@@ -17,9 +17,10 @@ class CreateDescriptionsTable extends Migration
             $table->increments('id');
             $table->integer('descriptive_id');
             $table->string('descriptive_type',100);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('note');
+            $table->integer('cross_id')->unsigned()->nullable();
             $table->timestamps();
 
             //clé étrangère

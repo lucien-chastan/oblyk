@@ -27,7 +27,19 @@ class Cross extends Model
         return $this->hasMany('App\CrossUser','cross_id', 'id');
     }
 
+    public function description(){
+        return $this->hasOne('App\Description', 'cross_id', 'id');
+    }
+
     public function crossStatus(){
         return $this->hasOne('App\CrossStatus','id', 'status_id');
+    }
+
+    public function crossMode(){
+        return $this->hasOne('App\CrossMode','id', 'mode_id');
+    }
+
+    public function crossHardness(){
+        return $this->hasOne('App\CrossHardness','id', 'hardness_id');
     }
 }

@@ -11,8 +11,9 @@ class CrossHardnessesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cross_hardnesses')->insert(['label' => 'facile pour la cotation']);
-        DB::table('cross_hardnesses')->insert(['label' => 'juste, bien coté']);
-        DB::table('cross_hardnesses')->insert(['label' => 'dur pour la cotation']);
+        DB::table('cross_hardnesses')->insert(['label' => 'pas d\'avis']); // 1
+        DB::table('cross_hardnesses')->insert(['label' => 'facile pour la cotation']); // 2
+        DB::table('cross_hardnesses')->insert(['label' => 'juste, bien coté']); // 3
+        DB::table('cross_hardnesses')->insert(['label' => 'dur pour la cotation']); // 4
     }
 }

@@ -47,6 +47,21 @@ function specialAction(data) {
     //init les selects
     $('select').material_select();
 
+    //init des inputs date
+    $('.datepicker').pickadate({
+        monthsFull : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        monthsShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
+        weekdaysFull: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 80, // Creates a dropdown of 80 years to control year,
+        today: 'Aujourd\'hui',
+        format: 'yyyy-mm-dd',
+        clear: 'Annuler',
+        close: 'Ok',
+        closeOnSelect: true // Close upon selecting a date,
+    });
+
     //color les branches de la boussole dans l'input orientation
     colorOrientation();
 

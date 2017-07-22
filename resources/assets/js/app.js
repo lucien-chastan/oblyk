@@ -166,4 +166,8 @@ windowWidth = function (){
         return document.body.clientWidth;
     else
         return -1;
+};
+
+function showMeAResponse(response) {
+    console.log(response)
 }

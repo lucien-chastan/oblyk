@@ -131,5 +131,39 @@ class RouteSectionsTableSeeder extends Seeder
             'section_order' => 2,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
+        // 7 - Lavandière L3
+        DB::table('route_sections')->insert([
+            'route_id' => 6,
+            'grade' => '7c',
+            'sub_grade' => '',
+            'grade_val' => 41,
+            'section_height' => 21,
+            'nb_point' => 10,
+            'point_id' => 2,
+            'anchor_id' => 3,
+            'reception_id' => 1,
+            'start_id' => 1,
+            'incline_id' => 2,
+            'section_order' => 3,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        // 7 - Lavandière L4
+        DB::table('route_sections')->insert([
+            'route_id' => 6,
+            'grade' => '7a',
+            'sub_grade' => '+',
+            'grade_val' => 37,
+            'section_height' => 36,
+            'nb_point' => 12,
+            'point_id' => 2,
+            'anchor_id' => 3,
+            'reception_id' => 1,
+            'start_id' => 1,
+            'incline_id' => 2,
+            'section_order' => 4,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

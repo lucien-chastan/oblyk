@@ -11,7 +11,7 @@
 
     .side-route{
         max-width: calc(100% - 25px) !important;
-        width: 500px;
+        width: 650px;
         height: 100%;
         overflow-y: auto;
         will-change: transform;
@@ -186,6 +186,17 @@
         }
     }
 
+    .bt-add-grimpeur-on-cross {
+        vertical-align: bottom;
+        margin-left: 0.3em;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        &:hover {
+            color: #2196F3;
+        }
+    }
+
 }
 
 .ligne-bt-route{
@@ -243,5 +254,22 @@
 #popup-route-type-cotation {
     p {
         margin-bottom: 1em;
+    }
+}
+
+//POPUP DES CROIX
+.cross-hr-section {
+    border: 1px rgb(220, 220, 220);
+    border-bottom-style: solid;
+    margin: 25px 10px 10px 10px;
+    padding-bottom: 6px;
+    font-size: 0.75em;
+    text-transform: uppercase;
+}
+
+.table-pitch-cross {
+    td {
+        padding-top: 0;
+        padding-bottom: 0;
     }
 }

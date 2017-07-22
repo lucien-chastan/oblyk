@@ -11,13 +11,13 @@ class ClimbsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('climbs')->insert(['label' => 'inconnu']);
-        DB::table('climbs')->insert(['label' => 'bloc']);
-        DB::table('climbs')->insert(['label' => 'voie']);
-        DB::table('climbs')->insert(['label' => 'grande-voie']);
-        DB::table('climbs')->insert(['label' => 'trad']);
-        DB::table('climbs')->insert(['label' => 'artif']);
-        DB::table('climbs')->insert(['label' => 'deep-water']);
-        DB::table('climbs')->insert(['label' => 'via-ferrata']);
+        DB::table('climbs')->insert(['label' => 'inconnu']); // 1
+        DB::table('climbs')->insert(['label' => 'bloc']); // 2
+        DB::table('climbs')->insert(['label' => 'voie']); // 3
+        DB::table('climbs')->insert(['label' => 'grande-voie']); // 4
+        DB::table('climbs')->insert(['label' => 'trad']); // 5
+        DB::table('climbs')->insert(['label' => 'artif']); // 6
+        DB::table('climbs')->insert(['label' => 'deep-water']); // 7
+        DB::table('climbs')->insert(['label' => 'via-ferrata']); // 8
     }
 }

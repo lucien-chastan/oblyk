@@ -71,11 +71,12 @@ class InputTemplates extends ServiceProvider{
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $id = (isset($options['id']))? $options['id'] : $options['name'];
         $align = (isset($options['align'])) ? 'text-' . $options['align'] : 'text-left';
+        $value = (isset($options['value'])) ? "value = " . $options['value'] : '';
         $onchange = (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : "";
 
         return '
         <p class="' . $align . '">
-            <input ' . $onchange . ' class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
+            <input ' . $onchange . ' ' . $value . ' class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
             <label for="' . $id . '">' . $label .'</label>
         </p>';
     }
@@ -218,6 +219,23 @@ class InputTemplates extends ServiceProvider{
         return '
             <div class="col s12 markdownZone">
                 <textarea placeholder="' . $placeholder . '" id="' . $id . '" class="input-data ' . $class . '">' . $value . '</textarea>
+            </div>
+        ';
+    }
+
+    //INPUT DU TYPE DATE
+    public static function date($options){
+        $name = $options['name'];
+        $id = (isset($options['id']))? $options['id'] : $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : '';
+        $class = (isset($options['class']))? $options['class'] : '';
+        $placeholder = (isset($options['placeholder']))? $options['placeholder'] : '';
+
+        return '
+            <div class="col s12">
+                <label>' . $label . '</label>
+                <input name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
             </div>
         ';
     }
