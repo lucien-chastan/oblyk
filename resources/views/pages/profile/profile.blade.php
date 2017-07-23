@@ -42,6 +42,8 @@
     <script src="/js/post.js"></script>
     <script src="/js/notification.js"></script>
     <script src="/js/profile-router.js"></script>
+    <script src="/js/profile-chart.js"></script>
+    <script src="/framework/chartJs/Chart.min.js"></script>
     <script>
 
         //passage de la barre de navigation en noir

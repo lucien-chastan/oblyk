@@ -96,6 +96,11 @@ function afterLoad() {
         getMyActuality();
     }catch (e){}
 
+    //Lance le graphique des croix
+    try {
+        getChartMyCross();
+    }catch (e){}
+
 }
 
 

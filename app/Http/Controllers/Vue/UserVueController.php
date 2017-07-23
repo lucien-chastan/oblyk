@@ -6,6 +6,7 @@ use App\Album;
 use App\Article;
 use App\Conversation;
 use App\Crag;
+use App\Cross;
 use App\Description;
 use App\Follow;
 use App\ForumTopic;
@@ -318,7 +319,61 @@ class UserVueController extends Controller
 
         if($relationStatus == 3 || $user->settings->public == 1 || $user->id == Auth::id()){
 
-            $data = ['user' => $user,];
+            $crosses = Cross::where('user_id', $user->id)
+                ->with('crossSections')
+                ->with('crossStatus')
+                ->with('crossSections.routeSection')
+                ->with('route.crag')
+                ->with('route.routeSections')
+                ->get();
+
+            $crags = $pays = $regions = $years = $crossSectionIds = [];
+            $somme_metre = 0;
+            $max_val = 0;
+            $max_grade = '';
+            $max_sub_grade = '';
+
+            //on fait un tableau des longueurs faites
+            foreach ($crosses as $cross ) {
+                foreach ($cross->crossSections as $section) $crossSectionIds[] = $section->route_section_id;
+            }
+
+
+            //Rangement des croix dans différent tableaux (pour le trie ensuite
+            foreach ($crosses as $cross){
+                $crags[$cross->route->crag->id][] = $cross;
+                $pays[$cross->route->crag->code_country][] = $cross;
+                $regions[$cross->route->crag->region][] = $cross;
+                $years[$cross->release_at->format('Y')][] = $cross;
+                $somme_metre += $cross->route->height;
+
+                //on va cherche la cotation max
+                if($cross->status_id != 1){
+                    foreach ($cross->route->routeSections as $section){
+                        if(in_array($section->id, $crossSectionIds)){
+                            if ($section->grade_val > $max_val) {
+                                $max_val = $section->grade_val;
+                                $max_grade = $section->grade;
+                                $max_sub_grade = $section->sub_grade;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            $data = [
+                'user' => $user,
+                'crags' => $crags,
+                'pays' => $pays,
+                'regions' => $regions,
+                'years' => $years,
+                'metres' => $somme_metre,
+                'max_val' => $max_val,
+                'max_grade' => $max_grade,
+                'max_sub_grade' => $max_sub_grade,
+                'crosses' => $crosses,
+            ];
             return view('pages.profile.vues.croixVue', $data);
 
         }else{

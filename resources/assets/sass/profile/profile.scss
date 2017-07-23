@@ -304,6 +304,40 @@
         }
     }
 
+    .card-chiffre-chart {
+
+        padding-bottom: 1px;
+        margin-bottom: 0;
+
+        .zone-graph-type-grimpe {
+            margin: 10px 0;
+            min-height: 150px;
+        }
+
+        .legend-climb-square {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            margin-right: 0.15em;
+            border-radius: 2px;
+            margin-bottom: -2px;
+        }
+
+        .label-legend-climb {
+            color: rgb(120,120,120);
+            margin-right: 0.7em;
+        }
+
+        .bt-go-to-analytiks {
+            cursor: pointer;
+            i {
+                vertical-align: text-top;
+                margin-top: 1px;
+            }
+        }
+
+    }
+
     .ic-tab-parametre-profile {
         margin-right: 0.5em;
         vertical-align: middle;

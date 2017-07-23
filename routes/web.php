@@ -266,6 +266,7 @@ Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites'
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
 Route::get('/chart/sector/{sector_id}/grade', 'Chart\SectorChartController@gradeChart')->name('gradeSectorChart');
+Route::post('/chart/cross/climb-type', 'Chart\Crosses\UserCrossesTypeClimb@climbChart')->name('climbUserCrossesChart');
 
 
 //SIMILAR
