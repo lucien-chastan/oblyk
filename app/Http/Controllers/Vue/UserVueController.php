@@ -361,7 +361,6 @@ class UserVueController extends Controller
                 }
             }
 
-
             $data = [
                 'user' => $user,
                 'crags' => $crags,
@@ -416,8 +415,15 @@ class UserVueController extends Controller
 
         if(Auth::id() == $user_id){
 
-            $user = User::where('id',Auth::id())->first();
-            $data = ['user' => $user,];
+            $projects = Cross::where([['user_id',$user_id],['status_id',1]])->with('route.crag')->with('route.routeSections')->get();
+
+            $crags = [];
+
+            foreach ($projects as $project){
+                $crags[$project->route->crag_id][] = $project;
+            }
+
+            $data = ['crags' => $crags,];
             return view('pages.profile.vues.projetVue', $data);
 
         }else{
