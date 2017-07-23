@@ -6,8 +6,10 @@ use App\Cross;
 use App\CrossSection;
 use App\CrossUser;
 use App\Description;
+use App\Follow;
 use App\Route;
 use App\TickList;
+use App\User;
 use Carbon\Carbon;
 use DebugBar;
 use Validator;
@@ -84,6 +86,47 @@ class CrossController extends Controller
     }
 
 
+    function crossUserModal(Request $request){
+
+        //va chercher la liste des amis confirmés
+        $friends = User::whereIn('id', Follow::friends(Auth::id()))->get();
+
+        //construction de la définition (vide ou avec des infos)
+        $id_cross = $request->input('cross_id');
+        $cross = Cross::where('id', $id_cross)->with('crossUsers')->first();
+
+        //liste des users déjà lié à cette croix
+        $crossUsers = [];
+        foreach ($cross->crossUsers as $user) $crossUsers[] = $user->id;
+
+        $callback = $request->input('callback');
+        $callback = isset($callback) ? $request->input('callback') : 'refresh';
+
+        //définition du chemin de sauvgarde
+        $outputRoute = '/cross/users';
+
+        DebugBar::addMessage(json_decode(json_encode(Follow::friends(Auth::id()))),'perso');
+        DebugBar::addMessage(Auth::id(),'id');
+
+        $data = [
+            'dataModal' => [
+                'crossUsers' => $crossUsers,
+                'friends' => $friends,
+                'id' => $id_cross,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute,
+                'callback' => $callback
+            ]
+        ];
+
+        return view('modal.crossUser', $data);
+    }
+
+
+    function crossUsers (Request $request){
+
+    }
 
     /**
      * Display a listing of the resource.

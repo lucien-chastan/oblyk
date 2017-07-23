@@ -69,7 +69,7 @@
                             @foreach($cross->crossUsers as $user)
                                 <span><a href="{{ route('userPage', ['user_id'=>$user->user->id, 'user_label'=>str_slug($user->user->name)]) }}">{{ $user->user->name }}</a></span>
                             @endforeach
-                            <i {!! $Helpers::tooltip('Éditer la liste des potes qui étaient avec moi') !!} class="material-icons grey-text bt-add-grimpeur-on-cross tooltipped">group_add</i>
+                            <i {!! $Helpers::tooltip('Éditer la liste des potes qui étaient avec moi') !!} {!! $Helpers::modal(route('crossUserModal'), ["route"=>"/cross/users", "cross_id"=>$cross->id, "title"=>"Les potes qui étaient avec moi", "method"=>"POST", "callback"=>"reloadRouteCarnetTab"]) !!} onclick="$('#modal').modal('open');" class="material-icons grey-text bt-add-grimpeur-on-cross tooltipped btnModal">group_add</i>
                         </span>
 
                         @if(isset($cross->description->description))
@@ -95,7 +95,5 @@
             <a {!! $Helpers::modal(route('crossModal'), ["cross_id"=>'', "route_id"=>$route->id, 'title'=>'Ajouter une croix à mon carnet', 'method'=>'POST', 'callback'=>'reloadRouteCarnetTab']) !!} class="btn-flat waves-effect text-cursor btn-add-in-cross-book btnModal" onclick="$('#modal').modal('open');"><i class="material-icons">repeat</i> Ajouter une répétition</a>
         </div>
     @endif
-
-
 
 </div>

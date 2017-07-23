@@ -169,6 +169,7 @@ Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
 Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
 Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal');
 Route::post('/modal/cross', 'CRUD\CrossController@crossModal')->name('crossModal');
+Route::post('/modal/crossUser', 'CRUD\CrossController@crossUserModal')->name('crossUserModal');
 
 
 //CRUD AJAX
@@ -201,6 +202,7 @@ Route::resource('posts', 'CRUD\PostController');
 Route::resource('notifications', 'CRUD\NotificationController');
 Route::resource('topics', 'CRUD\TopicController');
 Route::resource('crosses', 'CRUD\CrossController');
+Route::post('/cross/users', 'CRUD\CrossController@crossUsers')->name('crossUsersScript');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

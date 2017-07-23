@@ -2,7 +2,9 @@
 
 namespace App;
 
+use DebugBar;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Follow extends Model
 {
@@ -33,4 +35,5 @@ class Follow extends Model
 
         return $relationStatus;
     }
+
 }
