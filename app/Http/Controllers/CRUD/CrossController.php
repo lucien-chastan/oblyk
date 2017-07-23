@@ -89,15 +89,15 @@ class CrossController extends Controller
     function crossUserModal(Request $request){
 
         //va chercher la liste des amis confirmés
-        $friends = User::whereIn('id', Follow::friends(Auth::id()))->get();
+        $friends = Follow::where([['followed_type', 'App\\User'],['followed_id', Auth::id()]])->with('user')->get();
 
         //construction de la définition (vide ou avec des infos)
         $id_cross = $request->input('cross_id');
         $cross = Cross::where('id', $id_cross)->with('crossUsers')->first();
 
         //liste des users déjà lié à cette croix
-        $crossUsers = [];
-        foreach ($cross->crossUsers as $user) $crossUsers[] = $user->id;
+        $crossFriends = [];
+        foreach ($cross->crossUsers as $user) $crossFriends[] = $user->user_id;
 
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
@@ -105,12 +105,9 @@ class CrossController extends Controller
         //définition du chemin de sauvgarde
         $outputRoute = '/cross/users';
 
-        DebugBar::addMessage(json_decode(json_encode(Follow::friends(Auth::id()))),'perso');
-        DebugBar::addMessage(Auth::id(),'id');
-
         $data = [
             'dataModal' => [
-                'crossUsers' => $crossUsers,
+                'crossFriends' => $crossFriends,
                 'friends' => $friends,
                 'id' => $id_cross,
                 'title' => $request->input('title'),
@@ -124,7 +121,41 @@ class CrossController extends Controller
     }
 
 
+    //Met à jour la liste des grimpeurs liée à une croix
     function crossUsers (Request $request){
+
+        $cross = Cross::where('id', $request->input('id'))->with('crossUsers')->first();
+
+        if($request->input('crossFriends') != ''){
+            $crossFriends = explode(';',$request->input('crossFriends'));
+
+            //passe UNE : on supprime les anciens qui sont en trop
+            $clearFriends = [];
+            foreach ($cross->crossUsers as $crossUser) {
+                if(!in_array($crossUser->user_id, $crossFriends)) {
+                    $crossUser->delete();
+                }else{
+                    $clearFriends[] = $crossUser->user_id;
+                }
+            }
+
+            //passe DEUX : on ajoute les nouvelles longueur
+            foreach ($crossFriends as $friend){
+                if(!in_array($friend, $clearFriends)) {
+                    $crossUser = new CrossUser();
+                    $crossUser->cross_id = $cross->id;
+                    $crossUser->user_id = $friend;
+                    $crossUser->save();
+                }
+            }
+        }else{
+            //s'il n'y a pas de tableau en paramètre on supprime entiérement les crossUers
+
+            foreach ($cross->crossUsers as $crossUser) {
+                $crossUser->delete();
+            }
+        }
+
 
     }
 

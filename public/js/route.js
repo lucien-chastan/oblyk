@@ -411,6 +411,19 @@ function parsePitch() {
     }
 
     crossPitchs.value = arrayCrossPitchs.join(';');
+}
 
-    console.log(crossPitchs.value);
+
+function parseFreinds() {
+    let checkFriend = document.getElementsByName('check_freind_cross_users'),
+        crossFriends = document.getElementById('crossFriends'),
+        arrayCrossFriends = [];
+
+    for(let i = 0 ; i < checkFriend.length ; i++){
+        if(checkFriend[i].checked === true){
+            arrayCrossFriends.push(checkFriend[i].value);
+        }
+    }
+
+    crossFriends.value = arrayCrossFriends.join(';');
 }
