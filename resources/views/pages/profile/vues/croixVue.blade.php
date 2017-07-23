@@ -11,7 +11,7 @@
                 <div class="row">
 
                     {{-- GRAPHE DES DIFFÉRENTS TYPE DE GRIMPE--}}
-                    <div class="col s12 m6 l3" id="graph-type-grimpe">
+                    <div class="col s12 m6 l3 text-center" id="graph-type-grimpe">
                         <label>Nombre de croix par type de grimpe</label>
                         <div class="zone-graph-type-grimpe">
                             <canvas id="chart-climb-id" width="100" height="250"></canvas>
