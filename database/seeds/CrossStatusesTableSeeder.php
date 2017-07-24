@@ -11,11 +11,11 @@ class CrossStatusesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cross_statuses')->insert(['label' => 'projet']);
-        DB::table('cross_statuses')->insert(['label' => 'terminé']);
-        DB::table('cross_statuses')->insert(['label' => 'après travail']);
-        DB::table('cross_statuses')->insert(['label' => 'flash']);
-        DB::table('cross_statuses')->insert(['label' => 'a vue']);
-        DB::table('cross_statuses')->insert(['label' => 'répétition']);
+        DB::table('cross_statuses')->insert(['label' => 'projet']); // 1
+        DB::table('cross_statuses')->insert(['label' => 'terminé']); // 2
+        DB::table('cross_statuses')->insert(['label' => 'après travail']); // 3
+        DB::table('cross_statuses')->insert(['label' => 'flash']); // 4
+        DB::table('cross_statuses')->insert(['label' => 'a vue']); // 5
+        DB::table('cross_statuses')->insert(['label' => 'répétition']); // 6
     }
 }

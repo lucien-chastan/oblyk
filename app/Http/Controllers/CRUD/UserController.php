@@ -163,6 +163,21 @@ class UserController extends Controller
                 ->save(storage_path('app/public/users/50/user-' . $user_id . '.jpg'));
         }
     }
+
+    function saveFilterSettings(Request $request){
+
+        $user = User::where('id', Auth::id())->with('settings')->first();
+
+        $user->settings->filter_climb = $request->input('filter_climb');
+        $user->settings->filter_status = $request->input('filter_status');
+        $user->settings->filter_period = $request->input('filter_period');
+        $user->settings->save();
+
+        return response()->json('Vos filtres ont été enregistré');
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *

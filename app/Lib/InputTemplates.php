@@ -235,7 +235,7 @@ class InputTemplates extends ServiceProvider{
         return '
             <div class="col s12">
                 <label>' . $label . '</label>
-                <input name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
+                <input name="' . $name . '" data-value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
             </div>
         ';
     }
@@ -245,6 +245,7 @@ class InputTemplates extends ServiceProvider{
         $label = (isset($options['label']))? $options['label'] : 'Envoyer';
         $color = (isset($options['color']))? $options['color'] : 'blue';
         $cancelable = (isset($options['cancelable']))? $options['cancelable'] : true;
+        $onclick = (isset($options['onclick']))? ' onclick="' .$options['onclick'] . '"' : '';
 
         $cancelBtn = $cancelable ? '<button class="btn-flat waves-effect waves-light grey-text text-darken-2" onclick="$(\'#modal\').modal(\'close\');" type="button">Annuler</button>' : '';
 
@@ -252,7 +253,7 @@ class InputTemplates extends ServiceProvider{
             <div class="col s12">
                 <div class="row text-right" id="submit-btn">
                     ' . $cancelBtn . '
-                    <button class="btn waves-effect ' . $color . ' waves-light" type="submit" name="action">' . $label . '
+                    <button ' . $onclick . ' class="btn waves-effect ' . $color . ' waves-light" type="submit" name="action">' . $label . '
                         <i class="material-icons right">send</i>
                     </button>
                 </div>

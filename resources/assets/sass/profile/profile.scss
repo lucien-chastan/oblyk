@@ -648,3 +648,68 @@
         }
     }
 }
+
+//ZONE ANALYTIKS
+
+.analytiks {
+
+    .zone-analytiks-tabs {
+        margin-bottom: 0;
+        .blue-card-panel {
+            padding: 0;
+            .col.s12 {
+                padding: 0;
+            }
+        }
+
+        .tab-filter-analytiks {
+            border: 1px rgb(210, 210, 210);
+            border-left-style: solid;
+        }
+    }
+
+    .zone-analytiks-box {
+        h2.loved-king-font {
+            font-size: 1.6em;
+            color: rgb(100,100,100);
+            margin-top: 0;
+            padding-bottom: 8px;
+            border: 1px rgb(220, 220, 220);
+            border-bottom-style: solid;
+        }
+
+        .card-panel {
+            padding: 10px;
+        }
+
+        .row {
+            margin-bottom: 1px;
+        }
+    }
+
+    .bt-action-filter {
+        font-size: 0.9em;
+
+        span {
+            cursor: pointer;
+            transition: color 0.3s;
+            &:hover {color: #2196F3;  }
+
+            &:last-child{ margin-left: 0.7em}
+
+            i {
+                vertical-align: bottom;
+                margin-bottom: -2px;
+                margin-right: 0.1em;
+            }
+        }
+    }
+
+    .switch-filter-period {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        span {
+            margin-right: 1em;
+        }
+    }
+}

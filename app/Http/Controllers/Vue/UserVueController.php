@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Vue;
 
 use App\Album;
 use App\Article;
+use App\Climb;
 use App\Conversation;
 use App\Crag;
 use App\Cross;
+use App\CrossStatus;
 use App\Description;
 use App\Follow;
 use App\ForumTopic;
@@ -19,6 +21,7 @@ use App\Topo;
 use App\User;
 use App\UserConversation;
 use App\Video;
+use DebugBar;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
@@ -439,8 +442,57 @@ class UserVueController extends Controller
 
         if(Auth::id() == $user_id){
 
-            $user = User::where('id',Auth::id())->first();
-            $data = ['user' => $user,];
+            $user = User::where('id',Auth::id())->with('settings')->first();
+
+            $filter_climb = $filter_status = $filter_period = [];
+
+            //filtre sur les types de grimp
+            if(!isset($user->settings->filter_climb)) {
+                $filter_climb = [1 => true, 2 => true, 3 => true, 4 => true, 5 => true, 6 => true, 7 => true, 8 => true];
+                $user->settings->filter_climb = json_encode($filter_climb);
+                $user->settings->save();
+            }else{
+                $climbs = json_decode($user->settings->filter_climb);
+                foreach ($climbs as $key => $climb){
+                    $filter_climb[$key] = $climb;
+                }
+            }
+
+            //filtre sur les status
+            if(!isset($user->settings->filter_status)) {
+                $filter_status = [1 => true, 2 => true, 3 => true, 4 => true, 5 => true, 6 => true];
+                $user->settings->filter_status = json_encode($filter_status);
+                $user->settings->save();
+            }else{
+                $statuses = json_decode($user->settings->filter_status);
+                foreach ($statuses as $key => $status){
+                    $filter_status[$key] = $status;
+                }
+            }
+
+            //filtre sur les dates
+            if(!isset($user->settings->filter_period)) {
+                $filter_periods = ['start' => 'first', 'end' => 'now'];
+                $user->settings->filter_period = json_encode($filter_periods);
+                $user->settings->save();
+            }else{
+                $periods = json_decode($user->settings->filter_period);
+                foreach ($periods as $key => $period){
+                    $filter_periods[$key] = $period;
+                }
+            }
+
+
+
+            $data = [
+                'user' => $user,
+                'filter_climb' => $filter_climb,
+                'filter_status' => $filter_status,
+                'filter_periods' => $filter_periods,
+                'statuses' => CrossStatus::all(),
+                'climbs' => Climb::all(),
+            ];
+
             return view('pages.profile.vues.analytiksVue', $data);
 
         }else{
