@@ -19,7 +19,7 @@
             @include('pages.profile.partials.analytiks.tabs.routeAnalytiks')
         </div>
         <div id="analytiks-tab-lieux">
-            @include('pages.profile.partials.analytiks.tabs.lieuxAnalytiks')
+            @include('pages.profile.partials.analytiks.tabs.environmentAnalytiks')
         </div>
         <div id="analytiks-tab-time">
             @include('pages.profile.partials.analytiks.tabs.timeAnalytiks')

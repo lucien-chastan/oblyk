@@ -4,7 +4,9 @@
     <div class="col s12">
         <div class="card-panel">
             <h2 class="loved-king-font">Croix / Cotations</h2>
-            croix par cotation
+            <div class="card-chart">
+                <canvas class="route-analytiks-canvas" data-route="{{ route('gradeAnalytiksChart') }}" id="analytiks-cotations" width="100" height="250"></canvas>
+            </div>
         </div>
     </div>
 
@@ -16,7 +18,9 @@
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">Croix / Type de grimpe</h2>
-            croix par type de grimpe
+            <div class="card-chart">
+                <canvas class="route-analytiks-canvas" data-route="{{ route('climbsAnalytiksChart') }}" id="analytiks-climbs" width="100" height="250"></canvas>
+            </div>
         </div>
     </div>
 
@@ -24,7 +28,9 @@
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">Croix / Type d'enchainement</h2>
-            croix par type d'enchainement
+            <div class="card-chart">
+                <canvas class="route-analytiks-canvas" data-route="{{ route('statusesAnalytiksChart') }}" id="analytiks-statuses" width="100" height="250"></canvas>
+            </div>
         </div>
     </div>
 
@@ -32,7 +38,9 @@
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">Croix / Mode de grimpe</h2>
-            croix par mode
+            <div class="card-chart">
+                <canvas class="route-analytiks-canvas" data-route="{{ route('modesAnalytiksChart') }}" id="analytiks-modes" width="100" height="250"></canvas>
+            </div>
         </div>
     </div>
 

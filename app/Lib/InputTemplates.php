@@ -235,7 +235,7 @@ class InputTemplates extends ServiceProvider{
         return '
             <div class="col s12">
                 <label>' . $label . '</label>
-                <input name="' . $name . '" data-value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
+                <input name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
             </div>
         ';
     }

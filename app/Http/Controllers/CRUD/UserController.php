@@ -173,8 +173,6 @@ class UserController extends Controller
         $user->settings->filter_period = $request->input('filter_period');
         $user->settings->save();
 
-        return response()->json('Vos filtres ont été enregistré');
-
     }
 
 

@@ -267,8 +267,25 @@ Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites'
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
 Route::get('/chart/sector/{sector_id}/grade', 'Chart\SectorChartController@gradeChart')->name('gradeSectorChart');
-Route::post('/chart/cross/climb-type', 'Chart\Crosses\UserCrossesTypeClimb@climbChart')->name('climbUserCrossesChart');
+Route::post('/chart/cross/climb-type', 'Chart\Crosses\UserCrossesTypeClimbController@climbChart')->name('climbUserCrossesChart');
 
+//CHART - ANALYTIKS
+// -> tab : route
+Route::post('/chart/analytiks/grades', 'Chart\Crosses\routeChartsController@grades')->name('gradeAnalytiksChart');
+Route::post('/chart/analytiks/climbs', 'Chart\Crosses\routeChartsController@climbs')->name('climbsAnalytiksChart');
+Route::post('/chart/analytiks/statuses', 'Chart\Crosses\routeChartsController@statuses')->name('statusesAnalytiksChart');
+Route::post('/chart/analytiks/modes', 'Chart\Crosses\routeChartsController@modes')->name('modesAnalytiksChart');
+
+// -> tab : environment
+Route::post('/chart/analytiks/rocks', 'Chart\Crosses\environmentChartsController@rocks')->name('rocksAnalytiksChart');
+Route::post('/chart/analytiks/crags', 'Chart\Crosses\environmentChartsController@crags')->name('cragsAnalytiksChart');
+Route::post('/chart/analytiks/regions', 'Chart\Crosses\environmentChartsController@regions')->name('regionsAnalytiksChart');
+Route::post('/chart/analytiks/pays', 'Chart\Crosses\environmentChartsController@pays')->name('paysAnalytiksChart');
+
+// -> tab : période
+Route::post('/chart/analytiks/years', 'Chart\Crosses\timeChartsController@years')->name('yearsAnalytiksChart');
+Route::post('/chart/analytiks/months', 'Chart\Crosses\timeChartsController@months')->name('monthsAnalytiksChart');
+Route::post('/chart/analytiks/time-lines', 'Chart\Crosses\timeChartsController@timeLines')->name('timeLinesAnalytiksChart');
 
 //SIMILAR
 Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');

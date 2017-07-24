@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Cross extends Model
@@ -41,5 +42,55 @@ class Cross extends Model
 
     public function crossHardness(){
         return $this->hasOne('App\CrossHardness','id', 'hardness_id');
+    }
+
+    public static function getCrossWithFilter($user){
+
+        //Filtre sur les status
+        $statuses_id = [];
+        $filter_statuses = json_decode($user->settings->filter_status);
+        foreach ($filter_statuses as $key=>$filter_status){
+            if($filter_status == true) {
+                $statuses_id[] = $key;
+            }
+        }
+
+        //Filtre sur le type de grimpe
+        $climbs_id = [];
+        $filter_climbs = json_decode($user->settings->filter_climb);
+        foreach ($filter_climbs as $key => $filter_climb){
+            if($filter_climb == true) {
+                $climbs_id[] = $key;
+            }
+        }
+
+        //filtre sur la periode
+        $periods = json_decode($user->settings->filter_period);
+        $filter_periods = [];
+        foreach ($periods as $key => $period) $filter_periods[$key] = $period;
+
+        if($filter_periods['start'] != 'first' && $filter_periods['end'] != 'now'){
+            //personalisé
+            $start = $filter_periods['start'];
+            $end = $filter_periods['end'];
+        }else{
+            $firstCross = Cross::where('user_id',$user->id)->orderBy('release_at')->first();
+            $start = $firstCross->release_at;
+            $end = Carbon::now();
+        }
+
+        $crosses = Cross::where('user_id',$user->id)
+            ->whereBetween('release_at',[$start,$end])
+            ->whereIn('status_id', $statuses_id)
+            ->whereHas('route', function ($query) use ($climbs_id){$query->whereIn('climb_id', $climbs_id);})
+            ->with('route')
+            ->with('route.crag')
+            ->with('crossSections')
+            ->with('crossSections.routeSection')
+            ->orderBy('release_at')
+            ->get();
+
+        return $crosses;
+
     }
 }

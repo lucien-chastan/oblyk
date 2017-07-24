@@ -6,7 +6,7 @@ use App\Cross;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserCrossesTypeClimb extends Controller
+class UserCrossesTypeClimbController extends Controller
 {
 
     //GRAPHIQUE DES TYPES DE GRIMPE

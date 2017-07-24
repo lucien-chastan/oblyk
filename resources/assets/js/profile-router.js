@@ -116,6 +116,11 @@ function afterLoad() {
         getChartMyCross();
     }catch (e){}
 
+    //Lance la premier page de graphique des croix
+    try {
+        getAnalytiksCharts();
+    }catch (e){}
+
 }
 
 

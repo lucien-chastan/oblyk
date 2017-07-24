@@ -1,3 +1,5 @@
+let paintedCharts = [],
+    instanceCharts = [];
 
 //VA CHERCHER LE GRAPHE DES TYPES DES GRIMPES D'UN USER
 function getChartMyCross() {
@@ -48,7 +50,42 @@ function submitFilter() {
         filter_climb : JSON.stringify(climbsArray),
         filter_status : JSON.stringify(statusesArray),
         filter_period : periodFilter
-    }).then(function (response) {
-        Materialize.toast(response.data, 4000);
+    }).then(function () {
+        paintedCharts = [];
+        reloadCurrentVue();
+    });
+}
+
+
+//Parcours les canvas et va cherche le datas du graphique
+function getAnalytiksCharts(canvasClass = 'route-analytiks-canvas') {
+    let analytkisCanvas = document.getElementsByClassName(canvasClass);
+
+    for(let i = 0 ; i < analytkisCanvas.length ; i++) {
+        let route = analytkisCanvas[i].getAttribute('data-route'),
+            element = analytkisCanvas[i];
+
+        if(paintedCharts[element.id] !== true){
+            setTimeout(function () {
+                paintChart(route, element);
+            } (500 * i));
+        }
+    }
+}
+
+
+//Va chercher et dessine le graphique ciblé
+function paintChart(route, element) {
+    axios.post(route).then(function (response) {
+
+        paintedCharts[element.id] = true;
+
+        console.log(JSON.parse(response.data));
+
+        new Chart(
+            element.getContext('2d'),
+            JSON.parse(response.data)
+        );
+
     });
 }

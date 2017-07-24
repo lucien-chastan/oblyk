@@ -663,7 +663,7 @@
         }
 
         .tab-filter-analytiks {
-            border: 1px rgb(210, 210, 210);
+            border: 1px #aaa;;
             border-left-style: solid;
         }
     }
@@ -680,6 +680,10 @@
 
         .card-panel {
             padding: 10px;
+
+            .card-chart {
+                min-height: 200px;
+            }
         }
 
         .row {
