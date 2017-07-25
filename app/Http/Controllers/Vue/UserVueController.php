@@ -526,7 +526,11 @@ class UserVueController extends Controller
 
         if(Auth::id() == $user_id){
 
-            $user = User::where('id',Auth::id())->first();
+            $user = User::where('id',Auth::id())
+                ->with('places')
+                ->with('settings')
+                ->first();
+
             $data = ['user' => $user,];
             return view('pages.profile.vues.lieuxVue', $data);
 

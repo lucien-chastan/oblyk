@@ -43,6 +43,11 @@
     }
 }
 
+.blue-hover {
+    transition: color 0.3s;
+    &:hover {color: #2196F3;}
+}
+
 .cookie-in-cookiebanner {
     vertical-align: bottom;
     height: 20px;

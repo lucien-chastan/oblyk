@@ -707,6 +707,19 @@ class InputTemplates extends ServiceProvider{
         $label = (isset($options['label']))? $options['label'] : 'Localisation';
         $lat = (isset($options['lat']))? $options['lat'] : 0;
         $lng = (isset($options['lng']))? $options['lng'] : 0;
+        $withRayon = (isset($options['withRayon']))? true : false;
+        $rayon = (isset($options['rayon']))? $options['rayon'] : 5;
+
+        if($withRayon){
+            $html = '
+            <div class="input-field col s12">
+                <input onkeyup="changeRayonPopupMap()" placeholder="rayon en Km" id="rayon-localisation-popup" value="' . $rayon . '" name="rayon" type="number" min="1" max="40" class="input-data">
+                <label for="rayon-localisation-popup">Mon rayon d\'action autour de ce point (en km)</label>
+            </div>
+            ';
+        }else{
+            $html = '';
+        }
 
         return '
             <div class="row">
@@ -717,6 +730,7 @@ class InputTemplates extends ServiceProvider{
                     <label>' . $label . '</label>
                     <div id="input-map" class="input-map"></div>
                 </div>
+                ' . $html .'
             </div>
         ';
     }

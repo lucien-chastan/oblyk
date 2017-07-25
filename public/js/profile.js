@@ -1,5 +1,6 @@
 let chargedBox = 0,
-    nbBox = 0;
+    nbBox = 0,
+    parnterSettingMap = null;
 
 //AJOUT UN ÉVÉNEMENT AU ONRESEIZE POUR REDIMENSIONNER LE DASHBOAD
 window.addEventListener('resize', function () {
@@ -282,4 +283,66 @@ function changeRelation(user_id, relation_status) {
         reloadCurrentVue();
 
     });
+}
+
+function activePartner(active = true) {
+    axios.post('/partner/active',{active : active}).then(function (response) {
+        Materialize.toast(response.data, 4000);
+        reloadCurrentVue();
+    })
+}
+
+function activeLieu(switchbox) {
+
+    let active = switchbox.checked === true,
+        place_id = switchbox.value;
+
+    axios.post('/partner/place/active',{active : active, place_id : place_id}).then(function (response) {
+        Materialize.toast(response.data, 4000);
+        initPartnerSettingMap();
+    });
+}
+
+function initPartnerSettingMap() {
+
+    setTimeout(function () {
+        let latLngPolyline = [];
+
+        if(parnterSettingMap !== null) parnterSettingMap.remove();
+
+        parnterSettingMap = L.map('placeSettingMap',{ zoomControl : true, center:[46.5, 4.5], zoom : 5, layers: [carte]});
+
+        //ajout du controleur de tuile
+        L.control.layers(baseMaps).addTo(parnterSettingMap);
+
+        axios.post('/partner/setting-map').then(function (response) {
+            let places = response.data[0];
+
+            //ajoute les markeurs à la carte
+            for(let i in places){
+
+                //marker
+                L.marker([places[i].lat,places[i].lng]).addTo(parnterSettingMap);
+
+                //circle
+                L.circle([places[i].lat,places[i].lng],{
+                    radius : places[i].rayon * 1000,
+                    fill : false,
+                    color : '#2196F3'
+                }).addTo(parnterSettingMap);
+
+                //polyline de centrage
+                latLngPolyline.push([places[i].lat, places[i].lng])
+            }
+
+            let polyline = L.polyline(latLngPolyline, {color: 'rgba(255,255,255,0'}).addTo(parnterSettingMap);
+
+            // zoom the map to the polyline
+            parnterSettingMap.fitBounds(polyline.getBounds());
+
+            //on supprime la polyline de zoom
+            polyline.remove();
+
+        });
+    },500);
 }

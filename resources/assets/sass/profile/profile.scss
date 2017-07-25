@@ -134,9 +134,8 @@
 
         .blue-card-panel {
             border-radius: 0 0 2px 2px;
+            border: 3px #2196F3;
             border-top-style: solid;
-            border-width: 3px;
-            border-color: #2196F3;
         }
 
         .titre-profile-boite-vue {
@@ -377,6 +376,13 @@
         display: inline-block;
         vertical-align: top;
     }
+
+    .alert-partenaire-div {
+        border-radius: 4px;
+        padding: 1px;
+    }
+
+    .placeSettingMap {height: calc(100vh - 120px);}
 }
 
 .notification-zone {

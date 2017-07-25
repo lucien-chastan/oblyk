@@ -40,6 +40,7 @@ class User extends Authenticatable
     public function messages(){ return $this->hasMany('App\Message','user_id', 'id'); }
     public function notifications(){ return $this->hasMany('App\Notification','user_id', 'id'); }
     public function parkings() { return $this->hasMany('App\Parking','user_id', 'id'); }
+    public function places() { return $this->hasMany('App\UserPlace','user_id', 'id'); }
     public function posts() { return $this->hasMany('App\Post','user_id', 'id'); }
     public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
     public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }

@@ -92,5 +92,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CrossesTableSeeder::class);
         $this->call(CrossSectionsTableSeeder::class);
         $this->call(CrossUsersTableSeeder::class);
+
+        //Recherche de partenaire
+        $this->call(UserPlacesTableSeeder::class);
+
     }
 }

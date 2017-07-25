@@ -122,6 +122,11 @@ function afterLoad() {
         paintedCharts = [];
         getAnalytiksCharts();
     }catch (e){}
+
+    //Lance la premier page de graphique des croix
+    try {
+        initPartnerSettingMap();
+    }catch (e){}
 }
 
 

@@ -1,5 +1,6 @@
-var inputMap,
-    markerInputMap;
+var inputMap = null,
+    markerInputMap = null,
+    circleRayon = null;
 
 
 //FONCTION D'OUVERUTRE DES MODALES PERMETTANTS L'ÉDITION DU CONTENUE DES TABLES
@@ -320,20 +321,20 @@ function colorSaison() {
 function creatInputMap() {
     let lat = parseFloat(document.getElementById('lat-hidden-input').value),
         lng = parseFloat(document.getElementById('lng-hidden-input').value),
+        rayon = document.getElementById('rayon-localisation-popup'),
         defautLat = (lat === 0)? 46.927527 : lat,
         defautLng = (lng === 0)? 2.871905 : lng,
         defautZoom = (lat === 0 && lng === 0)? 5 : 16;
+
 
     //définition des différents style de tuile
     let cartePopupMap = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
         satellitePopupMap   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
 
     //si la carte existe déjà on la détruit
-    if(typeof inputMap !== "undefined"){
-        markerInputMap.remove();
-        inputMap.remove();
-
-        markerInputMap = undefined;
+    if(inputMap !== null){
+        inputMap = null;
+        markerInputMap = null;
     }
 
     //création de la map
@@ -350,6 +351,16 @@ function creatInputMap() {
 
     if(lat !== 0 || lng !== 0){
         markerInputMap = L.marker([lat,lng], {}).addTo(inputMap);
+
+        try {
+            let valRayon = parseInt(rayon.value);
+            circleRayon = L.circle([lat,lng],{
+                radius : valRayon * 1000,
+                fill : false,
+                color : '#2196F3'
+            }).addTo(inputMap);
+            inputMap.fitBounds(circleRayon.getBounds());
+        }catch (e){}
     }
 
     inputMap.on('click', pointMarkerInputMap);
@@ -363,14 +374,42 @@ function creatInputMap() {
 //CHANGE L'EMPLACEMENT DU POINT SUR LA CARTE
 function pointMarkerInputMap(e) {
     let lat = document.getElementById('lat-hidden-input'),
-        lng = document.getElementById('lng-hidden-input');
+        lng = document.getElementById('lng-hidden-input'),
+        rayon = document.getElementById('rayon-localisation-popup');
 
     lat.value = e['latlng']['lat'];
     lng.value = e['latlng']['lng'];
 
-    if(typeof markerInputMap !== "undefined"){
+    if(markerInputMap !== null){
         markerInputMap.setLatLng(e['latlng']);
+        try {
+            circleRayon.setLatLng(e['latlng']);
+        }catch (e){}
     }else{
         markerInputMap = L.marker(e['latlng'], {}).addTo(inputMap);
+
+        try {
+            let valRayon = parseInt(rayon.value);
+            circleRayon = L.circle(e['latlng'],{
+                radius : valRayon * 1000,
+                fill : false,
+                color : '#2196F3'
+            }).addTo(inputMap);
+            inputMap.fitBounds(circleRayon.getBounds());
+        }catch (e){}
+    }
+}
+
+function changeRayonPopupMap() {
+    let lat = parseFloat(document.getElementById('lat-hidden-input').value),
+        lng = parseFloat(document.getElementById('lng-hidden-input').value),
+        rayon = document.getElementById('rayon-localisation-popup');
+
+    if(lat !== 0 || lng !== 0){
+        try {
+            let valRayon = parseInt(rayon.value);
+            circleRayon.setRadius(valRayon * 1000);
+            inputMap.fitBounds(circleRayon.getBounds());
+        }catch (e){}
     }
 }

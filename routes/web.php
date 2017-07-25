@@ -124,6 +124,9 @@ Route::get('/forum-escalade/les-sujets', 'ForumController@topicsPage')->name('fo
 Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
 Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
 
+// PARTENAIRE
+Route::get('/partenaire-escalade/carte-des-grimpeurs', 'PartnerController@mapPage')->name('partnerMapPage');
+
 
 //TOPO (VERS LES SCRIPTS DE LIAISON)
 Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
@@ -170,6 +173,7 @@ Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
 Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal');
 Route::post('/modal/cross', 'CRUD\CrossController@crossModal')->name('crossModal');
 Route::post('/modal/crossUser', 'CRUD\CrossController@crossUserModal')->name('crossUserModal');
+Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('partnerModal');
 
 
 //CRUD AJAX
@@ -203,6 +207,7 @@ Route::resource('notifications', 'CRUD\NotificationController');
 Route::resource('topics', 'CRUD\TopicController');
 Route::resource('crosses', 'CRUD\CrossController');
 Route::post('/cross/users', 'CRUD\CrossController@crossUsers')->name('crossUsersScript');
+Route::resource('partners', 'CRUD\PartnerController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
@@ -220,6 +225,12 @@ Route::post('/user/relation', 'CRUD\FollowController@userRelation')->name('userR
 //TICK LISTS (DELETE)
 Route::post('/tick-list/delete', 'CRUD\TickListController@deleteTickList')->name('deleteTickList');
 Route::post('/tick-list/add', 'CRUD\TickListController@addTickList')->name('addTickList');
+
+
+// CRUD PARTNER
+Route::post('/partner/active', 'CRUD\PartnerController@activePartner')->name('activePartnerScript');
+Route::post('/partner/place/active', 'CRUD\PartnerController@activePlace')->name('activePlaceScript');
+Route::post('/partner/setting-map', 'CRUD\PartnerController@mapPlaces')->name('mapPlacesScript');
 
 
 //PROBLEM
