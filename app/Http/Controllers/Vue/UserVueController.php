@@ -626,7 +626,30 @@ class UserVueController extends Controller
     // BOX : LES CROIX DES POTES
     function subVueCroixPote($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+
+        $findFriends = Follow::where([['followed_id', $user->id],['followed_type', 'App\\User']])->get();
+        $friends = [];
+        foreach ($findFriends as $friend){
+            $friends[] = $friend->id;
+        }
+
+        $friendsCrosses = Cross::where('status_id','!=',1)
+            ->whereIn('user_id', $friends)
+            ->with('route')
+            ->with('user')
+            ->with('route.routeSections')
+            ->with('route.crag')
+            ->with('crossStatus')
+            ->skip(0)
+            ->take(10)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $data = [
+            'user' => $user,
+            'friendsCrosses' => $friendsCrosses,
+        ];
+
         return view('pages.profile.vues.dashboardBox.boxVues.croixPote', $data);
     }
 
