@@ -251,6 +251,15 @@
                     padding: 5px 5px;
                 }
             }
+
+            .bt-go-to-nav-item {
+                cursor: pointer;
+                i {
+                    vertical-align: text-top;
+                    margin-top: 1px;
+                    margin-left: 0.7em;
+                }
+            }
         }
     }
 

@@ -19,7 +19,7 @@
 
     {{--BOX : MES CROIX--}}
     @if($user->settings->dash_my_cross)
-        @include('pages.profile.vues.dashboardBox.box',['routeTitle'=>'Mes croix','routeBox'=>route('subVueMesCroixUser', ['user_id'=>$user->id])])
+        @include('pages.profile.vues.dashboardBox.box',['routeTitle'=>'Aperçu de mes croix','routeBox'=>route('subVueMesCroixUser', ['user_id'=>$user->id])])
     @endif
 
     {{--BOX : LES DERNIRERS POSTES SUR LE FORUM--}}

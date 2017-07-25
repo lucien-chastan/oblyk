@@ -95,13 +95,13 @@
                 </span>
             </div>
             <div class="collapsible-body">
-                <div data-route="{{route('vueCroixUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
+                <div id="item-mes-croix-nav" data-route="{{route('vueCroixUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
                     <i class="left material-icons">done_all</i>
                     <span class="hidden-1000">
                         Mes croix
                     </span>
                 </div>
-                <div data-route="{{route('vueTickListUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
+                <div id="item-ticklist-nav" data-route="{{route('vueTickListUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
                     <i class="left material-icons">crop_free</i>
                     <span class="hidden-1000">
                         Ticklist
