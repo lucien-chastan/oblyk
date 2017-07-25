@@ -7,7 +7,7 @@
 
             <h2 class="loved-king-font titre-profile-boite-vue">Les lieux où je grimpe</h2>
 
-            @if($user->settings->partenaire == 0)
+            @if($user->partnerSettings->partner == 0)
                 <div class="red lighten-4 alert-partenaire-div">
                     <p class="text-center">
                         <strong>Attention !</strong> : Tu n'as pas activé la recherche de partenaire. Pour l'instant personne ne peut te trouver ...<br>

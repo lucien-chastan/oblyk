@@ -51,11 +51,11 @@ class PartnerController extends Controller
 
     function activePartner(Request $request){
 
-        $user = User::where('id', Auth::id())->with('settings')->first();
-        $user->settings->partenaire = $request->input('active');
-        $user->settings->save();
+        $user = User::where('id', Auth::id())->with('partnerSettings')->first();
+        $user->partnerSettings->partner = $request->input('active');
+        $user->partnerSettings->save();
 
-        $message = $user->settings->partenaire == 1 ? 'Recherche de partenaire activée' : 'Recherche de partenaire désactivée';
+        $message = $user->partnerSettings->partner == 1 ? 'Recherche de partenaire activée' : 'Recherche de partenaire désactivée';
 
         return response()->json($message);
 
@@ -81,6 +81,26 @@ class PartnerController extends Controller
         ]);
     }
 
+
+    function saveSettings(Request $request){
+
+        $user = User::where('id', Auth::id())->with('partnerSettings')->first();
+
+        $user->partnerSettings->partner = $request->input('partner');
+        $user->partnerSettings->description = $request->input('description');
+        $user->partnerSettings->climb_2 = $request->input('climb_2');
+        $user->partnerSettings->climb_3 = $request->input('climb_3');
+        $user->partnerSettings->climb_4 = $request->input('climb_4');
+        $user->partnerSettings->climb_5 = $request->input('climb_5');
+        $user->partnerSettings->climb_6 = $request->input('climb_6');
+        $user->partnerSettings->climb_7 = $request->input('climb_7');
+        $user->partnerSettings->climb_8 = $request->input('climb_8');
+        $user->partnerSettings->grade_max = $request->input('grade_max');
+        $user->partnerSettings->grade_min = $request->input('grade_min');
+        $user->partnerSettings->save();
+
+        return response()->json('Votre profil de recherche a été mis à jour ');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -16,7 +16,6 @@ class CreateUserSettingsTable extends Migration
         Schema::create('user_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->boolean('partenaire')->nullable()->default(0);
             $table->boolean('mail_new_conversation')->nullable()->default(1);
             $table->boolean('mail_new_message')->nullable()->default(0);
             $table->boolean('sound_alert')->nullable()->default(1);

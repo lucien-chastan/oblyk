@@ -231,6 +231,7 @@ Route::post('/tick-list/add', 'CRUD\TickListController@addTickList')->name('addT
 Route::post('/partner/active', 'CRUD\PartnerController@activePartner')->name('activePartnerScript');
 Route::post('/partner/place/active', 'CRUD\PartnerController@activePlace')->name('activePlaceScript');
 Route::post('/partner/setting-map', 'CRUD\PartnerController@mapPlaces')->name('mapPlacesScript');
+Route::post('/partner/save-settings', 'CRUD\PartnerController@saveSettings')->name('saveUserPartnerSettings');
 
 
 //PROBLEM

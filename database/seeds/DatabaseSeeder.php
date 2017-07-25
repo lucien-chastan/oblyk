@@ -95,6 +95,7 @@ class DatabaseSeeder extends Seeder
 
         //Recherche de partenaire
         $this->call(UserPlacesTableSeeder::class);
+        $this->call(UserPartnerSettingsTableSeeder::class);
 
     }
 }

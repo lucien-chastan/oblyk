@@ -194,6 +194,7 @@ class UserVueController extends Controller
 
         $user = User::where('id',$user_id)
             ->with('settings')
+            ->with('partnerSettings')
             ->with('socialNetworks')
             ->with('socialNetworks.socialNetwork')
             ->withCount('crags')
@@ -528,7 +529,7 @@ class UserVueController extends Controller
 
             $user = User::where('id',Auth::id())
                 ->with('places')
-                ->with('settings')
+                ->with('partnerSettings')
                 ->first();
 
             $data = ['user' => $user,];
@@ -547,7 +548,7 @@ class UserVueController extends Controller
 
         if(Auth::id() == $user_id){
 
-            $user = User::where('id',Auth::id())->first();
+            $user = User::where('id',Auth::id())->with('partnerSettings')->first();
             $data = ['user' => $user,];
             return view('pages.profile.vues.partenaireParametresVue', $data);
 

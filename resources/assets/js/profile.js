@@ -346,3 +346,7 @@ function initPartnerSettingMap() {
         });
     },500);
 }
+
+function majPartnerSettings(response) {
+    Materialize.toast(response.data, 4000)
+}

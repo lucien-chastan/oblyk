@@ -84,7 +84,7 @@
 
 
     {{--PARTENAIRE DE GRIMPE--}}
-    @if($user->settings->partenaire == 1)
+    @if($user->partnerSettings->partner == 1)
         <div class="row">
             <div class="col s12">
                 <div class="card-panel blue-card-panel">

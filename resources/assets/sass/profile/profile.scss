@@ -383,6 +383,21 @@
     }
 
     .placeSettingMap {height: calc(100vh - 120px);}
+
+    .partner-settings-zone {
+
+        .para-note-active-partner {
+            margin-bottom: 0;
+        }
+
+        .blue-border-div {
+            margin-bottom: 4em;
+        }
+
+        ul {
+            margin-top: 0;
+        }
+    }
 }
 
 .notification-zone {
