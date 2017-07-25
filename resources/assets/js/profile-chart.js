@@ -1,5 +1,7 @@
 let paintedCharts = [],
-    instanceCharts = [];
+    instanceCharts = [],
+    analytiksMap = null,
+    initMap = false;
 
 //VA CHERCHER LE GRAPHE DES TYPES DES GRIMPES D'UN USER
 function getChartMyCross() {
@@ -51,6 +53,7 @@ function submitFilter() {
         filter_status : JSON.stringify(statusesArray),
         filter_period : periodFilter
     }).then(function () {
+        initMap = false;
         paintedCharts = [];
         reloadCurrentVue();
     });
@@ -61,16 +64,21 @@ function submitFilter() {
 function getAnalytiksCharts(canvasClass = 'route-analytiks-canvas') {
     let analytkisCanvas = document.getElementsByClassName(canvasClass);
 
-    for(let i = 0 ; i < analytkisCanvas.length ; i++) {
-        let route = analytkisCanvas[i].getAttribute('data-route'),
-            element = analytkisCanvas[i];
+    setTimeout(function () {
+        for(let i = 0 ; i < analytkisCanvas.length ; i++) {
+            let route = analytkisCanvas[i].getAttribute('data-route'),
+                element = analytkisCanvas[i];
 
-        if(paintedCharts[element.id] !== true){
-            setTimeout(function () {
-                paintChart(route, element);
-            } (500 * i));
+            if(paintedCharts[element.id] !== true) paintChart(route, element);
+
         }
-    }
+
+        if(canvasClass === 'environment-analytiks-canvas' && initMap !== true){
+            setTimeout(function () {
+                initAnalytiksMap();
+            },500);
+        }
+    },300);
 }
 
 
@@ -80,12 +88,48 @@ function paintChart(route, element) {
 
         paintedCharts[element.id] = true;
 
-        console.log(JSON.parse(response.data));
-
         new Chart(
             element.getContext('2d'),
             JSON.parse(response.data)
         );
 
+    });
+}
+
+function initAnalytiksMap() {
+    let latLngPolyline = [];
+
+    if(analytiksMap !== null) analytiksMap.remove();
+
+    analytiksMap = L.map('analytiks-map',{ zoomControl : true, center:[46.5, 4.5], zoom : 5, layers: [carte]});
+
+    //ajout du controleur de tuile
+    L.control.layers(baseMaps).addTo(analytiksMap);
+
+    axios.post('/chart/analytiks/maps').then(function (response) {
+        let crags = response.data;
+
+        //ajoute les markeurs à la carte
+        for(let i in crags){
+
+            let markerIcon = styleIcon(crags[i].type_voie + '' + crags[i].type_grande_voie + '' + crags[i].type_bloc + '' + crags[i].type_deep_water + '' + crags[i].type_via_ferrata);
+
+            L.marker(
+                [crags[i].lat,crags[i].lng],
+                {icon: markerIcon}
+            ).bindPopup(buildPopup(crags[i])).addTo(analytiksMap);
+
+            latLngPolyline.push([crags[i].lat, crags[i].lng])
+        }
+
+        let polyline = L.polyline(latLngPolyline, {color: 'rgba(255,255,255,0'}).addTo(analytiksMap);
+
+        // zoom the map to the polyline
+        analytiksMap.fitBounds(polyline.getBounds());
+
+        //on supprime la polyline de zoom
+        polyline.remove();
+
+        initMap = true;
     });
 }

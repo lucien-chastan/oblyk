@@ -113,7 +113,7 @@
                         Projets
                     </span>
                 </div>
-                <div data-route="{{route('vueAnalytiksUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
+                <div id="item-analytiks-nav" data-route="{{route('vueAnalytiksUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
                     <i class="left material-icons">equalizer</i>
                     <span class="hidden-1000">
                         Analytiks

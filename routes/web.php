@@ -281,6 +281,7 @@ Route::post('/chart/analytiks/rocks', 'Chart\Crosses\environmentChartsController
 Route::post('/chart/analytiks/crags', 'Chart\Crosses\environmentChartsController@crags')->name('cragsAnalytiksChart');
 Route::post('/chart/analytiks/regions', 'Chart\Crosses\environmentChartsController@regions')->name('regionsAnalytiksChart');
 Route::post('/chart/analytiks/pays', 'Chart\Crosses\environmentChartsController@pays')->name('paysAnalytiksChart');
+Route::post('/chart/analytiks/maps', 'Chart\Crosses\environmentChartsController@maps')->name('mapsAnalytiksChart');
 
 // -> tab : période
 Route::post('/chart/analytiks/years', 'Chart\Crosses\timeChartsController@years')->name('yearsAnalytiksChart');

@@ -118,9 +118,10 @@ function afterLoad() {
 
     //Lance la premier page de graphique des croix
     try {
+        initMap = false;
+        paintedCharts = [];
         getAnalytiksCharts();
     }catch (e){}
-
 }
 
 

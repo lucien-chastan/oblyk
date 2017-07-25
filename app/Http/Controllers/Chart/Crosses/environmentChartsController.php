@@ -206,4 +206,22 @@ class environmentChartsController extends Controller
 
         return response()->json(json_encode($data));
     }
+
+
+    //GRAPHIQUE DES TYPES DE GRIMPE
+    function maps(){
+
+        $user = User::where('id', Auth::id())->with('settings')->first();
+        $crosses = Cross::getCrossWithFilter($user);
+
+        $crags = [];
+
+        foreach ($crosses as $cross){
+            if(!isset($crags[$cross->route->crag->id])) $crags[$cross->route->crag->id] = $cross->route->crag;
+        }
+
+        $data = array_values($crags);
+
+        return response()->json($data);
+    }
 }

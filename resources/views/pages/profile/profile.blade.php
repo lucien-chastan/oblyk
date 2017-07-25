@@ -4,6 +4,8 @@
     <link href="/css/profile.css" rel="stylesheet">
     <link href="/css/post.css" rel="stylesheet">
     <link href="/css/messagerie.css" rel="stylesheet">
+    <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
+    <link href="/css/popupMapStyle.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -44,6 +46,8 @@
     <script src="/js/profile-router.js"></script>
     <script src="/js/profile-chart.js"></script>
     <script src="/framework/chartJs/Chart.min.js"></script>
+    <script src="/framework/leaflet/leaflet.js"></script>
+    <script src="/js/mapVariable.js"></script>
     <script>
 
         //passage de la barre de navigation en noir

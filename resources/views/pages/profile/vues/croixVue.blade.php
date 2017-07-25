@@ -76,7 +76,7 @@
                         <div class="legend-climb-square climb-bg-color-7"></div> <span class="label-legend-climb">Deep-water</span>
                         <div class="legend-climb-square climb-bg-color-8"></div> <span class="label-legend-climb">Via-ferrata</span>
                         @if(Auth::id() == $user->id)
-                            <div class="right"><a class="bt-go-to-analytiks"><i class="material-icons tiny">equalizer</i> Analytiks</a></div>
+                            <div class="right"><a class="bt-go-to-analytiks" onclick="loadProfileRoute(document.getElementById('item-analytiks-nav'))"><i class="material-icons tiny">equalizer</i> Analytiks</a></div>
                         @endif
                     </div>
                 </div>

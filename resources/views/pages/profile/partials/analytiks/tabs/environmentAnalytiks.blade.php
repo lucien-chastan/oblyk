@@ -54,7 +54,7 @@
     <div class="col s12">
         <div class="card-panel">
             <h2 class="loved-king-font">Carte des sites ou j'ai grimpé</h2>
-            carte des sites
+            <div id="analytiks-map" class="analytiks-map"></div>
         </div>
     </div>
 </div>
