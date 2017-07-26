@@ -16,20 +16,28 @@ class UserPlace extends Model
     public static function matchPlaces(){
 
         $userPlaces = UserPlace::where('user_id',Auth::id())->get();
+        $placeIds = [];
 
         foreach ($userPlaces as $place){
+            $ids = DB::select('
+                SELECT id
+                FROM user_places
+                WHERE
+                  user_id != :user_id AND
+                  (:rayon + rayon) > getRange(:lat, :lng, lat, lng) / 1000
+            ', [
+                'user_id'=>Auth::id(),
+                'rayon' => $place->rayon,
+                'lat' => $place->lat,
+                'lng' => $place->lng
+            ]);
 
+            foreach ($ids as $id){
+                if(!in_array($id->id, $placeIds)) $placeIds[] = $id->id;
+            }
         }
-        $idPlaces = DB::select('
-            SELECT myPlaces.id AS id
-            FROM 
-              user_places AS myPlaces,
-              user_places AS otherPlaces
-            WHERE 
-              myPlaces.user_id = 1 AND 
-              (myPlaces.rayon + otherPlaces.rayon) < getRange(myPlaces.lat, myPlaces.lng, otherPlaces.lat, otherPlaces.lng)
-        ');
 
+        return $placeIds;
     }
 
 }

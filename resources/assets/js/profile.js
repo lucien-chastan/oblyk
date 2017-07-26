@@ -348,6 +348,5 @@ function initPartnerSettingMap() {
 }
 
 function majPartnerSettings(response) {
-    Materialize.toast(response.data, 10000);
-    showSubmitLoader(false);
+    location.href = '/partenaire-escalade/carte-des-grimpeurs';
 }

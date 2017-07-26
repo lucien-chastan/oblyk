@@ -17,12 +17,54 @@
     <div id="my-user-circle-partner" class="side-user-map-partner circle-side">
         <div class="row">
             <div class="col s12">
-                <h2 class="loved-king-font">Liste des grimpeurs dans ma zone</h2>
+                @if(Auth::check())
 
-                <p>Ici tu trouve une liste des grimpeurs qui partage la même zone que toi</p>
+                    @if($user->partnerSettings->partner == 1)
 
+                        @if(count($places) > 0)
 
+                            <h2 class="loved-king-font">Qui grimpe au même endroit que moi</h2>
 
+                            <div class="blue-border-zone">
+                                @foreach($places as $place)
+                                    <div title="Cliquez pour afficher sur la carte" class="blue-border-div place-div" onclick="zoomOn({{ $place->lat }}, {{ $place->lng }})">
+                                        <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <span class="blue-text" onclick="openProfile({{ $place->user->id }})">{{ $place->user->name }}</span> à {{$place->label}}</p>
+                                        <div class="markdownZone grey-text">@markdown($place->description)</div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        @else
+                            <h2 class="loved-king-font text-center">Mes lieux de grimpe</h2>
+
+                            <p>
+                                Pour que nous puissions te présenter les grimpeurs autours de chez toi, il faut déjà que tu nous dise où tu grimpe.<br>
+                                Rend-toi dans ton profil et renseigne ta zone de grimpe
+                            </p>
+                            <p class="text-center">
+                                <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux">Mes lieux de grimpe</a>
+                            </p>
+                        @endif
+                    @else
+
+                        <h2 class="loved-king-font text-center">Bienvenue {{ Auth::user()->name }} !</h2>
+
+                        <p>
+                            Bienvenue dans la recheche de partenaire d'oblyk ! pour en faire partie il faut que tu passe par 2 étapes.<br>
+                            <span class="text-underline">Premièrement</span> : Active la recherche de partenaire et presente toi un peux plus.
+                        </p>
+                        <p class="text-center">
+                            <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres">Activation &amp; Présentation</a>
+                        </p>
+                    @endif
+                @else
+                    <p class="grey-text text-center">
+                        Crée-toi un compte pour avoir accès à liste de grimpeur près de chez toi !<br>
+                    </p>
+                    <p class="text-center">
+                        <a href="{{ route('login') }}">Connexion</a> - <a href="{{ route('register') }}">Créer un compte</a>
+                    </p>
+                @endif
             </div>
         </div>
     </div>

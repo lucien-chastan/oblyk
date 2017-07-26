@@ -18,10 +18,13 @@ class PartnerController extends Controller
             ->with(['places' => function ($query) {$query->where('active', 1);}])
             ->first();
 
+        $places = UserPlace::whereIn('id', UserPlace::matchPlaces())->with('user')->get();
+
         $data = [
             'meta_title' => 'Carte des Grimpeurs, Trouver un partenaire d\'escalade',
             'meta_description' => 'Carte des Grimpeurs, Trouver un partenaire d\'escalade',
-            'user'=>$user
+            'user'=>$user,
+            'places'=>$places
         ];
 
         return view('pages.partenaire.partenaireMap', $data);

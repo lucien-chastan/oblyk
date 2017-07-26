@@ -1,5 +1,9 @@
 let map, markers, marker_user;
 
+window.addEventListener('load', function () {
+    openVoletMyCircle(true);
+});
+
 //INITIALISE LA CARTE
 function loadPartnerMap() {
 
