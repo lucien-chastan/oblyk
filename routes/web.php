@@ -232,6 +232,9 @@ Route::post('/partner/active', 'CRUD\PartnerController@activePartner')->name('ac
 Route::post('/partner/place/active', 'CRUD\PartnerController@activePlace')->name('activePlaceScript');
 Route::post('/partner/setting-map', 'CRUD\PartnerController@mapPlaces')->name('mapPlacesScript');
 Route::post('/partner/save-settings', 'CRUD\PartnerController@saveSettings')->name('saveUserPartnerSettings');
+Route::post('/partner/getPartnerPoints', 'PartnerController@getPartnerPoints')->name('getPartnerPoints');
+Route::post('/partner/getUserInformation', 'PartnerController@getUserInformation')->name('getUserInformation');
+Route::post('/partner/getMyPlaces', 'PartnerController@getMyPlaces')->name('getMyPlaces');
 
 
 //PROBLEM

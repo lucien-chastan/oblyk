@@ -44,6 +44,11 @@
     <ul id="dropdown_partenaire" class="dropdown-content dropD-220">
         <li><a href="{{ route('partnerMapPage') }}"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
         <li><a href="#!"><i class="material-icons left">school</i>Comment ça marche</a></li>
+        @if(Auth::check())
+            <li class="divider"></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#partenaire-parametres"><i class="material-icons left">accessibility</i>Qui je suis ?</a></li>
+            <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#mes-lieux"><i class="material-icons left">my_location</i>Mes lieux</a></li>
+        @endif
     </ul>
 
     {{--MENU--}}

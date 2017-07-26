@@ -324,9 +324,6 @@ function initPartnerSettingMap() {
             //ajoute les markeurs à la carte
             for(let i in places){
 
-                //marker
-                L.marker([places[i].lat,places[i].lng]).addTo(parnterSettingMap);
-
                 //circle
                 L.circle([places[i].lat,places[i].lng],{
                     radius : places[i].rayon * 1000,

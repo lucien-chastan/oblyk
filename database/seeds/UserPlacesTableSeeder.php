@@ -34,15 +34,49 @@ class UserPlacesTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+        // user 2 : Oblyk
+        DB::table('user_places')->insert([
+            'user_id' => 2,
+            'lat' => 45.739487,
+            'lng' => 4.865331,
+            'rayon' => 5,
+            'label' => 'Lyon, Rue Marius Berliet',
+            'description' => '',
+            'active' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        DB::table('user_places')->insert([
+            'user_id' => 2,
+            'lat' => 44.836951,
+            'lng' => 5.186745,
+            'rayon' => 25,
+            'label' => 'Le Moulin de la Pipie',
+            'description' => '',
+            'active' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        DB::table('user_places')->insert([
+            'user_id' => 2,
+            'lat' => 45.175085,
+            'lng' => 5.728760,
+            'rayon' => 1,
+            'label' => 'À gre aussi',
+            'description' => 'Même emplacement que Léna pour tester la superposition',
+            'active' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
 
         // user 3 : Léna
         DB::table('user_places')->insert([
             'user_id' => 3,
-            'lat' => 43.759259,
-            'lng' => 6.584270,
+            'lat' => 45.175085,
+            'lng' => 5.728760,
             'rayon' => 10,
-            'label' => 'La Martre, Le Pont de Madame',
-            'description' => '',
+            'label' => 'Gre Gre',
+            'description' => 'Je grimpe à la salle ABK et au Labo de temps en temps',
             'active' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);

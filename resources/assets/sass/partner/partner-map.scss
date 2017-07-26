@@ -1,1 +1,109 @@
-// partner
+.icon-user-map {
+    img.circle {
+        height: 27px;
+    }
+
+    img.barre-accroche{
+        position: absolute;
+        height: 10px;
+        top: 29px;
+        left: 6px;
+        z-index: -1;
+    }
+}
+
+.fixed-action-btn {
+    left: 23px;
+    right: auto;
+    z-index: 2;
+}
+
+.side-user-map-partner {
+    z-index: 3;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-out;
+    position: fixed;
+    padding: 0;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 370px;
+    max-width: calc(100vw - 40px);
+    background-color: white;
+    height: 100%;
+    box-shadow: 0 0 12px 2px rgba(0,0,0,0.5);
+    overflow-y: auto;
+
+    &.circle-side {
+        padding-top: 70px;
+    }
+
+    .content-side-map-partner {
+        display: none;
+    }
+
+    .load-side-map-partner {
+        height: 100vh;
+        line-height: 100vh;
+        text-align: center;
+
+        .load-side-map-partner {
+            vertical-align: middle;
+        }
+    }
+
+    .user-partner-bandeau{
+        height: 200px;
+        background-size: cover;
+        padding-top: 84px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .left-col {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .right-col{
+            padding-top: 2px;
+            vertical-align: top;
+            display: inline-block;
+            width: calc(100% - 110px);
+        }
+
+        img{
+            border: 4px solid rgb(255, 255, 255);
+            height: 90px;
+        }
+
+        p {
+            background-color: rgba(0,0,0,0.8);
+            margin: 0 0 0.25em 0;
+            color: rgb(255,255,255);
+            padding: 0.2em 0.2em;
+
+            &.loved-king-font {
+                font-size: 2em;
+            }
+        }
+    }
+
+    h2.loved-king-font {
+        font-size: 1.8em;
+        margin: 12px 0 5px 0;
+    }
+
+    .image-type-grimpe {
+        height: 2em;
+    }
+
+    .place-div {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        &:hover {
+            background-color: rgb(235,235,235);
+        }
+    }
+}
