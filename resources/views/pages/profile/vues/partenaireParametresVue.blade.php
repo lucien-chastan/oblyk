@@ -4,12 +4,15 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel blue-card-panel partner-settings-zone">
+
+            <button class="btn-flat right waves-effect blue-text" onclick="loadProfileRoute(document.getElementById('item-mes-lieux-nav'))">Mes Lieux<i class="material-icons right">arrow_forward</i></button>
+
             <h2 class="loved-king-font titre-profile-boite-vue">Qui je suis ?</h2>
 
             <p>
                 <strong class="text-underline">Pourquoi cette page ?</strong><br>
-                Pour que d'autres grimpeurs te contact, ou pour te donner envie de contacter quelqu'un, il est important d'avoir un minimum d'informations
-                sur toi. Cette page te permet de préciser quelques indicateur de qui tu es, ton niveau, quelle type de grimpe tu pratique, etc.
+                Pour que d'autres grimpeurs et envie de te contacter, il est important qu'ils aient un minimum d'informations sur toi.
+                Cette page te permet de donne quelques indicateurs de qui tu es, ton niveau, quelle type de grimpe tu pratique, etc.
             </p>
 
             <form id="form-partner-setting" class="submit-form" data-route="{{route('saveUserPartnerSettings')}}" onsubmit="submitData(this, majPartnerSettings); return false">
@@ -28,7 +31,7 @@
                                 Si cette case n'est pas cochée, tu n'apparaîtra pas sur la carte des grimpeurs
                             </li>
                             <li>
-                                Désactiver ton profil de la recherche de partenaire ne supprime pas tes préférences ni ta zone de grimpe
+                                Désactiver ton profil de la recherche de partenaire ne supprime pas tes préférences ni tes lieux de grimpe, tu deviens juste invisible.
                             </li>
                         </ul>
                     </div>
@@ -83,7 +86,7 @@
                             <label for="grade_min">Mon niveau minimum</label>
                         </div>
                         <div class="input-field col s12">
-                            <select class="input-data" name="grade_min">
+                            <select id="grade_max" class="input-data" name="grade_max">
                                 <option value="2a" @if($user->partnerSettings->grade_max == '2a') selected @endif >2a</option>
                                 <option value="2b" @if($user->partnerSettings->grade_max == '2b') selected @endif >2b</option>
                                 <option value="2c" @if($user->partnerSettings->grade_max == '2c') selected @endif >2c</option>
@@ -116,10 +119,10 @@
                                 <option value="9b" @if($user->partnerSettings->grade_max == '9b') selected @endif >9b</option>
                                 <option value="9c" @if($user->partnerSettings->grade_max == '9c') selected @endif >9c</option>
                             </select>
-                            <label>Mon niveau maxium</label>
+                            <label for="grade_max">Mon niveau maxium</label>
                         </div>
                         <p class="grey-text">
-                            Note : si tu ne sais pas quoi mettre, ton niveau minium pourait correspondre à la côte de ton échauffement, et ton niveau max à la cotation de tes projets.
+                            Note : si tu ne sais pas quoi mettre, ton niveau minium pourait correspondre à ton échauffement, et ton niveau max à tes projets.
                         </p>
                     </div>
 
@@ -130,6 +133,8 @@
                             Note : tu peux par exemple préciser ce que tu recherche, te décrir plus amplement, parler de ton matériel d'escalade ou de tes connaissances dans les manipes par exemple.
                         </p>
                     </div>
+
+                    {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
 
                     <div class="row">
                         {!! $Inputs::Submit(['label'=>'Enregistrer', 'cancelable' => false]) !!}

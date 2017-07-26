@@ -308,7 +308,10 @@ function initPartnerSettingMap() {
     setTimeout(function () {
         let latLngPolyline = [];
 
-        if(parnterSettingMap !== null) parnterSettingMap.remove();
+        if(parnterSettingMap !== null){
+            parnterSettingMap.remove();
+            parnterSettingMap = null;
+        }
 
         parnterSettingMap = L.map('placeSettingMap',{ zoomControl : true, center:[46.5, 4.5], zoom : 5, layers: [carte]});
 
@@ -348,5 +351,6 @@ function initPartnerSettingMap() {
 }
 
 function majPartnerSettings(response) {
-    Materialize.toast(response.data, 4000)
+    Materialize.toast(response.data, 10000);
+    showSubmitLoader(false);
 }

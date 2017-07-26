@@ -5,6 +5,8 @@
     <div class="col s12">
         <div class="card-panel blue-card-panel">
 
+            <button class="btn-flat right waves-effect blue-text" onclick="loadProfileRoute(document.getElementById('item-qui-je-suis-nav'))"><i class="material-icons left">arrow_back</i>Qui je suis ?</button>
+
             <h2 class="loved-king-font titre-profile-boite-vue">Les lieux où je grimpe</h2>
 
             @if($user->partnerSettings->partner == 0)

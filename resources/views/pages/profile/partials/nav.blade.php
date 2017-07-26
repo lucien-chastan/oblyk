@@ -142,16 +142,16 @@
                 </span>
             </div>
             <div class="collapsible-body">
-                <div data-route="{{route('vueLieuxUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
-                    <i class="left material-icons">place</i>
-                    <span class="hidden-1000">
-                        Mes Lieux
-                    </span>
-                </div>
-                <div data-route="{{route('vuePartenaireParametresUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
+                <div id="item-qui-je-suis-nav" data-route="{{route('vuePartenaireParametresUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
                     <i class="left material-icons">accessibility</i>
                     <span class="hidden-1000">
                         Qui je suis
+                    </span>
+                </div>
+                <div id="item-mes-lieux-nav" data-route="{{route('vueLieuxUser',['user_id'=>$user->id])}}" class="row truncate router-profile-link">
+                    <i class="left material-icons">place</i>
+                    <span class="hidden-1000">
+                        Mes Lieux
                     </span>
                 </div>
             </div>

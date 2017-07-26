@@ -99,7 +99,7 @@ class PartnerController extends Controller
         $user->partnerSettings->grade_min = $request->input('grade_min');
         $user->partnerSettings->save();
 
-        return response()->json('Votre profil de recherche a été mis à jour ');
+        return response()->json('Ton profil a été mis à jour, aller sur la <a href="' . route('partnerMapPage') . '"> Carte des grimpeurs</a>');
     }
     /**
      * Display a listing of the resource.
