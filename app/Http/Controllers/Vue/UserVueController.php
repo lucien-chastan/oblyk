@@ -20,6 +20,7 @@ use App\TickList;
 use App\Topo;
 use App\User;
 use App\UserConversation;
+use App\UserPlace;
 use App\Video;
 use DebugBar;
 use Illuminate\Support\Facades\DB;
@@ -924,8 +925,19 @@ class UserVueController extends Controller
 
     // BOX : RÉSUMÉ DE LA RECHERCHE DE PARTENAIRE
     function subVuePartenaire($user_id){
-        $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+
+        $user = User::where('id',$user_id)
+            ->with('partnerSettings')
+            ->withCount(['places' => function ($query) { $query->where('active',1); }])
+            ->first();
+
+        $places = UserPlace::whereIn('id', UserPlace::matchPlaces())->with('user')->get();
+
+        $data = [
+            'user' => $user,
+            'places' => $places,
+        ];
+
         return view('pages.profile.vues.dashboardBox.boxVues.partenaire', $data);
     }
 

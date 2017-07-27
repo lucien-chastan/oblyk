@@ -170,7 +170,7 @@
 
         {{--PARAMÈTRES--}}
         <li>
-            <div data-route="{{route('vueEditSettingsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
+            <div id="item-parametre-nav" data-route="{{route('vueEditSettingsUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
                 <i class="material-icons">settings</i>
                 <span class="hidden-1000">
                     Paramètres
