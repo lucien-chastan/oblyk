@@ -36,6 +36,13 @@ function loadPartnerMap() {
         openVoletProfil(false);
         openVoletMyCircle(false);
     });
+
+    map.on('zoomend', function () {changeDash();});
+    map.on('moveend', function () {changeDash();});
+}
+
+function changeDash() {
+    location.replace('#' + map.getCenter().lat.toPrecision(7) + '/' + map.getCenter().lng.toPrecision(7) + '/' +  map.getZoom());
 }
 
 //VA CHERCHER ET AFFCHE LES POINTS SUR LA CARTE

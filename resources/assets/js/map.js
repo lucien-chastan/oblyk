@@ -3,8 +3,21 @@ let map, markers,
 
 //function au chargement de la map
 function loadMap() {
+    let lat = 46.927527,
+        lng = 2.871905,
+        zoom = 5,
+        dashLocation = location.href,
+        splitDash = dashLocation.split('#');
 
-    map = L.map('map',{ zoomControl : false, center:[46.927527, 2.871905], zoom : 5, layers: [carte]});
+    if(splitDash[1]){
+        if(/^[-]?(?:\d*\.)?\d+[/][-]?(?:\d*\.)?\d+[/]\d{1,2}$/.test(splitDash[1])){
+            lat = splitDash[1].split('/')[0];
+            lng = splitDash[1].split('/')[1];
+            zoom = splitDash[1].split('/')[2];
+        }
+    }
+
+    map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup();
 
     L.control.zoom({position : 'bottomright'}).addTo(map);
@@ -14,8 +27,14 @@ function loadMap() {
 
     map.on('click', pointMarkerMap);
 
+    map.on('zoomend', function () {changeDash();});
+    map.on('moveend', function () {changeDash();});
+
 }
 
+function changeDash() {
+    location.replace('#' + map.getCenter().lat.toPrecision(7) + '/' + map.getCenter().lng.toPrecision(7) + '/' +  map.getZoom());
+}
 
 //commence la fonction ajouter un élément (crag ou sae)
 function startAdd(type) {
