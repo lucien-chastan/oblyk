@@ -92,16 +92,44 @@
 
                     <div class="row">
                         <div class="col s12 m6 l6">
-                            mon bla bla de présentation
+                            @markdown($user->partnerSettings->description)
+                            @if($user->partnerSettings->description == '')
+                            <p class="grey-color text-center">
+                                {{ $user->name }} n'a pas donné d'indication particulière sur sa recherche de partenaire
+                            </p>
+                            @endif
                         </div>
 
                         <div class="col s12 m6 l3">
-                            niveau<br>
-                            type de grimpe
+                            <p class="text-bold text-underline">
+                                Partique &amp; Niveau
+                            </p>
+                            <p>
+                                <strong>{{ $user->name }}</strong> grimpe entre le <span class="color-grade-{{$user->partnerSettings->grade_min_val}} text-bold">{{$user->partnerSettings->grade_min}}</span> et le <span class="color-grade-{{$user->partnerSettings->grade_max_val}} text-bold">{{$user->partnerSettings->grade_max}}</span>
+                            </p>
+                            <p>
+                                Ses styles d'escalades : <br>
+                                @if($user->partnerSettings->climb_2 == 1) <img {!! $Helpers::tooltip('Bloc') !!} class="tooltipped" height="25" src="/img/icon-climb-2.png"> @endif
+                                @if($user->partnerSettings->climb_3 == 1) <img {!! $Helpers::tooltip('Voie') !!} class="tooltipped" height="25" src="/img/icon-climb-3.png"> @endif
+                                @if($user->partnerSettings->climb_4 == 1) <img {!! $Helpers::tooltip('Grande-voie') !!} class="tooltipped" height="25" src="/img/icon-climb-4.png"> @endif
+                                @if($user->partnerSettings->climb_5 == 1) <img {!! $Helpers::tooltip('Trad') !!} class="tooltipped" height="25" src="/img/icon-climb-5.png"> @endif
+                                @if($user->partnerSettings->climb_6 == 1) <img {!! $Helpers::tooltip('Artif') !!} class="tooltipped" height="25" src="/img/icon-climb-6.png"> @endif
+                                @if($user->partnerSettings->climb_7 == 1) <img {!! $Helpers::tooltip('Deep-water') !!} class="tooltipped" height="25" src="/img/icon-climb-7.png"> @endif
+                                @if($user->partnerSettings->climb_8 == 1) <img {!! $Helpers::tooltip('Via-ferrata') !!} class="tooltipped" height="25" src="/img/icon-climb-8.png"> @endif
+                            </p>
                         </div>
 
                         <div class="col s12 m12 l3">
-                            mes lieux de grimpe
+                            <p class="text-bold text-underline">
+                                Ses lieux de grimpe
+                            </p>
+                            <div class="blue-border-zone">
+                                @foreach($user->places as $place)
+                                    <div class="blue-border-div">
+                                        <p class="no-margin"><a href="{{ route('partnerMapPage') }}#{{ $place->lat }}/{{ $place->lng }}/15"><i class="material-icons left">location_on</i> {{ $place->label }} </a></p>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
 
                     </div>

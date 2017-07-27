@@ -197,6 +197,7 @@ class UserVueController extends Controller
             ->with('settings')
             ->with('partnerSettings')
             ->with('socialNetworks')
+            ->with(['places'=>function ($query) {$query->where('active',1);}])
             ->with('socialNetworks.socialNetwork')
             ->withCount('crags')
             ->withCount('routes')
@@ -222,6 +223,10 @@ class UserVueController extends Controller
 
         $user->image = file_exists(storage_path('app/public/users/200/user-' . $user->id . '.jpg')) ? '/storage/users/200/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
         $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg' : '';
+
+        $user->partnerSettings->grade_min_val = Route::gradeToVal($user->partnerSettings->grade_min,'');
+        $user->partnerSettings->grade_max_val = Route::gradeToVal($user->partnerSettings->grade_max,'');
+
 
         $data = [
             'user' => $user,

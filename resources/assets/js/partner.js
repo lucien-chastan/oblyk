@@ -6,10 +6,21 @@ window.addEventListener('load', function () {
 
 //INITIALISE LA CARTE
 function loadPartnerMap() {
+    let lat = 46.927527,
+        lng = 2.871905,
+        zoom = 5,
+        dashLocation = location.href,
+        splitDash = dashLocation.split('#');
 
-    marker_user = L.icon({iconUrl: '/img/marker-user-4.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+    if(splitDash[1]){
+        if(/^[-]?(?:\d*\.)?\d+[/][-]?(?:\d*\.)?\d+[/]\d{1,2}$/.test(splitDash[1])){
+            lat = splitDash[1].split('/')[0];
+            lng = splitDash[1].split('/')[1];
+            zoom = splitDash[1].split('/')[2];
+        }
+    }
 
-    map = L.map('map',{ zoomControl : false, center:[46.927527, 2.871905], zoom : 5, layers: [carte]});
+    map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup({
         showCoverageOnHover:false
     });

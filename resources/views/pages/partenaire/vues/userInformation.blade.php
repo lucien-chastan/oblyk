@@ -67,7 +67,7 @@
             <div class="col s12">
                 <p class="text-underline text-bold">Son niveau en escalade :</p>
                 <p class="no-margin">
-                    Je grimpe entre le <span class="color-grade-{{$user->partnerSettings->grade_min_val}} text-bold">{{$user->partnerSettings->grade_min}}</span> et le <span class="color-grade-{{$user->partnerSettings->grade_max_val}} text-bold">{{$user->partnerSettings->grade_max}}</span>
+                    {{ $user->name }} grimpe entre le <span class="color-grade-{{$user->partnerSettings->grade_min_val}} text-bold">{{$user->partnerSettings->grade_min}}</span> et le <span class="color-grade-{{$user->partnerSettings->grade_max_val}} text-bold">{{$user->partnerSettings->grade_max}}</span>
                 </p>
             </div>
 
