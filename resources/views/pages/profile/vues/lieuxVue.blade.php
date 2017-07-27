@@ -90,6 +90,8 @@
     <div class="col s12">
         <div class="card-panel blue-card-panel">
 
+            <a href="{{ route('partnerMapPage') }}" class="btn-flat right waves-effect blue-text"><i class="material-icons left">map</i>La carte des grimpeurs</a>
+
             <h2 class="loved-king-font titre-profile-boite-vue">Mes lieux sur la carte</h2>
             @if(count($user->places) > 0)
                 <div id="placeSettingMap" class="placeSettingMap"></div>

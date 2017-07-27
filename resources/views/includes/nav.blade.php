@@ -43,7 +43,7 @@
     {{--DROPDOWN DU PARTENAIRE--}}
     <ul id="dropdown_partenaire" class="dropdown-content dropD-220">
         <li><a href="{{ route('partnerMapPage') }}"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
-        <li><a href="#!"><i class="material-icons left">school</i>Comment ça marche</a></li>
+        <li><a href="{{ route('partnerHowPage') }}"><i class="material-icons left">school</i>Comment ça marche</a></li>
         @if(Auth::check())
             <li class="divider"></li>
             <li><a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#partenaire-parametres"><i class="material-icons left">accessibility</i>Qui je suis ?</a></li>
@@ -126,8 +126,8 @@
                         <div class="collapsible-header"><i class="material-icons">group</i>Partenaire de grimpe</div>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#!"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
-                                <li><a href="#!"><i class="material-icons left">school</i>Comment ça marche</a></li>
+                                <li><a href="{{ route('partnerMapPage') }}"><i class="material-icons left">person_pin_circle</i>Carte des grimpeurs</a></li>
+                                <li><a href="{{ route('partnerHowPage') }}"><i class="material-icons left">school</i>Comment ça marche</a></li>
                             </ul>
                         </div>
                     </li>

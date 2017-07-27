@@ -126,6 +126,8 @@ Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPag
 
 // PARTENAIRE
 Route::get('/partenaire-escalade/carte-des-grimpeurs', 'PartnerController@mapPage')->name('partnerMapPage');
+Route::get('/partenaire-escalade/comment-ca-marche', 'PartnerController@howPage')->name('partnerHowPage');
+Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
 
 
 //TOPO (VERS LES SCRIPTS DE LIAISON)

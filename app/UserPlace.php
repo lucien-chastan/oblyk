@@ -15,7 +15,7 @@ class UserPlace extends Model
 
     public static function matchPlaces(){
 
-        $userPlaces = UserPlace::where('user_id',Auth::id())->get();
+        $userPlaces = UserPlace::where([['user_id',Auth::id()],['active',1]])->get();
         $placeIds = [];
 
         foreach ($userPlaces as $place){

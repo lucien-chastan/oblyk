@@ -176,6 +176,20 @@ class UserController extends Controller
     }
 
 
+    function saveBirth(Request $request){
+
+        $this->validate($request, [
+            'birth'=>"required|Integer|min:1900|max:" . date('Y')
+        ]);
+
+        $user = User::where('id', Auth::id())->first();
+        $user->birth = $request->input('birth');
+        $user->save();
+
+        return $user;
+
+    }
+
     /**
      * Display a listing of the resource.
      *

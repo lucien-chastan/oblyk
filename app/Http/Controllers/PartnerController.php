@@ -11,11 +11,22 @@ use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller
 {
+
+    function howPage(){
+        $data = [
+            'meta_title' => 'Carte des Grimpeurs, Trouver un partenaire d\'escalade',
+            'meta_description' => 'Carte des Grimpeurs, Trouver un partenaire d\'escalade'
+        ];
+
+        return view('pages.partenaire.partenaireHowToUser', $data);
+    }
+
+
     function mapPage(){
 
         $user = User::where('id', Auth::id())
             ->with('partnerSettings')
-            ->with(['places' => function ($query) {$query->where('active', 1);}])
+            ->withCount(['places' => function ($query) {$query->where('active', 1);}])
             ->first();
 
         $places = UserPlace::whereIn('id', UserPlace::matchPlaces())->with('user')->get();
@@ -63,6 +74,8 @@ class PartnerController extends Controller
             ->with(['places'=>function($query) {$query->where('active', 1);}])
             ->first();
 
+        $authUser = User::where('id', Auth::id())->first();
+
         if($user->sex == 0) $user->genre = 'Inféfini';
         if($user->sex == 1) $user->genre = 'Femme';
         if($user->sex == 2) $user->genre = 'Homme';
@@ -76,7 +89,8 @@ class PartnerController extends Controller
         $user->partnerSettings->grade_max_val = Route::gradeToVal($user->partnerSettings->grade_max,'');
 
         $data = [
-            'user'=> $user
+            'user'=> $user,
+            'authUser'=> $authUser,
         ];
 
         return view('pages.partenaire.vues.userInformation', $data);

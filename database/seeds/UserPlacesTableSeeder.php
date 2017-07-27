@@ -59,11 +59,11 @@ class UserPlacesTableSeeder extends Seeder
 
         DB::table('user_places')->insert([
             'user_id' => 2,
-            'lat' => 45.175085,
-            'lng' => 5.728760,
+            'lat' => 45.191061,
+            'lng' => 5.716076,
             'rayon' => 1,
-            'label' => 'À Grenoble aussi',
-            'description' => 'Même emplacement que Léna pour tester la superposition',
+            'label' => 'Grenoble, Le Labo',
+            'description' => 'Je suis un grand habitué du labo, j\'y vais 2 à 3 fois par semaine le soir',
             'active' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);

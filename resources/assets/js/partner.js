@@ -106,12 +106,19 @@ function openVoletProfil(open) {
 
 //OUVRE OU FERME LE VOLET LATÉRAL
 function openVoletMyCircle(open) {
-    let volet = document.getElementById('my-user-circle-partner');
+    let volet = document.getElementById('my-user-circle-partner'),
+        scale = document.getElementById('btn-mes-lieux');
 
     if (open){
         volet.style.transform = 'translateX(0)';
+        setTimeout(function () {
+            scale.setAttribute('class', scale.className.replace('scale-in', 'scale-out'))
+        },400);
     }else{
         volet.style.transform = 'translateX(-100%)';
+        setTimeout(function () {
+            scale.setAttribute('class', scale.className.replace('scale-out', 'scale-in'))
+        },500);
     }
 }
 

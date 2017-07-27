@@ -27,6 +27,9 @@
                         Oblyk est une grande base de donnée des falaises d'escalades de france et du monde constament enrichie par la communauté,
                         tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte.
                     </p>
+                    <p class="text-right">
+                        <a class="btn-flat blue-text" href="{{ route('map') }}"><i class="material-icons left">map</i> La carte des falaises</a>
+                    </p>
                 </div>
 
                 <div class="col s12 m6 l6 center">
@@ -57,6 +60,9 @@
                     <p class="explication-oblyk">
                         Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu'un avec qui grimper en falaise ou en salle ?<br>
                         Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu'un avec qui grimper.
+                    </p>
+                    <p class="text-right">
+                        <a class="btn-flat blue-text" href="{{ route('partnerHowPage') }}"><i class="material-icons left">person_pin</i> En savoir plus</a>
                     </p>
                 </div>
 

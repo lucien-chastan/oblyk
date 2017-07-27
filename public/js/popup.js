@@ -55,8 +55,10 @@ function specialAction(data) {
         weekdaysFull: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 80, // Creates a dropdown of 80 years to control year,
+        selectYears: 120, // Creates a dropdown of 120 years to control year,
         today: 'Aujourd\'hui',
+        min: '1900-01-01',
+        max: new Date(),
         format: 'yyyy-mm-dd',
         clear: 'Annuler',
         close: 'Ok',
