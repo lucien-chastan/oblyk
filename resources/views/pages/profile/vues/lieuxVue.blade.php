@@ -33,8 +33,6 @@
                         <th class="text-center">Actif</th>
                         <th class="text-center">Nom du lieu</th>
                         <th class="text-center">Description</th>
-                        <th class="text-center">Latitude</th>
-                        <th class="text-center">Longitude</th>
                         <th class="text-center">Rayon</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -42,7 +40,7 @@
                     <tbody>
                     @foreach($user->places as $place)
                         <tr>
-                            <td>
+                            <td class="no-warp">
                                 <div class="switch">
                                     <label>
                                         Non
@@ -58,11 +56,9 @@
                             </td>
                             <td>{{ $place->label }}</td>
                             <td>{{ $place->description }}</td>
-                            <td class="text-center grey-text">{{ $place->lat }}</td>
-                            <td class="text-center grey-text">{{ $place->lng }}</td>
-                            <td class="text-center grey-text">{{ $place->rayon }} Km</td>
-                            <td class="text-center grey-text i-cursor">
-                                <i {!! $Helpers::modal(route('partnerModal'), ["place_id"=>$place->id, "title"=>"Ajouter un lieu", "method"=>"PUT", "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip('Modifier ce lieu') !!} class="material-icons blue-hover tooltipped btnModal">edit_location</i>
+                            <td class="text-center grey-text no-warp">{{ $place->rayon }} Km</td>
+                            <td class="text-center grey-text i-cursor no-warp">
+                                <i {!! $Helpers::modal(route('partnerModal'), ["place_id"=>$place->id, "title"=>"Modifier ce lieu", "method"=>"PUT", "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip('Modifier ce lieu') !!} class="material-icons blue-hover tooltipped btnModal">edit_location</i>
                                 <i {!! $Helpers::modal(route('deleteModal'), ["route"=>"/partners/" . $place->id, "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip('Supprimer ce lieu') !!} class="material-icons blue-hover tooltipped btnModal">delete</i>
                             </td>
                         </tr>

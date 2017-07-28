@@ -22,6 +22,14 @@ class PartnerController extends Controller
         } else {
             $partner = new UserPlace();
             $partner->rayon = 5;
+            $preLat = $request->input('lat');
+            $preLng = $request->input('lng');
+            $preLabel = $request->input('label');
+            $preRayon = $request->input('rayon');
+            if(isset($preLat)) $partner->lat = $preLat;
+            if(isset($preLng)) $partner->lng = $preLng;
+            if(isset($preLabel)) $partner->label = $preLabel;
+            if(isset($preRayon)) $partner->rayon = $preRayon;
         }
 
         $callback = $request->input('callback');

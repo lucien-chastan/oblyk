@@ -31,6 +31,7 @@
 .no-scroll-x{overflow-x: hidden !important;}
 .no-scroll-y{overflow-y: hidden !important;}
 .no-scroll{overflow: hidden !important;}
+.no-warp {white-space: nowrap;}
 .text-hover{
     transition: opacity 0.3s;
     &:hover{

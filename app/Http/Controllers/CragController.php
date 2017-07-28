@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Crag;
 use App\Follow;
+use App\User;
+use App\UserPlace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +34,10 @@ class CragController extends Controller
             ->with('descriptions.user')
             ->first();
 
+        $partners = User::whereIn('id', UserPlace::getPartnersAroundCenter($crag->lat, $crag->lng))->get();
+
+        $user = User::where('id',Auth::id())->with('partnerSettings')->first();
+
         //on va chercher si l'utilisateur follow ce site
         $userFollow = Follow::where(
             [
@@ -48,9 +54,11 @@ class CragController extends Controller
 
         $data = [
             'crag' => $crag,
+            'user' => $user,
             'meta_title' => $crag['label'],
             'meta_description' => 'description de ' . $crag['label'],
-            'user_follow' => $userFollow
+            'user_follow' => $userFollow,
+            'partners' => $partners,
         ];
 
         return view('pages.crag.crag', $data);
