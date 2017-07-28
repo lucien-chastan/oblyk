@@ -97,5 +97,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPlacesTableSeeder::class);
         $this->call(UserPartnerSettingsTableSeeder::class);
 
+        //Salle d'escalade
+        $this->call(GymsTableSeeder::class);
+
+
     }
 }

@@ -36,6 +36,7 @@ class User extends Authenticatable
     public function crosses(){ return $this->hasMany('App\Cross','user_id', 'id'); }
     public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }
     public function follows() { return $this->hasMany('App\Follow','user_id', 'id'); }
+    public function gyms() { return $this->hasMany('App\Gym','user_id', 'id'); }
     public function lexiques() { return $this->hasMany('App\Word','user_id', 'id'); }
     public function messages(){ return $this->hasMany('App\Message','user_id', 'id'); }
     public function notifications(){ return $this->hasMany('App\Notification','user_id', 'id'); }

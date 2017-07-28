@@ -115,6 +115,8 @@ Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo'
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 
+//LES SALLES D'ESCALADE
+Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
 
 //FORUM
 Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');
@@ -266,6 +268,10 @@ Route::get('/vue/route/{route_id}/comments','Vue\RouteVueController@vueComments'
 Route::get('/vue/route/{route_id}/photos','Vue\RouteVueController@vuePhotos')->name('vuePhotosRoute');
 Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->name('vueVideosRoute');
 Route::get('/vue/route/{route_id}/carnet','Vue\RouteVueController@vueCarnet')->name('vueCarnetRoute');
+
+//VUE GYM
+Route::get('/vue/gym/{gym_id}/map', 'Vue\GymVueController@vueMap')->name('vueMapGym');
+Route::get('/vue/gym/{gym_id}/fil-actu', 'Vue\GymVueController@vueFilActu')->name('vueFilActuGym');
 
 //VUE TOPO
 Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');
