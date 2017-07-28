@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Cross;
 use App\Follow;
+use App\TickList;
 use App\User;
 use App\UserPlace;
 use Illuminate\Http\Request;
@@ -38,6 +40,20 @@ class CragController extends Controller
 
         $user = User::where('id',Auth::id())->with('partnerSettings')->first();
 
+        $crag_id = $crag->id;
+        $userCrosses = Cross::where('user_id', Auth::id())
+            ->whereHas('route', function ($query) use ($crag_id) {$query->where('crag_id', $crag_id);})
+            ->with('route')
+            ->with('route.routeSections')
+            ->with('crossStatus')
+            ->get();
+
+        $userTicklists  =TickList::where('user_id', Auth::id())
+            ->whereHas('route', function ($query) use ($crag_id) {$query->where('crag_id', $crag_id);})
+            ->with('route')
+            ->with('route.routeSections')
+            ->get();
+
         //on va chercher si l'utilisateur follow ce site
         $userFollow = Follow::where(
             [
@@ -55,6 +71,8 @@ class CragController extends Controller
         $data = [
             'crag' => $crag,
             'user' => $user,
+            'userCrosses' => $userCrosses,
+            'userTicklists' => $userTicklists,
             'meta_title' => $crag['label'],
             'meta_description' => 'description de ' . $crag['label'],
             'user_follow' => $userFollow,

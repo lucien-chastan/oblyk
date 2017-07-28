@@ -21,7 +21,7 @@
     @include('pages.crag.partials.topos')
 </div>
 
-<div class="row">
+<div class="row stretchCol">
 
     {{--RECHERCHE DE PARTENRAIRE--}}
     <div class="col s12 m5">

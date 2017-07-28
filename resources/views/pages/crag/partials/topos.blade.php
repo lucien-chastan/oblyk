@@ -26,7 +26,7 @@
             @foreach($crag->topoWebs as $topoWeb)
                 <div class="blue-border-div">
                     <h6>{{$topoWeb->label}}</h6>
-                    <a target="_blank" href="{{$topoWeb->url}}">{{$topoWeb->url}}</a>
+                    <a class="truncate" target="_blank" href="{{$topoWeb->url}}">{{$topoWeb->url}}</a>
                     <p class="info-user grey-text">
                         ajouté par {{$topoWeb->user->name}} le {{$topoWeb->created_at->format('d M Y')}}
 
