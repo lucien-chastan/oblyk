@@ -1,6 +1,10 @@
 .side-global-search{
     max-width: calc(100% - 25px) !important;
 
+    .icon-tab-global-search{
+        margin-bottom: -23px;
+    }
+
     h4 {
         font-size: 2em;
         margin-bottom: 10px;

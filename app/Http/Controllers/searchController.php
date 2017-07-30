@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Crag;
 use App\ForumTopic;
+use App\Gym;
 use App\Help;
 use App\Massive;
 use App\Route;
@@ -117,6 +118,21 @@ class searchController extends Controller
             $topics[] = $topic;
         }
 
+        //RECHERCHE SUR LES SALLES D'ESCALADE
+        $gyms = [];
+        $findGyms = Gym::where('label','like','%' . $search . '%')
+            ->orWhere('city','like','%' . $search . '%')
+            ->orWhere('big_city','like','%' . $search . '%')
+            ->orderBy('views', 'desc')
+            ->get();
+        foreach ($findGyms as $gym){
+            $gym->url = route('gymPage', ['gym_id'=>$gym->id,'gym_label'=>str_slug($gym->label)]);
+            $gym->icon = '/img/icon-search-gym.svg';
+
+            $gyms[] = $gym;
+        }
+
+
         //RECHERCHE SUR LES AIDES
         $helps = Help::where('label','like','%' . $search . '%')->orWhere('category','like','%' . $search . '%')->orderBy('label', 'asc')->get();
 
@@ -135,6 +151,7 @@ class searchController extends Controller
                 'words' => count($words),
                 'topics' => count($topics),
                 'aides' => count($helps),
+                'gyms' => count($gyms),
             ],
             'crags' => $crags,
             'massives' => $massives,
@@ -146,6 +163,7 @@ class searchController extends Controller
             'topics' => $topics,
             'users' => $users,
             'aides' => $helps,
+            'gyms' => $gyms,
         ];
 
         return response()->json($data);

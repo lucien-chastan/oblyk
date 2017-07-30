@@ -20,6 +20,7 @@ window.onload = function () {
 function globalSearche(searchInput) {
     let progress = document.getElementById('progressSearch'),
         nbCrag = document.getElementById('nb-result-global-search-crag'),
+        nbGym = document.getElementById('nb-result-global-search-gym'),
         nbRoute = document.getElementById('nb-result-global-search-route'),
         nbTopo = document.getElementById('nb-result-global-search-topo'),
         nbUser = document.getElementById('nb-result-global-search-user'),
@@ -27,6 +28,7 @@ function globalSearche(searchInput) {
         nbAide = document.getElementById('nb-result-global-search-aide'),
         nbTopic = document.getElementById('nb-result-global-search-topic'),
         cragZone = document.getElementById('global-search-crag'),
+        gymZone = document.getElementById('global-search-gym'),
         lexiqueZone = document.getElementById('global-search-lexique'),
         routeZone = document.getElementById('global-search-route'),
         topoZone = document.getElementById('global-search-topo'),
@@ -45,6 +47,7 @@ function globalSearche(searchInput) {
 
     //on fait disparaitre les étiquettes de nombres
     scaleTransition(nbCrag, 'out');
+    scaleTransition(nbGym, 'out');
     scaleTransition(nbRoute, 'out');
     scaleTransition(nbTopo, 'out');
     scaleTransition(nbUser, 'out');
@@ -69,6 +72,7 @@ function globalSearche(searchInput) {
 
             //on inscrit le nombre de résultat
             nbCrag.textContent = data.nombre.crags + data.nombre.massives;
+            nbGym.textContent = data.nombre.gyms;
             nbRoute.textContent = data.nombre.routes;
             nbTopo.textContent = data.nombre.topos + data.nombre.topoPdfs + data.nombre.topoWebs;
             nbUser.textContent = data.nombre.users;
@@ -94,6 +98,19 @@ function globalSearche(searchInput) {
                 rideau(document.querySelectorAll('#global-search-crag .rideau-animation'));
             }else{
                 cragZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les falaises</p>`
+            }
+
+
+            //RÉSULTAT SUR LES SALLES D'ESCALADES
+            gymZone.innerHTML = '';
+            if(data.nombre.gyms > 0){
+                scaleTransition(nbGym, 'in');
+                for(let i = 0 ; i < data.nombre.gyms ; i++) {
+                    gymZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.gyms[i].icon}"><a href="${data.gyms[i].url}">${data.gyms[i].label}</a><br><span class="grey-text">${data.gyms[i].big_city}, ${data.gyms[i].region} (${data.gyms[i].code_country})</span></div>`;
+                }
+                rideau(document.querySelectorAll('#global-search-gym .rideau-animation'));
+            }else{
+                gymZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" sur les salles d'escalades</p>`
             }
 
 
@@ -231,6 +248,7 @@ function changeTab(data) {
 
     //si la tab active à des résultats alors on reste sur celle-ci
     if(activeTab.id === 'tab-global-search-crag' && (data.nombre.crags > 0 || data.nombre.massives > 0)) return false;
+    if(activeTab.id === 'tab-global-search-gym' && (data.nombre.gyms > 0)) return false;
     if(activeTab.id === 'tab-global-search-route' && data.nombre.routes > 0) return false;
     if(activeTab.id === 'tab-global-search-topo' && (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0)) return false;
     if(activeTab.id === 'tab-global-search-user' && data.nombre.users > 0) return false;
@@ -242,6 +260,8 @@ function changeTab(data) {
     // Si l'onglet actif n'a pas de résultat on cherche le meilleur onglet
     if(data.nombre.crags > 0 || data.nombre.massives > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-crag');
+    } else if (data.nombre.gyms > 0) {
+        $('ul.tabs').tabs('select_tab', 'global-search-gym');
     } else if (data.nombre.routes > 0) {
         $('ul.tabs').tabs('select_tab', 'global-search-route');
     } else if (data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0) {
