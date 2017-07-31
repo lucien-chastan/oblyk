@@ -60,6 +60,14 @@ class FollowController extends Controller
                     $follow->followInformation = $genre . ', ' . $age . ' ans';
                 }
 
+                //SALLE
+                if($follow->followed_type == 'App\Gym'){
+                    $follow->followUrl = route('gymPage', ['gym_id'=>$follow->followed_id, 'gym_name'=>str_slug($follow->followed->label)]);
+                    $follow->followName = $follow->followed->label;
+                    $follow->followIcon = '/img/icon-search-gym.svg';
+                    $follow->followInformation = $follow->followed->big_city . ' (' . $follow->followed->code_country . ')';
+                }
+
                 $follows[] = $follow;
 
             }

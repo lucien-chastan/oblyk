@@ -75,6 +75,15 @@ class UserVueController extends Controller
                         $catTitre = 'topics';
                     }
 
+                    //SALLE DE GRIMPE
+                    if($follow->followed_type == 'App\Gym'){
+                        $follow->followUrl = route('gymPage', ['gym_id'=>$follow->followed_id, 'gym_label'=>str_slug($follow->followed->label)]);
+                        $follow->followName = $follow->followed->label;
+                        $follow->followIcon = '/img/icon-search-gym.svg';
+                        $follow->followInformation = $follow->followed->big_city .'(' . $follow->followed->code_country . ')';
+                        $catTitre = 'Salles d\'escalade';
+                    }
+
                     $follows[$catTitre][] = $follow;
                 }
             }
