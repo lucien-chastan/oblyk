@@ -40,6 +40,8 @@
         @else
             <img src="/img/icon-search-user.svg" class="circle left" alt="">
         @endif
+    @elseif($post->postable_type == 'App\\Gym')
+        <img src="/img/icon-search-gym.svg" class="circle left" alt="">
     @endif
 
     {{--INFORMATION SUR L'ÉLÉMENT--}}
@@ -52,6 +54,8 @@
             <a class="lien-title-post" href="{{route('massivePage',['massive_id'=>$post->postable->id, 'massive_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a> <span class="grey-text">regroupement de site</span>
         @elseif($post->postable_type == 'App\\User')
             <a class="lien-title-post" href="{{route('userPage',['user_id'=>$post->postable->id, 'user_label'=>str_slug($post->postable->name)])}}">{{$post->postable->name}}</a>
+        @elseif($post->postable_type == 'App\\Gym')
+            <a class="lien-title-post" href="{{route('gymPage',['gym_id'=>$post->postable->id, 'gym_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a>
         @elseif($post->postable_type == 'App\\ForumTopic')
             @if($postable_type != 'ForumTopic')
                 <a class="lien-title-post" href="{{route('topicPage',['topic_id'=>$post->postable->id, 'topic_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a>
