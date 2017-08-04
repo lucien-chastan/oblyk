@@ -44,6 +44,10 @@ let marker_11111 = L.icon({iconUrl: '/img/marker-11111.svg', iconSize: [24, 32],
 let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_sale = L.icon({iconUrl: '/img/marker-sale.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
+let marker_gym_00 = L.icon({iconUrl: '/img/marker-sae-00.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_01 = L.icon({iconUrl: '/img/marker-sae-01.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_10 = L.icon({iconUrl: '/img/marker-sae-10.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_11 = L.icon({iconUrl: '/img/marker-sae-11.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
 //définition des différents style de tuile
 let carte = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Gym;
 use App\Massive;
 use App\Topo;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class MapController extends Controller
     public function mapPage(){
         $data = [
             'crags' => Crag::withCount('routes')->with('gapGrade')->get(),
-            'meta_title' => 'Carte des falaises',
+            'gyms' => Gym::get(),
+            'meta_title' => 'Carte des falaises et salle d\'escalade',
             'meta_description' => 'Voir la carte interactive des sites naturels de grimpe et des salles d\'escalade sur Oblyk, que ce soit en France, ou dans le Monde, et voir leurs informations détaillées'
         ];
 

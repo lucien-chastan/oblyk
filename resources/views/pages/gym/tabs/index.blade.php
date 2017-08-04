@@ -15,3 +15,8 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    {{--DESCRIPTION--}}
+    @include('pages.gym.partials.description')
+</div>

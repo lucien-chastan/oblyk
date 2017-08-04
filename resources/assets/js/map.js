@@ -45,7 +45,7 @@ function startAdd(type) {
 
     map.style.cursor = 'crosshair';
 
-    let $toastContent = (type == 'crag')? $('<span>Cliquez sur l\'emplacement du site</span>') : $('<span>Cliquez sur l\'emplacement de la salle</span>');
+    let $toastContent = (type === 'crag')? $('<span>Cliquez sur l\'emplacement du site</span>') : $('<span>Cliquez sur l\'emplacement de la salle</span>');
     Materialize.toast($toastContent, 3000);
 
     addStarted = true;
@@ -86,11 +86,11 @@ function openAddPopup() {
     addStarted = false;
     suiteIsVisible = false;
 
-    if(addType == 'crag'){
+    if(addType === 'crag'){
         openModal('/modal/crag', {"lat" : newLat, "lng" : newLng, "method" : "POST", "title":"Ajouter un site", "MapReverseGeoCoding":true});
     }
 
-    if(addType == 'sae'){
+    if(addType === 'sae'){
 
     }
 }

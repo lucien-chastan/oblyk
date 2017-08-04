@@ -84,6 +84,45 @@
             markers.addLayer(point);
         @endforeach
 
+        //boucle sur les falaises pour ajouter les marqueurs sur la carte
+        @foreach($gyms as $gym)
+
+        var point = L.marker(
+            [{{$gym['lat']}},{{$gym['lng']}}],
+            {icon: marker_gym_{{$gym['type_boulder']}}{{$gym['type_route']}}}
+            )
+                .bindPopup(
+                    `
+                <img class="photo-couve-site-leaflet" src="/img/default-gym-bandeau.jpg" alt="photo de couverture de {{$gym['label']}}">
+                <div class="crag-leaflet-info">
+                    <h2 class="loved-king-font titre-crag-leaflet">
+                        <a href="/salle-escalade/{{$gym['id']}}/{{str_slug($gym['label'])}}">{{$gym['label']}}</a>
+                    </h2>
+                    <table>
+                        <tr>
+                            <td>Localisation : </td>
+                            <td>{{$gym['big_city']}}, {{$gym['region']}} ({{$gym['code_country']}})</td>
+                        </tr>
+                        <tr>
+                            <td>Type de grimpe : </td>
+                            <td class="type-grimpe">
+                                @if($gym['type_voie'] == 1)<span class="voie">voie</span>@endif
+                            @if($gym['type_boulder'] == 1)<span class="bloc">bloc</span>@endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="btn-vers-crags">
+                            <a href="/salle-escalade/{{$gym['id']}}/{{str_slug($gym['label'])}}" class="waves-effect waves-light btn">voir la salle</a>
+                            </td>
+                        </tr>
+                    </table>
+                 </div>
+                `
+                );
+        markers.addLayer(point);
+        @endforeach
+
         map.addLayer(markers);
 
         //passage de la barre de navigation en noir
