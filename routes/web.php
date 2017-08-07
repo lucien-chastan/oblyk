@@ -148,6 +148,7 @@ Route::post('/upload/topoCouverture', 'CRUD\TopoController@uploadCouvertureTopo'
 
 //MODAL
 Route::post('/modal/crag', 'CRUD\CragController@cragModal')->name('cragModal');
+Route::post('/modal/gym', 'CRUD\GymController@gymModal')->name('gymModal');
 Route::post('/modal/description', 'CRUD\DescriptionController@descriptionModal')->name('descriptionModal');
 Route::post('/modal/comment', 'CRUD\CommentController@commentModal')->name('commentModal');
 Route::post('/modal/link', 'CRUD\LinkController@linkModal')->name('linkModal');
@@ -185,6 +186,7 @@ Route::resource('descriptions', 'CRUD\DescriptionController');
 Route::resource('comments', 'CRUD\CommentController');
 Route::resource('links', 'CRUD\LinkController');
 Route::resource('crags', 'CRUD\CragController');
+Route::resource('gyms', 'CRUD\GymController');
 Route::resource('parkings', 'CRUD\ParkingController');
 Route::resource('sectors', 'CRUD\SectorController');
 Route::resource('routes', 'CRUD\RouteController');

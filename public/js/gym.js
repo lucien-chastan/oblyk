@@ -16,3 +16,7 @@ function initGymMap() {
 function getGymPosts(){
     getPosts('Gym',document.getElementById('id-gym-actualite').value, document.getElementById('insert-posts-zone'));
 }
+
+function uploadGymLogo() {
+    console.log('ok');
+}

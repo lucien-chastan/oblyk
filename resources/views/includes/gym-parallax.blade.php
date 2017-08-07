@@ -1,7 +1,10 @@
 <div class="parallax-container gym-parallax">
     <div class="row entete-info container">
-        <div class="square-entete">
+        <div class="square-entete relative" style="position: relative">
             <img src="{{ $logo }}" alt="">
+            @if(Auth::check())
+                <i class="material-icons white-text upload-gym-ic dropdown-button" data-constrainwidth="false" data-activates='choice-upload'>photo_camera</i>
+            @endif
         </div>
         <div class="liste-info">
             <h1 class="loved-king-font"><span>salle d'escalade </span>{{$label}}</h1>
@@ -20,3 +23,12 @@
         <img class="img-gym-parallax" src="{{$imgSrc}}" alt="{{$imgAlt}}">
     </div>
 </div>
+
+<ul id='choice-upload' class='dropdown-content'>
+    <li><label for="upload-form-logo" class="label-dropdown blue-text"><i class="material-icons ic-drop-upload">photo_camera</i> Changer le logo</label></li>
+    <li><a href="#!"><i class="material-icons ic-drop-upload">wallpaper</i> Changer le bandeau</a></li>
+</ul>
+
+<form id="form-gym-logo" name="formGymLogo" style="display: none" onsubmit="uploadGymLogo(); return false">
+    <input id="upload-form-logo" type="file" onchange="document.formGymLogo.submit()">
+</form>

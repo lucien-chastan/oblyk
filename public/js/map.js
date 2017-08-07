@@ -91,7 +91,7 @@ function openAddPopup() {
     }
 
     if(addType === 'sae'){
-
+        openModal('/modal/gym', {"lat" : newLat, "lng" : newLng, "method" : "POST", "title":"Ajouter une salle", "MapReverseGeoCoding":true});
     }
 }
 
@@ -101,7 +101,7 @@ function MapReverseGeoCoding() {
     axios.get('http://nominatim.openstreetmap.org/reverse?format=json&lat=' + newLat + '&lon=' + newLng + '&zoom=18&addressdetails=18&email=ekip@oblyk.net').then(function (response) {
         document.getElementsByName('code_country')[0].value = response.data.address.country_code;
         document.getElementsByName('country')[0].value = response.data.address.country;
-        document.getElementsByName('city')[0].value = ( typeof response.data.address.village != 'undefined')? response.data.address.village : ( typeof response.data.address.city != 'undefined')? response.data.address.city : response.data.address.town;
+        document.getElementsByName('city')[0].value = ( typeof response.data.address.village !== 'undefined')? response.data.address.village : ( typeof response.data.address.city != 'undefined')? response.data.address.city : response.data.address.town;
         document.getElementsByName('region')[0].value = response.data.address.state;
     });
 }
@@ -110,4 +110,10 @@ function MapReverseGeoCoding() {
 function goToNewCrag(data) {
     let cragData = JSON.parse(data.data);
     location.href = '/site-escalade/' + cragData.id + '/' + cragData.slug;
+}
+
+//Envoie sur la nouvelle page de la salle
+function goToNewGym(data) {
+    let gymData = JSON.parse(data.data);
+    location.href = '/salle-escalade/' + gymData.id + '/' + gymData.slug;
 }

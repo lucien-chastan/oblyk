@@ -86,3 +86,31 @@ body{
 
 .type-voie{color: #3771C8}
 .type-bloc{color: #ffcc00}
+
+.upload-gym-ic {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    cursor: pointer;
+    &:hover{ opacity: 1; }
+}
+
+.relative {
+    position: relative;
+}
+
+.ic-drop-upload {
+    margin-right: 0.5em;
+    vertical-align: bottom;
+}
+
+.label-dropdown {
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+
+}
