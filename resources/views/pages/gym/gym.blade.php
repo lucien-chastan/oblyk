@@ -17,6 +17,8 @@
         'imgAlt' => 'salle escalade ' . $gym->label,
         'label' => $gym->label,
         'city' => $gym->city,
+        'lat' => $gym->lat,
+        'lng' => $gym->lng,
         'country' => $gym->country,
         'region' => $gym->region,
         'code_country' => $gym->code_country,

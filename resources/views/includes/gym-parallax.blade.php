@@ -5,7 +5,7 @@
         </div>
         <div class="liste-info">
             <h1 class="loved-king-font"><span>salle d'escalade </span>{{$label}}</h1>
-            <p>{{$city}}, {{$region}} ({{$code_country}})</p>
+            <p><a class="white-text" href="{{route('map')}}#{{$lat}}/{{$lng}}/15">{{$city}}, {{$region}} ({{$code_country}})</a></p>
             @if(Auth::check())
                 <p onclick="followedElement(this, 'Gym', {{$gym->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
                     <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre cette salle</span>
