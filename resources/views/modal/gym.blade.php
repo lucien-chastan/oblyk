@@ -14,8 +14,8 @@
         {!! $Inputs::text(['name'=>'address', 'value'=>$dataModal['gym']->address, 'label'=>'Adresse de la salle', 'placeholder'=>'Adresse de la salle','type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'postal_code', 'value'=>$dataModal['gym']->postal_code, 'label'=>'Code postal de la salle', 'placeholder'=>'Code postal de la salle','type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'region', 'value'=>$dataModal['gym']->region, 'label'=>'Département', 'placeholder'=>'Département de la salle','type'=>'text']) !!}
-        {!! $Inputs::checkbox(['name'=>'type_boulder', 'checked'=>($dataModal['gym']->type_boulder == 1), 'label'=>'Cette salle à une partie bloc']) !!}
-        {!! $Inputs::checkbox(['name'=>'type_route', 'checked'=>($dataModal['gym']->type_route == 1), 'label'=>'Cette salle à une partie voie']) !!}
+        {!! $Inputs::checkbox(['name'=>'type_boulder', 'checked'=>($dataModal['gym']->type_boulder == 1), 'label'=>'Cette salle a une partie bloc']) !!}
+        {!! $Inputs::checkbox(['name'=>'type_route', 'checked'=>($dataModal['gym']->type_route == 1), 'label'=>'Cette salle a une partie voie']) !!}
         {!! $Inputs::text(['name'=>'phone_number', 'value'=>$dataModal['gym']->phone_number, 'label'=>'Numéro de téléphone', 'placeholder'=>'Numéro de la salle','type'=>'tel']) !!}
         {!! $Inputs::text(['name'=>'email', 'value'=>$dataModal['gym']->email, 'label'=>'Email de la salle', 'placeholder'=>'Email de la salle','type'=>'email']) !!}
         {!! $Inputs::text(['name'=>'web_site', 'value'=>$dataModal['gym']->web_site, 'label'=>'Site internet de la salle', 'placeholder'=>'site internet de la salle','type'=>'url']) !!}

@@ -64,7 +64,7 @@ class FollowController extends Controller
                 if($follow->followed_type == 'App\Gym'){
                     $follow->followUrl = route('gymPage', ['gym_id'=>$follow->followed_id, 'gym_name'=>str_slug($follow->followed->label)]);
                     $follow->followName = $follow->followed->label;
-                    $follow->followIcon = '/img/icon-search-gym.svg';
+                    $follow->followIcon = file_exists(storage_path('app/public/gyms/100/logo-' . $follow->followed_id . '.png')) ? '/storage/gyms/100/logo-' . $follow->followed_id . '.png' : '/img/icon-search-gym.svg';
                     $follow->followInformation = $follow->followed->big_city . ' (' . $follow->followed->code_country . ')';
                 }
 

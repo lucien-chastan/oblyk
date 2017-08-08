@@ -127,7 +127,7 @@ class searchController extends Controller
             ->get();
         foreach ($findGyms as $gym){
             $gym->url = route('gymPage', ['gym_id'=>$gym->id,'gym_label'=>str_slug($gym->label)]);
-            $gym->icon = '/img/icon-search-gym.svg';
+            $gym->icon = file_exists(storage_path('app/public/gyms/50/logo-' . $gym->id . '.png')) ? '/storage/gyms/50/logo-' . $gym->id . '.png' : '/img/icon-search-gym.svg';
 
             $gyms[] = $gym;
         }

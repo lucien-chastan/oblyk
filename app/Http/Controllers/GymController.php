@@ -44,7 +44,7 @@ class GymController extends Controller
         $gym->save();
 
         $gym->bandeau = file_exists(storage_path('app/public/gyms/1300/bandeau-' . $gym->id . '.jpg')) ? '/storage/gyms/1300/bandeau-' . $gym->id . '.jpg' : '/img/default-gym-bandeau.jpg';
-        $gym->logo = file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png')) ? '/storage/gyms/100/logo-' . $gym->id . '.png' : '/img/icon-search-gym.svg';
+        $gym->logo = file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png')) ? '/storage/gyms/100/logo-' . $gym->id . '.png' : '/img/icon-gym.svg';
 
 
         $data = [
