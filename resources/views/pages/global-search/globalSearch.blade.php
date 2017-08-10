@@ -8,7 +8,7 @@
         <div class="input-field col s12">
             <i class="material-icons prefix">search</i>
             <input onkeyup="globalSearche(this)" id="input-text-global-search" type="search">
-            <label for="input-text-global-search">Chercher sur oblyk</label>
+            <label for="input-text-global-search">@lang('interface/search.searchOnOblyk')</label>
         </div>
 
         <div class="col s12 tab-search-ligne">
@@ -29,7 +29,7 @@
         <div id="global-search-follow" class="col s12 suggestion-recherche">
 
             @if(Auth::check())
-                <p class="grey-text text-center">Chargement des favoris ...</p>
+                <p class="grey-text text-center">@lang('interface/search.loadingFavorites')</p>
                 <div class="text-center">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -47,19 +47,19 @@
                 </div>
                 <input type="hidden" id="id-user-global-search" value="{{Auth::id()}}">
             @else
-                <p class="grey-text text-center">Créer toi un compte pour garder en favoris les sites que tu visite le plus souvent</p>
+                <p class="grey-text text-center">@lang('interface/search.createAccountFor')</p>
                 <input type="hidden" id="id-user-global-search" value="0">
             @endif
         </div>
 
-        <div id="global-search-crag" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur les falaises</p></div>
-        <div id="global-search-gym" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur les salles d'escalade</p></div>
-        <div id="global-search-route" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur les lignes</p></div>
-        <div id="global-search-topo" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur les topos</p></div>
-        <div id="global-search-user" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur les grimpeurs</p></div>
-        <div id="global-search-topic" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur le <a href="{{ route('forum') }}">forum</a></p></div>
-        <div id="global-search-lexique" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur le <a href="{{ route('lexique') }}">lexique</a></p></div>
-        <div id="global-search-aide" class="col s12"><p class="grey-text text-center">Ici apparaîtront les résultats de la recherche sur l'<a href="{{ route('help') }}">aide</a></p></div>
+        <div id="global-search-crag" class="col s12"><p class="grey-text text-center">@lang('interface/search.cragResultsHere')</p></div>
+        <div id="global-search-gym" class="col s12"><p class="grey-text text-center">@lang('interface/search.gymResultsHere')</p></div>
+        <div id="global-search-route" class="col s12"><p class="grey-text text-center">@lang('interface/search.routeResultsHere')</p></div>
+        <div id="global-search-topo" class="col s12"><p class="grey-text text-center">@lang('interface/search.guideBookResultsHere')</p></div>
+        <div id="global-search-user" class="col s12"><p class="grey-text text-center">@lang('interface/search.userResultsHere')</p></div>
+        <div id="global-search-topic" class="col s12"><p class="grey-text text-center">@lang('interface/search.forumResultsHere',['url'=> route('forum')])</p></div>
+        <div id="global-search-lexique" class="col s12"><p class="grey-text text-center">@lang('interface/search.glossaryResultsHere',['url'=> route('lexique')])</p></div>
+        <div id="global-search-aide" class="col s12"><p class="grey-text text-center">@lang('interface/search.helpResultsHere',['url'=> route('help')])</p></div>
     </div>
 
 

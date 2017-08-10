@@ -11,34 +11,74 @@
 |
 */
 
-//PAGE D'ACCUEIL
-Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
-    Route::get('/', 'HomeController@indexPage')->name('index');
-});
-
 Auth::routes();
 
-//PAGE LIÉES AU POJET
-Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
-Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
-Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
-Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
-Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
-Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('supportUs');
-Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
-Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
-//UN ARTICLE
-Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+//******************************************************************
+//ROUTE VISIBLE PAR L'UTILISATEUR, DONC PRÉFIXÉ AVEC LA LOCALISATION
+//******************************************************************
 
-//LE LEXIQUE
-Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+
+    //PAGE D'ACCUEIL
+    Route::get('/', 'HomeController@indexPage')->name('index');
+
+    //PAGE LIÉES AU POJET
+    Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
+    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
+    Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
+    Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
+    Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
+    Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('supportUs');
+    Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
+    Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+
+
+    //UN ARTICLE
+    Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+
+    //LE LEXIQUE
+    Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
+
+    //LE POFIL
+    Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
+
+    //OUTDOOR
+    Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
+    Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
+    Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
+
+    //LES SALLES D'ESCALADE
+    Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
+
+    //LA CARTE
+    Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
+
+    //FORUM
+    Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');
+    Route::get('/forum-escalade/accueil', 'ForumController@forumPage')->name('forum');
+    Route::get('/forum-escalade/les-categories', 'ForumController@categoryPage')->name('forumCategories');
+    Route::get('/forum-escalade/les-sujets', 'ForumController@topicsPage')->name('forumTopics');
+    Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
+    Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
+
+    // PARTENAIRE
+    Route::get('/partenaire-escalade/carte-des-grimpeurs', 'PartnerController@mapPage')->name('partnerMapPage');
+    Route::get('/partenaire-escalade/comment-ca-marche', 'PartnerController@howPage')->name('partnerHowPage');
+
+
+});
+
+
+
+
+
+//*****************************************************
+//ROUTE NON VISIBLE PAR L'UTILISATEUR, ( SANS PRÉSFIXE)
+//*****************************************************
 
 //LA RECHERCHE
 Route::get('/API/search/{search}', 'searchController@search')->name('globalSearch');
-
-//LE POFIL
-Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
 
 //VUE DU PROFIL
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
@@ -103,33 +143,14 @@ Route::post('/post/vueOnePost', 'PostController@vueOnePost')->name('vueOnePost')
 Route::post('/like/add', 'LikeController@addLike')->name('addLike');
 
 
-//LA CARTE
-Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
-
-
 //OUTDOOD
-Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
-Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
-Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
 Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAroundPoint')->name('APIMarkerMap');
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 
-//LES SALLES D'ESCALADE
-Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
-
-//FORUM
-Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');
-Route::get('/forum-escalade/accueil', 'ForumController@forumPage')->name('forum');
-Route::get('/forum-escalade/les-categories', 'ForumController@categoryPage')->name('forumCategories');
-Route::get('/forum-escalade/les-sujets', 'ForumController@topicsPage')->name('forumTopics');
-Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
-Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
 
 // PARTENAIRE
-Route::get('/partenaire-escalade/carte-des-grimpeurs', 'PartnerController@mapPage')->name('partnerMapPage');
-Route::get('/partenaire-escalade/comment-ca-marche', 'PartnerController@howPage')->name('partnerHowPage');
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
 
 

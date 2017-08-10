@@ -22,13 +22,10 @@
         <div class="partie-point-home">
             <div class="row">
                 <div class="col s12 m6 l6">
-                    <h2>Check les infos des falaises</h2>
-                    <p class="explication-oblyk">
-                        Oblyk est une grande base de donnée des falaises d'escalades de france et du monde constament enrichie par la communauté,
-                        tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte.
-                    </p>
+                    <h2>@lang('home.titleCheckCragInformation')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionCheckCragInformation')</p>
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('map') }}"><i class="material-icons left">map</i> La carte des falaises</a>
+                        <a class="btn-flat blue-text" href="{{ route('map') }}"><i class="material-icons left">map</i> @lang('home.actionCheckCragInformation')</a>
                     </p>
                 </div>
 
@@ -46,23 +43,17 @@
                     </div>
                 </div>
                 <div class="col s12 m6 l6 order-2">
-                    <h2>Tiens un carnet de croix</h2>
-                    <p class="explication-oblyk">
-                        Bon pour la mémoire, la progression et la motivation, tenir un carnet de croix à beaucoup d'avantage.<br>
-                        Oblyk te permet de facilement faire ça, tu pourras ensuite visualiser ta progression grâce à de nombres façon d'analyser et afficher ton carnet de croix
-                    </p>
+                    <h2>@lang('home.titleCrossBook')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionCrossBook')</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col s12 m6 l6">
-                    <h2>Trouve un partenaire de grimpe</h2>
-                    <p class="explication-oblyk">
-                        Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu'un avec qui grimper en falaise ou en salle ?<br>
-                        Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu'un avec qui grimper.
-                    </p>
+                    <h2>@lang('home.titlePartner')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionPartner')</p>
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('partnerHowPage') }}"><i class="material-icons left">person_pin</i> En savoir plus</a>
+                        <a class="btn-flat blue-text" href="{{ route('partnerHowPage') }}"><i class="material-icons left">person_pin</i>@lang('home.actionPartner')</a>
                     </p>
                 </div>
 
@@ -82,27 +73,19 @@
                 </div>
 
                 <div class="col s12 m6 l6 order-2">
-                    <h2>Reste au courant</h2>
-                    <p class="explication-oblyk">
-                        Oblyk intégre un système de flux simple qui te permet d'être au courant de l'activité des falaises autour de chez toi.<br>
-                        Par exemple s'il y a une mission "Nettoyage Printanier", l'organisateur post dans le flux de la falaise et hop !
-                        tous les intéréssés sont au courant et peuvent venir aider.
-                    </p>
+                    <h2>@lang('home.titleNewsFeed')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionNewsFeed')</p>
                 </div>
             </div>
 
             <div class="row">
 
                 <div class="col s12 m6 l6">
-                    <h2>Rejoins-nous !</h2>
-                    <p class="explication-oblyk">
-                        En rejoingnant oblyk tu auras librement accès à tous les infos de la communauté, te tenir au courant de ce qui se passe dans le
-                        monde de la grimpe, tu pourras tenir un carnet de croix pour t'aider à progresser ou pour garder un souvenire de tes passages en falaise.<br>
-                        Et tu pouras participer à l'élaboration d'une grande base de connaissance commune des sites d'escalades de France et du monde !
-                    </p>
+                    <h2>@lang('home.titleAccount')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionAccount')</p>
                     @if(Auth::guest())
                         <p class="center">
-                            <a href="{{ route('register') }}" class="waves-effect waves-light btn">Créer un compte</a>
+                            <a href="{{ route('register') }}" class="waves-effect waves-light btn">@lang('home.actionAccount')</a>
                         </p>
                     @endif
                 </div>
@@ -121,7 +104,7 @@
 
         <div class="row">
             <div class="s12 m12 l12">
-                <h2 class="center">Quoi de neuf ?</h2>
+                <h2 class="center">@lang('home.titleWhatUp')</h2>
             </div>
         </div>
 
@@ -144,7 +127,7 @@
                             </p>
                         </div>
                         <div class="card-action text-right">
-                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label' => str_slug($article->label)])}}">Lire la suite</a>
+                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label' => str_slug($article->label)])}}">@lang('home.readMore')</a>
                         </div>
                     </div>
                 </div>
@@ -154,27 +137,27 @@
         {{--PARTIE CHIFFRE D'OBLYK--}}
         <div class="row">
             <div class="col s12 m12 l12">
-                <h2 class="center">Oblyk en quelques chiffres</h2>
+                <h2 class="center">@lang('home.titleInFigures')</h2>
             </div>
         </div>
 
         <div class="center partie-chiffre-oblyk">
             <div class="row oblyk-number blue-text">
-                <div class="col s4 m4 l4">2077<br><span class="loved-king-font">Falaises</span></div>
-                <div class="col s4 m4 l4">1259<br><span class="loved-king-font">Grimpeurs</span></div>
-                <div class="col s4 m4 l4">120<br><span class="loved-king-font">Salles</span></div>
+                <div class="col s4 m4 l4">2077<br><span class="loved-king-font">@lang('home.figuresCrags')</span></div>
+                <div class="col s4 m4 l4">1259<br><span class="loved-king-font">@lang('home.figuresClimbers')</span></div>
+                <div class="col s4 m4 l4">120<br><span class="loved-king-font">@lang('home.figuresGyms')</span></div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">71018<br><span class="loved-king-font">Lignes</span></div>
-                <div class="col s4 m4 l4">8581<br><span class="loved-king-font">Croix</span></div>
-                <div class="col s4 m4 l4">1132<br><span class="loved-king-font">Photos</span></div>
+                <div class="col s4 m4 l4">71018<br><span class="loved-king-font">@lang('home.figuresRoutes')</span></div>
+                <div class="col s4 m4 l4">8581<br><span class="loved-king-font">@lang('home.figuresCrosses')</span></div>
+                <div class="col s4 m4 l4">1132<br><span class="loved-king-font">@lang('home.figuresPhotos')</span></div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">222<br><span class="loved-king-font">Topos</span></div>
-                <div class="col s4 m4 l4">1924<br><span class="loved-king-font">Commentaires</span></div>
-                <div class="col s4 m4 l4">105<br><span class="loved-king-font">Vidéos</span></div>
+                <div class="col s4 m4 l4">222<br><span class="loved-king-font">@lang('home.figuresGuideBooks')</span></div>
+                <div class="col s4 m4 l4">1924<br><span class="loved-king-font">@lang('home.figuresComments')</span></div>
+                <div class="col s4 m4 l4">105<br><span class="loved-king-font">@lang('home.figuresVideos')</span></div>
             </div>
         </div>
     </div>
