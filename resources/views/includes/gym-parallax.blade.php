@@ -3,7 +3,7 @@
         <div class="square-entete relative" style="position: relative">
             <img src="{{ $logo }}" alt="">
             @if(Auth::check())
-                <i class="material-icons white-text upload-gym-ic dropdown-button" data-constrainwidth="false" data-activates='choice-upload'>photo_camera</i>
+                {{--<i class="material-icons white-text upload-gym-ic dropdown-button" data-constrainwidth="false" data-activates='choice-upload'>photo_camera</i>--}}
             @endif
         </div>
         <div class="liste-info">
