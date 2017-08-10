@@ -12,7 +12,7 @@
             <img class="img-parallax-home" src="/img/oblyk-home-baume-rousse.jpg" alt="escalade à la falaise de baume rousse">
             <div class="div-entete-oblyk">
                 <h1>Oblyk</h1>
-                <p>Site communautaire dédié à l'escalade</p>
+                <p>@lang('home.slogan')</p>
             </div>
         </div>
     </div>

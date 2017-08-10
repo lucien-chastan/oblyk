@@ -11,7 +11,8 @@
         "caouecs/laravel-lang": "~3.0",
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "mcamara/laravel-localization": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

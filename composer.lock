@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56917f09574df9bfd93a8c75b33af855",
-    "content-hash": "6e5fcedda1c135c539f92c833dd5c159",
+    "hash": "4b3ca684a88a814a6356dbc56f7e5fa0",
+    "content-hash": "94c92a4b71cf9ef8523199e4bb054246",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
@@ -830,6 +830,65 @@
                 "debugbar"
             ],
             "time": "2017-01-05 08:46:19"
+        },
+        {
+            "name": "mcamara/laravel-localization",
+            "version": "v1.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcamara/laravel-localization.git",
+                "reference": "5f7e0e646d5c2374b8adaf1757599e043cd0994d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/5f7e0e646d5c2374b8adaf1757599e043cd0994d",
+                "reference": "5f7e0e646d5c2374b8adaf1757599e043cd0994d",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.2, ~5.3, ~5.4",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "orchestra/testbench-browser-kit": "~3.4",
+                "phpunit/phpunit": "5.4.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelLocalization": "Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization"
+                    }
+                }
+            },
+            "autoload": {
+                "classmap": [],
+                "psr-0": {
+                    "Mcamara\\LaravelLocalization": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Cámara",
+                    "email": "mcamara88@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy localization for Laravel",
+            "homepage": "https://github.com/mcamara/laravel-localization",
+            "keywords": [
+                "laravel",
+                "localization",
+                "php"
+            ],
+            "time": "2017-08-08 04:41:28"
         },
         {
             "name": "monolog/monolog",

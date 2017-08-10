@@ -11,11 +11,12 @@
 |
 */
 
-//PAGE D'ACCUIELLE
-Route::get('/', 'HomeController@indexPage')->name('index');
+//PAGE D'ACCUEIL
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+    Route::get('/', 'HomeController@indexPage')->name('index');
+});
 
 Auth::routes();
-
 
 //PAGE LIÉES AU POJET
 Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');

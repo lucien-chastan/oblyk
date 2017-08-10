@@ -283,6 +283,12 @@ footer {
     text-align: center;
 }
 
+.flag-icon {
+    height: 1.1em;
+    margin-right: 0.5em;
+    vertical-align: sub;
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{

@@ -78,10 +78,7 @@ return [
     */
 
     'locale' => 'fr',
-    'languages' => [
-        'fr' => 'Français',
-        'en' => 'English'
-    ],
+    'locales'=>['fr' => 'Français', 'en' => 'English'],
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Lib\InputTemplates::class,
         App\Lib\HelpersTemplates::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
     ],
 
     /*
@@ -236,6 +234,7 @@ return [
         'DebugBar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Markdown' => Indal\Markdown\Facade::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
 
     ],
 
