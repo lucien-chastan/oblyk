@@ -17,10 +17,10 @@ class CreateSeasonsTable extends Migration
             $table->increments('id');
             $table->integer('seasontable_id');
             $table->string('seasontable_type',100);
-            $table->boolean('summer');
-            $table->boolean('autumn');
-            $table->boolean('winter');
-            $table->boolean('spring');
+            $table->boolean('summer')->default(0);
+            $table->boolean('autumn')->default(0);
+            $table->boolean('winter')->default(0);
+            $table->boolean('spring')->default(0);
             $table->timestamps();
         });
     }

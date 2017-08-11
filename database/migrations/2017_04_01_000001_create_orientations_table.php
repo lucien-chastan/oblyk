@@ -17,14 +17,14 @@ class CreateOrientationsTable extends Migration
             $table->increments('id');
             $table->integer('orientable_id');
             $table->string('orientable_type',100);
-            $table->boolean('north');
-            $table->boolean('east');
-            $table->boolean('south');
-            $table->boolean('west');
-            $table->boolean('north_east');
-            $table->boolean('north_west');
-            $table->boolean('south_east');
-            $table->boolean('south_west');
+            $table->boolean('north')->default(0);
+            $table->boolean('east')->default(0);
+            $table->boolean('south')->default(0);
+            $table->boolean('west')->default(0);
+            $table->boolean('north_east')->default(0);
+            $table->boolean('north_west')->default(0);
+            $table->boolean('south_east')->default(0);
+            $table->boolean('south_west')->default(0);
             $table->timestamps();
         });
     }
