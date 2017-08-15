@@ -11,14 +11,16 @@
 |
 */
 
-Auth::routes();
-
 
 //******************************************************************
 //ROUTE VISIBLE PAR L'UTILISATEUR, DONC PRÉFIXÉ AVEC LA LOCALISATION
 //******************************************************************
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+
+
+    //Connexion, réinitialiser mot de passe, etc...
+    Auth::routes();
 
     //PAGE D'ACCUEIL
     Route::get('/', 'HomeController@indexPage')->name('index');

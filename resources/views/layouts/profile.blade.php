@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
     <head>
         @include('includes.head')
     </head>

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\MailResetPasswordToken;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,6 +31,12 @@ class User extends Authenticatable
     protected $dates = [
         'last_fil_read'
     ];
+
+    //Customisation du mail de reset de password
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordToken($token));
+    }
 
     public function albums() { return $this->hasMany('App\Album','user_id', 'id'); }
     public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }

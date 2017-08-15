@@ -67,7 +67,7 @@
         <div class="nav-wrapper nav-white" id="nav_barre">
 
             {{--logo de oblyk--}}
-            <a href="/" class="brand-logo">
+            <a href="{{ route('index') }}" class="brand-logo">
                 <svg version="1.1" viewBox="0 0 117.2832 76.144533" class="logo-de-oblyk" height="35px" width="60px">
                     <g transform="translate(-332.73828,-314.61719)">
                         <path id="path-logo" d="m 396.05664,314.61719 -30.4043,41.7539 13.79493,21.1543 10.61132,10.96484 10.22461,-14.02343 15.76953,16.29492 9.65235,-13.23633 24.3164,0 -53.96484,-62.9082 z M 379.44727,377.52539 362.78516,360.31055 352.80859,350 l -20.07031,27.52539 46.70899,0 z" style="fill-opacity:1;fill-rule:evenodd;stroke:none;" />

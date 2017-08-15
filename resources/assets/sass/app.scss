@@ -289,6 +289,16 @@ footer {
     vertical-align: sub;
 }
 
+.success-alert-password {
+    padding: 1px;
+    border-radius: 3px;
+    margin-bottom: 1em;
+
+    p {
+        margin: 5px 0;
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{
