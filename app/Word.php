@@ -11,4 +11,8 @@ class Word extends Model
         return $this->hasOne('App\User','id', 'user_id');
     }
 
+    public function search() {
+        return $this->morphOne('App\Search', 'searchable');
+    }
+
 }

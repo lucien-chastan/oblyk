@@ -80,7 +80,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 //*****************************************************
 
 //LA RECHERCHE
-Route::get('/API/search/{search}', 'searchController@search')->name('globalSearch');
+Route::get('/API/search/{limit}/{offset}/{search}', 'searchController@search')->name('globalSearch');
 
 //VUE DU PROFIL
 Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');

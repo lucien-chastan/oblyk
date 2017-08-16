@@ -54,6 +54,7 @@ class User extends Authenticatable
     public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
     public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }
     public function sales() { return $this->hasMany('App\Sale','user_id', 'id'); }
+    public function search() { return $this->morphOne('App\Search', 'searchable');}
     public function sectors() { return $this->hasMany('App\Sector','user_id', 'id'); }
     public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
     public function socialNetworks(){ return $this->hasMany('App\UserSocialNetwork','user_id', 'id'); }

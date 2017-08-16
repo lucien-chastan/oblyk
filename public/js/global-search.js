@@ -19,22 +19,7 @@ window.onload = function () {
 //LANCEMENT ET AFFICHAGE DE LA RECERCHE
 function globalSearche(searchInput) {
     let progress = document.getElementById('progressSearch'),
-        nbCrag = document.getElementById('nb-result-global-search-crag'),
-        nbGym = document.getElementById('nb-result-global-search-gym'),
-        nbRoute = document.getElementById('nb-result-global-search-route'),
-        nbTopo = document.getElementById('nb-result-global-search-topo'),
-        nbUser = document.getElementById('nb-result-global-search-user'),
-        nbLexique = document.getElementById('nb-result-global-search-lexique'),
-        nbAide = document.getElementById('nb-result-global-search-aide'),
-        nbTopic = document.getElementById('nb-result-global-search-topic'),
-        cragZone = document.getElementById('global-search-crag'),
-        gymZone = document.getElementById('global-search-gym'),
-        lexiqueZone = document.getElementById('global-search-lexique'),
-        routeZone = document.getElementById('global-search-route'),
-        topoZone = document.getElementById('global-search-topo'),
-        topicZone = document.getElementById('global-search-topic'),
-        userZone = document.getElementById('global-search-user'),
-        aideZone = document.getElementById('global-search-aide');
+        findsZone = document.getElementById('global-search-finds');
 
     //on annule la frappe précédente
     clearTimeout(timToGlobalSearch);
@@ -45,16 +30,6 @@ function globalSearche(searchInput) {
     //on affiche la progresse barre
     progress.style.opacity = '1';
 
-    //on fait disparaitre les étiquettes de nombres
-    scaleTransition(nbCrag, 'out');
-    scaleTransition(nbGym, 'out');
-    scaleTransition(nbRoute, 'out');
-    scaleTransition(nbTopo, 'out');
-    scaleTransition(nbUser, 'out');
-    scaleTransition(nbLexique, 'out');
-    scaleTransition(nbTopic, 'out');
-    scaleTransition(nbAide, 'out');
-
     //si notre champs de recherche est vide, on s'arrête
     if(searchInput.value === ''){
         progress.style.opacity = '0';
@@ -63,177 +38,135 @@ function globalSearche(searchInput) {
 
     //on lance la fonction AJAX de recherche
     timToGlobalSearch = setTimeout(function () {
-        axios.get('/API/search/' + searchInput.value).then(function (response) {
+        axios.get('/API/search/10/0/' + searchInput.value).then(function (response) {
 
             let data = response.data;
 
-            //sauvegarde de la reche
-            saveSearch = data.search;
-
-            //on inscrit le nombre de résultat
-            nbCrag.textContent = data.nombre.crags + data.nombre.massives;
-            nbGym.textContent = data.nombre.gyms;
-            nbRoute.textContent = data.nombre.routes;
-            nbTopo.textContent = data.nombre.topos + data.nombre.topoPdfs + data.nombre.topoWebs;
-            nbUser.textContent = data.nombre.users;
-            nbLexique.textContent = data.nombre.words;
-            nbAide.textContent = data.nombre.aides;
-            nbTopic.textContent = data.nombre.topics;
-
+            //sauvegarde de la recherche
+            saveSearch = searchInput.value;
 
             //RÉSULTAT SUR LES FALAISES
-            cragZone.innerHTML = '';
-            if(data.nombre.crags > 0 || data.nombre.massives > 0){
-                scaleTransition(nbCrag, 'in');
+            findsZone.innerHTML = response.data;
 
-                //les massifs d'abord
-                for(let i = 0 ; i < data.nombre.massives ; i++) {
-                    cragZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="/img/icon-search-massive.svg"><a href="${data.massives[i].url}">${data.massives[i].label}</a><br><span class="grey-text">Regroupement de ${data.massives[i].crags_count} sites)</span></div>`;
-                }
+            //anime les résulats
+            rideau(document.querySelectorAll('#global-search-finds .rideau-animation'));
 
-                //les falaises ensuite
-                for(let i = 0 ; i < data.nombre.crags ; i++) {
-                    cragZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.crags[i].bandeau}"><a href="${data.crags[i].url}"><img src="/img/point-${data.crags[i].climbType}.svg" class="search-climb-type">  ${data.crags[i].label}</a><br><span class="grey-text">${data.crags[i].region} (${data.crags[i].code_country})</span></div>`;
-                }
-                rideau(document.querySelectorAll('#global-search-crag .rideau-animation'));
-            }else{
-                cragZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les falaises</p>`
-            }
+            //séléctionne l'onglet de résultat
+            $('ul.tabs').tabs('select_tab', 'global-search-finds');
 
-
-            //RÉSULTAT SUR LES SALLES D'ESCALADES
-            gymZone.innerHTML = '';
-            if(data.nombre.gyms > 0){
-                scaleTransition(nbGym, 'in');
-                for(let i = 0 ; i < data.nombre.gyms ; i++) {
-                    gymZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.gyms[i].icon}"><a href="${data.gyms[i].url}">${data.gyms[i].label}</a><br><span class="grey-text">${data.gyms[i].big_city}, ${data.gyms[i].region} (${data.gyms[i].code_country})</span></div>`;
-                }
-                rideau(document.querySelectorAll('#global-search-gym .rideau-animation'));
-            }else{
-                gymZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" sur les salles d'escalades</p>`
-            }
-
-
-            //RÉSULTAT SUR LES ROUTES
-            routeZone.innerHTML = '';
-            if(data.nombre.routes > 0){
-                scaleTransition(nbRoute, 'in');
-                for(let i = 0 ; i < data.nombre.routes ; i++) {
-                    routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a class="button-open-route text-cursor" class="button-open-route" onclick="loadRoute(${data.routes[i].id})"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">sur le site <a href="${data.routes[i].cragUrl}">${data.routes[i].crag.label}</a>, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
-                }
-                rideau(document.querySelectorAll('#global-search-route .rideau-animation'));
-                initRouteOpener();
-            }else{
-                routeZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les lignes</p>`
-            }
-
-
-            //RÉSULTAT SUR LES TOPOS
-            topoZone.innerHTML = '';
-            if(data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0){
-                scaleTransition(nbTopo, 'in');
-
-                //TOPO PAPIER
-                if(data.nombre.topos > 0){
-                    for(let i = 0 ; i < data.nombre.topos ; i++) {
-                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topos[i].couverture}"><a href="${data.topos[i].url}">${data.topos[i].label}</a><br><span class="grey-text">${data.topos[i].author}, ${data.topos[i].editor} ${data.topos[i].editionYear}</span></div>`;
-                    }
-                }
-
-                //TOPO PDF
-                if(data.nombre.topoPdfs > 0){
-                    for(let i = 0 ; i < data.nombre.topoPdfs ; i++) {
-                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoPdfs[i].couverture}"><a href="${data.topoPdfs[i].url}">${data.topoPdfs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoPdfs[i].cragUrl}">${data.topoPdfs[i].crag.label}</a></span></div>`;
-                    }
-                }
-
-                //TOPO WEB
-                if(data.nombre.topoWebs > 0){
-                    for(let i = 0 ; i < data.nombre.topoWebs ; i++) {
-                        topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoWebs[i].couverture}"><a href="${data.topoWebs[i].url}">${data.topoWebs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoWebs[i].cragUrl}">${data.topoWebs[i].crag.label}</a></span></div>`;
-                    }
-                }
-
-                rideau(document.querySelectorAll('#global-search-topo .rideau-animation'));
-            }else{
-                topoZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les topos</p>`
-            }
-
-
-
-            //RÉSULTAT SUR LES GRIMPEURS
-            userZone.innerHTML = '';
-            if(data.nombre.users > 0){
-                scaleTransition(nbUser, 'in');
-                for(let i = 0 ; i < data.nombre.users ; i++) {
-                    userZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.users[i].photo}"><a href="${data.users[i].url}">${data.users[i].name}</a><br><span class="grey-text">${data.users[i].genre}, ${data.users[i].age} ans</span></div>`;
-                }
-                rideau(document.querySelectorAll('#global-search-user .rideau-animation'));
-            }else{
-                userZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les grimpeurs</p>`
-            }
-
-
-            //RÉSULTAT SUR LE LEXIQUE
-            lexiqueZone.innerHTML = '';
-            if(data.nombre.words > 0){
-                scaleTransition(nbLexique, 'in');
-                for(let i = 0 ; i < data.nombre.words ; i++){
-                    lexiqueZone.innerHTML += `<div class="blue-border-search rideau-animation"><strong>${data.words[i].label}</strong><br>${data.words[i].definition}</div>`;
-                }
-                lexiqueZone.innerHTML += '<div class="rideau-animation"><p class="text-right">voir le <a href="/lexique">lexique</a></p></div>';
-                rideau(document.querySelectorAll('#global-search-lexique .rideau-animation'));
-            }else{
-                lexiqueZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans le lexique</p>`;
-            }
-
-            //RÉSULTAT SUR L'AIDE
-            aideZone.innerHTML = '';
-            if(data.nombre.aides > 0){
-                scaleTransition(nbAide, 'in');
-                for(let i = 0 ; i < data.nombre.aides ; i++){
-                    aideZone.innerHTML += `<div class="blue-border-search rideau-animation"><strong>${data.aides[i].label}</strong><div class="markdownZone">${data.aides[i].contents}</div></div>`;
-                }
-                aideZone.innerHTML += '<div class="rideau-animation"><p class="text-right">voir <a href="/aides">l\'aide</a></p></div>';
-                rideau(document.querySelectorAll('#global-search-aide .rideau-animation'));
-            }else{
-                aideZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans l'aide</p>`;
-            }
+            // if(data.nombre.crags > 0 || data.nombre.massives > 0){
+            //     scaleTransition(nbCrag, 'in');
+            //
+            //     //les massifs d'abord
+            //     for(let i = 0 ; i < data.nombre.massives ; i++) {
+            //         cragZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="/img/icon-search-massive.svg"><a href="${data.massives[i].url}">${data.massives[i].label}</a><br><span class="grey-text">Regroupement de ${data.massives[i].crags_count} sites)</span></div>`;
+            //     }
+            //
+            // }else{
+            //     cragZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les falaises</p>`
+            // }
+            //
+            //
+            // //RÉSULTAT SUR LES SALLES D'ESCALADES
+            // gymZone.innerHTML = '';
+            // if(data.nombre.gyms > 0){
+            //     scaleTransition(nbGym, 'in');
+            //     for(let i = 0 ; i < data.nombre.gyms ; i++) {
+            //         gymZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.gyms[i].icon}"><a href="${data.gyms[i].url}">${data.gyms[i].label}</a><br><span class="grey-text">${data.gyms[i].big_city}, ${data.gyms[i].region} (${data.gyms[i].code_country})</span></div>`;
+            //     }
+            //     rideau(document.querySelectorAll('#global-search-gym .rideau-animation'));
+            // }else{
+            //     gymZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" sur les salles d'escalades</p>`
+            // }
+            //
+            //
+            // //RÉSULTAT SUR LES ROUTES
+            // routeZone.innerHTML = '';
+            // if(data.nombre.routes > 0){
+            //     scaleTransition(nbRoute, 'in');
+            //     for(let i = 0 ; i < data.nombre.routes ; i++) {
+            //         routeZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.routes[i].bandeau}"><a class="button-open-route text-cursor" class="button-open-route" onclick="loadRoute(${data.routes[i].id})"><img src="/img/climb-${data.routes[i].climb_id}.png" class="search-climb-type"> <span class="color-grade-${data.routes[i].color} text-normal">${data.routes[i].cotation}</span> ${data.routes[i].label}</a><br><span class="grey-text">sur le site <a href="${data.routes[i].cragUrl}">${data.routes[i].crag.label}</a>, ${data.routes[i].crag.region} (${data.routes[i].crag.code_country})</span></div>`;
+            //     }
+            //     rideau(document.querySelectorAll('#global-search-route .rideau-animation'));
+            //     initRouteOpener();
+            // }else{
+            //     routeZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les lignes</p>`
+            // }
+            //
+            //
+            // //RÉSULTAT SUR LES TOPOS
+            // topoZone.innerHTML = '';
+            // if(data.nombre.topos > 0 || data.nombre.topoPdfs > 0 || data.nombre.topoWebs > 0){
+            //     scaleTransition(nbTopo, 'in');
+            //
+            //     //TOPO PAPIER
+            //     if(data.nombre.topos > 0){
+            //         for(let i = 0 ; i < data.nombre.topos ; i++) {
+            //             topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topos[i].couverture}"><a href="${data.topos[i].url}">${data.topos[i].label}</a><br><span class="grey-text">${data.topos[i].author}, ${data.topos[i].editor} ${data.topos[i].editionYear}</span></div>`;
+            //         }
+            //     }
+            //
+            //     //TOPO PDF
+            //     if(data.nombre.topoPdfs > 0){
+            //         for(let i = 0 ; i < data.nombre.topoPdfs ; i++) {
+            //             topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoPdfs[i].couverture}"><a href="${data.topoPdfs[i].url}">${data.topoPdfs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoPdfs[i].cragUrl}">${data.topoPdfs[i].crag.label}</a></span></div>`;
+            //         }
+            //     }
+            //
+            //     //TOPO WEB
+            //     if(data.nombre.topoWebs > 0){
+            //         for(let i = 0 ; i < data.nombre.topoWebs ; i++) {
+            //             topoZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left couverture-topo" src="${data.topoWebs[i].couverture}"><a href="${data.topoWebs[i].url}">${data.topoWebs[i].label}</a><br><span class="grey-text">sur le site : <a href="${data.topoWebs[i].cragUrl}">${data.topoWebs[i].crag.label}</a></span></div>`;
+            //         }
+            //     }
+            //
+            //     rideau(document.querySelectorAll('#global-search-topo .rideau-animation'));
+            // }else{
+            //     topoZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans les topos</p>`
+            // }
 
 
 
-            //RÉSULTAT SUR LE FORUM
-            topicZone.innerHTML = '';
-            if(data.nombre.topics > 0){
-                scaleTransition(nbTopic, 'in');
-                for(let i = 0 ; i < data.nombre.topics ; i++) {
-                    topicZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.topics[i].icon}"><a href="${data.topics[i].url}">${data.topics[i].label}</a><br><span class="grey-text">proposé par <a class="text-normal" href="${data.topics[i].user.url}">${data.topics[i].user.name}</a></span></div>`;
-                }
-                rideau(document.querySelectorAll('#global-search-topic .rideau-animation'));
-            }else{
-                topicZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans le forum</p>`
-            }
-
-
-            //On compil les markdowns si nous avons des résultats sur le lexique ou sur l'aide
-            if(data.nombre.aides > 0 || data.nombre.words > 0){
-                convertMarkdownZone();
-            }
-
-            //CHAGEMENT D'ONGLET AU MIEUX
-            changeTab(data);
+            // //RÉSULTAT SUR L'AIDE
+            // aideZone.innerHTML = '';
+            // if(data.nombre.aides > 0){
+            //     scaleTransition(nbAide, 'in');
+            //     for(let i = 0 ; i < data.nombre.aides ; i++){
+            //         aideZone.innerHTML += `<div class="blue-border-search rideau-animation"><strong>${data.aides[i].label}</strong><div class="markdownZone">${data.aides[i].contents}</div></div>`;
+            //     }
+            //     aideZone.innerHTML += '<div class="rideau-animation"><p class="text-right">voir <a href="/aides">l\'aide</a></p></div>';
+            //     rideau(document.querySelectorAll('#global-search-aide .rideau-animation'));
+            // }else{
+            //     aideZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans l'aide</p>`;
+            // }
+            //
+            //
+            //
+            // //RÉSULTAT SUR LE FORUM
+            // topicZone.innerHTML = '';
+            // if(data.nombre.topics > 0){
+            //     scaleTransition(nbTopic, 'in');
+            //     for(let i = 0 ; i < data.nombre.topics ; i++) {
+            //         topicZone.innerHTML += `<div class="col s12 blue-border-search crag-result rideau-animation"><img class="left circle" src="${data.topics[i].icon}"><a href="${data.topics[i].url}">${data.topics[i].label}</a><br><span class="grey-text">proposé par <a class="text-normal" href="${data.topics[i].user.url}">${data.topics[i].user.name}</a></span></div>`;
+            //     }
+            //     rideau(document.querySelectorAll('#global-search-topic .rideau-animation'));
+            // }else{
+            //     topicZone.innerHTML = `<p class="text-center grey-text">il n\'y a pas de résultat pour : "${data.search}" dans le forum</p>`
+            // }
+            //
+            //
+            // //On compil les markdowns si nous avons des résultats sur le lexique ou sur l'aide
+            // if(data.nombre.aides > 0 || data.nombre.words > 0){
+            //     convertMarkdownZone();
+            // }
+            //
+            // //CHAGEMENT D'ONGLET AU MIEUX
+            // changeTab(data);
 
             //on cache la progress barre
             progress.style.opacity = '0';
         });
     },500);
-}
-
-
-//FONCTION D'ANIMATION DES ÉTIQUETTES DE NOMBRE
-function scaleTransition(ettiquette, scale) {
-    let invertScale = (scale === 'in') ? 'out' : 'in';
-    ettiquette.setAttribute('class', ettiquette.className.replace('scale-' + invertScale, 'scale-' + scale));
 }
 
 
