@@ -19,6 +19,10 @@ class Topo extends Model
         return $this->morphMany('App\Link', 'linkable');
     }
 
+    public function search(){
+        return $this->morphOne('App\Search', 'searchable');
+    }
+
     public function follows(){
         return $this->morphMany('App\Follow', 'followed');
     }

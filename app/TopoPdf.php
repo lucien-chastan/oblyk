@@ -15,4 +15,7 @@ class TopoPdf extends Model
         return $this->hasOne('App\Crag','id', 'crag_id');
     }
 
+    public function search(){
+        return $this->morphOne('App\Search', 'searchable');
+    }
 }

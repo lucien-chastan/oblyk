@@ -16,13 +16,13 @@ class Search extends Model
 
         //transform la recherche en regexp
         $litleWords = '/^(de|des|du|le|la|et|les|l|a|au|aux|the)$/';
-        $splitSearches = explode('-', $label);
+        $splitSearches = explode('-', str_slug($label));
         $goodWords = [];
         foreach ($splitSearches as $word){
             if(!preg_match($litleWords, $word)) $goodWords[] = $word;
         }
 
-        $regSearches = implode('|', $goodWords);
+        $regSearches = '[' . implode('|', $goodWords) . ']';
 
         //va chercher les entrées qui correspondent à la recherche
         $finds = DB::select('

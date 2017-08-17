@@ -48,7 +48,7 @@ class CragController extends Controller
             ->with('crossStatus')
             ->get();
 
-        $userTicklists  =TickList::where('user_id', Auth::id())
+        $userTicklists = TickList::where('user_id', Auth::id())
             ->whereHas('route', function ($query) use ($crag_id) {$query->where('crag_id', $crag_id);})
             ->with('route')
             ->with('route.routeSections')

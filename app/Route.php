@@ -26,6 +26,10 @@ class Route extends Model
         return $this->hasMany('App\TickList','route_id','id');
     }
 
+    public function search(){
+        return $this->morphOne('App\Search', 'searchable');
+    }
+
     public function crosses(){
         return $this->hasMany('App\Cross','route_id','id');
     }

@@ -27,4 +27,8 @@ class ForumTopic extends Model
         return $this->morphMany('App\Post', 'postable');
     }
 
+    public function search(){
+        return $this->morphOne('App\Search', 'searchable');
+    }
+
 }

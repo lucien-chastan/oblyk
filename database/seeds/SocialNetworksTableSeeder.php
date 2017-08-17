@@ -11,21 +11,21 @@ class SocialNetworksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('social_networks')->insert(['label' => 'site web']);
-        DB::table('social_networks')->insert(['label' => 'facebook']);
-        DB::table('social_networks')->insert(['label' => 'tiwitter']);
-        DB::table('social_networks')->insert(['label' => 'google +']);
-        DB::table('social_networks')->insert(['label' => 'instagramme']);
-        DB::table('social_networks')->insert(['label' => 'pinterest']);
-        DB::table('social_networks')->insert(['label' => 'youtube']);
-        DB::table('social_networks')->insert(['label' => 'vimeo']);
-        DB::table('social_networks')->insert(['label' => 'dailymotion']);
-        DB::table('social_networks')->insert(['label' => 'diaspora']);
-        DB::table('social_networks')->insert(['label' => 'tumblr']);
-        DB::table('social_networks')->insert(['label' => 'camptocamp']);
-        DB::table('social_networks')->insert(['label' => 'ilooove.it']);
-        DB::table('social_networks')->insert(['label' => 'behance']);
-        DB::table('social_networks')->insert(['label' => 'flickr']);
-        DB::table('social_networks')->insert(['label' => 'verticall']);
+        DB::table('social_networks')->insert(['label' => 'site web']); // 1
+        DB::table('social_networks')->insert(['label' => 'facebook']); // 2
+        DB::table('social_networks')->insert(['label' => 'tiwitter']); // 3
+        DB::table('social_networks')->insert(['label' => 'google +']); // 4
+        DB::table('social_networks')->insert(['label' => 'instagramme']); // 5
+        DB::table('social_networks')->insert(['label' => 'pinterest']); // 6
+        DB::table('social_networks')->insert(['label' => 'youtube']); // 7
+        DB::table('social_networks')->insert(['label' => 'vimeo']); // 8
+        DB::table('social_networks')->insert(['label' => 'dailymotion']); // 9
+        DB::table('social_networks')->insert(['label' => 'diaspora']); // 10
+        DB::table('social_networks')->insert(['label' => 'tumblr']); // 11
+        DB::table('social_networks')->insert(['label' => 'camptocamp']); // 12
+        DB::table('social_networks')->insert(['label' => 'ilooove.it']); // 13
+        DB::table('social_networks')->insert(['label' => 'behance']); // 14
+        DB::table('social_networks')->insert(['label' => 'flickr']); // 15
+        DB::table('social_networks')->insert(['label' => 'verticall']); //16
     }
 }

@@ -19,6 +19,10 @@ class Gym extends Model
         return $this->morphMany('App\Post', 'postable');
     }
 
+    public function search(){
+        return $this->morphOne('App\Search', 'searchable');
+    }
+
     public function photos(){
         return $this->morphMany('App\Photo', 'illustrable');
     }
