@@ -183,4 +183,49 @@ class Route extends Model
 
         return $val;
     }
+
+    //convertie une cotation en valeur
+    public static function valToGrad($val){
+        $grad = 0;
+
+        //cotation type 1a, 6a, 8b
+
+        if($val == 1 || $val == 2) $grad = '1a' ;
+        if($val == 3 || $val == 4) $grad = '1b' ;
+        if($val == 5 || $val == 6) $grad = '1c' ;
+
+        if($val == 7 || $val == 8) $grad = '2a' ;
+        if($val == 9 || $val == 10) $grad = '2b' ;
+        if($val == 11 || $val == 12) $grad = '2c' ;
+
+        if($val == 13 || $val == 14) $grad = '3a' ;
+        if($val == 15 || $val == 16) $grad = '3b' ;
+        if($val == 17 || $val == 18) $grad = '3c' ;
+
+        if($val == 19 || $val == 20) $grad = '4a' ;
+        if($val == 21 || $val == 22) $grad = '4b' ;
+        if($val == 23 || $val == 24) $grad = '4c' ;
+
+        if($val == 25 || $val == 26) $grad = '5a' ;
+        if($val == 27 || $val == 28) $grad = '5b' ;
+        if($val == 29 || $val == 30) $grad = '5c' ;
+
+        if($val == 31 || $val == 32) $grad = '6a' ;
+        if($val == 33 || $val == 34) $grad = '6b' ;
+        if($val == 35 || $val == 36) $grad = '6c' ;
+
+        if($val == 37 || $val == 38) $grad = '7a' ;
+        if($val == 39 || $val == 40) $grad = '7b' ;
+        if($val == 41 || $val == 42) $grad = '7c' ;
+
+        if($val == 43 || $val == 44) $grad = '8a' ;
+        if($val == 45 || $val == 46) $grad = '8b' ;
+        if($val == 47 || $val == 48) $grad = '8c' ;
+
+        if($val == 49 || $val == 50) $grad = '9a' ;
+        if($val == 51 || $val == 52) $grad = '9b' ;
+        if($val == 53 || $val == 54) $grad = '9c' ;
+
+        return $grad;
+    }
 }

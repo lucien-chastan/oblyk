@@ -7,17 +7,68 @@ catch(Exception $e){die('Erreur : '.$e->getMessage());}
 try{$bddOrg = new PDO('mysql:host=localhost;dbname=oblykorg;charset=utf8', 'root', 'MySql26400', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));}
 catch(Exception $e){die('Erreur : '.$e->getMessage());}
 
+include('markdown.php');
 
 //Constant
 
 $oblyk_id = 57;
 $startDate = date("Y-m-d H:i:s");
 
+//convertie une cotation en valeur
+function valToGrad($val){
+    $grad = 0;
+
+    //cotation type 1a, 6a, 8b
+
+    if($val == 1 || $val == 2) $grad = '1a' ;
+    if($val == 3 || $val == 4) $grad = '1b' ;
+    if($val == 5 || $val == 6) $grad = '1c' ;
+
+    if($val == 7 || $val == 8) $grad = '2a' ;
+    if($val == 9 || $val == 10) $grad = '2b' ;
+    if($val == 11 || $val == 12) $grad = '2c' ;
+
+    if($val == 13 || $val == 14) $grad = '3a' ;
+    if($val == 15 || $val == 16) $grad = '3b' ;
+    if($val == 17 || $val == 18) $grad = '3c' ;
+
+    if($val == 19 || $val == 20) $grad = '4a' ;
+    if($val == 21 || $val == 22) $grad = '4b' ;
+    if($val == 23 || $val == 24) $grad = '4c' ;
+
+    if($val == 25 || $val == 26) $grad = '5a' ;
+    if($val == 27 || $val == 28) $grad = '5b' ;
+    if($val == 29 || $val == 30) $grad = '5c' ;
+
+    if($val == 31 || $val == 32) $grad = '6a' ;
+    if($val == 33 || $val == 34) $grad = '6b' ;
+    if($val == 35 || $val == 36) $grad = '6c' ;
+
+    if($val == 37 || $val == 38) $grad = '7a' ;
+    if($val == 39 || $val == 40) $grad = '7b' ;
+    if($val == 41 || $val == 42) $grad = '7c' ;
+
+    if($val == 43 || $val == 44) $grad = '8a' ;
+    if($val == 45 || $val == 46) $grad = '8b' ;
+    if($val == 47 || $val == 48) $grad = '8c' ;
+
+    if($val == 49 || $val == 50) $grad = '9a' ;
+    if($val == 51 || $val == 52) $grad = '9b' ;
+    if($val == 53 || $val == 54) $grad = '9c' ;
+
+    return $grad;
+}
+
 //pour souvenir
 //"%â˜º%" -> :)
 //"%ðŸ˜ƒ%" -> :D
 //"%ðŸ˜%" -> <3
-//"%ðŸ™„%" -> <3
+//"%ðŸ™„%" -> :/
+//"%ðŸ˜•%" -> :\
+//"%ðŸ˜‰%" -> ;)
+//"%ðŸ˜Š%" -> ^^
+//"%ðŸ˜%" ->
+//"%ðŸ™Š%" -> &#128586;
 
 //1 . LES UTILISATEURS
 $users = [];
@@ -46,6 +97,56 @@ while($data = $req->fetch()){
     'created_at'=>$data['date'],
   ]);
 
+  //on va chercher les paramètres du partenaire
+  $reqPartnerSettings = $bddNet->prepare('SELECT * FROM usr_climbing_setting WHERE id_user = :user_id');
+  $reqPartnerSettings->execute(['user_id'=>$data['id']]);
+  $dataPartner = $reqPartnerSettings->fetch();
+
+  //Les paramètres de recherche de partenaire
+  if(isset($dataPartner['description_preference'])){
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO user_partner_settings (user_id, partner, description, climb_1, climb_2, climb_3, climb_4, climb_5, climb_6, climb_7, climb_8, grade_max, grade_min, created_at)
+      VALUES (:user_id, :partner, :description, :climb_1, :climb_2, :climb_3, :climb_4, :climb_5, :climb_6, :climb_7, :climb_8, :grade_max, :grade_min, :created_at)');
+    $insert->execute([
+      'user_id'=>$users[$data['id']],
+      'partner'=>$data['partenaire'],
+      'description'=>$dataPartner['description_preference'],
+      'climb_1'=>$dataPartner['type_bloc_ext'],
+      'climb_2'=>$dataPartner['type_voie_ext'],
+      'climb_3'=>$dataPartner['type_gv'],
+      'climb_4'=>$dataPartner['type_trad'],
+      'climb_5'=>$dataPartner['type_artif'],
+      'climb_6'=>$dataPartner['type_dw'],
+      'climb_7'=>0,
+      'climb_8'=>0,
+      'grade_max'=>valToGrad($dataPartner['cotation_max']),
+      'grade_min'=>valToGrad($dataPartner['cotation_mini']),
+      'created_at'=>$data['date'],
+    ]);
+
+  }else{
+
+    //Les paramètres de recherche de partenaire
+    $insert = $bddOrg->prepare('INSERT INTO user_partner_settings (user_id, partner, description, climb_1, climb_2, climb_3, climb_4, climb_5, climb_6, climb_7, grade_max, grade_min, created_at) VALUES (:user_id, :partner, :description, :climb_1, :climb_2, :climb_3, :climb_4, :climb_5, :climb_6, :climb_7, :grade_max, :grade_min, :created_at)');
+    $insert->execute([
+      'user_id'=>$users[$data['id']],
+      'partner'=>0,
+      'description'=>'',
+      'climb_1'=>0,
+      'climb_2'=> 0,
+      'climb_3'=> 0,
+      'climb_4'=> 0,
+      'climb_5'=> 0,
+      'climb_6'=> 0,
+      'climb_7' => 0,
+      'grade_max'=>'2a',
+      'grade_min'=>'2a',
+      'created_at'=>$data['date'],
+    ]);
+  }
+
+
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
   $insert->execute([
@@ -57,7 +158,6 @@ while($data = $req->fetch()){
 
 }
 echo "1. Les Utiliateurs -> ok <br>";
-
 
 //2 . Les albums
 $albums = [];
@@ -656,6 +756,47 @@ while($data = $req->fetch()){
 echo '18. écart de cotation -> ok <br>';
 
 
+// 18 ''. les gaps grades des secteurs
+$req = $bddOrg->prepare('SELECT * FROM sectors');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  $min = 100;
+  $max = 0;
+  $minText = '';
+  $maxText = '';
+  $reqVal = $bddOrg->prepare('SELECT route_sections.grade_val AS val, route_sections.grade AS grade FROM routes INNER JOIN route_sections ON routes.id = route_sections.route_id WHERE routes.sector_id = :sector_id');
+  $reqVal->execute([
+    'sector_id' => $data['id']
+  ]);
+  while($dataRoute = $reqVal->fetch()){
+
+    if($dataRoute['val'] < $min){
+      $min = $dataRoute['val'];
+      $minText = $dataRoute['grade'];
+    }
+
+    if($dataRoute['val'] > $max){
+      $max = $dataRoute['val'];
+      $maxText = $dataRoute['grade'];
+    }
+  }
+
+  $insert = $bddOrg->prepare('
+    INSERT INTO gap_grades (spreadable_id, spreadable_type, min_grade_val, max_grade_val, min_grade_text, max_grade_text, created_at)
+    VALUES (:spreadable_id, :spreadable_type, :min_grade_val, :max_grade_val, :min_grade_text, :max_grade_text, :created_at)');
+  $insert->execute([
+    'spreadable_id' => $data['id'],
+    'spreadable_type' => 'App\Sector',
+    'min_grade_val' => $min,
+    'max_grade_val' => $max,
+    'min_grade_text' => $minText,
+    'max_grade_text' => $maxText,
+    'created_at' => $data['created_at'],
+  ]);
+}
+echo '18 \'. écart de cotation dans un secteur -> ok <br>';
+
 //19. Les descriptions sur les lignes
 $req = $bddNet->prepare('SELECT * FROM ligne_description');
 $req->execute(array());
@@ -1248,8 +1389,6 @@ while($data = $req->fetch()){
 
   if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_conversation'], $conversations)){
 
-    echo 'message : ' . $data['id'] . '<br>';
-
     $insert = $bddOrg->prepare('
       INSERT INTO messages (user_id, conversation_id, message, created_at)
       VALUES (:user_id, :conversation_id, :message, :created_at)');
@@ -1263,7 +1402,6 @@ while($data = $req->fetch()){
 }
 echo '33. Les messages users de la conversation -> ok <br>';
 
-
 //34. Les salles d'escalades
 $gyms = [];
 $req = $bddNet->prepare('SELECT * FROM sae_pr');
@@ -1271,27 +1409,28 @@ $req->execute(array());
 while($data = $req->fetch()){
 
   $insert = $bddOrg->prepare('
-    INSERT INTO gyms (label, description, type_boulder, type_route, free, address, postal_code, code_country, country, city, big_city, region, lat, lng, email, phone_number, web_site, created_at)
-    VALUES (:label, :description, :type_boulder, :type_route, :free, :address, :postal_code, :code_country, :country, :city, :big_city, :region, :lat, :lng, :email, :phone_number, :web_site, :created_at)');
+    INSERT INTO gyms (user_id, label, description, type_boulder, type_route, free, address, postal_code, code_country, country, city, big_city, region, lat, lng, email, phone_number, web_site, created_at)
+    VALUES (:user_id, :label, :description, :type_boulder, :type_route, :free, :address, :postal_code, :code_country, :country, :city, :big_city, :region, :lat, :lng, :email, :phone_number, :web_site, :created_at)');
   $insert->execute([
-    'label'=>$data['nom'],
-    'description'=>$data['intro'],
-    'type_boulder'=>0,
-    'type_route'=>0,
-    'free'=>1,
-    'address'=>$data['adresse'],
-    'postal_code'=>$data['code_postal'],
-    'code_country'=>$data['pays'],
-    'country'=>$data['pays'],
-    'city'=>$data['ville'],
-    'big_city'=>$data['grande_ville'],
-    'region'=>$data['departement'],
-    'lat'=>$data['latitude'],
-    'lng'=>$data['longitude'],
-    'email'=>$data['mail'],
-    'phone_number'=>$data['telephone'],
-    'web_site'=>$data['site_internet'],
-    'created_at'=>date('Y-m-d H:m:s'),
+    'user_id' => $oblyk_id,
+    'label' => $data['nom'],
+    'description' => $data['intro'],
+    'type_boulder' => 0,
+    'type_route' => 0,
+    'free' => 1,
+    'address' => $data['adresse'],
+    'postal_code' => $data['code_postal'],
+    'code_country' => $data['pays'],
+    'country' => $data['pays'],
+    'city' => $data['ville'],
+    'big_city' => $data['grande_ville'],
+    'region' => $data['departement'],
+    'lat' => $data['latitude'],
+    'lng' => $data['longitude'],
+    'email' => $data['mail'],
+    'phone_number' => $data['telephone'],
+    'web_site' => $data['site_internet'],
+    'created_at' => date('Y-m-d H:m:s'),
   ]);
 
   $gyms[$data['id']] = $bddOrg->lastInsertId();
@@ -1299,17 +1438,526 @@ while($data = $req->fetch()){
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
   $insert->execute([
-    'searchable_id'=> $gyms[$data['id']],
-    'searchable_type'=>'App\Gym',
-    'label'=> $data['nom'],
-    'created_at'=>date('Y-m-d H:m:s'),
+    'searchable_id' => $gyms[$data['id']],
+    'searchable_type' => 'App\Gym',
+    'label' => $data['nom'],
+    'created_at' => date('Y-m-d H:m:s'),
   ]);
 
 }
 echo '34. Les salles d\'escalade -> ok <br>';
 
+// 35. les types de grande catégorie
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Communauté")'); // 1
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Oblyk")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Matos")'); // 3
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Escalade")'); // 4
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Entraînement")'); // 5
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Actus - Évènements")'); // 6
+$insert = $bddOrg->query('INSERT INTO forum_general_categories (label) VALUES ("Topos")'); // 7
+echo '35. Les grandes catégories du forum -> ok <br>';
+
+// 36. Les sous catégorie du forum
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (1,"Résumé de trip, histoires","Envie de partager une histoire, une anecdote, de faire un retour sur un trip grimpe (photos, vidéos, etc.) ?")'); // 1
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (1,"Recherche de partenaires","Tu cherches quelqu\'un pour grimper dans une salle ou en falaise, ou même pour un trip? C\'est ici !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (1,"Zone d\'expression libre","Ici, tu peux parler de tout et de rien !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (1,"Organiser une sortie grimpe","Besoin de trouver un co-voiturage, ou de se faire prêter du matos? Tout ce qui concerne l\'organisation d\'une sortie à plusieurs.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (1,"Photos / Vidéos : conseils et matos","Pour ceux qui ont besoin de conseils pour prendre de belles images de grimpe, pour choisir le matos, etc.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (2,"Boîte à idées","Tu as des idées d\'amélioration pour Oblyk, ou des remarques ? C\'est ici que ça se passe !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (2,"Bugs","Si tu as relevé un bug sur le site, n\'hésite pas à le poster ici. On n\'est pas des machines et on peut faire des erreurs !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (2,"Traduction","Si tu as remarqué des erreurs sur la traduction anglaise, ou si tu es motivé pour proposer une traduction du site dans une autre langue ! ; )")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (2,"Articles","Lancer une discussion, ou réagir à un article publié sur Oblyk, tout est permis !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (3,"Chaussons","Voir les avis sur une marque ou un modèle de chaussons, ou partager ses expériences, et ses attentes.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (3,"Baudrier, corde, casque","Voir les avis sur une marque ou un modèle de baudrier, corde ou casque, et partager ses expériences, et ses attentes.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (3,"Quincaillerie : mousquetons, dégaines, etc.","Voir les avis sur une marque ou un modèle de mousquetons, dégaines, etc., et partager ses expériences, et ses attentes.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Informations / Réglementation sites d\'escalade","Tu cherches des informations sur un site ou la réglementation pour y pratiquer l\'escalade ? C\'est ici que ça se passe.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Voie","Tu recherches des informations sur une voie en particulier, ou tu veux partager ton expérience ? C\'est ici que ça se passe !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Grande voie / Trad","Ici, tu peux raconter ton expérience dans une grande voie (ou trad), ou demander des informations plus spécifiques.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Résine et salles","Tout ce qui concerne les salles d\'escalade.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Club","Envie de parler d\'un club en particulier, de promouvoir un évènement organisé par un club, ou même de rechercher des bénévoles ? C\'est par ici !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Bloc","Ici, on peut parler de tout ce qui relève de l\'univers du bloc !")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Deep water","Deep water, psicobloc, bref tout ce qui concerne la grimpe au dessus de l\'eau.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (4,"Urban climbing","L\'espace dédié à l\'urban climbing ! Là où on peut en faire, les bons spots, etc.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (5,"Diététique","Ici, tu peux partager tout ce qui concerne la diététique à adopter pour l\'escalade : conseils, recettes, idées, ou questions.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (5,"Entraînement spécifique","Des conseils ou des questions concernant les exercices spécifiques pour s\'entraîner ? Pan güllich, poutre, etc., c\'est ici que ça se passe. Bref, l\'espace des masos ! ; )")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (5,"Conseils pour progresser","Si tu débutes, ou que tu cherches à progresser en escalade, tu peux poser tes questions ici.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (5,"Planification","Un espace pour parler de tout ce qui touche, de près ou de loin, à la planification d\'entraînement en escalade.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (5,"Blessures","Pour partager des expériences sur certaines blessures, et donner des conseils de prévention pour éviter qu\'elle surviennent.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (6,"Évènements","Pour connaître les prochains évènements qui concernent l\'escalade (compétitions, contests, rassemblements, etc.), ou autre.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (6,"Les news de la grimpe","Ici, tu peux discuter ou réagir sur les dernières news du monde de la grimpe.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (7,"Nouveau topo","Si un topo vient de sortir, tu peux en parler ici pour informer les autres grimpeurs qu\'il est disponible.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (7,"Recherche de topo","Si tu recherches un topo et que tu n\'arrives pas à le trouver, tu peux consulter cette partie du forum.")'); // 2
+$insert = $bddOrg->query('INSERT INTO forum_categories (general_category_id, label, description) VALUES (7,"Discussions topos","Un espace de discussion libre où on peut parler de tout ce qui concerne les topos (papier, numérique, etc.).")'); // 2
+echo '36. Les sous catégories du forum -> ok <br>';
 
 
+
+//37. Les sujets du forum
+$topics = [];
+$req = $bddNet->prepare('SELECT * FROM forum_sujet');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  //transformation de la date
+  $dateLastPost = ($data['date_d_poste'] != '0000-00-00 00:00:00') ? $data['date_d_poste'] : date('Y-m-d H:m:s');
+
+  if (array_key_exists($data['id_user'], $users)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO forum_topics (category_id, user_id, label, nb_post, last_post, created_at)
+      VALUES (:category_id, :user_id, :label, :nb_post, :last_post, :created_at)');
+    $insert->execute([
+      'category_id'=>$data['categorie'],
+      'user_id'=>$users[$data['id_user']],
+      'label'=>$data['titre_sujet'],
+      'nb_post'=>$data['nb_poste'],
+      'last_post'=>$dateLastPost,
+      'created_at'=>$data['date_cr'],
+    ]);
+
+    $topics[$data['id']] = $bddOrg->lastInsertId();
+
+    //Indexation pour la recherche rapide
+    $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
+    $insert->execute([
+      'searchable_id'=> $topics[$data['id']],
+      'searchable_type'=>'App\ForumTopic',
+      'label'=> $data['titre_sujet'],
+      'created_at'=>$data['date_cr'],
+    ]);
+  }
+}
+echo '37. les sujets du forum -> ok <br>';
+
+
+
+//38. la ticklist
+$req = $bddNet->prepare('SELECT * FROM usr_ticklist');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_ligne'], $routes)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO tick_lists (user_id, route_id, created_at)
+      VALUES (:user_id, :route_id, :created_at)');
+    $insert->execute([
+      'user_id'=>$users[$data['id_user']],
+      'route_id'=>$routes[$data['id_ligne']],
+      'created_at'=>$data['date_ticklist'],
+    ]);
+  }
+}
+echo '38. La ticklist -> ok <br>';
+
+
+// 39. les types d'encordement
+$insert = $bddOrg->query('INSERT INTO cross_modes (label) VALUES ("tête")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_modes (label) VALUES ("moulinette")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_modes (label) VALUES ("leader")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_modes (label) VALUES ("second")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_modes (label) VALUES ("réversible")'); // 1
+echo '39. Mode d\'encordement -> ok <br>';
+
+// 40. la difficulté de la ligne
+$insert = $bddOrg->query('INSERT INTO cross_hardnesses (label) VALUES ("pas d\'avis")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_hardnesses (label) VALUES ("facile pour la cotation")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_hardnesses (label) VALUES ("juste, bien coté")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_hardnesses (label) VALUES ("dur pour la cotation")'); // 1
+echo '40. La difficulté -> ok <br>';
+
+// 41. les status
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("projet")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("terminé")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("après travail")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("flash")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("à vue")'); // 1
+$insert = $bddOrg->query('INSERT INTO cross_statuses (label) VALUES ("répétition")'); // 1
+echo '41. Le status -> ok <br>';
+
+//42. Les croix
+$crosses = [];
+$req = $bddNet->prepare('SELECT * FROM usr_cc');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_ligne'], $routes)){
+
+
+    $hardness = 1;
+    if($data['cotation_user'] == 0) $hardness = 1;
+    if($data['cotation_user'] == 1) $hardness = 3;
+    if($data['cotation_user'] == 2) $hardness = 2;
+    if($data['cotation_user'] == 3) $hardness = 4;
+
+    //transformation de la date
+    $dateCroix = ($data['date_croix'] != '0000-00-00 00:00:00') ? $data['date_croix'] : date('Y-m-d H:m:s');
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO crosses (route_id, user_id, status_id, mode_id, hardness_id, environment, release_at, created_at)
+      VALUES (:route_id, :user_id, :status_id, :mode_id, :hardness_id, :environment, :release_at, :created_at)');
+    $insert->execute([
+      'route_id'=>$routes[$data['id_ligne']],
+      'user_id'=>$users[$data['id_user']],
+      'status_id'=>$data['status'] + 1,
+      'mode_id'=>$data['mode'] + 1,
+      'hardness_id'=>$hardness,
+      'environment'=>0,
+      'release_at'=>$dateCroix,
+      'created_at'=>$dateCroix,
+    ]);
+
+    $crosses[$data['id']] = $bddOrg->lastInsertId();
+  }
+}
+echo '42. Les croix -> ok <br>';
+
+// 43. Les sections des croix
+$req = $bddOrg->prepare('SELECT * FROM crosses');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  $reqRoute = $bddOrg->prepare('SELECT * FROM route_sections where route_id = :route_id');
+  $reqRoute->execute([
+    'route_id'=>$data['route_id']
+  ]);
+  while($dataRoute = $reqRoute->fetch()){
+    $insert = $bddOrg->prepare('
+      INSERT INTO cross_sections (cross_id, route_section_id, created_at)
+      VALUES (:cross_id, :route_section_id, :created_at)');
+    $insert->execute([
+      'cross_id'=>$data['id'],
+      'route_section_id'=>$dataRoute['id'],
+      'created_at'=>$data['release_at'],
+    ]);
+  }
+}
+echo '43. Les sections des croix -> ok <br>';
+
+
+
+//44. Les lieux de grimpe (PARTENAIRE)
+$req = $bddNet->prepare('SELECT * FROM usr_climbing_zone');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users)){
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO user_places (user_id, lat, lng, rayon, label, description, active, created_at)
+      VALUES (:user_id, :lat, :lng, :rayon, :label, :description, :active, :created_at)');
+    $insert->execute([
+      'user_id'=>$users[$data['id_user']],
+      'lat'=>$data['latitude'],
+      'lng'=>$data['longitude'],
+      'rayon'=>$data['rayon'],
+      'label'=>$data['titre_lieu'],
+      'description'=>'',
+      'active'=>$data['active_zone'],
+      'created_at'=> date('Y-m-d H:m:s'),
+    ]);
+  }
+}
+echo '44. Les lieux des grimpeurs -> ok <br>';
+
+
+//45. Following des falaises
+$req = $bddNet->prepare('SELECT * FROM site_follow');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_site'], $crags)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$crags[$data['id_site']],
+      'followed_type'=>'App\Crag',
+      'user_id'=>$users[$data['id_user']],
+      'created_at'=> $data['date_follow'],
+    ]);
+  }
+}
+echo '45. Following des falaises -> ok <br>';
+
+
+//46. Following des topos
+$req = $bddNet->prepare('SELECT * FROM topo_follow');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_topo'], $topos)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$topos[$data['id_topo']],
+      'followed_type'=>'App\Topo',
+      'user_id'=>$users[$data['id_user']],
+      'created_at'=> $data['date_follow'],
+    ]);
+  }
+}
+echo '46. Following des topos -> ok <br>';
+
+
+//46. Following des massif
+$req = $bddNet->prepare('SELECT * FROM massif_follow');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_massif'], $massives)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$massives[$data['id_massif']],
+      'followed_type'=>'App\Massive',
+      'user_id'=>$users[$data['id_user']],
+      'created_at'=> $data['date_follow'],
+    ]);
+  }
+}
+echo '46. Following des massifs -> ok <br>';
+
+
+//47. Following des salles de grimpe
+$req = $bddNet->prepare('SELECT * FROM sae_follow');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_sae'], $gyms)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$gyms[$data['id_sae']],
+      'followed_type'=>'App\Gym',
+      'user_id'=>$users[$data['id_user']],
+      'created_at'=> $data['date_follow'],
+    ]);
+  }
+}
+echo '47. Following des salles -> ok <br>';
+
+
+//48. Following des topics du forum
+$req = $bddNet->prepare('SELECT * FROM forum_suivi');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user'], $users) && array_key_exists($data['id_sujet'], $topics)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$topics[$data['id_sujet']],
+      'followed_type'=>'App\ForumTopic',
+      'user_id'=>$users[$data['id_user']],
+      'created_at'=> $data['date_suivi'],
+    ]);
+  }
+}
+echo '48. Following des topics -> ok <br>';
+
+
+
+//49. Les relations d'amitié
+$req = $bddNet->prepare('SELECT * FROM usr_relation');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if (array_key_exists($data['id_user_demande'], $users) && array_key_exists($data['id_user_cible'], $users)){
+    $insert = $bddOrg->prepare('
+      INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+      VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+    $insert->execute([
+      'followed_id'=>$users[$data['id_user_cible']],
+      'followed_type'=>'App\User',
+      'user_id'=>$users[$data['id_user_demande']],
+      'created_at'=> $data['date_demande'],
+    ]);
+
+    if($data['accept'] == 1) {
+
+      $insert = $bddOrg->prepare('
+        INSERT INTO follows (followed_id, followed_type, user_id, created_at)
+        VALUES (:followed_id, :followed_type, :user_id, :created_at)');
+      $insert->execute([
+        'followed_id'=>$users[$data['id_user_demande']],
+        'followed_type'=>'App\User',
+        'user_id'=>$users[$data['id_user_cible']],
+        'created_at'=> $data['date_accept'],
+      ]);
+
+    }
+  }
+}
+echo '49. Les relations user / user -> ok <br>';
+
+
+
+//50. Les posts dans le flux de premier niveau
+$posts = [];
+$req = $bddNet->prepare('SELECT * FROM flux WHERE id_reponse = 0');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  // 1 - SAE
+  if($data['type_sujet'] == 1){
+    if(array_key_exists($data['id_sujet'], $gyms) && array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$gyms[$data['id_sujet']],
+        'postable_type'=>'App\Gym',
+        'user_id'=>$users[$data['id_redacteur']],
+        'content'=> Markdown($data['text_flux']),
+        'created_at'=> $data['date_cr'],
+      ]);
+
+      $posts[$data['id']] = $bddOrg->lastInsertId();
+    }
+  }
+
+
+  // 2 - USER
+  if($data['type_sujet'] == 2){
+    if(array_key_exists($data['id_sujet'], $users) && array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$users[$data['id_sujet']],
+        'postable_type'=>'App\User',
+        'user_id'=>$users[$data['id_redacteur']],
+        'content'=> Markdown($data['text_flux']),
+        'created_at'=> $data['date_cr'],
+      ]);
+      $posts[$data['id']] = $bddOrg->lastInsertId();
+    }
+  }
+
+  // 3 - TOPO
+  if($data['type_sujet'] == 3){
+    if(array_key_exists($data['id_sujet'], $topos) && array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$topos[$data['id_sujet']],
+        'postable_type'=>'App\Topo',
+        'user_id'=>$users[$data['id_redacteur']],
+        'content'=> Markdown($data['text_flux']),
+        'created_at'=> $data['date_cr'],
+      ]);
+      $posts[$data['id']] = $bddOrg->lastInsertId();
+    }
+  }
+
+
+  // 4 - MASSIF
+  if($data['type_sujet'] == 4){
+    if(array_key_exists($data['id_sujet'], $massives) && array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$massives[$data['id_sujet']],
+        'postable_type'=>'App\Massive',
+        'user_id'=>$users[$data['id_redacteur']],
+        'content'=> Markdown($data['text_flux']),
+        'created_at'=> $data['date_cr'],
+      ]);
+      $posts[$data['id']] = $bddOrg->lastInsertId();
+    }
+  }
+
+  // 5 - SITE
+  if($data['type_sujet'] == 5){
+    if(array_key_exists($data['id_sujet'], $crags) && array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$crags[$data['id_sujet']],
+        'postable_type'=>'App\Crag',
+        'user_id'=>$users[$data['id_redacteur']],
+        'content'=> Markdown($data['text_flux']),
+        'created_at'=> $data['date_cr'],
+      ]);
+      $posts[$data['id']] = $bddOrg->lastInsertId();
+    }
+  }
+}
+echo '50. Posts de niveau 1 -> ok <br>';
+
+
+//51. Converstion des messages dans le forum en post de niveau 1
+$req = $bddNet->prepare('SELECT * FROM forum_post');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_sujet'], $topics) && array_key_exists($data['id_user'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+      $insert->execute([
+        'postable_id'=>$topics[$data['id_sujet']],
+        'postable_type'=>'App\ForumTopic',
+        'user_id'=>$users[$data['id_user']],
+        'content'=> Markdown($data['texte_poste']),
+        'created_at'=> $data['date_poste'],
+      ]);
+  }
+}
+echo '51. Sujet forum en post flux -> ok <br>';
+
+
+
+//50. Les posts dans le flux de second niveau
+// $comments = [];
+// $req = $bddNet->prepare('SELECT * FROM flux WHERE id_reponse != 0');
+// $req->execute(array());
+// while($data = $req->fetch()){
+//
+//   //si c'est un commentaire sur un post
+//   if(array_key_exists($data['id_reponse'], $posts)){
+//     if(array_key_exists($data['id_redacteur'], $users){
+//       $insert = $bddOrg->prepare('
+//         INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
+//         VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
+//       $insert->execute([
+//         'commentable_id'=>$posts[$data['id_reponse']],
+//         'commentable_type'=>'App\Post',
+//         'comment'=> $data['text_flux'],
+//         'user_id'=>$users[$data['id_redacteur']],
+//         'created_at'=> $data['date_cr'],
+//       ]);
+//
+//       $comments[$data['id']] = $bddOrg->lastInsertId();
+//     }
+//
+//   }else{
+//
+//     //si c'est un commentaire sur un commentaire
+//     if(array_key_exists($data['id_reponse'], $comments)){
+//       if(array_key_exists($data['id_redacteur'], $users){
+//         $insert = $bddOrg->prepare('
+//           INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
+//           VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
+//         $insert->execute([
+//           'commentable_id'=>$comments[$data['id_reponse']],
+//           'commentable_type'=>'App\Comment',
+//           'comment'=> $data['text_flux'],
+//           'user_id'=>$users[$data['id_redacteur']],
+//           'created_at'=> $data['date_cr'],
+//         ]);
+//
+//         $comments[$data['id']] = $bddOrg->lastInsertId();
+//       }
+//     }
+//   }
+// }
 
 //calcul du temps d'éxécution
 echo "<br><br>FIN<br><br>";
