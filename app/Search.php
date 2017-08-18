@@ -22,7 +22,7 @@ class Search extends Model
             if(!preg_match($litleWords, $word)) $goodWords[] = $word;
         }
 
-        $regSearches = '[' . implode('|', $goodWords) . ']';
+        $regSearches = implode('|', $goodWords);
 
         //va chercher les entrées qui correspondent à la recherche
         $finds = DB::select('

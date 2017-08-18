@@ -59,6 +59,32 @@ function valToGrad($val){
     return $grad;
 }
 
+function slugify($text) {
+  // replace non letter or digits by -
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+  // transliterate
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+
+  // trim
+  $text = trim($text, '-');
+
+  // remove duplicate -
+  $text = preg_replace('~-+~', '-', $text);
+
+  // lowercase
+  $text = strtolower($text);
+
+  if (empty($text)) {
+    return 'n-a';
+  }
+
+  return $text;
+}
+
 //pour souvenir
 //"%â˜º%" -> :)
 //"%ðŸ˜ƒ%" -> :D
@@ -70,13 +96,15 @@ function valToGrad($val){
 //"%ðŸ˜%" ->
 //"%ðŸ™Š%" -> &#128586;
 
+// REGEXP "â˜º|ðŸ˜ƒ|ðŸ˜|ðŸ™„|ðŸ˜•|ðŸ˜‰|ðŸ˜Š|ðŸ˜|ðŸ™Š"
+
 //1 . LES UTILISATEURS
 $users = [];
 $req = $bddNet->prepare('SELECT * FROM usr_pr');
 $req->execute(array());
 while($data = $req->fetch()){
 
-  $insert = $bddOrg->prepare('INSERT INTO users (name, email, password, localisation, birth, sex, description, created_at) VALUES (:name, :email, :password, :localisation, :birth, :sex, :description, :created_at)');
+  $insert = $bddOrg->prepare('INSERT INTO users (name, email, password, localisation, birth, sex, description, last_fil_read, created_at) VALUES (:name, :email, :password, :localisation, :birth, :sex, :description, :last_fil_read, :created_at)');
   $insert->execute([
     'name'=>$data['nom'],
     'email'=>$data['email'],
@@ -85,6 +113,7 @@ while($data = $req->fetch()){
     'birth'=>$data['age'],
     'sex'=>$data['sex'],
     'description'=>$data['description_profil'],
+    'last_fil_read'=>date('Y-m-d H:m:s'),
     'created_at'=>$data['date'],
   ]);
 
@@ -146,6 +175,23 @@ while($data = $req->fetch()){
     ]);
   }
 
+  //copie du bandeau si existe
+  if($data['img_bandeau'] != ''){
+    if(file_exists('../oblyk.net/img_user/photo_bandeau/' . $data['img_bandeau'])){
+      $splitBandeau = explode('.',$data['img_bandeau']);
+      $extension = $splitBandeau[1];
+      copy('../oblyk.net/img_user/photo_bandeau/' . $data['img_bandeau'], '../oblyk.org/storage/app/public/users/1300/bandeau-' . $users[$data['id']] . '.' . $extension);
+    }
+  }
+
+  //copie de l'image du user si existe
+  if($data['img_pr'] != ''){
+    if(file_exists('../oblyk.net/img_user/' . $data['img_pr'])){
+      $splitImgProfile = explode('.',$data['img_pr']);
+      $extension = $splitImgProfile[1];
+      copy('../oblyk.net/img_user/' . $data['img_pr'], '../oblyk.org/storage/app/public/users/1000/user-' . $users[$data['id']] . '.' . $extension);
+    }
+  }
 
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
@@ -155,9 +201,9 @@ while($data = $req->fetch()){
     'label'=> $data['nom'],
     'created_at'=>$data['date'],
   ]);
-
 }
 echo "1. Les Utiliateurs -> ok <br>";
+
 
 //2 . Les albums
 $albums = [];
@@ -203,6 +249,7 @@ echo ('3. Type de roche -> ok <br>');
 
 //4 . Les falaises
 $crags = [];
+$cragSlugs = [];
 $req = $bddNet->prepare('SELECT * FROM site_pr');
 $req->execute(array());
 while($data = $req->fetch()){
@@ -230,6 +277,7 @@ while($data = $req->fetch()){
   ]);
 
   $crags[$data['id']] = $bddOrg->lastInsertId();
+  $cragSlugs[$data['id']] = slugify($data['nom']);
 
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
@@ -339,8 +387,6 @@ while($data = $req->fetch()){
 
   if (array_key_exists($data['id_site'], $crags) && array_key_exists($data['id_user'], $users)){
 
-    // echo 'Lien : ' . $data['id'] . ' du site : ' . $data['id_site'] . '<br>';
-
     $insert = $bddOrg->prepare('
       INSERT INTO links (linkable_id, linkable_type, label, link, description, user_id, created_at)
       VALUES (:linkable_id, :linkable_type, :label, :link, :description, :user_id, :created_at)');
@@ -421,6 +467,7 @@ echo "10' . création des secteurs manquant -> ok <br>";
 
 // 10. Les Secteurs
 $sectors = [];
+$sectorSlugs = [];
 $req = $bddNet->prepare('SELECT * FROM secteur_pr');
 $req->execute(array());
 while($data = $req->fetch()){
@@ -448,7 +495,7 @@ while($data = $req->fetch()){
     ]);
 
     $sectors[$data['id']] = $bddOrg->lastInsertId();
-
+    $sectorSlugs[$data['id']] = slugify($data['nom']);
 
     //Orientation
     $orientations = explode(' - ', $data['orientation']);
@@ -601,6 +648,7 @@ echo '16. type de départ -> ok <br>';
 
 //17 . Les lignes
 $routes = [];
+$routeSlugs = [];
 $routeSections = [];
 $req = $bddNet->prepare('SELECT * FROM ligne_pr');
 $req->execute(array());
@@ -639,6 +687,7 @@ while($data = $req->fetch()){
     ]);
 
     $routes[$data['id']] = $bddOrg->lastInsertId();
+    $routeSlugs[$data['id']] = slugify($data['nom']);
 
     //Indexation pour la recherche rapide
     $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
@@ -869,6 +918,15 @@ while($data = $req->fetch()){
   ]);
 
   $topos[$data['id']] = $bddOrg->lastInsertId();
+
+  //copie de la couverture du topo si elle existe
+  if($data['img_topo'] != ''){
+    if(file_exists('../oblyk.net/img_topo/' . $data['img_topo'])){
+      $splitImg = explode('.',$data['img_topo']);
+      $extension = $splitImg[1];
+      copy('../oblyk.net/img_topo/' . $data['img_topo'], '../oblyk.org/storage/app/public/topos/700/topo-' . $topos[$data['id']] . '.' . $extension);
+    }
+  }
 
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
@@ -1435,6 +1493,24 @@ while($data = $req->fetch()){
 
   $gyms[$data['id']] = $bddOrg->lastInsertId();
 
+  //copie du logo s'il existe
+  if($data['img_logo'] != ''){
+    if(file_exists('../oblyk.net/img_sae/img_logo/' . $data['img_logo'])){
+      $splitImg = explode('.',$data['img_logo']);
+      $extension = $splitImg[1];
+      copy('../oblyk.net/img_sae/img_logo/' . $data['img_logo'], '../oblyk.org/storage/app/public/gyms/100/logo-' . $gyms[$data['id']] . '.' . $extension);
+    }
+  }
+
+  //copie du bandeau s'il existe
+  if($data['img_bandeau'] != ''){
+    if(file_exists('../oblyk.net/img_sae/img_bandeau/' . $data['img_bandeau'])){
+      $splitImg = explode('.',$data['img_bandeau']);
+      $extension = $splitImg[1];
+      copy('../oblyk.net/img_sae/img_bandeau/' . $data['img_bandeau'], '../oblyk.org/storage/app/public/gyms/1300/bandeau-' . $gyms[$data['id']] . '.' . $extension);
+    }
+  }
+
   //Indexation pour la recherche rapide
   $insert = $bddOrg->prepare('INSERT INTO searches (searchable_id, searchable_type, label, created_at) VALUES (:searchable_id, :searchable_type, :label, :created_at)');
   $insert->execute([
@@ -1606,6 +1682,24 @@ while($data = $req->fetch()){
     ]);
 
     $crosses[$data['id']] = $bddOrg->lastInsertId();
+
+    //s'il y a un commentaire sur cette croix
+    if($data['text_libre'] != ''){
+
+      $insert = $bddOrg->prepare('
+        INSERT INTO descriptions (descriptive_id, descriptive_type, description, user_id, note, cross_id, created_at)
+        VALUES (:descriptive_id, :descriptive_type, :description, :user_id, :note, :cross_id, :created_at)');
+      $insert->execute([
+        'descriptive_id'=>$routes[$data['id_ligne']],
+        'descriptive_type'=>'App\Route',
+        'description'=> $data['text_libre'],
+        'user_id'=>$users[$data['id_user']],
+        'note'=>$data['note'],
+        'cross_id'=>$crosses[$data['id']],
+        'created_at'=>$dateCroix,
+      ]);
+
+    }
   }
 }
 echo '42. Les croix -> ok <br>';
@@ -1641,6 +1735,9 @@ while($data = $req->fetch()){
 
   if (array_key_exists($data['id_user'], $users)){
 
+    //limite à 40 Km
+    $rayon = ($data['rayon'] > 40) ? 40 : $data['rayon'];
+
     $insert = $bddOrg->prepare('
       INSERT INTO user_places (user_id, lat, lng, rayon, label, description, active, created_at)
       VALUES (:user_id, :lat, :lng, :rayon, :label, :description, :active, :created_at)');
@@ -1648,7 +1745,7 @@ while($data = $req->fetch()){
       'user_id'=>$users[$data['id_user']],
       'lat'=>$data['latitude'],
       'lng'=>$data['longitude'],
-      'rayon'=>$data['rayon'],
+      'rayon'=>$rayon,
       'label'=>$data['titre_lieu'],
       'description'=>'',
       'active'=>$data['active_zone'],
@@ -1801,7 +1898,7 @@ $req = $bddNet->prepare('SELECT * FROM flux WHERE id_reponse = 0');
 $req->execute(array());
 while($data = $req->fetch()){
 
-  // 1 - SAE
+  // TYPE 1 - SAE
   if($data['type_sujet'] == 1){
     if(array_key_exists($data['id_sujet'], $gyms) && array_key_exists($data['id_redacteur'], $users)){
       $insert = $bddOrg->prepare('
@@ -1820,7 +1917,7 @@ while($data = $req->fetch()){
   }
 
 
-  // 2 - USER
+  // TYPE 2 - USER
   if($data['type_sujet'] == 2){
     if(array_key_exists($data['id_sujet'], $users) && array_key_exists($data['id_redacteur'], $users)){
       $insert = $bddOrg->prepare('
@@ -1837,7 +1934,7 @@ while($data = $req->fetch()){
     }
   }
 
-  // 3 - TOPO
+  // TYPE 3 - TOPO
   if($data['type_sujet'] == 3){
     if(array_key_exists($data['id_sujet'], $topos) && array_key_exists($data['id_redacteur'], $users)){
       $insert = $bddOrg->prepare('
@@ -1855,7 +1952,7 @@ while($data = $req->fetch()){
   }
 
 
-  // 4 - MASSIF
+  // TYPE 4 - MASSIF
   if($data['type_sujet'] == 4){
     if(array_key_exists($data['id_sujet'], $massives) && array_key_exists($data['id_redacteur'], $users)){
       $insert = $bddOrg->prepare('
@@ -1872,7 +1969,7 @@ while($data = $req->fetch()){
     }
   }
 
-  // 5 - SITE
+  // TYPE 5 - SITE
   if($data['type_sujet'] == 5){
     if(array_key_exists($data['id_sujet'], $crags) && array_key_exists($data['id_redacteur'], $users)){
       $insert = $bddOrg->prepare('
@@ -1893,71 +1990,285 @@ echo '50. Posts de niveau 1 -> ok <br>';
 
 
 //51. Converstion des messages dans le forum en post de niveau 1
-$req = $bddNet->prepare('SELECT * FROM forum_post');
+$req = $bddNet->prepare('SELECT * FROM forum_poste');
 $req->execute(array());
 while($data = $req->fetch()){
 
   if(array_key_exists($data['id_sujet'], $topics) && array_key_exists($data['id_user'], $users)){
-      $insert = $bddOrg->prepare('
-        INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
-        VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
-      $insert->execute([
-        'postable_id'=>$topics[$data['id_sujet']],
-        'postable_type'=>'App\ForumTopic',
-        'user_id'=>$users[$data['id_user']],
-        'content'=> Markdown($data['texte_poste']),
-        'created_at'=> $data['date_poste'],
-      ]);
+    $insert = $bddOrg->prepare('
+      INSERT INTO posts (postable_id, postable_type, user_id, content, created_at)
+      VALUES (:postable_id, :postable_type, :user_id, :content, :created_at)');
+    $insert->execute([
+      'postable_id'=>$topics[$data['id_sujet']],
+      'postable_type'=>'App\ForumTopic',
+      'user_id'=>$users[$data['id_user']],
+      'content'=> Markdown($data['text_poste']),
+      'created_at'=> $data['date_poste'],
+    ]);
   }
 }
 echo '51. Sujet forum en post flux -> ok <br>';
 
 
 
-//50. Les posts dans le flux de second niveau
-// $comments = [];
-// $req = $bddNet->prepare('SELECT * FROM flux WHERE id_reponse != 0');
-// $req->execute(array());
-// while($data = $req->fetch()){
-//
-//   //si c'est un commentaire sur un post
-//   if(array_key_exists($data['id_reponse'], $posts)){
-//     if(array_key_exists($data['id_redacteur'], $users){
-//       $insert = $bddOrg->prepare('
-//         INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
-//         VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
-//       $insert->execute([
-//         'commentable_id'=>$posts[$data['id_reponse']],
-//         'commentable_type'=>'App\Post',
-//         'comment'=> $data['text_flux'],
-//         'user_id'=>$users[$data['id_redacteur']],
-//         'created_at'=> $data['date_cr'],
-//       ]);
-//
-//       $comments[$data['id']] = $bddOrg->lastInsertId();
-//     }
-//
-//   }else{
-//
-//     //si c'est un commentaire sur un commentaire
-//     if(array_key_exists($data['id_reponse'], $comments)){
-//       if(array_key_exists($data['id_redacteur'], $users){
-//         $insert = $bddOrg->prepare('
-//           INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
-//           VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
-//         $insert->execute([
-//           'commentable_id'=>$comments[$data['id_reponse']],
-//           'commentable_type'=>'App\Comment',
-//           'comment'=> $data['text_flux'],
-//           'user_id'=>$users[$data['id_redacteur']],
-//           'created_at'=> $data['date_cr'],
-//         ]);
-//
-//         $comments[$data['id']] = $bddOrg->lastInsertId();
-//       }
-//     }
-//   }
-// }
+// 52. Les posts dans le flux de second niveau
+$comments = [];
+$req = $bddNet->prepare('SELECT * FROM flux WHERE id_reponse != 0');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  //si c'est un commentaire sur un post
+  if(array_key_exists($data['id_reponse'], $posts)){
+
+    if(array_key_exists($data['id_redacteur'], $users)){
+      $insert = $bddOrg->prepare('
+        INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
+        VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
+      $insert->execute([
+        'commentable_id'=>$posts[$data['id_reponse']],
+        'commentable_type'=>'App\Post',
+        'comment'=> $data['text_flux'],
+        'user_id'=>$users[$data['id_redacteur']],
+        'created_at'=> $data['date_cr'],
+      ]);
+
+      $comments[$data['id']] = $bddOrg->lastInsertId();
+    }
+
+  }else{
+
+    //si c'est un commentaire sur un commentaire
+    if(array_key_exists($data['id_reponse'], $comments)){
+      if(array_key_exists($data['id_redacteur'], $users)){
+        $insert = $bddOrg->prepare('
+          INSERT INTO comments (commentable_id, commentable_type, comment, user_id, created_at)
+          VALUES (:commentable_id, :commentable_type, :comment, :user_id, :created_at)');
+        $insert->execute([
+          'commentable_id'=>$comments[$data['id_reponse']],
+          'commentable_type'=>'App\Comment',
+          'comment'=> $data['text_flux'],
+          'user_id'=>$users[$data['id_redacteur']],
+          'created_at'=> $data['date_cr'],
+        ]);
+
+        $comments[$data['id']] = $bddOrg->lastInsertId();
+      }
+    }
+  }
+}
+echo '52. Les commentaires de seconds niveaux -> ok <br>';
+
+
+//53. Les vidéo sur les sites d'escalades
+$req = $bddNet->prepare('SELECT * FROM site_video');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_site'], $crags)){
+
+    //on change l'id du user s'il n'existe plus
+    $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO videos (user_id, viewable_id, viewable_type, iframe, description, created_at)
+      VALUES (:user_id, :viewable_id, :viewable_type, :iframe, :description, :created_at)');
+    $insert->execute([
+      'user_id'=>$user_id,
+      'viewable_id'=>$crags[$data['id_site']],
+      'viewable_type'=>'App\Crag',
+      'iframe'=> $data['href_video'],
+      'description'=> $data['description'],
+      'created_at'=> $data['date_cr'],
+    ]);
+  }
+}
+echo '53. Les vidéos sur les sites d\'escalade -> ok <br>';
+
+
+
+//54. Les vidéo sur les lignes
+$req = $bddNet->prepare('SELECT * FROM ligne_video');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_ligne'], $routes)){
+
+    //on change l'id du user s'il n'existe plus
+    $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO videos (user_id, viewable_id, viewable_type, iframe, description, created_at)
+      VALUES (:user_id, :viewable_id, :viewable_type, :iframe, :description, :created_at)');
+    $insert->execute([
+      'user_id'=>$user_id,
+      'viewable_id'=>$routes[$data['id_ligne']],
+      'viewable_type'=>'App\Route',
+      'iframe'=> $data['href_video'],
+      'description'=> $data['description'],
+      'created_at'=> $data['date_cr'],
+    ]);
+  }
+}
+echo '54. Les vidéos sur les lignes -> ok <br>';
+
+
+
+//55. Les vidéo sur les Salle
+$req = $bddNet->prepare('SELECT * FROM sae_video');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_sae'], $gyms)){
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO videos (user_id, viewable_id, viewable_type, iframe, description, created_at)
+      VALUES (:user_id, :viewable_id, :viewable_type, :iframe, :description, :created_at)');
+    $insert->execute([
+      'user_id'=>$oblyk_id,
+      'viewable_id'=>$gyms[$data['id_sae']],
+      'viewable_type'=>'App\Gym',
+      'iframe'=> $data['href_video'],
+      'description'=> $data['legende'],
+      'created_at'=> $data['date_cr'],
+    ]);
+  }
+}
+echo '55. Les vidéos sur les salles -> ok <br>';
+
+
+//56. Les photos
+$photos = [];
+$req = $bddNet->prepare('SELECT * FROM photo');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  //Photo sur les sites
+  if($data['type_source'] == 'site'){
+    if(array_key_exists($data['id_source'], $crags)){
+      if(file_exists('../oblyk.net/photo/site/' . $data['href_photo'])){
+
+        //on change l'id du user s'il n'existe plus
+        $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+        //On enregistre la photo en table (avec un nom temporaire)
+        $insert = $bddOrg->prepare('
+          INSERT INTO photos (illustrable_id, illustrable_type, slug_label, user_id, album_id, description, created_at)
+          VALUES (:illustrable_id, :illustrable_type, :slug_label, :user_id, :album_id, :description, :created_at)');
+        $insert->execute([
+          'illustrable_id'=>$crags[$data['id_source']],
+          'illustrable_type'=>'App\Crag',
+          'slug_label'=>'temp-slug',
+          'user_id'=>$user_id,
+          'album_id'=>$albums[$data['id_user_album']],
+          'description'=> $data['legende'],
+          'created_at'=> $data['date_cr'],
+        ]);
+
+        $photos[$data['id']] = $bddOrg->lastInsertId();
+
+        // on copie le fichier
+        $splitImg = explode('.', $data['href_photo']);
+        $extension = $splitImg[1];
+        $imgName = $cragSlugs[$data['id_source']] . '-' . $photos[$data['id']] . '.' . $extension;
+        copy('../oblyk.net/photo/site/' . $data['href_photo'], '../oblyk.org/storage/app/public/photos/crags/1300/' . $imgName);
+
+        //on modifie l'ancien slug pour le nouveau
+        $update = $bddOrg->prepare('UPDATE photos SET slug_label = :slug_label WHERE id = :id');
+        $update->execute([
+          'slug_label'=>$imgName,
+          'id'=> $photos[$data['id']],
+        ]);
+
+      }
+    }
+  }
+
+
+  //Photo sur les secteurs
+  if($data['type_source'] == 'secteur'){
+    if(array_key_exists($data['id_source'], $sectors)){
+      if(file_exists('../oblyk.net/photo/secteur/' . $data['href_photo'])){
+
+        //on change l'id du user s'il n'existe plus
+        $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+        //On enregistre la photo en table (avec un nom temporaire)
+        $insert = $bddOrg->prepare('
+          INSERT INTO photos (illustrable_id, illustrable_type, slug_label, user_id, album_id, description, created_at)
+          VALUES (:illustrable_id, :illustrable_type, :slug_label, :user_id, :album_id, :description, :created_at)');
+        $insert->execute([
+          'illustrable_id'=>$sectors[$data['id_source']],
+          'illustrable_type'=>'App\Sector',
+          'slug_label'=>'temp-slug',
+          'user_id'=>$user_id,
+          'album_id'=>$albums[$data['id_user_album']],
+          'description'=> $data['legende'],
+          'created_at'=> $data['date_cr'],
+        ]);
+
+        $photos[$data['id']] = $bddOrg->lastInsertId();
+
+        // on copie le fichier
+        $splitImg = explode('.', $data['href_photo']);
+        $extension = $splitImg[1];
+        $imgName = $sectorSlugs[$data['id_source']] . '-' . $photos[$data['id']] . '.' . $extension;
+        copy('../oblyk.net/photo/secteur/' . $data['href_photo'], '../oblyk.org/storage/app/public/photos/crags/1300/' . $imgName);
+
+        //on modifie l'ancien slug pour le nouveau
+        $update = $bddOrg->prepare('UPDATE photos SET slug_label = :slug_label WHERE id = :id');
+        $update->execute([
+          'slug_label'=>$imgName,
+          'id'=> $photos[$data['id']],
+        ]);
+
+      }
+    }
+  }
+
+  //Photo sur les lignes
+  if($data['type_source'] == 'ligne'){
+    if(array_key_exists($data['id_source'], $routes)){
+      if(file_exists('../oblyk.net/photo/ligne/' . $data['href_photo'])){
+
+        //on change l'id du user s'il n'existe plus
+        $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+        //On enregistre la photo en table (avec un nom temporaire)
+        $insert = $bddOrg->prepare('
+          INSERT INTO photos (illustrable_id, illustrable_type, slug_label, user_id, album_id, description, created_at)
+          VALUES (:illustrable_id, :illustrable_type, :slug_label, :user_id, :album_id, :description, :created_at)');
+        $insert->execute([
+          'illustrable_id'=>$routes[$data['id_source']],
+          'illustrable_type'=>'App\Route',
+          'slug_label'=>'temp-slug',
+          'user_id'=>$user_id,
+          'album_id'=>$albums[$data['id_user_album']],
+          'description'=> $data['legende'],
+          'created_at'=> $data['date_cr'],
+        ]);
+
+        $photos[$data['id']] = $bddOrg->lastInsertId();
+
+        // on copie le fichier
+        $splitImg = explode('.', $data['href_photo']);
+        $extension = $splitImg[1];
+        $imgName = $routeSlugs[$data['id_source']] . '-' . $photos[$data['id']] . '.' . $extension;
+        copy('../oblyk.net/photo/ligne/' . $data['href_photo'], '../oblyk.org/storage/app/public/photos/crags/1300/' . $imgName);
+
+        //on modifie l'ancien slug pour le nouveau
+        $update = $bddOrg->prepare('UPDATE photos SET slug_label = :slug_label WHERE id = :id');
+        $update->execute([
+          'slug_label'=>$imgName,
+          'id'=> $photos[$data['id']],
+        ]);
+
+      }
+    }
+  }
+
+
+}
+echo '56. Les photos -> ok <br>';
 
 //calcul du temps d'éxécution
 echo "<br><br>FIN<br><br>";
