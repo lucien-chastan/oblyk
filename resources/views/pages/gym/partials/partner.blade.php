@@ -34,7 +34,7 @@
             </p>
         @else
             <p class="text-center">
-                <a {!! $Helpers::modal(route('partnerModal'), ["place_id"=>"", "lat"=>$crag->lat, "lng"=>$crag->lng, "label"=>$crag->label, "rayon"=>2, "title"=>"Ajouter un lieu", "method"=>"POST", "callback"=>"refresh" ]) !!} class="btn-flat blue-text btnModal"><i class="material-icons left">person_pin</i> Moi je grimpe ici !</a>
+                <a {!! $Helpers::modal(route('partnerModal'), ["place_id"=>"", "lat"=>$gym->lat, "lng"=>$gym->lng, "label"=>$gym->label, "rayon"=>2, "title"=>"Ajouter un lieu", "method"=>"POST", "callback"=>"refresh" ]) !!} class="btn-flat blue-text btnModal"><i class="material-icons left">person_pin</i> Je grimpe ici !</a>
             </p>
         @endif
     @endif

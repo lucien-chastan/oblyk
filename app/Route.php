@@ -34,6 +34,10 @@ class Route extends Model
         return $this->hasMany('App\Cross','route_id','id');
     }
 
+    public function tags(){
+        return $this->hasMany('App\Tag','route_id','id');
+    }
+
     public function climb(){
         return $this->hasOne('App\Climb','id', 'climb_id');
     }

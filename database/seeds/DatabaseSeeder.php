@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoutesTableSeeder::class);
         $this->call(RouteSectionsTableSeeder::class);
         $this->call(GapGradesTableSeeder::class);
+        $this->call(RouteTagsTableSeeder::class);
 
         //Topo
         $this->call(ToposTableSeeder::class);
