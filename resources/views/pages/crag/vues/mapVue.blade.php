@@ -19,7 +19,7 @@
                         <i class="material-icons blue-text left">local_parking</i> <a class="tooltipped lien-parking" {!! $Helpers::tooltip('Cliquer pour afficher sur la carte', 'right') !!} onclick="cragMap.setView([{{$parking->lat}}, {{$parking->lng}}], 18)">{{$parking->lat}}, {{$parking->lng}}</a>
                         <div class="markdownZone">{{ $parking->description }}</div>
                         <p class="info-user grey-text">
-                            ajouté par {{$parking->user->name}} le {{$parking->created_at->format('d M Y')}}
+                            ajouté par <a href="{{ route('userPage', ['user_id'=>$parking->user->id, 'user_label'=>str_slug($parking->user->name)]) }}">{{$parking->user->name}}</a> le {{$parking->created_at->format('d M Y')}}
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$parking->id, "model"=>"Parking"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -43,10 +43,10 @@
                 <h2 class="loved-king-font">Les marches d'approches</h2>
                 @foreach($crag->approaches as $approach)
                     <div class="blue-border-div">
-                        <i class="material-icons blue-text left">directions_walk</i> <a class="tooltipped lien-parking" {!! $Helpers::tooltip('Cliquer pour afficher sur la carte', 'right') !!}>test</a>
+                        <i class="material-icons blue-text left">directions_walk</i>
                         <div class="markdownZone">{{ $approach->description }}</div>
                         <p class="info-user grey-text">
-                            ajouté par {{$approach->user->name}} le {{$approach->created_at->format('d M Y')}}
+                            ajouté par <a href="{{ route('userPage', ['user_id'=>$approach->user->id, 'user_label'=>str_slug($approach->user->name)]) }}">{{$approach->user->name}}</a> le {{$approach->created_at->format('d M Y')}}
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$approach->id, "model"=>"Approach"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -72,7 +72,11 @@
                         <i class="large material-icons">add</i>
                     </a>
                     <ul>
-                        <li><a {!! $Helpers::tooltip('Ajouter une marche d\'approche') !!}} class="tooltipped btn-floating blue"><i class="material-icons">directions_walk</i></a></li>
+                        @if(count($crag->parkings) != 0)
+                            <li><a {!! $Helpers::tooltip('Ajouter une marche d\'approche') !!}} {!! $Helpers::modal(route('approachModal'), ["crag_id"=>$crag->id, "approach_id"=>"", "title"=>"Ajouter une marche d\'approche", "method" => "POST", "lat1"=>$crag->lat, "lng1"=>$crag->lng, "lat2"=>$crag->parkings[0]->lat, "lng2"=>$crag->parkings[0]->lng]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">directions_walk</i></a></li>
+                        @else
+                            <li><a {!! $Helpers::tooltip('Ajouter au moins un parking pour ajouter une marche d\'approche') !!}} onclick="alert('Il faut que vous ayez ajouté au moins un parking pour pouvoir ajouter une marche d\'approche')" class="tooltipped btn-floating blue"><i class="material-icons">directions_walk</i></a></li>
+                        @endif
                         <li><a {!! $Helpers::tooltip('Ajouter un parking') !!}} {!! $Helpers::modal(route('parkingModal'), ["crag_id"=>$crag->id, "parking_id"=>"", "title"=>"Ajouter un parking", "method" => "POST", "lat"=>$crag->lat, "lng"=>$crag->lng]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">local_parking</i></a></li>
                     </ul>
                 </div>

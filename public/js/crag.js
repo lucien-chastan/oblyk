@@ -32,19 +32,33 @@ function initCragMap() {
 
             if(crags[i].id === parseInt(document.getElementById('cragId').value)){
                 for(let j in crags[i].parkings){
-                    L.marker(
-                        [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
-                        {icon: marker_parking}
-                    ).bindPopup(`
+
+                    if(crags[i].parkings[j].description !== ''){
+                        L.marker(
+                            [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
+                            {icon: marker_parking}
+                        ).bindPopup(`
                         <div class="crag-leaflet-info parking-leaflet-info">
                             <h2 class="loved-king-font titre-crag-leaflet"> Parking </h2>
                             <div>${crags[i].parkings[j].description}</div>
                         </div>
                     `).addTo(cragMap);
+                    }else{
+                        L.marker(
+                            [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
+                            {icon: marker_parking, interactive : false}
+                        ).addTo(cragMap);
+                    }
+
                 }
 
                 for(let j in crags[i].approaches){
-                    console.log(crags[i].approaches[j]);
+                    let points = convertApprocheString(crags[i].approaches[j].polyline);
+                    if(crags[i].approaches[j].description !== ''){
+                        L.polyline(points, {color: '#2196F3'}).bindPopup('<p>' + crags[i].approaches[j].description + '</p>').addTo(cragMap);
+                    }else{
+                        L.polyline(points, {color: '#2196F3', interactive : false}).addTo(cragMap);
+                    }
                 }
             }
         }
@@ -415,4 +429,18 @@ function uploadTopoPdf(form, callback) {
 
 function getCragPosts(){
     getPosts('Crag',document.getElementById('id-crag-actualite').value, document.getElementById('insert-posts-zone'));
+}
+
+function convertApprocheString(approachString) {
+    let clean1 = approachString.replace(/["]/g,''),
+        outputArray = [],
+        split1 = clean1.split(', ');
+
+    for(let i = 0 ; i < split1.length ; i++){
+        let clean2 = split1[i].replace(/[\[\]]/g,''),
+            split2 = clean2.split(',');
+        outputArray.push([parseFloat(split2[0]), parseFloat(split2[1])]);
+    }
+
+    return outputArray;
 }

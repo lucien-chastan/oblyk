@@ -203,6 +203,7 @@ Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal
 Route::post('/modal/cross', 'CRUD\CrossController@crossModal')->name('crossModal');
 Route::post('/modal/crossUser', 'CRUD\CrossController@crossUserModal')->name('crossUserModal');
 Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('partnerModal');
+Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 
 
 //CRUD AJAX
@@ -238,6 +239,7 @@ Route::resource('topics', 'CRUD\TopicController');
 Route::resource('crosses', 'CRUD\CrossController');
 Route::post('/cross/users', 'CRUD\CrossController@crossUsers')->name('crossUsersScript');
 Route::resource('partners', 'CRUD\PartnerController');
+Route::resource('approaches', 'CRUD\ApproachController');
 
 //CRUD USER
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
