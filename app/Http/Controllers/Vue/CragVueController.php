@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Auth;
 class CragVueController extends Controller
 {
     function vueMap($id){
-        $data = ['crag' => Crag::where('id',$id)->with('parkings')->first()];
+
+        $crag = Crag::where('id',$id)
+            ->with('parkings')
+            ->with('approaches')
+            ->first();
+
+        $data = ['crag' => $crag];
         return view('pages.crag.vues.mapVue', $data);
     }
 

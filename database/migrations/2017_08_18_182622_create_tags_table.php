@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRouteTagsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRouteTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('route_tags', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('route_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -33,6 +33,6 @@ class CreateRouteTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('route_tags');
+        Schema::drop('tags');
     }
 }

@@ -30,8 +30,8 @@ function globalSearche(searchInput) {
     //on affiche la progresse barre
     progress.style.opacity = '1';
 
-    //si notre champs de recherche est vide, on s'arrête
-    if(searchInput.value === ''){
+    //si notre champs de recherche est vide, on s'arrête (ou si on à que 2 lettres
+    if(searchInput.value === '' || searchInput.value.length < 3){
         progress.style.opacity = '0';
         return false;
     }
@@ -60,7 +60,7 @@ function globalSearche(searchInput) {
             //on cache la progress barre
             progress.style.opacity = '0';
         });
-    },500);
+    },300);
 }
 
 //ANIMATION EN RIDEAU DES RÉSULTATS DES RECHERCHES

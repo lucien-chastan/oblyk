@@ -39,6 +39,7 @@ class User extends Authenticatable
     }
 
     public function albums() { return $this->hasMany('App\Album','user_id', 'id'); }
+    public function approaches() { return $this->hasMany('App\Approach','user_id', 'id'); }
     public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }
     public function crosses(){ return $this->hasMany('App\Cross','user_id', 'id'); }
     public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }
@@ -58,6 +59,7 @@ class User extends Authenticatable
     public function sectors() { return $this->hasMany('App\Sector','user_id', 'id'); }
     public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
     public function socialNetworks(){ return $this->hasMany('App\UserSocialNetwork','user_id', 'id'); }
+    public function tags() { return $this->hasMany('App\Tag','user_id', 'id'); }
     public function topos() { return $this->hasMany('App\Topo','user_id', 'id'); }
     public function topoWebs() { return $this->hasMany('App\TopoWeb','user_id', 'id'); }
     public function topoPdfs() { return $this->hasMany('App\TopoPdf','user_id', 'id'); }

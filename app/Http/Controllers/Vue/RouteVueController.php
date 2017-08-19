@@ -44,6 +44,7 @@ class RouteVueController extends Controller
         $data = [
             'route' => Route::where('id',$id)
                 ->with('descriptions')
+                ->with('tags')
                 ->with('descriptions.user')
                 ->with('routeSections')
                 ->with('routeSections.anchor')

@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Approach extends Model
 {
-    public function route(){
-        return $this->hasOne('App\Route','id', 'route_id');
+    public function crag(){
+        return $this->hasOne('App\Crag','id', 'crag_id');
     }
 
     public function user(){

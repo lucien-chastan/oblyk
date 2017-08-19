@@ -165,6 +165,16 @@
 
     </div>
 
+    {{--LES TAGS--}}
+    <div class="row table-des-informations">
+        <div class="col s12">
+            @foreach($route->tags as $tag)
+                <cite>
+                    #@lang('elements/tags.tag_' . $tag->tag_id)
+                </cite>
+            @endforeach
+        </div>
+    </div>
 
     {{--BOUTON POUR LA MODIFICATION--}}
     <div class="ligne-bt-route">
@@ -176,7 +186,6 @@
 
 
     {{--LISTE DES LONGUEURS--}}
-
     @if(count($route->routeSections) > 1)
 
         <h5 class="loved-king-font">Les longueurs</h5>

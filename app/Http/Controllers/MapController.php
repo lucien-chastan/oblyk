@@ -28,7 +28,7 @@ class MapController extends Controller
         $cragsInRayon = Crag::getCragsAroundPoint($lat, $lng, $rayon);
         $crags = [];
         foreach ($cragsInRayon as $crag) $crags[] = $crag->id;
-        $data = ['crags' => Crag::whereIn('id',$crags)->with('parkings')->get()];
+        $data = ['crags' => Crag::whereIn('id',$crags)->withCount('routes')->with('gapGrade')->with('parkings')->with('approaches')->get()];
 
         return response()->json($data);
 

@@ -87,7 +87,7 @@ function buildPopup(crag) {
                 </tr>
                 <tr>
                     <td>Lignes &amp; Cotations : </td>
-                    <td>150 lignes, de 5a <i class="material-icons tiny">arrow_forward</i> 6a</td>
+                    <td>${crag.routes_count} lignes, de <span class="color-grade-${crag.gap_grade.min_grade_val}">${crag.gap_grade.min_grade_text}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${crag.gap_grade.max_grade_val}">${crag.gap_grade.max_grade_text}</span></td>
                 </tr>
                 <tr>
                     <td></td>

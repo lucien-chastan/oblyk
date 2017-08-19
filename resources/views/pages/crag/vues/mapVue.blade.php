@@ -38,6 +38,33 @@
 
             </div>
 
+            {{--Liste des marches d'approches--}}
+            <div class="blue-border-zone">
+                <h2 class="loved-king-font">Les marches d'approches</h2>
+                @foreach($crag->approaches as $approach)
+                    <div class="blue-border-div">
+                        <i class="material-icons blue-text left">directions_walk</i> <a class="tooltipped lien-parking" {!! $Helpers::tooltip('Cliquer pour afficher sur la carte', 'right') !!}>test</a>
+                        <div class="markdownZone">{{ $approach->description }}</div>
+                        <p class="info-user grey-text">
+                            ajouté par {{$approach->user->name}} le {{$approach->created_at->format('d M Y')}}
+
+                            @if(Auth::check())
+                                <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$approach->id, "model"=>"Approach"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                @if($parking->user_id == Auth::id())
+                                    <i {!! $Helpers::tooltip('Modifier cette marche d\'approche') !!} {!! $Helpers::modal(route('parkingModal'), ["crag_id"=>$crag->id, "approach_id"=>$approach->id, "title"=>"Modifier cette marche d'approche", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                    <i {!! $Helpers::tooltip('Supprimer cette marche d\'approche') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/approaches/" . $approach->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                @endif
+                            @endif
+                        </p>
+                    </div>
+                @endforeach
+
+                @if(count($crag->approaches) == 0)
+                    <p class="grey-text text-center">Il n'y a pas encore de marche d'approche référencée sur ce site</p>
+                @endif
+
+            </div>
+
             {{--bouton d'ajout--}}
             @if(Auth::check())
                 <div class="fixed-action-btn horizontal">

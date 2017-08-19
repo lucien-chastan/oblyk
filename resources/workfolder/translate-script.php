@@ -198,7 +198,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id'=> $users[$data['id']],
     'searchable_type'=>'App\User',
-    'label'=> $data['nom'],
+    'label'=> slugify($data['nom']),
     'created_at'=>$data['date'],
   ]);
 }
@@ -284,7 +284,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id'=> $crags[$data['id']],
     'searchable_type'=>'App\Crag',
-    'label'=> $data['nom'],
+    'label'=> slugify($data['nom']),
     'created_at'=>$data['date_cr'],
   ]);
 
@@ -579,7 +579,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id'=> $words[$data['id']],
     'searchable_type'=>'App\Word',
-    'label'=> $data['nom'],
+    'label'=> slugify($data['nom']),
     'created_at'=>$data['date_cr'],
   ]);
 }
@@ -694,7 +694,7 @@ while($data = $req->fetch()){
     $insert->execute([
       'searchable_id'=> $routes[$data['id']],
       'searchable_type'=>'App\Route',
-      'label'=> $data['nom'],
+      'label'=> slugify($data['nom']),
       'created_at'=>$data['date_cr'],
     ]);
 
@@ -933,7 +933,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id'=> $topos[$data['id']],
     'searchable_type'=>'App\Topo',
-    'label'=> $data['nom_topo'],
+    'label'=> slugify($data['nom_topo']),
     'created_at' => $dateCr,
   ]);
 
@@ -1066,7 +1066,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id'=> $massives[$data['id']],
     'searchable_type'=>'App\Massive',
-    'label'=> $data['nom'],
+    'label'=> slugify($data['nom']),
     'created_at'=>$data['date_cr'],
   ]);
 }
@@ -1516,7 +1516,7 @@ while($data = $req->fetch()){
   $insert->execute([
     'searchable_id' => $gyms[$data['id']],
     'searchable_type' => 'App\Gym',
-    'label' => $data['nom'],
+    'label' => slugify($data['nom']),
     'created_at' => date('Y-m-d H:m:s'),
   ]);
 
@@ -1597,7 +1597,7 @@ while($data = $req->fetch()){
     $insert->execute([
       'searchable_id'=> $topics[$data['id']],
       'searchable_type'=>'App\ForumTopic',
-      'label'=> $data['titre_sujet'],
+      'label'=> slugify($data['titre_sujet']),
       'created_at'=>$data['date_cr'],
     ]);
   }
@@ -2265,10 +2265,59 @@ while($data = $req->fetch()){
       }
     }
   }
-
-
 }
 echo '56. Les photos -> ok <br>';
+
+
+// 57 . Les tags
+$req = $bddNet->prepare('SELECT * FROM ligne_tag');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_ligne'], $routes)){
+
+    //on change l'id du user s'il n'existe plus
+    $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO tags (route_id, user_id, tag_id, created_at)
+      VALUES (:route_id, :user_id, :tag_id, :created_at)');
+    $insert->execute([
+      'route_id'=>$routes[$data['id_ligne']],
+      'user_id'=>$user_id,
+      'tag_id'=>$data['id_tag'],
+      'created_at'=> $data['date_cr'],
+    ]);
+  }
+}
+echo '57. Les tags -> ok <br>';
+
+
+// 58 . Les marches d'approches
+$req = $bddNet->prepare('SELECT * FROM site_approche');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_site'], $crags)){
+
+    //on change l'id du user s'il n'existe plus
+    $user_id = array_key_exists($data['id_user'], $users) ? $users[$data['id_user']] : $oblyk_id;
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO approaches (crag_id, user_id, polyline, description, length, created_at)
+      VALUES (:crag_id, :user_id, :polyline, :description, :length, :created_at)');
+    $insert->execute([
+      'crag_id'=>$crags[$data['id_site']],
+      'user_id'=>$user_id,
+      'polyline'=>$data['gpx'],
+      'description'=>$data['description'],
+      'length'=>$data['longueur'],
+      'created_at'=> $data['date_cr'],
+    ]);
+  }
+}
+echo '58. Les marches d\'approches -> ok <br>';
+
 
 //calcul du temps d'éxécution
 echo "<br><br>FIN<br><br>";

@@ -30,7 +30,7 @@ function initCragMap() {
                 {icon: markerIcon}
             ).bindPopup(buildPopup(crags[i])).addTo(cragMap);
 
-            if(crags[i].id == document.getElementById('cragId').value){
+            if(crags[i].id === parseInt(document.getElementById('cragId').value)){
                 for(let j in crags[i].parkings){
                     L.marker(
                         [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
@@ -41,6 +41,10 @@ function initCragMap() {
                             <div>${crags[i].parkings[j].description}</div>
                         </div>
                     `).addTo(cragMap);
+                }
+
+                for(let j in crags[i].approaches){
+                    console.log(crags[i].approaches[j]);
                 }
             }
         }
