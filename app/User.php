@@ -43,6 +43,7 @@ class User extends Authenticatable
     public function crags(){ return $this->hasMany('App\Crag','user_id', 'id'); }
     public function crosses(){ return $this->hasMany('App\Cross','user_id', 'id'); }
     public function descriptions() { return $this->hasMany('App\Description','user_id', 'id'); }
+    public function exceptions() { return $this->hasMany('App\Exception','user_id', 'id'); }
     public function follows() { return $this->hasMany('App\Follow','user_id', 'id'); }
     public function gyms() { return $this->hasMany('App\Gym','user_id', 'id'); }
     public function lexiques() { return $this->hasMany('App\Word','user_id', 'id'); }

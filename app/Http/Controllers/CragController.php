@@ -34,6 +34,7 @@ class CragController extends Controller
             ->with('topoPdfs.user')
             ->with('gapGrade')
             ->with('descriptions.user')
+            ->with('exceptions.user')
             ->first();
 
         $partners = User::whereIn('id', UserPlace::getPartnersAroundCenter($crag->lat, $crag->lng))->get();

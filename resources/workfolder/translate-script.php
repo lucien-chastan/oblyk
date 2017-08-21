@@ -2319,6 +2319,30 @@ while($data = $req->fetch()){
 echo '58. Les marches d\'approches -> ok <br>';
 
 
+
+// 59 . Les éxeptions sur les falaises
+$req = $bddNet->prepare('SELECT * FROM site_interdiction');
+$req->execute(array());
+while($data = $req->fetch()){
+
+  if(array_key_exists($data['id_site'], $crags)){
+
+    $insert = $bddOrg->prepare('
+      INSERT INTO exceptions (crag_id, user_id, exceptions_type, description, created_at)
+      VALUES (:crag_id, :user_id, :exceptions_type, :description, :created_at)');
+    $insert->execute([
+      'crag_id'=>$crags[$data['id_site']],
+      'user_id'=>$oblyk_id,
+      'exceptions_type'=>$data['niveau'],
+      'description'=>$data['description'],
+      'created_at'=> $data['date'],
+    ]);
+  }
+}
+echo '59. Les éxeptions -> ok <br>';
+
+
+
 //calcul du temps d'éxécution
 echo "<br><br>FIN<br><br>";
 $endDate = date("Y-m-d H:i:s");

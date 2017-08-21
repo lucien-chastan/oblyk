@@ -12,6 +12,33 @@
         On y trouve {{ $crag->routes_count }} lignes @if($crag->routes_count > 0) allant de <strong class="color-grade-{{ $crag->gapGrade->min_grade_val }}">{{ $crag->gapGrade->min_grade_text }}</strong> à <strong class="color-grade-{{ $crag->gapGrade->max_grade_val }}">{{ $crag->gapGrade->max_grade_text }}</strong> @endif
     </p>
 
+    {{-- INTERFICTION, CONVENTION, ETC--}}
+    @if(count($crag->exceptions) > 0)
+        @foreach($crag->exceptions as $exception)
+
+            @if($exception->exception_type == 1)
+                <p class="red-text text-bold">
+                    <i class="material-icons left">report_problem</i> Site interdit
+                </p>
+            @endif
+
+            @if($exception->exception_type == 2)
+                <p class="orange-text text-bold"><i class="material-icons left">error</i> Accès restreint à ce site</p>
+            @endif
+
+            @if($exception->exception_type == 3)
+                <p class="text-bold ffme-color"><img src="/img/logo_ffme.svg" class="logo-exceptions-crag"> Site conventionné par la <a class="inherit-color" href="http://www.ffme.fr/">FFME</a></p>
+            @endif
+
+            @if($exception->exception_type == 4)
+                <p class="text-bold greenspits-color"><img src="/img/logo_greenspits.svg" class="logo-exceptions-crag"> Site maintenu par <a class="inherit-color" href="https://greenspits.com/fr/greenspits-projet-naissant-lavenir/">Greenspits</a></p>
+            @endif
+
+            <div class="markdownZone">{{$exception->description}}</div>
+
+        @endforeach
+    @endif
+
     {{--REGROUPEMENT--}}
     @if(count($crag->massives) > 0)
         <p>
