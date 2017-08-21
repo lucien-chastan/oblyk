@@ -27,8 +27,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.828427"
-     inkscape:cx="120.46034"
-     inkscape:cy="551.80011"
+     inkscape:cx="350.07832"
+     inkscape:cy="710.25868"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1197,5 +1197,12 @@
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cccccccccccccc" />
     </g>
+    <rect
+       id="rect6802"
+       width="18.554436"
+       height="18.554436"
+       x="319.85889"
+       y="404.36865"
+       style="fill:none;stroke:#2196f3;stroke-width:2.81250001;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none" />
   </g>
 </svg>

@@ -44,6 +44,10 @@ let marker_11111 = L.icon({iconUrl: '/img/marker-11111.svg', iconSize: [24, 32],
 let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_sale = L.icon({iconUrl: '/img/marker-sale.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
+//marker des secteurs
+let marker_sector = L.icon({iconUrl: '/img/marker-sector.svg', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -14]});
+
+//Marker des salles d'escalade
 let marker_gym_00 = L.icon({iconUrl: '/img/marker-sae-00.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_gym_01 = L.icon({iconUrl: '/img/marker-sae-01.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_gym_10 = L.icon({iconUrl: '/img/marker-sae-10.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});

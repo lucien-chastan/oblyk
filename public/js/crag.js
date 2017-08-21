@@ -49,7 +49,6 @@ function initCragMap() {
                             {icon: marker_parking, interactive : false}
                         ).addTo(cragMap);
                     }
-
                 }
 
                 for(let j in crags[i].approaches){
@@ -58,6 +57,35 @@ function initCragMap() {
                         L.polyline(points, {color: '#2196F3'}).bindPopup('<p>' + crags[i].approaches[j].description + '</p>').addTo(cragMap);
                     }else{
                         L.polyline(points, {color: '#2196F3', interactive : false}).addTo(cragMap);
+                    }
+                }
+
+                for(let j in crags[i].sectors){
+
+                    if(crags[i].sectors[j].lat !== 0 && crags[i].sectors[j].lng !== 0) {
+                        L.marker(
+                            [crags[i].sectors[j].lat, crags[i].sectors[j].lng],
+                            {icon: marker_sector}
+                        ).bindPopup(`
+                            <img class="photo-couve-site-leaflet" src="${crags[i].bandeau}" alt="photo de couverture de ${crags[i].label}">
+                            <div class="crag-leaflet-info parking-leaflet-info">
+                                <h2 class="loved-king-font titre-crag-leaflet"> Secteur : ${crags[i].sectors[j].label} </h2>
+                                <table>
+                                    <tr>
+                                        <td>Temps d'approche : </td>
+                                        <td>${crags[i].sectors[j].approach} minutes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Localisation : </td>
+                                        <td>${crags[i].sectors[j].lat}, ${crags[i].sectors[j].lng}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cotations : </td>
+                                        <td>Cotation allant de <span class="color-grade-${crags[i].sectors[j].gap_grade.min_grade_val}">${crags[i].sectors[j].gap_grade.min_grade_text}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${crags[i].sectors[j].gap_grade.max_grade_val}">${crags[i].sectors[j].gap_grade.max_grade_text}</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        `).addTo(cragMap);
                     }
                 }
             }
