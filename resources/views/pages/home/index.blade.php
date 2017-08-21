@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> trans('meta/home.title'),
+    'meta_description'=>trans('meta/home.description'),
+    'meta_img'=>'/img/meta_home.jpg',
+])
 
 @section('css')
     {{--css particulier à la page--}}

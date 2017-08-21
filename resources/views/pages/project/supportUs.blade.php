@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'meta_title'=> trans('meta/project.title_supportUs'),
+    'meta_description'=>trans('meta/project.description_supportUs'),
+    'meta_img'=>'/img/meta_home.jpg',
+    ])
 
 @section('content')
 

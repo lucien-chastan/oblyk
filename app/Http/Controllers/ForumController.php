@@ -76,6 +76,7 @@ class ForumController extends Controller
 
         $topic = ForumTopic::where('id',$topic_id)
             ->with('user')
+            ->with('category')
             ->first();
 
         //Increment de nombre de vue

@@ -1,4 +1,8 @@
-@extends('layouts.profile')
+@extends('layouts.profile', [
+    'meta_title'=> trans('meta/profile.title_map'),
+    'meta_description'=>trans('meta/profile.description_map'),
+    'meta_img'=>'/img/meta_home.jpg',
+    ])
 
 @section('css')
     <link href="/css/profile.css" rel="stylesheet">

@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'meta_title'=> $article->title,
+    'meta_description'=> $article->description,
+    'meta_img'=>$bandeau,
+    ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
 

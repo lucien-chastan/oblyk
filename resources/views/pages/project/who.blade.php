@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'meta_title'=> trans('meta/project.title_who'),
+    'meta_description'=>trans('meta/project.description_who'),
+    'meta_img'=>'/img/meta_home.jpg',
+    ])
 
 @section('css')
     <link href="/css/project.css" rel="stylesheet">

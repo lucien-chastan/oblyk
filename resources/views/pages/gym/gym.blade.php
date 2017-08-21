@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> trans('meta/gym.title', ['label'=>$gym->label, 'big_city'=>$gym->big_city]),
+    'meta_description'=>trans('meta/gym.description', ['label'=>$gym->label, 'city'=>$gym->city, 'big_city'=>$gym->big_city]),
+    'meta_img'=>$gym->bandeau,
+    ])
+
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')

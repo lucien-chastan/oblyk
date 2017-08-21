@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> trans('meta/massive.title', ['label'=>$massive->label]),
+    'meta_description'=>trans('meta/massive.description', ['label'=>$massive->label]),
+    'meta_img'=>'/img/default-massive-bandeau.jpg',
+    ])
+
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')

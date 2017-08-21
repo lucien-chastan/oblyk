@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'meta_title'=> trans('meta/project.title_help'),
+    'meta_description'=>trans('meta/project.description_help'),
+    'meta_img'=>'/img/meta_home.jpg',
+    ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
 

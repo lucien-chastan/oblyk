@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> trans('meta/forum.title_category'),
+    'meta_description'=>trans('meta/forum.description_category'),
+    'meta_img'=>'/img/forum-escalade-oblyk.jpg',
+    ])
 
 @section('css')
     <link href="/css/forum.css" rel="stylesheet">

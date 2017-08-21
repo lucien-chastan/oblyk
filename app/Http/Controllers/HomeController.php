@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        //
+    }
 
     /**
      * Show the application dashboard.
@@ -25,11 +25,7 @@ class HomeController extends Controller
     public function indexPage()
     {
         $articles = Article::where([['id','>','0'],['publish','=',1]])->withCount('descriptions')->orderBy('created_at','desc')->skip(0)->take(3)->get();
-
-        $data = [
-            'articles' => $articles
-        ];
-
+        $data = ['articles' => $articles];
         return view('pages.home.index', $data);
     }
 }

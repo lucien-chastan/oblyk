@@ -1,4 +1,8 @@
-@extends('layouts.map')
+@extends('layouts.map', [
+    'meta_title'=> trans('meta/partner.title_map'),
+    'meta_description'=>trans('meta/partner.description_map'),
+    'meta_img'=>'/img/map_meta.jpg',
+    ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
 @inject('Inputs','App\Lib\InputTemplates')

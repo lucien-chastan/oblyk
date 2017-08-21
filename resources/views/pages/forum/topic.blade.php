@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> $topic->label,
+    'meta_description'=>$topic->category->description,
+    'meta_img'=>'/img/forum-escalade-oblyk.jpg',
+    ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
 

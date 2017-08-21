@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app',[
+    'meta_title'=> trans('meta/forum.title_topics'),
+    'meta_description'=>trans('meta/forum.description_topics'),
+    'meta_img'=>'/img/forum-escalade-oblyk.jpg',
+    ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
 @inject('Inputs','App\Lib\InputTemplates')

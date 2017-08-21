@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'meta_title'=> trans('meta/topo.title', ['label'=>$topo->label]),
+    'meta_description'=>trans('meta/topo.description', ['label'=>$topo->label]),
+    'meta_img'=>'/img/default-topo-bandeau.jpg',
+    ])
+
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')
