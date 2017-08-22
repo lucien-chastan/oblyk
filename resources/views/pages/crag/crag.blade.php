@@ -71,6 +71,7 @@
 
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
+    <script src="/framework/leaflet/leaflet.plotter.min.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/crag.js"></script>
     <script src="/js/post.js"></script>

@@ -32,32 +32,45 @@ function initCragMap() {
 
             if(crags[i].id === parseInt(document.getElementById('cragId').value)){
                 for(let j in crags[i].parkings){
-
-                    if(crags[i].parkings[j].description !== ''){
-                        L.marker(
-                            [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
-                            {icon: marker_parking}
-                        ).bindPopup(`
+                    L.marker(
+                        [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
+                        {icon: marker_parking}
+                    ).bindPopup(`
+                        <img class="photo-couve-site-leaflet" src="/img/img_parking.jpg" alt="">
                         <div class="crag-leaflet-info parking-leaflet-info">
                             <h2 class="loved-king-font titre-crag-leaflet"> Parking </h2>
-                            <div>${crags[i].parkings[j].description}</div>
+                            <table>
+                                <tr>
+                                    <td>Description : </td>
+                                    <td>${crags[i].parkings[j].description}</td>
+                                </tr>
+                                <tr>
+                                    <td>Localisation : </td>
+                                    <td>${crags[i].parkings[j].lat}, ${crags[i].parkings[j].lng}</td>
+                                </tr>
+                            </table>
                         </div>
                     `).addTo(cragMap);
-                    }else{
-                        L.marker(
-                            [crags[i].parkings[j].lat,crags[i].parkings[j].lng],
-                            {icon: marker_parking, interactive : false}
-                        ).addTo(cragMap);
-                    }
                 }
 
                 for(let j in crags[i].approaches){
                     let points = convertApprocheString(crags[i].approaches[j].polyline);
-                    if(crags[i].approaches[j].description !== ''){
-                        L.polyline(points, {color: '#2196F3'}).bindPopup('<p>' + crags[i].approaches[j].description + '</p>').addTo(cragMap);
-                    }else{
-                        L.polyline(points, {color: '#2196F3', interactive : false}).addTo(cragMap);
-                    }
+                    L.polyline(points, {color: '#2196F3', opacity: 0.8, dashArray:8}).bindPopup(`
+                        <img class="photo-couve-site-leaflet" src="/img/img_approach.jpg" alt="">
+                        <div class="crag-leaflet-info parking-leaflet-info">
+                            <h2 class="loved-king-font titre-crag-leaflet">Approche</h2>
+                            <table>
+                                <tr>
+                                    <td>Description : </td>
+                                    <td>${crags[i].approaches[j].description}</td>
+                                </tr>
+                                <tr>
+                                    <td>Longueur : </td>
+                                    <td>${crags[i].approaches[j].length} mètres (environs ${(crags[i].approaches[j].length / 1000 * 60 / 3).toFixed(0)} minutes de marche)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    `).addTo(cragMap);
                 }
 
                 for(let j in crags[i].sectors){
@@ -457,18 +470,4 @@ function uploadTopoPdf(form, callback) {
 
 function getCragPosts(){
     getPosts('Crag',document.getElementById('id-crag-actualite').value, document.getElementById('insert-posts-zone'));
-}
-
-function convertApprocheString(approachString) {
-    let clean1 = approachString.replace(/["]/g,''),
-        outputArray = [],
-        split1 = clean1.split(', ');
-
-    for(let i = 0 ; i < split1.length ; i++){
-        let clean2 = split1[i].replace(/[\[\]]/g,''),
-            split2 = clean2.split(',');
-        outputArray.push([parseFloat(split2[0]), parseFloat(split2[1])]);
-    }
-
-    return outputArray;
 }

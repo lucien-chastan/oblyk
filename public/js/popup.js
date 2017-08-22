@@ -1,5 +1,7 @@
-var inputMap = null,
+let inputMap = null,
+    inputMapApproach = null,
     markerInputMap = null,
+    polylineApproach = null,
     circleRayon = null;
 
 
@@ -121,6 +123,11 @@ function specialAction(data) {
         try {creatInputMap();}catch (e){}
     },500);
 
+    //créer la map de de tracé de la marche d'approache (s'il y en a une)
+    setTimeout(function () {
+        try {creatInputMapApproach();}catch (e){}
+    },500);
+
     if(data['MapReverseGeoCoding'] === true){
         MapReverseGeoCoding();
     }
@@ -192,6 +199,12 @@ function submitData(form, callback) {
             data['trumbowyg-post-editor'] = $('#trumbowyg-post-editor').trumbowyg('html');
         }
 
+        //on va chercher les valeurs des polylines de marche d'approche
+        let approaches = document.getElementsByClassName('input-map-approach');
+        if(approaches.length > 0){
+            data['polyline'] = getPolylinePoints();
+            data['length'] = getLengthPolyline();
+        }
 
         //lance la fonction ajax
         axios(
@@ -373,6 +386,70 @@ function creatInputMap() {
 }
 
 
+
+//CRÉATION DE LA MAP
+function creatInputMapApproach() {
+    let stringPolyline = document.getElementById('polyline-hidden-input').value,
+        points = convertApprocheString(stringPolyline);
+        defautLat = 46.927527,
+        defautLng = 2.871905,
+        defautZoom = 5;
+
+
+    //définition des différents style de tuile
+    let cartePopupMap = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
+        satellitePopupMap   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+
+    //si la carte existe déjà on la détruit
+    if(inputMapApproach !== null){
+        inputMapApproach = null;
+        polylineApproach = null;
+    }
+
+    //création de la map
+    inputMapApproach = L.map('input-map-approach',{ zoomControl : true, center:[defautLat, defautLng], zoom : defautZoom, layers: [cartePopupMap]});
+
+    //création du controlleur de tuile
+    let basePopUpMaps = {
+        "Relief": cartePopupMap,
+        "Satellite": satellitePopupMap
+    };
+
+    //ajout du controleur de tuile
+    L.control.layers(basePopUpMaps).addTo(inputMapApproach);
+
+    //on ajoute la polyline
+    polylineApproach = L.Polyline.Plotter(points, {weight: 2, color : '#2196F3'}).addTo(inputMapApproach);
+
+    inputMapApproach.fitBounds(polylineApproach.getBounds());
+
+    //on change le curseur pour une croix
+    document.getElementById('input-map-approach').style.cursor = 'crosshair';
+
+}
+
+function getPolylinePoints() {
+    let points = polylineApproach.getLatLngs(),
+        pointsReturn = [];
+
+    for(let i = 0 ; i < points.length ; i++){
+        pointsReturn.push("[" + points[i].lat + "," +  points[i].lng + "]");
+    }
+
+    return pointsReturn.join(', ');
+}
+
+function getLengthPolyline() {
+    let points = polylineApproach.getLatLngs(),
+        length = 0;
+
+    for(let i = 0 ; i < points.length ; i++) {
+        if(i < points.length - 1) length += getGpsRange(points[i].lat, points[i].lng, points[i + 1].lat, points[i + 1].lng )
+    }
+
+    return length * 1000;
+}
+
 //CHANGE L'EMPLACEMENT DU POINT SUR LA CARTE
 function pointMarkerInputMap(e) {
     let lat = document.getElementById('lat-hidden-input'),
@@ -414,4 +491,18 @@ function changeRayonPopupMap() {
             inputMap.fitBounds(circleRayon.getBounds());
         }catch (e){}
     }
+}
+
+function convertApprocheString(approachString) {
+    let clean1 = approachString.replace(/["]/g,''),
+        outputArray = [],
+        split1 = clean1.split(', ');
+
+    for(let i = 0 ; i < split1.length ; i++){
+        let clean2 = split1[i].replace(/[\[\]]/g,''),
+            split2 = clean2.split(',');
+        outputArray.push([parseFloat(split2[0]), parseFloat(split2[1])]);
+    }
+
+    return outputArray;
 }

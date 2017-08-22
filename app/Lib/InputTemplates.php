@@ -736,6 +736,27 @@ class InputTemplates extends ServiceProvider{
     }
 
 
+    //INPUT TYPE MARCHE D'APPROCHE
+    public static function approach($options){
+        $label = (isset($options['label']))? $options['label'] : 'La marche d\'approche';
+        $polyline = (isset($options['polyline']))? $options['polyline'] : '[]';
+        $length = (isset($options['length']))? $options['length'] : 0;
+        $elementsForMap = (isset($options['elements']))? $options['elements'] : '';
+
+        return '
+            <div class="row">
+                <div class="col s12">
+                    <input id="polyline-hidden-input" class="input-data" type="hidden" name="polyline" value="' . $polyline . '">
+                    <input id="length-hidden-input" class="input-data" type="hidden" name="length" value="' . $length . '">
+                    <input id="over-elements-for-map" type="hidden" name="over-element" value="' . $elementsForMap . '">
+                    <label>' . $label . '</label>
+                    <div id="input-map-approach" class="input-map input-map-approach"></div>
+                </div>
+            </div>
+        ';
+    }
+
+
     //INPUT DU TYPE LISTE DES SECTORS
     public static function sectors($options){
         $name = $options['name'];

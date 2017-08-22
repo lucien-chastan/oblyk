@@ -45,13 +45,14 @@
                     <div class="blue-border-div">
                         <i class="material-icons blue-text left">directions_walk</i>
                         <div class="markdownZone">{{ $approach->description }}</div>
+                        <p class="no-margin"><strong>Longueur :</strong> {{ $approach->length }} mètres <span class="grey-text">(environs {{ round($approach->length / 1000 * 60 / 3, 0) }} minutes de marche à 3 Km/h)</span></p>
                         <p class="info-user grey-text">
                             ajouté par <a href="{{ route('userPage', ['user_id'=>$approach->user->id, 'user_label'=>str_slug($approach->user->name)]) }}">{{$approach->user->name}}</a> le {{$approach->created_at->format('d M Y')}}
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$approach->id, "model"=>"Approach"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                 @if($parking->user_id == Auth::id())
-                                    <i {!! $Helpers::tooltip('Modifier cette marche d\'approche') !!} {!! $Helpers::modal(route('parkingModal'), ["crag_id"=>$crag->id, "approach_id"=>$approach->id, "title"=>"Modifier cette marche d'approche", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                    <i {!! $Helpers::tooltip('Modifier cette marche d\'approche') !!} {!! $Helpers::modal(route('approachModal'), ["crag_id"=>$crag->id, "approach_id"=>$approach->id, "title"=>"Modifier cette marche d\'approche", "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                     <i {!! $Helpers::tooltip('Supprimer cette marche d\'approche') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/approaches/" . $approach->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                                 @endif
                             @endif
