@@ -147,21 +147,21 @@
 
         <div class="center partie-chiffre-oblyk">
             <div class="row oblyk-number blue-text">
-                <div class="col s4 m4 l4">2077<br><span class="loved-king-font">@lang('home.figuresCrags')</span></div>
-                <div class="col s4 m4 l4">1259<br><span class="loved-king-font">@lang('home.figuresClimbers')</span></div>
-                <div class="col s4 m4 l4">120<br><span class="loved-king-font">@lang('home.figuresGyms')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_crags }}<br><span class="loved-king-font">@lang('home.figuresCrags')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_users }}<br><span class="loved-king-font">@lang('home.figuresClimbers')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_gyms }}<br><span class="loved-king-font">@lang('home.figuresGyms')</span></div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">71018<br><span class="loved-king-font">@lang('home.figuresRoutes')</span></div>
-                <div class="col s4 m4 l4">8581<br><span class="loved-king-font">@lang('home.figuresCrosses')</span></div>
-                <div class="col s4 m4 l4">1132<br><span class="loved-king-font">@lang('home.figuresPhotos')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_routes }}<br><span class="loved-king-font">@lang('home.figuresRoutes')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_crosses }}<br><span class="loved-king-font">@lang('home.figuresCrosses')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_photos }}<br><span class="loved-king-font">@lang('home.figuresPhotos')</span></div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">222<br><span class="loved-king-font">@lang('home.figuresGuideBooks')</span></div>
-                <div class="col s4 m4 l4">1924<br><span class="loved-king-font">@lang('home.figuresComments')</span></div>
-                <div class="col s4 m4 l4">105<br><span class="loved-king-font">@lang('home.figuresVideos')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_topos + $nb_topos_web + $nb_topos_pdf }}<br><span class="loved-king-font">@lang('home.figuresGuideBooks')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_descriptions }}<br><span class="loved-king-font">@lang('home.figuresComments')</span></div>
+                <div class="col s4 m4 l4">{{ $nb_videos }}<br><span class="loved-king-font">@lang('home.figuresVideos')</span></div>
             </div>
         </div>
     </div>
