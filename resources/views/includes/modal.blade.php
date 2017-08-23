@@ -1,6 +1,6 @@
 <div id="modal" class="modal">
 
-    <i class="material-icons right close-btn-popup" onclick="$('#modal').modal('close');">close</i>
+    <i class="material-icons right close-btn-popup" onclick="closeModal()">close</i>
 
     <div class="modal-content">
 

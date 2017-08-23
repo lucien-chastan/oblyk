@@ -180,20 +180,3 @@ function getGpsRange(lat_1, long_1, lat_2, long_2){
     r_long2 = long_2 * (Math.PI / 180);
     return (Math.acos(Math.sin(r_lat1) * Math.sin(r_lat2) + Math.cos(r_lat1) * Math.cos(r_lat2) * Math.cos(r_long1 - r_long2)) * 6371 );
 }
-
-L.Polyline = L.Polyline.extend({
-    getDistance: function(system) {
-        // distance in meters
-        var mDistanse = 0,
-            length = this._latlngs.length;
-        for (var i = 1; i < length; i++) {
-            mDistanse += this._latlngs[i].distanceTo(this._latlngs[i - 1]);
-        }
-        // optional
-        if (system === 'imperial') {
-            return mDistanse / 1609.34;
-        } else {
-            return mDistanse / 1000;
-        }
-    }
-});

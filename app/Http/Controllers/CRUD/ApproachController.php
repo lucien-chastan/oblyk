@@ -32,9 +32,9 @@ class ApproachController extends Controller
         $crag = Crag::where('id', $request->input('crag_id'))->first();
 
         $elements = [];
-        foreach ($sectors as $sector) $elements[] = ['label'=>'Secteur ' . $sector->label,'lat'=>$sector->lat, 'lng'=>$sector->lng];
-        foreach ($parkings as $parking) $elements[] = ['label'=>'Parking','lat'=>$parking->lat, 'lng'=>$parking->lng];
-        $elements[] = ['label'=>'Site : ' . $crag->label,'lat'=>$crag->lat, 'lng'=>$crag->lng];
+        foreach ($sectors as $sector) $elements[] = ['label'=>"Secteur : $sector->label" ,'lat'=>$sector->lat, 'lng'=>$sector->lng, 'type'=>"sector"];
+        foreach ($parkings as $parking) $elements[] = ['label'=>'Parking','lat'=>$parking->lat, 'lng'=>$parking->lng, 'type'=>"parking"];
+        $elements[] = ['label'=>"Site : $crag->label",'lat'=>$crag->lat, 'lng'=>$crag->lng, 'type'=>"crag"];
 
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
@@ -90,7 +90,8 @@ class ApproachController extends Controller
     {
         //validation du formulaire
         $this->validate($request, [
-            'polyline' => 'required'
+            'polyline' => 'required',
+            'length' => 'required',
         ]);
 
         //enregistrement des données
@@ -138,7 +139,8 @@ class ApproachController extends Controller
     {
         //validation du formulaire
         $this->validate($request, [
-            'polyline' => 'required'
+            'polyline' => 'required',
+            'length' => 'required',
         ]);
 
         //enregistrement des données

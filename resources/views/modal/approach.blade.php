@@ -9,7 +9,7 @@
 
     <div class="row">
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description']) !!}
-        {!! $Inputs::approach(['polyline'=>$dataModal['polyline'], 'elements'=>$dataModal['elements'], 'length'=>$dataModal['length'], 'label'=>'Déplacer les points pour tracer votre']) !!}
+        {!! $Inputs::approach(['polyline'=>$dataModal['polyline'], 'elements'=>$dataModal['elements'], 'length'=>$dataModal['length'], 'label'=>'Utiliser la carte pour tracer la marche d\'approche']) !!}
         {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
     </div>
 

@@ -247,7 +247,7 @@ class InputTemplates extends ServiceProvider{
         $cancelable = (isset($options['cancelable']))? $options['cancelable'] : true;
         $onclick = (isset($options['onclick']))? ' onclick="' .$options['onclick'] . '"' : '';
 
-        $cancelBtn = $cancelable ? '<button class="btn-flat waves-effect waves-light grey-text text-darken-2" onclick="$(\'#modal\').modal(\'close\');" type="button">Annuler</button>' : '';
+        $cancelBtn = $cancelable ? '<button class="btn-flat waves-effect waves-light grey-text text-darken-2" onclick="closeModal();" type="button">Annuler</button>' : '';
 
         return '
             <div class="col s12">
@@ -748,9 +748,15 @@ class InputTemplates extends ServiceProvider{
                 <div class="col s12">
                     <input id="polyline-hidden-input" class="input-data" type="hidden" name="polyline" value="' . $polyline . '">
                     <input id="length-hidden-input" class="input-data" type="hidden" name="length" value="' . $length . '">
-                    <input id="over-elements-for-map" type="hidden" name="over-element" value="' . $elementsForMap . '">
                     <label>' . $label . '</label>
+                    <ul class="ul-tuto-marche-approche">
+                        <li>Glisser déposer les points blancs pour changer le tracé</li>
+                        <li>Un clic sur un point semi-opaque ajout le point au tracé</li>
+                        <li>Un clic sur un point blanc supprime le point du tracé</li>
+                        <li>Un clic sur la carte ajout un point au bout du tracé</li>
+                    </ul>
                     <div id="input-map-approach" class="input-map input-map-approach"></div>
+                    <textarea style="display: none;" id="over-elements-for-map" name="over-element">' . $elementsForMap . '</textarea>
                 </div>
             </div>
         ';

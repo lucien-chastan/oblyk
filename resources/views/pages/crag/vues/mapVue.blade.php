@@ -74,7 +74,7 @@
                     </a>
                     <ul>
                         @if(count($crag->parkings) != 0)
-                            <li><a {!! $Helpers::tooltip('Ajouter une marche d\'approche') !!}} {!! $Helpers::modal(route('approachModal'), ["crag_id"=>$crag->id, "approach_id"=>"", "title"=>"Ajouter une marche d\'approche", "method" => "POST", "lat1"=>$crag->lat, "lng1"=>$crag->lng, "lat2"=>$crag->parkings[0]->lat, "lng2"=>$crag->parkings[0]->lng]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">directions_walk</i></a></li>
+                            <li><a {!! $Helpers::tooltip('Ajouter une marche d\'approche') !!}} {!! $Helpers::modal(route('approachModal'), ["crag_id"=>$crag->id, "approach_id"=>"", "title"=>"Ajouter une marche d\'approche", "method" => "POST", "lat1"=>$crag->parkings[0]->lat, "lng1"=>$crag->parkings[0]->lng, "lat2"=>$crag->lat, "lng2"=>$crag->lng]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">directions_walk</i></a></li>
                         @else
                             <li><a {!! $Helpers::tooltip('Ajouter au moins un parking pour ajouter une marche d\'approche') !!}} onclick="alert('Il faut que vous ayez ajouté au moins un parking pour pouvoir ajouter une marche d\'approche')" class="tooltipped btn-floating blue"><i class="material-icons">directions_walk</i></a></li>
                         @endif

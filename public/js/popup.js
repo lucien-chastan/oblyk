@@ -418,6 +418,14 @@ function creatInputMapApproach() {
     //ajout du controleur de tuile
     L.control.layers(basePopUpMaps).addTo(inputMapApproach);
 
+    //ajout les éléments qui gravite autour du site
+    let elements = JSON.parse(document.getElementById('over-elements-for-map').value);
+    for(let i = 0 ; i < elements.length ; i++){
+        if(elements[i].type === 'sector') L.marker([parseFloat(elements[i].lat),parseFloat(elements[i].lng)],{icon : marker_sector}).bindPopup(elements[i].label).addTo(inputMapApproach);
+        if(elements[i].type === 'crag') L.marker([parseFloat(elements[i].lat),parseFloat(elements[i].lng)],{icon : marker_10000}).bindPopup(elements[i].label).addTo(inputMapApproach);
+        if(elements[i].type === 'parking') L.marker([parseFloat(elements[i].lat),parseFloat(elements[i].lng)],{icon : marker_parking}).bindPopup(elements[i].label).addTo(inputMapApproach);
+    }
+
     //on ajoute la polyline
     polylineApproach = L.Polyline.Plotter(points, {weight: 2, color : '#2196F3'}).addTo(inputMapApproach);
 

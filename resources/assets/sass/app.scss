@@ -303,6 +303,13 @@ footer {
     }
 }
 
+.ul-tuto-marche-approche{
+    padding-left: 13px !important;
+    li{
+        list-style: disc !important;
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{
