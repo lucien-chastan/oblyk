@@ -122,10 +122,12 @@ class CragController extends Controller
         $crag->user_id = Auth::id();
         $crag->lat = $request->input('lat');
         $crag->lng = $request->input('lng');
+        $crag->bandeau = '/img/default-crag-bandeau.jpg';
         $crag->type_voie = 0;
         $crag->type_bloc = 0;
         $crag->type_deep_water = 0;
         $crag->type_grande_voie = 0;
+        $crag->type_via_ferrata = 0;
         $crag->save();
         $crag->slug = str_slug($crag->label);
 
