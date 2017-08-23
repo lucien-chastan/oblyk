@@ -514,3 +514,27 @@ function convertApprocheString(approachString) {
 
     return outputArray;
 }
+
+//CACHE LES TAGS DE LA LISTE
+function searchTags() {
+    let search_tags_ipt = document.getElementById('search_tags'),
+        tag_div = document.getElementsByClassName('tag_div');
+
+    for(let i = 0 ; i < tag_div.length ; i++){
+        tag_div[i].style.display = tag_div[i].getAttribute('data-tag').indexOf(search_tags_ipt.value) !== -1 ? 'block' : 'none';
+    }
+
+}
+
+//COMPIL LES DONNEÉS DES TAGS
+function parseTags() {
+    let checkTags = document.getElementsByName('check_tag_route'),
+        tagsList = document.getElementById('tagsList'),
+        tags = [];
+
+    for (let i = 0 ; i < checkTags.length ; i++){
+        if(checkTags[i].checked === true) tags.push(checkTags[i].value);
+    }
+
+    tagsList.value = tags.join(';');
+}

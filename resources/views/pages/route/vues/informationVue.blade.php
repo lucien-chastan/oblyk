@@ -173,6 +173,7 @@
                     #@lang('elements/tags.tag_' . $tag->tag_id)
                 </cite>
             @endforeach
+            <a {!! $Helpers::modal(route('tagModal'),['route_id' => $route->id ,'title'=>'Ajouter des tags', 'method'=>'POST', 'callback'=>'reloadRouteInformationTab']) !!} class="btnModal text-cursor" onclick="$('#modal').modal('open');">+ Ajouter des tags</a>
         </div>
     </div>
 
