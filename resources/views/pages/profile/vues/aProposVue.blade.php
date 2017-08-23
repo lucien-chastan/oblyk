@@ -146,7 +146,7 @@
 
                 <div class="row">
 
-                    @if($user->somme_add != 0)
+                    @if($user->sommeAdd != 0)
 
                         {{--NOMBRE DE SITE DE GRIMPE--}}
                         @if($user->crags_count > 0)
@@ -184,22 +184,24 @@
                         @endif
 
                         {{--NOMBRE DE TOPO (PAPIER, WEB, PDF--}}
-                        @if($user->topos_count + $user->topoWebs_count + $user->topoPdfs_count)
+                        @if($user->topos_count + $user->topo_webs_count + $user->topo_pdfs_count)
                             <div class="col s12 m4 l3">
-                                <p><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count }}</span> topos</p>
+                                <p><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topo_webs_count + $user->topo_pdfs_count }}</span> topos</p>
                             </div>
                         @endif
 
 
                         {{--NOMBRE DE SALLE DE GRIMPE--}}
-                        <div class="col s12 m4 l3">
-                            <p><i class="material-icons left">home</i> <span class="blue-text">+ x</span> salle de grimpe</p>
-                        </div>
+                        @if($user->gyms_count)
+                            <div class="col s12 m4 l3">
+                                <p><i class="material-icons left">home</i> <span class="blue-text">+ {{ $user->gyms_count }}</span> salle de grimpe</p>
+                            </div>
+                        @endif
 
                         {{--NOMBRE D'ACTU--}}
                         @if($user->posts_count)
                             <div class="col s12 m4 l3">
-                                <p><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> actus postées</p>
+                                <p><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> posts</p>
                             </div>
                         @endif
 

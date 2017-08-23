@@ -29,9 +29,8 @@
 
         {{--NOMBRE DE TOPO (PAPIER, WEB, PDF--}}
         <div class="col s12 l6">
-            <p class="truncate"><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count }}</span> topos</p>
+            <p class="truncate"><i class="material-icons left">photo_album</i> <span class="blue-text">+ {{ $user->topos_count + $user->topo_webs_count + $user->topo_pdfs_count }}</span> topos</p>
         </div>
-
 
         {{--NOMBRE DE SALLE DE GRIMPE--}}
         <div class="col s12 l6">
@@ -40,7 +39,7 @@
 
         {{--NOMBRE D'ACTU--}}
         <div class="col s12 l6">
-            <p class="truncate"><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> actus postées</p>
+            <p class="truncate"><i class="material-icons left">forum</i> <span class="blue-text">+ {{ $user->posts_count }}</span> posts</p>
         </div>
 
     @else

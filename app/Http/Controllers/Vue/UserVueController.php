@@ -209,6 +209,7 @@ class UserVueController extends Controller
             ->with(['places'=>function ($query) {$query->where('active',1);}])
             ->with('socialNetworks.socialNetwork')
             ->withCount('crags')
+            ->withCount('gyms')
             ->withCount('routes')
             ->withCount('descriptions')
             ->withCount('photos')
@@ -219,7 +220,7 @@ class UserVueController extends Controller
             ->withCount('posts')
             ->first();
 
-        $user->sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count + $user->posts_count;
+        $user->sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topo_webs_count + $user->topo_pdfs_count + $user->posts_count +  $user->gyms_count;
 
         //On va chercher si l'auth est amis avec l'user
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
@@ -784,7 +785,7 @@ class UserVueController extends Controller
             ->withCount('gyms')
             ->first();
 
-        $sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count + $user->posts_count;
+        $sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topo_webs_count + $user->topo_pdfs_count + $user->posts_count  + $user->gyms_count;
 
         $data = [
             'user' => $user,
