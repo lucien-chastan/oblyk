@@ -1,6 +1,6 @@
 @extends('layouts.profile', [
-    'meta_title'=> trans('meta/profile.title_map'),
-    'meta_description'=>trans('meta/profile.description_map'),
+    'meta_title'=> trans('meta/profile.title', ['label'=>$user->name]),
+    'meta_description'=>trans('meta/profile.description', ['label'=>$user->name]),
     'meta_img'=>'/img/meta_home.jpg',
     ])
 

@@ -33,14 +33,16 @@
 {{--LISTE DES MESSAGES--}}
 <div class="zone-liste-message" id="zone-liste-message">
     @foreach($conversation->messages as $message)
-        <div class="message-div @if($message->user->id == Auth::id()) message-div-right @else message-div-left @endif">
-            <div class="markdownZone">
-                @markdown($message->message)
+        @if($message->message !== "\n" && $message->message !== "")
+            <div class="message-div @if($message->user->id == Auth::id()) message-div-right @else message-div-left @endif">
+                <div class="markdownZone">
+                    @markdown($message->message)
+                </div>
+                <p class="no-margin info-user-message">
+                    {{$message->user->name}} le {{$message->created_at->format('d M Y à H:i')}}
+                </p>
             </div>
-            <p class="no-margin info-user-message">
-                {{$message->user->name}} le {{$message->created_at->format('d M Y à H:i')}}
-            </p>
-        </div>
+        @endif
     @endforeach
 
     @if(count($conversation->userConversations) <= 1)
