@@ -25,7 +25,7 @@
     {{--DROPDOWN DU PROJET--}}
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
-        <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>
+{{--        <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>--}}
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
         <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
         <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
@@ -172,7 +172,7 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
-                                <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>
+{{--                                <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>--}}
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
                                 <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>

@@ -18,6 +18,7 @@
                 <h1>Oblyk</h1>
                 <p>@lang('home.slogan')</p>
             </div>
+            <span class="credit-philippe">&copy; Philippe LATOURETTE</span>
         </div>
     </div>
 

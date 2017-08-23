@@ -10,7 +10,7 @@
                 <li><a class="grey-text text-lighten-3" href="{{ route('project') }}">@lang('interface/nav.theProject')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('contact') }}">@lang('interface/nav.contact')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('about') }}">@lang('interface/nav.aboutUs')</a></li>
-                <li><a class="grey-text text-lighten-3" href="{{ route('supportUs') }}"><i class="material-icons tiny red-text">favorite</i> @lang('interface/nav.aboutUs')</a></li>
+                <li><a class="grey-text text-lighten-3" href="{{ route('supportUs') }}"><i class="material-icons tiny red-text">favorite</i> @lang('interface/nav.supportUs')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('developer') }}">@lang('interface/nav.developerAndApi')</a></li>
                 <li><a data-modal="{'id':'global', 'model':'Page'}" data-target="modal" data-route="{{route('problemModal')}}" class="grey-text text-lighten-3 btnModal">@lang('interface/footer.reportAProblem')</a></li>
             </ul>
