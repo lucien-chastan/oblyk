@@ -46,8 +46,12 @@ class MapController extends Controller
     //RETOURNE LES SITES D'ESCALADE D'UN TOPO
     public function getPopupMarkerCragsTopo($topo_id){
         $data = [];
-        $cragsTopo = Topo::where('id',$topo_id)->with('crags.crag')->first();
-        foreach ($cragsTopo->crags as $liaison) $data[] = $liaison->crag;
+        $cragsTopo = Topo::where('id',$topo_id)->with('crags.crag')->with('crags.crag.gapGrade')->with('crags.crag.routes')->first();
+        foreach ($cragsTopo->crags as $liaison) {
+            $crag = $liaison->crag;
+            $crag->routes_count = count($crag->routes);
+            $data[] = $liaison->crag;
+        }
 
         return response()->json($data);
     }
@@ -56,8 +60,12 @@ class MapController extends Controller
     //RETOURNE LES SITES D'ESCALADE D'UN GROUPEMENT DE SITE
     public function getPopupMarkerCragsMassive($massive_id){
         $data = [];
-        $cragsMassive = Massive::where('id',$massive_id)->with('crags.crag')->first();
-        foreach ($cragsMassive->crags as $liaison) $data[] = $liaison->crag;
+        $cragsMassive = Massive::where('id',$massive_id)->with('crags.crag')->with('crags.crag.gapGrade')->with('crags.crag.routes')->first();
+        foreach ($cragsMassive->crags as $liaison) {
+            $crag = $liaison->crag;
+            $crag->routes_count = count($crag->routes);
+            $data[] = $crag;
+        }
 
         return response()->json($data);
     }
