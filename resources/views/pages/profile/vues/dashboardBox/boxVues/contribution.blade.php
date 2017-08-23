@@ -35,7 +35,7 @@
 
         {{--NOMBRE DE SALLE DE GRIMPE--}}
         <div class="col s12 l6">
-            <p class="truncate"><i class="material-icons left">home</i> <span class="blue-text">+ x</span> salle de grimpe</p>
+            <p class="truncate"><i class="material-icons left">home</i> <span class="blue-text">+ {{ $user->gyms_count }}</span> salle de grimpe</p>
         </div>
 
         {{--NOMBRE D'ACTU--}}

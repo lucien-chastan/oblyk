@@ -650,7 +650,7 @@ class UserVueController extends Controller
         $findFriends = Follow::where([['followed_id', $user->id],['followed_type', 'App\\User']])->get();
         $friends = [];
         foreach ($findFriends as $friend){
-            $friends[] = $friend->id;
+            $friends[] = $friend->user_id;
         }
 
         $friendsCrosses = Cross::where('status_id','!=',1)
@@ -668,6 +668,7 @@ class UserVueController extends Controller
         $data = [
             'user' => $user,
             'friendsCrosses' => $friendsCrosses,
+            'friends' => $friends
         ];
 
         return view('pages.profile.vues.dashboardBox.boxVues.croixPote', $data);
@@ -780,6 +781,7 @@ class UserVueController extends Controller
             ->withCount('topoWebs')
             ->withCount('topoPdfs')
             ->withCount('posts')
+            ->withCount('gyms')
             ->first();
 
         $sommeAdd = $user->crags_count + $user->routes_count + $user->descriptions_count + $user->photos_count + $user->videos_count + $user->topos_count + $user->topoWebs_count + $user->topoPdfs_count + $user->posts_count;
