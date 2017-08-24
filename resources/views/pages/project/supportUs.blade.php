@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3">Nous soutenir</h1>
+                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/projects/supportUs.title')</h1>
 
                 <p class="text-center grey-text">Coming soon</p>
             </div>

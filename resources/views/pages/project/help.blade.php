@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3">Aides</h1>
+                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/projects/help.title')</h1>
 
                 @foreach($helpCategory as $key => $category)
                     <h2 class="loved-king-font titre-2-helps">{{$key}}</h2>
@@ -32,13 +32,13 @@
                                     <div class="markdownZone">@markdown($help->contents)</div>
                                     <p class="info-user grey-text">
                                         @if(isset($help->updated_at))
-                                            dernière mise à jour : {{$help->updated_at->format('d M Y')}}
+                                            @lang('pages/projects/help.last_update') {{$help->updated_at->format('d M Y')}}
                                         @else
-                                            créé le {{$help->created_at->format('d M Y')}}
+                                            @lang('pages/projects/help.created_at') {{$help->created_at->format('d M Y')}}
                                         @endif
 
                                         @if(Auth::check())
-                                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$help->id, "model"=>"Help"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$help->id, "model"=>"Help"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                         @endif
                                     </p>
                                 </div>
