@@ -4,6 +4,11 @@
     'meta_img'=>'/img/meta_home.jpg',
     ])
 
+@section('css')
+    <link href="/css/project.css" rel="stylesheet">
+@endsection
+
+
 @section('content')
 
     {{--parallax--}}
@@ -14,6 +19,23 @@
         <div class="row">
             <div class="col s12">
                 <h1 class="loved-king-font text-center grey-text text-darken-3">Contact</h1>
+
+                <div class="row">
+                    <div class="col s12 m6">
+                        <img src="/img/contact-infographie.svg" alt="un bloqueur poste une lettre" class="infographie-contact">
+                    </div>
+                    <div class="col s12 m6">
+                        <p>
+                            Pour toutes questions : que ce soit une demande d'aide, une suggestion d'amélioration, un bug trouvé, une demande d'informations, etc.
+                        </p>
+                        <p class="text-center">
+                             <a href="mailto:ekip&#64;oblyk.org">ekip&#64;oblyk.org</a>
+                        </p>
+                        <p class="text-center grey-text">
+                            On essayera de vous répondre rapidement, promis !
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

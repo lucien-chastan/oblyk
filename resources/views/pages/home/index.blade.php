@@ -4,6 +4,8 @@
     'meta_img'=>'/img/meta_home.jpg',
 ])
 
+@inject('Helpers','App\Lib\HelpersTemplates')
+
 @section('css')
     {{--css particulier à la page--}}
     <link href="/css/home.css" rel="stylesheet">
@@ -148,21 +150,48 @@
 
         <div class="center partie-chiffre-oblyk">
             <div class="row oblyk-number blue-text">
-                <div class="col s4 m4 l4">{{ $nb_crags }}<br><span class="loved-king-font">@lang('home.figuresCrags')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_users }}<br><span class="loved-king-font">@lang('home.figuresClimbers')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_gyms }}<br><span class="loved-king-font">@lang('home.figuresGyms')</span></div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_crags }} @if($nb_crags_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.crag_today', $nb_crags_today)) !!}} class="tooltipped green-text">+{{ $nb_crags_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresCrags')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_users }} @if($nb_users_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.user_today', $nb_users_today)) !!}} class="tooltipped green-text">+{{ $nb_users_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresClimbers')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_gyms }} @if($nb_gyms_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.gym_today', $nb_gyms_today)) !!}} class="tooltipped green-text">+{{ $nb_gyms_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresGyms')</span>
+                </div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">{{ $nb_routes }}<br><span class="loved-king-font">@lang('home.figuresRoutes')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_crosses }}<br><span class="loved-king-font">@lang('home.figuresCrosses')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_photos }}<br><span class="loved-king-font">@lang('home.figuresPhotos')</span></div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_routes }} @if($nb_routes_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.route_today', $nb_routes_today)) !!}} class="tooltipped green-text">+{{ $nb_routes_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresRoutes')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_crosses }} @if($nb_crosses_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.cross_today', $nb_crosses_today)) !!}} class="tooltipped green-text">+{{ $nb_crosses_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresCrosses')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_photos }} @if($nb_photos_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.photo_today', $nb_photos_today)) !!}} class="tooltipped green-text">+{{ $nb_photos_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresPhotos')</span>
+                </div>
             </div>
 
             <div class="row oblyk-number">
-                <div class="col s4 m4 l4">{{ $nb_topos + $nb_topos_web + $nb_topos_pdf }}<br><span class="loved-king-font">@lang('home.figuresGuideBooks')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_descriptions }}<br><span class="loved-king-font">@lang('home.figuresComments')</span></div>
-                <div class="col s4 m4 l4">{{ $nb_videos }}<br><span class="loved-king-font">@lang('home.figuresVideos')</span></div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_topos + $nb_topos_web + $nb_topos_pdf }} @if($nb_topos_today > 0 || $nb_topos_web_today > 0 || $nb_topos_pdf_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.topo_today', $nb_topos_today + $nb_topos_web_today + $nb_topos_pdf_today)) !!}} class="tooltipped green-text">+{{ $nb_topos_today + $nb_topos_web_today + $nb_topos_pdf_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresGuideBooks')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_descriptions }} @if($nb_descriptions_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.description_today', $nb_descriptions_today)) !!}} class="tooltipped green-text">+{{ $nb_descriptions_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresComments')</span>
+                </div>
+                <div class="col s4 m4 l4">
+                    {{ $nb_videos }} @if($nb_videos_today > 0) <em {!! $Helpers::tooltip(trans_choice('home.video_today', $nb_videos_today)) !!}} class="tooltipped green-text">+{{ $nb_videos_today }}</em> @endif<br>
+                    <span class="loved-king-font">@lang('home.figuresVideos')</span>
+                </div>
             </div>
         </div>
     </div>

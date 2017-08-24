@@ -78,4 +78,15 @@ return [
     'figuresGuideBooks' => 'Topos',
     'figuresComments' => 'Commentaires',
     'figuresVideos' => 'Vidéos',
+
+    //Message du nombre d'ajout par jour
+    'crag_today'=>'Une falaise a été ajouté aujourd\'hui|:count falaises ont été ajoutées aujourd\'hui ',
+    'user_today'=>'Un nouveau grimpeur est arrivé aujourd\'hui|:count grimpeurs sont arrivés aujourd\'hui ',
+    'gym_today'=>'Une nouvelle salle a été ajouté aujourd\'hui|:count salles ont été ajoutées aujourd\'hui ',
+    'route_today'=>'Une nouvelle ligne a été ajouté aujourd\'hui|:count lignes ont été ajoutées aujourd\'hui ',
+    'cross_today'=>'Une nouvelle croix a été faite aujourd\'hui|:count croix ont été faites aujourd\'hui ',
+    'photo_today'=>'Une nouvelle photo a été ajouté aujourd\'hui|:count photos ont été ajoutées aujourd\'hui ',
+    'topo_today'=>'Un nouveau topo a été référencé aujourd\'hui|:count topos ont été référencés aujourd\'hui ',
+    'description_today'=>'Un nouveau commentaire a été posté aujourd\'hui|:count commentaires ont été postés aujourd\'hui ',
+    'video_today'=>'Une nouvelle vidéo a été posté aujourd\'hui|:count vidéos ont été ajoutées aujourd\'hui ',
 ];

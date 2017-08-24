@@ -104,6 +104,12 @@
             color: rgb(150,150,150);
             font-size: 1.2em;
         }
+
+        em {
+            font-style: normal;
+            font-size: 0.6em;
+            vertical-align: super;
+        }
     }
 }
 
