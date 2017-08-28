@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Crag;
 use App\Route;
 use App\RouteSection;
+use App\Search;
 use App\Sector;
 use Validator;
 use Illuminate\Http\Request;
@@ -179,6 +180,9 @@ class RouteController extends Controller
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Route', $route->id, $route->label);
+
         return response()->json(json_encode($route));
     }
 
@@ -291,6 +295,9 @@ class RouteController extends Controller
         //mise à jour des informations de la falaise (type de voie, grande-voie,etc.)
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Route', $route->id, $route->label);
 
         return response()->json(json_encode($route));
     }

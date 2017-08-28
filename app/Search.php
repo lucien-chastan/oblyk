@@ -47,4 +47,24 @@ class Search extends Model
         return $data;
     }
 
+
+    /**
+     * CRÉER OU MET À JOUR L'INDEX DE RECHERCHE
+     * @param $model - Modéle à indexer
+     * @param $id - id du modéle
+     * @param $label - nom du modéle
+     */
+    public static function index ($model, $id, $label){
+
+        $searchIndex = Search::where(['searchable_id' => $id, 'searchable_type'=>$model])->first();
+        if(count($searchIndex) == 0){
+            $searchIndex = new Search();
+            $searchIndex->searchable_id = $id;
+            $searchIndex->searchable_type = $model;
+        }
+        $searchIndex->label = str_slug($label);
+        $searchIndex->save();
+
+    }
+
 }

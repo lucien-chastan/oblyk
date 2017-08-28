@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Search;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\UserSettings;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -62,10 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+
+        //Création du user
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->save();
+
+        //On créer la table des paramètres pour cet utilisateur
+        $setting = New UserSettings();
+        $setting->user_id = $user->id;
+        $setting->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\User', $user->id, $user->name);
+
+        return $user;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Search;
 use App\Word;
 use Validator;
 use Illuminate\Http\Request;
@@ -80,6 +81,10 @@ class WordController extends Controller
         $word->user_id = Auth::id();
         $word->save();
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Word', $word->id, $word->label);
+
+
         return response()->json(json_encode($word));
 
     }
@@ -126,6 +131,10 @@ class WordController extends Controller
             $word->label = $request->input('label');
             $word->definition = $request->input('definition');
             $word->save();
+
+            //Mise à jour de l'index de recherche
+            Search::index('App\Word', $word->id, $word->label);
+
         }
 
         return response()->json(json_encode($word));

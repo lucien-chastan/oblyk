@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Follow;
 use App\ForumTopic;
 use App\Route;
+use App\Search;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Http\Request;
@@ -93,6 +94,9 @@ class TopicController extends Controller
         $follow->user_id = Auth::id();
         $follow->save();
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Topic', $topic->id, $topic->label);
+
 
         return response()->json(json_encode($topic));
 
@@ -141,6 +145,9 @@ class TopicController extends Controller
             $topic->category_id = $request->input('category_id');
             $topic->save();
         }
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Topic', $topic->id, $topic->label);
 
         return response()->json(json_encode($topic));
     }

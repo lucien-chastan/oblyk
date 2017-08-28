@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Crag;
 use App\Orientation;
 use App\Photo;
+use App\Search;
 use App\Season;
 use Validator;
 use Illuminate\Http\Request;
@@ -155,6 +156,9 @@ class CragController extends Controller
         $orientation->south_west = $request->input('south_west');
         $orientation->save();
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Crag', $crag->id, $crag->label);
+
         return response()->json(json_encode($crag));
     }
 
@@ -237,6 +241,9 @@ class CragController extends Controller
         $orientation->south_east = $request->input('south_east');
         $orientation->south_west = $request->input('south_west');
         $orientation->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Crag', $crag->id, $crag->label);
 
         return response()->json(json_encode($crag));
     }

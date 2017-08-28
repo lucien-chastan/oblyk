@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
+use App\Search;
 use App\Topo;
 use App\TopoCrag;
 use Intervention\Image\Facades\Image;
@@ -167,6 +168,9 @@ class TopoController extends Controller
             $liaison->save();
         }
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Topo', $topo->id, $topo->label);
+
         return response()->json(json_encode($topo));
 
     }
@@ -208,16 +212,18 @@ class TopoController extends Controller
 
         //enregistrement des données
         $topo = Topo::where('id', $request->input('id'))->first();
-        if($topo->user_id == Auth::id()){
-            $topo->label = $request->input('label');
-            $topo->author = $request->input('author');
-            $topo->editor = $request->input('editor');
-            $topo->editionYear = $request->input('editionYear');
-            $topo->price = $request->input('price');
-            $topo->page = $request->input('page');
-            $topo->weight = $request->input('weight');
-            $topo->save();
-        }
+        $topo->label = $request->input('label');
+        $topo->author = $request->input('author');
+        $topo->editor = $request->input('editor');
+        $topo->editionYear = $request->input('editionYear');
+        $topo->price = $request->input('price');
+        $topo->page = $request->input('page');
+        $topo->weight = $request->input('weight');
+        $topo->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Topo', $topo->id, $topo->label);
+
 
         return response()->json(json_encode($topo));
     }

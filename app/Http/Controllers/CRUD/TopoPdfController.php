@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
+use App\Search;
 use App\TopoPdf;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -108,6 +109,10 @@ class TopoPdfController extends Controller
                 $topoPdf->save();
 
                 $request->file('file')->storeAs('public/topos/PDF/', $topoPdf->slug_label);
+
+                //Mise à jour de l'index de recherche
+                Search::index('App\TopoPdf', $topoPdf->id, $topoPdf->label);
+
             }
         }
 
@@ -152,6 +157,10 @@ class TopoPdfController extends Controller
             $topoPdf->author = $request->input('author');
             $topoPdf->label = $request->input('label');
             $topoPdf->save();
+
+            //Mise à jour de l'index de recherche
+            Search::index('App\TopoPdf', $topoPdf->id, $topoPdf->label);
+
         }
 
         return response()->json(json_encode($topoPdf));

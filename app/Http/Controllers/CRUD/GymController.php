@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Gym;
+use App\Search;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -102,6 +103,9 @@ class GymController extends Controller
         $gym->save();
         $gym->slug = str_slug($gym->label);
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Gym', $gym->id, $gym->label);
+
         return response()->json(json_encode($gym));
     }
 
@@ -160,6 +164,9 @@ class GymController extends Controller
         $gym->lat = $request->input('lat');
         $gym->lng = $request->input('lng');
         $gym->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Gym', $gym->id, $gym->label);
 
         return response()->json(json_encode($gym));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Search;
 use App\TopoWeb;
 use Validator;
 use Illuminate\Http\Request;
@@ -86,6 +87,10 @@ class TopoWebController extends Controller
         $topoWeb->user_id = Auth::id();
         $topoWeb->save();
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\TopoWeb', $topoWeb->id, $topoWeb->label);
+
+
         return response()->json(json_encode($topoWeb));
 
     }
@@ -132,6 +137,10 @@ class TopoWebController extends Controller
             $topoWeb->label = $request->input('label');
             $topoWeb->url = $request->input('url');
             $topoWeb->save();
+
+            //Mise à jour de l'index de recherche
+            Search::index('App\TopoWeb', $topoWeb->id, $topoWeb->label);
+
         }
 
         return response()->json(json_encode($topoWeb));

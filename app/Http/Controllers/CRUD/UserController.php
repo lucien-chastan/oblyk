@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
+use App\Search;
 use App\User;
 use App\UserSettings;
 use Illuminate\Support\Facades\Hash;
@@ -264,6 +265,10 @@ class UserController extends Controller
         $user->sex = $request->input('sex');
         $user->description = $request->input('description');
         $user->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\User', $user->id, $user->name);
+
 
         return response()->json(json_encode($user));
     }

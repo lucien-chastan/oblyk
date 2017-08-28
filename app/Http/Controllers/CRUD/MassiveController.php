@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\Massive;
 use App\MassiveCrag;
+use App\Search;
 use Intervention\Image\Facades\Image;
 use Validator;
 use Illuminate\Http\Request;
@@ -93,6 +94,9 @@ class MassiveController extends Controller
             $liaison->save();
         }
 
+        //Mise à jour de l'index de recherche
+        Search::index('App\Massive', $massive->id, $massive->label);
+
         return response()->json(json_encode($massive));
 
     }
@@ -134,10 +138,12 @@ class MassiveController extends Controller
 
         //enregistrement des données
         $massive = Massive::where('id', $request->input('id'))->first();
-        if($massive->user_id == Auth::id()){
-            $massive->label = $request->input('label');
-            $massive->save();
-        }
+        $massive->label = $request->input('label');
+        $massive->save();
+
+        //Mise à jour de l'index de recherche
+        Search::index('App\Massive', $massive->id, $massive->label);
+
 
         return response()->json(json_encode($massive));
     }
