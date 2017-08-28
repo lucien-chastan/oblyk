@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Search;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\UserPartnerSettings;
 use App\UserSettings;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -76,6 +77,10 @@ class RegisterController extends Controller
         $setting = New UserSettings();
         $setting->user_id = $user->id;
         $setting->save();
+
+        $partner = New UserPartnerSettings();
+        $partner->user_id = $user->id;
+        $partner->save();
 
         //Mise à jour de l'index de recherche
         Search::index('App\User', $user->id, $user->name);

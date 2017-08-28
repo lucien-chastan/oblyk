@@ -73,7 +73,7 @@ class FollowController extends Controller
             }
         }
 
-        return response()->json(['follows' => $follows]);
+        return view('pages.global-search.followsVue', ['follows' => $follows]);
     }
 
 }

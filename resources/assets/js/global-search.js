@@ -85,14 +85,7 @@ function getUserFollows() {
 
     if(userId.value !== "0"){
         axios.post('/follow/user', {user_id : userId.value}).then(function (response) {
-
-            let data = response.data;
-
-            followZone.innerHTML = '';
-            for(let i = 0 ; i < data.follows.length ; i++){
-                followZone.innerHTML += `<div class="col s12 blue-border-search crag-result"><img class="left circle" src="${data.follows[i].followIcon}"><a href="${data.follows[i].followUrl}">${data.follows[i].followName}</a><br><span class="grey-text">${data.follows[i].followInformation}</span></div>`;
-            }
-
+            followZone.innerHTML = response.data;
         });
     }
 }

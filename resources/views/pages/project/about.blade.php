@@ -21,6 +21,14 @@
                 <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/projects/about.title')</h1>
 
                 <p>@lang('pages/projects/about.para_1')</p>
+                <p>
+                    @lang('pages/projects/about.para_green_server')
+                </p>
+                <p class="center">
+                    <a href="https://www.phpnet.org/datacenter-vert.php">
+                        <img class="img-eco-serveur" src="http://www.phpnet.org/img/logos/logo-phpnet-vert2.png" alt="PHPNET hébergement vert" />
+                    </a>
+                </p>
                 <p>@lang('pages/projects/about.para_2')</p>
 
                 {{--Outil graphique--}}

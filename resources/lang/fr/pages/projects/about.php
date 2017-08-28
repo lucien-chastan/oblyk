@@ -7,7 +7,8 @@ return [
 Oblyk est une platforme communautaire dédiée à l\'escalade, elle a pour but de créer une grande base de donnée des falaises et voies de France et du monde, aider les grimpeurs à trouver des partenaires, suivre sa progression en escalade en tenant un carnet de croix, et plus généralement Oblyk est un réseau social de la grimpe.<br>
 Oblyk est développé par <a href="http://www.lucien-chastan.fr/">Lucien CHASTAN</a>, le code source est ouvert aux  <a href="https://github.com/lucien-chastan/oblyk">contributions</a>.',
 
-    'para_2' => 'Voici les quelques les outils &amp; langages utilisés pour le développement d\'oblyk :',
+    'para_2' => 'Voici les quelques outils &amp; langages utilisés pour le développement d\'oblyk :',
+    'para_green_server' => 'Oblyk est hébergé à Grenoble par des serveurs alimentés en energie renouvelable',
 
     //Graphisme
     'title_graphisme' => 'Graphisme :',
