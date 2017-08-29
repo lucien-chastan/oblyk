@@ -21,7 +21,7 @@ class CreateSearchesTable extends Migration
             $table->timestamps();
 
             //Label est indexé pour une recherche plus rapide
-            $table->index('label', 'label_index');
+            //$table->index('label', 'label_index');
         });
     }
 
