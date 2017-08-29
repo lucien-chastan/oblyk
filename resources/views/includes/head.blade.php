@@ -14,7 +14,7 @@
 <meta property="og:type" content="website"/>
 
 <!--Import Google Icon Font-->
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {{--css globale de l'application--}}
 <link href="/css/app.css" rel="stylesheet">
