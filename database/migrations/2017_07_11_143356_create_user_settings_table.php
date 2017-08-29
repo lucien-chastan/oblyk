@@ -37,9 +37,9 @@ class CreateUserSettingsTable extends Migration
             $table->boolean('dash_videos')->nullable()->default(0);
             $table->boolean('dash_random_word')->nullable()->default(1);
             $table->boolean('dash_contribution')->nullable()->default(1);
-            $table->json('filter_climb')->nullable();
-            $table->json('filter_status')->nullable();
-            $table->json('filter_period')->nullable();
+            $table->text('filter_climb')->nullable();
+            $table->text('filter_status')->nullable();
+            $table->text('filter_period')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
