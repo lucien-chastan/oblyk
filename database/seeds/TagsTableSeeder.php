@@ -13,7 +13,7 @@ class TagsTableSeeder extends Seeder
     {
 
         // 1 - Blue - Tag 1
-        DB::table('route_tags')->insert([
+        DB::table('tags')->insert([
             'route_id' => 1,
             'user_id' => 1,
             'tag_id' => 1,
@@ -21,7 +21,7 @@ class TagsTableSeeder extends Seeder
         ]);
 
         // 1 - Blue - Tag 5
-        DB::table('route_tags')->insert([
+        DB::table('tags')->insert([
             'route_id' => 1,
             'user_id' => 1,
             'tag_id' => 5,
@@ -29,7 +29,7 @@ class TagsTableSeeder extends Seeder
         ]);
 
         // 2 - Crespin
-        DB::table('route_tags')->insert([
+        DB::table('tags')->insert([
             'route_id' => 2,
             'user_id' => 2,
             'tag_id' => 3,
