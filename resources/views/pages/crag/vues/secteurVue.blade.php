@@ -3,26 +3,27 @@
 <input hidden id="cragId" value="{{$crag->id}}">
 
 @if(count($sectors) > 0)
-    <div class="row">
-        <div class="col s12">
-            <div class="card-panel div-search-secteur">
-                <div class="row">
-                    <div class="input-field col s12 l9">
-                        <i class="material-icons prefix">search</i>
-                        <input id="secteurSearche" type="search">
-                        <label for="secteurSearche">Chercher dans les secteurs</label>
-                    </div>
-                    <div class="col s12 l3 text-right">
-                        <p>
-                            <label>Affichage :</label>
-                            <i id="btnCondenseAffichage" onclick="changeAffichageSecteur('condense')" {!! $Helpers::tooltip('Affichage condensé') !!} class="material-icons grey-text right tooltipped">view_headline</i>
-                            <i id="btnLargeAffichage" onclick="changeAffichageSecteur('large')" {!! $Helpers::tooltip('Afficahge large') !!} class="material-icons right blue-text tooltipped">view_stream</i>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    {{--<div class="row">--}}
+        {{--<div class="col s12">--}}
+            {{--<div class="card-panel div-search-secteur">--}}
+                {{--<div class="row">--}}
+                    {{--<div class="input-field col s12 l9">--}}
+                        {{--<i class="material-icons prefix">search</i>--}}
+                        {{--<input id="secteurSearche" type="search">--}}
+                        {{--<label for="secteurSearche">Chercher dans les secteurs</label>--}}
+                    {{--</div>--}}
+                    {{--<div class="col s12 l3 text-right">--}}
+                        {{--<p>--}}
+                            {{--<label>Affichage :</label>--}}
+                            {{--<i id="btnCondenseAffichage" onclick="changeAffichageSecteur('condense')" {!! $Helpers::tooltip('Affichage condensé') !!} class="material-icons grey-text right tooltipped">view_headline</i>--}}
+                            {{--<i id="btnLargeAffichage" onclick="changeAffichageSecteur('large')" {!! $Helpers::tooltip('Afficahge large') !!} class="material-icons right blue-text tooltipped">view_stream</i>--}}
+                        {{--</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <div class="row">
 
