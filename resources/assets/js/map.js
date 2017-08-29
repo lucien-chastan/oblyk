@@ -98,7 +98,7 @@ function openAddPopup() {
 
 //va chercher les données en reverse géo coding avec openstreetmap
 function MapReverseGeoCoding() {
-    axios.get('http://nominatim.openstreetmap.org/reverse?format=json&lat=' + newLat + '&lon=' + newLng + '&zoom=18&addressdetails=18&email=ekip@oblyk.net').then(function (response) {
+    axios.get('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + newLat + '&lon=' + newLng + '&zoom=18&addressdetails=18&email=ekip@oblyk.org').then(function (response) {
         document.getElementsByName('code_country')[0].value = response.data.address.country_code;
         document.getElementsByName('country')[0].value = response.data.address.country;
         document.getElementsByName('city')[0].value = ( typeof response.data.address.village !== 'undefined')? response.data.address.village : ( typeof response.data.address.city != 'undefined')? response.data.address.city : response.data.address.town;
