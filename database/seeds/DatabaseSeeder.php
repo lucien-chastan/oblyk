@@ -101,6 +101,8 @@ class DatabaseSeeder extends Seeder
         //Salle d'escalade
         $this->call(GymsTableSeeder::class);
 
+        //Table de recherche
+        $this->call(SearchesTableSeeder::class);
 
     }
 }
