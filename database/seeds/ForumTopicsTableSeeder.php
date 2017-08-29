@@ -15,6 +15,8 @@ class ForumTopicsTableSeeder extends Seeder
             'user_id' => 1,
             'category_id' => 3,
             'label' => 'Oblyk le nouveau forum',
+            'nb_post' => 1,
+            'views' => 1,
             'created_at' => date('Y-m-d H:m:s'),
             'last_post' => date('Y-m-d H:m:s'),
         ]);

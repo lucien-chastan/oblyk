@@ -176,6 +176,101 @@ Bonne grimpe à vous tous !
             ',
             'user_id' => 2,
             'created_at' => date('Y-m-d H:m:s'),
+        ]);//6
+        DB::table('posts')->insert([
+            'postable_id' => 2,
+            'postable_type' => 'App\User',
+            'content' => '
+<p><strong>Salut à tous,</strong></p>
+
+<p>
+Vous vous demandez peut-être où en est Oblyk ? Quelles sont les évolutions à venir ? Pourquoi certaines suggestions faites sur le forum ne sont toujours pas en ligne ?  
+Oblyk arrive à une nouvelle charnière de sa vie.
+</p>
+
+<p>
+Je suis sur la fin de ma formation de développeur web, et au vu de toutes les choses que j\'ai apprises depuis septembre, je me rend compte que je ne peux pas continuer à développer Oblyk sur la même base de code …
+</p>
+
+<p>
+<strong>Du coup, c\'est reparti pour une refonte totale du monstre ! ; )</strong>
+</p>
+
+<p>
+En deux années d\'existence j\'ai pu voir comment était utilisé Oblyk, voir que certaines sections que je ne pensais pas être très intéressantes étaient la raison de la venue de nombreux nouveaux. Et inversement, j\'ai pu mettre beaucoup d\'énergie dans des sections qui sont restées inutilisées.
+</p>
+
+<p>
+C\'est donc l\'occasion de recadrer le projet, faire respirer l\'interface et se concentrer sur ce qui fonctionne et vous intéresse :
+</p>
+
+<ul>
+<li>les infos sur les falaises</li>
+<li>le carnet de croix</li>
+<li>la recherche de partenaire de grimpe</li>
+<li>et du coup implicitement : votre profil et celui des autres</li>
+</ul>
+
+<p>
+Seront absents, ou du moins, secondaires au début du nouvel Oblyk :
+</p>
+
+<ul>
+<li>le forum</li>
+<li>la partie indoor</li>
+</ul>
+
+<p>
+Bien sûr, oblyk actuel continuera de fonctionner jusqu’à ce que la nouvelle version soit là, et la transition entre les deux versions sera transparente, rien ne sera perdu.
+</p>
+
+<p>
+<strong>Et c\'est pour quand ?</strong>
+</p>
+<p>
+Aahhh ! bonne question … et je ne vais pas me risquer à vous donner une date, parce que je n\'ai jamais réussi à estimer et tenir les délais que je me donnais ; )  
+Mais dans tous les cas ce n\'est pas pour demain, à la louche nous pourrions parler de septembre 2017 … ah bah voilà, je viens de donner une date ^^.
+</p>
+
+<p>
+Je vous l\'accord, tous ceci est encore flou et lointain.<br>
+Promis, je vous tiendrai au courant dès qu\'il y aura des visuels ou des éléments plus concrets.
+</p>
+
+<p>
+Merci de tout ce que vous avez déjà fait pour Oblyk !<br>
+Comme d\'habitude n\'hésitez pas à me faire part de vos réflexions.
+</p>
+
+<p>
+Bonne grimpe à vous tous !
+</p>
+            ',
+            'user_id' => 2,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        //7
+        DB::table('posts')->insert([
+            'postable_id' => 1,
+            'postable_type' => 'App\ForumTopic',
+            'content' => 'Salut à tous,
+<p>
+Voici le nouveau forum d\'oblyk !
+</p>
+<p>
+Il est très similaire à l\'ancien, mais il a quand même eu le droit à quelques petites nouveautés ; )
+</p>
+<ul>
+<li>Les posts peuvent être liké (quand on est d\'accord mais qu\'on à pas grand chose à rajouter)</li>
+<li>Les posts peuvent être commenté</li>
+<li>Ou on peut ajouter un post à la discussions</li>
+</ul>
+<p>
+Autre avantage de ce nouveau forum, il est complètement intégré au fil d\'actualité sur votre profil !
+</p>',
+            'user_id' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
         ]);
 
     }
