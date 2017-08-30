@@ -296,7 +296,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Rock as $rock){
             $selected = ($rock->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $rock->id . '">' . ucfirst($rock->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $rock->id . '">' . trans('elements/rocks.rock_' . $rock->id) . '</option>';
         }
 
         $html .= '
@@ -326,7 +326,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Statuses as $status){
             $selected = ($status->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $status->id . '">' . ucfirst($status->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $status->id . '">' . trans('elements/statuses.status_' . $status->id) . '</option>';
         }
 
         $html .= '
@@ -356,7 +356,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Hardnesses as $hardness){
             $selected = ($hardness->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $hardness->id . '">' . ucfirst($hardness->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $hardness->id . '">' . trans('elements/hardnesses.hardness_' . $hardness->id) . '</option>';
         }
 
         $html .= '
@@ -386,7 +386,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Modes as $mode){
             $selected = ($mode->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $mode->id . '">' . ucfirst($mode->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $mode->id . '">' . trans('elements/modes.mode_' . $mode->id) . '</option>';
         }
 
         $html .= '
@@ -482,7 +482,7 @@ class InputTemplates extends ServiceProvider{
         foreach ($climbs as $key => $climb){
             if($key != 0){
                 $selected = ($climb->id == $value)? 'selected' : '';
-                $html .= '<option class="left" data-icon="/img/icon-climb-' . ($key + 1) . '.png" ' . $selected . ' value="' . $climb->id . '">' . ucfirst($climb->label) . '</option>';
+                $html .= '<option class="left" data-icon="/img/icon-climb-' . ($key + 1) . '.png" ' . $selected . ' value="' . $climb->id . '">' . trans('elements/climbs.climb_' . $climb->id) . '</option>';
             }
         }
 
@@ -504,14 +504,14 @@ class InputTemplates extends ServiceProvider{
         $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
 
         $notes = [
-            0 => 'pas de note',
-            1 => 'Horrible !',
-            2 => 'Moche',
-            3 => 'Bof',
-            4 => 'Normal',
-            5 => 'Belle',
-            6 => 'Très belle',
-            7 => 'Majeur !'
+            0 => trans('elements/notes.note_1'),
+            1 => trans('elements/notes.note_2'),
+            2 => trans('elements/notes.note_3'),
+            3 => trans('elements/notes.note_4'),
+            4 => trans('elements/notes.note_5'),
+            5 => trans('elements/notes.note_6'),
+            6 => trans('elements/notes.note_7'),
+            7 => trans('elements/notes.note_8'),
         ];
 
         $html = '
@@ -582,7 +582,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Rains as $rain){
             $selected = ($rain->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $rain->id . '">' . ucfirst($rain->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $rain->id . '">' . trans('elements/rains.rains_' . $rain->id) . '</option>';
         }
 
         $html .= '
@@ -922,7 +922,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Inclines as $key => $incline){
             $selected = ($incline->id == $value)? 'selected' : '';
-            $html .= '<option class="left" data-icon="/img/incline-' . ($key + 1) . '.png" ' . $selected . ' value="' . $incline->id . '">' . ucfirst($incline->label) . '</option>';
+            $html .= '<option class="left" data-icon="/img/incline-' . ($key + 1) . '.png" ' . $selected . ' value="' . $incline->id . '">' . trans('elements/inclines.incline_' . $incline->id) . '</option>';
         }
 
         $html .= '
@@ -981,7 +981,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Points as $key=>$point){
             $selected = ($point->id == $value)? 'selected' : '';
-            $html .= '<option class="left" data-icon="/img/point-' . ($key + 1) . '.png" ' . $selected . ' value="' . $point->id . '">' . ucfirst($point->label) . '</option>';
+            $html .= '<option class="left" data-icon="/img/point-' . ($key + 1) . '.png" ' . $selected . ' value="' . $point->id . '">' . trans('elements/points.point_' . $point->id) . '</option>';
         }
 
         $html .= '
@@ -1010,7 +1010,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Anchors as $key=>$anchor){
             $selected = ($anchor->id == $value)? 'selected' : '';
-            $html .= '<option class="left" data-icon="/img/relais-' . ($key + 1) . '.png" ' . $selected . ' value="' . $anchor->id . '">' . ucfirst($anchor->label) . '</option>';
+            $html .= '<option class="left" data-icon="/img/relais-' . ($key + 1) . '.png" ' . $selected . ' value="' . $anchor->id . '">' . trans('elements/anchors.anchor_' . $anchor->id) . '</option>';
         }
 
         $html .= '
@@ -1040,7 +1040,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Receptions as $reception){
             $selected = ($reception->id == $value)? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $reception->id . '">' . ucfirst($reception->label) . '</option>';
+            $html .= '<option ' . $selected . ' value="' . $reception->id . '">' . trans('elements/receptions.reception_' . $reception->id) . '</option>';
         }
 
         $html .= '
@@ -1070,7 +1070,7 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($Starts as $key=>$start){
             $selected = ($start->id == $value)? 'selected' : '';
-            $html .= '<option class="left" data-icon="/img/start-' . ($key + 1) . '.png" ' . $selected . ' value="' . $start->id . '">' . ucfirst($start->label) . '</option>';
+            $html .= '<option class="left" data-icon="/img/start-' . ($key + 1) . '.png" ' . $selected . ' value="' . $start->id . '">' . trans('elements/starts.start_' . $start->id) . '</option>';
         }
 
         $html .= '
