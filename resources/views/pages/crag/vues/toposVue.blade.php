@@ -88,7 +88,7 @@
                         </div>
                     @endforeach
 
-                    @if(count($crag->topoWebs) == 0)
+                    @if(count($crag->topoPdfs) == 0)
                         <p class="grey-text text-center">Aucun n'a été uploadé sur Oblyk pour l'instant</p>
                     @endif
                 </div>
