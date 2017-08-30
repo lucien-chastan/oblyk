@@ -9,7 +9,7 @@
             @if(file_exists(storage_path('app/public/users/50/user-' . $like->user->id . '.jpg')))
                 <img src="/storage/users/50/user-{{$like->user->id}}.jpg" alt="" class="left circle" style="margin-right: 0.7em">
             @else
-                <img src="/img/icon-search-user.svg" alt="" class="left circle" style="margin-right: 0.7em">
+                <img src="/img/icon-search-user.svg" alt="" class="left circle" style="margin-right: 0.7em; height: 50px;">
             @endif
             <p>
                 <a href="{{Route('userPage',['user_id'=>$like->user->id,'user_label'=>str_slug($like->user->name)])}}" class="text-bold">{{$like->user->name}}</a><br>
