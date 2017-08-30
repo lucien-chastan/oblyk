@@ -18,27 +18,27 @@
 
         <tr class="button-open-route" onclick="loadRoute({{$route->id}})">
             <td class="button-open-route" onclick="loadRoute({{$route->id}},'carnet');event.stopPropagation();">
-                @if(isset($route->ticklists[0]->id))
+                @if(isset($route->tickLists[0]->id))
                     <i {!! $Helpers::tooltip('Fait partie de ma tick-list') !!} class="material-icons tooltipped">crop_free</i>
                 @endif
                 @if(isset($route->crosses[0]->id))
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 1)
-                        <i {!! $Helpers::tooltip('Fait partie de mes projets') !!} class="material-icons tooltipped">crop_square</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_1')) !!} class="material-icons tooltipped">crop_square</i>
                     @endif
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 2)
-                        <i {!! $Helpers::tooltip('Terminé') !!} class="material-icons tooltipped">done</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_2')) !!} class="material-icons tooltipped">done</i>
                     @endif
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 3)
-                        <i {!! $Helpers::tooltip('Fait après travail') !!} class="material-icons tooltipped">check_box</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_3')) !!} class="material-icons tooltipped">check_box</i>
                     @endif
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 4)
-                        <i {!! $Helpers::tooltip('Fait flash') !!} class="material-icons tooltipped">flash_on</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_4')) !!} class="material-icons tooltipped">flash_on</i>
                     @endif
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 5)
-                        <i {!! $Helpers::tooltip('Fait à vue') !!} class="material-icons tooltipped">visibility</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_5')) !!} class="material-icons tooltipped">visibility</i>
                     @endif
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 6)
-                        <i {!! $Helpers::tooltip('Ligne répétée') !!} class="material-icons tooltipped">repeat</i>
+                        <i {!! $Helpers::tooltip(trans('elements/statuses.status_6')) !!} class="material-icons tooltipped">repeat</i>
                     @endif
                 @endif
             </td>

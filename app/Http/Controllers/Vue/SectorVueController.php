@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Vue;
 use App\Http\Controllers\Controller;
 use App\Route;
 use App\Sector;
-use DebugBar;
 use Illuminate\Support\Facades\Auth;
 
 class SectorVueController extends Controller
