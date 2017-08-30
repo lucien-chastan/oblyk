@@ -69,7 +69,7 @@
                 </div>
 
 
-                @if(!$posts->hasMorePages())
+                @if(!$posts->hasMorePages() && Auth::check())
                     <div {!! $Helpers::modal(route('postModal'), ["postable_id"=>$topic->id, "postable_type"=>"ForumTopic", "post_id"=>"", "title"=>"Écrire le premier post", "method"=>"POST" ]) !!} class="btnModal btn-add-response waves-effect blue-text z-depth-1">
                         <p>
                             @if($topic->nb_post == 0)
