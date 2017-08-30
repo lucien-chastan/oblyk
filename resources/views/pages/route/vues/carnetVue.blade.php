@@ -52,7 +52,7 @@
 
                             {{--Si voie de plusieur longueur--}}
                             @if($route->route_sections_count == count($cross->crossSections))
-                                <strong>J'ai fais les {{ $route->route_sections_count }} longueurs</strong><br>
+                                <strong>J'ai fait les {{ $route->route_sections_count }} longueurs</strong><br>
                             @else
                                 <strong>Longueurs faites {{ count($cross->crossSections) }}/{{ $route->route_sections_count }} :</strong>
                                 <ul>
