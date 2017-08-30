@@ -18,7 +18,7 @@ class CreateSectorsTable extends Migration
             $table->integer('crag_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('label',255);
-            $table->integer('approach');
+            $table->integer('approach')->nullable()->default(0);
             $table->integer('rain_id')->unsigned();
             $table->integer('sun_id')->unsigned();
             $table->double('lat',9,6);

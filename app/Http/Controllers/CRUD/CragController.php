@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
+use App\GapGrade;
 use App\Orientation;
 use App\Photo;
 use App\Search;
@@ -155,6 +156,16 @@ class CragController extends Controller
         $orientation->south_east = $request->input('south_east');
         $orientation->south_west = $request->input('south_west');
         $orientation->save();
+
+        //écart de cotation
+        $gap = new GapGrade();
+        $gap->spreadable_id = $crag->id;
+        $gap->spreadable_type = 'App\Crag';
+        $gap->min_grade_val = 0;
+        $gap->max_grade_val = 0;
+        $gap->min_grade_text = '';
+        $gap->max_grade_text = '';
+        $gap->save();
 
         //Mise à jour de l'index de recherche
         Search::index('App\Crag', $crag->id, $crag->label);
