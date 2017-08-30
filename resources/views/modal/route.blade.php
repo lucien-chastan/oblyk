@@ -8,7 +8,7 @@
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'id'=>'popup_line_name', 'value'=>$dataModal['ligne']->label, 'label'=>'Nom de la ligne', 'icon'=>'icon-nom', 'placeholder'=>'Nom de la ligne (exemple : Biographie)','type'=>'text']) !!}
-        {!! $Inputs::sectors(['name'=>'sector_id', 'value'=>$dataModal['ligne']->sector_id, 'label'=>'Secteur', 'icon'=>'icon-sector', 'crag_id'=>1]) !!}
+        {!! $Inputs::sectors(['name'=>'sector_id', 'value'=>$dataModal['ligne']->sector_id, 'label'=>'Secteur', 'icon'=>'icon-sector', 'crag_id'=>$dataModal['ligne']->crag_id]) !!}
         {!! $Inputs::climbs(['name'=>'climb_id', 'value'=>$dataModal['ligne']->climb_id, 'label'=>'Type de grimpe', 'icon'=>'icon-type_grimpe',]) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['ligne']->height, 'label'=>'Hauteur', 'icon'=>'icon-route_height', 'placeholder'=>'Hauteur en mètre','type'=>'number']) !!}
 
