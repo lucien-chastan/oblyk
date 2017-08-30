@@ -109,7 +109,7 @@ function initCragMap() {
 //recharge l'onglet des secteurs quand on le met à jour par exemple
 function reloadSector(response) {
     let data = JSON.parse(response.data);
-    ajaxRouter('/vue/crag/' + data.id + '/secteur', document.getElementById('voies'), 'closeModal');
+    ajaxRouter('/vue/crag/' + data.crag_id + '/secteur', document.getElementById('voies'), 'closeModal');
 }
 
 //Recharge l'onglet description qui a été mise à jour
