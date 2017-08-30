@@ -20,7 +20,7 @@ class CreateUserPlacesTable extends Migration
             $table->double('lng',9,6);
             $table->integer('rayon');
             $table->string('label', 255);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('active');
             $table->timestamps();
 

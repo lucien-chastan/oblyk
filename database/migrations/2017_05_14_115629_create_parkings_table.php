@@ -17,7 +17,7 @@ class CreateParkingsTable extends Migration
             $table->increments('id');
             $table->integer('crag_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('description',2000);
+            $table->string('description',2000)->nullable();
             $table->double('lat',9,6);
             $table->double('lng',9,6);
             $table->timestamps();
