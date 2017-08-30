@@ -13,7 +13,7 @@
                     <div class="col-information">
                         <h2 class="loved-king-font">{{ $user->name }}</h2>
                         <p>{{ $user->genre }}, {{ $user->age }} ans</p>
-                        <p>
+                        <p class="text-cursor">
                             <span onclick="changeRelation({{ $user->id }}, {{  $relationStatus }})">
                                 @if($relationStatus == 0)
                                     <i class="material-icons left">star_border</i> demander {{ $user->name }} en amis
