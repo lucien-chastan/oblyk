@@ -4,7 +4,8 @@
 
 return [
 
-    'written_by' => 'Rédigé par :nam le :date',
+    'written_by' => 'Rédigé par :name le :date',
+    'nb_comments' => '{0}aucun commentaire|{1}un commentaire|[2,*]:count commentaires',
     'views' => 'lu :nb fois',
     'titleComments' => 'Commentaires',
     'byDate' => 'par :auteur le :date',
