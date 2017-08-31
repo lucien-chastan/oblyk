@@ -77,6 +77,9 @@ class GymController extends Controller
         $this->validate($request, [
             'label' => 'required|String|max:255',
             'city' => 'required|String|max:255',
+            'big_city' => 'required|String|max:255',
+            'postal_code' => 'required|String|max:10',
+            'country' => 'required|String|max:255',
             'region' => 'required|String|max:255'
         ]);
 
@@ -143,6 +146,9 @@ class GymController extends Controller
         $this->validate($request, [
             'label' => 'required|String|max:255',
             'city' => 'required|String|max:255',
+            'big_city' => 'required|String|max:255',
+            'postal_code' => 'required|String|max:10',
+            'country' => 'required|String|max:255',
             'region' => 'required|String|max:255'
         ]);
 
