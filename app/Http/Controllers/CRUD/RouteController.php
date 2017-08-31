@@ -116,6 +116,9 @@ class RouteController extends Controller
         //validation du formulaire
         $this->validate($request, [
             'label' => 'required|String|max:255',
+            'height' => 'nullable|Integer|min:0',
+            'open_year' => 'nullable|Integer|min:1800',
+            'nb_longueur' => 'nullable|Integer|min:1',
         ]);
 
         //information sur la falaise
@@ -219,6 +222,9 @@ class RouteController extends Controller
         //validation du formulaire
         $this->validate($request, [
             'label' => 'required|String|max:255',
+            'height' => 'nullable|Integer|min:0',
+            'open_year' => 'nullable|Integer|min:1800',
+            'nb_longueur' => 'nullable|Integer|min:1',
         ]);
 
         //mise à jour des données de la falaise
