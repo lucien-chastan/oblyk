@@ -28,6 +28,7 @@ class CragController extends Controller
             ->withCount('topoPdfs')
             ->withCount('posts')
             ->with('photos')
+            ->with('photos.user')
             ->with('topos.topo')
             ->with('massives.massive')
             ->with('topoWebs.user')
@@ -69,8 +70,18 @@ class CragController extends Controller
         $crag->views++;
         $crag->save();
 
+        //type de grimpe sur ce site
+        $climbTypes = '<span class="crag-type-grimpe">';
+        if($crag->type_voie == 1) $climbTypes .= '<span class="type-voie">' . trans('elements/climbs.climb_3') . '</span>';
+        if($crag->type_grande_voie == 1) $climbTypes .= '<span class="type-grande-voie">' . trans('elements/climbs.climb_4') . '</span>';
+        if($crag->type_bloc == 1) $climbTypes .= '<span class="type-bloc">' . trans('elements/climbs.climb_2') . '</span>';
+        if($crag->type_deep_water == 1) $climbTypes .= '<span class="type-deep-water">' . trans('elements/climbs.climb_7') . '</span>';
+        if($crag->type_via_ferrata == 1) $climbTypes .= '<span class="type-via-ferrata">' . trans('elements/climbs.climb_8') . '</span>';
+        $climbTypes .= '</span>';
+
         $data = [
             'crag' => $crag,
+            'climbTypes' => $climbTypes,
             'user' => $user,
             'userCrosses' => $userCrosses,
             'userTicklists' => $userTicklists,

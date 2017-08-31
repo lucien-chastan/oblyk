@@ -14,7 +14,7 @@
                         ajouté par {{$link->user->name}} le {{$link->created_at->format('d M Y')}}
 
                         @if(Auth::check())
-                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($link->user_id == Auth::id())
                                 <i {!! $Helpers::tooltip('Modifier ce lien') !!} {!! $Helpers::modal(route('linkModal'), ["linkable_id"=>$topo->id, "linkable_type"=>"Topo", "link_id"=>$link->id, "title"=>"Modifier le lien", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                 <i {!! $Helpers::tooltip('Supprimer ce lien') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/links/" . $link->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>

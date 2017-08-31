@@ -34,7 +34,7 @@
                                 <div class="card-content i-cursor">
                                     <p>
                                         <i {!! $Helpers::tooltip('Définir comme bandeau du site') !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$sector->crag_id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
-                                        <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                                         @if(Auth::id() == $photo->user_id)
                                             <i {!! $Helpers::tooltip('Modifier la photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$sector->id, "illustrable_type"=>"Sector", "photo_id"=>$photo->id, "title"=>"Modifier une photo", "method"=>"PUT", "callback"=>"reloadPhotoSector"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
                                             <i {!! $Helpers::tooltip('Supprimer la photo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id, "callback"=>"reloadPhotoSector"]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>

@@ -30,7 +30,7 @@
                             </p>
                             <p class="info-user grey-text">
                                 @if(Auth::check())
-                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$album->id, "model"=>"Album"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                    <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$album->id, "model"=>"Album"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                     @if($album->user_id == Auth::id())
                                         <i {!! $Helpers::tooltip('Modifier cet album') !!} {!! $Helpers::modal(route('albumModal'), ["album_id"=>$album->id, "title"=>"Modifier un album", "method"=>"PUT", "callback"=>"reloadCurrentVue"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                         <i {!! $Helpers::tooltip('Supprimer cet album') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/albums/" . $album->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>

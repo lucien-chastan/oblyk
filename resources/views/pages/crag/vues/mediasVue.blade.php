@@ -6,7 +6,7 @@
 
             <div id="zone-crag-gallerie">
 
-                <h2 class="loved-king-font text-center">Photos de la falaise</h2>
+                <h2 class="loved-king-font text-center">@lang('pages/crags/tabs/media.titlePhotoCrag')</h2>
 
                 <div class="row row-crag-gallerie">
                     <div id="cragPhototheque" class="phototheque">
@@ -21,13 +21,13 @@
 
                 <div class="row" id="bt-show-crag-gallerie-editor">
                     <div class="info-user grey-text i-cursor">
-                        <i {!! $Helpers::tooltip('Modifier / supprimer ou signaler un problème sur une photo') !!} onclick="showPhotoEditor(true)" class="material-icons tiny-btn right tooltipped">edit</i>
+                        <i {!! $Helpers::tooltip(trans('pages/crags/tabs/media.tooltipEditDeleteReport')) !!} onclick="showPhotoEditor(true)" class="material-icons tiny-btn right tooltipped">edit</i>
                     </div>
                 </div>
 
                 <div class="row zone-photo-editor" id="zone-photo-editor">
 
-                    <h2 class="loved-king-font text-center">Action sur une photo</h2>
+                    <h2 class="loved-king-font text-center">@lang('pages/crags/tabs/media.titleActionPhoto')</h2>
 
                     <div class="row">
                         @foreach($crag->photos as $photo)
@@ -38,11 +38,11 @@
                                     </div>
                                     <div class="card-content i-cursor">
                                         <p>
-                                            <i {!! $Helpers::tooltip('Définir comme bandeau du site') !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$crag->id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
-                                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                            <i {!! $Helpers::tooltip(trans('modals/photo.headbandTooltip')) !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$crag->id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
+                                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                                             @if(Auth::id() == $photo->user_id)
-                                                <i {!! $Helpers::tooltip('Modifier la photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Crag", "photo_id"=>$photo->id, "title"=>"Modifier une photo", "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
-                                                <i {!! $Helpers::tooltip('Supprimer la photo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                                <i {!! $Helpers::tooltip(trans('modals/photo.editTooltip')) !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Crag", "photo_id"=>$photo->id, "title"=>trans('modals/photo.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                                <i {!! $Helpers::tooltip(trans('modals/photo.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
                                             @endif
                                         </p>
                                     </div>
@@ -53,13 +53,13 @@
 
                     <div class="row">
                         <div class="info-user grey-text i-cursor col s12">
-                            <i {!! $Helpers::tooltip('fermer l\'édition des photos') !!} onclick="showPhotoEditor(false)" class="material-icons tiny-btn right tooltipped">clear</i>
+                            <i {!! $Helpers::tooltip(trans('pages/crags/tabs/media.tooltipCloseEdit')) !!} onclick="showPhotoEditor(false)" class="material-icons tiny-btn right tooltipped">clear</i>
                         </div>
                     </div>
                 </div>
             @endif
 
-            <h2 class="loved-king-font text-center">Vidéos</h2>
+            <h2 class="loved-king-font text-center">@lang('pages/crags/tabs/media.titleVideosCrag')</h2>
 
             <div class="row">
 
@@ -71,19 +71,19 @@
                             </div>
                             <p class="i-cursor">
                                 {{$video->description}}<br>
-                                posté par {{$video->user->name}}<br>
+                                @lang('modals/video.postByDate', ['url'=>route('userPage',['user_id'=>$video->user->id, 'user_label'=>str_slug($video->user->name)]), 'name'=>$video->user->name, 'date'=>$video->created_at->format('D M Y')])
                                 @if(Auth::check())
-                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                    <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                                     @if(Auth::id() == $video->user_id)
-                                        <i {!! $Helpers::tooltip('Modifier la vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>$video->id, "title"=>"Modifier une vidéo", "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
-                                        <i {!! $Helpers::tooltip('Supprimer la vidéo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/videos/" . $video->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/video.editTooltip')) !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>$video->id, "title"=>trans('modals/video.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/video.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/videos/" . $video->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
                                     @endif
                                 @endif
                             </p>
                         </div>
                     @endforeach
                 @else
-                    <p class="text-center grey-text">Il n'y a pas de vidéo postée sur ce site pour l'instant</p>
+                    <p class="text-center grey-text">@lang('pages/crags/tabs/media.paraNoVideo')</p>
                 @endif
             </div>
 
@@ -94,8 +94,8 @@
                         <i class="large material-icons">add</i>
                     </a>
                     <ul>
-                        <li><a {!! $Helpers::tooltip('Ajouter une photo') !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Crag", "photo_id"=>'', "title"=>"Ajouter une photo", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">photo_camera</i></a></li>
-                        <li><a {!! $Helpers::tooltip('Ajouter une vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>'', "title"=>"Ajouter une vidéo", "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">videocam</i></a></li>
+                        <li><a {!! $Helpers::tooltip(trans('modals/photo.addTooltip')) !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Crag", "photo_id"=>'', "title"=>trans('modals/photo.modalAddTitle'), "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">photo_camera</i></a></li>
+                        <li><a {!! $Helpers::tooltip(trans('modals/video.addTooltip')) !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$crag->id, "viewable_type"=>"Crag", "video_id"=>'', "title"=>trans('modals/video.modalAddTitle'), "method"=>"POST"]) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">videocam</i></a></li>
                     </ul>
                 </div>
             @endif

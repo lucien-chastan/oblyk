@@ -37,10 +37,10 @@
                     <div class="row no-bottom-margin">
                         <div class="col s12">
                             <ul class="tabs">
-                                <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">Informations</a></li>
-                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">Voies</a><span class="count-tab-ettiquette">{{$sector->routes_count}}</span></li>
-                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">Descriptions</a><span class="count-tab-ettiquette">{{$sector->descriptions_count}}</span></li>
-                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">Photos</a><span class="count-tab-ettiquette">{{$sector->photos_count}}</span></li>
+                                <li class="tab col s3"><a class="active routerLinkSector" href="#informations-secteur-{{$sector->id}}">@lang('pages/crags/tabs/sectors/global.tabInformation')</a></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueRoutesSector',[$sector->id])}}" href="#voies-secteur-{{$sector->id}}">@lang('pages/crags/tabs/sectors/global.tabRoute')</a><span class="count-tab-ettiquette">{{$sector->routes_count}}</span></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vueDescriptionsSector',[$sector->id])}}" href="#description-secteur-{{$sector->id}}">@lang('pages/crags/tabs/sectors/global.tabDescription')</a><span class="count-tab-ettiquette">{{$sector->descriptions_count}}</span></li>
+                                <li class="tab col s3"><a onclick="loadSectorVue(this)" data-sector-id="{{$sector->id}}" data-route="{{route('vuePhotosSector',[$sector->id])}}" data-callback="initSectorPhototheque" href="#photos-secteur-{{$sector->id}}">@lang('pages/crags/tabs/sectors/global.tabPhoto')</a><span class="count-tab-ettiquette">{{$sector->photos_count}}</span></li>
                             </ul>
                         </div>
                         <div id="informations-secteur-{{$sector->id}}" class="col s12">@include('pages.crag.tabs.sector-tabs.sector-informations')</div>
@@ -54,7 +54,9 @@
         @endforeach
     </div>
 @else
-    <p class="text-center grey-text">Il n'y à encore aucune ligne ni secteur posté sur ce site.<br>Utilise le bouton "+" en bas à droite pour ajouter un secteur</p>
+    <p class="text-center grey-text">
+        @lang('pages/crags/tabs/sectors/global.paraNoSecteur')
+    </p>
 @endif
 
 {{--bouton d'ajout--}}
@@ -64,9 +66,9 @@
             <i class="large material-icons">add</i>
         </a>
         <ul>
-            <li><a {!! $Helpers::tooltip('Ajouter un secteur') !!}} {!! $Helpers::modal(route('sectorModal'),['crag_id' => $crag->id ,'title'=>'Ajouter un secteur','method'=>'POST']) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">terrain</i></a></li>
+            <li><a {!! $Helpers::tooltip(trans('modals/sector.addTooltip')) !!}} {!! $Helpers::modal(route('sectorModal'),['crag_id' => $crag->id ,'title'=>trans('modals/sector.modalAddTitle'),'method'=>'POST']) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">terrain</i></a></li>
             @if(count($sectors) > 0)
-                <li><a {!! $Helpers::tooltip('Ajouter une ligne') !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>'Ajouter une ligne','method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
+                <li><a {!! $Helpers::tooltip(trans('modals/route.addTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>trans('modals/route.modalAddTitle'),'method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
             @endif
         </ul>
     </div>

@@ -1,6 +1,6 @@
 <div class="col s12 m7">
     <div class="card-panel">
-        <h2 class="loved-king-font">Topos papier de ce site :</h2>
+        <h2 class="loved-king-font">@lang('pages/crags/tabs/informations.paperGuideBookTitle')</h2>
 
         @foreach($crag->topos as $liaison)
             <div class="col s12 m6 l4 topo-panel text-center">
@@ -14,13 +14,13 @@
         @endforeach
 
         @if(count($crag->topos) == 0)
-            <p class="grey-text text-center">Ce site n'est référencé dans aucun topo papier</p>
+            <p class="grey-text text-center">@lang('pages/crags/tabs/informations.paraNoPaperGuideBook')</p>
         @endif
     </div>
 </div>
 <div class="col s12 m5">
     <div class="card-panel">
-        <h2 class="loved-king-font">Topos web</h2>
+        <h2 class="loved-king-font">@lang('pages/crags/tabs/informations.webGuideBookTitle')</h2>
 
         <div class="blue-border-zone">
             @foreach($crag->topoWebs as $topoWeb)
@@ -28,13 +28,12 @@
                     <h6>{{$topoWeb->label}}</h6>
                     <a class="truncate" target="_blank" href="{{$topoWeb->url}}">{{$topoWeb->url}}</a>
                     <p class="info-user grey-text">
-                        ajouté par {{$topoWeb->user->name}} le {{$topoWeb->created_at->format('d M Y')}}
-
+                        @lang('modals/webGuideBook.postByDate', ['name'=>$topoWeb->user->name, 'url'=> route('userPage', ['user_id'=>$topoWeb->user->id, 'user_label'=>str_slug($topoWeb->user->name)]), 'date'=>$topoWeb->created_at->format('d M Y')])
                         @if(Auth::check())
-                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoWeb->id, "model"=>"TopoWeb"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoWeb->id, "model"=>"TopoWeb"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($topoWeb->user_id == Auth::id())
-                                <i {!! $Helpers::tooltip('Modifier ce topo web') !!} {!! $Helpers::modal(route('topoWebModal'), ["topo_web_id"=>$topoWeb->id, "crag_id"=>$crag->id, "title"=>"Modifier le topo web", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                                <i {!! $Helpers::tooltip('Supprimer ce topo web') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoWebs/" . $topoWeb->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                <i {!! $Helpers::tooltip(trans('modals/webGuideBook.editTooltip')) !!} {!! $Helpers::modal(route('topoWebModal'), ["topo_web_id"=>$topoWeb->id, "crag_id"=>$crag->id, "title"=>trans('modals/webGuideBook.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip(trans('modals/webGuideBook.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoWebs/" . $topoWeb->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @endif
                     </p>
@@ -42,11 +41,11 @@
             @endforeach
 
             @if(count($crag->topoWebs) == 0)
-                <p class="grey-text">Aucun site internet présente le topo de cette falaise</p>
+                <p class="grey-text">@lang('pages/crags/tabs/informations.paraNoWebGuideBook')</p>
             @endif
         </div>
 
-        <h2 class="loved-king-font">Topos PDF</h2>
+        <h2 class="loved-king-font">@lang('pages/crags/tabs/informations.pdfGuideBookTitle')</h2>
         <div class="blue-border-zone">
 
             @foreach($crag->topoPdfs as $topoPdf)
@@ -57,10 +56,10 @@
                         ajouté par {{$topoPdf->user->name}} le {{$topoPdf->created_at->format('d M Y')}}
 
                         @if(Auth::check())
-                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoPdf->id, "model"=>"TopoPdf"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$topoPdf->id, "model"=>"TopoPdf"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                             @if($topoPdf->user_id == Auth::id())
-                                <i {!! $Helpers::tooltip('Modifier ce topo PDF') !!} {!! $Helpers::modal(route('topoPdfModal'), ["topo_pdf_id"=>$topoPdf->id, "crag_id"=>$crag->id, "title"=>"Modifier le topo Pdf", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                                <i {!! $Helpers::tooltip('Supprimer ce topo PDF') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoPdfs/" . $topoPdf->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                <i {!! $Helpers::tooltip(trans('modals/pdfGuideBook.editTooltip')) !!} {!! $Helpers::modal(route('topoPdfModal'), ["topo_pdf_id"=>$topoPdf->id, "crag_id"=>$crag->id, "title"=>trans('modals/pdfGuideBook.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                <i {!! $Helpers::tooltip(trans('modals/pdfGuideBook.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoPdfs/" . $topoPdf->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @endif
                     </p>
@@ -68,7 +67,7 @@
             @endforeach
 
             @if(count($crag->topoPdfs) == 0)
-                <p class="grey-text text-center">Aucun topo PDF n'a été uploadé sur Oblyk pour l'instant</p>
+                <p class="grey-text text-center">@lang('pages/crags/tabs/informations.paraNoPdfGuideBook')</p>
             @endif
         </div>
     </div>

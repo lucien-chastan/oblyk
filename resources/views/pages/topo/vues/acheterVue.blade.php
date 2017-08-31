@@ -26,7 +26,7 @@
                             ajouté par {{$sale->user->name}} le {{$sale->created_at->format('d M Y')}}
 
                             @if(Auth::check())
-                                <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$sale->id, "model"=>"TopoSale"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$sale->id, "model"=>"TopoSale"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                 @if($sale->user_id == Auth::id())
                                     <i {!! $Helpers::tooltip('Modifier ce point de vente') !!} {!! $Helpers::modal(route('topoSaleModal'), ["topo_id"=>$topo->id, "id"=>$sale->id, "title"=>"Modifier le point de vente", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                     <i {!! $Helpers::tooltip('Supprimer ce point de vente') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoSales/" . $sale->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>

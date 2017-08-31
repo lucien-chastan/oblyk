@@ -48,7 +48,7 @@
                                     ajouté par {{$word->user->name}} le {{$word->created_at->format('d M Y')}}
 
                                     @if(Auth::check())
-                                        <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                         @if($word->user_id == Auth::id())
                                             <i {!! $Helpers::tooltip('Modifier cette définition') !!} {!! $Helpers::modal(route('wordModal'), ["word_id"=>$word->id, "title"=>"Modifier une défintion", "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                             <i {!! $Helpers::tooltip('Supprimer cette définition') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/words/" . $word->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>

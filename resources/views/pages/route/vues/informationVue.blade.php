@@ -181,7 +181,7 @@
     <div class="ligne-bt-route">
         <p class="text-right">
             <i {!! $Helpers::tooltip('Modifier cette ligne') !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>'Modifier cette ligne','method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
-            <i {!! $Helpers::tooltip('Signaler un problème') !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
+            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
         </p>
     </div>
 
@@ -240,7 +240,7 @@
                             par {{$description->user->name}} le {{$description->created_at->format('d M Y')}}
 
                             @if(Auth::check())
-                                <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>
+                                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>
                                 @if($description->user_id == Auth::id())
                                     <i {!! $Helpers::tooltip('Modifier cette déscription') !!} {!! $Helpers::modal(route('descriptionModal'), ["descriptive_id"=>$route->id, "descriptive_type"=>"Route", "description_id"=>$description->id, "title"=>"Modifier la description", "method" => "PUT", "callback"=>"reloadRouteInformationTab"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
                                     <i {!! $Helpers::tooltip('Supprimer cette déscription') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/descriptions/".$description->id, "callback"=>"reloadRouteInformationTab"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">delete</i>

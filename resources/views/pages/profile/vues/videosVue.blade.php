@@ -28,7 +28,7 @@
                             </p>
                             <p class="mo-margin grey-text">
                                 @if(Auth::check())
-                                    <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                    <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                                     @if(Auth::id() == $video->user_id)
                                         <i {!! $Helpers::tooltip('Modifier la vidéo') !!} {!! $Helpers::modal(route('videoModal'), ["viewable_id"=>$user->id, "viewable_type"=>explode('\\',$video->viewable_type)[1], "video_id"=>$video->id, "title"=>"Modifier une vidéo", "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
                                         <i {!! $Helpers::tooltip('Supprimer la vidéo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/videos/" . $video->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>

@@ -1,11 +1,11 @@
 <div class="card-panel">
-    <h2 class="loved-king-font">Ma ticklist, Mes croix ici</h2>
+    <h2 class="loved-king-font">@lang('pages/crags/tabs/informations.crossesTickListTitle')</h2>
     @if(Auth::check())
 
         {{--MES CROIX--}}
         <div class="row">
             <div class="col s12 l6">
-                <p class="text-underline text-bold">Mes croix</p>
+                <p class="text-underline text-bold">@lang('pages/crags/tabs/informations.crossesTitle')</p>
                 @foreach($userCrosses as $cross)
                     <p class="no-margin">
                         <span class="text-cursor button-open-route" onclick="loadRoute({{$cross->route->id}})">
@@ -21,12 +21,12 @@
                         </span>
                     </p>
                 @endforeach
-                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#croix">Voir mon carnet</a></p>
+                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#croix">@lang('pages/crags/tabs/informations.seeMyCrossesBook')</a></p>
             </div>
 
             {{--TICK LIST--}}
             <div class="col s12 l6">
-                <p class="text-underline text-bold">Ma ticklist</p>
+                <p class="text-underline text-bold">@lang('pages/crags/tabs/informations.TickListTitle')</p>
                 @foreach($userTicklists as $tick)
                     <p class="no-margin">
                         <span class="text-cursor button-open-route" onclick="loadRoute({{$tick->route->id}})">
@@ -42,13 +42,13 @@
                         </span>
                     </p>
                 @endforeach
-                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#tick-list">Voir ma ticklist</a></p>
+                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#tick-list">@lang('pages/crags/tabs/informations.seeMyTickList')</a></p>
             </div>
         </div>
     @else
         <p class="text-center grey-text">
-            Créer toi un compte pour pouvoir tenir un carnet de croix sur ce site<br>
-            <a href="{{ route('register') }}">Créer un compte</a>
+            @lang('pages/crags/tabs/informations.paraRegister')<br>
+            <a href="{{ route('register') }}">@lang('pages/crags/tabs/informations.btnRegister')</a>
         </p>
     @endif
 </div>

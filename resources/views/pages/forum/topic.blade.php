@@ -33,7 +33,7 @@
                         , {{$topic->nb_post}} posts
                         , vu {{$topic->views}} fois
                         @if(Auth::check())
-                            <i {!! $Helpers::tooltip('Signaler un problème') !!} {!! $Helpers::modal(route('problemModal'), ["id" => $topic->id , "model"=> "ForumTopic"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $topic->id , "model"=> "ForumTopic"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                             @if(Auth::id() == $topic->user_id)
                                 <i {!! $Helpers::tooltip('Modifier titre ou catégorie de ce topic') !!} {!! $Helpers::modal(route('topicModal'), ["topic_id"=>$topic->id, "title"=>"Modifier ce topic", "method" => "PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
                                 @if(count($posts) == 0)
