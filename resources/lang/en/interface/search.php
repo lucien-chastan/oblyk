@@ -1,6 +1,6 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
+//TODO : TRADUCTION À FAIRE (partiellement)
 
 return [
     'searchOnOblyk' => 'Search on Oblyk', // Chercher sur oblyk
@@ -11,4 +11,12 @@ return [
 
     //Tabs
     'findsResultsHere' => 'Search a cliff, a route, a user, etc. in the search bar above', //Ici apparaîtront les résultats de la recherche sur les falaises
+
+    //Info sur les resultats
+    'groupInfo' => "crag grouping|grouping of :count crags",
+    'inCrag' => "on crag",
+    'suggestedBy' => "proposed by ",
+
+    //pas de résultat
+    'noResultFor' => 'there are no results for the search : " :search " '
 ];

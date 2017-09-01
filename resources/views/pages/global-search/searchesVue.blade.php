@@ -8,7 +8,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                regroupement de {{ count($find->searchable->crags) }} sites d'escalade
+                {{ trans_choice('interface/search.groupInfo', count($find->searchable->crags) }}
             </span>
         </div>
     @endif
@@ -49,10 +49,8 @@
                 {{ $find->searchable->name }}
             </a><br>
             <span class="grey-text">
-                @if($find->searchable->sex == 0) Indéfini, @endif
-                @if($find->searchable->sex == 1) Femme, @endif
-                @if($find->searchable->sex == 2) Homme, @endif
-                {{ $find->searchable->birth != 0 ? date('Y') - $find->searchable->birth : '?' }} ans
+                @lang('elements/sex.sex_' . $find->searchable->sex),
+                {{ $find->searchable->birth != 0 ? trans_choice('elements/old.old', date('Y') - $find->searchable->birth) : trans_choice('elements/old.old',0) }}
             </span>
         </div>
     @endif
@@ -71,7 +69,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                sur le site
+                @lang('interface/search.inCrag')
                 <a href="{{ route('cragPage',['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
                     {{ $find->searchable->crag->label }}
                 </a>,
@@ -103,7 +101,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                sur le site
+                @lang('interface/search.inCrag')
                 <a href="{{ route('cragPage', ['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
                     {{ $find->searchable->crag->label }}
                 </a>
@@ -120,7 +118,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                sur le site
+                @lang('interface/search.inCrag')
                 <a href="{{ route('cragPage', ['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
                     {{ $find->searchable->crag->label }}
                 </a>
@@ -137,7 +135,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                proposé par
+                @lang('interface/search.suggestedBy')
                 <a href="{{ route('userPage', ['user_id'=>$find->searchable->user->id, 'user_label'=>str_slug($find->searchable->user->name)]) }}">
                     {{ $find->searchable->user->name }}
                 </a>
@@ -171,6 +169,6 @@
 
 @if(count($finds) == 0)
     <p class="grey-text text-center">
-        Il n'y a pas de résultat pour la recherche : " {{ $search }} "
+        @lang('interface/search.noResultFor', ['search' => $search])
     </p>
 @endif

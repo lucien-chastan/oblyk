@@ -9,4 +9,12 @@ return [
 
     //Tabs
     'findsResultsHere' => 'Cherche une falaise, une ligne, un utilisteur, etc. dans la barre de recherche ci-dessus',
+
+    //Info sur les resultats
+    'groupInfo' => "regroupement de un site d'escalade|regroupement de :count sites d'escalade",
+    'inCrag' => "sur le site",
+    'suggestedBy' => "proposé par ",
+
+    //pas de résultat
+    'noResultFor' => 'there are no results for the search : " :search " '
 ];
