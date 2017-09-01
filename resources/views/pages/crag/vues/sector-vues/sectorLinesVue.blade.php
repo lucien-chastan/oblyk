@@ -16,7 +16,7 @@
         </tr>
     @foreach($routes as $route)
 
-        <tr class="button-open-route" onclick="loadRoute({{$route->id}})">
+        <tr class="button-open-route text-cursor blue-hover" onclick="loadRoute({{$route->id}})">
             <td class="button-open-route" onclick="loadRoute({{$route->id}},'carnet');event.stopPropagation();">
                 @if(isset($route->tickLists[0]->id))
                     <i {!! $Helpers::tooltip('Fait partie de ma tick-list') !!} class="material-icons tooltipped">crop_free</i>
