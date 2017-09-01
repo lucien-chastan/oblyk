@@ -1,4 +1,4 @@
-<div class="user-bandeau grey darken-1" style="background-image: url('{{$user->bandeau}}')">
+<div class="user-bandeau grey darken-1" onclick="@if($user->id == Auth::id()) loadProfileRoute(document.getElementById('item-parametre-nav')) @else loadProfileRoute(document.getElementById('item-a-propos-nav')) @endif" style="background-image: url('{{$user->bandeau}}')">
     <div class="left-col">
         <img src="{{$user->image}}" alt="phoot de profil de {{$user->name}} " class="circle img-nav-user z-depth-3">
     </div>
@@ -188,7 +188,7 @@
 
         {{--À PROPOS--}}
         <li>
-            <div data-route="{{route('vueAProposUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
+            <div id="item-a-propos-nav" data-route="{{route('vueAProposUser',['user_id'=>$user->id])}}" class="collapsible-header truncate router-profile-link">
                 <i class="material-icons">account_circle</i>
                 <span class="hidden-1000">
                     À propos
