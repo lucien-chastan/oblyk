@@ -85,6 +85,7 @@ class Cross extends Model
             ->whereHas('route', function ($query) use ($climbs_id){$query->whereIn('climb_id', $climbs_id);})
             ->with('route')
             ->with('route.crag')
+            ->with('route.crag.gapGrade')
             ->with('crossSections')
             ->with('crossSections.routeSection')
             ->orderBy('release_at')
