@@ -22,21 +22,21 @@
 
         <div class="row">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3">Les catégories</h1>
+                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/forums/category.title')</h1>
 
                 <p>
-                    Dans cette section, vous trouverez toutes les catégories de discussions qui existent sur le forum d'escalade d'Oblyk: résumés de voyages de grimpe, questions relatives à une voie ou un site d'escalade, etc.
+                    @lang('pages/forums/category.intro_1')
                 </p>
 
                 <p>
-                    Si vous ne trouvez la catégorie parfaite pour votre sujet, utiliser la "zone d'expression libre", elle est faite pour ça.
+                    @lang('pages/forums/category.intro_2')
                 </p>
 
                 <div class="row list-categories-zone">
 
                     @foreach($generalCategories as $generalCategory)
 
-                        <h2 class="loved-king-font">{{$generalCategory->label}}</h2>
+                        <h2 class="loved-king-font">@lang('elements/generalCategories.category_' . $generalCategory->id)</h2>
 
                         <div class="row">
                             @foreach($generalCategory->categories as $category)
@@ -45,20 +45,18 @@
                                         <div class="card-content">
                                             <div class="title-bar">
                                                 <img src="/img/forum-{{$category->id}}.svg" alt="" class="left">
-                                                <h3 class="loved-king-font truncate"> {{$category->label}}</h3>
-                                                @if(count($category->topics) > 0)
-                                                    <p class="no-margin grey-text">{{count($category->topics)}} sujets postés</p>
-                                                @else
-                                                    <p class="no-margin grey-text">pas encore de sujet posté</p>
-                                                @endif
+                                                <h3 class="loved-king-font truncate">@lang('elements/Categories.label_' . $category->id)</h3>
+                                                <p class="no-margin grey-text">
+                                                    {{ trans_choice('pages/forums/category.nbTopics', count($category->topics)) }}
+                                                </p>
                                             </div>
-                                            <p>{{$category->description}}</p>
+                                            <p>@lang('elements/Categories.description_' . $category->id)</p>
                                         </div>
                                         <div class="card-action">
                                             @if(Auth::check())
-                                                <a rel="nofollow" href="{{route('createTopics',['category_id'=>$category->id])}}">Créer un sujet</a>
+                                                <a rel="nofollow" href="{{route('createTopics',['category_id'=>$category->id])}}">@lang('pages/forums/category.btnCreateTopics')</a>
                                             @endif
-                                            <a rel="nofollow" href="{{route('forumTopics')}}?categorie={{$category->id}}">voir les sujets</a>
+                                            <a rel="nofollow" href="{{route('forumTopics')}}?categorie={{$category->id}}">@lang('pages/forums/category.btnSeeTopics')</a>
                                         </div>
                                     </div>
                                 </div>

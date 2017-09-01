@@ -22,10 +22,10 @@
 
         <div class="row">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3">Discuter, Échanger, Débattre de la grimpe</h1>
+                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/forums/home.title')</h1>
 
                 <h2 class="text-center loved-king-font">
-                    Bienvenue sur le forum d'oblyk !
+                    @lang('pages/forums/home.slogan')
                 </h2>
 
                 <div class="row div-image-explication-forum">
@@ -33,17 +33,19 @@
                         <img src="/img/svg-forum.svg" class="responsive-img">
                     </div>
                     <div class="col s12 m6">
-                        <p>Ici tu peux discuter avec la communauté d'oblyk, parler de ce qui t'intéresse, défendre tes idées, proposer des améliorations pour oblyk, etc.</p>
                         <p>
-                            <a href="{{route('forumTopics')}}"><i class="material-icons left tiny">forum</i> Voir les sujets encours</a><br>
+                            @lang('pages/forums/home.para')
+                        </p>
+                        <p>
+                            <a href="{{route('forumTopics')}}"><i class="material-icons left tiny">forum</i> @lang('pages/forums/home.goToTopics')</a><br>
                         </p>
                         @if(Auth::check())
                             <p>
-                                <a href="{{route('createTopics',['category_id'=>1])}}"><i class="material-icons left tiny">comment</i> Créer un nouveau sujet</a><br>
+                                <a href="{{route('createTopics',['category_id'=>1])}}"><i class="material-icons left tiny">comment</i> @lang('pages/forums/home.goToCreate')</a><br>
                             </p>
                         @endif
                         <p>
-                            <a href="{{route('forumRules')}}"><i class="material-icons left tiny">reorder</i> Jeter un oeil aux régles</a>
+                            <a href="{{route('forumRules')}}"><i class="material-icons left tiny">reorder</i> @lang('pages/forums/home.goToRules')</a>
                         </p>
                     </div>
                 </div>

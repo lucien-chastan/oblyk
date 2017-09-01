@@ -28,21 +28,18 @@
 
                 @if($filter == 'no-filtre')
 
-                    <h1 class="loved-king-font text-center grey-text text-darken-3">Les sujets postés</h1>
+                    <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/forums/topics.title')</h1>
 
                     <p>
-                        Dans cette section, vous trouverez les dernières <strong>discussions</strong> lancées par des grimpeurs, sur des sujets divers et variés, comme :
-                        <strong>recherche de partenaires</strong>, conseils pour faire des jolies <strong>photos d'escalade</strong>, avis sur du <strong>matériel d'escalade</strong>, etc.<br>
-                        N'hésitez surtout pas à poster un message dans une discussion qui vous interpelle sur le <strong>forum d'escalade</strong> :
-                        il est toujours bon d'enrichir les débats ! ;)
+                        @lang('pages/forums/topics.intro')
                     </p>
 
                 @else
 
-                    <h1 class="loved-king-font text-center grey-text text-darken-3">{{$filter_categorie->label}}</h1>
+                    <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('elements/Categories.label_' . $filter_categorie->id)</h1>
 
                     <p class="text-center">
-                        {{$filter_categorie->description}}
+                        @lang('elements/Categories.description_' . $filter_categorie->id)
                     </p>
 
                 @endif
@@ -51,11 +48,11 @@
                     <table>
                         <thead>
                         <tr>
-                            <th>Titre</th>
-                            <th class="text-center">Catégorie</th>
-                            <th class="text-center">vus</th>
-                            <th class="text-center">posts</th>
-                            <th class="text-center">Date</th>
+                            <th>@lang('pages/forums/topics.columnTitle')</th>
+                            <th class="text-center">@lang('pages/forums/topics.columnCategory')</th>
+                            <th class="text-center">@lang('pages/forums/topics.columnViews')</th>
+                            <th class="text-center">@lang('pages/forums/topics.columnPosts')</th>
+                            <th class="text-center">@lang('pages/forums/topics.columnDate')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,9 +60,9 @@
                             <tr>
                                 <td>
                                     <a class="text-bold" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}">{{$topic->label}}</a><br>
-                                    <span class="grey-text">proposé par <a href="{{route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)])}}">{{$topic->user->name}}</a></span>
+                                    <span class="grey-text">@lang('pages/forums/topics.addedBy') <a href="{{route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)])}}">{{$topic->user->name}}</a></span>
                                 </td>
-                                <td {!! $Helpers::tooltip($topic->category->label) !!} class="text-center tooltipped"><img class="img-topics" src="/img/forum-{{$topic->category_id}}.svg"></td>
+                                <td {!! $Helpers::tooltip(trans('elements/Categories.label_' . $topic->category->id)) !!} class="text-center tooltipped"><img class="img-topics" src="/img/forum-{{$topic->category_id}}.svg"></td>
                                 <td class="text-center">{{$topic->views}}</td>
                                 <td class="text-center">{{$topic->nb_post}}</td>
                                 <td class="grey-text text-center">{{$topic->last_post->format('d M Y à H:i')}}</td>
@@ -75,8 +72,8 @@
                     </table>
                 @else
                     <p class="grey-text text-center">
-                        Il n'y a pas encore de sujet dans cette catégorie<br>
-                        <a href="{{route('forumTopics')}}">voir tous les sujets</a>
+                        @lang('pages/forums/topics.noTopics')<br>
+                        <a href="{{route('forumTopics')}}">@lang('pages/forums/topics.actionNoTopics')</a>
                     </p>
                 @endif
 

@@ -416,11 +416,11 @@ class InputTemplates extends ServiceProvider{
 
         foreach ($generalCategories as $generalCategory){
 
-            $html .= '<optgroup label="' . $generalCategory->label . '">';
+            $html .= '<optgroup label="' . trans('elements/generalCategories.category_' . $generalCategory->id) . '">';
 
             foreach ($generalCategory->categories as $category){
                 $selected = ($category->id == $value)? 'selected' : '';
-                $html .= '<option data-icon="/img/forum-' . $category->id . '.svg" class="circle left" ' . $selected . ' value="' . $category->id . '">' . ucfirst($category->label) . '</option>';
+                $html .= '<option data-icon="/img/forum-' . $category->id . '.svg" class="circle left" ' . $selected . ' value="' . $category->id . '">' . trans('elements/Categories.label_' . $category->id) . '</option>';
             }
 
             $html .= '</optgroup>';
@@ -435,13 +435,17 @@ class InputTemplates extends ServiceProvider{
         return $html;
     }
 
-    //SELECT DU TYPE DE ROCHE
+    //SELECT DU GENRE
     public static function sex($options){
         $name = $options['name'];
         $label = (isset($options['label']))? $options['label'] : $options['name'];
         $value = (isset($options['value']))? $options['value'] : 0;
         $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-        $tabSexs = ['indéfinie','femme','homme'];
+        $tabSexs = [
+            trans('elements/sex.sex_0'),
+            trans('elements/sex.sex_1'),
+            trans('elements/sex.sex_2')
+        ];
 
         $html = '
             <div class="input-field col s12">
