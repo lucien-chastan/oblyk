@@ -7,15 +7,15 @@
             @endif
         </div>
         <div class="liste-info">
-            <h1 class="loved-king-font"><span>salle d'escalade </span>{{$label}}</h1>
+            <h1 class="loved-king-font"><span>@lang('pages/gyms/global.hiddenTitle') </span>{{$label}}</h1>
             <p><a class="white-text" href="{{route('map')}}#{{$lat}}/{{$lng}}/15">{{$city}}, {{$region}} ({{$code_country}})</a></p>
             @if(Auth::check())
                 <p onclick="followedElement(this, 'Gym', {{$gym->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
-                    <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre cette salle</span>
-                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre cette salle</span>
+                    <span id="followed-element"><i class="material-icons amber-text">star</i> @lang('pages/gyms/global.noFollowThisGym')</span>
+                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> @lang('pages/gyms/global.followThisGym')</span>
                 </p>
             @else
-                <p>Connectez-vous pour suivre cette salle</p>
+                <p>@lang('pages/gyms/global.registerToFollow')</p>
             @endif
         </div>
     </div>
@@ -25,8 +25,8 @@
 </div>
 
 <ul id='choice-upload' class='dropdown-content'>
-    <li><label for="upload-form-logo" class="label-dropdown blue-text"><i class="material-icons ic-drop-upload">photo_camera</i> Changer le logo</label></li>
-    <li><a href="#!"><i class="material-icons ic-drop-upload">wallpaper</i> Changer le bandeau</a></li>
+    <li><label for="upload-form-logo" class="label-dropdown blue-text"><i class="material-icons ic-drop-upload">photo_camera</i> @lang('pages/gyms/global.btChangeLogo')</label></li>
+    <li><a href="#!"><i class="material-icons ic-drop-upload">wallpaper</i> @lang('pages/gyms/global.btChangeHeadband')</a></li>
 </ul>
 
 <form id="form-gym-logo" name="formGymLogo" style="display: none" onsubmit="uploadGymLogo(); return false">

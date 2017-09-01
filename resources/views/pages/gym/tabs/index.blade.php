@@ -3,20 +3,27 @@
     {{--INOFRMATION SUR LA SALLE--}}
     <div class="col s12 m7">
         <div class="card-panel">
-            <h2 class="loved-king-font">Informations sur {{ $gym->label }}</h2>
+            <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.title', ['name'=>$gym->label])</h2>
             <p>
-                {{ $gym->label }} est une salle d'escalade
-                @if($gym->type_boulder == 1 && $gym->type_route == 1) de <span class="type-bloc text-bold">bloc</span> et de <span class="type-voie text-bold">voie</span> @endif
-                @if($gym->type_boulder == 1 && $gym->type_route == 0) de <span class="type-bloc text-bold">bloc</span> @endif
-                @if($gym->type_boulder == 0 && $gym->type_route == 1) de <span class="type-voie text-bold">voie</span> @endif
-                situé à {{ $gym->city }} <a class="grey-text" href="{{ route('map') }}#{{ $gym->lat }}/{{ $gym->lng }}/15">({{ $gym->address }}, {{ $gym->postal_code }} {{ $gym->city }})</a>
+                @lang(
+                    'pages/gyms/tabs/information.description',
+                     [
+                        'name'=>$gym->label,
+                        'type'=>$gym->type,
+                        'city'=>$gym->city,
+                        'class'=>'grey-text',
+                        'url'=>route('map') . '#' . $gym->lat . '/' . $gym->lng . '/15',
+                        'address'=>$gym->address,
+                        'postal_code'=>$gym->postal_code,
+                     ]
+                )
             </p>
 
             @markdown($gym->description)
 
             @if(Auth::check() && $gym->free == 1)
                 <div class="text-right ligne-btn">
-                    <i {!! $Helpers::tooltip('Modifier les informations') !!} {!! $Helpers::modal(route('gymModal'), ["id"=>$gym->id, "title"=>"Modifier cette salle", "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+                    <i {!! $Helpers::tooltip(trans('modals/gym.editTooltip')) !!} {!! $Helpers::modal(route('gymModal'), ["id"=>$gym->id, "title"=>trans('modals/gym.modalEditeTitle'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
                 </div>
             @endif
         </div>
@@ -25,14 +32,14 @@
     {{--PETITE INFORMATION SUR LA SALLE--}}
     <div class="col s12 m5">
         <div class="card-panel">
-            <h2 class="loved-king-font">À propos</h2>
+            <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.titleAbout')</h2>
             <p><i class="material-icons left">phone</i>
                 @if($gym->phone_number != '')
                     <a href="tel:{{ $gym->phone_number }}">
                         {{ $gym->phone_number }}
                     </a>
                 @else
-                    <span class="grey-text">numéro de téléphone non renseigné</span>
+                    <span class="grey-text">@lang('pages/gyms/tabs/information.noPhoneNumber')</span>
                 @endif
             </p>
             <p><i class="material-icons left">email</i>
@@ -41,7 +48,7 @@
                         {{ $gym->email }}
                     </a>
                 @else
-                    <span class="grey-text">email non renseigné</span>
+                    <span class="grey-text">@lang('pages/gyms/tabs/information.noEmail')</span>
                 @endif
             </p>
             <p><i class="material-icons left">language</i>
@@ -50,7 +57,7 @@
                         {{ $gym->web_site }}
                     </a>
                 @else
-                    <span class="grey-text">site internet non renseigné</span>
+                    <span class="grey-text">@lang('pages/gyms/tabs/information.noWebSite')</span>
                 @endif
             </p>
         </div>

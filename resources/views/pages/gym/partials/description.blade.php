@@ -1,6 +1,6 @@
 <div class="col s12">
     <div class="card-panel">
-        <h2 class="loved-king-font">Description par ceux qui y grimpe</h2>
+        <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.titleDescription')</h2>
 
         <div class="blue-border-zone">
             @foreach ($gym->descriptions as $description)
@@ -21,7 +21,7 @@
             @endforeach
 
             @if(count($gym->descriptions) == 0)
-                <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrir ici</p>
+                <p class="grey-text text-center">@lang('pages/gyms/tabs/information.noDescription')</p>
             @endif
 
         </div>

@@ -8,7 +8,7 @@
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
-                {{ trans_choice('interface/search.groupInfo', count($find->searchable->crags) }}
+                {{ trans_choice('interface/search.groupInfo', count($find->searchable->crags)) }}
             </span>
         </div>
     @endif
