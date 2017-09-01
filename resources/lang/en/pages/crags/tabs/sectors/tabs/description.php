@@ -1,5 +1,7 @@
 <?php
 
+//TODO : TRADUCION À FAIRE
+
 return [
 
     //Autre

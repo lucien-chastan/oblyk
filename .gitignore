@@ -3,6 +3,7 @@
 /public/hot
 /storage/*.key
 /vendor
+/piwik
 /.idea
 Homestead.json
 Homestead.yaml
