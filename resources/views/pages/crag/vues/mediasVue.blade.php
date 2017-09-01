@@ -8,13 +8,34 @@
 
                 <h2 class="loved-king-font text-center">@lang('pages/crags/tabs/media.titlePhotoCrag')</h2>
 
-                <div class="row row-crag-gallerie">
-                    <div id="cragPhototheque" class="phototheque">
-                        @foreach($crag->photos as $photo)
-                            <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$crag->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                        @endforeach
+                @if($crag->nbPhoto != 0)
+                    <div class="row row-crag-gallerie">
+                        <div id="cragPhototheque" class="phototheque">
+
+                            {{--photos de la falaise--}}
+                            @foreach($crag->photos as $photo)
+                                <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$crag->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                            @endforeach
+
+                            {{--photos des secteurs--}}
+                            @foreach($crag->sectors as $sector)
+                                @foreach($sector->photos as $photo)
+                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]) . '#voies', 'elementLabel'=>$sector->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                @endforeach
+                            @endforeach
+
+                            {{--photos des lignes--}}
+                            @foreach($crag->routes as $route)
+                                @foreach($route->photos as $photo)
+                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$route->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                @endforeach
+                            @endforeach
+
+                        </div>
                     </div>
-                </div>
+                @else
+                    <p class="grey-text text-center">@lang('pages/crags/tabs/media.paraNoPhoto')</p>
+                @endif
             </div>
 
             @if(Auth::check())
@@ -30,6 +51,8 @@
                     <h2 class="loved-king-font text-center">@lang('pages/crags/tabs/media.titleActionPhoto')</h2>
 
                     <div class="row">
+
+                        {{--Photos de la falaises--}}
                         @foreach($crag->photos as $photo)
                             <div class="col s6 m4 l3 text-center">
                                 <div class="card">
@@ -49,6 +72,53 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        {{--photos des secteurs--}}
+                        @foreach($crag->sectors as $sector)
+                            @foreach($sector->photos as $photo)
+                                <div class="col s6 m4 l3 text-center">
+                                    <div class="card">
+                                        <div class="card-image">
+                                            <img alt="{{$sector->label}} - {{$photo->description}}" style="height: 100px; object-fit: cover" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                        </div>
+                                        <div class="card-content i-cursor">
+                                            <p>
+                                                <i {!! $Helpers::tooltip(trans('modals/photo.headbandTooltip')) !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$crag->id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
+                                                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                                @if(Auth::id() == $photo->user_id)
+                                                    <i {!! $Helpers::tooltip(trans('modals/photo.editTooltip')) !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Sector", "photo_id"=>$photo->id, "title"=>trans('modals/photo.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                                    <i {!! $Helpers::tooltip(trans('modals/photo.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endforeach
+
+                        {{--photos des voies--}}
+                        @foreach($crag->routes as $route)
+                            @foreach($route->photos as $photo)
+                                <div class="col s6 m4 l3 text-center">
+                                    <div class="card">
+                                        <div class="card-image">
+                                            <img alt="{{$sector->label}} - {{$photo->description}}" style="height: 100px; object-fit: cover" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                        </div>
+                                        <div class="card-content i-cursor">
+                                            <p>
+                                                <i {!! $Helpers::tooltip(trans('modals/photo.headbandTooltip')) !!} {!! $Helpers::modal(route('bandeauModal'), ["photo_id"=>$photo->id, "crag_id"=>$crag->id]) !!} class="material-icons tiny-btn tooltipped btnModal">wallpaper</i>
+                                                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$photo->id, "model"=>"Photo"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
+                                                @if(Auth::id() == $photo->user_id)
+                                                    <i {!! $Helpers::tooltip(trans('modals/photo.editTooltip')) !!} {!! $Helpers::modal(route('photoModal'), ["illustrable_id"=>$crag->id, "illustrable_type"=>"Route", "photo_id"=>$photo->id, "title"=>trans('modals/photo.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn tooltipped btnModal">edit</i>
+                                                    <i {!! $Helpers::tooltip(trans('modals/photo.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/photos/" . $photo->id]) !!} class="material-icons tiny-btn tooltipped btnModal">delete</i>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endforeach
+
                     </div>
 
                     <div class="row">
