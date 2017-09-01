@@ -100,11 +100,15 @@ function followedElement(DomElement, followed_type, followed_id, addToast = 'Vou
 
 //scroll jusqu'au haut de la page
 function backToTop() {
-    window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-    });
+    try {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }catch (e){
+        window.scrollTo(0,0);
+    }
 }
 
 //regarde les nouveaux messages
