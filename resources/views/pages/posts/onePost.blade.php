@@ -63,15 +63,16 @@
         @endif
         <br>
         <span class="grey-text">
-            @if($post->user->id == Auth::id())
-                posté par <a href="{{route('userPage',['user_id'=>$post->user->id, 'user_label'=>$post->user->name])}}">moi</a>
-            @else
-                posté par <a href="{{route('userPage',['user_id'=>$post->user->id, 'user_label'=>$post->user->name])}}">{{$post->user->name}}</a>
-            @endif
+            @lang('pages/post/onePost.postBy',
+                [
+                    'name'=> ($post->user->id == Auth::id()) ? trans('pages/post/onePost.me') : $post->user->name,
+                    'url' => route('userPage',['user_id'=>$post->user->id, 'user_label'=>$post->user->name])
+                ]
+            )
             @if($post->created_at->format('d M Y') == date('d M Y'))
-                aujourd'hui à {{$post->created_at->format('H:i')}}
+                @lang('pages/post/onePost.today', ['hour'=>$post->created_at->format('H:i')])
             @else
-                le {{$post->created_at->format('d M Y à H:i')}}
+                @lang('pages/post/onePost.date', ['date'=>$post->created_at->format('d M Y'),'hour'=>$post->created_at->format('H:i')])
             @endif
         </span>
     </p>
@@ -85,7 +86,7 @@
 @if(count($post->comments) > 0)
 
     {{--PETIT TITRE COMME QUOI IL Y A DES COMMENTAIRES--}}
-    <span class="span-nb-commentaire-post">{{count($post->comments)}} COMMENTAIRES</span>
+    <span class="span-nb-commentaire-post">{{ trans_choice('pages/post/onePost.titleNbCommentaire', count($post->comments)) }}</span>
 
     {{--ZONE DES COMMENTAIRES--}}
     <div class="commentaire-post-zone">
@@ -100,30 +101,30 @@
                 <p class="user-comment-info grey-text">
 
                     @if($commentaire->user->id == Auth::id())
-                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">moi</a> le {{$commentaire->created_at->format('d M Y à H:i')}}
+                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">@lang('pages/post/onePost.me')</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
                     @else
-                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">{{$commentaire->user->name}}</a> le {{$commentaire->created_at->format('d M Y à H:i')}}
+                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">{{$commentaire->user->name}}</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
                     @endif
 
                     @if(count($commentaire->likes) > 0)
-                        <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$commentaire->id, "likable_type"=>"Comment", "title"=>"Ils ont liké ce commentaire"]) !!} class="text-cursor btnModal">{{count($commentaire->likes)}} j'aime(s)</cite>
+                        <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$commentaire->id, "likable_type"=>"Comment", "title"=>trans('pages/post/onePost.usersLikePost')]) !!} class="text-cursor btnModal">{{ trans_choice('pages/post/onePost.nbLike', count($commentaire->likes)) }}</cite>
                     @endif
 
                     @if(Auth::check())
                         @if($commentaire->user_id == Auth::id())
-                            <i {!! $Helpers::tooltip('Modifier ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$commentaire->id, "title"=>"Modifier ce commentaire", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                            <i {!! $Helpers::tooltip(trans('modals/comment.editTooltip')) !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$commentaire->id, "title"=>trans('modals/comment.modalEditeTitle'), "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                             @if(count($commentaire->comments) == 0)
-                                <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                <i {!! $Helpers::tooltip(trans('modals/comment.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $commentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                             @endif
                         @else
-                            <i {!! $Helpers::tooltip('Signaler un problème sur ce commentaire') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$commentaire->id, "model"=>"Comment"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                            <i {!! $Helpers::tooltip(trans('pages/post/onePost.reportAProblem')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$commentaire->id, "model"=>"Comment"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                         @endif
                         @if(count($commentaire->likes->whereIn('user_id',Auth::id())) >= 1)
-                            <i title="Ne plus aimer" onclick="like({{$commentaire->id}}, 'Comment', false, {{$post->id}}, 'Comment')" {!! $Helpers::tooltip('J\'aime') !!} class="material-icons ic-repondre-commentaire tiny blue-text" style="opacity: 1">thumb_up</i>
+                            <i title="@lang('pages/post/onePost.unLike')" onclick="like({{$commentaire->id}}, 'Comment', false, {{$post->id}}, 'Comment')" {!! $Helpers::tooltip(trans('pages/post/onePost.like')) !!} class="material-icons ic-repondre-commentaire tiny blue-text" style="opacity: 1">thumb_up</i>
                         @else
-                            <i title="Aimer" onclick="like({{$commentaire->id}}, 'Comment', true, {{$post->id}}, 'Comment')" {!! $Helpers::tooltip('J\'aime') !!} class="material-icons ic-repondre-commentaire tiny">thumb_up</i>
+                            <i title="@lang('pages/post/onePost.addLike')" onclick="like({{$commentaire->id}}, 'Comment', true, {{$post->id}}, 'Comment')" {!! $Helpers::tooltip(trans('pages/post/onePost.like')) !!} class="material-icons ic-repondre-commentaire tiny">thumb_up</i>
                         @endif
-                        <i {!! $Helpers::tooltip('Répondre à ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>"Comment", "comment_id"=>"", "title"=>"Répondre à ce commentaire", "method"=>"POST", "callback"=>"reloadPost"]) !!} class="material-icons tooltipped btnModal ic-repondre-commentaire tiny">mode_comment</i>
+                        <i {!! $Helpers::tooltip(trans('pages/post/onePost.answer')) !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>"Comment", "comment_id"=>"", "title"=>trans('pages/post/onePost.answer'), "method"=>"POST", "callback"=>"reloadPost"]) !!} class="material-icons tooltipped btnModal ic-repondre-commentaire tiny">mode_comment</i>
                     @endif
                 </p>
             </div>
@@ -147,20 +148,20 @@
                                 @endif
 
                                 @if(count($subCommentaire->likes) > 0)
-                                    <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$subCommentaire->id, "likable_type"=>"Comment", "title"=>"Ils ont liké cette réponse"]) !!} class="text-cursor btnModal">{{count($subCommentaire->likes)}} j'aime(s)</cite>
+                                    <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$subCommentaire->id, "likable_type"=>"Comment", "title"=>trans('pages/post/onePost.usersLike')]) !!} class="text-cursor btnModal">{{count($subCommentaire->likes)}} j'aime(s)</cite>
                                 @endif
 
                                 @if(Auth::check())
                                     @if($subCommentaire->user_id == Auth::id())
-                                        <i {!! $Helpers::tooltip('Modifier ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$subCommentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$subCommentaire->id, "title"=>"Modifier ce commentaire", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                                        <i {!! $Helpers::tooltip('Supprimer ce commentaire') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $subCommentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/comment.editTooltip')) !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$subCommentaire->id, "commentable_type"=>explode('\\',$post->postable_type)[1],"comment_id"=>$subCommentaire->id, "title"=>trans('modals/comment.modalEditeTitle'), "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/comment.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/comments/" . $subCommentaire->id , "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                                     @else
-                                        <i {!! $Helpers::tooltip('Signaler un problème sur ce commentaire') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$subCommentaire->id, "model"=>"Comment"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
+                                        <i {!! $Helpers::tooltip(trans('pages/post/onePost.reportAProblem')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$subCommentaire->id, "model"=>"Comment"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                     @endif
                                     @if(count($subCommentaire->likes->whereIn('user_id',Auth::id())) >= 1)
-                                        <i title="Ne plus aimer" onclick="like({{$subCommentaire->id}}, 'Comment', false, {{$post->id}}, 'SubComment')" {!! $Helpers::tooltip('J\'aime') !!} class="material-icons ic-repondre-commentaire tiny blue-text" style="opacity: 1">thumb_up</i>
+                                        <i title="@lang('pages/post/onePost.unLike')" onclick="like({{$subCommentaire->id}}, 'Comment', false, {{$post->id}}, 'SubComment')" {!! $Helpers::tooltip(trans('pages/post/onePost.like')) !!} class="material-icons ic-repondre-commentaire tiny blue-text" style="opacity: 1">thumb_up</i>
                                     @else
-                                        <i title="Aimer" onclick="like({{$subCommentaire->id}}, 'Comment', true, {{$post->id}}, 'SubComment')" {!! $Helpers::tooltip('J\'aime') !!} class="material-icons ic-repondre-commentaire tiny">thumb_up</i>
+                                        <i title="@lang('pages/post/onePost.addLike')" onclick="like({{$subCommentaire->id}}, 'Comment', true, {{$post->id}}, 'SubComment')" {!! $Helpers::tooltip(trans('pages/post/onePost.like')) !!} class="material-icons ic-repondre-commentaire tiny">thumb_up</i>
                                     @endif
                                 @endif
                             </p>
@@ -171,7 +172,7 @@
 
                     @if(Auth::check())
                         <p class="para-ajouter-reponse">
-                            <a {!! $Helpers::tooltip('Répondre à ce commentaire') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>"Comment", "comment_id"=>"", "title"=>"Répondre à ce commentaire", "method"=>"POST", "callback"=>"reloadPost"]) !!} class="tooltipped btnModal text-cursor"><i class="material-icons tiny">mode_comment</i>Ajouter une réponse</a>
+                            <a {!! $Helpers::tooltip(trans('pages/post/onePost.answer')) !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$commentaire->id, "commentable_type"=>"Comment", "comment_id"=>"", "title"=>trans('pages/post/onePost.answer'), "method"=>"POST", "callback"=>"reloadPost"]) !!} class="tooltipped btnModal text-cursor"><i class="material-icons tiny">mode_comment</i>@lang('pages/post/onePost.addAnswer')</a>
                         </p>
                     @endif
                 </div>
@@ -187,23 +188,23 @@
     @if(Auth::check())
         <span class="btn-like-comment-repost">
             @if(count($post->likes->whereIn('user_id',Auth::id())) >= 1)
-                <span title="Ne plus aimer" onclick="like({{$post->id}}, 'Post', false, {{$post->id}}, 'Post')" class="btn-commenter blue-text"><i class="material-icons tiny">thumb_up</i> J'aime déjà</span>
+                <span title="@lang('pages/post/onePost.unLike')" onclick="like({{$post->id}}, 'Post', false, {{$post->id}}, 'Post')" class="btn-commenter blue-text"><i class="material-icons tiny">thumb_up</i> @lang('pages/post/onePost.alreadyLike')</span>
             @else
-                <span title="Aimer" onclick="like({{$post->id}}, 'Post', true, {{$post->id}}, 'Post')" class="btn-commenter"><i class="material-icons tiny">thumb_up</i> j'aime</span>
+                <span title="@lang('pages/post/onePost.addLike')" onclick="like({{$post->id}}, 'Post', true, {{$post->id}}, 'Post')" class="btn-commenter"><i class="material-icons tiny">thumb_up</i> @lang('pages/post/onePost.like')</span>
             @endif
-            <span {!! $Helpers::tooltip('Commenter ce post') !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$post->id, "commentable_type"=>"Post", "comment_id"=>"", "title"=>"Commenter ce post", "method"=>"POST", "callback"=>"reloadPost"]) !!} class="btn-commenter tooltipped btnModal"><i class="material-icons tiny">mode_comment</i> commenter</span>
+            <span {!! $Helpers::tooltip(trans('pages/post/onePost.commentPost')) !!} {!! $Helpers::modal(route('commentModal'), ["commentable_id"=>$post->id, "commentable_type"=>"Post", "comment_id"=>"", "title"=>trans('pages/post/onePost.commentPost'), "method"=>"POST", "callback"=>"reloadPost"]) !!} class="btn-commenter tooltipped btnModal"><i class="material-icons tiny">mode_comment</i> @lang('pages/post/onePost.comment')</span>
         </span>
         @if($post->user_id == Auth::id())
-            <span><i {!! $Helpers::tooltip('Modifier ce post') !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$post->postable_id, "postable_type"=>explode('\\',$post->postable_type)[1], "post_id"=>$post->id, "title"=>"Modifier ce post", "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i></span>
+            <span><i {!! $Helpers::tooltip(trans('modals/post.editTooltip')) !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$post->postable_id, "postable_type"=>explode('\\',$post->postable_type)[1], "post_id"=>$post->id, "title"=>trans('modals/post.modalEditeTitle'), "method"=>"PUT", "callback"=>"reloadPost"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i></span>
             @if(count($post->comments) == 0)
-                <span><i {!! $Helpers::tooltip('Supprimer ce post') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/posts/" . $post->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i></span>
+                <span><i {!! $Helpers::tooltip(trans('modals/post.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/posts/" . $post->id]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i></span>
             @endif
         @else
-            <span><i {!! $Helpers::tooltip('Signaler un problème sur ce post') !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$post->id, "model"=>"Post"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i></span>
+            <span><i {!! $Helpers::tooltip(trans('pages/post/onePost.reportAProblemPost')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$post->id, "model"=>"Post"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i></span>
         @endif
     @endif
 
     @if(count($post->likes) > 0)
-        <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$post->id, "likable_type"=>"Post", "title"=>"Ils ont liké ce post"]) !!} class="text-cursor btnModal">{{count($post->likes)}} j'aime(s)</cite>
+        <cite {!! $Helpers::modal(route('likeModal'), ["likable_id"=>$post->id, "likable_type"=>"Post", "title"=>trans('pages/post/onePost.usersLikePost')]) !!} class="text-cursor btnModal">{{ trans_choice('pages/post/onePost.nbLike', count($post->likes)) }}</cite>
     @endif
 </div>

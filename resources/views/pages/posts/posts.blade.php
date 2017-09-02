@@ -18,8 +18,8 @@
     <div class="col s12">
         <div class="card-panel">
             <p class="text-center grey-text">
-                Il n'y a pas encore d'acutalité postée ici<br>
-                <a {!! $Helpers::tooltip('Poster dans le fil d\'actualité') !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$postable_id, "postable_type"=>$postable_type, "post_id"=>"", "title"=>"Poster une actualité", "method"=>"POST" ]) !!} class="tooltipped btnModal text-cursor">poster une actualité</a>
+                @lang('pages/post/post.noActuality')<br>
+                <a {!! $Helpers::tooltip(trans('pages/post/post.addActuality')) !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$postable_id, "postable_type"=>$postable_type, "post_id"=>"", "title"=>trans('pages/post/post.postActuality'), "method"=>"POST" ]) !!} class="tooltipped btnModal text-cursor">@lang('pages/post/post.postActuality')</a>
             </p>
         </div>
     </div>
@@ -28,7 +28,7 @@
 @if(count($posts) < $take)
     <div class="col s12 information-fin-post">
         <p class="text-center grey-text text-bold">
-            fin des posts
+            @lang('pages/post/post.postEnd')
         </p>
     </div>
 @endif
