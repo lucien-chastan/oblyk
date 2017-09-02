@@ -104,6 +104,26 @@
                 </div>
 
             </div>
+
+            <div class="row">
+
+                <div class="col s12 m6 l6">
+                    <div class="svg-container">
+                        @include('pages.home.partials.svg.guidebook')
+                    </div>
+                </div>
+
+                <div class="col s12 m6 l6">
+                    <h2>@lang('home.titleGuidebook')</h2>
+                    <p class="explication-oblyk">@lang('home.descriptionGuidebook')</p>
+                    @if(Auth::guest())
+                        <p class="center">
+                            <a href="{{ route('register') }}" class="waves-effect waves-light btn">@lang('home.actionAccount')</a>
+                        </p>
+                    @endif
+                </div>
+
+            </div>
         </div>
 
 

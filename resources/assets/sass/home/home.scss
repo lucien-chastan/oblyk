@@ -114,6 +114,8 @@
 }
 
 //ANIMATION SVG
+
+// info des falaises
 #nuage_1{animation: animation_nuage 14s infinite linear;}
 #nuage_2{animation: animation_nuage 14s infinite linear;}
 
@@ -128,6 +130,8 @@
         transform: translateX(-100px);}
 }
 
+
+//tien un carnet de croix
 #croix_1{animation : animation_croix_1 2.5s infinite;}
 #croix_2{animation : animation_croix_2 2.5s infinite;}
 #croix_3{animation : animation_croix_3 2.5s infinite;}
@@ -135,11 +139,15 @@
 @keyframes animation_croix_2 {0% {fill-opacity: 0;} 30% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
 @keyframes animation_croix_3 {0% {fill-opacity: 0;} 55% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
 
+
+//tien toi au courant de ce qui se passe
 #text_fermeture{animation: animation_fermeture 10s infinite;}
 #text_nettoyage{animation: animation_nettoyage 10s infinite;}
 @keyframes animation_fermeture {0% {opacity: 0;} 20%{opacity: 1;} 40% {opacity: 1;} 50% {opacity: 0;} 60% {opacity: 0;} 80% {opacity: 0;} 100%{opacity: 0;}}
 @keyframes animation_nettoyage {0% {opacity: 0;} 20%{opacity: 0;} 40% {opacity: 0;} 50% {opacity: 0;} 60% {opacity: 1;} 80% {opacity: 1;} 100% {opacity: 0;}}
 
+
+//rejoins nous
 #bras_gauche{animation : animation_bras_gauche 0.3s infinite;}
 @keyframes animation_bras_gauche {
     0% {transform: translate(0px,0px);}
@@ -149,10 +157,41 @@
 
 #bras_droit{animation : animation_bras_droit 0.3s infinite;}
 @keyframes animation_bras_droit {
-    0% {transform: translate(0px,0px);  }
-    80% {transform: translate(0.1%,0%);}
-    100% {transform: translate(0px,0px);}
+    0% {opacity: 0 !important;}
+    100% {opacity:1 !important;}
 }
+
+#path_1 {animation : animation_path_1 5s infinite;}
+#path_2 {animation : animation_path_2 5s infinite;}
+#path_3 {animation : animation_path_3 5s infinite;}
+#path_4 {animation : animation_path_4 5s infinite;}
+#path_5 {animation : animation_path_5 5s infinite;}
+#path_6 {animation : animation_path_6 5s infinite;}
+#path_7 {animation : animation_path_7 5s infinite;}
+#path_8 {animation : animation_path_8 5s infinite;}
+#path_9 {animation : animation_path_9 5s infinite;}
+#path_10 {animation : animation_path_10 5s infinite;}
+#path_11 {animation : animation_path_11 5s infinite;}
+#path_12 {animation : animation_path_12 5s infinite;}
+#path_13 {animation : animation_path_13 5s infinite;}
+#path_14 {animation : animation_path_14 5s infinite;}
+#path_15 {animation : animation_path_15 5s infinite;}
+@keyframes animation_path_1 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 0;} 75% {fill-opacity: 0;} 82% {fill-opacity: 0;} 88% {fill-opacity: 0;} 95% {fill-opacity: 0;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_2 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 0;} 75% {fill-opacity: 0;} 82% {fill-opacity: 0;} 88% {fill-opacity: 0;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_3 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 0;} 75% {fill-opacity: 0;} 82% {fill-opacity: 0;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_4 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 0;} 75% {fill-opacity: 0;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_5 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 0;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_6 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 0;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_7 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 0;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_8 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 0;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_9 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 0;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_10 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 0;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_11 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 0;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_12 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 0;} 28% {fill-opacity: 1;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_13 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 0;} 21% {fill-opacity: 1;} 28% {fill-opacity: 1;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_14 { 0% {fill-opacity: 0;} 7% {fill-opacity: 0;} 14% {fill-opacity: 1;} 21% {fill-opacity: 1;} 28% {fill-opacity: 1;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_15 { 0% {fill-opacity: 0;} 7% {fill-opacity: 1;} 14% {fill-opacity: 1;} 21% {fill-opacity: 1;} 28% {fill-opacity: 1;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
+@keyframes animation_path_16 { 0% {fill-opacity: 1;} 7% {fill-opacity: 1;} 14% {fill-opacity: 1;} 21% {fill-opacity: 1;} 28% {fill-opacity: 1;} 35% {fill-opacity: 1;} 42% {fill-opacity: 1;} 49% {fill-opacity: 1;} 56% {fill-opacity: 1;} 61% {fill-opacity: 1;} 68% {fill-opacity: 1;} 75% {fill-opacity: 1;} 82% {fill-opacity: 1;} 88% {fill-opacity: 1;} 95% {fill-opacity: 1;} 100% {fill-opacity: 1;} }
 
 @media (max-width:600px) {
     .description-oblyk{

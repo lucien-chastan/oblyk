@@ -61,6 +61,18 @@ return [
     'actionAccount' => 'Créer un compte',
 
 
+    //****************
+    // Les topos
+    //****************
+
+    'titleGuidebook' => 'Oblyk et les topos',
+    'descriptionGuidebook' => "
+        Vous pourriez vous demander si oblyk peut remplacer les topos papier et par extension nuire au développement des sites d'escalde ?<br>
+        Sachez que nous nous somme beaucoup posé cette question aussi. Et la réponse est non, Oblyk ne peut pas remplacer un topo !<br>
+        Les topos continent des informations indispensable que nous ne permettons pas d'ajouter sur oblyk<br><br>
+        Acheter un topo, c'est soutenir des passionnés qui donnent énormément pour maintenir, développer, nettoyer les sites d'escalade sur lesquel vous allez grimper gratuitement.
+    ",
+
     //Quoi de neuf
     'titleWhatUp' => 'Quoi de neuf ?',
 
