@@ -4,7 +4,7 @@
             <h1 class="loved-king-font titre-1-massive">{{$massive->label}}</h1>
 
             <p>
-                {{$massive->label}} regroupe {{$massive->crags_count}} sites d'escalade de {{implode(', ', $regions)}}.
+                @lang('pages/massives/tabs/information.description',['name'=>$massive->label, 'nb'=>$massive->crags_count, 'regions'=>implode(', ', $regions)])
             </p>
 
             @if(Auth::check())
@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            <h2 class="loved-king-font titre-2-massive">Description des grimpeurs</h2>
+            <h2 class="loved-king-font titre-2-massive">@lang('pages/massives/tabs/information.titleDescription')</h2>
 
             <div class="blue-border-zone">
                 @foreach ($massive->descriptions as $description)
@@ -34,7 +34,7 @@
                 @endforeach
 
                 @if(count($massive->descriptions) == 0)
-                    <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs</p>
+                    <p class="grey-text text-center">@lang('pages/massives/tabs/information.noDescription')</p>
                 @endif
 
                 {{--BOUTON POUR AJOUTER UNE DESCRIPTION--}}

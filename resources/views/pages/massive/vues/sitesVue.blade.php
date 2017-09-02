@@ -11,11 +11,11 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Nom</th>
-                        <th>Pays</th>
-                        <th>Département</th>
-                        <th>Ville</th>
-                        <th>Rocher</th>
+                        <th>@lang('pages/massives/tabs/crag.columnName')</th>
+                        <th>@lang('pages/massives/tabs/crag.columnCountry')</th>
+                        <th>@lang('pages/massives/tabs/crag.columnRegion')</th>
+                        <th>@lang('pages/massives/tabs/crag.columnCity')</th>
+                        <th>@lang('pages/massives/tabs/crag.columnRock')</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@
                             <td>{{ucfirst($liaison->crag->rock->label)}}</td>
                             <td class="ligne-btn">
                                 @if(Auth::check())
-                                    <i {!! $Helpers::tooltip('Enlever ce site du regroupement') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/massiveCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>
+                                    <i {!! $Helpers::tooltip(trans('pages/massives/tabs/crag.deleteCrag')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/massiveCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>
                                 @endif
                             </td>
                         </tr>

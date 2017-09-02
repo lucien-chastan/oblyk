@@ -5,14 +5,14 @@
         </div>
         <div class="liste-info">
             <h1 class="loved-king-font">{{$label}}</h1>
-            <p>{{$nbCrags}} sites d'escalade</p>
+            <p>{{ trans_choice('pages/massives/global.nbCrag', $nbCrags) }}</p>
             @if(Auth::check())
                 <p onclick="followedElement(this, 'Massive', {{$massive->id}})" class="follow-paragraphe" data-followed="{{$user_follow}}">
-                    <span id="followed-element"><i class="material-icons amber-text">star</i> Ne plus suivre ce groupe</span>
-                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> Suivre ce groupe</span>
+                    <span id="followed-element"><i class="material-icons amber-text">star</i> @lang('pages/massives/global.noFollowThisMassive')</span>
+                    <span id="not-followed-element"><i class="material-icons with-text">star_border</i> @lang('pages/massives/global.followThisMassive')</span>
                 </p>
             @else
-                <p>Connectez-vous pour suivre ce regroupement</p>
+                <p>@lang('pages/massives/global.registerToFollow')</p>
             @endif
         </div>
     </div>
