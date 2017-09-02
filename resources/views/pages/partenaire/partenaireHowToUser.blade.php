@@ -17,20 +17,20 @@
     <div class="container">
         <div class="row row-how-partner">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3 titre-1-partner">La recherche de partenaire</h1>
-                <h2 class="loved-king-font text-center grey-text text-darken-2 titre-2-partner">Comment ça marche ?</h2>
+                <h1 class="loved-king-font text-center grey-text text-darken-3 titre-1-partner">@lang('pages/partner/partnerHowToUser.bigTitle')</h1>
+                <h2 class="loved-king-font text-center grey-text text-darken-2 titre-2-partner">@lang('pages/partner/partnerHowToUser.slogan')</h2>
 
                 <p class="text-center">
-                    Tu arrive dans une nouvelle région, tu cherche quelqu'un pour t'accompagner lors de tes sorties falaises ou pour aller grimper à la salle du coin ? Tu trouvera peut-être ton bonheur ici !
+                    @lang('pages/partner/partnerHowToUser.intro')
                 </p>
 
                 @if(!Auth::check())
                     <p class="text-center">
-                        Pour voir les grimpeurs inscrits sur la recherche de partenaire, il faut déjà que tu es un compte !<br>
+                        @lang('pages/partner/partnerHowToUser.introNoCompte')<br>
                     </p>
                     <p class="text-center">
-                        <a class="btn" href="{{ route('register') }}">Créer un compte</a><br>
-                        <a href="{{ route('login') }}">Se connecter</a>
+                        <a class="btn" href="{{ route('register') }}">@lang('pages/partner/partnerHowToUser.registerAction')</a><br>
+                        <a href="{{ route('login') }}">@lang('pages/partner/partnerHowToUser.loginAction')</a>
                     </p>
                 @endif
             </div>
@@ -45,11 +45,11 @@
             </div>
 
             <div class="col s12 m12 l6">
-                <p class="text-underline text-bold">Étape 1 : Mes préférences</p>
-                <p>Pour donner envie aux autres de te contacter il faut qu'ils aient un minimum d'informations sur toi, quel style d'escalade tu pratique (bloc, voie, trad, ...), dans quelle cotation tu aime grimper, etc.  </p>
+                <p class="text-underline text-bold">@lang('pages/partner/partnerHowToUser.title_step_1')</p>
+                <p>@lang('pages/partner/partnerHowToUser.description_step_1')</p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres"><i class="material-icons left">accessibility</i> Qui je suis ?</a>
+                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres"><i class="material-icons left">accessibility</i>@lang('pages/partner/partnerHowToUser.action_step_1')</a>
                     </p>
                 @endif
             </div>
@@ -59,14 +59,13 @@
         <div class="row row-how-partner">
 
             <div class="col s12 m12 l6">
-                <p class="text-underline text-bold">Étape 2 : Ma zone de grimpe</p>
+                <p class="text-underline text-bold">@lang('pages/partner/partnerHowToUser.title_step_2')</p>
                 <p>
-                    Pour que nous puissions te présenter une liste des grimpeurs près de chez toi, faut-il déjà que nous sachions où tu grimpe !<br>
-                    Tu peux établire une liste des lieux où tu grimpe, et oblyk te présentera les grimpeurs qui partage les mêmes zones que toi.
+                    @lang('pages/partner/partnerHowToUser.description_step_2')
                 </p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux"><i class="material-icons left">location_on</i> Mes lieux ?</a>
+                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux"><i class="material-icons left">location_on</i>@lang('pages/partner/partnerHowToUser.action_step_2')</a>
                     </p>
                 @endif
             </div>
@@ -85,10 +84,10 @@
             </div>
 
             <div class="col s12 m12 l6">
-                <p class="text-underline text-bold">Étape 3 : La carte des grimpeurs</p>
-                <p>Maintenant que tu as renseigné tes lieux d'escalade et dit qui tu étais, tu peux utiliser la carte des grimpeurs pour trouver quelqu'un avec qui tu aimerais grimper.</p>
+                <p class="text-underline text-bold">@lang('pages/partner/partnerHowToUser.title_step_3')</p>
+                <p>@lang('pages/partner/partnerHowToUser.description_step_3')</p>
                 <p class="text-right">
-                    <a class="btn-flat blue-text" href="{{ route('partnerMapPage') }}"><i class="material-icons left">map</i>La carte des grimpeurs</a>
+                    <a class="btn-flat blue-text" href="{{ route('partnerMapPage') }}"><i class="material-icons left">map</i>@lang('pages/partner/partnerHowToUser.action_step_3')</a>
                 </p>
             </div>
         </div>
@@ -97,14 +96,13 @@
         <div class="row row-how-partner">
 
             <div class="col s12 m12 l6">
-                <p class="text-underline text-bold">Étape 4 : Contact</p>
+                <p class="text-underline text-bold">@lang('pages/partner/partnerHowToUser.title_step_4')</p>
                 <p>
-                    Tu as trouver quelqu'un avec qui tu aimerais grimper ? Envoie lui un message via la messagerie d'oblyk.<br>
-                    Libre à vous ensuite de vous organiser comme vous voulez.
+                    @lang('pages/partner/partnerHowToUser.description_step_4')
                 </p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#messagerie"><i class="material-icons left">email</i> Ma messagerie</a>
+                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#messagerie"><i class="material-icons left">email</i> @lang('pages/partner/partnerHowToUser.action_step_4')</a>
                     </p>
                 @endif
             </div>

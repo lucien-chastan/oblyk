@@ -30,29 +30,26 @@
 
                         @if($user->birth == 0)
                             <p>
-                                Bonjour,<br>
-                                Avant toute chose pour faire partie de la recheche de partenaire, nous devons connaître ta date de naissance.
+                                @lang('pages/partner/partnerMap.birth')
                             </p>
                             <form class="submit-form" data-route="{{route('saveUserBirth')}}" onsubmit="submitData(this, refresh); return false">
                                 {!! $Inputs::popupError([]) !!}
 
-                                {!! $Inputs::text(['name'=>'birth', 'label'=>'Mon année de naissance', 'value'=>'', 'type'=>'number']) !!}
+                                {!! $Inputs::text(['name'=>'birth', 'label'=>trans('pages/partner/partnerMap.labelBirth'), 'value'=>'', 'type'=>'number']) !!}
 
                                 {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
 
                                 <div class="row">
-                                    {!! $Inputs::Submit(['label'=>'Enregistrer', 'cancelable' => false]) !!}
+                                    {!! $Inputs::Submit(['label'=>trans('pages/partner/partnerMap.submitBirth'), 'cancelable' => false]) !!}
                                 </div>
 
                             </form>
                         @else
                             <p>
-                                Désolé,<br>
-                                Pour des questions de résponsabilité, nous n'autorisons pas les mineurs à utiliser ce service.
+                                @lang('pages/partner/partnerMap.noResponsibility_1')
                             </p>
                             <p>
-                                Grandi encore un peu et reviens dans quelques années !<br>
-                                Bonne chance à toi.
+                                @lang('pages/partner/partnerMap.noResponsibility_2')
                             </p>
                         @endif
                     @else
@@ -60,11 +57,11 @@
 
                             @if($user->places_count > 0)
 
-                                <h2 class="loved-king-font">Qui grimpe au même endroit que moi</h2>
+                                <h2 class="loved-king-font">@lang('pages/partner/partnerMap.title')</h2>
 
                                 <div class="blue-border-zone">
                                     @foreach($places as $place)
-                                        <div title="Cliquez pour afficher sur la carte" class="blue-border-div place-div" onclick="zoomOn({{ $place->lat }}, {{ $place->lng }})">
+                                        <div title="@lang('pages/partner/partnerMap.tooltipClicForMap')" class="blue-border-div place-div" onclick="zoomOn({{ $place->lat }}, {{ $place->lng }})">
                                             <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <span class="blue-text" onclick="openProfile({{ $place->user->id }})">{{ $place->user->name }}</span> à {{$place->label}}</p>
                                             <div class="markdownZone grey-text">@markdown($place->description)</div>
                                         </div>
@@ -74,34 +71,32 @@
 
                                 @if(count($places) == 0)
                                     <p class="grey-text text-center">
-                                        Désolé, il n'y a personne qui partage les mêmes zones de grimpe que toi pour l'instant
+                                        @lang('pages/partner/partnerMap.noClimbers')
                                     </p>
                                 @endif
 
                                 <p class="text-right">
-                                    <a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux" class="btn-flat blue-text"><i class="material-icons left">location_on</i> Voir mes lieux de grimpe</a>
+                                    <a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux" class="btn-flat blue-text"><i class="material-icons left">location_on</i> @lang('pages/partner/partnerMap.seeMyPlaces')</a>
                                 </p>
                             @else
-                                <h2 class="loved-king-font text-center">Mes lieux de grimpe</h2>
+                                <h2 class="loved-king-font text-center">@lang('pages/partner/partnerMap.titlePlaces')</h2>
 
                                 <p>
-                                    Pour que nous puissions te présenter les grimpeurs autours de chez toi, il faut déjà que tu nous dise où tu grimpe.<br>
-                                    Rend-toi dans ton profil et renseigne ta zone de grimpe
+                                    @lang('pages/partner/partnerMap.introPlaces')
                                 </p>
                                 <p class="text-center">
-                                    <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux">Mes lieux de grimpe</a>
+                                    <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux">@lang('pages/partner/partnerMap.actionPlaces')</a>
                                 </p>
                             @endif
                         @else
 
-                            <h2 class="loved-king-font text-center">Bienvenue {{ Auth::user()->name }} !</h2>
+                            <h2 class="loved-king-font text-center">@lang('pages/partner/partnerMap.welcome', ['name'=>Auth::user()->name]) !</h2>
 
                             <p>
-                                Bienvenue dans la recheche de partenaire d'oblyk ! pour en faire partie il faut que tu passe par 2 étapes.<br>
-                                <span class="text-underline">Premièrement</span> : Active la recherche de partenaire et presente toi un peux plus.
+                                @lang('pages/partner/partnerMap.introWelcome')
                             </p>
                             <p class="text-center">
-                                <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres">Commencer ma recherche</a>
+                                <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres">@lang('pages/partner/partnerMap.actionWelcome')</a>
                             </p>
                             <div class="svg-container">
                                 @include('pages.home.partials.svg.partenaire_grimpe')
@@ -110,11 +105,11 @@
                     @endif
                 @else
                     <p class="grey-text text-center">
-                        Crée-toi un compte pour avoir accès à liste de grimpeur près de chez toi !<br>
+                        @lang('pages/partner/partnerMap.noAccountDescription')<br>
                     </p>
                     <p class="text-center">
-                        <a class="btn" href="{{ route('register') }}">Créer un compte</a><br>
-                        <a href="{{ route('login') }}">Connexion</a>
+                        <a class="btn" href="{{ route('register') }}">@lang('pages/partner/partnerMap.register')</a><br>
+                        <a href="{{ route('login') }}">@lang('pages/partner/partnerMap.login')</a>
                     </p>
                 @endif
             </div>
@@ -124,7 +119,7 @@
     {{--SIDE NAV QUI MONTRE UN USTILISATEUR--}}
     <div id="side-user-map-partner" class="side-user-map-partner">
         <div id="content-side-map-partner" class="content-side-map-partner">
-            mon contenu
+            {{--Ajax--}}
         </div>
         <div id="load-side-map-partner" class="load-side-map-partner">
             <div class="preloader-wrapper active">
