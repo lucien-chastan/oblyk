@@ -220,16 +220,20 @@ function getSectorChart() {
 
 //INITIALISE LA VISIONNEUSE PHOTOTHEQUE
 function initPhotothequeCrag() {
-    cragVisionneuse = new Phototheque('#cragPhototheque',
-        {
-            "maxHeight" : "150px","gouttiere" : "3px",
-            "lastRow" : "center",
-            "visiotheque" : true,
-            "visiotheque-option" : {
-                "legende" : "data-legende"
+
+    if(document.getElementById('cragPhototheque') !== null) {
+        cragVisionneuse = new Phototheque('#cragPhototheque',
+            {
+                "maxHeight" : "150px","gouttiere" : "3px",
+                "lastRow" : "center",
+                "visiotheque" : true,
+                "visiotheque-option" : {
+                    "legende" : "data-legende"
+                }
             }
-        }
-    );
+        );
+    }
+
 }
 
 function showPhotoEditor(visible) {
