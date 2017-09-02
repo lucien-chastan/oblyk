@@ -22,7 +22,7 @@
 
                     <div class="input-field col s12{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email">@lang('auth.labelEmail')</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
 
                         @if ($errors->has('email'))
                             <span class="help-block">
