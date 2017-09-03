@@ -16,8 +16,7 @@
 //ROUTE VISIBLE PAR L'UTILISATEUR, DONC PRÉFIXÉ AVEC LA LOCALISATION
 //******************************************************************
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
-
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function() {
 
     //Connexion, réinitialiser mot de passe, etc...
     Auth::routes();
@@ -69,58 +68,100 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::get('/partenaire-escalade/comment-ca-marche', 'PartnerController@howPage')->name('partnerHowPage');
 
 
+    //*******************************************************************
+    //PAS BESOIN DE PRÉFIX MAIS DOIT PROFITER DU MIDDELWAR ET DES COOKIES
+    //*******************************************************************
+
+    //LA RECHERCHE
+    Route::get('/API/search/{limit}/{offset}/{search}', 'searchController@search')->name('globalSearch');
+
+
+    //VUE DU PROFIL
+    Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
+    Route::get('/vue/profile/{profile_id}/friend', 'Vue\UserVueController@vueFriend')->name('vueFriendUser');
+    Route::get('/vue/profile/{profile_id}/topotheque', 'Vue\UserVueController@vueTopotheque')->name('vueTopothequeUser');
+    Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
+    Route::get('/vue/profile/{profile_id}/a-propos', 'Vue\UserVueController@vueAPropos')->name('vueAProposUser');
+    Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
+    Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
+    Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
+    Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
+    Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')->name('vueCroixUser');
+    Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
+    Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
+    Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
+    Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessagerie')->name('vueMessagesUser');
+    Route::get('/vue/profile/{profile_id}/mes-lieux', 'Vue\UserVueController@vueLieux')->name('vueLieuxUser');
+    Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueController@vuePartenaireParametres')->name('vuePartenaireParametresUser');
+    Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
+    Route::get('/vue/profile/{profile_id}/parametres', 'Vue\UserVueController@vueSettings')->name('vueEditSettingsUser');
+
+    //SOUS VUE DES BOÎTES DU DASHBORD
+    Route::get('/vue/dashboard/{profile_id}/welcome', 'Vue\UserVueController@subVueWelcome')->name('subVueWelcomeUser');
+    Route::get('/vue/dashboard/{profile_id}/croix-pote', 'Vue\UserVueController@subVueCroixPote')->name('subVueCroixPoteUser');
+    Route::get('/vue/dashboard/{profile_id}/mes-croix', 'Vue\UserVueController@subVueMesCroix')->name('subVueMesCroixUser');
+    Route::get('/vue/dashboard/{profile_id}/forum-last', 'Vue\UserVueController@subVueForumLast')->name('subVueForumLastUser');
+    Route::get('/vue/dashboard/{profile_id}/news-oblyk', 'Vue\UserVueController@subVueNewsOblyk')->name('subVueNewsOblykUser');
+    Route::get('/vue/dashboard/{profile_id}/photos-last', 'Vue\UserVueController@subVuephotosLast')->name('subVuephotosLastUser');
+    Route::get('/vue/dashboard/{profile_id}/videos-last', 'Vue\UserVueController@subVueVideosLast')->name('subVueVideosLastUser');
+    Route::get('/vue/dashboard/{profile_id}/comments-last', 'Vue\UserVueController@subVueCommentsLast')->name('subVueCommentsLastUser');
+    Route::get('/vue/dashboard/{profile_id}/routes-last', 'Vue\UserVueController@subVueRoutesLast')->name('subVueRoutesLastUser');
+    Route::get('/vue/dashboard/{profile_id}/crags-last', 'Vue\UserVueController@subVueCragsLast')->name('subVueCragsLastUser');
+    Route::get('/vue/dashboard/{profile_id}/topos-last', 'Vue\UserVueController@subVueToposLast')->name('subVueToposLastUser');
+    Route::get('/vue/dashboard/{profile_id}/users-last', 'Vue\UserVueController@subVueUsersLast')->name('subVueUsersLastUser');
+    Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVueSaeLast')->name('subVueSaeLastUser');
+    Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
+    Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
+    Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
+    Route::get('/vue/dashboard/{profile_id}/contribution', 'Vue\UserVueController@subVueContribution')->name('subVueContributionUser');
+
+
+    //VUE CRAG
+    Route::get('/vue/crag/{crag_id}/map', 'Vue\CragVueController@vueMap')->name('vueMapCrag');
+    Route::get('/vue/crag/{crag_id}/fil-actu', 'Vue\CragVueController@vueFilActu')->name('vueFilActuCrag');
+    Route::get('/vue/crag/{crag_id}/medias', 'Vue\CragVueController@vueMedias')->name('vueMediasCrag');
+    Route::get('/vue/crag/{crag_id}/liens', 'Vue\CragVueController@vueLiens')->name('vueLiensCrag');
+    Route::get('/vue/crag/{crag_id}/topos', 'Vue\CragVueController@vueTopos')->name('vueToposCrag');
+    Route::get('/vue/crag/{crag_id}/secteur', 'Vue\CragVueController@vueSecteur')->name('vueSecteurCrag');
+
+    //VUE SECTEUR
+    Route::get('/vue/sector/{sector_id}/lines', 'Vue\SectorVueController@vueRoutes')->name('vueRoutesSector');
+    Route::get('/vue/sector/{sector_id}/descriptions', 'Vue\SectorVueController@vueDescriptions')->name('vueDescriptionsSector');
+    Route::get('/vue/sector/{sector_id}/photos', 'Vue\SectorVueController@vuePhotos')->name('vuePhotosSector');
+
+    //VUE ROUTE
+    Route::get('/vue/route/{route_id}/route','Vue\RouteVueController@vueRoute')->name('vueRouteRoute');
+    Route::get('/vue/route/{route_id}/information','Vue\RouteVueController@vueInformation')->name('vueInformationRoute');
+    Route::get('/vue/route/{route_id}/comments','Vue\RouteVueController@vueComments')->name('vueCommentsRoute');
+    Route::get('/vue/route/{route_id}/photos','Vue\RouteVueController@vuePhotos')->name('vuePhotosRoute');
+    Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->name('vueVideosRoute');
+    Route::get('/vue/route/{route_id}/carnet','Vue\RouteVueController@vueCarnet')->name('vueCarnetRoute');
+
+    //VUE GYM
+    Route::get('/vue/gym/{gym_id}/map', 'Vue\GymVueController@vueMap')->name('vueMapGym');
+    Route::get('/vue/gym/{gym_id}/fil-actu', 'Vue\GymVueController@vueFilActu')->name('vueFilActuGym');
+
+    //VUE TOPO
+    Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');
+    Route::get('/vue/topo/{topo_id}/liens','Vue\TopoVueController@vueLiens')->name('vueLiensTopo');
+    Route::get('/vue/topo/{topo_id}/sites','Vue\TopoVueController@vueSites')->name('vueSitesTopo');
+    Route::get('/vue/topo/{topo_id}/acheter','Vue\TopoVueController@vueAcheter')->name('vueAcheterTopo');
+    Route::get('/vue/topo/{topo_id}/map','Vue\TopoVueController@vueMap')->name('vueMapTopo');
+
+    //VUE MASSIVE
+    Route::get('/vue/massive/{massive_id}/fil-actu','Vue\MassiveVueController@vueFilActu')->name('vueFilActuMassive');
+    Route::get('/vue/massive/{massive_id}/liens','Vue\MassiveVueController@vueLiens')->name('vueLiensMassive');
+    Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites')->name('vueSitesMassive');
+
 });
 
-
-
-
-
-//*****************************************************
-//ROUTE NON VISIBLE PAR L'UTILISATEUR, ( SANS PRÉSFIXE)
-//*****************************************************
-
-//LA RECHERCHE
-Route::get('/API/search/{limit}/{offset}/{search}', 'searchController@search')->name('globalSearch');
-
-//VUE DU PROFIL
-Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
-Route::get('/vue/profile/{profile_id}/friend', 'Vue\UserVueController@vueFriend')->name('vueFriendUser');
-Route::get('/vue/profile/{profile_id}/topotheque', 'Vue\UserVueController@vueTopotheque')->name('vueTopothequeUser');
-Route::get('/vue/profile/{profile_id}/dashboard', 'Vue\UserVueController@vueDashboard')->name('vueDashboardUser');
-Route::get('/vue/profile/{profile_id}/a-propos', 'Vue\UserVueController@vueAPropos')->name('vueAProposUser');
-Route::get('/vue/profile/{profile_id}/fil-actu', 'Vue\UserVueController@vueFilActu')->name('vueFilActuUser');
-Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
-Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
-Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
-Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')->name('vueCroixUser');
-Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
-Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
-Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
-Route::get('/vue/profile/{profile_id}/messages', 'Vue\UserVueController@vueMessagerie')->name('vueMessagesUser');
-Route::get('/vue/profile/{profile_id}/mes-lieux', 'Vue\UserVueController@vueLieux')->name('vueLieuxUser');
-Route::get('/vue/profile/{profile_id}/partenaire-parametres', 'Vue\UserVueController@vuePartenaireParametres')->name('vuePartenaireParametresUser');
-Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
-Route::get('/vue/profile/{profile_id}/parametres', 'Vue\UserVueController@vueSettings')->name('vueEditSettingsUser');
-
-//SOUS VUE DES BOÎTES DU DASHBORD
-Route::get('/vue/dashboard/{profile_id}/welcome', 'Vue\UserVueController@subVueWelcome')->name('subVueWelcomeUser');
-Route::get('/vue/dashboard/{profile_id}/croix-pote', 'Vue\UserVueController@subVueCroixPote')->name('subVueCroixPoteUser');
-Route::get('/vue/dashboard/{profile_id}/mes-croix', 'Vue\UserVueController@subVueMesCroix')->name('subVueMesCroixUser');
-Route::get('/vue/dashboard/{profile_id}/forum-last', 'Vue\UserVueController@subVueForumLast')->name('subVueForumLastUser');
-Route::get('/vue/dashboard/{profile_id}/news-oblyk', 'Vue\UserVueController@subVueNewsOblyk')->name('subVueNewsOblykUser');
-Route::get('/vue/dashboard/{profile_id}/photos-last', 'Vue\UserVueController@subVuephotosLast')->name('subVuephotosLastUser');
-Route::get('/vue/dashboard/{profile_id}/videos-last', 'Vue\UserVueController@subVueVideosLast')->name('subVueVideosLastUser');
-Route::get('/vue/dashboard/{profile_id}/comments-last', 'Vue\UserVueController@subVueCommentsLast')->name('subVueCommentsLastUser');
-Route::get('/vue/dashboard/{profile_id}/routes-last', 'Vue\UserVueController@subVueRoutesLast')->name('subVueRoutesLastUser');
-Route::get('/vue/dashboard/{profile_id}/crags-last', 'Vue\UserVueController@subVueCragsLast')->name('subVueCragsLastUser');
-Route::get('/vue/dashboard/{profile_id}/topos-last', 'Vue\UserVueController@subVueToposLast')->name('subVueToposLastUser');
-Route::get('/vue/dashboard/{profile_id}/users-last', 'Vue\UserVueController@subVueUsersLast')->name('subVueUsersLastUser');
-Route::get('/vue/dashboard/{profile_id}/sae-last', 'Vue\UserVueController@subVueSaeLast')->name('subVueSaeLastUser');
-Route::get('/vue/dashboard/{profile_id}/list-crag-sae', 'Vue\UserVueController@subVueListCragSae')->name('subVueListCragSaeUser');
-Route::get('/vue/dashboard/{profile_id}/partenaire', 'Vue\UserVueController@subVuePartenaire')->name('subVuePartenaireUser');
-Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
-Route::get('/vue/dashboard/{profile_id}/contribution', 'Vue\UserVueController@subVueContribution')->name('subVueContributionUser');
-
+//LE FIL D'ACTUALITÉ
+Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
+Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
+Route::post('/user/actuality', 'PostController@userActuality')->name('userActuality');
+Route::post('/post/upload', 'CRUD\PostController@uploadPostImage')->name('uploadPostImage');
+Route::post('/post/vueOnePost', 'PostController@vueOnePost')->name('vueOnePost');
+Route::post('/like/add', 'LikeController@addLike')->name('addLike');
 
 //VUES DE LA MESSAGERIE
 Route::post('/messagerie/conversations', 'Vue\UserVueController@vueConversations')->name('vueConversations');
@@ -134,15 +175,6 @@ Route::post('/message/new', 'CRUD\UserConversationController@newMessage')->name(
 //NOUVEAU MESSAGE ET NOTIFICATION
 Route::post('/new/notifications-and-messages', 'UserController@getNewNotificationAndMessage')->name('getNewNotificationAndMessage');
 Route::post('/notification/read', 'CRUD\NotificationController@notificationAsRead')->name('notificationAsRead');
-
-
-//LE FIL D'ACTUALITÉ
-Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
-Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
-Route::post('/user/actuality', 'PostController@userActuality')->name('userActuality');
-Route::post('/post/upload', 'CRUD\PostController@uploadPostImage')->name('uploadPostImage');
-Route::post('/post/vueOnePost', 'PostController@vueOnePost')->name('vueOnePost');
-Route::post('/like/add', 'LikeController@addLike')->name('addLike');
 
 
 //OUTDOOD
@@ -278,44 +310,6 @@ Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendPr
 Route::post('/bandeau/define', 'CRUD\CragController@defineBandeau')->name('defineBandeau');
 
 
-//VUE CRAG
-Route::get('/vue/crag/{crag_id}/map', 'Vue\CragVueController@vueMap')->name('vueMapCrag');
-Route::get('/vue/crag/{crag_id}/fil-actu', 'Vue\CragVueController@vueFilActu')->name('vueFilActuCrag');
-Route::get('/vue/crag/{crag_id}/medias', 'Vue\CragVueController@vueMedias')->name('vueMediasCrag');
-Route::get('/vue/crag/{crag_id}/liens', 'Vue\CragVueController@vueLiens')->name('vueLiensCrag');
-Route::get('/vue/crag/{crag_id}/topos', 'Vue\CragVueController@vueTopos')->name('vueToposCrag');
-Route::get('/vue/crag/{crag_id}/secteur', 'Vue\CragVueController@vueSecteur')->name('vueSecteurCrag');
-
-//VUE SECTEUR
-Route::get('/vue/sector/{sector_id}/lines', 'Vue\SectorVueController@vueRoutes')->name('vueRoutesSector');
-Route::get('/vue/sector/{sector_id}/descriptions', 'Vue\SectorVueController@vueDescriptions')->name('vueDescriptionsSector');
-Route::get('/vue/sector/{sector_id}/photos', 'Vue\SectorVueController@vuePhotos')->name('vuePhotosSector');
-
-//VUE ROUTE
-Route::get('/vue/route/{route_id}/route','Vue\RouteVueController@vueRoute')->name('vueRouteRoute');
-Route::get('/vue/route/{route_id}/information','Vue\RouteVueController@vueInformation')->name('vueInformationRoute');
-Route::get('/vue/route/{route_id}/comments','Vue\RouteVueController@vueComments')->name('vueCommentsRoute');
-Route::get('/vue/route/{route_id}/photos','Vue\RouteVueController@vuePhotos')->name('vuePhotosRoute');
-Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->name('vueVideosRoute');
-Route::get('/vue/route/{route_id}/carnet','Vue\RouteVueController@vueCarnet')->name('vueCarnetRoute');
-
-//VUE GYM
-Route::get('/vue/gym/{gym_id}/map', 'Vue\GymVueController@vueMap')->name('vueMapGym');
-Route::get('/vue/gym/{gym_id}/fil-actu', 'Vue\GymVueController@vueFilActu')->name('vueFilActuGym');
-
-//VUE TOPO
-Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');
-Route::get('/vue/topo/{topo_id}/liens','Vue\TopoVueController@vueLiens')->name('vueLiensTopo');
-Route::get('/vue/topo/{topo_id}/sites','Vue\TopoVueController@vueSites')->name('vueSitesTopo');
-Route::get('/vue/topo/{topo_id}/acheter','Vue\TopoVueController@vueAcheter')->name('vueAcheterTopo');
-Route::get('/vue/topo/{topo_id}/map','Vue\TopoVueController@vueMap')->name('vueMapTopo');
-
-//VUE MASSIVE
-Route::get('/vue/massive/{massive_id}/fil-actu','Vue\MassiveVueController@vueFilActu')->name('vueFilActuMassive');
-Route::get('/vue/massive/{massive_id}/liens','Vue\MassiveVueController@vueLiens')->name('vueLiensMassive');
-Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites')->name('vueSitesMassive');
-
-
 //CHART
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
@@ -343,7 +337,6 @@ Route::post('/chart/analytiks/time-lines', 'Chart\Crosses\timeChartsController@t
 
 //SIMILAR
 Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');
-
 
 //FOLLOW
 Route::post('/follow/user','FollowController@getUserFollows')->name('followUser');

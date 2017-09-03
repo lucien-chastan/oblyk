@@ -3,7 +3,7 @@
     {{--PAR SITE--}}
     <div class="col s12">
         <div class="card-panel">
-            <h2 class="loved-king-font">Nombre de croix pas site d'escalade</h2>
+            <h2 class="loved-king-font">@lang('pages/profile/analytiks.nbCrossesByCrag')</h2>
             <div class="card-chart">
                 <canvas class="environment-analytiks-canvas" data-route="{{ route('cragsAnalytiksChart') }}" id="analytiks-crags" width="100" height="250"></canvas>
             </div>

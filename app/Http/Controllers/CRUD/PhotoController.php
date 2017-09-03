@@ -90,7 +90,6 @@ class PhotoController extends Controller
         //si nous avons un fichier image
         if ($request->hasFile('file')) {
 
-
             //on va chercher l'album
             $album_id = 0;
             if ($request->input('album_id') != 0) {

@@ -5,9 +5,9 @@
         <div class="card-panel blue-card-panel">
 
             @if(Auth::id() == $user->id)
-                <h2 class="loved-king-font titre-profile-boite-vue">Mes albums</h2>
+                <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/albums.authTitle')</h2>
             @else
-                <h2 class="loved-king-font titre-profile-boite-vue">Les albums de {{$user->name}}</h2>
+                <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/albums.authTitle', ['name'=>$user->name])</h2>
             @endif
 
             <div class="blue-border-zone row">
@@ -26,14 +26,14 @@
                             <p class="no-margin">
                                 <strong class="text-cursor" onclick="openAlbum('{{route('vuePhotosUser',['profile_id'=>$album->user_id,'album_id'=>$album->id])}}')">{{$album->label}}</strong><br>
                                 {{$album->description}}<br>
-                                <span class="grey-text">{{count($album->photos)}} photos</span>
+                                <span class="grey-text">@choice('pages/profile/albums.nbPhoto', count($album->photos))</span>
                             </p>
                             <p class="info-user grey-text">
                                 @if(Auth::check())
                                     <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$album->id, "model"=>"Album"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                     @if($album->user_id == Auth::id())
-                                        <i {!! $Helpers::tooltip('Modifier cet album') !!} {!! $Helpers::modal(route('albumModal'), ["album_id"=>$album->id, "title"=>"Modifier un album", "method"=>"PUT", "callback"=>"reloadCurrentVue"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                                        <i {!! $Helpers::tooltip('Supprimer cet album') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/albums/" . $album->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/album.editTooltip')) !!} {!! $Helpers::modal(route('albumModal'), ["album_id"=>$album->id, "title"=>trans('modals/album.modalEditeTitle'), "method"=>"PUT", "callback"=>"reloadCurrentVue"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                                        <i {!! $Helpers::tooltip(trans('modals/album.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/albums/" . $album->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
                                     @endif
                                 @endif
                             </p>
@@ -44,9 +44,9 @@
 
             @if(count($user->albums) == 0)
                 @if(Auth::id() == $user->id)
-                    <p class="grey-text text-center">Tu n'as pas encore d'album photo</p>
+                    <p class="grey-text text-center">@lang('pages/profile/albums.noPhotoAuth')</p>
                 @else
-                    <p class="grey-text text-center">{{$user->name}} pas encore d'album photo</p>
+                    <p class="grey-text text-center">@lang('pages/profile/albums.noPhotoNoAuth', ['name'=>$user->name])</p>
                 @endif
             @endif
 

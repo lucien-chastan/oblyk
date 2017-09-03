@@ -3,7 +3,7 @@
     {{--COTATION--}}
     <div class="col s12">
         <div class="card-panel">
-            <h2 class="loved-king-font">Croix / Cotations</h2>
+            <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesGraderGraphTitle')</h2>
             <div class="card-chart">
                 <canvas class="route-analytiks-canvas" data-route="{{ route('gradeAnalytiksChart') }}" id="analytiks-cotations" width="100" height="250"></canvas>
             </div>
@@ -17,7 +17,7 @@
     {{--TYPE DE GRIMPE--}}
     <div class="col s12 l4">
         <div class="card-panel">
-            <h2 class="loved-king-font">Croix / Type de grimpe</h2>
+            <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesClimbGraphTitle')</h2>
             <div class="card-chart">
                 <canvas class="route-analytiks-canvas" data-route="{{ route('climbsAnalytiksChart') }}" id="analytiks-climbs" width="100" height="250"></canvas>
             </div>
@@ -27,7 +27,7 @@
     {{--ENCHAINEMENT--}}
     <div class="col s12 l4">
         <div class="card-panel">
-            <h2 class="loved-king-font">Croix / Type d'enchainement</h2>
+            <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesModeGraphTitle')</h2>
             <div class="card-chart">
                 <canvas class="route-analytiks-canvas" data-route="{{ route('statusesAnalytiksChart') }}" id="analytiks-statuses" width="100" height="250"></canvas>
             </div>
