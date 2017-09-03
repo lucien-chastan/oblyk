@@ -12,7 +12,7 @@
 
                     {{-- GRAPHE DES DIFFÉRENTS TYPE DE GRIMPE--}}
                     <div class="col s12 m6 l3 text-center" id="graph-type-grimpe">
-                        <label>Nombre de croix par type de grimpe</label>
+                        <label>@lang('pages/profile/crosses.titleNbCrossesByType')</label>
                         <div class="zone-graph-type-grimpe">
                             <canvas id="chart-climb-id" width="100" height="250"></canvas>
                         </div>
@@ -22,40 +22,40 @@
                     <div class="col s12 m6 l9">
                         <h2 class="loved-king-font titre-profile-boite-vue">
                             @if(Auth::id() == $user->id)
-                                Mes croix en quelques chiffres
+                                @lang('pages/profile/crosses.myCrossesFigures')
                             @else
-                                Les croix de {{ $user->name }} en quelques chiffres
+                                @lang('pages/profile/crosses.otherCrossesFigures', ['name'=>$user->name])
                             @endif
                         </h2>
                         <div class="row">
                             <div class="col s6 m4 l4">
                                 <p>
                                     <i class="material-icons left">public</i>
-                                    {{ count($pays) }} Pays
+                                    @choice('pages/profile/crosses.countryFigures', count($pays))
                                 </p>
                             </div>
                             <div class="col s6 m4 l4">
                                 <p>
                                     <i class="material-icons left">terrain</i>
-                                    {{ count($crags) }} Sites
+                                    @choice('pages/profile/crosses.cragFigures', count($crags))
                                 </p>
                             </div>
                             <div class="col s6 m4 l4">
                                 <p>
                                     <i class="material-icons left">nature</i>
-                                    {{ count($regions) }} Regions
+                                    @choice('pages/profile/crosses.regionFigures', count($regions))
                                 </p>
                             </div>
                             <div class="col s6 m4 l4">
                                 <p>
                                     <i class="material-icons left">done_all</i>
-                                    {{ count($crosses) }} Croix
+                                    @choice('pages/profile/crosses.crossesFigures', count($crosses))
                                 </p>
                             </div>
                             <div class="col s6 m4 l4">
                                 <p>
                                     <i class="material-icons left">functions</i>
-                                    {{ $metres }} mètres grimpé
+                                    @choice('pages/profile/crosses.meterFigures', $metres)
                                 </p>
                             </div>
                             <div class="col s6 m4 l4">
@@ -68,13 +68,13 @@
                     </div>
 
                     <div class="col s12">
-                        <div class="legend-climb-square climb-bg-color-2"></div> <span class="label-legend-climb">Bloc</span>
-                        <div class="legend-climb-square climb-bg-color-3"></div> <span class="label-legend-climb">Voie</span>
-                        <div class="legend-climb-square climb-bg-color-4"></div> <span class="label-legend-climb">Grande-voie</span>
-                        <div class="legend-climb-square climb-bg-color-5"></div> <span class="label-legend-climb">Trad</span>
-                        <div class="legend-climb-square climb-bg-color-6"></div> <span class="label-legend-climb">Artif</span>
-                        <div class="legend-climb-square climb-bg-color-7"></div> <span class="label-legend-climb">Deep-water</span>
-                        <div class="legend-climb-square climb-bg-color-8"></div> <span class="label-legend-climb">Via-ferrata</span>
+                        <div class="legend-climb-square climb-bg-color-2"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_2')</span>
+                        <div class="legend-climb-square climb-bg-color-3"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_3')</span>
+                        <div class="legend-climb-square climb-bg-color-4"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_4')</span>
+                        <div class="legend-climb-square climb-bg-color-5"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_5')</span>
+                        <div class="legend-climb-square climb-bg-color-6"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_6')</span>
+                        <div class="legend-climb-square climb-bg-color-7"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_7')</span>
+                        <div class="legend-climb-square climb-bg-color-8"></div> <span class="label-legend-climb">@lang('elements/climbs.climb_8')</span>
                         @if(Auth::id() == $user->id)
                             <div class="right"><a class="bt-go-to-analytiks" onclick="loadProfileRoute(document.getElementById('item-analytiks-nav'))"><i class="material-icons tiny">equalizer</i> Analytiks</a></div>
                         @endif
@@ -91,10 +91,10 @@
                 <div class="row">
                     <div class="col s12">
                         <ul class="tabs no-scroll-x">
-                            <li class="tab col s3"><a href="#tab-site" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> Sites</a></li>
-                            <li class="tab col s3"><a href="#tab-pays"><i class="material-icons ic-tab-parametre-profile">public</i> Pays</a></li>
-                            <li class="tab col s3"><a href="#tab-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> Regions</a></li>
-                            <li class="tab col s3"><a href="#tab-annee"><i class="material-icons ic-tab-parametre-profile">today</i> Années</a></li>
+                            <li class="tab col s3"><a href="#tab-site" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> @lang('pages/profile/crosses.cragTab')</a></li>
+                            <li class="tab col s3"><a href="#tab-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
+                            <li class="tab col s3"><a href="#tab-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
+                            <li class="tab col s3"><a href="#tab-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
                         </ul>
                     </div>
                     <div id="tab-site" class="col s12">
@@ -118,11 +118,11 @@
 
     @if(Auth::id() == $user->id)
         <p class="grey-text text-center text-bold">
-            Tu n'as pas encore ajouté tes croix
+            @lang('pages/profile/crosses.noCrosses')
         </p>
     @else
         <p class="grey-text text-center text-bold">
-            {{ $user->name }} n'a pas encore ajouté ses croix
+            @lang('pages/profile/crosses.otherNoCrosses', ['name'=>$user->name])
         </p>
     @endif
 

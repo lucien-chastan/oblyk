@@ -225,11 +225,8 @@ class UserVueController extends Controller
         //On va chercher si l'auth est amis avec l'user
         $relationStatus = Follow::statusRelation(Auth::id(),$user_id);
 
-        if($user->sex == 0) $user->genre = 'Inféfini';
-        if($user->sex == 1) $user->genre = 'Femme';
-        if($user->sex == 2) $user->genre = 'Homme';
-
-        $user->age = $user->birth != 0 ? date('Y') - $user->birth : '?';
+        $user->genre = trans('elements/sex.sex_' . $user->sex);
+        $user->age = $user->birth != 0 ? trans_choice('elements/old.old', date('Y') - $user->birth) : trans_choice('elements/old.old', 0);
 
         $user->image = file_exists(storage_path('app/public/users/200/user-' . $user->id . '.jpg')) ? '/storage/users/200/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
         $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg' : '';

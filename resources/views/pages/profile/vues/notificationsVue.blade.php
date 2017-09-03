@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel blue-card-panel">
-            <h2 class="loved-king-font titre-profile-boite-vue">Panneau des notifications</h2>
+            <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/notification.notificationTitle')</h2>
 
             <div class="blue-border-zone row notification-zone">
                 @foreach($notifications as $notification)
@@ -15,19 +15,19 @@
                                 <span class="grey-text">
                                     {!! $notification->data->content !!}
                                     @if($notification->created_at->format('d M Y') == date('d M Y'))
-                                        aujourd'hui à {{$notification->created_at->format('H:i')}}
+                                        @lang('pages/profile/notification.today', ['date'=>$notification->created_at->format('H:i')])
                                     @else
-                                        le {{$notification->created_at->format('d M Y à H:i')}}
+                                        @lang('pages/profile/notification.on', ['date'=>$notification->created_at->format('H:i')])
                                     @endif
                                 </span>
                             </p>
                             <span class="grey-text i-cursor">
                                 @if($notification->read == 0)
-                                    <i id="icon-notification-{{$notification->id}}" {!! $Helpers::tooltip('Marquer comme vu') !!} class="material-icons tooltipped" onclick="notificationsAsRead({{$notification->id}})">visibility</i>
+                                    <i id="icon-notification-{{$notification->id}}" {!! $Helpers::tooltip(trans('pages/profile/notification.markedAsSeen')) !!} class="material-icons tooltipped" onclick="notificationsAsRead({{$notification->id}})">visibility</i>
                                 @else
-                                    <i id="icon-notification-{{$notification->id}}" {!! $Helpers::tooltip('Marquer comme non vu') !!} class="material-icons tooltipped" onclick="notificationsAsRead({{$notification->id}})">visibility_off</i>
+                                    <i id="icon-notification-{{$notification->id}}" {!! $Helpers::tooltip(trans('pages/profile/notification.markedAsUnseen')) !!} class="material-icons tooltipped" onclick="notificationsAsRead({{$notification->id}})">visibility_off</i>
                                 @endif
-                                <i {!! $Helpers::tooltip('Supprimer cette notification') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/notifications/" . $notification->id, "callback"=>"reloadNotificationAfterDelete" ]) !!} class="material-icons tooltipped btnModal">delete</i>
+                                <i {!! $Helpers::tooltip(trans('pages/profile/notification.deleteNotification')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/notifications/" . $notification->id, "callback"=>"reloadNotificationAfterDelete" ]) !!} class="material-icons tooltipped btnModal">delete</i>
                             </span>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
             </div>
 
             @if(count($notifications) == 0)
-                <p class="grey-text text-center">Vous n'avez pas de notification</p>
+                <p class="grey-text text-center">@lang('pages/profile/notification.noNotification')</p>
             @endif
 
         </div>

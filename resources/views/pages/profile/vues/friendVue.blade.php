@@ -15,7 +15,7 @@
                         <span class="grey-text">
                             {{$friend->followInformation}}
                             @if(Auth::id() == $user->id)
-                                <i {!! $Helpers::tooltip('Supprimer cette amis') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/follows/" . $friend->id, "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">delete</i>
+                                <i {!! $Helpers::tooltip(trans('pages/profile/friend.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/follows/" . $friend->id, "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">delete</i>
                             @endif
                         </span>
                     </p>
@@ -27,15 +27,14 @@
         @if(count($friends) == 0)
             @if(Auth::id() == $user->id)
                 <p class="text-bold text-center grey-text">
-                    Tu n'as pas encore d'amis ...<br>
-                    Pour demander quelqu'un en amis, va sur la page de son profil et clique sur
+                    @lang('pages/profile/friend.paraNoFriend')
                 </p>
                 <p class="text-bold text-center grey-text">
-                    <i class="material-icons ic-exemple-ajouter-topo">star_border</i> Demander en amis
+                    <i class="material-icons ic-exemple-ajouter-topo">star_border</i> @lang('pages/profile/friend.exampleFollowFriend')
                 </p>
             @else
                 <p class="text-bold text-center grey-text">
-                    {{$user->name}} n'as pas encore d'amis
+                    @lang('pages/profile/friend.paraOtherNoFriend', ['name'=>$user->name])
                 </p>
             @endif
 

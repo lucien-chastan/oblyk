@@ -9,7 +9,7 @@
                 @endif
                 <p class="no-margin">
                     <a class="text-bold" href="{{ route('cragPage',['crag_id'=>$crosses[0]->route->crag->id,'crag_label'=>str_slug($crosses[0]->route->crag->label)]) }}">{{ $crosses[0]->route->crag->label }}</a><br>
-                    <span class="grey-text">{{ count($crosses) }} croix</span>
+                    <span class="grey-text">@choice('pages/profile/crosses.crossesFigures', count($crosses))</span>
                 </p>
             </div>
 

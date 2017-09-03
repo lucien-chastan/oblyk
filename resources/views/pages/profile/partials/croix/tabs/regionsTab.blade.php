@@ -3,7 +3,7 @@
         <div class="blue-border-div">
             <div class="row">
                 <p class="no-margin">
-                    <span style="font-size: 1.8em" class="loved-king-font">{{ $key }}</span> <span class="grey-text">{{ count($crosses) }} croix</span>
+                    <span style="font-size: 1.8em" class="loved-king-font">{{ $key }}</span> <span class="grey-text">@choice('pages/profile/crosses.crossesFigures', count($crosses))</span>
                 </p>
             </div>
 

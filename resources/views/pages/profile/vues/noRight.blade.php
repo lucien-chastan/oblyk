@@ -4,8 +4,7 @@
     <div class="col s12">
 
         <p class="grey-text text-bold text-center">
-            Vous n'êtes pas autorisé à voir cette page<br>
-            Désolé
+            @lang('pages/profile/noRight.noRight')
         </p>
 
     </div>

@@ -4,7 +4,7 @@
     <div class="col s12">
         <div class="card-panel blue-card-panel">
 
-            <h2 class="loved-king-font titre-profile-boite-vue">Mes suivis</h2>
+            <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/follow.myFollow')</h2>
 
             @foreach($follows as $key => $catFollow)
 
@@ -18,7 +18,7 @@
                                 <a href="{{$follow->followUrl}}" class="text-bold">{{$follow->followName}}</a><br>
                                 <span class="grey-text">
                                     {{$follow->followInformation}}
-                                    <i {!! $Helpers::tooltip('Supprimer ce suivi') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/follows/" . $follow->id, "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">delete</i>
+                                    <i {!! $Helpers::tooltip(trans('pages/profile/follow.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/follows/" . $follow->id, "callback"=>"reloadCurrentVue" ]) !!} class="material-icons tooltipped btnModal">delete</i>
                                 </span>
                             </div>
                         </div>
@@ -28,13 +28,12 @@
 
             @if(count($follows) == 0)
                 <p class="text-center grey-text text-bold">
-                    Vous ne suivez aucun élément<br>
-                    Pour suivre un élément, rendez-vous sur la page d'une falaise ou d'une salle d'escalade et cliquez sur :
+                    @lang('pages/profile/follow.paraNoFollow')
                 </p>
                 <p class="text-bold text-center grey-text">
-                    <i class="material-icons ic-exemple-ajouter-topo">star_border</i> Suivre ce site
+                    <i class="material-icons ic-exemple-ajouter-topo">star_border</i> @lang('pages/profile/follow.exampleFollowCrag')
                 </p>
-                <p class="text-center grey-text text-bold">Suivre un élément vous permet d'être au courant de ce qui si passe !</p>
+                <p class="text-center grey-text text-bold">@lang('pages/profile/follow.slogan')</p>
             @endif
 
         </div>

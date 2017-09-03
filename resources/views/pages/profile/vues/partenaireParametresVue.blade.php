@@ -7,12 +7,10 @@
 
             <button class="btn-flat right waves-effect blue-text" onclick="loadProfileRoute(document.getElementById('item-mes-lieux-nav'))">Mes Lieux<i class="material-icons right">arrow_forward</i></button>
 
-            <h2 class="loved-king-font titre-profile-boite-vue">Qui je suis ?</h2>
+            <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/partnerSearch.titleWhoIAm')</h2>
 
             <p>
-                <strong class="text-underline">Pourquoi cette page ?</strong><br>
-                Pour que d'autres grimpeurs et envie de te contacter, il est important qu'ils aient un minimum d'informations sur toi.
-                Cette page te permet de donne quelques indicateurs de qui tu es, ton niveau, quelle type de grimpe tu pratique, etc.
+                @lang('pages/profile/partnerSearch.explication')
             </p>
 
             <form id="form-partner-setting" class="submit-form" data-route="{{route('saveUserPartnerSettings')}}" onsubmit="submitData(this, majPartnerSettings); return false">
@@ -22,33 +20,33 @@
                 <div class="blue-border-zone">
 
                     <div class="blue-border-div">
-                        <p class="text-bold text-underline">1. Faire partie de la recherche de partenaire d'oblyk</p>
-                        {!! $Inputs::checkbox(['name'=>'partner', 'label'=>'Activer ma recherche de partenaire de grimpe', 'checked' => ($user->partnerSettings->partner == 1) ? true : false, 'align' => 'left']) !!}
+                        <p class="text-bold text-underline">@lang('pages/profile/partnerSearch.step1Title')</p>
+                        {!! $Inputs::checkbox(['name'=>'partner', 'label'=>trans('pages/profile/partnerSearch.labelActive'), 'checked' => ($user->partnerSettings->partner == 1) ? true : false, 'align' => 'left']) !!}
 
-                        <p class="grey-text para-note-active-partner">Note :</p>
+                        <p class="grey-text para-note-active-partner">@lang('pages/profile/partnerSearch.titleNote')</p>
                         <ul class="grey-text oblyk-ul">
                             <li>
-                                Si cette case n'est pas cochée, tu n'apparaîtra pas sur la carte des grimpeurs
+                                @lang('pages/profile/partnerSearch.li1')
                             </li>
                             <li>
-                                Désactiver ton profil de la recherche de partenaire ne supprime pas tes préférences ni tes lieux de grimpe, tu deviens juste invisible.
+                                @lang('pages/profile/partnerSearch.li2')
                             </li>
                         </ul>
                     </div>
 
                     <div class="blue-border-div">
-                        <p class="text-bold text-underline">2. Quel type de grimpe je pratique ?</p>
-                        {!! $Inputs::checkbox(['name'=>'climb_2', 'label'=>'Bloc', 'checked' => ($user->partnerSettings->climb_2 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_3', 'label'=>'Voie', 'checked' => ($user->partnerSettings->climb_3 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_4', 'label'=>'Grande-voie', 'checked' => ($user->partnerSettings->climb_4 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_5', 'label'=>'Trad', 'checked' => ($user->partnerSettings->climb_5 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_6', 'label'=>'Artif', 'checked' => ($user->partnerSettings->climb_6 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_7', 'label'=>'Deep-water', 'checked' => ($user->partnerSettings->climb_7 == 1) ? true : false, 'align' => 'left']) !!}
-                        {!! $Inputs::checkbox(['name'=>'climb_8', 'label'=>'Via-ferrata', 'checked' => ($user->partnerSettings->climb_8 == 1) ? true : false, 'align' => 'left']) !!}
+                        <p class="text-bold text-underline">@lang('pages/profile/partnerSearch.step2Title')</p>
+                        {!! $Inputs::checkbox(['name'=>'climb_2', 'label'=>trans('elements/climbs.climb_2'), 'checked' => ($user->partnerSettings->climb_2 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_3', 'label'=>trans('elements/climbs.climb_3'), 'checked' => ($user->partnerSettings->climb_3 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_4', 'label'=>trans('elements/climbs.climb_4'), 'checked' => ($user->partnerSettings->climb_4 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_5', 'label'=>trans('elements/climbs.climb_5'), 'checked' => ($user->partnerSettings->climb_5 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_6', 'label'=>trans('elements/climbs.climb_6'), 'checked' => ($user->partnerSettings->climb_6 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_7', 'label'=>trans('elements/climbs.climb_7'), 'checked' => ($user->partnerSettings->climb_7 == 1) ? true : false, 'align' => 'left']) !!}
+                        {!! $Inputs::checkbox(['name'=>'climb_8', 'label'=>trans('elements/climbs.climb_8'), 'checked' => ($user->partnerSettings->climb_8 == 1) ? true : false, 'align' => 'left']) !!}
                     </div>
 
                     <div class="blue-border-div">
-                        <p class="text-bold text-underline">3. Quel est mon niveau ?</p>
+                        <p class="text-bold text-underline">@lang('pages/profile/partnerSearch.step3Title')</p>
                         <div class="input-field col s12">
                             <select id="grade_min" class="input-data" name="grade_min">
                                 <option value="2a" @if($user->partnerSettings->grade_min == '2a') selected @endif >2a</option>
@@ -83,7 +81,7 @@
                                 <option value="9b" @if($user->partnerSettings->grade_min == '9b') selected @endif >9b</option>
                                 <option value="9c" @if($user->partnerSettings->grade_min == '9c') selected @endif >9c</option>
                             </select>
-                            <label for="grade_min">Mon niveau minimum</label>
+                            <label for="grade_min">@lang('pages/profile/partnerSearch.minLabel')</label>
                         </div>
                         <div class="input-field col s12">
                             <select id="grade_max" class="input-data" name="grade_max">
@@ -119,10 +117,10 @@
                                 <option value="9b" @if($user->partnerSettings->grade_max == '9b') selected @endif >9b</option>
                                 <option value="9c" @if($user->partnerSettings->grade_max == '9c') selected @endif >9c</option>
                             </select>
-                            <label for="grade_max">Mon niveau maxium</label>
+                            <label for="grade_max">@lang('pages/profile/partnerSearch.maxLabel')</label>
                         </div>
                         <p class="grey-text">
-                            Note : si tu ne sais pas quoi mettre, ton niveau minium pourait correspondre à ton échauffement, et ton niveau max à tes projets.
+                            @lang('pages/profile/partnerSearch.noteLevel')
                         </p>
                     </div>
 

@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="bt-add-conversation">
-                    <a {!! $Helpers::tooltip('Commencer une conversation') !!} {!! $Helpers::modal(route('conversationModal'), ["title"=>"Nouvelle conversation", "callback"=>"reloadConversationAfterAdd", "method"=>"POST" ]) !!} class="btn-floating btn-small waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
+                    <a {!! $Helpers::tooltip(trans('modals/conversation.addTooltip')) !!} {!! $Helpers::modal(route('conversationModal'), ["title"=>trans('modals/conversation.modalAddTitle'), "callback"=>"reloadConversationAfterAdd", "method"=>"POST" ]) !!} class="btn-floating btn-small waves-effect waves-light tooltipped btnModal"><i class="material-icons">add</i></a>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
 
                 {{--zone des messages--}}
                 <div id="insert-message-list">
-                    <p class="text-center grey-text">clique sur une conversation pour qu'elle s'affiche ici</p>
+                    <p class="text-center grey-text">@lang('pages/profile/messenger.clickForSee')</p>
                 </div>
 
                 {{--loader des messages--}}
@@ -58,10 +58,10 @@
             <div class="text-zone" id="message-text-zone">
                 <div class="input-field col s12">
                     <textarea onkeydown="frappeText(event)" id="textarea-message"></textarea>
-                    <label for="textarea-message">Écrir un message</label>
+                    <label for="textarea-message">@lang('pages/profile/messenger.placeholderTextarea')</label>
                 </div>
                 <div class="zone-send-message">
-                    <i {!! $Helpers::tooltip('Envoyer le message [Ctrl + Entrer]') !!} class="material-icons tooltipped" onclick="sendMessage()">send</i>
+                    <i {!! $Helpers::tooltip(trans('pages/profile/messenger.submitMessage')) !!} class="material-icons tooltipped" onclick="sendMessage()">send</i>
                 </div>
             </div>
         </div>
