@@ -64,7 +64,12 @@ function specialAction(data) {
         format: 'yyyy-mm-dd',
         clear: 'Annuler',
         close: 'Ok',
-        closeOnSelect: true // Close upon selecting a date,
+        closeOnSelect: true, // Close upon selecting a date,
+        onSet: function (ele) {
+            if(ele.select){
+                this.close();
+            }
+        }
     });
 
     //color les branches de la boussole dans l'input orientation
