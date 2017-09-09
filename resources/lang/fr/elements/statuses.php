@@ -6,6 +6,7 @@ return [
     'status_3' => 'Après travail',
     'status_4' => 'Flash',
     'status_5' => 'À vue',
+    'status_6' => 'Répétition',
 ];
 
 

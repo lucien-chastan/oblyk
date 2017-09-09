@@ -6,6 +6,8 @@ return [
     'point_3' => 'Bolt hangers',
     'point_4' => 'Open staple bolts',
     'point_5' => 'Staple / U bolts',
+    'point_6' => 'No bolts',
+
 ];
 
 

@@ -6,6 +6,7 @@ return [
     'status_3' => 'Red point',
     'status_4' => 'Flash',
     'status_5' => 'Onsight',
+    'status_6' => 'Repetition',
 ];
 
 

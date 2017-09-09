@@ -6,6 +6,7 @@ return [
     'point_3' => 'Plaquettes',
     'point_4' => 'Crochet',
     'point_5' => 'Anneau',
+    'point_6' => 'Pas de point',
 ];
 
 
