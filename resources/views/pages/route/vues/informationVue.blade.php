@@ -208,8 +208,8 @@
                         <tr>
                             <td>L. {{$section->section_order}}</td>
                             <td><strong class="color-grade-{{$section->grade_val}}">{{$section->grade}}{{$section->sub_grade}}</strong></td>
-                            <td><span class="oblyk-icon icon-relais_{{$section->anchor->id}} grey-text"></span> {{$section->anchor->label}}</td>
-                            <td><span class="oblyk-icon icon-point_{{$section->point->id}} grey-text"></span> {{$section->point->label}}</td>
+                            <td><span class="oblyk-icon icon-relais_{{$section->anchor->id}} grey-text"></span> @lang('elements/anchors.anchor_' . $section->anchor->id)</td>
+                            <td><span class="oblyk-icon icon-point_{{$section->point->id}} grey-text"></span> @lang('elements/points.point_' . $section->point->id)</td>
                             <td>{{$section->section_height}} mètres</td>
                         </tr>
                     @endforeach
