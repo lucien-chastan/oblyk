@@ -23,5 +23,6 @@ il est toujours bon d'enrichir les débats ! ;)",
     //autre
     'noTopics'=>"Il n'y a pas encore de sujet dans cette catégorie",
     'actionNoTopics'=>"voir tous les sujets",
+    'goToLastPage'=>"aller à la dernière page",
 
 ];

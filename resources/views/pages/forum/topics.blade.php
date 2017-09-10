@@ -53,6 +53,7 @@
                             <th class="text-center">@lang('pages/forums/topics.columnViews')</th>
                             <th class="text-center">@lang('pages/forums/topics.columnPosts')</th>
                             <th class="text-center">@lang('pages/forums/topics.columnDate')</th>
+                            <th class="text-center"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,11 @@
                                 <td class="text-center">{{$topic->views}}</td>
                                 <td class="text-center">{{$topic->nb_post}}</td>
                                 <td class="grey-text text-center">{{$topic->last_post->format('d M Y à H:i')}}</td>
+                                <td>
+                                    <a {!! $Helpers::tooltip(trans('pages/forums/topics.goToLastPage')) !!} class="tooltipped" rel="nofollow" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}&page={{ ceil($topic->nb_post / 10) }}">
+                                        <i class="material-icons right">last_page</i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
