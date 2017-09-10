@@ -47,6 +47,7 @@ class CrossController extends Controller
 
         } else {
             $cross = new Cross();
+            $cross->attempt = 1;
             foreach ($line->routeSections as $section) $crossPitchs[] = $section->id;
         }
 
@@ -67,6 +68,7 @@ class CrossController extends Controller
                 'mode_id' => $cross->mode_id,
                 'hardness_id' => $cross->hardness_id,
                 'environment' => $cross->environment,
+                'attempt' => $cross->attempt,
                 'release_at' => $release_at,
                 'id' => $id_cross,
                 'line' => $line,
@@ -191,6 +193,7 @@ class CrossController extends Controller
         //validation du formulaire
         $this->validate($request, [
             'release_at' => 'required|date_format:Y-m-d',
+            'attempt' => 'min:0',
         ]);
 
         //Enregistrement de la croix
@@ -200,6 +203,7 @@ class CrossController extends Controller
         $cross->mode_id = $request->input('mode_id');
         $cross->hardness_id = $request->input('hardness_id');
         $cross->environment = $request->input('environment');
+        $cross->attempt = $request->input('attempt');
         $cross->release_at = $request->input('release_at');
         $cross->user_id = Auth::id();
         $cross->save();
@@ -269,6 +273,7 @@ class CrossController extends Controller
         //validation du formulaire
         $this->validate($request, [
             'release_at' => 'required|date_format:Y-m-d',
+            'attempt' => 'min:0',
         ]);
 
         //Mise à jour des données
@@ -279,6 +284,7 @@ class CrossController extends Controller
             $cross->status_id = $request->input('status_id');
             $cross->mode_id = $request->input('mode_id');
             $cross->hardness_id = $request->input('hardness_id');
+            $cross->attempt = $request->input('attempt');
             $cross->save();
 
             //on va chercher une éventuelle description posté sur cette croix

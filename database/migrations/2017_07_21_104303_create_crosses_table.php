@@ -21,6 +21,7 @@ class CreateCrossesTable extends Migration
             $table->integer('mode_id')->unsigned(); //en tête, moulinette, etc.
             $table->integer('hardness_id')->unsigned(); //facile, juste, dur
             $table->integer('environment')->default(0); //0 -> outdoor, 1 -> indoor
+            $table->integer('attempt')->default(1); //0 -> outdoor, 1 -> indoor
             $table->dateTime('release_at');
             $table->timestamps();
 

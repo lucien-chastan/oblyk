@@ -63,7 +63,7 @@
                             @endif
 
                         @endif
-
+                        <strong>Nombre de tentative : </strong>{{ $cross->attempt }}<br>
                         <strong>J'étais avec :</strong>
                         <span class="virgule">
                             @foreach($cross->crossUsers as $user)

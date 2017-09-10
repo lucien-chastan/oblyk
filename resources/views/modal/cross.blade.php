@@ -15,6 +15,7 @@
                 {!! $Inputs::crossModes(['name'=>'mode_id','label'=>'Mode (En tête, en moulinette, etc.)', 'value'=> $dataModal['mode_id']]) !!}
             </div>
             {!! $Inputs::date(['name'=>'release_at', 'label'=>'Date de la croix', 'placeholder'=>'Date de la croix', 'value'=> $dataModal['release_at']]) !!}
+            {!! $Inputs::text(['name'=>'attempt', 'label'=>'Nombre de tentative', 'value'=> $dataModal['attempt'], 'type'=>'number']) !!}
         </div>
 
         <div class="row" style="{{$dataModal['showPitchs']}}">
