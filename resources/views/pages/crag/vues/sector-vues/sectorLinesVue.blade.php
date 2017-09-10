@@ -42,7 +42,7 @@
                     @endif
                 @else
                     @if(!isset($route->tickLists[0]->id) && Auth::check())
-                        <i {!! $Helpers::tooltip('Ajouter à mon carnet ou à ma ticklist') !!} class="material-icons tooltipped grey-text text-lighten-1">radio_button_unchecked</i>
+                        <i {!! $Helpers::tooltip(trans('pages/crags/tabs/sectors/tabs/route.addTooltip')) !!} class="material-icons tooltipped grey-text text-lighten-1">radio_button_unchecked</i>
                     @endif
                 @endif
             </td>

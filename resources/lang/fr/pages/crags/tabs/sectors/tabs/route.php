@@ -18,6 +18,7 @@ return [
     'nbPhoto' => "il y a une photo sur cette ligne | il y a :count photos sur cette ligne",
     'nbVideo' => "il y a une vidéo sur cette ligne | il y a :count vidéos sur cette ligne",
     'height' => "{0} ? mètre|{1} 1 mètre|[2,*] :count mètres",
+    'addTooltip' => "Ajouter à mon carnet ou à ma ticklist",
 
     //Autre
     'noRoute' => "Il n'y a pas de ligne référencée sur ce secteur,<br> vous pouvez en ajouter en cliquant sur le bouton +",
