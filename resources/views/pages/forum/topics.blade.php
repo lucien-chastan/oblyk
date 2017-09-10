@@ -68,7 +68,7 @@
                                 <td class="text-center">{{$topic->nb_post}}</td>
                                 <td class="grey-text text-center">{{$topic->last_post->format('d M Y à H:i')}}</td>
                                 <td>
-                                    <a {!! $Helpers::tooltip(trans('pages/forums/topics.goToLastPage')) !!} class="tooltipped" rel="nofollow" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}&page={{ ceil($topic->nb_post / 10) }}">
+                                    <a {!! $Helpers::tooltip(trans('pages/forums/topics.goToLastPage')) !!} class="tooltipped" rel="nofollow" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}?page={{ ceil($topic->nb_post / 10) }}">
                                         <i class="material-icons right">last_page</i>
                                     </a>
                                 </td>
