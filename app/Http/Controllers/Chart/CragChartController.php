@@ -114,7 +114,7 @@ class CragChartController extends Controller
             'type'=>'bar',
             'data'=> [
                 'labels' => [
-                    "Bloc", "Voie", "Grande-voie", "Trad", "Artif", "Deep-water", "Via-ferrata"
+                    trans('elements/climbs.climb_2'), trans('elements/climbs.climb_3'), trans('elements/climbs.climb_4'), trans('elements/climbs.climb_5'), trans('elements/climbs.climb_6'), trans('elements/climbs.climb_7'), trans('elements/climbs.climb_8')
                 ],
                 'datasets' => [
                     [

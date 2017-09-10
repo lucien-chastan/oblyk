@@ -73,11 +73,11 @@ class environmentChartsController extends Controller
         $labels = [];
 
         foreach ($crosses as $cross){
-            $labels[$cross->route->crag->id] = $cross->route->crag->region;
-            if(isset($datas[$cross->route->crag->id])){
-                $datas[$cross->route->crag->id]++;
+            $labels[$cross->route->crag->region] = $cross->route->crag->region;
+            if(isset($datas[$cross->route->crag->region])){
+                $datas[$cross->route->crag->region]++;
             }else{
-                $datas[$cross->route->crag->id] = 1;
+                $datas[$cross->route->crag->region] = 1;
             }
         }
 
@@ -122,11 +122,11 @@ class environmentChartsController extends Controller
         $labels = [];
 
         foreach ($crosses as $cross){
-            $labels[$cross->route->crag->id] = $cross->route->crag->code_country;
-            if(isset($datas[$cross->route->crag->id])){
-                $datas[$cross->route->crag->id]++;
+            $labels[$cross->route->crag->code_country] = $cross->route->crag->code_country;
+            if(isset($datas[$cross->route->crag->code_country])){
+                $datas[$cross->route->crag->code_country]++;
             }else{
-                $datas[$cross->route->crag->id] = 1;
+                $datas[$cross->route->crag->code_country] = 1;
             }
         }
 
@@ -174,7 +174,7 @@ class environmentChartsController extends Controller
 
         // Liste des labels (le -1 et pour que l'index commence à 0)
         foreach ($rocks as $rock){
-            $rocksLabel[$rock->id - 1] = ucfirst($rock->label);
+            $rocksLabel[$rock->id - 1] = trans('elements/rocks.rock_' . $rock->id);
             $rocksData[$rock->id - 1] = 0;
         }
 

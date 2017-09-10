@@ -122,7 +122,7 @@ class routeChartsController extends Controller
             'type'=>'doughnut',
             'data'=> [
                 'labels' => [
-                    "Bloc", "Voie", "Grande-voie", "Trad", "Artif", "Deep-water", "Via-ferrata"
+                    trans('elements/climbs.climb_2'), trans('elements/climbs.climb_3'), trans('elements/climbs.climb_4'), trans('elements/climbs.climb_5'), trans('elements/climbs.climb_6'), trans('elements/climbs.climb_7'), trans('elements/climbs.climb_8')
                 ],
                 'datasets' => [
                     [
@@ -160,7 +160,7 @@ class routeChartsController extends Controller
 
         // Liste des labels (le -1 et pour que l'index commence à 0)
         foreach ($statuses as $status){
-            $statusesLabel[$status->id - 1] = ucfirst($status->label);
+            $statusesLabel[$status->id - 1] = trans('elements/statuses.status_' . $status->id);
             $statusesData[$status->id - 1] = 0;
         }
 
@@ -205,7 +205,7 @@ class routeChartsController extends Controller
 
         // Liste des labels (le -1 et pour que l'index commence à 0)
         foreach ($modes as $modes){
-            $modesLabel[$modes->id - 1] = ucfirst($modes->label);
+            $modesLabel[$modes->id - 1] = trans('elements/modes.mode_' . $modes->id);
             $modesData[$modes->id - 1] = 0;
         }
 
