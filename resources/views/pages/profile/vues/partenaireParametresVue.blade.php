@@ -125,17 +125,17 @@
                     </div>
 
                     <div class="blue-border-div">
-                        <p class="text-bold text-underline">4. Pourquoi ne pas parler un peut plus de toi ?</p>
-                        {!! $Inputs::mdText(['name'=>'description', 'label'=>'Qui je suis avec mes mots', 'value'=>$user->partnerSettings->description]) !!}
+                        <p class="text-bold text-underline">@lang('pages/profile/partnerSearch.step4Title')</p>
+                        {!! $Inputs::mdText(['name'=>'description', 'label'=>trans('pages/profile/partnerSearch.LabelWhoIAm'), 'value'=>$user->partnerSettings->description]) !!}
                         <p class="grey-text">
-                            Note : tu peux par exemple préciser ce que tu recherche, te décrir plus amplement, parler de ton matériel d'escalade ou de tes connaissances dans les manipes par exemple.
+                            @lang('pages/profile/partnerSearch.noteDescription')
                         </p>
                     </div>
 
                     {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}
 
                     <div class="row">
-                        {!! $Inputs::Submit(['label'=>'Enregistrer', 'cancelable' => false]) !!}
+                        {!! $Inputs::Submit(['label'=>trans('pages/profile/partnerSearch.submit'), 'cancelable' => false]) !!}
                     </div>
 
                 </div>

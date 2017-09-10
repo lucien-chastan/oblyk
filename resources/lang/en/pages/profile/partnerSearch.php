@@ -1,5 +1,7 @@
 <?php
 
+//TODO : TRADUCTION À FAIRE
+
 return [
 
     //titre et alert

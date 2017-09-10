@@ -2,26 +2,26 @@
 {{--INFORMATIONS GÉNÉRALES--}}
 <form id="form-compte-setting" class="submit-form row" data-route="/users/{{$user->id}}" onsubmit="submitData(this, majSettingsCompte); return false">
 
-    <h2 class="loved-king-font titre-profile-boite-vue">Mes informations</h2>
+    <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleInformation')</h2>
 
     {!! $Inputs::popupError([]) !!}
 
-    {!! $Inputs::text(['name'=>'name', 'value'=>$user->name, 'label'=>'Mon nom', 'type'=>'text']) !!}
-    {!! $Inputs::text(['name'=>'localisation', 'value'=>$user->localisation, 'label'=>'La où je grimpe', 'type'=>'text']) !!}
-    {!! $Inputs::text(['name'=>'birth', 'value'=>$user->birth, 'label'=>'Année de naissance', 'type'=>'number']) !!}
-    {!! $Inputs::sex(['name'=>'sex', 'value'=>$user->sex, 'label'=>'Je suis']) !!}
-    {!! $Inputs::mdText(['name'=>'description', 'value'=>$user->description, 'label'=>'Qui je suis en quelques mots']) !!}
+    {!! $Inputs::text(['name'=>'name', 'value'=>$user->name, 'label'=>trans('pages/profile/settings.labelName'), 'type'=>'text']) !!}
+    {!! $Inputs::text(['name'=>'localisation', 'value'=>$user->localisation, 'label'=>trans('pages/profile/settings.labelPlaces'), 'type'=>'text']) !!}
+    {!! $Inputs::text(['name'=>'birth', 'value'=>$user->birth, 'label'=>trans('pages/profile/settings.labelBirthYear'), 'type'=>'number']) !!}
+    {!! $Inputs::sex(['name'=>'sex', 'value'=>$user->sex, 'label'=>trans('pages/profile/settings.labelSex')]) !!}
+    {!! $Inputs::mdText(['name'=>'description', 'value'=>$user->description, 'label'=>trans('pages/profile/settings.labelDescription')]) !!}
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'PUT']) !!}
 
     <div class="row">
-        {!! $Inputs::Submit(['label'=>'Enregistrer', 'cancelable' => false]) !!}
+        {!! $Inputs::Submit(['label'=>trans('pages/profile/settings.saveSubmit'), 'cancelable' => false]) !!}
     </div>
 
 </form>
 
 {{--UPLOAD DES PHOTOS DE PROFIL ET BANDEAU--}}
-<h2 class="loved-king-font titre-profile-boite-vue">Photo de profil &amp; Bandeau</h2>
+<h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titlePhotoAndHeadband')</h2>
 
 <form id="form-upload-photo-profil-setting" class="submit-form row" onsubmit="return false">
 
@@ -32,7 +32,7 @@
             <img src="{{$user->image}}?cache={{date('Ymdhis')}}" alt="" class="circle left img-settings">
         </div>
         <div class="upload-settings-col-input">
-            {!! $Inputs::upload(['name'=>'image', 'filter'=>'image/*', 'id'=>'upload-photo-profil' ,'label'=>'Photo de profil', 'onchange'=>'uploadImageProfile()']) !!}
+            {!! $Inputs::upload(['name'=>'image', 'filter'=>'image/*', 'id'=>'upload-photo-profil' ,'label'=>trans('pages/profile/settings.labelProfilePicture'), 'onchange'=>'uploadImageProfile()']) !!}
             {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo-profil']) !!}
         </div>
     </div>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="upload-settings-col-input">
-            {!! $Inputs::upload(['name'=>'bandeau', 'filter'=>'image/*', 'id'=>'upload-photo-bandeau' ,'label'=>'Bandeau', 'onchange'=>'uploadBandeau()']) !!}
+            {!! $Inputs::upload(['name'=>'bandeau', 'filter'=>'image/*', 'id'=>'upload-photo-bandeau' ,'label'=>trans('pages/profile/settings.labelHeadband'), 'onchange'=>'uploadBandeau()']) !!}
             {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo-bandeau']) !!}
         </div>
     </div>
@@ -60,6 +60,6 @@
 {{--SUPPRIMER SON COMPTE--}}
 <form class="submit-form row" data-route="" onsubmit="submitData(this, majSettingsDashboard); return false">
 
-    <h2 class="loved-king-font titre-profile-boite-vue">Supprimer mon compte</h2>
+    <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleDeleteAccount')</h2>
 
 </form>

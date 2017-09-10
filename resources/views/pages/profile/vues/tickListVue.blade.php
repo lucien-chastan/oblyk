@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel blue-card-panel">
-            <h2 class="loved-king-font titre-profile-boite-vue">Ma tick-list</h2>
+            <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/tickList.titleTickList')</h2>
 
             <div class="blue-border-zone tickliste-zone">
                 @foreach($crags as $key => $crag)

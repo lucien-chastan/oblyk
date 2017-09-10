@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel blue-card-panel">
-            <h2 class="loved-king-font titre-profile-boite-vue">Mes projets</h2>
+            <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/project.titleProject')</h2>
 
             <div class="blue-border-zone tickliste-zone">
                 @foreach($crags as $key => $crag)
@@ -42,6 +42,10 @@
                     </div>
                 @endforeach
             </div>
+
+            @if(count($crags) == 0)
+                <p class="grey-text text-center">@lang('pages/profile/project.noProject')</p>
+            @endif
         </div>
     </div>
 </div>

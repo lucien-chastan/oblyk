@@ -8,7 +8,7 @@
 
             <p>
                 {{$album->description}}<br>
-                <span class="grey-text">{{count($album->photos)}} photos</span>
+                <span class="grey-text">@choice('pages/profile/photo.nbPhoto', count($album->photos))</span>
             </p>
 
             <div id="albumPhototheque" class="phototheque">
@@ -17,7 +17,7 @@
                 @endforeach
             </div>
 
-            <p><a class="text-cursor" onclick="reloadCurrentVue()"><i class="material-icons left">arrow_back</i> Retourner aux albums</a></p>
+            <p><a class="text-cursor" onclick="reloadCurrentVue()"><i class="material-icons left">arrow_back</i> @lang('pages/profile/photo.backToAlbum')</a></p>
 
         </div>
     </div>
