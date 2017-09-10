@@ -10,7 +10,7 @@ $('.modal').modal(
 
 //on blanchie la barre de navigation au scroll
 let backgroundNav = function () {
-    let nav_barre = document.getElementById('nav_barre');
+    var nav_barre = document.getElementById('nav_barre');
 
     if(window.pageYOffset > 0){
         nav_barre.setAttribute('class', nav_barre.className.replace('nav-white','nav-black'));

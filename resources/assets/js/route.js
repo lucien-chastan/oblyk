@@ -42,6 +42,8 @@ function loadRoute(id_route, load_tab = false) {
 
     if(load_tab !== false){
         if(load_tab === 'carnet') callback = 'reloadRouteCarnetTab';
+        if(load_tab === 'photo') callback = 'reloadRoutePhotoTab';
+        if(load_tab === 'video') callback = 'reloadRouteVideoTab';
     }
 
     ajaxRouter(route, target, callback);
@@ -126,14 +128,15 @@ function initInformationRouteTab() {
 function initVideoRouteTab() {
     //ajoute les événements open modal sur les boutons
     initOpenModal();
+
+    setTimeout(function () {$('ul.tabs').tabs('select_tab', 'route-tab-videos');},200);
 }
 
 function initCarnetRouteTab() {
     //ajoute les événements open modal sur les boutons
     initOpenModal();
 
-    console.log('ok');
-    $('ul.tabs').tabs('select_tab', 'route-tab-carnet');
+    setTimeout(function () {$('ul.tabs').tabs('select_tab', 'route-tab-carnet');},200);
 }
 
 function initRoutePhototheque() {
@@ -153,6 +156,8 @@ function initRoutePhototheque() {
     }
 
     initOpenModal();
+
+    setTimeout(function () {$('ul.tabs').tabs('select_tab', 'route-tab-photos');},200);
 
 }
 

@@ -1,4 +1,4 @@
-let map, markers,
+var map, markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
 //function au chargement de la map

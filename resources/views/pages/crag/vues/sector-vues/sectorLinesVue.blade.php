@@ -40,6 +40,10 @@
                     @if($route->crosses[count($route->crosses) - 1]->status_id == 6)
                         <i {!! $Helpers::tooltip(trans('elements/statuses.status_6')) !!} class="material-icons tooltipped">repeat</i>
                     @endif
+                @else
+                    @if(!isset($route->tickLists[0]->id) && Auth::check())
+                        <i {!! $Helpers::tooltip('Ajouter à mon carnet ou à ma ticklist') !!} class="material-icons tooltipped grey-text text-lighten-1">radio_button_unchecked</i>
+                    @endif
                 @endif
             </td>
             <td><img {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.evaluation', $route->nb_note)) !!} src="/img/note_{{$route->note}}.png" alt="" class="tooltipped img-note-route-sector"></td>
@@ -65,10 +69,10 @@
                     <i {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.nbDescription', $route->descriptions_count)) !!} class="tooltipped material-icons tiny">comment</i>
                 @endif
                 @if($route->photos_count > 0)
-                    <i {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.nbPhoto', $route->photos_count)) !!} class="tooltipped material-icons tiny">photo_camera</i>
+                    <i onclick="loadRoute({{$route->id}},'photo');event.stopPropagation();" {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.nbPhoto', $route->photos_count)) !!} class="tooltipped material-icons tiny button-open-route">photo_camera</i>
                 @endif
                 @if($route->videos_count > 0)
-                    <i {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.nbVideo', $route->videos_count)) !!} class="tooltipped material-icons tiny">videocam</i>
+                    <i onclick="loadRoute({{$route->id}},'video');event.stopPropagation();" {!! $Helpers::tooltip(trans_choice('pages/crags/tabs/sectors/tabs/route.nbVideo', $route->videos_count)) !!} class="tooltipped material-icons tiny button-open-route">videocam</i>
                 @endif
             </td>
         </tr>
