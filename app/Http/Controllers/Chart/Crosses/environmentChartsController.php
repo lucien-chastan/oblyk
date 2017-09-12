@@ -51,7 +51,15 @@ class environmentChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
@@ -101,7 +109,15 @@ class environmentChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
@@ -150,7 +166,15 @@ class environmentChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
@@ -196,7 +220,15 @@ class environmentChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false

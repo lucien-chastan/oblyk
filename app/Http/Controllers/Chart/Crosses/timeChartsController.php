@@ -73,7 +73,15 @@ class timeChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
@@ -122,7 +130,15 @@ class timeChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
@@ -140,7 +156,7 @@ class timeChartsController extends Controller
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
 
-        $datas = [1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0];
+        $datas = ['1'=>0, '2'=>0, '3'=>0, '4'=>0, '5'=>0, '6'=>0, '7'=>0, '8'=>0, '9'=>0, '10'=>0, '11'=>0, '12'=>0];
         $labels = ['Jan','Fév','Mar','Avr','Mai','Jui','Jul','Aou','Sep','Oct','Nov','Déc'];
 
         foreach ($crosses as $cross){
@@ -167,7 +183,15 @@ class timeChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false

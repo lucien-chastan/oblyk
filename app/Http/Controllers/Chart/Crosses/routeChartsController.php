@@ -86,7 +86,8 @@ class routeChartsController extends Controller
                     'yAxes' => [
                         [
                             'ticks' => [
-                                'beginAtZero' => true,
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
                             ]
                         ]
                     ]
@@ -182,7 +183,7 @@ class routeChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
                 ],
                 'legend' => [
                     'display' => false
@@ -228,7 +229,15 @@ class routeChartsController extends Controller
             'options' => [
                 'maintainAspectRatio' => false,
                 'scales' => [
-                    'display' => false
+                    'display' => false,
+                    'yAxes' => [
+                        [
+                            'ticks' => [
+                                'suggestedMin'=> 0,
+                                'stepSize' => 1
+                            ]
+                        ]
+                    ]
                 ],
                 'legend' => [
                     'display' => false
