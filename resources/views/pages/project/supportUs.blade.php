@@ -41,7 +41,7 @@
                 </div>
 
                 <p>
-                    @lang('pages/projects/supportUs.para_3')
+                    @lang('pages/projects/supportUs.para_4')
                 </p>
 
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="text-center">
