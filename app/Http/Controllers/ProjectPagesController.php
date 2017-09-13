@@ -48,6 +48,11 @@ class ProjectPagesController extends Controller
         return view('pages.project.supportUs', $data);
     }
 
+    public function thanksPage(){
+        return view('pages.project.thanks');
+    }
+
+
     public function developerPage(){
         $data = ['meta_title' => 'Développer et API',];
         return view('pages.project.developer', $data);

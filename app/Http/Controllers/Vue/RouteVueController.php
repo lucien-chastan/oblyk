@@ -41,18 +41,43 @@ class RouteVueController extends Controller
     }
 
     function vueInformation($id){
+
+        $route = Route::where('id',$id)
+            ->with('descriptions')
+            ->with('tags')
+            ->with('descriptions.user')
+            ->with('routeSections')
+            ->with('routeSections.anchor')
+            ->with('routeSections.point')
+            ->with('routeSections.incline')
+            ->with('routeSections.reception')
+            ->with('routeSections.start')
+            ->first();
+
+        //calcul de la durté de la cotation
+        $easy = $just = $hard = $sum = 0;
+        $crosses = Cross::where('route_id',$route->id)
+            ->where('hardness_id','!=',1)
+            ->get();
+
+        foreach ($crosses as $cross){
+            if($cross->hardness_id == 2) $easy++;
+            if($cross->hardness_id == 3) $just++;
+            if($cross->hardness_id == 4) $hard++;
+            $sum += $cross->hardness_id;
+        }
+
+        $hardness = [
+            'easy' => $easy / count($crosses) * 100,
+            'just' => $just / count($crosses) * 100,
+            'hard' => $hard / count($crosses) * 100,
+            'trend' => round($sum / count($crosses),0),
+            'nbVote' => count($crosses),
+        ];
+
         $data = [
-            'route' => Route::where('id',$id)
-                ->with('descriptions')
-                ->with('tags')
-                ->with('descriptions.user')
-                ->with('routeSections')
-                ->with('routeSections.anchor')
-                ->with('routeSections.point')
-                ->with('routeSections.incline')
-                ->with('routeSections.reception')
-                ->with('routeSections.start')
-                ->first()
+            'hardness' => 'coucou',
+            'route' => $route,
         ];
         return view('pages.route.vues.informationVue', $data);
     }

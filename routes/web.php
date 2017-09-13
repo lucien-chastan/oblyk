@@ -31,6 +31,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
     Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
     Route::get('/nous-soutenire', 'ProjectPagesController@supportUsPage')->name('supportUs');
+    Route::get('/merci', 'ProjectPagesController@thanksPage')->name('thanks');
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 

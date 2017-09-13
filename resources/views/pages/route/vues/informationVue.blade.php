@@ -28,7 +28,15 @@
             </p>
 
             {{--DIFFICULTÉ DE LA COTATION--}}
-            <p><span class="oblyk-icon icon-stronger grey-text"></span> Dur pour la cotation</p>
+            <p>
+                <span class="oblyk-icon icon-stronger grey-text"></span>
+                {{--@if($hardness != 0)--}}
+{{--                    {{  $route->hardness }}--}}
+                {{--@else--}}
+                    {{--<cite>Pas d'évaluation de la difficulté</cite>--}}
+                    {{--{{ json_encode($hardness) }}--}}
+                {{--@endif--}}
+            </p>
 
             {{--INCLINAISON DE LA LIGNE--}}
             @if(count($route->routeSections) == 1)

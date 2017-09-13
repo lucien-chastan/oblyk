@@ -26,6 +26,10 @@ return [
     'title_supportUs' => 'Supporter Oblyk, faire un don',
     'description_supportUs' => 'Supporter le développement d\'Oblyk pour qu\'il puisse continuer à évoluer',
 
+    //Page de remerciment
+    'title_thanks' => 'Merci !',
+    'description_thanks' => 'Un énorme merci pour votre don !',
+
     //Page Mention légale
     'title_termsOfUse' => 'Mentions légales du site d\'escalade Oblyk : plateforme communautaire pour les grimpeurs',
     'description_termsOfUse' => 'Voir les conditions générales d\'utilisation d\'Oblyk, le site communautaire d\'escalade : notre politique de confidentialité et nos mentions légales',
