@@ -17,17 +17,17 @@ return [
 
     //étape 1 : Qui je suis
     'welcome' => "Bienvenue :name ",
-    'introWelcome' => "Bienvenue dans la recheche de partenaire d'oblyk ! pour en faire partie il faut que tu passe par 2 étapes.<br><span class=\"text-underline\">Premièrement</span> : Active la recherche de partenaire et presente toi un peux plus.",
+    'introWelcome' => "Bienvenue dans la recheche de partenaire d'Oblyk ! Pour en faire partie il faut que tu passes par 2 étapes.<br><span class=\"text-underline\">Premièrement</span> : Active la recherche de partenaire et présente toi un peux plus.",
     'actionWelcome' => "Commencer ma recherche",
 
 
     //étape 2 : mes lieux de grimpe
     'titlePlaces' => "Mes lieux de grimpe",
-    'introPlaces' => "Pour que nous puissions te présenter les grimpeurs autours de chez toi, il faut déjà que tu nous dise où tu grimpe.<br>Rend-toi dans ton profil et renseigne ta zone de grimpe",
+    'introPlaces' => "Pour que nous puissions te présenter les grimpeurs autours de chez toi, il faut déjà que tu nous dises où tu grimpes.<br>Rends-toi dans ton profil et renseigne ta zone de grimpe",
     'actionPlaces' => "Mes lieux de grimpe",
 
     //Login or Register
-    'noAccountDescription' => "Crée-toi un compte pour avoir accès à liste de grimpeur près de chez toi !",
+    'noAccountDescription' => "Crée un compte pour avoir accès à liste de grimpeurs près de chez toi !",
     'register' => "Créer un compte",
     'login' => "Connexion",
 
