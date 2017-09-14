@@ -3,8 +3,8 @@
 return [
 
     //titre et intro
-    'title' => "Les régles du forum",
-    'intro' => "Pour que tout se passe bien, merci de respecter ces quelques régles simples (qui relèvent souvent du bon sens).",
+    'title' => "Les règles du forum",
+    'intro' => "Pour que tout se passe bien, merci de respecter ces quelques règles simples (qui relèvent souvent du bon sens).",
     'conclusion' => "Merci d'avoir lu ces quelques règles simples, en espérant que vous les comprendrez et que vous en tiendrez compte pour vos prochains posts !",
 
     //Les régles
