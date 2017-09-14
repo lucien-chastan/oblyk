@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b3ca684a88a814a6356dbc56f7e5fa0",
-    "content-hash": "94c92a4b71cf9ef8523199e4bb054246",
+    "hash": "a54eefc62ffc602402c55061c477d353",
+    "content-hash": "ffec93a3a70cef9a2893053d542796ce",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
@@ -2199,6 +2199,57 @@
                 "dump"
             ],
             "time": "2017-02-20 13:45:48"
+        },
+        {
+            "name": "themsaid/laravel-langman-gui",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/themsaid/laravel-langman-gui.git",
+                "reference": "ca7019b4098b8728744ea571c7571df5556af349"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/themsaid/laravel-langman-gui/zipball/ca7019b4098b8728744ea571c7571df5556af349",
+                "reference": "ca7019b4098b8728744ea571c7571df5556af349",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/translation": "~5.4",
+                "php": "^7.0 || ^7.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Themsaid\\LangmanGUI\\LangmanServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Themsaid\\LangmanGUI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohamed Said",
+                    "email": "theMohamedSaid@gmail.com",
+                    "homepage": "https://themsaid.com"
+                }
+            ],
+            "description": "Manage language files with ease.",
+            "homepage": "https://github.com/themsaid/laravel-langman-gui",
+            "keywords": [
+                "laravel",
+                "localization",
+                "multilingual"
+            ],
+            "time": "2017-08-16 15:28:12"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

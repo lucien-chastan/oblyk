@@ -30,6 +30,8 @@
             {{--DIFFICULTÉ DE LA COTATION--}}
             <p>
                 <span class="oblyk-icon icon-stronger grey-text"></span>
+                {{--{{ $machin }}--}}
+                {{--{{ $test }}--}}
                 {{--@if($hardness != 0)--}}
 {{--                    {{  $route->hardness }}--}}
                 {{--@else--}}

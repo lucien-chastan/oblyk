@@ -40,6 +40,7 @@ class RouteVueController extends Controller
         return view('pages.route.vues.route', $data);
     }
 
+
     function vueInformation($id){
 
         $route = Route::where('id',$id)
@@ -76,9 +77,10 @@ class RouteVueController extends Controller
         ];
 
         $data = [
-            'hardness' => 'coucou',
+            'machin' => 'coucou',
             'route' => $route,
         ];
+
         return view('pages.route.vues.informationVue', $data);
     }
 
