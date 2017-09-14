@@ -101,8 +101,8 @@ return [
     'labelRandomWordBox' => "Le mot au hasard",
     'descriptionRandomWordBox' => "Un boîte qui te présente un mot au hasard du lexique de l'escalade",
 
-    'labelContributionBox' => "Votre contribution à Oblyk",
-    'descriptionContributionBox' => "Un boîte donne en quelques chiffres les éléments que vous avez ajouté sur Oblyk",
+    'labelContributionBox' => "Ta contribution à Oblyk",
+    'descriptionContributionBox' => "Un boîte qui te donne en quelques chiffres les éléments que tu as ajouté sur Oblyk",
 
     //ONGLET : MESSAGERIE
     'titleMessenger' => "Paramètres de ma messagerie",
