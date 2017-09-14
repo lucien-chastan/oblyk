@@ -13,12 +13,12 @@ return [
     'noWebSite' => "site web non renseigné",
 
     //Boite description
-    'titleDescription'=>">Description par ceux qui y grimpe",
-    'noDescription'=>">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrir ici",
+    'titleDescription'=>">Description par ceux qui y grimpent",
+    'noDescription'=>">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrire ici",
 
     //Partenaire
     'titlePartner'=>"Ils cherchent des grimpeurs ici : ",
-    'noPartner'=>"Pour l'instant, aucun grimpeur n'a indiqué qu'il escaladait ici",
+    'noPartner'=>"Pour l'instant, aucun grimpeur n'a indiqué qu'il grimpe ici",
     'activePartner'=>"Faire partie de la recherche",
     'addPlace'=>"Je grimpe ici !",
 
