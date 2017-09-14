@@ -21,7 +21,7 @@ return [
     'localisationTitle' => 'Localisation',
 
     //Boite description
-    'titleDescription' => "Description par ceux qui y grimpe",
+    'titleDescription' => "Description par ceux qui y grimpent",
     'paraNoDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as grimpé ici n'hésite pas à décrire ce site",
 
     //Boite topo papier sur le site
@@ -38,7 +38,7 @@ return [
 
     //Boite de recherche de partenaire
     'partnerTitle' => 'Ils cherchent des grimpeurs ici :',
-    'noPartnerPara' => 'Pour l\'instant, aucun grimpeur n\'a indiqué qu\'il escaladait ici',
+    'noPartnerPara' => 'Pour l\'instant, aucun grimpeur n\'a indiqué qu\'il grimpe ici',
     'activePartner' => 'Faire partie de la recherche',
 
     //Boite ma ticklist et mes croix
@@ -47,7 +47,7 @@ return [
     'seeMyCrossesBook'=>'Voir mon carnet',
     'TickListTitle'=>'Ma tick-list',
     'seeMyTickList'=>'Voir ma tick-list',
-    'paraRegister'=>'Créer toi un compte pour pouvoir tenir un carnet de croix sur ce site',
+    'paraRegister'=>'Crée un compte pour pouvoir tenir un carnet de croix sur ce site',
     'btnRegister'=>'Créer un compte',
 
     //Boite les photos
