@@ -14,7 +14,7 @@ return [
 
     'climbingTypeTitle' => "Ses styles d'escalades",
     'action' => "Contacter :name",
-    'accountFor' => "Créer toi un compte pour contacter :name",
+    'accountFor' => "Crée un compte pour contacter :name",
     'loginAction' => "Se connecter",
     'registerAction' => "Créer un compte",
 ];

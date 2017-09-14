@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'deleteTooltip' => "Supprimer ce amis",
+    'deleteTooltip' => "Supprimer cet ami",
     'paraNoFriend' => "
 Tu n'as pas encore d'amis ...<br>
-Pour demander quelqu'un en amis, va sur la page de son profil et clique sur
+Pour demander quelqu'un en ami, va sur la page de son profil et clique sur
 ",
-    'exampleFollowFriend' => "Demander en amis",
+    'exampleFollowFriend' => "Demander en ami",
     'paraOtherNoFriend' => ":name n'as pas encore d'amis",
 ];

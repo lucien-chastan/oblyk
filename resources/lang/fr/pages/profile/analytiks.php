@@ -14,15 +14,15 @@ return [
     'crossesModeGraphTitle' => "Croix / Type d'enchainement",
 
     //Sur les lieux : Titre des graphiques
-    'nbCrossesByCragGraphTitle' => "Nombre de croix pas site d'escalade",
-    'nbCrossesByRegionGraphTitle' => "Nombre de croix pas régions",
-    'nbCrossesByCountryGraphTitle' => "Nombre de croix pas pays",
+    'nbCrossesByCragGraphTitle' => "Nombre de croix par site d'escalade",
+    'nbCrossesByRegionGraphTitle' => "Nombre de croix par régions",
+    'nbCrossesByCountryGraphTitle' => "Nombre de croix par pays",
     'nbCrossesByRockGraphTitle' => "Nombre de croix par roche",
     'nbCrossesByMapGraphTitle' => "Carte des sites ou j'ai grimpé",
 
     //Sur le temps : Titre des graphiques
     'nbCrossesInLifeGraphTitle' => "Nombre de croix sur le temps",
-    'nbCrossesByYearGraphTitle' => "Nombre de croix sur les anneés",
+    'nbCrossesByYearGraphTitle' => "Nombre de croix sur les années",
     'nbCrossesByMouthGraphTitle' => "Nombre de croix sur les mois",
 
     //Filtre
