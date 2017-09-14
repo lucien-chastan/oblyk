@@ -8,6 +8,6 @@ return [
 
     //Messenger
     'clickForSee' => "clique sur une conversation pour qu'elle s'affiche ici",
-    'placeholderTextarea' => "Écrir un message",
+    'placeholderTextarea' => "Écrire un message",
     'submitMessage' => "Envoyer le message [Ctrl + Entrer]",
 ];
