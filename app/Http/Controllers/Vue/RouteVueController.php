@@ -31,30 +31,6 @@ class RouteVueController extends Controller
         $route->views++;
         $route->save();
 
-        $data = [
-            'route' => $route,
-            'ticklist' => $tickList,
-            'count_carnet' => $count_carnet
-        ];
-
-        return view('pages.route.vues.route', $data);
-    }
-
-
-    function vueInformation($id){
-
-        $route = Route::where('id',$id)
-            ->with('descriptions')
-            ->with('tags')
-            ->with('descriptions.user')
-            ->with('routeSections')
-            ->with('routeSections.anchor')
-            ->with('routeSections.point')
-            ->with('routeSections.incline')
-            ->with('routeSections.reception')
-            ->with('routeSections.start')
-            ->first();
-
         //calcul de la durté de la cotation
         $easy = $just = $hard = $sum = 0;
         $crosses = Cross::where('route_id',$route->id)
@@ -69,16 +45,40 @@ class RouteVueController extends Controller
         }
 
         $hardness = [
-            'easy' => $easy / count($crosses) * 100,
-            'just' => $just / count($crosses) * 100,
-            'hard' => $hard / count($crosses) * 100,
-            'trend' => round($sum / count($crosses),0),
+            'easy' => (count($crosses) > 0) ? $easy / count($crosses) * 100 : 0,
+            'just' => (count($crosses) > 0) ? $just / count($crosses) * 100 : 0,
+            'hard' => (count($crosses) > 0) ? $hard / count($crosses) * 100 : 0,
+            'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
             'nbVote' => count($crosses),
         ];
 
         $data = [
-            'machin' => 'coucou',
             'route' => $route,
+            'hardness'=> $hardness,
+            'ticklist' => $tickList,
+            'count_carnet' => $count_carnet
+        ];
+
+        return view('pages.route.vues.route', $data);
+    }
+
+
+    function vueInformation($id){
+
+        $route = Route::where('id',$id)
+            ->with(['descriptions' =>function ($query) {$query->where('description','!=','');}])
+            ->with('tags')
+            ->with('descriptions.user')
+            ->with('routeSections')
+            ->with('routeSections.anchor')
+            ->with('routeSections.point')
+            ->with('routeSections.incline')
+            ->with('routeSections.reception')
+            ->with('routeSections.start')
+            ->first();
+
+        $data = [
+            'route' => $route
         ];
 
         return view('pages.route.vues.informationVue', $data);

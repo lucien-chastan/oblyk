@@ -30,14 +30,16 @@
             {{--DIFFICULTÉ DE LA COTATION--}}
             <p>
                 <span class="oblyk-icon icon-stronger grey-text"></span>
-                {{--{{ $machin }}--}}
-                {{--{{ $test }}--}}
-                {{--@if($hardness != 0)--}}
-{{--                    {{  $route->hardness }}--}}
-                {{--@else--}}
-                    {{--<cite>Pas d'évaluation de la difficulté</cite>--}}
-                    {{--{{ json_encode($hardness) }}--}}
-                {{--@endif--}}
+                @if($hardness['trend'] != 0)
+                    <span data-html="true" {!! $Helpers::tooltip(trans('pages/routes/tabs/information.hardnessTool', ['easy'=>$hardness['easy'], 'just'=>$hardness['just'], 'hard'=>$hardness['hard']])) !!} class="tooltipped">
+                        @lang('elements/hardnesses.hardness_' . $hardness['trend'])
+                        <span class="grey-text">
+                            ( @choice('pages/routes/tabs/information.nbVote', $hardness['nbVote']) )
+                        </span>
+                    </span>
+                @else
+                    <cite class="grey-text">@lang('pages/routes/tabs/information.noEvaluation')</cite>
+                @endif
             </p>
 
             {{--INCLINAISON DE LA LIGNE--}}
@@ -45,16 +47,16 @@
                 <p>
                     <span class="oblyk-icon icon-inclinaison_{{$route->routeSections[0]->incline->id}} grey-text"></span>
                     @if($route->routeSections[0]->incline->id != '1')
-                        {{$route->routeSections[0]->incline->label}}
+                        @lang('elements/inclines.incline_' . $route->routeSections[0]->incline->id)
                     @else
-                        <span class="grey-text text-italic">inclinaison non-renseignée</span>
+                        <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noIncline')</span>
                     @endif
                 </p>
             @endif
 
             {{--NOMBRE DE LONGUEUR--}}
             @if(count($route->routeSections) > 1)
-                <p><span class="oblyk-icon icon-nb_longueur grey-text"></span> {{count($route->routeSections)}} Longueurs</p>
+                <p><span class="oblyk-icon icon-nb_longueur grey-text"></span>@choice('pages/routes/tabs/information.nbLongueur', count($route->routeSections))</p>
             @endif
 
             {{--TYPE DE RECEPTION--}}
@@ -62,9 +64,9 @@
                 <p>
                     <span class="oblyk-icon icon-reception grey-text"></span>
                     @if($route->routeSections[0]['reception_id'] != 1)
-                        {{$route->routeSections[0]->reception->label}}
+                        @lang('elements/receptions.reception_' . $route->routeSections[0]->reception->id)
                     @else
-                        <span class="grey-text text-italic">réception non-renseignée</span>
+                        <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noReception')</span>
                     @endif
                 </p>
             @endif
@@ -72,9 +74,9 @@
             {{--TYPE DE RELAIS--}}
             @if($route->climb_id != 2 && $route->climb_id != 7 && count($route->routeSections) == 1)
                 @if($route->routeSections[0]['anchor_id'] != '1')
-                    <p><span class="oblyk-icon icon-relais_{{$route->routeSections[0]['anchor_id']}} grey-text"></span> {{$route->routeSections[0]->anchor->label}}</p>
+                    <p><span class="oblyk-icon icon-relais_{{$route->routeSections[0]['anchor_id']}} grey-text"></span> @lang('elements/anchors.anchor_' . $route->routeSections[0]->anchor->id)</p>
                 @else
-                    <p><span class="oblyk-icon icon-relais_{{$route->routeSections[0]['anchor_id']}} grey-text"></span> <span class="grey-text text-italic">relais non-renseigné</span></p>
+                    <p><span class="oblyk-icon icon-relais_{{$route->routeSections[0]['anchor_id']}} grey-text"></span> <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noAnchor')</span></p>
                 @endif
             @endif
 
@@ -85,7 +87,7 @@
         <div class="col s12 m6">
 
             {{--NOTE--}}
-            <p><span class="oblyk-icon icon-note grey-text"></span> <img src="/img/note_{{$route->note}}.png" alt="" class="img-note-route-sector"> {{$route->nb_note}} votes</p>
+            <p><span class="oblyk-icon icon-note grey-text"></span> <img src="/img/note_{{$route->note}}.png" alt="" class="img-note-route-sector"> @choice('pages/routes/tabs/information.nbVote', $route->nb_note)</p>
 
             {{--NOM DU SECTEUR--}}
             <p>
@@ -103,18 +105,18 @@
             <p>
                 <span class="oblyk-icon icon-route_height grey-text"></span>
                 @if($route->height != 0)
-                    {{$route->height}} mètres
+                    @choice('pages/routes/tabs/information.height', $route->height)
                 @else
-                    <span class="grey-text text-italic">hauteur non-renseignée</span>
+                    <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noHeight')</span>
                 @endif
             </p>
 
             {{--TYPE DE POINT--}}
             @if($route->climb_id != 2 && $route->climb_id != 7 && count($route->routeSections) == 1)
                 @if($route->routeSections[0]['point_id'] != '1')
-                    <p><span class="oblyk-icon icon-point_{{$route->routeSections[0]['point_id']}} grey-text"></span> {{$route->routeSections[0]->point->label}}</p>
+                    <p><span class="oblyk-icon icon-point_{{$route->routeSections[0]['point_id']}} grey-text"></span> @lang('elements/points.point_' . $route->routeSections[0]->point->id)</p>
                 @else
-                    <p><span class="oblyk-icon icon-point_{{$route->routeSections[0]['point_id']}} grey-text"></span> <span class="grey-text text-italic">point non-renseigné</span></p>
+                    <p><span class="oblyk-icon icon-point_{{$route->routeSections[0]['point_id']}} grey-text"></span> <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noPoint')</span></p>
                 @endif
             @endif
 
@@ -123,9 +125,9 @@
                 <p>
                     <span class="oblyk-icon icon-depart_{{$route->routeSections[0]['start_id']}} grey-text"></span>
                     @if($route->routeSections[0]['start_id'] != 1)
-                        {{$route->routeSections[0]->start->label}}
+                        @lang('elements/starts.start_' . $route->routeSections[0]->start->id)
                     @else
-                        <span class="grey-text text-italic">départ non-renseignée</span>
+                        <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noStart')</span>
                     @endif
                 </p>
             @endif
@@ -147,7 +149,7 @@
                     @if($route->opener != '')
                         {{$route->opener}}
                     @else
-                        <span class="grey-text text-italic">brosseur non-renseigné</span>
+                        <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noBoulderOpener')</span>
                     @endif
                 </p>
             @else
@@ -156,7 +158,7 @@
                     @if($route->opener != '')
                         {{$route->opener}}
                     @else
-                        <span class="grey-text text-italic">ouvreur non-renseigné</span>
+                        <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noRouteOpener')</span>
                     @endif
                 </p>
             @endif
@@ -168,7 +170,7 @@
                 @if($route->open_year != 0)
                     {{$route->open_year}}
                 @else
-                    <span class="grey-text text-italic">année non-renseignée</span>
+                    <span class="grey-text text-italic">@lang('pages/routes/tabs/information.noOpenYear')</span>
                 @endif
             </p>
         </div>
@@ -183,14 +185,14 @@
                     #@lang('elements/tags.tag_' . $tag->tag_id)
                 </cite>
             @endforeach
-            <a {!! $Helpers::modal(route('tagModal'),['route_id' => $route->id ,'title'=>'Ajouter des tags', 'method'=>'POST', 'callback'=>'reloadRouteInformationTab']) !!} class="btnModal text-cursor" onclick="$('#modal').modal('open');">+ Ajouter des tags</a>
+            <a {!! $Helpers::modal(route('tagModal'),['route_id' => $route->id ,'title'=>trans('modals/tag.modalAddTitle'), 'method'=>'POST', 'callback'=>'reloadRouteInformationTab']) !!} class="btnModal text-cursor" onclick="$('#modal').modal('open');">+ Ajouter des tags</a>
         </div>
     </div>
 
     {{--BOUTON POUR LA MODIFICATION--}}
     <div class="ligne-bt-route">
         <p class="text-right">
-            <i {!! $Helpers::tooltip('Modifier cette ligne') !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>'Modifier cette ligne','method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
+            <i {!! $Helpers::tooltip(trans('modals/route.editTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>trans('modals/route.modalEditeTitle'),'method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
             <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
         </p>
     </div>
@@ -199,7 +201,7 @@
     {{--LISTE DES LONGUEURS--}}
     @if(count($route->routeSections) > 1)
 
-        <h5 class="loved-king-font">Les longueurs</h5>
+        <h5 class="loved-king-font">@lang('pages/routes/tabs/information.pitchTitle')</h5>
 
         <div class="row">
             <div class="col s12">
@@ -207,10 +209,10 @@
                     <thead>
                     <tr>
                         <th>L.</th>
-                        <th>Côte</th>
-                        <th>Relais</th>
-                        <th>Point</th>
-                        <th>Hauteur</th>
+                        <th>@lang('pages/routes/tabs/information.gradeColumn')</th>
+                        <th>@lang('pages/routes/tabs/information.anchorColumn')</th>
+                        <th>@lang('pages/routes/tabs/information.pointColumn')</th>
+                        <th>@lang('pages/routes/tabs/information.heightColumn')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -220,7 +222,7 @@
                             <td><strong class="color-grade-{{$section->grade_val}}">{{$section->grade}}{{$section->sub_grade}}</strong></td>
                             <td><span class="oblyk-icon icon-relais_{{$section->anchor->id}} grey-text"></span> @lang('elements/anchors.anchor_' . $section->anchor->id)</td>
                             <td><span class="oblyk-icon icon-point_{{$section->point->id}} grey-text"></span> @lang('elements/points.point_' . $section->point->id)</td>
-                            <td>{{$section->section_height}} mètres</td>
+                            <td>@choice('pages/routes/tabs/information.height', $section->section_height)</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -236,7 +238,7 @@
 
     <div class="row route-description-zone">
 
-        <h5 class="loved-king-font">Description des grimpeurs</h5>
+        <h5 class="loved-king-font">@lang('pages/routes/tabs/information.descriptionTitle')</h5>
 
         <div class="col s12">
             <div class="blue-border-zone">
@@ -261,7 +263,7 @@
                 @endforeach
 
                 @if(count($route->descriptions) == 0)
-                    <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé cette ligne pas à la décrire</p>
+                    <p class="grey-text text-center">@lang('pages/routes/tabs/information.noDescription')</p>
                 @endif
 
             </div>
