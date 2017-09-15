@@ -45,9 +45,9 @@ class RouteVueController extends Controller
         }
 
         $hardness = [
-            'easy' => (count($crosses) > 0) ? $easy / count($crosses) * 100 : 0,
-            'just' => (count($crosses) > 0) ? $just / count($crosses) * 100 : 0,
-            'hard' => (count($crosses) > 0) ? $hard / count($crosses) * 100 : 0,
+            'easy' => (count($crosses) > 0) ? round($easy / count($crosses) * 100, 1) : 0,
+            'just' => (count($crosses) > 0) ? round($just / count($crosses) * 100, 1) : 0,
+            'hard' => (count($crosses) > 0) ? round($hard / count($crosses) * 100, 1) : 0,
             'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
             'nbVote' => count($crosses),
         ];
