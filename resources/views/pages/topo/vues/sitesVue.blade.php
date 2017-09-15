@@ -11,11 +11,11 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Nom</th>
-                        <th>Pays</th>
-                        <th>Département</th>
-                        <th>Ville</th>
-                        <th>Rocher</th>
+                        <th>@lang('pages/guidebooks/tabs/crags.nameColumn')</th>
+                        <th>@lang('pages/guidebooks/tabs/crags.countryColumn')</th>
+                        <th>@lang('pages/guidebooks/tabs/crags.regionsColumn')</th>
+                        <th>@lang('pages/guidebooks/tabs/crags.cityColumn')</th>
+                        <th>@lang('pages/guidebooks/tabs/crags.rockColumn')</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@
                             <td>{{ucfirst($liaison->crag->rock->label)}}</td>
                             <td class="ligne-btn">
                                 @if(Auth::check())
-                                    <i {!! $Helpers::tooltip('Enlever ce site du topo') !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>
+                                    <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/crags.removeCrag')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>
                                 @endif
                             </td>
                         </tr>

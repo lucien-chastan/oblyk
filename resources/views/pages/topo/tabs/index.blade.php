@@ -5,45 +5,45 @@
             <h1 class="loved-king-font titre-1-topo">{{$topo->label}}</h1>
 
             <p>
-                {{$topo->label}} est un topo édité par {{$topo->editor}} en {{$topo->editionYear}}<br>
-                <strong>Nombre de site d'oblyk présent dans ce topo : </strong> {{$topo->crags_count}}<br>
-                <strong>Auteur : </strong>
+                @lang('pages/guidebooks/tabs/information.description', ['name'=>$topo->label, 'editor'=>$topo->editor, 'year'=>$topo->editionYear])<br>
+                <strong>@lang('pages/guidebooks/tabs/information.nbCrags')</strong> {{$topo->crags_count}}<br>
+                <strong>@lang('pages/guidebooks/tabs/information.authorTitle') </strong>
                 @if($topo->author != '')
                     {{$topo->author}}
                 @else
-                    <span class="grey-text text-italic">auteur non renseigné</span>
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noAuthor') </span>
                 @endif
                 <br>
-                <strong>Prix conseillé : </strong>
+                <strong>@lang('pages/guidebooks/tabs/information.priceTitle')</strong>
                 @if($topo->price != 0)
                     {{$topo->price}} €
                 @else
-                    <span class="grey-text text-italic">prix non renseigné</span>
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noPrice')</span>
                 @endif
                 <br>
-                <strong>Nombre de page : </strong>
+                <strong>@lang('pages/guidebooks/tabs/information.pagesTitle')</strong>
                 @if($topo->page != 0)
-                    {{$topo->page}} pages
+                    @choice('pages/guidebooks/tabs/information.nbPage', $topo->page)
                 @else
-                    <span class="grey-text text-italic">nombre de page non renseigné</span>
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noPages')</span>
                 @endif
                 <br>
-                <strong>Poids : </strong>
+                <strong>@lang('pages/guidebooks/tabs/information.weightTitle')</strong>
                 @if($topo->weight != 0)
-                    {{$topo->weight}} grammes
+                    @choice('pages/guidebooks/tabs/information.weight', $topo->weight)
                 @else
-                    <span class="grey-text text-italic">poids non renseigné</span>
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noWeight')</span>
                 @endif
             </p>
 
             @if(Auth::check())
                 <div class="text-right ligne-btn">
-                    <i {!! $Helpers::tooltip('Modifier les informations') !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>"Modifier ce topo", "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+                    <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/information.editInformation')) !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.editInformation'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
                 </div>
             @endif
 
 
-            <h2 class="loved-king-font titre-2-topo">Description des grimpeurs</h2>
+            <h2 class="loved-king-font titre-2-topo">@lang('pages/guidebooks/tabs/information.descriptionTitle')</h2>
 
             <div class="blue-border-zone">
                 @foreach ($topo->descriptions as $description)
@@ -64,7 +64,7 @@
                 @endforeach
 
                 @if(count($topo->descriptions) == 0)
-                    <p class="grey-text text-center">Il n'y a aucune description postée par des grimpeurs, si tu as ce topo, n'hésite pas à le décrire</p>
+                    <p class="grey-text text-center">@lang('pages/guidebooks/tabs/information.noDescription')</p>
                 @endif
 
             </div>
@@ -90,7 +90,7 @@
 
                 @if(Auth::check())
                     <p class="text-center">
-                        <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>"Changer la couverture du topo"]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i> Changer la couverture</a>
+                        <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.changeCover')]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i>@lang('pages/guidebooks/tabs/information.changeCover')</a>
                     </p>
                 @endif
         </div>

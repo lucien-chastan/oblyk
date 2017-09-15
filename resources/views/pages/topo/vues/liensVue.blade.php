@@ -11,7 +11,7 @@
                     <a target="_blank" href="{{$link->link}}">{{$link->link}}</a>
                     <div class="markdownZone">{{ $link->description }}</div>
                     <p class="info-user grey-text">
-                        ajouté par {{$link->user->name}} le {{$link->created_at->format('d M Y')}}
+                        @lang('modals/link.postByDate', ['name'=>$link->user->name, 'date'=>$link->created_at->format('d M Y') ,'url'=>route('userPage', ['user_id'=>$link->user->id, 'user_label'=>str_slug($link->user->name)])])
 
                         @if(Auth::check())
                             <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -25,7 +25,7 @@
             @endforeach
 
             @if(count($topo->links) == 0)
-                <p class="grey-text text-center">Il n'y a pas encore de lien posté sur ce topo</p>
+                <p class="grey-text text-center">@lang('pages/guidebooks/tabs/link.noLink')</p>
             @endif
 
             {{--BOUTON POUR AJOUTER UN LIEN--}}
