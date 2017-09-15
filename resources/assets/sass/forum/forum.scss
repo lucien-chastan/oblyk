@@ -115,3 +115,31 @@ h1.loved-king-font {
         }
     }
 }
+
+.forum-menu{
+    i {
+        vertical-align: text-bottom;
+        display: none;
+    }
+}
+
+//version smartphone
+@media screen and (max-width:600px) {
+
+    .forum-menu-zone {
+        width: 100%;
+        .forum-menu {
+            i {
+                display: inline;
+                font-size: 1.5em;
+            }
+            span {
+                display: none;
+            }
+        }
+
+        .s12{
+            padding: 0 !important;
+        }
+    }
+}
