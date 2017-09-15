@@ -17,7 +17,7 @@
 
         <div class="row" id="bt-show-route-gallerie-editor">
             <div class="info-user grey-text i-cursor">
-                <i {!! $Helpers::tooltip('Modifier / supprimer ou signaler un problème sur une photo') !!} onclick="showRoutePhotoEditor(true)" class="material-icons tiny-btn right tooltipped">edit</i>
+                <i {!! $Helpers::tooltip(trans('pages/routes/tabs/photo.tooltipEditGallery')) !!} onclick="showRoutePhotoEditor(true)" class="material-icons tiny-btn right tooltipped">edit</i>
             </div>
         </div>
 
@@ -47,14 +47,14 @@
 
             <div class="row">
                 <div class="info-user grey-text i-cursor col s12">
-                    <i {!! $Helpers::tooltip('fermer l\'édition des photos') !!} onclick="showRoutePhotoEditor(false)" class="material-icons tiny-btn right tooltipped" onclick="$('#modal').modal('open');">clear</i>
+                    <i {!! $Helpers::tooltip(trans('pages/routes/tabs/photo.closeEditGallery')) !!} onclick="showRoutePhotoEditor(false)" class="material-icons tiny-btn right tooltipped" onclick="$('#modal').modal('open');">clear</i>
                 </div>
             </div>
         </div>
     @endif
 
 @else
-    <p class="text-center grey-text">Il n'y a pas encore de photo postée sur cette ligne</p>
+    <p class="text-center grey-text">@lang('pages/routes/tabs/photo.noPhoto')</p>
 @endif
 
 {{--BOUTON POUR AJOUTER UNE PHOTO--}}
