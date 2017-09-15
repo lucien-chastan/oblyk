@@ -21,7 +21,7 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)->first();
 
-        $user->genre = trans('elements/sex.sex_' . $user->sex);
+        $user->genre = ($user->sex != null) ? trans('elements/sex.sex_' . $user->sex) : trans('elements/sex.sex_0');
         $user->age = $user->birth != 0 ? trans_choice('elements/old.old', date('Y') - $user->birth) : trans_choice('elements/old.old', 0);
 
         $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';

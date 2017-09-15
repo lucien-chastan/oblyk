@@ -76,7 +76,7 @@ class PartnerController extends Controller
 
         $authUser = User::where('id', Auth::id())->first();
 
-        $user->genre = trans('elements/sex.sex_' . $user->sex);
+        $user->genre = ($user->sex != null) ? trans('elements/sex.sex_' . $user->sex) : trans('elements/sex.sex_0');
 
         $user->age = $user->birth != 0 ? trans_choice('elements/old.old',date('Y') - $user->birth) : trans_choice('elements/old.old', 0);
 
