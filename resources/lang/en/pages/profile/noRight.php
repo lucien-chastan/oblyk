@@ -1,9 +1,7 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
     'noRight' => "
-Vous n'êtes pas autorisé à voir cette page<br>
-Désolé",
+    You are not allowed to see this page<br>
+    Sorry",
 ];

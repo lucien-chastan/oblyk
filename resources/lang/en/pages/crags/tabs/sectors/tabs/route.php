@@ -1,30 +1,26 @@
 <?php
 
-//TODO : TRADUCION À FAIRE
-
 return [
 
     //Tableau des lignes
     'columnNote' => "Note",
-    'columnGrade' => "Cote",
-    'columnName' => "Nom",
+    'columnGrade' => "Grade",
+    'columnName' => "Name",
     'columnType' => "Type",
-    'columnHeight' => "Hauteur",
-    'columnYear' => "Année",
-    'columnOpener' => "Ouvreur",
+    'columnHeight' => "Height",
+    'columnYear' => "Year",
+    'columnOpener' => "Opener",
 
     //information sur une ligne
-    'evaluation' => "{0}pas de note|{1}évaluation basé sur une note|[2,*]évaluation basé sur :count notes",
-    'alertHeight' => "Attention voie de plus de 35 mètres",
-    'nbDescription' => "il y a une description sur cette ligne | il y a :count descriptions sur cette ligne",
-    'nbPhoto' => "il y a une photo sur cette ligne | il y a :count photos sur cette ligne",
-    'nbVideo' => "il y a une vidéo sur cette ligne | il y a :count vidéos sur cette ligne",
-    'height' => "{0} ? mètre|{1} 1 mètre|[2,*] :count mètres",
-    'addTooltip' => "Ajouter à mon carnet ou à ma ticklist",
-
+    'evaluation' => "{0}no rating|{1}rating based on a rating|[2,*]valuation based on :count ratings",
+    'alertHeight' => "Attention route over 35 meters",
+    'nbDescription' => "there is a description on this route|there are :count descriptions on this route",
+    'nbPhoto' => "there's a picture on this route|there are :count pictures on this route",
+    'nbVideo' => "there's a video on this route|there are :count videos on this route",
+    'height' => "{0} ? metre|{1} 1 metre|[2,*] :count metres",
+    'addTooltip' => "Add to my sendlist or my ticklist",
 
     //Autre
-    'noRoute' => "Il n'y a pas de ligne référencée sur ce secteur,<br> vous pouvez en ajouter en cliquant sur le bouton +",
-
+    'noRoute' => "There's no referenced route on this sector,<br>you can add them by clicking on the button +",
 
 ];

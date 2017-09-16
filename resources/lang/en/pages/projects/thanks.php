@@ -1,11 +1,9 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'title' => 'Un énorme merci !',
-    'para_1' => "Un énorme merci pour votre don ! grâce à vous oblyk peut continuer à se développer et envisager l'avenir plus sereinement ; )",
-    'para_2' => 'Encore merci de votre soutient !',
+    'title' => 'Huge thanks !',
+    'para_1' => "Huge thanks for your donation ! Thanks to you, Oblyk can continue to develop",
+    'para_2' => 'Thanks again for your support!',
 
 ];

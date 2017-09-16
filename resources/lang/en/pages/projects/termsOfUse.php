@@ -1,7 +1,5 @@
 <?php
 
-//TODO : TRADUIRE 6_3_1, 6_3_2, 6_3_3 (LA PARTIE RECHERCHE DE PARTENAIRE)
-
 return [
 
     'title' => 'Terms of service',
@@ -23,7 +21,7 @@ return [
     'article_6' => 'Article 6 : Responsibilities',
     'article_6_1' => '6.1 Hardware damages and data loss',
     'article_6_2' => '6.2 Responsibility while practicing sport activities',
-    'article_6_3' => '6.3 Recherche de partenaire d\'escalade',
+    'article_6_3' => '6.3 Climbing partner search',
     'article_7' => 'Article 7 : Limitation of warranties',
     'article_7_1' => '7.1 Warranties',
     'article_7_2' => '7.2 Website closure or interruption',
@@ -73,9 +71,9 @@ return [
     'para_6_1' => 'The use of <strong>Oblyk.org</strong> is done under the sole responsibility of the users.',
     'para_6_1_1' => 'Subject to the applicable legal provisions, <strong>Oblyk.org</strong> shall not be held responsible for any damage, direct or indirect ( such as loss of profits, of consumers, of data, of intangible assets : non-exhaustive list) resulting from the use or the impossibility of use of the website, and more generally from any event related to our website and/or to any third party website. Any hardware or content downloaded on <strong>Oblyk.org</strong> is at the user\'s own risk. <strong>Oblyk.org</strong> shall not be held responsible for potential damages or data loss suffered by the user\'s computer.',
     'para_6_2_1' => 'The practice of sport activities (such as climbing or other mountain related sports) must be carried out with an advanced knowledge of the ground and of the technical skills of the sport in question, and implies the acceptation of a risk level which must be adapted to each person\'s abilities. <strong>Oblyk.org</strong> encourages its users to be really careful when they interpret the data and the information referenced by the community. By no means does <strong>Oblyk.org</strong> guarantee the accuracy and the comprehensiveness of the indications provided directly on this website (such as the type of bolts or anchors, the height of a route, the advices given in the forum or in the comments, etc. non-exhaustive list). All this information is non-contractual and cannot engage the responsibility of <strong>Oblyk.org</strong> and of the authors of the contents in question. Moreover, these indications cannot replace the advices of a skilled professional for the sport activity in question. <strong>Oblyk.org</strong> accepts no responsibility related to incidents of any kind that may result from the use or interpretation of the information broadcasted on its website.',
-    'para_6_3_1' => '<strong>Oblyk.org</strong> ne pourra pas être tenu responsable du comportement ou des actes des personnes qui se rencontreraient ou communiqueraient suite à l\'utilisation du service de recherche de partenaires.',
-    'para_6_3_2' => 'Le service de recherche de partenaire est interdit aux mineurs.',
-    'para_6_3_3' => 'Pour que le service de recherche de partenaire fonctionne, l\'utilisateur doit obligatoirement renseigner sa date de naissance. <strong>Oblyk.org</strong> ne pourra pas être tenu responsable dans le cas où l\'utilisateur indique une fausse date de naissance dans le but d\'utiliser le service malgré les restrictions.',
+    'para_6_3_1' => '<strong>Oblyk.org</strong>  cannot be held responsible for the behaviour or actions of persons who meet or communicate with each other as a result of using the partner tracing service.',
+    'para_6_3_2' => 'The partner tracing service is forbidden to underage.',
+    'para_6_3_3' => 'For the partner search service to work, the user must fill in his or her date of birth.. <strong>Oblyk.org</strong> cannot be held responsible if the user indicates a false date of birth in order to use the service despite the restrictions.',
 
     'para_7_1_1' => 'The website is provided "as is". It is accessible depending on its availability, without any express or implied warranty from <strong>Oblyk.org</strong>. Especially, <strong>Oblyk.org</strong> does not guarantee that : ',
     'li_7_1_1' => 'the website, the contents or the offered products will meet the users\' expectations',

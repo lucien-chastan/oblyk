@@ -1,26 +1,24 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //Ticklist
-    'inMyTickList' => "Fait partie de ma ",
-    'tooltipDeleteTick' => "Supprimer de ma tick list",
-    'btnAddTick' => "Ajouter à la tickList",
+    'inMyTickList' => "Included in my ",
+    'tooltipDeleteTick' => "Delete from my ticklist",
+    'btnAddTick' => "Add to tickList",
 
     //Carnet de croix
-    'sendListTitle' => "Dans mon carnet",
-    'crossDate' => "croix du :date",
-    'IThoughtIt' => "J'ai trouvé ça ",
-    'pitchMade' => "j'ai fait les :count longueur|j'ai fait les :count longueurs",
-    'nbPitchMade' => "Longueurs faites",
-    'pitchHeight' => "{0}? mètre|{1} :count mètre|[2,*]:count mètres",
-    'tentative' => "nombre de tentative : ",
-    'IClimbWith' => "J'étais avec : ",
-    'editFriendsList' => "Éditer la liste des potes qui étaient avec moi",
+    'sendListTitle' => "In my sendlist",
+    'crossDate' => "cross from :date",
+    'IThoughtIt' => "I found that ",
+    'pitchMade' => "I made the :count pitch|I made :count pitch",
+    'nbPitchMade' => "Pitch made",
+    'pitchHeight' => "{0}? meter|{1} :count meter|[2,*]:count meters",
+    'tentative' => "try number : ",
+    'IClimbWith' => "I was with : ",
+    'editFriendsList' => "Edit friend list who were with me",
     'note' => "Note :",
-    'btnAddCross' => "Ajouter à mon carnet de croix",
-    'btnRepeatCross' => "Ajouter une répétition",
+    'btnAddCross' => "Add to sendlist",
+    'btnRepeatCross' => "Add a repeat",
 
 ];

@@ -1,29 +1,27 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //entête
-    'titleNbCrossesByType' => "Nombre de croix par type de grimpe",
-    'myCrossesFigures' => "Mes croix en quelques chiffres",
-    'otherCrossesFigures' => "Les croix de :name en quelques chiffres",
+    'titleNbCrossesByType' => "Number of crosses by climbing type",
+    'myCrossesFigures' => "My crosses in figures",
+    'otherCrossesFigures' => "Crosses of :name in figures",
 
     //nb par truc
-    'countryFigures' => ":count pays|:count pays",
+    'countryFigures' => ":count country|:count pays",
     'cragFigures' => ":count site|:count sites",
-    'regionFigures' => ":count région|:count régions",
-    'crossesFigures' => ":count croix|:count croix",
-    'meterFigures' => ":count mètre grimpé|:count mètres grimpé",
+    'regionFigures' => ":count region|:count regions",
+    'crossesFigures' => ":count cross|:count crosses",
+    'meterFigures' => ":count meters climbed|:count meters climbed",
 
     //onglets
     'cragTab' => "site",
-    'countryTab' => "Pays",
+    'countryTab' => "Country",
     'regionTab' => "Regions",
-    'yearTab' => "Années",
+    'yearTab' => "Years",
 
     //autre
-    'noCrosses'=>"Tu n'as pas encore ajouté tes croix",
-    'otherNoCrosses'=>":name n'a pas encore ajouté ses croix",
+    'noCrosses'=>"You did not add any cross yet",
+    'otherNoCrosses'=>":name did not add his crosses",
 
 ];

@@ -1,64 +1,62 @@
 <?php
 
-// TODO : TRADUCTION À FAIRE
-
 return [
 
     //Boite informations
-    'boxInformationTitle' => "Informations sur :name",
-    'boxInformationShortDescription' => ":name est un site d'escalade de :climbs_type de :rock, situé à :city dans le département :region (:code_country)",
-    'boxInformationNbRoute' => "{0}Il n'y a pas encore de voie référencée sur ce site |{1} On y trouve une ligne|[2,*] On y trouve :count lignes",
-    'boxInformationGapGrade' => "allant de :min à :max",
+    'boxInformationTitle' => "Information about :name",
+    'boxInformationShortDescription' => ":name is a climb site of :climbs_type made of :rock, located in :city region :region (:code_country)",
+    'boxInformationNbRoute' => "{0}There are no routes referenced in this site |{1} There is one route|[2,*] There are :count routes",
+    'boxInformationGapGrade' => "from :min to :max",
 
-    'boxInformationTitleInterdiction' => "Site interdit",
-    'boxInformationTitleRestrictedAccess' => "Accès restreint à ce site",
-    'boxInformationTitleConventionSite' => 'Site conventionné par la <a class=":class" href=":url">FFME</a>',
-    'boxInformationTitleGreenSpits' => 'Site maintenu par <a class=":class" href=":url">Greenspits</a>',
+    'boxInformationTitleInterdiction' => "Site forbidden",
+    'boxInformationTitleRestrictedAccess' => "Restricted access to this site",
+    'boxInformationTitleConventionSite' => 'Site with a agreement by <a class=":class" href=":url">FFME</a>',
+    'boxInformationTitleGreenSpits' => 'Site maintained by <a class=":class" href=":url">Greenspits</a>',
 
-    'boxInformationGroup' => ':name fait partie des groupes suivant :',
-    'boxInformationNotGroup' => ':name ne fait pas partie d\'un regroupement de site',
+    'boxInformationGroup' => ':name is in the following groups :',
+    'boxInformationNotGroup' => ':name is not in the site group',
 
     //Boite petite information
     'orientationTitle' => 'Orientation',
     'localisationTitle' => 'Localisation',
 
     //Boite description
-    'titleDescription' => "Description par ceux qui y grimpe",
-    'paraNoDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as grimpé ici n'hésite pas à décrire ce site",
+    'titleDescription' => "Climbers description",
+    'paraNoDescription' => "There are no descriptions posted by climbers, if you've been here, do not hesitate to describe it",
 
     //Boite topo papier sur le site
-    'paperGuideBookTitle' => 'Topos papier de ce site :',
-    'paraNoPaperGuideBook' => 'Ce site n\'est référencé dans aucun topo papier',
+    'paperGuideBookTitle' => 'Paper Guidebook :',
+    'paraNoPaperGuideBook' => 'This site is\'nt referenced in any paper guidebook',
 
     //Boite topo web
-    'webGuideBookTitle' => 'Topos web',
-    'paraNoWebGuideBook' => 'Aucun site internet présente le topo de cette falaise',
+    'webGuideBookTitle' => 'Web Guidebook',
+    'paraNoWebGuideBook' => 'No website shows this site guidebook',
 
     //Boite topo pdf
-    'pdfGuideBookTitle' => 'Topos PDF',
-    'paraNoPdfGuideBook' => 'Aucun topo PDF n\'a été uploadé sur Oblyk pour l\'instant',
+    'pdfGuideBookTitle' => 'PDF Guidebook',
+    'paraNoPdfGuideBook' => 'No PDF guidebook has been uploaded on Oblyk',
 
     //Boite de recherche de partenaire
-    'partnerTitle' => 'Ils cherchent des grimpeurs ici :',
-    'noPartnerPara' => 'Pour l\'instant, aucun grimpeur n\'a indiqué qu\'il escaladait ici',
-    'activePartner' => 'Faire partie de la recherche',
+    'partnerTitle' => 'They are looking for climbers here:',
+    'noPartnerPara' => 'For now, no climbers stated climbing here',
+    'activePartner' => 'Be part of the search',
 
     //Boite ma ticklist et mes croix
-    'crossesTickListTitle'=>'Ma ticklist, Mes croix ici',
-    'crossesTitle'=>'Mes croix',
-    'seeMyCrossesBook'=>'Voir mon carnet',
-    'TickListTitle'=>'Ma tick-list',
-    'seeMyTickList'=>'Voir ma tick-list',
-    'paraRegister'=>'Créer toi un compte pour pouvoir tenir un carnet de croix sur ce site',
-    'btnRegister'=>'Créer un compte',
+    'crossesTickListTitle'=>'My ticklist, My crosses here',
+    'crossesTitle'=>'My crosses',
+    'seeMyCrossesBook'=>'See my crosses book',
+    'TickListTitle'=>'My tick-list',
+    'seeMyTickList'=>'See my tick-list',
+    'paraRegister'=>'Register to be able using a sendlist',
+    'btnRegister'=>'Register',
 
     //Boite les photos
     'photoTitle'=>'Photos',
-    'btSeeMore'=>'Voir plus',
-    'paraNoPhoto'=>'Il n\'y a pas encore de photo postée sur ce site',
+    'btSeeMore'=>'See more',
+    'paraNoPhoto'=>'There are no photo in this site yet',
 
     //Boite des graphs
-    'routeTypeTitle'=>'Type de lignes',
-    'gradeTitle'=>'Nombre de ligne par cotations',
+    'routeTypeTitle'=>'Route type',
+    'gradeTitle'=>'Number of routes by grades',
 
 ];

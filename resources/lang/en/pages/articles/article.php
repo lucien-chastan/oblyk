@@ -1,18 +1,16 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'written_by' => 'Rédigé par :name le :date',
-    'nb_comments' => '{0}aucun commentaire|{1}un commentaire|[2,*]:count commentaires',
-    'views' => 'lu :nb fois',
-    'titleComments' => 'Commentaires',
-    'byDate' => 'par :auteur le :date',
-    'editCommentTooltip' => 'Modifier mon commentaire',
-    'deleteCommentTooltip' => 'Supprimer mon commentaire',
-    'noComment' => 'Il n\'y a pas de commentaire sur cette article',
-    'addCommentTooltip' => 'Ajouter un commentaire',
-    'addCommentTitle' => 'Ajouter un commentaire',
+    'written_by' => 'Written by :name the :date',
+    'nb_comments' => '{0}no comment|{1}one comment|[2,*]:count comments',
+    'views' => 'read :nb times',
+    'titleComments' => 'Comments',
+    'byDate' => 'from :auteur the :date',
+    'editCommentTooltip' => 'Edit my comment',
+    'deleteCommentTooltip' => 'Delete my comment',
+    'noComment' => 'There are no comments in this post',
+    'addCommentTooltip' => 'Add a comment',
+    'addCommentTitle' => 'Add a comment',
 
 ];

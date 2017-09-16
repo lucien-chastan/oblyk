@@ -1,39 +1,36 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //titre et alert
-    'titleWhoIAm' => "Qui je suis ?",
+    'titleWhoIAm' => "Who I am ?",
     'explication' => "
-    <strong class=\"text-underline\">Pourquoi cette page ?</strong><br>
-    Pour que d'autres grimpeurs et envie de te contacter, il est important qu'ils aient un minimum d'informations sur toi.
-    Cette page te permet de donne quelques indicateurs de qui tu es, ton niveau, quelle type de grimpe tu pratique, etc.
+    <strong class=\"text-underline\">Why this page ?</strong><br>
+ If you want other people to contact you, you need to add a few information about you, which style (bouldering, artif, routes, bigwall..) which grade you like to climb,...
     ",
 
     //Step 1 : Faire partie de la recherche de partenaire
-    'step1Title' => "1. Faire partie de la recherche de partenaire d'oblyk",
-    'labelActive' => "Activer ma recherche de partenaire de grimpe",
+    'step1Title' => "1. Be part of Oblyk partner search",
+    'labelActive' => "Activate my climbing partner search",
     'titleNote' => "Note :",
-    'li1' => "Si cette case n'est pas cochée, tu n'apparaîtra pas sur la carte des grimpeurs",
-    'li2' => "Désactiver ton profil de la recherche de partenaire ne supprime pas tes préférences ni tes lieux de grimpe, tu deviens juste invisible.",
+    'li1' => "If this box in not checked, you will not be seen in climbers map",
+    'li2' => "Disable your profile of partner search do not delete preferences and climbing spot, you just become invisible.",
 
     //Step 2 : Mes types de grimpes
-    'step2Title' => "2. Quel type de grimpe je pratique ?",
+    'step2Title' => "2. What is my climbing type ?",
 
     //Step 3 : Niveau d'escalade
-    'step3Title' => "3. Quel est mon niveau ?",
-    'minLabel' => "Mon niveau minimum",
-    'maxLabel' => "Mon niveau maxium",
-    'noteLevel' => "Note : si tu ne sais pas quoi mettre, ton niveau minium pourait correspondre à ton échauffement, et ton niveau max à tes projets.",
+    'step3Title' => "3. What is my grade ?",
+    'minLabel' => "My minimum grade ",
+    'maxLabel' => "My maximum grade",
+    'noteLevel' => "Note : if you do not know what to choose, your mini grade may be your warm up, and your level max your projects",
 
 
     //Step 4 : Description
-    'step4Title' => "4. Pourquoi ne pas parler un peut plus de toi ?",
-    'LabelWhoIAm' => "Qui je suis avec mes mots",
-    'noteDescription' => "Note : tu peux par exemple préciser ce que tu recherche, te décrir plus amplement, parler de ton matériel d'escalade ou de tes connaissances dans les manipes par exemple.",
+    'step4Title' => "4. Tell us more about you ?",
+    'LabelWhoIAm' => "Who am I",
+    'noteDescription' => "Note : for example, you can tell what you are looking for, describe yourself, talk about your gear,...",
 
     //final
-    'submit' => "Enregistrer",
+    'submit' => "Submit",
 ];

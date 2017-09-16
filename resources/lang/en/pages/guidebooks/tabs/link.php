@@ -1,11 +1,9 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 
 return [
 
-    'noLink' => 'Il n\'y a pas encore de lien posté sur ce topo',
+    'noLink' => 'There are no link posted on this guidebook yet',
 
 
 ];

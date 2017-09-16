@@ -1,13 +1,11 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'authTitle' => "Mes albums",
-    'noAuthTitle' => "Les albums de :name",
+    'authTitle' => "My albums",
+    'noAuthTitle' => "Albums from :name",
     'nbPhoto' => ":count photo|:count photos",
-    'noPhotoAuth' => "Tu n'as pas encore d'album photo",
-    'noPhotoNoAuth' => ":name n'as pas encore d'album photo",
+    'noPhotoAuth' => "You don't have any album yet",
+    'noPhotoNoAuth' => ":name don't have any album yet",
 
 ];

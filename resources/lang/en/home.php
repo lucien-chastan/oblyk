@@ -4,13 +4,12 @@ return [
 
     'slogan' => 'Climbing community website', // Site communautaire dédié à l'escalade
 
-
     //****************************
     //Check les infos des falaises
     //****************************
 
-    'titleCheckCragInformation' => 'Check les infos des falaises',
-    'descriptionCheckCragInformation' => 'Oblyk est une grande base de donnée des falaises d\'escalades de france et du monde constament enrichie par la communauté, tu peux consulter celle-ci en utilisant le recherche ou en navigant sur la carte des falaises.',
+    'titleCheckCragInformation' => 'Check crags information',
+    'descriptionCheckCragInformation' => 'Oblyk is a big climbing spots database from France and the world, always updated by the community. You can see it using the search or using the crags map.',
     'actionCheckCragInformation' => 'Map of the crags',
 
 
@@ -18,10 +17,10 @@ return [
     //Tiens un carnet de croix
     //************************
 
-    'titleCrossBook' => 'Tiens un carnet de croix',
+    'titleCrossBook' => 'Hold a sendlist',
     'descriptionCrossBook' => '
-        Bon pour la mémoire, la progression et la motivation, tenir un carnet de croix à beaucoup d\'avantage.<br>
-        Oblyk te permet de facilement faire ça, tu pourras ensuite visualiser ta progression grâce à de nombres façon d\'analyser et afficher ton carnet de croix
+        Good for memory, progression and motivation, holding a sendlist has many good points.<br>
+        Oblyk helps you doing that an easy way, you can see your improvement many ways to analyse and display your sendlist
     ',
 
 
@@ -29,10 +28,10 @@ return [
     //Trouve un partenaire de grimpe
     //******************************
 
-    'titlePartner' => 'Trouve un partenaire de grimpe',
+    'titlePartner' => 'Find a climbing partner',
     'descriptionPartner' => '
-        Tu arrive dans une nouvelle regions, tu aimerais trouver quelqu\'un avec qui grimper en falaise ou en salle ?<br>
-        Regarde du côter de notre carte des grimpeurs, peut-être que tu trouveras quelqu\'un avec qui grimper.
+        Coming in a new region, looking for someone to climb with, in the gym or outdoor ?<br>
+        Look into the map of climber, maybe you will find somebody to climb with.
     ',
     'actionPartner' => 'Read more',
 
@@ -41,11 +40,10 @@ return [
     //Reste au courant
     //****************
 
-    'titleNewsFeed' => 'Reste au courant',
+    'titleNewsFeed' => 'Stay tuned',
     'descriptionNewsFeed' => '
-        Oblyk intégre un système de fil d\'acualité simple qui te permet d\'être au courant de l\'activité des falaises autour de chez toi.<br>
-        Par exemple s\'il y a une mission "Nettoyage Printanier", l\'organisateur post dans le flux de la falaise et hop !
-        tous les intéréssés sont au courant et peuvent venir aider.
+        Oblyk has a news feed allowing you to stay informed about crags news around you and others.<br>
+        For example, a  spring cleaning, the planner post into the crags news, and then it is, everyone interested will stay informed and may come help.
     ',
 
 
@@ -55,9 +53,8 @@ return [
 
     'titleAccount' => 'Join us !',
     'descriptionAccount' => '
-        En rejoingnant oblyk tu auras librement accès à tous les infos de la communauté, te tenir au courant de ce qui se passe dans le
-        monde de la grimpe, tu pourras tenir un carnet de croix pour t\'aider à progresser ou pour garder un souvenire de tes passages en falaise.<br>
-        Et tu pouras participer à l\'élaboration d\'une grande base de connaissance commune des sites d\'escalades de France et du monde !
+        When joining Oblyk you will, for free, be able to get all community information, stay informed what\'s up in climbing world, you can hold a sendlist to help improve and keep a track of your climbing trips<br>
+        You will also to able to contribute in building a big climbing spots database !
     ',
     'actionAccount' => 'Create an account',
 
@@ -68,10 +65,10 @@ return [
 
     'titleGuidebook' => 'Oblyk and the climbing guidebook',
     'descriptionGuidebook' => "
-        Vous pourriez vous demander si oblyk peut remplacer les topos papier et par extension nuire au développement des sites d'escalde ?<br>
-        Sachez que nous nous somme beaucoup posé cette question aussi. Et la réponse est non, Oblyk ne peut pas remplacer un topo !<br>
-        Les topos continent des informations indispensable que nous ne permettons pas d'ajouter sur oblyk<br><br>
-        Acheter un topo, c'est soutenir des passionnés qui donnent énormément pour maintenir, développer, nettoyer les sites d'escalade sur lesquel vous allez grimper gratuitement.
+        You could ask yourself if Oblyk may replace paper guidebook and in the meantime harm climbing spots development ?<br>
+        Be sure to know that we asked yourself this question a lot. Answer is no, Oblyk can't replace a guidebook!<br>
+        Guidebooks have essential information that we won't add in Oblyk<br><br>
+        Buying a guidebook, it is helping passionate climbers who give a lot to maintain, develop, clean climbing spots where you will climb for free.
     ",
 
 
@@ -94,13 +91,13 @@ return [
     'figuresVideos' => 'Videos',
 
     //Message du nombre d'ajout par jour
-    'crag_today'=>'Une falaise a été ajouté aujourd\'hui|:count falaises ont été ajoutées aujourd\'hui ',
-    'user_today'=>'Un nouveau grimpeur est arrivé aujourd\'hui|:count grimpeurs sont arrivés aujourd\'hui ',
-    'gym_today'=>'Une nouvelle salle a été ajouté aujourd\'hui|:count salles ont été ajoutées aujourd\'hui ',
-    'route_today'=>'Une nouvelle ligne a été ajouté aujourd\'hui|:count lignes ont été ajoutées aujourd\'hui ',
-    'cross_today'=>'Une nouvelle croix a été faite aujourd\'hui|:count croix ont été faites aujourd\'hui ',
-    'photo_today'=>'Une nouvelle photo a été ajouté aujourd\'hui|:count photos ont été ajoutées aujourd\'hui ',
-    'topo_today'=>'Un nouveau topo a été référencé aujourd\'hui|:count topos ont été référencés aujourd\'hui ',
-    'description_today'=>'Un nouveau commentaire a été posté aujourd\'hui|:count commentaires ont été postés aujourd\'hui ',
-    'video_today'=>'Une nouvelle vidéo a été posté aujourd\'hui|:count vidéos ont été ajoutées aujourd\'hui ',
+    'crag_today'=>'A crag has been added today|:count crags added today ',
+    'user_today'=>'A new climber joined us today|:count climbers joined today ',
+    'gym_today'=>'A new gym has been added today |:count gyms added today ',
+    'route_today'=>'A new route had been added today|:count routes added today ',
+    'cross_today'=>'A new cross has been made today |:count crosses made today ',
+    'photo_today'=>'A new picture has been added today|:count pictures aded today ',
+    'topo_today'=>'A new guidebook has been added today|:count guidebooks added today ',
+    'description_today'=>'A new comment has been posted today|:count comments posted today ',
+    'video_today'=>'A new video had been added today|:count videos added today ',
 ];

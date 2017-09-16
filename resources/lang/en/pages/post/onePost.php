@@ -1,27 +1,25 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'postBy' => "posté par <a href=':url'>:name</a>",
-    'today' => "aujourd'hui à :hour",
-    'date' => "le :date à :hour",
-    'me' => "moi",
-    'on' => "le",
-    'titleNbCommentaire' => "{0}PAS DE COMMENTAIRE|{1}:count COMMENTAIRE|[2,*]:count COMMENTAIRES",
-    'reportAProblem' => "Signaler un problème sur ce commentaire",
-    'reportAProblemPost' => "Signaler un problème sur ce post",
-    'like' => "j'aime",
-    'alreadyLike' => "j'aime déjà",
-    'usersLike' => "Ils ont liké ce commentaire",
-    'usersLikePost' => "Ils ont liké ce commentaire",
-    'answer' => "Répondre à ce commentaire",
-    'addAnswer' => "Ajouter une réponse",
-    'addLike' => "Aimer",
-    'unLike' => "Ne plus aimer",
-    'nbLike' => ":count j'aime|:count j'aimes",
-    'comment' => "commenter",
-    'commentPost' => "commenter ce post",
+    'postBy' => "post by <a href=':url'>:name</a>",
+    'today' => "today at :hour",
+    'date' => "the :date at :hour",
+    'me' => "me",
+    'on' => "on",
+    'titleNbCommentaire' => "{0}NO COMMENTS|{1}:count COMMENT|[2,*]:count COMMENTS",
+    'reportAProblem' => "Report a problem on this comment",
+    'reportAProblemPost' => "Report a problem on this post",
+    'like' => "I like",
+    'alreadyLike' => "I already like",
+    'usersLike' => "They liked this comment",
+    'usersLikePost' => "They like this post",
+    'answer' => "Answer this subject",
+    'addAnswer' => "Add an answer",
+    'addLike' => "Like",
+    'unLike' => "Unlike",
+    'nbLike' => ":count like|:count i like",
+    'comment' => "comment",
+    'commentPost' => "comment this post",
 
 ];

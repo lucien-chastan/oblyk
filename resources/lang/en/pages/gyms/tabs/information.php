@@ -1,27 +1,25 @@
 <?php
 
-// TODO : TRADUCTION À FAIRE
-
 return [
 
     //Les informations d'entête
-    'title' => "Informations sur :name",
-    'description' => ":name est une salle d'escalade de :type, situé à :city <a class=':class' href=':url'>(:address, :postal_code :city)</a>",
+    'title' => "Information of :name",
+    'description' => ":name is a climbing gym of :type, located in :city <a class=':class' href=':url'>(:address, :postal_code :city)</a>",
 
     //Contact et petite info
-    'titleAbout' => "À propos",
-    'noPhoneNumber' => "numéro de téléphone non renseigné",
-    'noEmail' => "email non renseigné",
-    'noWebSite' => "site web non renseigné",
+    'titleAbout' => "About",
+    'noPhoneNumber' => "Phone number not filled",
+    'noEmail' => "email not filled",
+    'noWebSite' => "website not filled",
 
     //Boite description
-    'titleDescription'=>">Description par ceux qui y grimpe",
-    'noDescription'=>">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrir ici",
+    'titleDescription'=>">Climbers description",
+    'noDescription'=>">There are no descriptions posted by climbers, if you've been here, do not hesitate to describe it",
 
     //Partenaire
-    'titlePartner'=>"Ils cherchent des grimpeurs ici : ",
-    'noPartner'=>"Pour l'instant, aucun grimpeur n'a indiqué qu'il escaladait ici",
-    'activePartner'=>"Faire partie de la recherche",
-    'addPlace'=>"Je grimpe ici !",
+    'titlePartner'=>"They are looking for climbers here: ",
+    'noPartner'=>"For now, no climbers stated climbing here",
+    'activePartner'=>"Be part of the search",
+    'addPlace'=>"I am climbing here !",
 
 ];

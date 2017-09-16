@@ -1,19 +1,17 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 
 return [
 
     //Tableau
-    'nameColumn' => 'Nom',
-    'countryColumn' => 'Pays',
-    'regionsColumn' => 'Département',
-    'cityColumn' => 'Ville',
-    'rockColumn' => 'Rocher',
+    'nameColumn' => 'Name',
+    'countryColumn' => 'Country',
+    'regionsColumn' => 'Region',
+    'cityColumn' => 'City',
+    'rockColumn' => 'Rock',
 
     //action
-    'removeCrag'=>"Enlever ce site du topo",
+    'removeCrag'=>"Remove crag from guidebook",
 
 
 ];

@@ -1,15 +1,13 @@
 <?php
 
-// TODO : TRADUCTION À FAIRE
-
 return [
 
     //titre et intro
-    'title' => "Créer un sujet",
-    'intro' => "Tu es sur le point de créer un nouveau sujet sur le forum d'escalade d'Oblyk. Avant d'aller plus loin, merci de vérifier que le sujet n'existe pas déjà (tu peux utiliser la recherche), Assure-toi d'avoir bien lu les quelques règles à respecter sur le forum. Les grimpeurs d'Oblyk auront sûrement la réponse à ta question ! ; )",
+    'title' => "New topics",
+    'intro' => "Your are creating a new topic in Oblyk climbing forum. Before going further, please check that this topic is not existing (you can use the research). Be sure that you've read the forum rules. Climbers may have an answer for you!; )",
 
     //le formulaire
-    'labelTitle'=>"Titre de ton sujet",
-    'selectCategory'=>"Categories du sujet",
-    'submit'=>"Créer",
+    'labelTitle'=>"Topic title",
+    'selectCategory'=>"Topic categories",
+    'submit'=>"Submit",
 ];

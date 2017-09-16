@@ -1,15 +1,13 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'notificationTitle' => "Panneau des notifications",
-    'today' => "aujourd'hui à :date",
-    'on' => "le :date",
-    'markedAsSeen' => "Marquer comme vu",
-    'markedAsUnseen' => "Marquer comme non vu",
-    'deleteNotification' => "Supprimer cette notification",
-    'noNotification' => "Vous n'avez pas de notification",
+    'notificationTitle' => "Notification panel",
+    'today' => "today at :date",
+    'on' => "on :date",
+    'markedAsSeen' => "Mark as seen",
+    'markedAsUnseen' => "Mark as unseen",
+    'deleteNotification' => "Delete notification",
+    'noNotification' => "You don't have any notification",
 
 ];

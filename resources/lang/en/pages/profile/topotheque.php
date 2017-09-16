@@ -1,14 +1,12 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'deleteTooltip' => "Supprimer ce topo de ma topothèque",
+    'deleteTooltip' => "Remove this guidebook from my library",
     'noGuidebookMe' => "
-Tu n'as pas encore de topo dans ta Topothèque ...<br>
-Pour ajouter un topo à ta Topothèque, rend-toi sur la page d'un topo et clique sur :",
-    'noGuidebookOther' => ":name n'as pas encore de topo dans sa Topothèque",
-    'exampleAddGuidebookAction' => "Ajouter à ma Topothèque",
+    You don't have any guidebook in your library ...<br>
+    To add a guidebook to your library, get into a guidebook page and click on :",
+    'noGuidebookOther' => ":name Doesn't have a guidebook in his library",
+    'exampleAddGuidebookAction' => "Add to my library",
 
 ];

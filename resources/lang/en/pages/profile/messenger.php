@@ -1,15 +1,13 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //Conversation
-    'titleNbCrossesByType' => "Nombre de croix par type de grimpe",
+    'titleNbCrossesByType' => "Number of crosses by climbing type",
 
 
     //Messenger
-    'clickForSee' => "clique sur une conversation pour qu'elle s'affiche ici",
-    'placeholderTextarea' => "Écrir un message",
-    'submitMessage' => "Envoyer le message [Ctrl + Entrer]",
+    'clickForSee' => "click on a conversation to display it here",
+    'placeholderTextarea' => "Write a message",
+    'submitMessage' => "Send a message [Ctrl + Enter]",
 ];

@@ -1,23 +1,21 @@
 <?php
 
-//TODO : TRADUCTION DE "LOGIN", "MOT DE PASSE OUBLIÉ" ET "RÉINITIALISATION" À FAIRE
-
 return [
 
     //Page connexion
-    'title_login' => 'Se connecter sur Oblyk',
-    'description_login' => 'Se connecter sur Oblyk, le site communaitre de la grimpe',
+    'title_login' => 'Login Oblyk',
+    'description_login' => 'Login Oblyk, climbing community website',
 
     //Page connexion
     'title_register' => 'Join Oblyk',
     'description_register' => 'Join Oblyk',
 
     //Page mot de passe oublié
-    'title_email' => 'Mot de passe oublié',
-    'description_email' => 'Mot de passe de connexion oublié ? renseigner votre adresse mail pour réinitialiser',
+    'title_email' => 'Forgotten password',
+    'description_email' => 'Forgotten password ? Fill in your email address to reset your password',
 
     //Page réinitialiser le mot de passe
-    'title_reset' => 'Réinitialiser votre mot de passe',
-    'description_reset' => 'Renseignez le formulaire pour réinitialiser votre mot de passe',
+    'title_reset' => 'Reset password',
+    'description_reset' => 'Fill the form to reset your password',
 
 ];

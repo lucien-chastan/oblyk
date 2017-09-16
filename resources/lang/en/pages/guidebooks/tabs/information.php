@@ -1,37 +1,36 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
 
 return [
 
-    'description' => ':name est un topo édité par :editor en :year',
-    'nbCrags' => 'Nombre de site d\'oblyk présent dans ce topo : ',
+    'description' => ':name is a guidebook edited by :editor in :year',
+    'nbCrags' => 'Number of Oblyk crag in this guidebook : ',
 
     //Auteur
-    'authorTitle' => 'Auteur :',
-    'noAuthor' => 'auteur non renseigné',
+    'authorTitle' => 'Author :',
+    'noAuthor' => 'Author not filled',
 
     //Prix
-    'priceTitle' => 'Prix conseillé : ',
-    'noPrice' => 'prix non renseigné',
+    'priceTitle' => 'Average price : ',
+    'noPrice' => 'Price not filled',
 
     //Pages
-    'pagesTitle' => 'Nombre de page :',
+    'pagesTitle' => 'Number of pages:',
     'nbPage' => ':count page|:count pages',
-    'noPages' => 'nombre de page non renseigné',
+    'noPages' => 'number of pages not filled',
 
     //Poids
-    'weightTitle' => 'Poids :',
+    'weightTitle' => 'Weight :',
     'weight' => ':count gramme|:count grammes',
-    'noWeight' => 'poids non renseigné',
+    'noWeight' => 'Weight not filled',
 
     //Action
-    'editInformation' => 'Modifier les informations',
-    'changeCover' => 'Changer la couverture du topo',
+    'editInformation' => 'Edit information',
+    'changeCover' => 'Change guidebook cover',
 
     //Description
-    'descriptionTitle' => "Description des grimpeurs",
-    'noDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as ce topo, n'hésite pas à le décrire",
+    'descriptionTitle' => "Climbers descriptions",
+    'noDescription' => "There are no climbers descriptions, if you have this guidebook, please describe it",
 
 
 ];

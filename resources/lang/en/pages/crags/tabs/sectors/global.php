@@ -1,15 +1,13 @@
 <?php
 
-//TODO : TRADUCION À FAIRE
-
 return [
 
     //Les onglet
-    'tabInformation' => "Informations",
-    'tabRoute' => "Voies",
+    'tabInformation' => "Information",
+    'tabRoute' => "Routes",
     'tabPhoto' => "Photos",
     'tabDescription' => "Descriptions",
 
-    'paraNoSecteur' => "Il n'y à encore aucune ligne ni secteur posté sur ce site.<br>Utilise le bouton \"+\" en bas à droite pour ajouter un secteur",
+    'paraNoSecteur' => "There are no routes or sectors posted on this crag yet.<br>Use the button \"+\" at the bottom right to add a sector",
 
 ];

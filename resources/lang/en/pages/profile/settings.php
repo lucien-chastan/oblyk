@@ -1,124 +1,122 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //Les onglets
-    'tabAccount' => "Compte",
+    'tabAccount' => "Account",
     'tabConnexion' => "Connexion",
-    'tabLinks' => "Liens",
+    'tabLinks' => "Links",
     'tabDashboard' => "Dashboard",
-    'tabMessenger' => "Messagerie",
-    'tabPrivacy' => "Confidentialité",
+    'tabMessenger' => "Messenger",
+    'tabPrivacy' => "Privacy",
 
     // ONGLET : COMPTE
-    'titleInformation' => "Mes informations",
-    'labelName' => "Mon nom",
-    'labelPlaces' => "La où je grimpe",
-    'labelBirthYear' => "Année de ma naissance",
-    'labelSex' => "Je suis",
-    'labelDescription' => "Qui je suis en quelques mots",
+    'titleInformation' => "Information",
+    'labelName' => "Name",
+    'labelPlaces' => "Where I climb",
+    'labelBirthYear' => "Birth year",
+    'labelSex' => "I am",
+    'labelDescription' => "Who am I",
 
-    'titlePhotoAndHeadband' => "Photo de profil &amp; Bandeau",
-    'labelProfilePicture' => "Photo de profil",
-    'labelHeadband' => "Bandeau",
+    'titlePhotoAndHeadband' => "Profile photo &amp; Header",
+    'labelProfilePicture' => "Profile photo",
+    'labelHeadband' => "Header",
 
-    'titleDeleteAccount' => "Supprimer mon compte",
+    'titleDeleteAccount' => "Delete account",
 
 
     //ONGLET : CONNEXION
-    'titleEmailConnexion' => "Mot de passe &amp; Email de connexion",
-    'labelMyEmail' => "Mon email",
-    'labelChangeMyPassword' => "Changer mon mot de passe",
-    'labelOldPassword' => "Mon ancien mot de passe",
-    'labelNewPassword' => "Mon nouveau mot de passe",
-    'labelConfirmNewPassword' => "Confirmer mon nouveau mot de passe",
+    'titleEmailConnexion' => "password &amp; connexion email",
+    'labelMyEmail' => "My Email",
+    'labelChangeMyPassword' => "Change password",
+    'labelOldPassword' => "My old password",
+    'labelNewPassword' => "My new password",
+    'labelConfirmNewPassword' => "Confirm new password",
 
 
     //ONGLET : MES AUTRES LIENS WEB
-    'titleSocialNetwork' => "Liens vers mes réseaux sociaux &amp; sites internets",
+    'titleSocialNetwork' => "Links to my social media &amp; websites",
     'columnType' => "type",
-    'columnName' => "nom",
+    'columnName' => "name",
     'columnUrl' => "url",
     'columnAction' => "Action",
 
-    'titleAddLink' => "Ajouter un lien",
-    'labelType' => "Type de lien",
-    'labelTitle' => "Titre du lien (optionnel)",
-    'labelUrl' => "Url du lien",
+    'titleAddLink' => "Add link",
+    'labelType' => "Link type",
+    'labelTitle' => "Link title (optional)",
+    'labelUrl' => "Link URL",
 
-    'saveSubmit' => "Enregistrer",
-    'addSubmit' => "Ajouter",
+    'saveSubmit' => "Submit",
+    'addSubmit' => "Add",
 
 
     //ONGLET : DASHBOARD
-    'titleDashboard' => "Choix des boîtes qui sont affichées sur mon Dashboard",
+    'titleDashboard' => "Box displayed on my Dashboard",
 
-    'labelWelcomeBox' => "Boîte de bienvenue",
-    'descriptionWelcomeBox' => "Affiche une boîte qui te souhaites la bienvenue et t'explique le fonctionnement du dashboard",
+    'labelWelcomeBox' => "Welcome Box",
+    'descriptionWelcomeBox' => "Display a box who welcome you and explain how the dashboard works",
 
-    'labelFriendsCrossesBox' => "Croix des potes",
-    'descriptionFriendsCrossesBox' => "Affiche une boîte qui te montre les dernières réalisation de tes potes",
+    'labelFriendsCrossesBox' => "Friends crosses",
+    'descriptionFriendsCrossesBox' => "Display a box with your last friends crosses",
 
-    'labelMyCrossesBox' => "Résumé de mes croix",
-    'descriptionMyCrossesBox' => "Affiche une boîte qui te présente un rapide résumé de tes croix",
+    'labelMyCrossesBox' => "Crosses resume",
+    'descriptionMyCrossesBox' => "Display a box with a quick crosses resume",
 
-    'labelLastCommentBox' => "Les derniers commentaire",
-    'descriptionLastCommentBox' => "Affiche les derniers commentaires postée sur des voies sur oblyk",
+    'labelLastCommentBox' => "Last comments",
+    'descriptionLastCommentBox' => "Display a box with last comments ",
 
-    'labelLastCragBox' => "Les dernières falaises ajoutées",
-    'descriptionLastCragBox' => "Affiche les dernières falaises qui ont étées ajoutées sur oblyk",
+    'labelLastCragBox' => "Last crags added",
+    'descriptionLastCragBox' => "Display last crags added",
 
-    'labelLastTopicBox' => "Les dernières sujets du forum",
-    'descriptionLastTopicBox' => "Te présente un rapide aperçu de ce qui se passe sur le forum",
+    'labelLastTopicBox' => "Last forum topics",
+    'descriptionLastTopicBox' => "Display a quick overview of the forum",
 
-    'labelCragGymTreeBox' => "Arbre des falaises et salles",
-    'descriptionCragGymTreeBox' => "Affiche sous forme d'arbre les falaises et salles d'oblyk, rangé par pays, régions, puis ville",
+    'labelCragGymTreeBox' => "Crags and gyms list",
+    'descriptionCragGymTreeBox' => "Display a list of crags and gyms, ordered by country, region and city",
 
     'labelNewsBox' => "Oblyk news",
-    'descriptionNewsBox' => "Te présente les derniers articles postés sur oblyk",
+    'descriptionNewsBox' => "Display last Oblyk's news",
 
-    'labelPartnerBox' => "Recherche de partenaire",
-    'descriptionPartnerBox' => "Cette boîte te résume l'activité de ta recherche de partenaire d'escalade",
+    'labelPartnerBox' => "Partner search",
+    'descriptionPartnerBox' => "This box display last partner search activity",
 
-    'labelLastPhotoBox' => "Dernières photos",
-    'descriptionLastPhotoBox' => "Affiche les dernières photos postées sur oblyk",
+    'labelLastPhotoBox' => "Last pictures",
+    'descriptionLastPhotoBox' => "Display last pictures added on Oblyk",
 
-    'labelLastRouteBox' => "Dernières voies",
-    'descriptionLastRouteBox' => "Affiche les dernières voies, blocs, grande-voies, etc. postés sur oblyk",
+    'labelLastRouteBox' => "Last routes",
+    'descriptionLastRouteBox' => "Display last routes added on Oblyk",
 
-    'labelLastGymBox' => "Dernières salles",
-    'descriptionLastGymBox' => "Affiche les dernières salles postées sur oblyk",
+    'labelLastGymBox' => "Last gym",
+    'descriptionLastGymBox' => "Display last gyms added on Oblyk",
 
-    'labelLastGuidebookBox' => "Derniers topos",
-    'descriptionLastGuidebookBox' => "Affiche les derniers topos postés sur oblyk",
+    'labelLastGuidebookBox' => "Last guidebook",
+    'descriptionLastGuidebookBox' => "Display last guidebook added on Oblyk",
 
-    'labelLastClimberBox' => "Derniers grimpeurs",
-    'descriptionLastClimberBox' => "Affiche les derniers grimpeurs arrivés sur oblyk",
+    'labelLastClimberBox' => "Last climbers",
+    'descriptionLastClimberBox' => "Display news climbers on Oblyk",
 
-    'labelLastVideoBox' => "Dernières vidéos",
-    'descriptionLastVideoBox' => "Affiche les dernières vidéos postées sur oblyk",
+    'labelLastVideoBox' => "Last videos",
+    'descriptionLastVideoBox' => "Display last video added on Oblyk",
 
-    'labelRandomWordBox' => "Le mot au hasard",
-    'descriptionRandomWordBox' => "Un boîte qui te présente un mot au hasard du lexique de l'escalade",
+    'labelRandomWordBox' => "Random word",
+    'descriptionRandomWordBox' => "Box that display a random word from climbing glossary",
 
-    'labelContributionBox' => "Votre contribution à oblyk",
-    'descriptionContributionBox' => "Un boîte donne en quelques chiffres les éléments que vous avez ajouté sur oblyk",
+    'labelContributionBox' => "Your contribution to Oblyk",
+    'descriptionContributionBox' => "A box that gives some numbers of elements you added to Oblyk",
 
     //ONGLET : MESSAGERIE
-    'titleMessenger' => "Paramètres de ma messagerie",
-    'subTitleMailWhen' => "M'envoyer un mail quand :",
-    'labelNewConversation' => "J'ai une nouvelle conversation",
-    'labelNewMessage' => "J'ai un nouveau message",
-    'subTitleSoundWhen' => "Émettre un signal sonore quand :",
+    'titleMessenger' => "Messenger settings",
+    'subTitleMailWhen' => "Send a mail when :",
+    'labelNewConversation' => "I have a new conversation",
+    'labelNewMessage' => "I have a new message",
+    'subTitleSoundWhen' => "Send a sound when :",
 
     //ONGLET : CONFIDENTIALITÉ
-    'titlePrivacy' => "Options de confidentialité",
-    'labelPublic' => "Mon profil est public",
-    'strongTitlePublic' => "Profil public :",
-    'descriptionPublic' => "Ma page à propos, mes photos, vidéo et carnet de croix sont visible par la communauté. (mais reste invisible pour les non-inscrits)",
-    'strongTitlePrivate' => "Profil privé :",
-    'descriptionPrivate' => "Profil privé :",
+    'titlePrivacy' => "Privacy options",
+    'labelPublic' => "My profile is public",
+    'strongTitlePublic' => "Public profile :",
+    'descriptionPublic' => "Pages: About, my pictures, videos, crosses are visible to the community. (but keep invisible for non registered users)",
+    'strongTitlePrivate' => "Private profile :",
+    'descriptionPrivate' => "Private profile :",
 
 ];

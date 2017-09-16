@@ -1,17 +1,15 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //titre et intro
-    'title' => "Discuter, Échanger, Débattre de la grimpe",
-    'slogan' => "Bienvenue sur le forum d'oblyk !",
-    'para' => "Ici tu peux discuter avec la communauté d'oblyk, parler de ce qui t'intéresse, défendre tes idées, proposer des améliorations pour oblyk, etc.",
+    'title' => "Discuss, share, debate about climbing",
+    'slogan' => "Welcome in Oblyk's forum!",
+    'para' => "Here you can discuss with the community, talk about your interest, defend your ideas, suggest improvement,...",
 
     //bouton
-    'goToTopics' => "Voir les sujets encours",
-    'goToCreate' => "Créer un nouveau sujet",
-    'goToRules' => "Jeter un oeil aux régles",
+    'goToTopics' => "See ongoing topics",
+    'goToCreate' => "New topic",
+    'goToRules' => "Have a look at the rules",
 
 ];

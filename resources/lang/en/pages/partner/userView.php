@@ -1,22 +1,20 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
-    'actionSeeProfil' => "Voir son profil",
-    'titleDescription' => "Sa description",
+    'actionSeeProfil' => "See his profile",
+    'titleDescription' => "His description",
 
-    'noDescription' => ":name n'a pas rédigé de description",
-    'climbingLevelTitle' => "Son niveau en escalade",
-    'minMax' => ":name grimpe entre le :min et le :max",
+    'noDescription' => ":name didn't write a description",
+    'climbingLevelTitle' => "His climbing level",
+    'minMax' => ":name climb between :min and :max",
 
-    'placesTitle' => "Où grimpe-t-( elle / il ) ?",
-    'tooltipClickMap' => "Cliquez pour afficher sur la carte",
+    'placesTitle' => "Where does he/she climb ?",
+    'tooltipClickMap' => "Click to show on map",
 
-    'climbingTypeTitle' => "Ses styles d'escalades",
-    'action' => "Contacter :name",
-    'accountFor' => "Créer toi un compte pour contacter :name",
-    'loginAction' => "Se connecter",
-    'registerAction' => "Créer un compte",
+    'climbingTypeTitle' => "His climbing styles",
+    'action' => "Contact :name",
+    'accountFor' => "Register to contact :name",
+    'loginAction' => "Login",
+    'registerAction' => "Register",
 ];

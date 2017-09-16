@@ -1,36 +1,34 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //Année de naissance et age limite
-    'birth' => "Bonjour,<br>Avant toute chose pour faire partie de la recheche de partenaire, nous devons connaître ta date de naissance.",
-    'labelBirth' => "Mon année de naissance",
-    'submitBirth' => "Enregistrer",
-    'noResponsibility_1' => "Désolé,<br>Pour des questions de résponsabilité, nous n'autorisons pas les mineurs à utiliser ce service.",
-    'noResponsibility_2' => "Grandi encore un peu et reviens dans quelques années !<br>Bonne chance à toi.",
+    'birth' => "Hello,<br> Before anything else, we need to know your birth year.",
+    'labelBirth' => "My birth year",
+    'submitBirth' => "Submit",
+    'noResponsibility_1' => "Sorry,<br>For responsibility reasons, you can't use Oblyk before 18y.",
+    'noResponsibility_2' => "Grow up a little and come back in a few!<br>Good luck",
 
     //Les grimpeurs autour de moi
-    'title' => "Qui grimpe au même endroit que moi",
-    'tooltipClicForMap' => "Cliquez pour afficher sur la carte",
-    'noClimbers' => "Désolé, il n'y a personne qui partage les mêmes zones de grimpe que toi pour l'instant",
-    'seeMyPlaces' => "Voir mes lieux de grimpe",
+    'title' => "Who is climbing in the sames spots",
+    'tooltipClicForMap' => "Click to show in the map",
+    'noClimbers' => "Sorry, for now nobody share the same climbing area",
+    'seeMyPlaces' => "See my climbing spots",
 
     //étape 1 : Qui je suis
-    'welcome' => "Bienvenue :name ",
-    'introWelcome' => "Bienvenue dans la recheche de partenaire d'oblyk ! pour en faire partie il faut que tu passe par 2 étapes.<br><span class=\"text-underline\">Premièrement</span> : Active la recherche de partenaire et presente toi un peux plus.",
-    'actionWelcome' => "Commencer ma recherche",
+    'welcome' => "Welcome :name ",
+    'introWelcome' => "Welcome into Oblyk's partner search! To be part of it, you need to do 2 steps.<br><span class=\"text-underline\">First</span> : Activate partner search et tell us about who you are.",
+    'actionWelcome' => "Start search",
 
 
     //étape 2 : mes lieux de grimpe
-    'titlePlaces' => "Mes lieux de grimpe",
-    'introPlaces' => "Pour que nous puissions te présenter les grimpeurs autours de chez toi, il faut déjà que tu nous dise où tu grimpe.<br>Rend-toi dans ton profil et renseigne ta zone de grimpe",
-    'actionPlaces' => "Mes lieux de grimpe",
+    'titlePlaces' => "My climbing spots",
+    'introPlaces' => "To show you climbers around you, we need to know first where you are climbing <br> Go into your profile and fill your climbing area",
+    'actionPlaces' => "My climbing spots",
 
     //Login or Register
-    'noAccountDescription' => "Crée-toi un compte pour avoir accès à liste de grimpeur près de chez toi !",
-    'register' => "Créer un compte",
-    'login' => "Connexion",
+    'noAccountDescription' => "Register to see a list a climbers around you !",
+    'register' => "Register",
+    'login' => "Login",
 
 ];

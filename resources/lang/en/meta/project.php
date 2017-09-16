@@ -1,7 +1,5 @@
 <?php
 
-//TODO : TRADUCTION DE "DEVELOPER" ET "NOUS SUPPORTER" À FAIRE
-
 return [
 
     //page à propos
@@ -13,8 +11,8 @@ return [
     'description_contact' => 'For any question, proposal, or if you simply want to help us, feel free to contact us !',
 
     //Page developer
-    'title_developer' => 'Oblyk developer, contribuer, API',
-    'description_developer' => 'Contribuer au code source d\'oblyk, suggérer des améliorations, éxploiter l\'Open Data grâce aux API',
+    'title_developer' => 'Oblyk developer, contribution, API',
+    'description_developer' => 'Contribute to Oblyk source code, suggest improvement, exploit OpenData with API',
 
     //Page aide
     'title_help' => 'The tutorial of the the climbing community website',
@@ -25,21 +23,20 @@ return [
     'description_project' => 'Learn more about oblyk\'s history, and its development prospects. Oblyk is a climbing community website',
 
     //Page nous supporter
-    'title_supportUs' => 'Supporter Oblyk, faire un don',
-    'description_supportUs' => 'Supporter le développement d\'Oblyk pour qu\'il puisse continuer à évoluer',
+    'title_supportUs' => 'Support Oblyk, make a donation',
+    'description_supportUs' => 'Support Oblyk development to help improvement',
 
     //Page de remerciment
-    'title_thanks' => 'Merci !',
-    'description_thanks' => 'Un énorme merci pour votre don !',
+    'title_thanks' => 'Thank\'s !',
+    'description_thanks' => 'Huge thanks for your donation !',
 
     //Page Mention légale
-    'title_termsOfUse' => 'Mentions légales du site d\'escalade Oblyk : plateforme communautaire pour les grimpeurs',
-    'description_termsOfUse' => 'Voir les conditions générales d\'utilisation d\'Oblyk, le site communautaire d\'escalade : notre politique de confidentialité et nos mentions légales',
+    'title_termsOfUse' => 'Terms of service of the climbing website Oblyk : community platform for climbers',
+    'description_termsOfUse' => 'View oblyk\'s terms of use, privacy policy, and terms of service. Oblyk is a climbing community website',
 
     //Page Qui somme nous
-    'title_who' => 'Terms of service of the climbing website Oblyk : community platform for climbers',
-    'description_who' => 'View oblyk\'s terms of use, privacy policy, and terms of service. Oblyk is a climbing community website',
-
+    'title_who' => 'See Oblyk website creators',
+    'description_who' => 'Know more about Oblyk website creators, their views of climbing, and why the created this community platform',
 
 
 ];

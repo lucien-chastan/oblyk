@@ -1,11 +1,8 @@
 <?php
 
-//TODO : TRADUCION À FAIRE
-
 return [
 
     //Marche d'approche
-    'approach' => "{0} temps d'approche non-renseigné|{1}une minute d'approche|[2,*]:count minutes d'approche",
-
+    'approach' => "{0} Approach walk not filled|{1}one minute approach walk|[2,*]:count minutes approach walk",
 
 ];

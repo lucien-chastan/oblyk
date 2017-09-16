@@ -1,20 +1,18 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //parking
-    'titleParking' => "Les parkings",
-    'noParking' => "Il n'y a pas encore de parking référencé sur ce site",
+    'titleParking' => "Parking",
+    'noParking' => "There are no parking referenced yet",
 
     //marche d'approche
-    'titleApproach' => "Les marches d'approches",
-    'noApproach' => "Il n'y a pas encore de marche d'approche référencée sur ce site",
+    'titleApproach' => "Approach",
+    'noApproach' => "There are no Approach walk referenced yet",
 
     //minimum add
-    'informationMinium' => "Ajouter au moins un parking pour ajouter une marche d\'approche",
-    'alertMinium' => "Il faut que vous ayez ajouté au moins un parking pour pouvoir ajouter une marche d\'approche",
+    'informationMinium' => "Add at least one parking to add an approach walk",
+    'alertMinium' => "You need to add at least one parking to be able adding an approach walk",
 
 
 ];

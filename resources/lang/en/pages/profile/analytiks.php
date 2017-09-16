@@ -1,43 +1,41 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //onglet
-    'routeTab' => "Sur les lignes",
-    'placeTab' => "Sur les lieux",
-    'timeTab' => "Sur le temps",
-    'filterTab' => "Filtres",
+    'routeTab' => "Routes tab",
+    'placeTab' => "Spots tab",
+    'timeTab' => "Time tab",
+    'filterTab' => "Filters",
 
     //Sur les lignes : Titre des graphiques
-    'crossesGraderGraphTitle' => "Croix / Cotations",
-    'crossesClimbGraphTitle' => "Croix / Type de grimpe",
-    'crossesModeGraphTitle' => "Croix / Type d'enchainement",
+    'crossesGraderGraphTitle' => "Crosses / Grades",
+    'crossesClimbGraphTitle' => "Crosses / Climbing types",
+    'crossesModeGraphTitle' => "Crosses / Type d'enchainement",
 
     //Sur les lieux : Titre des graphiques
-    'nbCrossesByCragGraphTitle' => "Nombre de croix pas site d'escalade",
-    'nbCrossesByRegionGraphTitle' => "Nombre de croix pas régions",
-    'nbCrossesByCountryGraphTitle' => "Nombre de croix pas pays",
-    'nbCrossesByRockGraphTitle' => "Nombre de croix par roche",
-    'nbCrossesByMapGraphTitle' => "Carte des sites ou j'ai grimpé",
+    'nbCrossesByCragGraphTitle' => "Number of crosses by crags",
+    'nbCrossesByRegionGraphTitle' => "Number of crosses by regions",
+    'nbCrossesByCountryGraphTitle' => "Number of crosses by countries",
+    'nbCrossesByRockGraphTitle' => "Number of crosses by rocks",
+    'nbCrossesByMapGraphTitle' => "Map of crags i climbed",
 
     //Sur le temps : Titre des graphiques
-    'nbCrossesInLifeGraphTitle' => "Nombre de croix sur le temps",
-    'nbCrossesByYearGraphTitle' => "Nombre de croix sur les anneés",
-    'nbCrossesByMouthGraphTitle' => "Nombre de croix sur les mois",
+    'nbCrossesInLifeGraphTitle' => "Number of crosses by time",
+    'nbCrossesByYearGraphTitle' => "Number of crosses by years",
+    'nbCrossesByMouthGraphTitle' => "Number of crosses by months",
 
     //Filtre
-    'filterTitle' => "Filtrer mon analytiks",
-    'filterOnClimbType' => "Filtre sur les types de grimpe",
-    'filterOnStatusType' => "Filtre sur les types d'enchainement :",
-    'filterPeriod' => "Afficher mes croix uniquement entre deux dates :",
-    'allDone' => "Tout cocher",
-    'allUndone' => "Tout décocher",
-    'startDate' => "Date de départ",
-    'endDate' => "Date de fin",
-    'submit' => "Enregistrer",
-    'yes' => "oui",
-    'no' => "non",
+    'filterTitle' => "Filter my analytiks",
+    'filterOnClimbType' => "Filter on climbing types",
+    'filterOnStatusType' => "Filter sur les types d'enchainement :",
+    'filterPeriod' => "Display my crosses only between two dates :",
+    'allDone' => "Check all",
+    'allUndone' => "Uncheck all",
+    'startDate' => "Start date",
+    'endDate' => "End date",
+    'submit' => "Submit",
+    'yes' => "yes",
+    'no' => "no",
 
 ];

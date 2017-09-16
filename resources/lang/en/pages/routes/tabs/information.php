@@ -1,37 +1,35 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //Évaluation de la difficulté
     'nbVote' => ':count vote|:count votes',
-    'hardnessTool' => 'Facile : :easy %<br>Juste : :just %<br>Dur : :hard %',
-    'noEvaluation' => "Pas d'évaluation de la difficulté",
+    'hardnessTool' => 'Easy : :easy %<br>Just : :just %<br>Hard : :hard %',
+    'noEvaluation' => "No difficulty evaluation",
 
     //information sur la ligne
-    'noIncline' => "inclinaison non-renseignée",
-    'nbLongueur' => ":count longueur|:count longueurs",
-    'noReception' => "réception non-renseignée",
-    'noAnchor' => "relais non-renseignée",
-    'height' => "{0}? mètre|{1}:count mètre|[2,*]:count mètres",
-    'noHeight' => "hauteur non-renseignée",
-    'noPoint' => "point non-renseigné",
-    'noStart' => "départ non-renseignée",
-    'noBoulderOpener' => "brosseur non-renseigné",
-    'noRouteOpener' => "ouvreur non-renseigné",
-    'noOpenYear' => "année non-renseignée",
+    'noIncline' => "incline not filled",
+    'nbLongueur' => ":count pitch|:count pitch",
+    'noReception' => "reception not filled",
+    'noAnchor' => "anchor not filled",
+    'height' => "{0}? meter|{1}:count meter|[2,*]:count meters",
+    'noHeight' => "height not filled",
+    'noPoint' => "point not filled",
+    'noStart' => "start not filled",
+    'noBoulderOpener' => "boulder opener not filled",
+    'noRouteOpener' => "route opener not filled",
+    'noOpenYear' => "open year not filled",
 
     //Les longueurs
-    'pitchTitle' => "Les longueurs",
-    'gradeColumn' => "Côte",
-    'anchorColumn' => "Relais",
+    'pitchTitle' => "Pitches",
+    'gradeColumn' => "Grade",
+    'anchorColumn' => "Anchor",
     'pointColumn' => "Point",
-    'heightColumn' => "Hauteur",
+    'heightColumn' => "Height",
 
     //description
-    'descriptionTitle' => "Description des grimpeurs",
-    'noDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as grimpé cette ligne pas à la décrire",
+    'descriptionTitle' => "Climbers description",
+    'noDescription' => "There are no descriptions posted by climbers, if you've been here, do not hesitate to describe it",
 
 
 ];

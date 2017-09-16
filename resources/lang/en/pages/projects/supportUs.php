@@ -1,20 +1,18 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     'title' => 'Support Us',
-    'para_1' => "Sur Oblyk il n'y a aucune limitation, pas de compte prenium, ni pub, ni lien ou article sponsorisé, tous est gratuit ! ; )",
-    'para_2' => "Si tout est gratuit et qu'obyk ne perçoit aucun revenu, cela veut-il dire qu'oblyk ne coûte rien à développer ?",
+    'para_1' => "In Oblyk there are no limits, no premium account, no adds, no sponsored link, everything free ! ; )",
+    'para_2' => "If it is free and Oblyk doesn't get any money, does it mean it is a zero cost project ?",
     'para_3' => "
-    Malheureusement non, comme tout site internet, oblyk doit être hebergé dans un datacenter et louer un nom de domaine pour pouvoir éxister sur la toile.<br>
-    Et ça par contre se n'est pas gratuit ...
+    Unfortunately no, as every website, oblyk need to be hosted in a data center and rent a domain name to exist.<br>
+    And that is not free...
     ",
     'para_4' => "
-    Si vous avez quelques euros en trop, que vous appréciez le travail réalisé et que vous souhaitez encourager le développement d'oblyk, vous pouvez nous faire un don ; )<br>
-    C'est pour nous une aide inestimable ! Vous nous permetrez ainsi de continuez le développement de cette belle platforme et d'assurer son avenir ; )
+    If you have a few money to spent, you like the work done and want to encourage Oblyk development, you can make a donation ; )<br>
+    It is for us a priceless help! You will help us continue the development and ensure it's future ; )
     ",
-    'thanks'=>"Merci d'avance de votre générosité !",
+    'thanks'=>"Thank you in advance for your generosity!",
 
 ];

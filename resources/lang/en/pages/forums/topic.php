@@ -1,23 +1,21 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //titre et intro
-    'postBy' => "Proposé par",
-    'postView' => "vu une fois|vu :count fois",
+    'postBy' => "Proposed by",
+    'postView' => "seen once|seen :count times",
     'nbPost' => ":count post|:count posts",
 
     //action
-    'tooltipEdit'=>"Modifier titre ou catégorie de ce topic",
-    'tooltipDelete'=>"Supprimer ce topic",
-    'titleModalEdit'=>"Modifier ce topic",
-    'addPost'=>"{0} Écrire le premier post|[1,*] Ajouter une réponse",
+    'tooltipEdit'=>"Edit title or category of this topic",
+    'tooltipDelete'=>"Delete topic",
+    'titleModalEdit'=>"Edit ce topic",
+    'addPost'=>"{0} Write first post|[1,*] Answer",
 
     //following
-    'following'=>'Suivre ce sujet',
-    'unfollowing'=>'Ne plus suivre ce sujet',
-    'loginForFollow'=>'Connectez-vous pour suivre ce sujet',
+    'following'=>'Follow this topic',
+    'unfollowing'=>'Do not follow this topic anymore',
+    'loginForFollow'=>'Login to follow this topic',
 
 ];

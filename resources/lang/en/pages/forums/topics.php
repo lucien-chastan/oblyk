@@ -1,30 +1,25 @@
 <?php
 
-//TODO : TRADUCTION À FAIRE
-
 return [
 
     //titre et intro
-    'title' => "Les sujets postés",
+    'title' => "Topics posted",
     'intro' => "
-Dans cette section, vous trouverez les dernières <strong>discussions</strong> lancées par des grimpeurs, sur des sujets divers et variés, comme :
-<strong>recherche de partenaires</strong>, conseils pour faire des jolies <strong>photos d'escalade</strong>, avis sur du <strong>matériel d'escalade</strong>, etc.<br>
-N'hésitez surtout pas à poster un message dans une discussion qui vous interpelle sur le <strong>forum d'escalade</strong> :
-il est toujours bon d'enrichir les débats ! ;)",
+    In this section, you will find last <strong>discussion created by climbers, about different topics, like : <strong>partner search</strong>, tips for taking good <strong>climbing pictures</strong>, reviews of <strong>climbing gear</strong>.. Feel free to add a new post in a discussion you are interested in. Always good to feed debates ! ;)",
 
     //tableau
-    'columnTitle' => "Titre",
-    'columnCategory' => "Catégorie",
-    'columnViews' => "Vus",
+    'columnTitle' => "Title",
+    'columnCategory' => "Categories",
+    'columnViews' => "Views",
     'columnPosts' => "Posts",
     'columnDate' => "Date",
 
     //information sur un sujet
-    'addedBy'=>"proposé par",
+    'addedBy'=>"added by",
 
     //autre
-    'noTopics'=>"Il n'y a pas encore de sujet dans cette catégorie",
-    'actionNoTopics'=>"voir tous les sujets",
-    'goToLastPage'=>"aller à la dernière page",
+    'noTopics'=>"No topics in this category",
+    'actionNoTopics'=>"see all topics",
+    'goToLastPage'=>"go to last page",
 
 ];
