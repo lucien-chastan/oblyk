@@ -8,12 +8,12 @@
 
     <div class="row">
         @if($dataModal['id'] == '')
-            {!! $Inputs::upload(['name'=>'file', 'filter'=>'application/pdf', 'id'=>'upload-input-topo' ,'label'=>'Fichier PDF']) !!}
+            {!! $Inputs::upload(['name'=>'file', 'filter'=>'application/pdf', 'id'=>'upload-input-topo' ,'label'=>trans('modals/pdfGuideBook.pdfFile')]) !!}
         @endif
 
-            {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du topo', 'type'=>'text']) !!}
-            {!! $Inputs::text(['name'=>'author', 'value'=>$dataModal['author'], 'label'=>'Auteur du topo', 'type'=>'text']) !!}
-            {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description du topo']) !!}
+            {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/pdfGuideBook.title'), 'type'=>'text']) !!}
+            {!! $Inputs::text(['name'=>'author', 'value'=>$dataModal['author'], 'label'=>trans('modals/pdfGuideBook.author'), 'type'=>'text']) !!}
+            {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/pdfGuideBook.description')]) !!}
 
             @if($dataModal['id'] == '')
                 {!! $Inputs::progressbar(['id'=>'progressbar-upload-topo']) !!}

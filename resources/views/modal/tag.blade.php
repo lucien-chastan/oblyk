@@ -7,8 +7,8 @@
     {!! $Inputs::popupError([]) !!}
     <div class="row">
         <div class="input-field col s12">
-            <input placeholder="filtrer les tags" id="search_tags" type="text" onkeyup="searchTags()">
-            <label for="search_tags">Rechercher un tag</label>
+            <input placeholder="@lang('modals/tag.searchTagPlaceholder')" id="search_tags" type="text" onkeyup="searchTags()">
+            <label for="search_tags">@lang('modals/tag.searchTag')</label>
         </div>
     </div>
     <div class="row">

@@ -7,7 +7,7 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>'Couverture']) !!}
+        {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>trans('modals/guidebookCover.cover')]) !!}
         {!! $Inputs::progressbar(['id'=>'progressbar-upload-couverture']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>

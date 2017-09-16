@@ -10,4 +10,8 @@ return [
 
     'postByDate' => 'ajouté par <a href=":url">:name</a> le :date',
 
+    //Label
+    'word' => "Mot",
+    'definition' => "Définition",
+
 ];

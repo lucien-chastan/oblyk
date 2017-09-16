@@ -8,9 +8,9 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Nom du lieu', 'type'=>'text']) !!}
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Informations complémentaires (optionnel)', 'placeholder'=>'ici tu peux donner plus d\'informations vis-à-vis de ce lieux (horaire de passage, secteur, etc.)']) !!}
-        {!! $Inputs::localisation(['lat'=>$dataModal['lat'], 'lng'=>$dataModal['lng'], 'label'=>'Localisation (cliquez sur la carte pour localiser le lieux)', 'withRayon'=>true, "rayon"=>$dataModal['rayon']]) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/partner.name'), 'type'=>'text']) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/partner.information'), 'placeholder'=>trans('modals/partner.informationPlaceholder')]) !!}
+        {!! $Inputs::localisation(['lat'=>$dataModal['lat'], 'lng'=>$dataModal['lng'], 'label'=>trans('modals/partner.localisation'), 'withRayon'=>true, "rayon"=>$dataModal['rayon']]) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 

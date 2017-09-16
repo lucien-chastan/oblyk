@@ -9,4 +9,7 @@ return [
     'modalAddTitle' => 'Add a video',
 
     'postByDate' => 'added by <a href=":url">:name</a> on :date',
+
+    //Label
+    'url' => "Video URL",
 ];

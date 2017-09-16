@@ -7,7 +7,7 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'searche-message-user', 'value'=>'', 'label'=>'Chercher un utilisateur', 'type'=>'text', 'onkeyup'=>'searchMessageUser()']) !!}
+        {!! $Inputs::text(['name'=>'searche-message-user', 'value'=>'', 'label'=>trans('modals/conversation.searchUser'), 'type'=>'text', 'onkeyup'=>'searchMessageUser()']) !!}
         <div id="insert-user-message-search">
 
         </div>

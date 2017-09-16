@@ -10,4 +10,9 @@ return [
 
     'postByDate' => 'téléversé par <a href=":url">:name</a> le :date',
 
+    //Label
+    'pdfFile' => "Fichier PDF",
+    'title' => "Titre du topo",
+    'author' => "Auteur du topo",
+    'description' => "Description du topo",
 ];

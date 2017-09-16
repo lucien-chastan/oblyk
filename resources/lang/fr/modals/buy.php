@@ -10,4 +10,8 @@ return [
 
     'postByDate' => 'ajouté par <a href=":url">:name</a> le :date',
 
+    //Label
+    'name' => "Nom du point de vente",
+    'webSite' => "Site internet du point de vente",
+    'localisation' => "Localisation (cliquez sur la carte pour localiser le point de vente)",
 ];

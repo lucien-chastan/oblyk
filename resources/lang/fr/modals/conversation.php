@@ -12,4 +12,5 @@ return [
 
     //Label
     'conversationTitle' => "Titre de la conversation",
+    'searchUser' => "Chercher un utilisateur",
 ];

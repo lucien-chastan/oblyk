@@ -13,4 +13,6 @@ return [
 
     //Label
     'conversationTitle' => "Conversation title",
+    'searchUser' => "Search a user",
+
 ];

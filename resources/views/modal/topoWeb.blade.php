@@ -7,8 +7,8 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du topo', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>'Url du topo web', 'type'=>'url']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/webGuideBook.title'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>trans('modals/webGuideBook.url'), 'type'=>'url']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 

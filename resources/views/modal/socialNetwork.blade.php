@@ -8,11 +8,11 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::social(['name'=>'social_network_id', 'value'=>$dataModal['social_network_id'], 'label'=>'Type de lien']) !!}
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du lien (optionnel)', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>'Url du lien', 'type'=>'url']) !!}
+        {!! $Inputs::social(['name'=>'social_network_id', 'value'=>$dataModal['social_network_id'], 'label'=>trans('modals/socialNetwork.linkType')]) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/socialNetwork.linkTitle'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>trans('modals/socialNetwork.linkUrl'), 'type'=>'url']) !!}
 
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

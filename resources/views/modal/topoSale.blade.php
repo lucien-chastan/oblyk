@@ -7,10 +7,10 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Nom du point de vente', 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/buy.name'), 'type'=>'text']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
-        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>'site internet', 'type'=>'url']) !!}
-        {!! $Inputs::localisation(['lat'=>$dataModal['lat'], 'lng'=>$dataModal['lng'], 'label'=>'Localisation (cliquez sur la carte pour localiser le point de vente)']) !!}
+        {!! $Inputs::text(['name'=>'url', 'value'=>$dataModal['url'], 'label'=>trans('modals/buy.webSite'), 'type'=>'url']) !!}
+        {!! $Inputs::localisation(['lat'=>$dataModal['lat'], 'lng'=>$dataModal['lng'], 'label'=>trans('modals/buy.localisation')]) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 

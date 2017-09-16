@@ -7,13 +7,13 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du topo', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'author', 'value'=>$dataModal['author'], 'label'=>'Auteur du topo', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'editor', 'value'=>$dataModal['editor'], 'label'=>'Éditeur du topo', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'editionYear', 'value'=>$dataModal['editionYear'], 'label'=>'Année d\'édition', 'type'=>'number']) !!}
-        {!! $Inputs::text(['name'=>'price', 'value'=>$dataModal['price'], 'label'=>'Prix en euro', 'type'=>'number']) !!}
-        {!! $Inputs::text(['name'=>'page', 'value'=>$dataModal['page'], 'label'=>'Nombre de page', 'type'=>'number']) !!}
-        {!! $Inputs::text(['name'=>'weight', 'value'=>$dataModal['weight'], 'label'=>'Poids en gramme', 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/paperGuideBook.guidebookTitle'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'author', 'value'=>$dataModal['author'], 'label'=>trans('modals/paperGuideBook.author'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'editor', 'value'=>$dataModal['editor'], 'label'=>trans('modals/paperGuideBook.editor'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'editionYear', 'value'=>$dataModal['editionYear'], 'label'=>trans('modals/paperGuideBook.publishingYear'), 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'price', 'value'=>$dataModal['price'], 'label'=>trans('modals/paperGuideBook.price'), 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'page', 'value'=>$dataModal['page'], 'label'=>trans('modals/paperGuideBook.page'), 'type'=>'number']) !!}
+        {!! $Inputs::text(['name'=>'weight', 'value'=>$dataModal['weight'], 'label'=>trans('modals/paperGuideBook.weight'), 'type'=>'number']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 

@@ -8,4 +8,8 @@ return [
     'modalEditeTitle' => 'Modifier des tags',
     'modalAddTitle' => 'Ajouter des tags',
 
+    //Label
+    'searchTag' => "Rechercher un tag",
+    'searchTagPlaceholder' => "Rechercher un tag",
+
 ];

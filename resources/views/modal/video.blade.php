@@ -7,7 +7,7 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'iframe', 'value'=>$dataModal['iframe'], 'label'=>'Url de la vidéo', 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'iframe', 'value'=>$dataModal['iframe'], 'label'=>trans('modals/video.url'), 'type'=>'text']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>

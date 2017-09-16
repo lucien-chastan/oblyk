@@ -10,4 +10,7 @@ return [
 
     'postByDate' => 'Added by <a href=":url">:name</a> on :date',
 
+    //Label
+    'title' => "Web guidebook title",
+    'url' => "Web guidebook URL",
 ];

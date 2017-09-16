@@ -10,4 +10,9 @@ return [
 
     'postByDate' => 'Uploaded by <a href=":url">:name</a> on :date',
 
+    //Label
+    'pdfFile' => "PDF file",
+    'title' => "PDF guidebook title",
+    'author' => "PDF guidebook author",
+    'description' => "PDF guidebook description",
 ];

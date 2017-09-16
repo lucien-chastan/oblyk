@@ -8,8 +8,8 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du sujet', 'type'=>'text']) !!}
-        {!! $Inputs::categories(['name'=>'category_id', 'value'=>$dataModal['category_id'], 'label'=>'Categories du sujet']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/topic.topicTitle'), 'type'=>'text']) !!}
+        {!! $Inputs::categories(['name'=>'category_id', 'value'=>$dataModal['category_id'], 'label'=>trans('modals/topic.topicCategory')]) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
