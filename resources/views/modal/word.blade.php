@@ -9,7 +9,7 @@
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Mot', 'type'=>'text']) !!}
         {!! $Inputs::mdText(['name'=>'definition', 'value'=>$dataModal['definition'], 'label'=>'Définition']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

@@ -9,25 +9,25 @@
     <div class="row">
 
         <div class="row">
-            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">playlist_add_check</i> Dans mon carnet</p>
-            {!! $Inputs::crossStatuses(['name'=>'status_id','label'=>'Status (En projet, À vue, Flash, etc.)', 'value'=> $dataModal['status_id']]) !!}
+            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">playlist_add_check</i> @lang('modals/cross.sendListTitle')</p>
+            {!! $Inputs::crossStatuses(['name'=>'status_id','label'=>trans('modals/cross.status'), 'value'=> $dataModal['status_id']]) !!}
             <div style="{{$dataModal['showMode']}}">
-                {!! $Inputs::crossModes(['name'=>'mode_id','label'=>'Mode (En tête, en moulinette, etc.)', 'value'=> $dataModal['mode_id']]) !!}
+                {!! $Inputs::crossModes(['name'=>'mode_id','label'=>trans('modals/cross.mode'), 'value'=> $dataModal['mode_id']]) !!}
             </div>
-            {!! $Inputs::date(['name'=>'release_at', 'label'=>'Date de la croix', 'placeholder'=>'Date de la croix', 'value'=> $dataModal['release_at']]) !!}
-            {!! $Inputs::text(['name'=>'attempt', 'label'=>'Nombre de tentative', 'value'=> $dataModal['attempt'], 'type'=>'number']) !!}
+            {!! $Inputs::date(['name'=>'release_at', 'label'=>trans('modals/cross.crossDate'), 'placeholder'=>trans('modals/cross.crossDate'), 'value'=> $dataModal['release_at']]) !!}
+            {!! $Inputs::text(['name'=>'attempt', 'label'=>trans('modals/cross.attempt'), 'value'=> $dataModal['attempt'], 'type'=>'number']) !!}
         </div>
 
         <div class="row" style="{{$dataModal['showPitchs']}}">
-            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">timeline</i> Les longueurs que j'ai faite</p>
+            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">timeline</i> @lang('modals/cross.pitchTitle')</p>
             <div id="list-pitch-cross-popup">
                 <table class="striped bordered centered table-pitch-cross">
                     <thead>
                     <tr>
-                        <th>Faite</th>
-                        <th>Longueur</th>
-                        <th>Cotation</th>
-                        <th>Hauteur</th>
+                        <th>@lang('modals/cross.activeColumn')</th>
+                        <th>@lang('modals/cross.pitchColumn')</th>
+                        <th>@lang('modals/cross.gradeColumn')</th>
+                        <th>@lang('modals/cross.heightColumn')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,17 +48,17 @@
         </div>
 
         <div class="row">
-            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">star</i> Comment j'ai trouvé cette voie</p>
-            {!! $Inputs::crossHardnesses(['name'=>'hardness_id', 'label'=>'L\'as tu trouvé dur pour la cotation ?', 'value'=> $dataModal['hardness_id']]) !!}
-            {!! $Inputs::note(['name'=>'note', 'label'=>'Commment noterais-tu cette ligne ?', 'value'=> $dataModal['crossNote']]) !!}
-            {!! $Inputs::mdText(['name'=>'description', 'label'=>'Commentaire', 'value'=> $dataModal['crossDescription']]) !!}
+            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">star</i> @lang('modals/cross.evaluationTitle')</p>
+            {!! $Inputs::crossHardnesses(['name'=>'hardness_id', 'label'=>trans('modals/cross.hardnessQuestion'), 'value'=> $dataModal['hardness_id']]) !!}
+            {!! $Inputs::note(['name'=>'note', 'label'=>trans('modals/cross.noteQuestion'), 'value'=> $dataModal['crossNote']]) !!}
+            {!! $Inputs::mdText(['name'=>'description', 'label'=>trans('modals/cross.comment'), 'value'=> $dataModal['crossDescription']]) !!}
         </div>
 
         <div class="row" style="display: none">
-            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">info_outline</i> Aide oblyk à mieux connaître cette voie !</p>
+            <p class="cross-hr-section grey-text"><i class="material-icons tiny left">info_outline</i> @lang('modals/cross.informationTitle')</p>
         </div>
 
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
 
     </div>
 

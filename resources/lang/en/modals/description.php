@@ -10,4 +10,6 @@ return [
 
     'postByDate' => 'written by <a href=":url">:name</a> on :date',
 
+    //Label
+    'evaluationQuestion' => "How did you find this route?"
 ];

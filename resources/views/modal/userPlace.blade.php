@@ -11,7 +11,7 @@
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Nom du lieu', 'type'=>'text']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Informations complémentaires (optionnel)', 'placeholder'=>'ici tu peux donner plus d\'informations vis-à-vis de ce lieux (horaire de passage, secteur, etc.)']) !!}
         {!! $Inputs::localisation(['lat'=>$dataModal['lat'], 'lng'=>$dataModal['lng'], 'label'=>'Localisation (cliquez sur la carte pour localiser le lieux)', 'withRayon'=>true, "rayon"=>$dataModal['rayon']]) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}

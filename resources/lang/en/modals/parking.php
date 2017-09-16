@@ -10,4 +10,6 @@ return [
 
     'postByDate' => 'added by <a href=":url">:name</a> on :date',
 
+    //Label
+    'localisation'=>"Localisation (click on the map to locate the car park)",
 ];

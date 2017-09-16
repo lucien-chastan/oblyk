@@ -10,4 +10,6 @@ return [
 
     'postByDate' => 'ajouté par <a href=":url">:name</a> le :date',
 
+    //Label
+    'conversationTitle' => "Titre de la conversation",
 ];

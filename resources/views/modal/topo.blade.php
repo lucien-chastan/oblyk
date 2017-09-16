@@ -14,7 +14,7 @@
         {!! $Inputs::text(['name'=>'price', 'value'=>$dataModal['price'], 'label'=>'Prix en euro', 'type'=>'number']) !!}
         {!! $Inputs::text(['name'=>'page', 'value'=>$dataModal['page'], 'label'=>'Nombre de page', 'type'=>'number']) !!}
         {!! $Inputs::text(['name'=>'weight', 'value'=>$dataModal['weight'], 'label'=>'Poids en gramme', 'type'=>'number']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

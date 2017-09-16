@@ -8,10 +8,10 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du lien', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'link', 'value'=>$dataModal['link'], 'label'=>'Url du lien', 'type'=>'url']) !!}
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>trans('modals/link.linkTitle'), 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'link', 'value'=>$dataModal['link'], 'label'=>trans('modals/link.url'), 'type'=>'url']) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

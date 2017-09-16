@@ -12,10 +12,10 @@
         {{--LISTE DES TOPOS--}}
         <div id="zone-massive-est-il-present">
 
-            <p class="text-underline text-bold">Ce site est-il présent dans l'un de ces groupes ?</p>
+            <p class="text-underline text-bold">@lang('modals/massive.connectionTitle')</p>
 
             <div id="liste-massive-proche" style="display: none">
-                liste des groupes
+                @lang('modals/massive.groupList')
             </div>
         </div>
 
@@ -23,17 +23,17 @@
         {{--VALIDATION--}}
         <div id="validation-liaison-massive" class="bt-validation-topo-proche" style="display: none">
 
-            <p class="text-center text-underline text-bold"><span id="nom-site-liaison">xxx</span> à été lié avec le groupe : <span id="nom-massive-liaison">xxx</span></p>
+            <p class="text-center text-underline text-bold"><span id="nom-site-liaison">xxx</span> @lang('modals/massive.connected') : <span id="nom-massive-liaison">xxx</span></p>
 
             {!! $Inputs::Hidden(['name'=>'id', 'id'=>'id-new-liaison', 'value'=>'']) !!}
 
             <div class="row">
-                <div class="col s6"><a id="lien-vers-massive" class="btn waves-effect">voir le groupe</a></div>
-                <div class="col s6"><a onclick="getMassiveArround()" class="btn waves-effect">Lier ce site à un autre groupe</a></div>
+                <div class="col s6"><a id="lien-vers-massive" class="btn waves-effect">@lang('modals/massive.seeGroup')</a></div>
+                <div class="col s6"><a onclick="getMassiveArround()" class="btn waves-effect">@lang('modals/massive.otherGroup')</a></div>
             </div>
             <div class="row">
-                <div class="col s6"><a class="btn-flat waves-effect" onclick="closeModal();refresh();">Fermer</a></div>
-                <div class="col s6"><a class="btn-flat waves-effect" onclick="deleteMassiveLiaison()">Annuler la liaison</a></div>
+                <div class="col s6"><a class="btn-flat waves-effect" onclick="closeModal();refresh();">@lang('modals/massive.close')</a></div>
+                <div class="col s6"><a class="btn-flat waves-effect" onclick="deleteMassiveLiaison()">@lang('modals/massive.cancel')</a></div>
             </div>
         </div>
 
@@ -56,11 +56,11 @@
 
         {{--ZONE CRÉER UN NOUVEAU TOPO--}}
         <div id="zone-creer-un-nouveau-massive">
-            <p class="text-underline text-bold">Si votre groupe n'est pas dans la liste ci-dessus vous pouvez créer un nouveau groupe</p>
+            <p class="text-underline text-bold">@lang('modals/massive.createTitle')</p>
 
             <p class="text-right">
-                <a class="btn-flat waves-effect" onclick="closeModal()">Annuler</a>
-                <a onclick="openModal('/modal/massive', {title : 'Nouveau groupement', massive_id : '', method : 'POST', crag_id : {{$dataModal['crag_id']}}, callback : 'goToNewMassive'})" class="btn waves-effect">Créer un nouveau groupe</a>
+                <a class="btn-flat waves-effect" onclick="closeModal()">@lang('modals/massive.cancel')</a>
+                <a onclick="openModal('/modal/massive', {title : '@lang('modals/massive.newGroup')', massive_id : '', method : 'POST', crag_id : {{$dataModal['crag_id']}}, callback : 'goToNewMassive'})" class="btn waves-effect">@lang('modals/massive.addANewGroup')</a>
             </p>
         </div>
 

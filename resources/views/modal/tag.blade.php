@@ -17,7 +17,7 @@
                 {!! $Inputs::checkbox(['name'=>'check_tag_route', 'id'=>'checkbox-tag-' . $i, 'value'=>$i , 'label'=> trans('elements/tags.tag_' . $i), 'checked' => in_array($i, $dataModal['routeTags']) ? true : false, 'align' => 'left', 'onchange'=>'parseTags()']) !!}
             </div>
         @endfor
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

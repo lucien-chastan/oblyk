@@ -8,8 +8,8 @@
 
     <div class="row">
         {!! $Inputs::text(['name'=>'iframe', 'value'=>$dataModal['iframe'], 'label'=>'Url de la vidéo', 'type'=>'text']) !!}
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

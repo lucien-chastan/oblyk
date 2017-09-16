@@ -9,7 +9,7 @@
     <div class="row">
         {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>'Couverture']) !!}
         {!! $Inputs::progressbar(['id'=>'progressbar-upload-couverture']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'topo_id','value'=>$dataModal['topo_id']]) !!}

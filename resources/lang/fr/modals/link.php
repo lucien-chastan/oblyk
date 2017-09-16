@@ -10,4 +10,7 @@ return [
 
     'postByDate' => 'ajouté par <a href=":url">:name</a> le :date',
 
+    //Label
+    'linkTitle' => "Titre du lien",
+    'url' => "URL du lien",
 ];

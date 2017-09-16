@@ -8,7 +8,7 @@
 
     <div class="row">
         {!! $Inputs::trumbowyg(['name'=>'content','id'=>'trumbowyg-post-editor', 'value'=>$dataModal['content'], 'class'=>'trumbowyg-post-editor']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'postable_type','value'=>$dataModal['postable_type']]) !!}

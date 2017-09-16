@@ -9,16 +9,15 @@
     <div class="row">
         <div class="col s12">
             <p>
-                Ah un problème ...<br>
-                Décrit-nous le problème que tu as rencontré pour que nous puisssions le résoudre. Tu peux renseigner ton adresse mail si tu veux que nous te donnions un retour sur sa résolution.
+                @lang('modals/problem.intro')
             </p>
         </div>
     </div>
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'email', 'value'=>$dataModal['email'], 'label'=>'Ton e-mail (optionel)', 'placeholder'=>'si tu veux un retour','type'=>'email']) !!}
-        {!! $Inputs::mdText(['name'=>'problem', 'value'=>'', 'label'=>'Problème', 'placeholder'=>'Dit-nous quel est le problème que tu as rencontré pour que nous puissions le résoudre']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::text(['name'=>'email', 'value'=>$dataModal['email'], 'label'=>trans('modals/problem.email'), 'placeholder'=>trans('modals/problem.emailPlaceholder'),'type'=>'email']) !!}
+        {!! $Inputs::mdText(['name'=>'problem', 'value'=>'', 'label'=>trans('modals/problem.problem'), 'placeholder'=>trans('modals/problem.problemPlaceholder')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}

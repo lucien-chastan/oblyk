@@ -10,4 +10,7 @@ return [
 
     'dataLegende' => 'Added to <a href=":elementUrl">:elementLabel</a> by <a href=":userUrl">:userName</a>',
 
+    //Label
+    'album' => "Album",
+    'description' => "Photo description",
 ];

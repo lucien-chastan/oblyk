@@ -10,12 +10,12 @@
 
     <div class="row">
         <p class="text-center">
-            Êtes-vous sûr de vouloir supprimer cet élément ?<br>
-            <span class="grey-text">(il n'y a pas de retour possible)</span>
+            @lang('modals/delete.deleteQuestion')<br>
+            <span class="grey-text">(@lang('modals/delete.noReturn')</span>
         </p>
     </div>
 
     <div class="row">
-        {!! $Inputs::Submit(['label'=>'Supprimer', 'color'=>'red']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/delete.delete'), 'color'=>'red']) !!}
     </div>
 </form>

@@ -10,7 +10,7 @@
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['label'], 'label'=>'Titre du sujet', 'type'=>'text']) !!}
         {!! $Inputs::categories(['name'=>'category_id', 'value'=>$dataModal['category_id'], 'label'=>'Categories du sujet']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

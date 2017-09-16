@@ -8,8 +8,8 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::mdText(['name'=>'comment', 'value'=>$dataModal['comment'], 'label'=>'Votre commentaire']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::mdText(['name'=>'comment', 'value'=>$dataModal['comment'], 'label'=>trans('modals/comment.comment')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

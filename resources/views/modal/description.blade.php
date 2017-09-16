@@ -9,10 +9,10 @@
 
     <div class="row">
         @if($dataModal['descriptive_type'] == 'App\Route')
-            {!! $Inputs::note(['name'=>'note', 'value'=>$dataModal['note'], 'label'=>'Comment as-tu trouvé cette ligne ?']) !!}
+            {!! $Inputs::note(['name'=>'note', 'value'=>$dataModal['note'], 'label'=>trans('modals/description.evaluationQuestion')]) !!}
         @endif
-        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>'Description']) !!}
-        {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

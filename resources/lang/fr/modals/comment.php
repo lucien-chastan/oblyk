@@ -10,4 +10,6 @@ return [
 
     'postByDate' => 'posté par <a href=":url">:name</a> le :date',
 
+    //Label
+    'comment' => "Votre commentaire",
 ];

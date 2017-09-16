@@ -10,4 +10,6 @@ return [
 
     'postByDate' => 'par <a href=":url">:name</a> le :date',
 
+    //Label
+    'evaluationQuestion' => "Comment as-tu trouvé cette ligne ?"
 ];

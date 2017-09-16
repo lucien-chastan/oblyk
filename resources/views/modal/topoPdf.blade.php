@@ -19,7 +19,7 @@
                 {!! $Inputs::progressbar(['id'=>'progressbar-upload-topo']) !!}
             @endif
 
-            {!! $Inputs::Submit(['label'=>'Envoyer']) !!}
+            {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
