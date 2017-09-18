@@ -909,6 +909,27 @@ class InputTemplates extends ServiceProvider{
     }
 
 
+    //NOUVELLE FONCTION POUR LES COTATIONS ET PONDERATION
+    public static function grade($options){
+        $name = $options['name'];
+        $id = (isset($options['id']))? $options['id'] : $options['name'];
+        $label = (isset($options['label']))? $options['label'] : $options['name'];
+        $value = (isset($options['value']))? $options['value'] : '';
+        $icon = (isset($options['icon']))? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+        $placeholder = (isset($options['placeholder']))? $options['placeholder'] : '';
+
+        $html = '
+            <div class="input-field col s12">
+                ' . $icon . '
+                <input placeholder="' . $placeholder . '" pattern="^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$" name="' . $name .'" value="' . $value . '" type="text" id="'. $id .'" class="input-data">
+                <label for="'. $id .'">' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
+
+
     //INCLINAISON DE LA LIGNE
     public static function inclinaison($options){
         $name = $options['name'];

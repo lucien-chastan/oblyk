@@ -7,9 +7,9 @@
     {!! $Inputs::popupError([]) !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'id'=>'popup_line_name', 'value'=>$dataModal['ligne']->label, 'label'=>trans('modals/route.name'), 'icon'=>'icon-nom', 'placeholder'=>trans('modals/route.namePlaceholder'),'type'=>'text']) !!}
         {!! $Inputs::sectors(['name'=>'sector_id', 'value'=>$dataModal['ligne']->sector_id, 'label'=>trans('modals/route.sector'), 'icon'=>'icon-sector', 'crag_id'=>$dataModal['ligne']->crag_id]) !!}
         {!! $Inputs::climbs(['name'=>'climb_id', 'value'=>$dataModal['ligne']->climb_id, 'label'=>trans('modals/route.ClimbType'), 'icon'=>'icon-type_grimpe',]) !!}
+        {!! $Inputs::text(['name'=>'label', 'id'=>'popup_line_name', 'value'=>$dataModal['ligne']->label, 'label'=>trans('modals/route.name'), 'icon'=>'icon-nom', 'placeholder'=>trans('modals/route.namePlaceholder'),'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['ligne']->height, 'label'=>trans('modals/route.height'), 'icon'=>'icon-route_height', 'placeholder'=>trans('modals/route.heightPlaceholder'),'type'=>'number']) !!}
 
         <div id="popup-route-nb-longueur">
@@ -51,10 +51,11 @@
         </div>
 
         <div id="popup-route-cotation-incline">
-            <div class="row">
-                {!! $Inputs::cotation(['grade'=>$dataModal['ligne']->routeSections[0]->grade]) !!}
-                {!! $Inputs::ponderation(['sub_grade'=>$dataModal['ligne']->routeSections[0]->sub_grade]) !!}
-            </div>
+            {{--<div class="row">--}}
+                {{--{!! $Inputs::cotation(['grade'=>$dataModal['ligne']->routeSections[0]->grade]) !!}--}}
+                {{--{!! $Inputs::ponderation(['sub_grade'=>$dataModal['ligne']->routeSections[0]->sub_grade]) !!}--}}
+            {{--</div>--}}
+            {!! $Inputs::grade(['name'=>'grade', 'label'=>'Cotation', 'value'=>$dataModal['ligne']->routeSections[0]->grade . $dataModal['ligne']->routeSections[0]->sub_grade, 'icon'=>'icon-grade', 'placeholder'=>"cotation, exemple 6a+, B8, ABO, etc."]) !!}
             {!! $Inputs::inclinaison(['name'=>'incline_id', 'value'=>$dataModal['ligne']->routeSections[0]->incline_id, 'label'=>trans('modals/route.incline'), 'icon'=>'icon-inclinaison']) !!}
         </div>
 

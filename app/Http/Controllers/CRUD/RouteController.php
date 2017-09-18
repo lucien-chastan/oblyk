@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 class RouteController extends Controller
 {
 
+    private $gradePattern = '/(([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))/';
+    private $subGradePattern = '/(\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c|\+|\-)/';
+
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE FALAISE
     function routeModal(Request $request){
 
@@ -113,12 +116,22 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
+
+//        $validationGrade = [
+//            'grade' = [
+//
+//            ]
+//        ];
         //validation du formulaire
         $this->validate($request, [
             'label' => 'required|String|max:255',
             'height' => 'nullable|Integer|min:0',
             'open_year' => 'nullable|Integer|min:1800',
             'nb_longueur' => 'nullable|Integer|min:1',
+            'grade' => [
+                'required',
+                'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
+            ]
         ]);
 
         //information sur la falaise
@@ -165,9 +178,9 @@ class RouteController extends Controller
             //cas d'une voie en une seul longueur
             $myLongueur = new RouteSection();
             $myLongueur->route_id = $route->id;
-            $myLongueur->grade = $request->input('grade');
-            $myLongueur->sub_grade = $request->input('sub_grade');
-            $myLongueur->grade_val = Route::gradeToVal($request->input('grade'), $request->input('sub_grade'));
+            $myLongueur->grade = preg_replace($this->subGradePattern,'', $request->input('grade'));
+            $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$request->input('grade'));
+            $myLongueur->grade_val = Route::gradeToVal($myLongueur->grade, $myLongueur->sub_grade);
             $myLongueur->section_height = $request->input('height');
             $myLongueur->nb_point = $request->input('nb_point');
             $myLongueur->point_id = $request->input('point_id');
@@ -225,6 +238,10 @@ class RouteController extends Controller
             'height' => 'nullable|Integer|min:0',
             'open_year' => 'nullable|Integer|min:1800',
             'nb_longueur' => 'nullable|Integer|min:1',
+            'grade' => [
+                'required',
+                'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
+            ]
         ]);
 
         //mise à jour des données de la falaise
@@ -277,9 +294,9 @@ class RouteController extends Controller
 
         }else{
             //cas d'une voie en une seul longueur
-            $route->routeSections[0]->grade = $request->input('grade');
-            $route->routeSections[0]->sub_grade = $request->input('sub_grade');
-            $route->routeSections[0]->grade_val = Route::gradeToVal($request->input('grade'), $request->input('sub_grade'));
+            $route->routeSections[0]->grade = preg_replace($this->subGradePattern,'', $request->input('grade'));
+            $route->routeSections[0]->sub_grade = preg_replace($this->gradePattern, '',$request->input('grade'));
+            $route->routeSections[0]->grade_val = Route::gradeToVal($route->routeSections[0]->grade, $route->routeSections[0]->sub_grade);
             $route->routeSections[0]->section_height = $request->input('height');
             $route->routeSections[0]->nb_point = $request->input('nb_point');
             $route->routeSections[0]->point_id = $request->input('point_id');

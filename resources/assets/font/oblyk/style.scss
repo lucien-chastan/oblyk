@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'oblyk';
-  src:  url('#{$icomoon-font-path}/oblyk.eot?p7on1a');
-  src:  url('#{$icomoon-font-path}/oblyk.eot?p7on1a#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/oblyk.ttf?p7on1a') format('truetype'),
-    url('#{$icomoon-font-path}/oblyk.woff?p7on1a') format('woff'),
-    url('#{$icomoon-font-path}/oblyk.svg?p7on1a#oblyk') format('svg');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?dr8e0a');
+  src:  url('#{$icomoon-font-path}/oblyk.eot?dr8e0a#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/oblyk.ttf?dr8e0a') format('truetype'),
+    url('#{$icomoon-font-path}/oblyk.woff?dr8e0a') format('woff'),
+    url('#{$icomoon-font-path}/oblyk.svg?dr8e0a#oblyk') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-grade {
+  &:before {
+    content: $icon-grade;
+  }
+}
 .icon-inclinaison {
   &:before {
     content: $icon-inclinaison;
