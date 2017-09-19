@@ -104,7 +104,7 @@ class Route extends Model
         if($grade == 'B20') $val = 50;
 
         //COTATION TYPE HUECO (USA)
-        if($grade == 'VB') $val = 13; if($gradeSub == 'V0-') $val = 15; if($gradeSub == 'V0' ) $val = 15;
+        if($grade == 'VB') $val = 13; if($gradeSub == 'V0-') $val = 14; if($gradeSub == 'V0' ) $val = 15;
         if($gradeSub == 'V0+') $val = 17; if($grade == 'V1') $val = 21; if($grade == 'V2') $val = 23;
         if($grade == 'V3') $val = 27; if($grade == 'V4') $val = 34; if($grade == 'V5') $val = 36;
         if($grade == 'V6') $val = 37; if($grade == 'V7') $val = 38; if($grade == 'V8') $val = 40;
@@ -154,7 +154,7 @@ class Route extends Model
         //COTATION ALLEMANDE VOIE
         if($gradeSub == 'III-') $val = 7; if($gradeSub == 'III') $val = 9; if($gradeSub == 'III+') $val = 13;
         if($gradeSub == 'IV-') $val = 15; if($gradeSub == 'IV') $val = 19; if($gradeSub == 'IV+') $val = 21;
-        if($gradeSub == 'V-') $val = 24; if($gradeSub == 'V') $val = 23; if($gradeSub == 'V+') $val = 25;
+        if($gradeSub == 'V-') $val = 23; if($gradeSub == 'V') $val = 24; if($gradeSub == 'V+') $val = 25;
         if($gradeSub == 'VI-') $val = 27; if($gradeSub == 'VI') $val = 29; if($gradeSub == 'VI+') $val = 31;
         if($gradeSub == 'VII-') $val = 32; if($gradeSub == 'VII') $val = 33; if($gradeSub == 'VII+') $val = 34;
         if($gradeSub == 'VIII-') $val = 35; if($gradeSub == 'VIII') $val = 36; if($gradeSub == 'VIII+') $val = 37;

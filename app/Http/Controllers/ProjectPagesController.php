@@ -28,6 +28,11 @@ class ProjectPagesController extends Controller
         return view('pages.project.about', $data);
     }
 
+    public function gradePage(){
+        return view('pages.project.grade');
+    }
+
+
     public function helpPage(){
 
         //on va chercher les aides et on les groupes par catégorie

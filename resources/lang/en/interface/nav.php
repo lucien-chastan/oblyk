@@ -32,6 +32,8 @@ return [
     'cragMap' => 'Map of the crags',
     'forum' => 'Forum',
     'glossary ' => 'Glossary',
+    'grade ' => 'The Climbing Grades',
+
 
     //Menu "Partenaire"
     'partnerMap' => 'Map of the climbers', // Carte des grimpeurs

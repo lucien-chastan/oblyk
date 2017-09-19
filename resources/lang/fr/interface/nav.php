@@ -32,6 +32,7 @@ return [
     'cragMap' => 'Carte des falaises',
     'forum' => 'Forum',
     'glossary ' => 'lexique',
+    'grade ' => 'Les cotations',
 
     //Menu "Partenaire"
     'partnerMap' => 'Carte des grimpeurs',

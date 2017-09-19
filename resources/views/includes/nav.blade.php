@@ -38,6 +38,7 @@
         <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>@lang('interface/nav.cragMap')</a></li>
         <li><a href="{{ route('forum') }}"><i class="material-icons left">forum</i>@lang('interface/nav.forum')</a></li>
         <li><a href="{{ route('lexique') }}"><i class="material-icons left">text_format</i>@lang('interface/nav.glossary ')</a></li>
+        <li><a href="{{ route('grade') }}"><i class="material-icons left">swap_vert</i>@lang('interface/nav.grade ')</a></li>
     </ul>
 
     {{--DROPDOWN DES OUTILS--}}
@@ -164,6 +165,7 @@
                                 <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>@lang('interface/nav.cragMap')</a></li>
                                 <li><a href="{{ route('forum') }}"><i class="material-icons left">forum</i>@lang('interface/nav.forum')</a></li>
                                 <li><a href="{{ route('lexique') }}"><i class="material-icons left">text_format</i>@lang('interface/nav.glossary ')</a></li>
+                                <li><a href="{{ route('grade') }}"><i class="material-icons left">swap_vert</i>@lang('interface/nav.grade ')</a></li>
                             </ul>
                         </div>
                     </li>
