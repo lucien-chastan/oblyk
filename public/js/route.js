@@ -1,4 +1,4 @@
-let loadedRouteTab = [],
+var loadedRouteTab = [],
     timeToGetSimilar;
 
 function initRouteOpener() {

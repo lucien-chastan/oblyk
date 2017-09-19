@@ -8,5 +8,8 @@ return [
     'videoTab' => 'Vidéos',
     'crossesTab' => 'Mon carnet',
 
+    //tooltip
+    'seeOnSeparatePage' => "voir sur une page séparée",
+
 
 ];

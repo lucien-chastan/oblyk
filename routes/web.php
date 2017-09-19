@@ -49,6 +49,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
     Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
     Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
+    Route::get('/voie-escalade/{route_id}/{route_label}', 'RouteController@routePage')->name('routePage');
 
     //LES SALLES D'ESCALADE
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');

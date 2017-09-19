@@ -1,117 +1,155 @@
-.overlay-side-route{
-    position: fixed;
-    display: none;
-    top:0;
-    left:0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    background-color: rgba(0,0,0,0);
-    transition: background-color 0.3s;
+
+.route-parallax {
+    min-height: 250px;
+    height: 50vh !important;
+    .img-route-parallax{
+        width: 100%;
+        height: 60vh;
+        object-fit: cover;
+    }
+}
+
+.entete-info{
+
+    margin-top: calc(50vh / 2 - 140px / 2);
+    position: relative;
+
+    .square-entete{
+        height: 140px;
+        width: 140px;
+        margin-right: 7px;
+        background-color: rgba(0,0,0,0.7);
+        display: inline-block;
+        text-align: center;
+
+        img{
+            max-height: 90px !important;
+            max-width: 90px !important;
+            display: inline;
+            margin-top: 20px;
+            position: relative;
+            min-width: 90px;
+            min-height: 90px;
+            transform: inherit;
+            left: inherit;
+            bottom: inherit;
+        }
+    }
+
+    .liste-info{
+        display: inline-block;
+        color: rgb(255,255,255);
+        vertical-align: top;
+
+        h1 {
+            margin: 0 0 9px 0;
+            padding: 5px 10px;
+            word-spacing: -10px;
+            font-size: 45px;
+            background-color: rgba(0,0,0,0.7);
+
+            span {
+                display: none;
+            }
+        }
+
+        p{
+            font-size: 14px;
+            margin: 0 0 9px 0;
+            background-color: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+        }
+    }
+}
+
+.line-zone {
 
     .zone-photo-editor {
         display: none;
     }
 
-    .side-route{
-        max-width: calc(100% - 25px) !important;
-        width: 650px;
-        height: 100%;
-        overflow-y: auto;
-        will-change: transform;
-        position: fixed;
-        top:0;
-        right: 0;
-        transform: translateX(100%);
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        background-color: rgb(255,255,255);
-        transition: transform 0.3s;
+    h4 {
+        display: none;
+    }
 
-        h4 {
-            font-size: 2em;
-            margin-bottom: 10px;
+    .tabs a {
+        font-weight: normal;
+    }
+
+    .type-ligne-route {
+        height: 0.5em;
+        vertical-align: middle;
+    }
+
+    .information-route {
+        margin-top: 20px;
+        padding-bottom: 4em;
+
+        .table-des-informations {
+            p {
+                border: 1px rgb(220, 220, 220);
+                border-bottom-style: solid;
+                margin: 0;
+                padding: 9px 0;
+            }
+        }
+
+        .oblyk-icon {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        h5 {
+            margin-top: 2em;
             text-align: center;
         }
+    }
 
-        .tabs a {
-            font-weight: normal;
+    .route-tab{
+        a {
+            display: inline;
+            font-size: inherit;
+            font-weight: inherit;
+            height: auto;
+            line-height: normal;
+            padding: 0;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+    }
+
+    .route-description-zone {
+        a {
+            display: inline;
+            font-size: inherit;
+            font-weight: inherit;
+            height: auto;
+            line-height: normal;
+            padding: 0;
+
+            &:hover {
+                background-color: inherit;
+            }
         }
 
-        .type-ligne-route {
-            height: 0.5em;
+        .note-description {
+            height: 1em;
+            margin-right: 0.5em;
             vertical-align: middle;
         }
+    }
 
-        .information-route {
-            margin-top: 20px;
-            padding-bottom: 4em;
+    .btn-route-add{
 
-            .table-des-informations {
-                p {
-                    border: 1px rgb(220, 220, 220);
-                    border-bottom-style: solid;
-                    margin: 0;
-                    padding: 9px 0;
-                }
-            }
+        a {
+            height: 40px;
+            display: inline-block;
 
-            .oblyk-icon {
-                font-size: 1.5em;
-                vertical-align: middle;
-                margin-right: 10px;
-            }
-
-            h5 {
-                margin-top: 2em;
-                text-align: center;
-            }
-        }
-
-        .route-tab{
-            a {
-                display: inline;
-                font-size: inherit;
-                font-weight: inherit;
-                height: auto;
-                line-height: normal;
-                padding: 0;
-
-                &:hover {
-                    background-color: inherit;
-                }
-            }
-        }
-
-        .route-description-zone {
-            a {
-                display: inline;
-                font-size: inherit;
-                font-weight: inherit;
-                height: auto;
-                line-height: normal;
-                padding: 0;
-
-                &:hover {
-                    background-color: inherit;
-                }
-            }
-
-            .note-description {
-                height: 1em;
-                margin-right: 0.5em;
-                vertical-align: middle;
-            }
-        }
-
-        .btn-route-add{
-
-            a {
-                height: 40px;
-                display: inline-block;
-
-                &:hover{
-                    background-color: #2196F3;
-                }
+            &:hover{
+                background-color: #2196F3;
             }
         }
     }
@@ -138,7 +176,7 @@
             .circle-date {
                 vertical-align: top;
                 margin-top: 5px;
-                color: rgb(255,255,255);
+                color: rgb(255, 255, 255);
                 font-size: 12px;
                 font-weight: bold;
                 height: 45px;
@@ -167,7 +205,9 @@
                         margin-left: 0.5em;
                         cursor: pointer;
                         transition: color 0.3s;
-                        &:hover {color: #2196F3;}
+                        &:hover {
+                            color: #2196F3;
+                        }
                     }
                 }
 
@@ -178,17 +218,18 @@
 
             .virgule {
                 span {
-                    &:after{
+                    &:after {
                         content: ', ';
                     }
 
-                    &:last-child::after{
+                    &:last-child::after {
                         content: '';
                     }
                 }
             }
         }
     }
+
 
     .bt-add-grimpeur-on-cross {
         vertical-align: bottom;
@@ -201,17 +242,16 @@
         }
     }
 
-}
-
-.ligne-bt-route{
-    i {
-        cursor: pointer;
-        opacity: 0.5;
-        transition: opacity 0.3s;
-    }
-    &:hover {
+    .ligne-bt-route{
         i {
-            opacity: 1;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        &:hover {
+            i {
+                opacity: 1;
+            }
         }
     }
 }
@@ -287,4 +327,23 @@
         padding-top: 0;
         padding-bottom: 0;
     }
+}
+
+//version smartphone
+@media screen and (max-width:600px){
+
+    .route-menu-zone{
+        width: 100%;
+        .route-menu{
+            i {display: inline;}
+            span {display: none;}
+        }
+    }
+
+    .entete-info{
+        margin-top: 60px;
+        .square-entete{display: none;}
+        .liste-info{display: block;}
+    }
+
 }

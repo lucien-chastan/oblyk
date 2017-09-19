@@ -9,7 +9,9 @@
             @else
                 <strong class="color-grade-{{$route->routeSections[0]->grade_val}}">{{$route->routeSections[0]->grade}}{{$route->routeSections[0]->sub_grade}}</strong>
             @endif
-
+            <a title="@lang('pages/routes/global.seeOnSeparatePage')" href="{{ route('routePage', ['route_id'=>$route->id, 'route_label'=>str_slug($route->label)]) }}">
+                <i class="material-icons right">open_in_new</i>
+            </a>
         </h4>
 
         <div class="row">

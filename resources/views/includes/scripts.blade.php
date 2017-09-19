@@ -9,6 +9,7 @@
 <script type="text/javascript" src="/js/router.js"></script>
 <script type="text/javascript" src="/js/global-search.js"></script>
 <script type="text/javascript" src="/framework/axios/axios.min.js"></script>
+<script src="/js/photo.js"></script>
 <script src="/framework/marked/marked.min.js"></script>
 <script src="/framework/phototheque/phototheque.js"></script>
 <script src="/framework/trumbowyg/trumbowyg.js"></script>

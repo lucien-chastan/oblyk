@@ -34,7 +34,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/forum/forum.scss', 'public/css')
     .sass('resources/assets/sass/globalSearch/global-search.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css')
-    .sass('resources/assets/sass/article-markdown.scss', 'public/css');
+    .sass('resources/assets/sass/article-markdown.scss', 'public/css')
+    .sass('resources/assets/sass/crag/line.scss', 'public/css');
 
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')

@@ -8,5 +8,7 @@ return [
     'videoTab' => 'Videos',
     'crossesTab' => 'My sendlist',
 
+    //tooltip
+    'seeOnSeparatePage' => "see on a separate page",
 
 ];

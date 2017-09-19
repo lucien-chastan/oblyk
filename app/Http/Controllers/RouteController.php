@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Cross;
 use App\Route;
+use App\TickList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RouteController extends Controller
 {
@@ -12,5 +15,63 @@ class RouteController extends Controller
         $similarLabel = Route::similarRoute($request->input('crag_id'), $request->input('route_id') , $request->input('label'));
 
         return response()->json(json_encode($similarLabel));
+    }
+
+    public function routePage($route_id, $route_label){
+
+        $route = Route::where('id', $route_id)
+            ->with(['descriptions' =>function ($query) {$query->where('description','!=','');}])
+            ->with('tags')
+            ->with('descriptions.user')
+            ->with('routeSections')
+            ->with('routeSections.anchor')
+            ->with('routeSections.point')
+            ->with('routeSections.incline')
+            ->with('routeSections.reception')
+            ->with('routeSections.start')
+            ->withCount('photos')
+            ->withCount('videos')
+            ->first();
+
+        //route dans la ticklist du connecté
+        $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
+
+        $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])->get();
+
+        $count_carnet = count($crosses);
+        if(isset($tickList)) $count_carnet++;
+
+        $route->views++;
+        $route->save();
+
+        //calcul de la durté de la cotation
+        $easy = $just = $hard = $sum = 0;
+        $crosses = Cross::where('route_id',$route->id)
+            ->where('hardness_id','!=',1)
+            ->get();
+
+        foreach ($crosses as $cross){
+            if($cross->hardness_id == 2) $easy++;
+            if($cross->hardness_id == 3) $just++;
+            if($cross->hardness_id == 4) $hard++;
+            $sum += $cross->hardness_id;
+        }
+
+        $hardness = [
+            'easy' => (count($crosses) > 0) ? round($easy / count($crosses) * 100, 1) : 0,
+            'just' => (count($crosses) > 0) ? round($just / count($crosses) * 100, 1) : 0,
+            'hard' => (count($crosses) > 0) ? round($hard / count($crosses) * 100, 1) : 0,
+            'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
+            'nbVote' => count($crosses),
+        ];
+
+        $data = [
+            'route'=>$route,
+            'hardness'=> $hardness,
+            'ticklist' => $tickList,
+            'count_carnet' => $count_carnet
+        ];
+
+        return view('pages.route.line', $data);
     }
 }

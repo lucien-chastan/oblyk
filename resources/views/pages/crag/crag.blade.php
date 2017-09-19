@@ -75,7 +75,6 @@
     <script src="/js/mapVariable.js"></script>
     <script src="/js/crag.js"></script>
     <script src="/js/post.js"></script>
-    <script src="/js/photo.js"></script>
     <script src="/framework/chartJs/Chart.min.js"></script>
     <script>
         convertMarkdownZone();
