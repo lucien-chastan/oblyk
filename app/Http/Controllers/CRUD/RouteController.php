@@ -29,8 +29,7 @@ class RouteController extends Controller
             $tabLongueur = [];
             foreach ($route->routeSections as $section){
                 $temTap = [
-                    $section->grade,
-                    $section->sub_grade,
+                    $section->grade . $section->sub_grade,
                     $section->anchor_id,
                     $section->point_id,
                     $section->nb_point,
@@ -67,7 +66,7 @@ class RouteController extends Controller
             $route->sector_id = $request->input('sector_id');
             $route->routeSections = [$routeSections];
             $route->nb_longueur = 1;
-            $route->tabLongueur = '2a;;1;1;0;1;0';
+            $route->tabLongueur = '2a;1;1;0;1;0';
             $route->typeCotation = true;
             $callback = 'prepareNewLine';
         }
@@ -159,14 +158,14 @@ class RouteController extends Controller
 
                 $myLongueur = new RouteSection();
                 $myLongueur->route_id = $route->id;
-                $myLongueur->grade = $tabInfo[0];
-                $myLongueur->sub_grade = $tabInfo[1];
-                $myLongueur->anchor_id = $tabInfo[2];
-                $myLongueur->point_id = $tabInfo[3];
-                $myLongueur->nb_point = $tabInfo[4];
-                $myLongueur->incline_id = $tabInfo[5];
-                $myLongueur->section_height = $tabInfo[6];
-                $myLongueur->grade_val = Route::gradeToVal($tabInfo[0], $tabInfo[1]);
+                $myLongueur->grade = preg_replace($this->subGradePattern,'', $tabInfo[0]);
+                $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$tabInfo[0]);
+                $myLongueur->anchor_id = $tabInfo[1];
+                $myLongueur->point_id = $tabInfo[2];
+                $myLongueur->nb_point = $tabInfo[3];
+                $myLongueur->incline_id = $tabInfo[4];
+                $myLongueur->section_height = $tabInfo[5];
+                $myLongueur->grade_val = Route::gradeToVal($myLongueur->grade, $myLongueur->sub_grade);
                 $myLongueur->section_order = ($key + 1);
                 $myLongueur->reception_id = 1;
                 $myLongueur->start_id = 1;
@@ -271,14 +270,14 @@ class RouteController extends Controller
                     $myLongueur->route_id = $route->id;
                 }
 
-                $myLongueur->grade = $tabInfo[0];
-                $myLongueur->sub_grade = $tabInfo[1];
-                $myLongueur->anchor_id = $tabInfo[2];
-                $myLongueur->point_id = $tabInfo[3];
-                $myLongueur->nb_point = $tabInfo[4];
-                $myLongueur->incline_id = $tabInfo[5];
-                $myLongueur->section_height = $tabInfo[6];
-                $myLongueur->grade_val = Route::gradeToVal($tabInfo[0], $tabInfo[1]);
+                $myLongueur->grade = preg_replace($this->subGradePattern,'', $tabInfo[0]);
+                $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$tabInfo[0]);
+                $myLongueur->anchor_id = $tabInfo[1];
+                $myLongueur->point_id = $tabInfo[2];
+                $myLongueur->nb_point = $tabInfo[3];
+                $myLongueur->incline_id = $tabInfo[4];
+                $myLongueur->section_height = $tabInfo[5];
+                $myLongueur->grade_val = Route::gradeToVal($myLongueur->grade, $myLongueur->sub_grade);
                 $myLongueur->section_order = ($key + 1);
                 $myLongueur->reception_id = 1;
                 $myLongueur->start_id = 1;

@@ -77,8 +77,30 @@ class RouteVueController extends Controller
             ->with('routeSections.start')
             ->first();
 
+        //calcul de la durté de la cotation
+        $easy = $just = $hard = $sum = 0;
+        $crosses = Cross::where('route_id',$route->id)
+            ->where('hardness_id','!=',1)
+            ->get();
+
+        foreach ($crosses as $cross){
+            if($cross->hardness_id == 2) $easy++;
+            if($cross->hardness_id == 3) $just++;
+            if($cross->hardness_id == 4) $hard++;
+            $sum += $cross->hardness_id;
+        }
+
+        $hardness = [
+            'easy' => (count($crosses) > 0) ? round($easy / count($crosses) * 100, 1) : 0,
+            'just' => (count($crosses) > 0) ? round($just / count($crosses) * 100, 1) : 0,
+            'hard' => (count($crosses) > 0) ? round($hard / count($crosses) * 100, 1) : 0,
+            'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
+            'nbVote' => count($crosses),
+        ];
+
         $data = [
-            'route' => $route
+            'route' => $route,
+            'hardness'=> $hardness,
         ];
 
         return view('pages.route.vues.informationVue', $data);

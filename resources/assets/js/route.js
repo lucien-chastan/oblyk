@@ -283,8 +283,7 @@ function dupliqueLongueurLine() {
 }
 
 function setJsonLongueur() {
-    let cotation_longueur = document.getElementsByName('cotation_longueur'),
-        ponderation_longueur = document.getElementsByName('ponderation_longueur'),
+    let grade_pitch = document.getElementsByName('grade_pitch'),
         relais_longueur = document.getElementsByName('relais_longueur'),
         point_longueur = document.getElementsByName('point_longueur'),
         nb_point_longueur = document.getElementsByName('nb_point_longueur'),
@@ -293,10 +292,9 @@ function setJsonLongueur() {
         jsonLongueur = document.getElementById('jsonLongueur'),
         tableJson = [];
 
-    for(let i = 0 ; i < cotation_longueur.length ; i++){
+    for(let i = 0 ; i < grade_pitch.length ; i++){
         let tempTab = [
-            cotation_longueur[i].value,
-            ponderation_longueur[i].value,
+            grade_pitch[i].value,
             relais_longueur[i].value,
             point_longueur[i].value,
             nb_point_longueur[i].value,
@@ -311,8 +309,7 @@ function setJsonLongueur() {
 }
 
 function getJsonLongueur() {
-    let cotation_longueur = document.getElementsByName('cotation_longueur'),
-        ponderation_longueur = document.getElementsByName('ponderation_longueur'),
+    let grade_pitch = document.getElementsByName('grade_pitch'),
         relais_longueur = document.getElementsByName('relais_longueur'),
         point_longueur = document.getElementsByName('point_longueur'),
         nb_point_longueur = document.getElementsByName('nb_point_longueur'),
@@ -324,13 +321,12 @@ function getJsonLongueur() {
     for(let i = 0 ; i < tableJson.length ; i++){
         let tempTab = tableJson[i].split(';');
         try {
-            cotation_longueur[i].value = tempTab[0];
-            ponderation_longueur[i].value = tempTab[1];
-            relais_longueur[i].value = tempTab[2];
-            point_longueur[i].value = tempTab[3];
-            nb_point_longueur[i].value = tempTab[4];
-            incline_id_longeur[i].value = tempTab[5];
-            height_longueur[i].value = tempTab[6];
+            grade_pitch[i].value = tempTab[0];
+            relais_longueur[i].value = tempTab[1];
+            point_longueur[i].value = tempTab[2];
+            nb_point_longueur[i].value = tempTab[3];
+            incline_id_longeur[i].value = tempTab[4];
+            height_longueur[i].value = tempTab[5];
         }catch (e){}
     }
 }

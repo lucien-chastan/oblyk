@@ -16,7 +16,7 @@
                         <p class="text-cursor">
                             <span onclick="changeRelation({{ $user->id }}, {{  $relationStatus }})">
                                 @if($relationStatus == 0)
-                                    <i class="material-icons left">star_border</i>@lang('askFriend', ['name'=>$user->name])
+                                    <i class="material-icons left">star_border</i>@lang('pages/profile/about.askFriend', ['name'=>$user->name])
                                 @endif
                                 @if($relationStatus == 1)
                                     <i class="material-icons left red-text">star_border</i> @lang('pages/profile/about.cancelAskFriend')
