@@ -17,6 +17,6 @@
     </div>
 
     <div class="row">
-        {!! $Inputs::Submit(['label'=>trans('modals/headband.defines')]) !!}
+        {!! $Inputs::Submit(['label'=>trans('modals/headband.define')]) !!}
     </div>
 </form>
