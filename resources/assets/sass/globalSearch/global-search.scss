@@ -1,6 +1,10 @@
 .side-global-search{
     max-width: calc(100% - 25px) !important;
 
+    .search-content {
+        padding-bottom: 50px;
+    }
+
     .icon-tab-global-search{
         margin-bottom: -23px;
     }

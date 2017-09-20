@@ -4,7 +4,7 @@
         <div class="indeterminate"></div>
     </div>
 
-    <div class="row">
+    <div class="row search-content">
         <div class="input-field col s12">
             <i class="material-icons prefix">search</i>
             <input onkeyup="globalSearche(this)" id="input-text-global-search" type="search">
