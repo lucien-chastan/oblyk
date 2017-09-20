@@ -57,8 +57,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
 
-    //PAGE DES COTATIONS
-    Route::get('/cotations', 'ProjectPagesController@gradePage')->name('grade');
+    //LES PAGES OUTILS
+    Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');
 
     //FORUM
     Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');

@@ -38,10 +38,5 @@ return [
     'title_who' => 'Voir les créateurs du site d\'escalade oblyk',
     'description_who' => 'En savoir plus sur les créateurs d\'oblyk, leur vision de l\'escalade et pourquoi ils ont créé ce site communautaire d\'escalade',
 
-    //Page Les cotations
-    'title_grade' => 'Les cotations sur Oblyk',
-    'description_grade' => 'Oblyk permet plusieurs notations pour la cotations et un code couleur est associé à une difficulté, voici comment ça marche',
-
-
 
 ];

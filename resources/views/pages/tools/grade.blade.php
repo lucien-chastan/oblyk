@@ -1,6 +1,6 @@
 @extends('layouts.app', [
-    'meta_title'=> trans('meta/project.title_grade'),
-    'meta_description'=>trans('meta/project.description_grade'),
+    'meta_title'=> trans('meta/tools.title_grade'),
+    'meta_description'=>trans('meta/tools.description_grade'),
     'meta_img'=>'/img/meta_home.jpg',
     ])
 
@@ -18,43 +18,43 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/projects/grade.title')</h1>
+                <h1 class="loved-king-font text-center grey-text text-darken-3">@lang('pages/tools/grade.title')</h1>
 
                 <p>
-                    @lang('pages/projects/grade.para_1')
+                    @lang('pages/tools/grade.para_1')
                 </p>
 
                 <p>
-                    @lang('pages/projects/grade.para_2')
+                    @lang('pages/tools/grade.para_2')
                 </p>
 
                 <p>
-                    @lang('pages/projects/grade.para_3')
+                    @lang('pages/tools/grade.para_3')
                 </p>
 
                 <ul class="oblyk-ul">
-                    <li><strong>+</strong> : @lang('pages/projects/grade.li1') <span class="grey-text">(@lang('pages/projects/grade.example') : 6a+)</span></li>
-                    <li><strong>-</strong> : @lang('pages/projects/grade.li2') <span class="grey-text">(@lang('pages/projects/grade.example') : 6a-)</span></li>
-                    <li><strong>/+</strong> : @lang('pages/projects/grade.li3') <span class="grey-text">(@lang('pages/projects/grade.example') : 6a/+)</span></li>
-                    <li><strong>/-</strong> : @lang('pages/projects/grade.li4') <span class="grey-text">(@lang('pages/projects/grade.example') : 6a/-)</span></li>
-                    <li><strong>?</strong> : @lang('pages/projects/grade.li5') <span class="grey-text">(@lang('pages/projects/grade.example') : 8b?)</span></li>
-                    <li><strong>+/b</strong> : @lang('pages/projects/grade.li6') <span class="grey-text">(@lang('pages/projects/grade.example') : 6a+/b)</span></li>
-                    <li><strong>+/c</strong> : @lang('pages/projects/grade.li7') <span class="grey-text">(@lang('pages/projects/grade.example') : 6b+/c)</span></li>
+                    <li><strong>+</strong> : @lang('pages/tools/grade.li1') <span class="grey-text">(@lang('pages/tools/grade.example') : 6a+)</span></li>
+                    <li><strong>-</strong> : @lang('pages/tools/grade.li2') <span class="grey-text">(@lang('pages/tools/grade.example') : 6a-)</span></li>
+                    <li><strong>/+</strong> : @lang('pages/tools/grade.li3') <span class="grey-text">(@lang('pages/tools/grade.example') : 6a/+)</span></li>
+                    <li><strong>/-</strong> : @lang('pages/tools/grade.li4') <span class="grey-text">(@lang('pages/tools/grade.example') : 6a/-)</span></li>
+                    <li><strong>?</strong> : @lang('pages/tools/grade.li5') <span class="grey-text">(@lang('pages/tools/grade.example') : 8b?)</span></li>
+                    <li><strong>+/b</strong> : @lang('pages/tools/grade.li6') <span class="grey-text">(@lang('pages/tools/grade.example') : 6a+/b)</span></li>
+                    <li><strong>+/c</strong> : @lang('pages/tools/grade.li7') <span class="grey-text">(@lang('pages/tools/grade.example') : 6b+/c)</span></li>
                 </ul>
 
                 <table class="centered highlight">
                     <thead>
                         <tr>
-                            <th>@lang('pages/projects/grade.columnN')</th>
-                            <th>@lang('pages/projects/grade.columnFr')</th>
-                            <th>@lang('pages/projects/grade.columnEn')</th>
-                            <th>@lang('pages/projects/grade.columnUSARoute')</th>
-                            <th>@lang('pages/projects/grade.columnUSABoulder')</th>
-                            <th>@lang('pages/projects/grade.columnDERoute')</th>
-                            <th>@lang('pages/projects/grade.columnAnnot')</th>
-                            <th>@lang('pages/projects/grade.columnGV')</th>
-                            <th>@lang('pages/projects/grade.columnArtif')</th>
-                            <th>@lang('pages/projects/grade.columnRGB')</th>
+                            <th>@lang('pages/tools/grade.columnN')</th>
+                            <th>@lang('pages/tools/grade.columnFr')</th>
+                            <th>@lang('pages/tools/grade.columnEn')</th>
+                            <th>@lang('pages/tools/grade.columnUSARoute')</th>
+                            <th>@lang('pages/tools/grade.columnUSABoulder')</th>
+                            <th>@lang('pages/tools/grade.columnDERoute')</th>
+                            <th>@lang('pages/tools/grade.columnAnnot')</th>
+                            <th>@lang('pages/tools/grade.columnGV')</th>
+                            <th>@lang('pages/tools/grade.columnArtif')</th>
+                            <th>@lang('pages/tools/grade.columnRGB')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -709,8 +709,8 @@
                     </tbody>
                 </table>
 
-                <p class="text-bold text-underline">@lang('pages/projects/grade.bonusTitle')</p>
-                <p>@lang('pages/projects/grade.bonusPara')</p>
+                <p class="text-bold text-underline">@lang('pages/tools/grade.bonusTitle')</p>
+                <p>@lang('pages/tools/grade.bonusPara')</p>
                 <pre>^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$</pre>
             </div>
         </div>

@@ -38,8 +38,4 @@ return [
     'title_who' => 'See Oblyk website creators',
     'description_who' => 'Know more about Oblyk website creators, their views of climbing, and why the created this community platform',
 
-    //Page Les cotations
-    'title_grade' => 'Oblyk grades',
-    'description_grade' => 'Oblyk allows several notations for grades and a color code is associated with a difficulty, here\'s how it works',
-
 ];
