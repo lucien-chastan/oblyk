@@ -4,33 +4,33 @@
 
 return [
 
-    'title' => 'Les cotations',
-    'para_1' => 'Oblyk permet d\'utiliser plusieurs formats pour les cotations (Française, Anglaise, Américaine, etc.). Pour chacune des cotations il est donné un code couleur pour se rendre compte rapidement du niveau de difficulté même si on est pas habitué au système de cotation affiché.',
-    'para_2' => 'Le tableau d\'équivalence suivant est contestable, il a pour vocation de donner un ordre d\'idée de la difficulté d\'une cotation et non pas de donner exactement l\'équivalence d\'un système vers un autre.',
-    'para_3' => 'Sur oblyk, chaque cotation peut prendre les pondérations suivante :',
-    'li1' => 'cotation forte',
-    'li2' => 'cotation faible',
-    'li3' => 'cotation qui mérite presque un <cite>+</cite>',
-    'li4' => 'idem que <cite>/+</cite> mais en <cite>-</cite>',
-    'li5' => 'cotation estimée mais à confirmer',
-    'li6' => 'cotation entre un <cite>Xa+</cite> et un <cite>Xb</cite>',
-    'li7' => 'cotation entre un <cite>Xb+</cite> et un <cite>Xc</cite>',
+    'title' => 'Grades',
+    'para_1' => 'Oblyk allows the use of many climbing grades system (French, English, American,...).For each one, a color code is given to quickly show routes difficulties even if not familiar with the grade system.',
+    'para_2' => 'The following equivalence table is questionable, its purpose is to give an order of idea of the difficulty of a grade and not to give exactly the equivalence of one system to another.',
+    'para_3' => 'In Oblyk, each grades can have following weights :',
+    'li1' => 'Hard grade',
+    'li2' => 'Weak grade',
+    'li3' => 'grade who deserves a <cite>+</cite>',
+    'li4' => 'same as <cite>/+</cite> but as <cite>-</cite>',
+    'li5' => 'estimated grade, but to be confirmed',
+    'li6' => 'grade between <cite>Xa+</cite> and <cite>Xb</cite>',
+    'li7' => 'grade between <cite>Xb+</cite> and <cite>Xc</cite>',
     'example' => 'exemple',
 
     //Talbeau
     'columnN' => "n°",
     'columnFr' => "Fr",
     'columnEn' => "En",
-    'columnUSARoute' => "USA Voie",
-    'columnUSABoulder' => "USA Bloc",
-    'columnDERoute' => "DE Voie",
+    'columnUSARoute' => "USA Routes",
+    'columnUSABoulder' => "USA Bouldering",
+    'columnDERoute' => "DE Route",
     'columnAnnot' => "Annot",
-    'columnGV' => "Grande-voie",
+    'columnGV' => "Multi-pitch",
     'columnArtif' => "Artif",
     'columnRGB' => "RVB",
 
     //Bonus
-    'bonusTitle' => "Petit bonnus pour les développers :",
-    'bonusPara' => "Si vous avez besoin de valider qu'une chaîne de texte est conforme à l'un de ces systèmes de cotation, voici <a href='https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp'>l'éxpression régulière</a> que vous pouvez utiliser :",
+    'bonusTitle' => "Developers Bonus:",
+    'bonusPara' => "If you need to check that a text string is true with one of those grades system, here is <a href='https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp'>regular expression</a> you may use :",
 
 ];
