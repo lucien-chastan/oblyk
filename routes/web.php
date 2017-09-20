@@ -59,6 +59,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //LES PAGES OUTILS
     Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');
+    Route::get('/index', 'ToolPagesController@indexPage')->name('indexes');
+    Route::get('/sites', 'ToolPagesController@cragsPage')->name('cragsIndex');
+    Route::get('/salles', 'ToolPagesController@gymsPage')->name('gymsIndex');
+    Route::get('/grimpeurs', 'ToolPagesController@usersPage')->name('usersIndex');
+    Route::get('/topos', 'ToolPagesController@guidebooksPage')->name('guidebooksIndex');
+    Route::get('/groupes', 'ToolPagesController@groupsPage')->name('groupsIndex');
+    Route::get('/voies', 'ToolPagesController@routesPage')->name('routesIndex');
 
     //FORUM
     Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');

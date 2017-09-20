@@ -31,8 +31,9 @@ return [
     //Menu "Carte et Outils"
     'cragMap' => 'Carte des falaises',
     'forum' => 'Forum',
-    'glossary ' => 'lexique',
-    'grade ' => 'Les cotations',
+    'glossary' => 'lexique',
+    'grade' => 'Les cotations',
+    'dataBase' => 'Base de données',
 
     //Menu "Partenaire"
     'partnerMap' => 'Carte des grimpeurs',

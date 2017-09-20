@@ -35,6 +35,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/globalSearch/global-search.scss', 'public/css')
     .sass('resources/assets/sass/markdown.scss', 'public/css')
     .sass('resources/assets/sass/article-markdown.scss', 'public/css')
+    .sass('resources/assets/sass/tools/tools.scss', 'public/css')
     .sass('resources/assets/sass/crag/line.scss', 'public/css');
 
 //fichier Js

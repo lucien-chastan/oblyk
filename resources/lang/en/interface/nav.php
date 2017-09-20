@@ -31,8 +31,9 @@ return [
     //Menu "Carte et Outils"
     'cragMap' => 'Map of the crags',
     'forum' => 'Forum',
-    'glossary ' => 'Glossary',
-    'grade ' => 'The Climbing Grades',
+    'glossary' => 'Glossary',
+    'grade' => 'The Climbing Grades',
+    'dataBase' => 'Data bases',
 
 
     //Menu "Partenaire"
