@@ -43,6 +43,6 @@ class ProblemController extends Controller
             'user_id' => Auth::id()
         ];
 
-        Mail::to('chastanlucien@gmail.com')->send(new sendProblem($data));
+        Mail::to('ekip@oblyk.org')->send(new sendProblem($data));
     }
 }

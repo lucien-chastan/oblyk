@@ -10,6 +10,6 @@ return [
     'columnAge' => "Age",
     'columnGenre' => "Genre",
     'columnLocalisation' => "Localisation",
-    'columnCreated' => "Ajouté le",
+    'columnCreated' => "Arrivé(e) le",
 
 ];
