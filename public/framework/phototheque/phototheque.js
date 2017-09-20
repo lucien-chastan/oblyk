@@ -414,16 +414,13 @@ class Visiotheque{
         this.showLoader(false);
 
         //attribut de l'imgAnimationOpen
-        this.imgOpenAnimation.style.display = 'block';
-        this.imgOpenAnimation.style.maxHeight = this.imgClick.target.offsetHeight + 'px';
-        this.imgOpenAnimation.style.maxWidth = this.imgClick.target.offsetWidth + 'px';
+        this.imgOpenAnimation.style.display = 'inline-block';
         this.imgOpenAnimation.style.opacity = 1;
-        this.imgOpenAnimation.style.top = positionImg['top'] + 'px';
-        this.imgOpenAnimation.style.left = positionImg['left'] + 'px';
 
         var sleepToZoom = setTimeout(()=>{
-            this.imgOpenAnimation.style.transition = 'top 0.3s, left 0.3s, max-height 0.3s, max-width 0.3s, opacity 0.5s';
+            this.imgOpenAnimation.style.transition = 'top 0.3s, left 0.3s, max-height 0.3s, max-width 0.3s, opacity 0.5s, transform 0.5s';
             this.positionneCurrentPhoto();
+            this.imgOpenAnimation.style.transform = 'scale(1)';
         },50);
     }
 
@@ -464,12 +461,10 @@ class Visiotheque{
             if(Math.abs(deltaVertical) < Math.abs(deltaHorizontal)) decalageTop = (zoneDimension['height'] - (photoDimension['height'] * zoneDimension['width'] / photoDimension['width'])) / 2;
 
             //on attribut les valeurs
-            this.imgOpenAnimation.style.left = decalageLeft + 'px';
-            this.imgOpenAnimation.style.top = decalageTop + 'px';
+            this.imgOpenAnimation.style.marginTop = decalageTop + 'px';
         }else{
             //si notre image naturel est plus petite que la zone d'affichage
-            this.imgOpenAnimation.style.left = (zoneDimension['width'] - photoDimension['width']) / 2 + 'px';
-            this.imgOpenAnimation.style.top = (zoneDimension['height'] - photoDimension['height']) / 2 + 'px';
+            this.imgOpenAnimation.style.marginTop = (zoneDimension['height'] - photoDimension['height']) / 2 + 'px';
         }
 
         //hauteur et largeur de l'image
@@ -532,7 +527,7 @@ class Visiotheque{
             this.currentPhoto = (direction == 'left')? (this.currentPhoto - 1) : (parseInt(this.currentPhoto) + 1);
 
             //animaton étape 1 : la photo par en transparence
-            this.imgOpenAnimation.style.transition = 'opacity 0.3s, left 0.3s';
+            this.imgOpenAnimation.style.transition = 'opacity 0.3s, left 0.3s, transform 0.5s';
             this.imgOpenAnimation.style.left = this.imgOpenAnimation.offsetLeft + decLeft + 'px';
             this.imgOpenAnimation.style.opacity = 0;
 
@@ -633,10 +628,7 @@ class Visiotheque{
         if(this.diaporama) this.visiothequePlayControl.style.opacity = 0;
 
         //animation de fermeture de la photo
-        this.imgOpenAnimation.style.top = this.imgCollection[this.currentPhoto].offsetTop - scrollPosition[1] + 'px';
-        this.imgOpenAnimation.style.left = this.imgCollection[this.currentPhoto].offsetLeft - scrollPosition[0] + 'px';
-        this.imgOpenAnimation.style.maxHeight = this.imgCollection[this.currentPhoto].offsetHeight + 'px';
-        this.imgOpenAnimation.style.maxWidth = this.imgCollection[this.currentPhoto].offsetWidth + 'px';
+        this.imgOpenAnimation.style.transform = 'scale(0.5)';
         this.imgOpenAnimation.style.opacity = 0;
         var sleepToclose = setTimeout(()=>{
             this.background.style.display = 'none';

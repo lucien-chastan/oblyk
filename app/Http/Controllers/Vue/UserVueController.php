@@ -12,6 +12,7 @@ use App\CrossStatus;
 use App\Description;
 use App\Follow;
 use App\ForumTopic;
+use App\Gym;
 use App\Notification;
 use App\Photo;
 use App\Post;
@@ -808,12 +809,12 @@ class UserVueController extends Controller
     // BOX : LES DERNIÈRES PHOTOS
     function subVuephotosLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $photos = Photo::where('illustrable_type', 'App\User')
+        $photos = Photo::where('illustrable_type', '!=', 'App\User')
             ->with('user')
             ->with('illustrable')
             ->orderBy('created_at', 'desc')
             ->skip(0)
-            ->take(8)
+            ->take(10)
             ->get();
 
         $data = [
@@ -926,7 +927,11 @@ class UserVueController extends Controller
     // BOX : LES DERNIÈRES SAE
     function subVueSaeLast($user_id){
         $user = User::where('id',$user_id)->first();
-        $data = ['user' => $user,];
+        $gyms = Gym::orderBy('created_at','desc')->skip(0)->take(5)->get();
+        $data = [
+            'user' => $user,
+            'gyms' => $gyms,
+            ];
         return view('pages.profile.vues.dashboardBox.boxVues.sae-last', $data);
     }
 

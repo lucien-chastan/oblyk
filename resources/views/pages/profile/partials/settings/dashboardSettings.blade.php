@@ -43,10 +43,10 @@
         </div>
 
         {{--LISTE DES FALAISES ET SALLE--}}
-        <div class="blue-border-div">
-            {!! $Inputs::checkbox(['name'=>'dash_list_crag_sae', 'label'=>trans('pages/profile/settings.labelCragGymTreeBox'), 'checked' => ($user->settings->dash_list_crag_sae == 1) ? true : false, 'align' => 'left']) !!}
-            <p>@lang('pages/profile/settings.descriptionCragGymTreeBox')</p>
-        </div>
+        {{--<div class="blue-border-div">--}}
+            {{--{!! $Inputs::checkbox(['name'=>'dash_list_crag_sae', 'label'=>trans('pages/profile/settings.labelCragGymTreeBox'), 'checked' => ($user->settings->dash_list_crag_sae == 1) ? true : false, 'align' => 'left']) !!}--}}
+            {{--<p>@lang('pages/profile/settings.descriptionCragGymTreeBox')</p>--}}
+        {{--</div>--}}
 
         {{--DERNIER ARTICLE D'OBLYK--}}
         <div class="blue-border-div">
