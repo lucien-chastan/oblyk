@@ -1,4 +1,4 @@
-let currentVue,
+var currentVue,
     activeSettingsTab;
 
 
@@ -17,7 +17,10 @@ window.addEventListener('load', function () {
         }
     }
 
-    if(!trouver) loadProfileRoute(routeLink[0]);
+    if(!trouver) {
+        let linkInProfile = document.querySelectorAll('.corps-de-page .router-profile-link');
+        loadProfileRoute(linkInProfile[0]);
+    }
 
 });
 
