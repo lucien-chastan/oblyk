@@ -17,7 +17,7 @@
                                     @if($notification->created_at->format('d M Y') == date('d M Y'))
                                         @lang('pages/profile/notification.today', ['date'=>$notification->created_at->format('H:i')])
                                     @else
-                                        @lang('pages/profile/notification.on', ['date'=>$notification->created_at->format('H:i')])
+                                        @lang('pages/profile/notification.on', ['date'=>$notification->created_at->format('d M Y H:i')])
                                     @endif
                                 </span>
                             </p>
