@@ -1,4 +1,4 @@
-let currentVue,
+var currentVue,
     activeSettingsTab;
 
 
