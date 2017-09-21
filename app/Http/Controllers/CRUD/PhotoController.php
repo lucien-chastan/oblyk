@@ -10,6 +10,7 @@ use App\Sector;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Mockery\Exception;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -153,27 +154,46 @@ class PhotoController extends Controller
             //on réenregistre le slug_label de la photo
             $photo->save();
 
-            //Image en 1300px de large
-            $img = Image::make($request->file('file'))
-                ->orientate()
-                ->resize(1300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->encode('jpg', 85)
-                ->save(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
+            try {
+                //Image en 1300px de large
+                $img = Image::make($request->file('file'))
+                    ->orientate()
+                    ->resize(1300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->encode('jpg', 85)
+                    ->save(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
 
-            //copie pour image en 200 de haut
-            $img200 = $img;
+                //copie pour image en 200 de haut
+                $img200 = $img;
 
-            //Image en 200px de haut
-            $img200->resize(null, 200, function ($constraint) {$constraint->aspectRatio();})
-                ->save(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
+                //Image en 200px de haut
+                $img200->resize(null, 200, function ($constraint) {$constraint->aspectRatio();})
+                    ->save(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
 
-            //Crop de l'image en 100 * 100
-            $img->fit(100, 100)->save(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
+                //Crop de l'image en 100 * 100
+                $img->fit(100, 100)->save(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
 
-            //Crop de l'image en 50 * 50
-            $img->fit(50, 50)->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
+                //Crop de l'image en 50 * 50
+                $img->fit(50, 50)->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
+
+                return response()->json(json_encode($photo));
+
+            }catch (Exception $e){
+
+                //s'il y a un problème on supprime les images potentiellement uploadé
+                if(file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
+                if(file_exists(storage_path('app/public/photos/crags/200/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
+                if(file_exists(storage_path('app/public/photos/crags/100/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
+                if(file_exists(storage_path('app/public/photos/crags/50/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
+
+                //on supprime la photo en base de donnée
+                $photo->delete();
+
+                return response()->json($e, 400);
+
+            }
+
 
 //            Image::make($request->file('file'))
 //                ->orientate()
@@ -207,7 +227,7 @@ class PhotoController extends Controller
 //                ->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
         }
 
-        return response()->json(json_encode($photo));
+
     }
 
     /**
