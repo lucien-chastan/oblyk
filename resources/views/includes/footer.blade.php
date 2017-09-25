@@ -18,8 +18,8 @@
         <div class="col l3 s12">
             <h5 class="white-text">@lang('interface/footer.titleFollow')</h5>
             <ul>
-                <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/pageoblyk/" rel="nofollow"><img class="img-footer" src="/img/logo_facebook.svg" alt="logo de facebook"> Facebook</a></li>
-                <li><a class="grey-text text-lighten-3" href="https://github.com/lucien-chastan/oblyk" rel="nofollow"><img class="img-footer" src="/img/logo_github.svg" alt="logo de facebook"> Github</a></li>
+                <li><a target="_blank" class="grey-text text-lighten-3" href="https://www.facebook.com/pageoblyk/" rel="nofollow"><img class="img-footer" src="/img/logo_facebook.svg" alt="logo de facebook"> Facebook</a></li>
+                <li><a target="_blank" class="grey-text text-lighten-3" href="https://github.com/lucien-chastan/oblyk" rel="nofollow"><img class="img-footer" src="/img/logo_github.svg" alt="logo de facebook"> Github</a></li>
             </ul>
         </div>
     </div>
