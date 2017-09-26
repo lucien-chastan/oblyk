@@ -27,4 +27,6 @@
 <link href="/framework/phototheque/phototheque.css" rel="stylesheet">
 <link href="/framework/trumbowyg/ui/trumbowyg.min.css" rel="stylesheet">
 
+<meta name="google-site-verification" content="MA_dg_DndaPfduYn-hra1oRpDBYVlWyoAQoluxMLLPI" />
+
 @yield('css')
