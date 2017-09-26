@@ -14,7 +14,7 @@
                             @if($crag[0]->route->crag->bandeau == '/img/default-crag-bandeau.jpg')
                                 <img class="img-tick-list circle left" src="/img/default-crag-bandeau.jpg" height="40" width="40">
                             @else
-                                <img class="img-tick-list circle left" src="/storage/photos/crags/50/{{$crag[0]->route->crag->bandeau}}">
+                                <img class="img-tick-list circle left" src="{{ str_replace_last('1300','50',$crag[0]->route->crag->bandeau)}}">
                             @endif
                             <p class="no-margin">
                                 <strong><a href="{{route('cragPage',['crag_id'=>$crag[0]->route->crag->id,'crag_label'=>str_slug($crag[0]->route->crag->label)])}}">{{$crag[0]->route->crag->label}}</a><br></strong>
