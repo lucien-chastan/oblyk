@@ -56,7 +56,7 @@
                             <td>{{ $place->description }}</td>
                             <td class="text-center grey-text no-warp">{{ $place->rayon }} Km</td>
                             <td class="text-center grey-text i-cursor no-warp">
-                                <i {!! $Helpers::modal(route('partnerModal'), ["place_id"=>$place->id, "title"=>trans('modals/parking.modalEditeTitle'), "method"=>"PUT", "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip(trans('modals/parking.editTooltip')) !!} class="material-icons blue-hover tooltipped btnModal">edit_location</i>
+                                <i {!! $Helpers::modal(route('partnerModal'), ["place_id"=>$place->id, "title"=>trans('modals/partner.modalEditTitle'), "method"=>"PUT", "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip(trans('modals/partner.editTooltip')) !!} class="material-icons blue-hover tooltipped btnModal">edit_location</i>
                                 <i {!! $Helpers::modal(route('deleteModal'), ["route"=>"/partners/" . $place->id, "callback"=>"reloadCurrentVue" ]) !!} {!! $Helpers::tooltip(trans('modals/partner.deleteTooltip')) !!} class="material-icons blue-hover tooltipped btnModal">delete</i>
                             </td>
                         </tr>

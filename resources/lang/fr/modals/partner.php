@@ -6,6 +6,8 @@ return [
     'modalAddPartner' => 'Ajouter un lieux',
     'btnAddPlaces' => 'Moi je grimpe ici',
     'deleteTooltip' => 'Supprimer ce lieux',
+    'editTooltip' => 'Modifier ce lieux',
+    'modalEditTitle' => 'Modifier ce lieux',
 
     //Label
     'name' => "Nom du lieu",

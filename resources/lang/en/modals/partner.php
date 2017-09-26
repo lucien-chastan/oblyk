@@ -6,6 +6,9 @@ return [
     'modalAddPartner' => 'Add a place',
     'btnAddPlaces' => 'I\'m climbing up here',
     'deleteTooltip' => 'Delete this place',
+    'editTooltip' => 'Edit this place',
+    'modalEditTitle' => 'Edit this place',
+
 
     //Label
     'name' => "Name of place",
