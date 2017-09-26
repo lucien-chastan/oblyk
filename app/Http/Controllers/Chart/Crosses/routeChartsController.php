@@ -88,7 +88,8 @@ class routeChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
@@ -235,7 +236,8 @@ class routeChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],

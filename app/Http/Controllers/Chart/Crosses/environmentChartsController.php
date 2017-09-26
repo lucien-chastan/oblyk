@@ -57,7 +57,8 @@ class environmentChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
@@ -115,7 +116,8 @@ class environmentChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
@@ -172,7 +174,8 @@ class environmentChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],

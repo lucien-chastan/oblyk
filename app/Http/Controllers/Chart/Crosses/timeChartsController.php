@@ -79,7 +79,8 @@ class timeChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
@@ -136,7 +137,8 @@ class timeChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
@@ -189,7 +191,8 @@ class timeChartsController extends Controller
                             'ticks' => [
                                 'suggestedMin'=> 0,
                                 'stepSize' => 1
-                            ]
+                            ],
+                            'display' => false
                         ]
                     ]
                 ],
