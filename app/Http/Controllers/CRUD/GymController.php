@@ -8,6 +8,10 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Mockery\Exception;
+
+
 
 class GymController extends Controller
 {
@@ -44,6 +48,67 @@ class GymController extends Controller
         return view('modal.gym', $data);
     }
 
+
+    //Upload du bandeau et du logo
+    function uploadLogoBandeau (Request $request){
+
+        //validation du formulaire
+        $this->validate($request, [
+            'id' => 'required|integer'
+        ]);
+
+        $gym = Gym::where('id', $request->input('id'))->first();
+
+        //Upload du logo
+        if ($request->hasFile('logo')) {
+
+            try {
+                //Logo en 100px de haut
+                $img = Image::make($request->file('logo'))
+                    ->orientate()
+                    ->resize(null, 100, function ($constraint) {$constraint->aspectRatio();})
+                    ->encode('png', 90)
+                    ->save(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png'));
+
+                //Logo en 50px de haut
+                $img->resize(null, 50, function ($constraint) {$constraint->aspectRatio();})
+                    ->save(storage_path('app/public/gyms/50/logo-' . $gym->id . '.png'));
+
+            }catch (Exception $e){
+
+                //s'il y a un problème on supprime les images potentiellement uploadé
+                if(file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png'))) unlink(storage_path('pp/public/gyms/100/logo-' . $gym->id . '.png'));
+                if(file_exists(storage_path('app/public/gyms/50/logo-' . $gym->id . '.png'))) unlink(storage_path('pp/public/gyms/50/logo-' . $gym->id . '.png'));
+
+            }
+        }
+
+        //Upload du bandeau
+        if ($request->hasFile('bandeau')) {
+
+            try {
+                //Bandeau en 1300px de large
+                $img = Image::make($request->file('bandeau'))
+                    ->orientate()
+                    ->resize(1300, null, function ($constraint) {$constraint->aspectRatio();})
+                    ->encode('jpg', 85)
+                    ->save(storage_path('app/public/gyms/1300/bandeau-' . $gym->id . '.jpg'));
+
+                //Bandeau en 200px de haut
+                $img->resize(null, 200, function ($constraint) {$constraint->aspectRatio();})
+                    ->save(storage_path('app/public/gyms/200/bandeau-' . $gym->id . '.jpg'));
+
+            }catch (Exception $e){
+
+                //s'il y a un problème on supprime les images potentiellement uploadé
+                if(file_exists(storage_path('app/public/gyms/1300/bandeau-' . $gym->id . '.jpg'))) unlink(storage_path('pp/public/gyms/1300/bandeau-' . $gym->id . '.jpg'));
+                if(file_exists(storage_path('app/public/gyms/200/bandeau-' . $gym->id . '.jpg'))) unlink(storage_path('pp/public/gyms/200/bandeau-' . $gym->id . '.jpg'));
+
+            }
+        }
+
+        return redirect()->route('gymPage', ['gym_id'=>$gym->id, 'gym_label'=>str_slug($gym->label)]);
+    }
 
     /**
      * Display a listing of the resource.

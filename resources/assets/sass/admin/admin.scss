@@ -1,0 +1,306 @@
+.full-height-row{
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: stretch;
+    flex-direction: row;
+
+    #admin-nav {
+        box-shadow: 1px 0 10px 2px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        width: 250px;
+        overflow-y: auto;
+        padding: 78px 0 0 0;
+        color: rgb(255,255,255);
+
+        a {
+            color: white;
+        }
+
+        .collapsible {
+            margin-top: 0;
+            border: none;
+            box-shadow: none;
+
+            .refresh-btn {
+                display: none;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                transition: transform 0.5s;
+
+                &:hover {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .collapsible-header{
+                background-color: rgba(0,0,0,0);
+                border: 4px none transparent;
+                border-left-style: solid;
+                &.active-item{
+                    border-color: #2196F3;
+
+                    .refresh-btn {
+                        display: inline;
+                    }
+                }
+            }
+
+            .collapsible-body {
+                padding: 0.3rem 0 0 1.6rem;
+                background-color: rgba(0,0,0,0);
+                border: none;
+
+                .row {
+                    padding-left: 0.9em;
+                    border: 4px none transparent;
+                    border-left-style: solid;
+                    &.active-item{
+                        border-color: #2196F3;
+
+                        .refresh-btn {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+
+        div {
+            cursor: pointer;
+        }
+
+        .collapsible-header {
+            transition: background-color 0.3s;
+            &:hover{
+                background-color: #2196F3;
+            }
+        }
+        .collapsible-body {
+            .row {
+                transition: background-color 0.3s;
+                margin-bottom: 0;
+                padding: 0.5em 0.1em;
+
+                &:hover{
+                    background-color: #2196F3;
+                }
+            }
+        }
+    }
+}
+
+#content-admin-zone{
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 75px;
+
+}
+
+//RESPONSIVE MENU
+@media screen and (max-width:1000px){
+
+    #user-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 40px !important;
+
+        .user-bandeau {
+            display: none;
+        }
+
+        .collapsible {
+            margin-top: 56px !important;
+
+            .collapsible-header {
+                padding: 0 0 0 2px;
+                text-align: center;
+            }
+
+            .collapsible-body {
+                padding: 0 !important;
+                div {
+                    padding-left: 0.4em !important;
+                }
+            }
+        }
+    }
+
+    #content-user-zone {
+        padding-top: 55px;
+        position: fixed;
+        width: 100%;
+        padding-left: 44px;
+        height: 100%;
+
+        .dashbox {
+            width: calc(100% - 10px) !important;
+            margin: 6px !important;
+        }
+    }
+
+    .hidden-1000 {
+        display: none;
+    }
+
+    .card-panel {
+        padding: 5px;
+    }
+
+    .row .col {
+        padding: 0 5px;
+    }
+
+    .messagerie {
+        height: calc(100vh - 58px) !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        &.row {
+            margin-bottom: 0;
+
+            .blue-card-panel {
+                margin-bottom: 0;
+            }
+        }
+
+        .flex-col {
+            margin-bottom: 12px;
+            min-width: 100%;
+        }
+
+        .zone-liste-message{
+            width: calc(100% + 9px) !important;
+        }
+    }
+
+    .tabs-settings-compte {
+        a {
+            padding: 0 !important;
+        }
+
+        i {
+            margin: 0 !important;
+        }
+    }
+
+
+    .col-echantillon-album {
+        display: block !important;
+        width: auto !important;
+    }
+
+    .col-information-album {
+        display: block !important;
+        width: auto !important;
+    }
+
+    .col-echantillon-album img:nth-child(3) {
+        left: calc(100% - 100px) !important;
+        top: 10px !important;
+    }
+
+    .col-echantillon-album img:nth-child(2) {
+        top: 5px !important;
+        left: calc(100% - 170px) !important;
+    }
+
+
+    .zone-a-propos-public {
+        .div-bandeau-a-propos {
+            margin-top: 6px;
+            height: calc(100vh - 69px);
+
+            .flex-center {
+                flex-direction: column;
+            }
+
+            .col-information {
+                padding: 0 10px;
+            }
+        }
+
+        .row {
+            margin-bottom: 0;
+        }
+    }
+}
+
+//ZONE ANALYTIKS
+
+.analytiks {
+
+    .zone-analytiks-tabs {
+        margin-bottom: 0;
+        .blue-card-panel {
+            padding: 0;
+            .col.s12 {
+                padding: 0;
+            }
+        }
+
+        .tab-filter-analytiks {
+            border: 1px #aaa;;
+            border-left-style: solid;
+        }
+    }
+
+    .zone-analytiks-box {
+        h2.loved-king-font {
+            font-size: 1.6em;
+            color: rgb(100,100,100);
+            margin-top: 0;
+            padding-bottom: 8px;
+            border: 1px rgb(220, 220, 220);
+            border-bottom-style: solid;
+        }
+
+        .card-panel {
+            padding: 10px;
+
+            .card-chart {
+                min-height: 200px;
+            }
+        }
+
+        .analytiks-map {
+            height: calc(100vh - 120px);
+        }
+
+        .row {
+            margin-bottom: 1px;
+        }
+    }
+
+    .bt-action-filter {
+        font-size: 0.9em;
+
+        span {
+            cursor: pointer;
+            transition: color 0.3s;
+            &:hover {color: #2196F3;  }
+
+            &:last-child{ margin-left: 0.7em}
+
+            i {
+                vertical-align: bottom;
+                margin-bottom: -2px;
+                margin-right: 0.1em;
+            }
+        }
+    }
+
+    .switch-filter-period {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        span {
+            margin-right: 1em;
+        }
+    }
+}

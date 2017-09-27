@@ -358,7 +358,8 @@ class Visiotheque{
     addEvents(){
         for(var i = 0 ; i < this.imgCollection.length ; i++){
             this.imgCollection[i].setAttribute('data-n-child', i);
-            this.imgCollection[i].addEventListener('click', (i)=>{this.openVisiotheque(i);});
+            if(this.imgCollection[i].getAttribute('data-addEvent') != 'true') this.imgCollection[i].addEventListener('click', (i)=>{this.openVisiotheque(i);});
+            this.imgCollection[i].setAttribute('data-addEvent', 'true');
         }
     }
 

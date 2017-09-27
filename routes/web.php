@@ -167,6 +167,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
 });
 
+//INTERFACE ADMIN
+
+Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
+
+    Route::get('/admin/home', 'AdminController@homePage')->name('admin_home');
+
+    //SAE
+    Route::get('/admin/upload-sae', 'AdminController@uploadSaePage')->name('admin_sae_upload');
+    Route::post('/admin/upload', 'CRUD\GymController@uploadLogoBandeau')->name('uploadLogoBandeauSae');
+
+});
+
+
 //LE FIL D'ACTUALITÉ
 Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
 Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
