@@ -1,7 +1,7 @@
 @extends('layouts.app', [
-    'meta_title'=> $article->title,
+    'meta_title'=> $article->label,
     'meta_description'=> $article->description,
-    'meta_img'=>$bandeau,
+    'meta_img'=>'https://oblyk.org' . $bandeau,
     ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')
