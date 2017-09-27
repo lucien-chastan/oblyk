@@ -14,7 +14,7 @@ return [
 
     //Boite description
     'titleDescription'=>"Description par ceux qui y grimpent",
-    'noDescription'=>">Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrire ici",
+    'noDescription'=>"Il n'y a aucune description postée par des grimpeurs, si tu as grimpé dans cette salle tu peux la décrire ici",
 
     //Partenaire
     'titlePartner'=>"Ils cherchent des grimpeurs ici : ",

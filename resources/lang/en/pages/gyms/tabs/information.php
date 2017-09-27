@@ -14,7 +14,7 @@ return [
 
     //Boite description
     'titleDescription'=>"Climbers description",
-    'noDescription'=>">There are no descriptions posted by climbers, if you've been here, do not hesitate to describe it",
+    'noDescription'=>"There are no descriptions posted by climbers, if you've been here, do not hesitate to describe it",
 
     //Partenaire
     'titlePartner'=>"They are looking for climbers here: ",
