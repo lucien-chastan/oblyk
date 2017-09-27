@@ -97,7 +97,7 @@
             )
                 .bindPopup(
                     `
-                <img class="photo-couve-site-leaflet" src="/img/default-gym-bandeau.jpg" alt="photo de couverture de {{$gym['label']}}">
+                <img class="photo-couve-site-leaflet" src="{{ (file_exists(storage_path('app/public/gyms/200/bandeau-' . $gym['id'] . '.jpg'))) ? '/storage/gyms/200/bandeau-' . $gym['id'] . '.jpg' : '/img/default-gym-bandeau.jpg'}}" alt="photo de couverture de {{$gym['label']}}">
                 <div class="crag-leaflet-info">
                     <h2 class="loved-king-font titre-crag-leaflet">
                         <a href="/salle-escalade/{{$gym['id']}}/{{str_slug($gym['label'])}}">{{$gym['label']}}</a>
