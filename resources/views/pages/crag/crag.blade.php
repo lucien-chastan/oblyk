@@ -1,7 +1,7 @@
 @extends('layouts.app',[
     'meta_title'=> trans('meta/crag.title', ['label'=>$crag->label, 'region'=>$crag->region]),
     'meta_description'=>trans('meta/crag.description', ['label'=>$crag->label]),
-    'meta_img'=>$crag->bandeau,
+    'meta_img'=>'https://oblyk.org' . $crag->bandeau,
     ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')

@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'meta_title'=> trans('meta/tools.title_climbers'),
     'meta_description'=>trans('meta/tools.description_climbers'),
-    'meta_img'=>'/img/meta_home.jpg',
+    'meta_img'=>'https://oblyk.org/img/meta_home.jpg',
     ])
 
 @section('css')

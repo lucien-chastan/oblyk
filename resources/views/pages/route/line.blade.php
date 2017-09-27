@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'meta_title'=> trans('meta/route.title', ['label'=>$route->label]),
     'meta_description'=>trans('meta/route.description', ['label'=>$route->label]),
-    'meta_img'=>'/img/default-topo-bandeau.jpg',
+    'meta_img'=>'https://oblyk.org' . $route->crag->bandeau,
     ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')

@@ -1,7 +1,7 @@
 @extends('layouts.app',[
     'meta_title'=> trans('meta/glossary.title'),
     'meta_description'=>trans('meta/glossary.description'),
-    'meta_img'=>'/img/default-lexique-bandeau.jpg',
+    'meta_img'=>'https://oblyk.org/img/default-lexique-bandeau.jpg',
     ])
 
 @inject('Helpers','App\Lib\HelpersTemplates')

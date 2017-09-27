@@ -1,7 +1,7 @@
 @extends('layouts.map',[
     'meta_title'=> trans('meta/map.title'),
     'meta_description'=>trans('meta/map.description'),
-    'meta_img'=>'/img/map_meta.jpg',
+    'meta_img'=>'https://oblyk.org/img/map_meta.jpg',
     ])
 
 @section('css')

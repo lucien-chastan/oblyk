@@ -1,7 +1,7 @@
 @extends('layouts.app',[
     'meta_title'=> trans('meta/forum.title_create'),
     'meta_description'=>trans('meta/forum.description_create'),
-    'meta_img'=>'/img/forum-escalade-oblyk.jpg',
+    'meta_img'=>'https://oblyk.org/img/forum-escalade-oblyk.jpg',
     ])
 
 @inject('Inputs','App\Lib\InputTemplates')
