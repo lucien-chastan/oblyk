@@ -17,7 +17,7 @@
         </div>
         <div class="col s7 m12 l7 petites-infos-crag">
             <ul>
-                <li>@lang('pages/crags/tabs/informations.localisationTitle')<br> <a href="#!">{{$crag->lat}}, {{$crag->lng}}</a></li>
+                <li>@lang('pages/crags/tabs/informations.localisationTitle')<br> <a href="{{ route('map') }}#{{ $crag->lat }}/{{ $crag->lng }}/15">{{$crag->lat}}, {{$crag->lng}}</a></li>
                 <li>
                     Saisons favorable<br>
                     <svg class="tooltipped" data-position="top" data-delay="50" data-tooltip="@lang('elements/seasons.season_e')" version="1.1" viewBox="0 0 24.999991 24.999999" height="7.0555553mm" width="7.055553mm">
