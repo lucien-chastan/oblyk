@@ -28,7 +28,7 @@ class SectorChartController extends Controller
         foreach ($routes as $route){
             foreach ($route->routeSections as $section) {
                 if($section->grade_val % 2 == 0) $section->grade_val--;
-                $gradeArray[$section->grade_val]++;
+                if($section->grade_val != 0) $gradeArray[$section->grade_val]++;
             }
         }
 
