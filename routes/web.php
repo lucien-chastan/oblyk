@@ -177,6 +177,9 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/admin/upload-sae', 'AdminController@uploadSaePage')->name('admin_sae_upload');
     Route::post('/admin/upload', 'CRUD\GymController@uploadLogoBandeau')->name('uploadLogoBandeauSae');
 
+    //ROUTE
+    Route::get('/admin/route-information', 'AdminController@routeInformationPage')->name('admin_route_information');
+
 });
 
 

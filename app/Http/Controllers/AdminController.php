@@ -11,8 +11,15 @@ class AdminController extends Controller
         return view('pages.admin.home');
     }
 
+
+    //SAE
     public function uploadSaePage(){
         return view('pages.admin.sae.upload');
+    }
+
+    //ROUTE
+    public function routeInformationPage(){
+        return view('pages.admin.route.information');
     }
 
 }
