@@ -1,4 +1,4 @@
-let map, markers, marker_user;
+var map, markers, marker_user;
 
 window.addEventListener('load', function () {
     openVoletMyCircle(true);
