@@ -30,6 +30,7 @@ class CrossController extends Controller
         $crossPitchs = [];
         $crossNote = 0;
         $crossDescription = '';
+        $crossPrivate = 0;
         $release_at = Carbon::now()->format('Y-m-d');
 
         //Nouveau ou Modifié
@@ -43,6 +44,7 @@ class CrossController extends Controller
             if(isset($description)){
                 $crossNote = $description->note;
                 $crossDescription = $description->description;
+                $crossPrivate = $description->private;
             }
 
         } else {
@@ -77,6 +79,7 @@ class CrossController extends Controller
                 'crossPitchs' => $crossPitchs,
                 'crossNote' => $crossNote,
                 'crossDescription' => $crossDescription,
+                'crossPrivate' => $crossPrivate,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
                 'route' => $outputRoute,
@@ -209,8 +212,8 @@ class CrossController extends Controller
         $cross->save();
 
 
-        //S'il y a une description
-        if($request->input('note') != 1 || $request->input('description') != ''){
+        //S'il y a une description ou une note
+        if($request->input('note') != 0 || $request->input('description') != ''){
             $description = new Description();
             $description->descriptive_id = $cross->route_id;
             $description->descriptive_type = 'App\Route';
@@ -218,6 +221,7 @@ class CrossController extends Controller
             $description->user_id = Auth::id();
             $description->cross_id = $cross->id;
             $description->note = $request->input('note');
+            $description->private = $request->input('private');
             $description->save();
         }
 
@@ -292,10 +296,11 @@ class CrossController extends Controller
             if(isset($description)){
                 $description->note = $request->input('note');
                 $description->description = $request->input('description');
+                $description->private = $request->input('private');
                 $description->save();
             }else{
                 //S'il n'y a pas de description, mais qu'on reçoi des infos, alors on la créer
-                if($request->input('note') != 1 || $request->input('description') != ''){
+                if($request->input('note') != 0 || $request->input('description') != ''){
                     $description = new Description();
                     $description->descriptive_id = $cross->route_id;
                     $description->descriptive_type = 'App\Route';
@@ -303,6 +308,7 @@ class CrossController extends Controller
                     $description->user_id = Auth::id();
                     $description->cross_id = $cross->id;
                     $description->note = $request->input('note');
+                    $description->private = $request->input('private');
                     $description->save();
                 }
             }

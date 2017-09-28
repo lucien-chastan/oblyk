@@ -12,6 +12,9 @@
             {!! $Inputs::note(['name'=>'note', 'value'=>$dataModal['note'], 'label'=>trans('modals/description.evaluationQuestion')]) !!}
         @endif
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/globalLabel.description')]) !!}
+        @if($dataModal['descriptive_type'] == 'App\Route')
+            {!! $Inputs::checkbox(['name'=>'private', 'id'=>'check-private' , 'label'=>trans('modals/cross.private_comment'), 'checked'=> ($dataModal['private'] == 1) ? 'true' : 'false', 'align'=>'right']) !!}
+        @endif
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 

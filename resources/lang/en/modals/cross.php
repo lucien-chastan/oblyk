@@ -25,6 +25,8 @@ return [
     'hardnessQuestion' => "Did you find it hard for the grade?",
     'noteQuestion' => "How would you rate this route?",
     'comment' => "Comment",
+    'private_comment' => "Private comment",
+
 
     'informationTitle' => "Help oblyk to know this route better!",
 ];

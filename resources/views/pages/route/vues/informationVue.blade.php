@@ -244,7 +244,16 @@
             <div class="blue-border-zone">
                 @foreach ($route->descriptions as $description)
                     <div class="blue-border-div">
-                        <div class="markdownZone">{{ $description->description }}</div>
+                        @if($description->private == 1)
+                            @if($description->user_id == Auth::user()->id)
+                                <i {!! $Helpers::tooltip(trans('modals/cross.private_comment')) !!} class="material-icons left grey-text text-lighten-1 tooltipped">vpn_key</i>
+                                <div class="markdownZone">{{ $description->description }}</div>
+                            @else
+                                <div class="markdownZone"><cite class="grey-text">commentaire privé</cite></div>
+                            @endif
+                        @else
+                            <div class="markdownZone">{{ $description->description }}</div>
+                        @endif
                         <p class="info-user grey-text">
                             @if($description->note != 0)
                                 <img class="note-description" src="/img/note_{{$description->note}}.png" alt="">

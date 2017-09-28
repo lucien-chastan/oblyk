@@ -73,7 +73,7 @@
                         </span>
 
                         @if(isset($cross->description->description))
-                            <div class="markdownZone">{{ $cross->description->description }}</div>
+                            <div class="markdownZone">@if($cross->description->private == 1)<i {!! $Helpers::tooltip(trans('modals/cross.private_comment')) !!} class="material-icons left grey-text text-lighten-1 tooltipped">vpn_key</i>@endif{{ $cross->description->description }}</div>
                             @if($cross->description->note != 0)
                                 <p class="no-margin">@lang('pages/routes/tabs/cross.note') <img src="/img/note_{{ $cross->description->note }}.png" height="15"></p>
                             @endif

@@ -25,6 +25,7 @@ return [
     'hardnessQuestion' => "L'as tu trouvé dur pour la cotation ?",
     'noteQuestion' => "Commment noterais-tu cette ligne ?",
     'comment' => "Commentaire",
+    'private_comment' => "Commentaire privé",
 
     'informationTitle' => "Aide oblyk à mieux connaître cette voie !",
 ];

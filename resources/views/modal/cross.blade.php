@@ -52,6 +52,7 @@
             {!! $Inputs::crossHardnesses(['name'=>'hardness_id', 'label'=>trans('modals/cross.hardnessQuestion'), 'value'=> $dataModal['hardness_id']]) !!}
             {!! $Inputs::note(['name'=>'note', 'label'=>trans('modals/cross.noteQuestion'), 'value'=> $dataModal['crossNote']]) !!}
             {!! $Inputs::mdText(['name'=>'description', 'label'=>trans('modals/cross.comment'), 'value'=> $dataModal['crossDescription']]) !!}
+            {!! $Inputs::checkbox(['name'=>'private', 'id'=>'check-private' , 'label'=>trans('modals/cross.private_comment'), 'checked'=> ($dataModal['crossPrivate'] == 1) ? 'true' : 'false', 'align'=>'right']) !!}
         </div>
 
         <div class="row" style="display: none">

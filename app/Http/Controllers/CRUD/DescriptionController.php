@@ -37,6 +37,7 @@ class DescriptionController extends Controller
                 'descriptive_type' => "App\\" . $request->input('descriptive_type'),
                 'description' => $description->description,
                 'note' => $description->note,
+                'private' => $description->private,
                 'id' => $id_description,
                 'title' => $request->input('title'),
                 'method' => $request->input('method'),
@@ -90,6 +91,7 @@ class DescriptionController extends Controller
         $description->descriptive_type = $request->input('descriptive_type');
         $description->description = $request->input('description');
         $description->note = $request->input('note');
+        $description->private = $request->input('private');
         $description->user_id = Auth::id();
         $description->save();
 
@@ -143,6 +145,7 @@ class DescriptionController extends Controller
         if($description->user_id == Auth::id()){
             $description->description = $request->input('description');
             $description->note = $request->input('note');
+            $description->private = $request->input('private');
             $description->save();
 
             //si c'est sur une ligne, on met à jour la note
