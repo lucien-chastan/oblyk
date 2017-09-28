@@ -204,7 +204,30 @@ function uploadBandeau() {
         }
     ).catch(
         function (err) {
-            console.log(err.message);
+
+            if(err.response.status === 422){
+
+                //table des erreurs
+                let errorArray = [];
+
+                // on boucle sur les erreurs renvoyées
+                for(let key in err.response.data){
+
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(err.response.data[key]);
+
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                alert(textError);
+            }else{
+                alert('Erreur ' + err.response.status);
+            }
+
+            document.getElementById('progressbar-upload-photo-bandeau').style.width = '0%';
         }
     );
 }
@@ -236,7 +259,29 @@ function uploadImageProfile() {
         }
     ).catch(
         function (err) {
-            console.log(err.message);
+            if(err.response.status === 422){
+
+                //table des erreurs
+                let errorArray = [];
+
+                // on boucle sur les erreurs renvoyées
+                for(let key in err.response.data){
+
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(err.response.data[key]);
+
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                alert(textError);
+            }else{
+                alert('Erreur ' + err.response.status);
+            }
+
+            document.getElementById('progressbar-upload-photo-profil').style.width = '0%';
         }
     );
 }

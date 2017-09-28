@@ -111,6 +111,10 @@ class UserController extends Controller
     function uploadBandeau(Request $request){
         $user_id = Auth::id();
 
+        $this->validate($request, [
+            'bandeau' => 'required|image:jpeg,jpg,png|file|max:10240',
+        ]);
+
         if ($request->hasFile('bandeau')) {
 
             //Image en 1300px de large
@@ -132,6 +136,10 @@ class UserController extends Controller
     //UPLOAD DE LA PHOTOD DE PROFIL
     function uploadPhotoProfile(Request $request){
         $user_id = Auth::id();
+
+        $this->validate($request, [
+            'photo' => 'required|image:jpeg,jpg,png|file|max:10240',
+        ]);
 
         if ($request->hasFile('photo')) {
 

@@ -85,8 +85,10 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $photo = [];
+        //validation du formulaire
+        $this->validate($request, [
+            'file' => 'required|image:jpeg,jpg,png|file|max:10240',
+        ]);
 
         //si nous avons un fichier image
         if ($request->hasFile('file')) {

@@ -27,7 +27,38 @@ function uploadPhoto(form, callback) {
         }
     ).catch(
         function (err) {
-            console.log(err.message);
+
+            if(err.response.status === 422){
+
+                //table des erreurs
+                let errorArray = [];
+
+                // on boucle sur les erreurs renvoyées
+                for(let key in err.response.data){
+
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(err.response.data[key]);
+
+                    try {
+                        //on ajoute la class invalid au champs qui ne sont pas bon
+                        let errorInput = form.querySelector("input[name='" + key + "']");
+                        errorInput.setAttribute('class', errorInput.className + ' invalid');
+                    }catch (e){}
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                errorPopupText.style.display = 'block';
+                errorPopupText.innerHTML = textError;
+            }else{
+                errorPopupText.style.display = 'block';
+                errorPopupText.innerHTML = 'Erreur ' + err.response.status;
+            }
+
+            document.getElementById('progressbar-upload-photo').style.width = '0%';
+
             showSubmitLoader(false);
         }
     );
