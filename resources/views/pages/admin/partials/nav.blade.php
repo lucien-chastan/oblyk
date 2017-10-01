@@ -46,7 +46,7 @@
             </span>
         </div>
         <div class="collapsible-body">
-            <a href="{{ route('admin_sae_upload') }}">
+            <a href="{{ route('admin_route_information') }}">
                 <div class="row truncate">
                     <i class="left material-icons">info</i>
                     <span class="hidden-1000">

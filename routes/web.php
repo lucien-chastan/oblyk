@@ -179,6 +179,8 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
     //ROUTE
     Route::get('/admin/route-information', 'AdminController@routeInformationPage')->name('admin_route_information');
+    Route::get('/get/route/{route_id}/information', 'AdminController@getRouteInformation');
+    Route::get('/delete/route/{route_id}', 'AdminCRUD\RouteCRUDController@deleteRoute')->name('delete_route');
 
 });
 
