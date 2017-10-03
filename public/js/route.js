@@ -345,7 +345,7 @@ function prepareNewLine(response) {
         });
     }
 
-    Materialize.toast('<p>' + popup_line_name.value + ' ajouté</p>', 10000);
+    Materialize.toast('<p>' + popup_line_name.value + ' ajouté</p>', 10000, 'light-blue');
     $(".button-collapse").sideNav();
 
     popup_line_name.value = '';

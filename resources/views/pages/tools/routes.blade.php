@@ -93,7 +93,7 @@
                     @foreach($routes as $route)
                         <tr>
                             <td class="text-bold">
-                                <a href="{{ route('routePage', ['route_id'=>$route->id, 'route_label'=>str_slug($route->label)]) }}">
+                                <a href="{{ route('routePage', ['route_id'=>$route->id, 'route_label'=>(str_slug($route->label) != '') ? str_slug($route->label) : 'ligne' ]) }}">
                                     <img src="/img/climb-{{ $route->climb_id }}.png" alt="" class="left" height="12">
                                     {{ $route->label }}
                                 </a>

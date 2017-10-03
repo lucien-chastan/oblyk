@@ -46,4 +46,9 @@ class AdminController extends Controller
 
     }
 
+    //ARTICLE
+    public function uploadArticleBandeauPage(){
+        return view('pages.admin.sae.upload');
+    }
+
 }
