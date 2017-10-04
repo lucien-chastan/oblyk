@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Route;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,27 @@ class AdminController extends Controller
 
     //ARTICLE
     public function uploadArticleBandeauPage(){
-        return view('pages.admin.sae.upload');
+        return view('pages.admin.article.upload');
+    }
+
+    public function createArticlePage(){
+        return view('pages.admin.article.create-article');
+    }
+
+    public function updateArticlePage(){
+        return view('pages.admin.article.update-article');
+    }
+
+    public function getArticleInformation($article_id){
+
+        $article = Article::where('id', $article_id)->first();
+
+        $data = [
+            'article' => $article,
+        ];
+
+        return view('pages.admin.article.get-article', $data);
+
     }
 
 }

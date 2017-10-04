@@ -57,6 +57,42 @@
         </div>
     </li>
 
+    {{--LES ARTICLES--}}
+    <li>
+        <div class="collapsible-header truncate">
+            <i class="material-icons">art_track</i>
+            <span class="hidden-1000">
+                Articles
+            </span>
+        </div>
+        <div class="collapsible-body">
+            <a href="{{ route('uploadBandeauArticlePage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">file_upload</i>
+                    <span class="hidden-1000">
+                        Uploader bandeau
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('createArticlePage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">add</i>
+                    <span class="hidden-1000">
+                        Créer un article
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('updateArticlePage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">create</i>
+                    <span class="hidden-1000">
+                        Modifier un article
+                    </span>
+                </div>
+            </a>
+        </div>
+    </li>
+
 </ul>
 
 

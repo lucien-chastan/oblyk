@@ -182,6 +182,14 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/route/{route_id}/information', 'AdminController@getRouteInformation');
     Route::get('/delete/route/{route_id}', 'AdminCRUD\RouteCRUDController@deleteRoute')->name('delete_route');
 
+    //ARTICLE
+    Route::get('/admin/article/upload-page', 'AdminController@uploadArticleBandeauPage')->name('uploadBandeauArticlePage');
+    Route::get('/admin/article/create', 'AdminController@createArticlePage')->name('createArticlePage');
+    Route::get('/admin/article/update', 'AdminController@updateArticlePage')->name('updateArticlePage');
+    Route::get('/get/article/{article_id}/information', 'AdminController@getArticleInformation');
+    Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
+    Route::resource('articles', 'CRUD\ArticleController');
+
 });
 
 
