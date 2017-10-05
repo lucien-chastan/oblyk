@@ -40,6 +40,16 @@
     @if(Auth::check())
         //check s'il y a de nouveau message et notification
         getNewNotificationAndMessage();
+
+        //check les messages et notification toutes les 30 secondes
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                setInterval(function () {
+                    getNewNotificationAndMessage();
+                },30000);
+            },30000);
+        });
+
     @endif
 
 </script>

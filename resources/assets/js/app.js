@@ -22,15 +22,6 @@ let backgroundNav = function () {
 //changement de la couleur du fond de la nav bar au scroll
 window.addEventListener('scroll', backgroundNav);
 
-//check les messages et notification toutes les 30 secondes
-window.addEventListener('load', function () {
-   setTimeout(function () {
-      setInterval(function () {
-          getNewNotificationAndMessage();
-      },30000);
-   },30000);
-});
-
 //INITIALISATION ET STYLE DES DROP DOWN DU MENU
 $('.nav-dropdown').dropdown({
         inDuration: 300,
