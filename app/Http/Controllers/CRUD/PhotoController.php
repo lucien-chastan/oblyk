@@ -87,7 +87,7 @@ class PhotoController extends Controller
     {
         //validation du formulaire
         $this->validate($request, [
-            'file' => 'required|image:jpeg,jpg,png|file|max:10240',
+            'file' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
         ]);
 
         //si nous avons un fichier image

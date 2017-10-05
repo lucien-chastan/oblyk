@@ -112,7 +112,7 @@ class UserController extends Controller
         $user_id = Auth::id();
 
         $this->validate($request, [
-            'bandeau' => 'required|image:jpeg,jpg,png|file|max:10240',
+            'bandeau' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
         ]);
 
         if ($request->hasFile('bandeau')) {
@@ -138,7 +138,7 @@ class UserController extends Controller
         $user_id = Auth::id();
 
         $this->validate($request, [
-            'photo' => 'required|image:jpeg,jpg,png|file|max:10240',
+            'photo' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
         ]);
 
         if ($request->hasFile('photo')) {
