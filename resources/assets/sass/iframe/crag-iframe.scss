@@ -1,0 +1,69 @@
+
+table {
+
+    font-size: 0.95em;
+    td { padding: 2px 3px 2px 0; }
+    tr {
+        td:first-child {
+            text-align: right;
+            color: rgb(100,100,100);
+            font-weight: 500;
+
+            .material-icons {
+                display: none;
+            }
+        }
+    }
+
+    .map-link {
+        color: #2196F3;
+        margin-right: 0.2px;
+    }
+
+    .material-icons {
+        vertical-align: sub;
+        font-size: 1em;
+    }
+
+    .climb-type{
+        span{
+            font-weight: 500;
+            &:after {
+                content: ', ';
+                color: black;
+                font-weight: normal;
+            }
+            &:last-child{
+                &:after{
+                    display: none;
+                }
+            }
+        }
+        .voie{color: #3771C8}
+        .grande-voie{color: #FF5555}
+        .bloc{color: #ffcc00}
+        .deep-water{color: #87cdde}
+        .via-ferrata{color: #37c871}
+    }
+}
+
+
+//version smartphone
+@media screen and (max-width:600px){
+
+    table {
+        tr {
+            td:first-child {
+                span {
+                    display: none;
+                }
+                .material-icons {
+                    display: inline;
+                    font-size: 1.2em;
+                    margin-right: 0.5em;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

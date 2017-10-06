@@ -37,6 +37,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/article-markdown.scss', 'public/css')
     .sass('resources/assets/sass/tools/tools.scss', 'public/css')
     .sass('resources/assets/sass/crag/line.scss', 'public/css')
+    .sass('resources/assets/sass/iframe/crag-iframe.scss', 'public/css/iframe')
+    .sass('resources/assets/sass/iframe/iframe.scss', 'public/css/iframe')
     .sass('resources/assets/sass/admin/admin.scss', 'public/css');
 
 //fichier Js
@@ -63,6 +65,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/project.js', 'public/js')
     .copy('resources/assets/js/global-search.js', 'public/js')
     .copy('resources/assets/js/mapVariable.js', 'public/js')
+    .copy('resources/assets/js/iframe/crag-iframe.js', 'public/js/iframe')
     .copy('resources/assets/js/jquery.min.js', 'public/js')
     .copy('resources/assets/js/materialize.min.js', 'public/js')
     .copy('resources/assets/js/admin.js', 'public/js');

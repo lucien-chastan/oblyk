@@ -77,6 +77,21 @@ body{
         margin: 0;
         font-size: 2em;
     }
+
+    .share-btn {
+        font-weight: 500;
+        transition: color 0.3s;
+        cursor: pointer;
+        color: #8F8F8F;
+        .material-icons {
+            opacity: 1;
+            vertical-align: bottom;
+            margin-right: 0.2em;
+        }
+        &:hover {
+            color: #2196F3 !important;
+        }
+    }
 }
 
 .topo-panel{

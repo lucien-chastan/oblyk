@@ -192,6 +192,9 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
 });
 
+//IFRAME
+Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
+
 
 //LE FIL D'ACTUALITÉ
 Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
@@ -275,6 +278,7 @@ Route::post('/modal/crossUser', 'CRUD\CrossController@crossUserModal')->name('cr
 Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('partnerModal');
 Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
+Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
 
 
 //CRUD AJAX

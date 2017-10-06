@@ -71,10 +71,13 @@
         </p>
     @endif
 
-    @if(Auth::check())
-        <div class="text-right ligne-btn">
+    <div class="text-right ligne-btn">
+        <span {!! $Helpers::tooltip( trans('modals/shareCrag.shareTooltip') ) !!} {!! $Helpers::modal(route('shareCragModal'), ["id"=>$crag->id, "title"=>trans('modals/shareCrag.shareTitle')]) !!}  class="tooltipped btnModal left share-btn grey-text">
+            <i class="material-icons">reply</i> Partager
+        </span>
+        @if(Auth::check())
             <i {!! $Helpers::tooltip( trans('modals/crag.tooltip')) !!} {!! $Helpers::modal(route('cragModal'), ["id"=>$crag->id, "title"=>trans('modals/crag.modalTitle'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
-        </div>
-    @endif
+        @endif
+    </div>
 
 </div>
