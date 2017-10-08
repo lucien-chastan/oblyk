@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['meta_title'=> 'Upload logo | Admin'])
+@extends('layouts.admin', ['meta_title'=> 'Créer article | Admin'])
 
 @inject('Inputs','App\Lib\InputTemplates')
 

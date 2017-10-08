@@ -48,6 +48,24 @@ class HelpController extends Controller
     public function store(Request $request)
     {
 
+        //validation du formulaire
+        $this->validate($request, [
+            'label' => 'required|max:255',
+            'category' => 'required|max:255',
+            'contents' => 'required',
+        ]);
+
+        //enregistrement des données
+        $help = new Help();
+        $help->label = $request->input('label');
+        $help->category = $request->input('category');
+        $help->contents = $request->input('contents');
+        $help->save();
+
+        //Ajout à elastic search
+        $help->addToIndex();
+
+        return redirect()->route('help');
     }
 
     /**
@@ -80,7 +98,24 @@ class HelpController extends Controller
      */
     public function update(Request $request)
     {
+        //validation du formulaire
+        $this->validate($request, [
+            'label' => 'required|max:255',
+            'category' => 'required|max:255',
+            'contents' => 'required',
+        ]);
 
+        //enregistrement des données
+        $help = Help::find($request->input('id'));
+        $help->label = $request->input('label');
+        $help->category = $request->input('category');
+        $help->contents = $request->input('contents');
+        $help->save();
+
+        //Ajout à elastic search
+        $help->addToIndex();
+
+        return response()->json(json_encode($help));
     }
 
     /**
@@ -94,6 +129,7 @@ class HelpController extends Controller
 
         $help = Help::find($id);
         $help->removeFromIndex();
+        $help->delete();
 
     }
 }

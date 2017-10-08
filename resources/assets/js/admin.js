@@ -23,6 +23,12 @@ function getArticle() {
     });
 }
 
+function articleUpdated() {
+    showSubmitLoader(false, document.getElementById('formUpdateArticle'));
+    Materialize.toast('Article mis à jour', 4000);
+}
+
+
 function collapseArea(area_id, element) {
     let area = document.getElementById(area_id),
         indicator = element.getElementsByTagName('span')[0];
@@ -37,11 +43,6 @@ function collapseArea(area_id, element) {
         indicator.textContent = '-';
     }
 
-}
-
-function articleUpdated() {
-    showSubmitLoader(false, document.getElementById('formUpdateArticle'));
-    Materialize.toast('Article mis à jour', 4000);
 }
 
 //ELASTIC
@@ -120,5 +121,29 @@ function elasticUsers() {
     axios.get('/elastic/users').then(function (response) {
         console.log(response);
         Materialize.toast('Users indexés', 4000);
+    });
+}
+
+
+//VA CHERCHER LES INFORMATIONS D'UNE AIDES
+function getHelp() {
+    let help_id = document.getElementById('help_id').value,
+        informationZone = document.getElementById('insertHelp');
+
+    axios.get('/get/aide/' + help_id + '/information').then(function (response) {
+        informationZone.innerHTML = response.data;
+    });
+}
+
+function helpUpdated() {
+    showSubmitLoader(false, document.getElementById('formUpdateHelp'));
+    Materialize.toast('Aide mis à jour', 4000);
+}
+
+function deleteHelp() {
+    let help_id = document.getElementById('help_id').value;
+
+    axios.delete('/helps/' + help_id).then(function () {
+        Materialize.toast('Aide supprimée', 4000);
     });
 }

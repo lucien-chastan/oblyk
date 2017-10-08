@@ -205,6 +205,14 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/elastic/topoWebs', 'CRUD\TopoWebController@IndexElasticTopoWeb');
     Route::get('/elastic/users', 'CRUD\UserController@IndexElasticUser');
 
+    //AIDES
+    Route::resource('helps', 'CRUD\HelpController');
+    Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
+    Route::get('/admin/aide/update', 'AdminController@updateHelpPage')->name('updateHelpPage');
+    Route::get('/admin/aide/delete', 'AdminController@deleteHelpPage')->name('deleteHelpPage');
+    Route::get('/get/aide/{help_id}/information', 'AdminController@getHelpInformation');
+
+
 });
 
 //IFRAME

@@ -93,6 +93,42 @@
         </div>
     </li>
 
+    {{--LES AIDES--}}
+    <li>
+        <div class="collapsible-header truncate">
+            <i class="material-icons">school</i>
+            <span class="hidden-1000">
+                Aides
+            </span>
+        </div>
+        <div class="collapsible-body">
+            <a href="{{ route('createHelpPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">add</i>
+                    <span class="hidden-1000">
+                        Créer une aide
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('updateHelpPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">create</i>
+                    <span class="hidden-1000">
+                        Modifier une aide
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('deleteHelpPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">delete</i>
+                    <span class="hidden-1000">
+                        Supprimer une aide
+                    </span>
+                </div>
+            </a>
+        </div>
+    </li>
+
     {{--ELASTIC--}}
     <li>
         <a href="{{ route('elasticIndexPage') }}">

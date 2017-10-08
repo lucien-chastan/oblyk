@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Help;
 use App\Route;
 use Illuminate\Http\Request;
 
@@ -75,5 +76,31 @@ class AdminController extends Controller
     //ELASTIC SEARCH
     public function ElasticIndexPage(){
         return view('pages.admin.elastic.index-page');
+    }
+
+
+    //LES AIDES
+    public function createHelpPage(){
+        return view('pages.admin.helps.create-help');
+    }
+
+    public function updateHelpPage(){
+        return view('pages.admin.helps.edit-help');
+    }
+
+    public function deleteHelpPage(){
+        return view('pages.admin.helps.delete-help');
+    }
+
+    public function getHelpInformation($help_id){
+
+        $help = Help::where('id', $help_id)->first();
+
+        $data = [
+            'help' => $help,
+        ];
+
+        return view('pages.admin.helps.get-help', $data);
+
     }
 }
