@@ -145,18 +145,24 @@ class PartnerController extends Controller
             'rayon' => 'required|max:40|min:1|Integer'
         ]);
 
-        //enregistrement des données
-        $partner = new UserPlace();
-        $partner->lat = $request->input('lat');
-        $partner->lng = $request->input('lng');
-        $partner->rayon = $request->input('rayon');
-        $partner->label = $request->input('label');
-        $partner->description = $request->input('description');
-        $partner->user_id = Auth::id();
-        $partner->active = 1;
-        $partner->save();
+        if($request->input('lat') == 0 || $request->input('lng') == 0){
 
-        return response()->json(json_encode($partner));
+            return response()->json(['lat_lng' => ['Vous devez cliquer sur la carte pour situer votre lieux']], 422);
+
+        }else{
+            //enregistrement des données
+            $partner = new UserPlace();
+            $partner->lat = $request->input('lat');
+            $partner->lng = $request->input('lng');
+            $partner->rayon = $request->input('rayon');
+            $partner->label = $request->input('label');
+            $partner->description = $request->input('description');
+            $partner->user_id = Auth::id();
+            $partner->active = 1;
+            $partner->save();
+
+            return response()->json(json_encode($partner));
+        }
 
     }
 
@@ -198,18 +204,27 @@ class PartnerController extends Controller
             'rayon' => 'required|max:40|min:1|Integer'
         ]);
 
-        //enregistrement des données
-        $partner = UserPlace::where('id', $request->input('id'))->first();
-        if($partner->user_id == Auth::id()){
-            $partner->lat = $request->input('lat');
-            $partner->lng = $request->input('lng');
-            $partner->rayon = $request->input('rayon');
-            $partner->description = $request->input('description');
-            $partner->label = $request->input('label');
-            $partner->save();
+        if($request->input('lat') == 0 || $request->input('lng') == 0){
+
+            return response()->json(['lat_lng' => ['Vous devez cliquer sur la carte pour situer votre lieux']], 422);
+
+        }else{
+
+            //enregistrement des données
+            $partner = UserPlace::where('id', $request->input('id'))->first();
+            if($partner->user_id == Auth::id()){
+                $partner->lat = $request->input('lat');
+                $partner->lng = $request->input('lng');
+                $partner->rayon = $request->input('rayon');
+                $partner->description = $request->input('description');
+                $partner->label = $request->input('label');
+                $partner->save();
+            }
+
+            return response()->json(json_encode($partner));
+
         }
 
-        return response()->json(json_encode($partner));
     }
 
     /**

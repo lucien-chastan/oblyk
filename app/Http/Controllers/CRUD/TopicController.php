@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Follow;
 use App\ForumTopic;
 use App\Route;
-use App\Search;
+use App\oldSearch;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Http\Request;
@@ -41,6 +41,11 @@ class TopicController extends Controller
         ];
 
         return view('modal.topic', $data);
+    }
+
+    //Index tous dans elastic search
+    public function IndexElasticTopic(){
+        ForumTopic::addAllToIndex();
     }
 
     /**
@@ -94,8 +99,8 @@ class TopicController extends Controller
         $follow->user_id = Auth::id();
         $follow->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Topic', $topic->id, $topic->label);
+        //Elastic indexation
+        $topic->addToIndex();
 
 
         return response()->json(json_encode($topic));
@@ -146,8 +151,8 @@ class TopicController extends Controller
             $topic->save();
         }
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Topic', $topic->id, $topic->label);
+        //Elastic indexation
+        $topic->addToIndex();
 
         return response()->json(json_encode($topic));
     }
@@ -163,6 +168,7 @@ class TopicController extends Controller
         $topic = ForumTopic::where('id', $id)->first();
 
         if($topic->user_id == Auth::id()){
+            $topic->removeFromIndex();
             $topic->delete();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Search;
+use App\oldSearch;
 use App\Word;
 use Validator;
 use Illuminate\Http\Request;
@@ -81,13 +81,19 @@ class WordController extends Controller
         $word->user_id = Auth::id();
         $word->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Word', $word->id, $word->label);
-
+        //Elasticindexation
+        $word->addToIndex();
 
         return response()->json(json_encode($word));
 
     }
+
+
+    //Index tous les mots dans elastic search
+    public function IndexElasticWord(){
+        Word::addAllToIndex();
+    }
+
 
     /**
      * Display the specified resource.
@@ -132,8 +138,8 @@ class WordController extends Controller
             $word->definition = $request->input('definition');
             $word->save();
 
-            //Mise à jour de l'index de recherche
-            Search::index('App\Word', $word->id, $word->label);
+            //Elasticindexation
+            $word->addToIndex();
 
         }
 
@@ -151,6 +157,9 @@ class WordController extends Controller
         $word = Word::where('id', $id)->first();
 
         if($word->user_id == Auth::id()){
+
+            $word->removeFromIndex();
+
             $word->delete();
         }
     }

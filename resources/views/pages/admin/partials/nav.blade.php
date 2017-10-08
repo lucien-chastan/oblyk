@@ -93,6 +93,16 @@
         </div>
     </li>
 
+    {{--ELASTIC--}}
+    <li>
+        <a href="{{ route('elasticIndexPage') }}">
+            <div class="collapsible-header truncate">
+                <i class="material-icons">youtube_searched_for</i>
+                <span class="hidden-1000">Elastic</span>
+            </div>
+        </a>
+    </li>
+
 </ul>
 
 

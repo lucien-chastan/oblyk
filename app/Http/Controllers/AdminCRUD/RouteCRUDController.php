@@ -23,7 +23,6 @@ class RouteCRUDController extends Controller
             ->with('videos')
             ->with('photos')
             ->with('tags')
-            ->with('search')
             ->first();
 
         $crag_id = $route->crag_id;
@@ -41,7 +40,7 @@ class RouteCRUDController extends Controller
         foreach ($route->photos as $photo) $photo->delete();
         foreach ($route->tags as $tag) $tag->delete();
 
-        $route->search->delete();
+        $route->removeFromIndex();
         $route->delete();
 
         //Mise à jour des informations de la falaise

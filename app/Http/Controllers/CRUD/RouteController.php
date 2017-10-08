@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Crag;
 use App\Route;
 use App\RouteSection;
-use App\Search;
+use App\oldSearch;
 use App\Sector;
 use Validator;
 use Illuminate\Http\Request;
@@ -85,6 +85,12 @@ class RouteController extends Controller
         ];
 
         return view('modal.route', $data);
+    }
+
+
+    //Index tous dans elastic search
+    public function IndexElasticRoute(){
+        Route::addAllToIndex();
     }
 
     /**
@@ -195,8 +201,8 @@ class RouteController extends Controller
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Route', $route->id, $route->label);
+        //Elastic indexation
+        $route->addToIndex();
 
         return response()->json(json_encode($route));
     }
@@ -318,8 +324,8 @@ class RouteController extends Controller
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Route', $route->id, $route->label);
+        //Elastic indexation
+        $route->addToIndex();
 
         return response()->json(json_encode($route));
     }

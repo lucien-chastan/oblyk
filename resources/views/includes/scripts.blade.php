@@ -30,7 +30,7 @@
         $('.parallax').parallax();
 
         $(".button-open-global-search").sideNav({
-            menuWidth: 400,
+            menuWidth: 500,
             edge: 'right',
             closeOnClick: false,
             draggable: false

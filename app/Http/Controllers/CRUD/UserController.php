@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Search;
+use App\oldSearch;
 use App\User;
 use App\UserSettings;
 use Illuminate\Support\Facades\Hash;
@@ -199,6 +199,12 @@ class UserController extends Controller
 
     }
 
+
+    //Index tous dans elastic search
+    public function IndexElasticUser(){
+        User::addAllToIndex();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -274,8 +280,8 @@ class UserController extends Controller
         $user->description = $request->input('description');
         $user->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\User', $user->id, $user->name);
+        //Elastic indexation
+        $user->addToIndex();
 
 
         return response()->json(json_encode($user));

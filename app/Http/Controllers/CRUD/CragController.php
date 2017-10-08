@@ -6,7 +6,7 @@ use App\Crag;
 use App\GapGrade;
 use App\Orientation;
 use App\Photo;
-use App\Search;
+use App\oldSearch;
 use App\Season;
 use Validator;
 use Illuminate\Http\Request;
@@ -75,6 +75,11 @@ class CragController extends Controller
         $crag->photo_id = $photo->id;
         $crag->bandeau = '/storage/photos/crags/1300/' . $photo->slug_label;
         $crag->save();
+    }
+
+    //Index tous les falaise dans elastic search
+    public function IndexElasticCrag(){
+        Crag::addAllToIndex();
     }
 
 
@@ -167,8 +172,8 @@ class CragController extends Controller
         $gap->max_grade_text = '';
         $gap->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Crag', $crag->id, $crag->label);
+        //Elastic indexation
+        $crag->addToIndex();
 
         return response()->json(json_encode($crag));
     }
@@ -253,8 +258,8 @@ class CragController extends Controller
         $orientation->south_west = $request->input('south_west');
         $orientation->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Crag', $crag->id, $crag->label);
+        //Elastic indexation
+        $crag->addToIndex();
 
         return response()->json(json_encode($crag));
     }
@@ -267,6 +272,8 @@ class CragController extends Controller
      */
     public function destroy($id)
     {
+        $crag = Crag::find($id);
 
+        $crag->removeFromIndex();
     }
 }

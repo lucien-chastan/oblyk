@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Gym;
-use App\Search;
+use App\oldSearch;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -110,6 +110,12 @@ class GymController extends Controller
         return redirect()->route('gymPage', ['gym_id'=>$gym->id, 'gym_label'=>str_slug($gym->label)]);
     }
 
+
+    //Index tous les salles dans elastic search
+    public function IndexElasticGym(){
+        Gym::addAllToIndex();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -171,8 +177,8 @@ class GymController extends Controller
         $gym->save();
         $gym->slug = str_slug($gym->label);
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Gym', $gym->id, $gym->label);
+        //Elastic indexation
+        $gym->addToIndex();
 
         return response()->json(json_encode($gym));
     }
@@ -236,8 +242,8 @@ class GymController extends Controller
         $gym->lng = $request->input('lng');
         $gym->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Gym', $gym->id, $gym->label);
+        //Elastic indexation
+        $gym->addToIndex();
 
         return response()->json(json_encode($gym));
     }
@@ -250,6 +256,9 @@ class GymController extends Controller
      */
     public function destroy($id)
     {
+
+        $gym = Gym::find($id);
+        $gym->removeFromIndex();
 
     }
 }

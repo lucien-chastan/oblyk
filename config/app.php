@@ -183,6 +183,7 @@ return [
         App\Lib\InputTemplates::class,
         App\Lib\HelpersTemplates::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Elasticquent\ElasticquentServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Markdown' => Indal\Markdown\Facade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
     ],
 

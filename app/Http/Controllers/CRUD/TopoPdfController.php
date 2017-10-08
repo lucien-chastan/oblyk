@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
-use App\Search;
+use App\oldSearch;
 use App\TopoPdf;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -110,13 +110,18 @@ class TopoPdfController extends Controller
 
                 $request->file('file')->storeAs('public/topos/PDF/', $topoPdf->slug_label);
 
-                //Mise à jour de l'index de recherche
-                Search::index('App\TopoPdf', $topoPdf->id, $topoPdf->label);
+                //Elastic indexation
+                $topoPdf->addToIndex();
 
             }
         }
 
         return response()->json(json_encode($topoPdf));
+    }
+
+    //Index tous dans elastic search
+    public function IndexElasticTopoPdf(){
+        TopoPdf::addAllToIndex();
     }
 
     /**
@@ -158,8 +163,8 @@ class TopoPdfController extends Controller
             $topoPdf->label = $request->input('label');
             $topoPdf->save();
 
-            //Mise à jour de l'index de recherche
-            Search::index('App\TopoPdf', $topoPdf->id, $topoPdf->label);
+            //Elastic indexation
+            $topoPdf->addToIndex();
 
         }
 
@@ -182,6 +187,8 @@ class TopoPdfController extends Controller
 
             //suppression du PDF dans le storage
             Storage::delete(['public/topos/PDF/' . $topoPdf->slug_label]);
+
+            $topoPdf->removeFromIndex();
 
             $topoPdf->delete();
         }

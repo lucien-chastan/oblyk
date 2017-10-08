@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Search extends Model
+class oldSearch extends Model
 {
 
     public function searchable(){
@@ -56,9 +56,9 @@ class Search extends Model
      */
     public static function index ($model, $id, $label){
 
-        $searchIndex = Search::where(['searchable_id' => $id, 'searchable_type'=>$model])->first();
+        $searchIndex = oldSearch::where(['searchable_id' => $id, 'searchable_type'=>$model])->first();
         if(count($searchIndex) == 0){
-            $searchIndex = new Search();
+            $searchIndex = new oldSearch();
             $searchIndex->searchable_id = $id;
             $searchIndex->searchable_type = $model;
         }

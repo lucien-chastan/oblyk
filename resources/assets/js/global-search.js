@@ -8,6 +8,9 @@ window.onload = function () {
         openBt[i].addEventListener('click', function () {
             let iptSearch = document.getElementById('input-text-global-search');
             $('ul.tabs').tabs('select_tab', 'global-search-follow');
+            $('select').material_select({
+                constrainWidth : falseap
+            });
             iptSearch.value = '';
             iptSearch.focus();
         });
@@ -19,7 +22,8 @@ window.onload = function () {
 //LANCEMENT ET AFFICHAGE DE LA RECERCHE
 function globalSearche(searchInput) {
     let progress = document.getElementById('progressSearch'),
-        findsZone = document.getElementById('global-search-finds');
+        findsZone = document.getElementById('global-search-finds'),
+        searchType = document.getElementById('search-type');
 
     //on annule la frappe précédente
     clearTimeout(timToGlobalSearch);
@@ -38,7 +42,7 @@ function globalSearche(searchInput) {
 
     //on lance la fonction AJAX de recherche
     timToGlobalSearch = setTimeout(function () {
-        axios.get('/API/search/10/0/' + searchInput.value).then(function (response) {
+        axios.get('/API/search/10/0/' + searchType.value + '/' + searchInput.value).then(function (response) {
 
             let data = response.data;
 

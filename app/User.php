@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\MailResetPasswordToken;
+use Elasticquent\ElasticquentTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'localisation', 'description'
     ];
 
     /**
@@ -31,6 +32,23 @@ class User extends Authenticatable
     protected $dates = [
         'last_fil_read'
     ];
+
+    use ElasticquentTrait;
+
+    protected $mappingProperties = array(
+        'name' => [
+            'type' => 'string',
+            "analyzer" => "standard",
+        ],
+        'localisation' => [
+            'type' => 'string',
+            "analyzer" => "standard",
+        ],
+        'description' => [
+            'type' => 'string',
+            "analyzer" => "standard",
+        ]
+    );
 
     //Customisation du mail de reset de password
     public function sendPasswordResetNotification($token)
@@ -56,7 +74,6 @@ class User extends Authenticatable
     public function photos() { return $this->hasMany('App\Photo','user_id', 'id'); }
     public function routes(){ return $this->hasMany('App\Route','user_id', 'id'); }
     public function sales() { return $this->hasMany('App\Sale','user_id', 'id'); }
-    public function search() { return $this->morphOne('App\Search', 'searchable');}
     public function sectors() { return $this->hasMany('App\Sector','user_id', 'id'); }
     public function settings(){ return $this->hasOne('App\UserSettings','user_id', 'id'); }
     public function socialNetworks(){ return $this->hasMany('App\UserSocialNetwork','user_id', 'id'); }

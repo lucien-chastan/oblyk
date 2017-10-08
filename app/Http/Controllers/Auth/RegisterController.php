@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Search;
+use App\oldSearch;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserPartnerSettings;
@@ -82,8 +82,8 @@ class RegisterController extends Controller
         $partner->user_id = $user->id;
         $partner->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\User', $user->id, $user->name);
+        //Elastic indexation
+        $user->addToIndex();
 
         return $user;
     }

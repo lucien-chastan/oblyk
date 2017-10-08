@@ -9,6 +9,7 @@
         "andreasindal/laravel-markdown": "^1.1",
         "barryvdh/laravel-debugbar": "^2.3",
         "caouecs/laravel-lang": "~3.0",
+        "elasticquent/elasticquent": "dev-master",
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

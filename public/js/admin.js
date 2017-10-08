@@ -41,5 +41,84 @@ function collapseArea(area_id, element) {
 
 function articleUpdated() {
     showSubmitLoader(false, document.getElementById('formUpdateArticle'));
-    Materialize.toast('Article mis à jour', 4000)
+    Materialize.toast('Article mis à jour', 4000);
+}
+
+//ELASTIC
+function elasticWords() {
+    axios.get('/elastic/words').then(function (response) {
+        console.log(response);
+        Materialize.toast('Words indexés', 4000);
+    });
+}
+
+function elasticCrags() {
+    axios.get('/elastic/crags').then(function (response) {
+        console.log(response);
+        Materialize.toast('Crags indexés', 4000);
+    });
+}
+
+function elasticGyms() {
+    axios.get('/elastic/gyms').then(function (response) {
+        console.log(response);
+        Materialize.toast('Salles indexés', 4000);
+    });
+}
+
+function elasticHelps() {
+    axios.get('/elastic/helps').then(function (response) {
+        console.log(response);
+        Materialize.toast('Aides indexés', 4000);
+    });
+}
+
+
+function elasticMassives() {
+    axios.get('/elastic/massives').then(function (response) {
+        console.log(response);
+        Materialize.toast('Massive indexés', 4000);
+    });
+}
+
+function elasticRoutes() {
+    axios.get('/elastic/routes').then(function (response) {
+        console.log(response);
+        Materialize.toast('Routes indexés', 4000);
+    });
+}
+
+function elasticTopics() {
+    axios.get('/elastic/topics').then(function (response) {
+        console.log(response);
+        Materialize.toast('Topics indexés', 4000);
+    });
+}
+
+function elasticTopos() {
+    axios.get('/elastic/topos').then(function (response) {
+        console.log(response);
+        Materialize.toast('Topos indexés', 4000);
+    });
+}
+
+function elasticTopoPdfs() {
+    axios.get('/elastic/topoPdfs').then(function (response) {
+        console.log(response);
+        Materialize.toast('TopoPdfs indexés', 4000);
+    });
+}
+
+function elasticTopoWebs() {
+    axios.get('/elastic/topoWebs').then(function (response) {
+        console.log(response);
+        Materialize.toast('TopoWebs indexés', 4000);
+    });
+}
+
+function elasticUsers() {
+    axios.get('/elastic/users').then(function (response) {
+        console.log(response);
+        Materialize.toast('Users indexés', 4000);
+    });
 }

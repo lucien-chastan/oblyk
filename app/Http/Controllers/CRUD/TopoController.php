@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Crag;
-use App\Search;
+use App\oldSearch;
 use App\Topo;
 use App\TopoCrag;
 use Intervention\Image\Facades\Image;
@@ -114,6 +114,12 @@ class TopoController extends Controller
 
     }
 
+
+    //Index tous dans elastic search
+    public function IndexElasticTopo(){
+        Topo::addAllToIndex();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -168,8 +174,8 @@ class TopoController extends Controller
             $liaison->save();
         }
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Topo', $topo->id, $topo->label);
+        //Elastic indexation
+        $topo->addToIndex();
 
         return response()->json(json_encode($topo));
 
@@ -221,8 +227,8 @@ class TopoController extends Controller
         $topo->weight = $request->input('weight');
         $topo->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Topo', $topo->id, $topo->label);
+        //Elastic indexation
+        $topo->addToIndex();
 
 
         return response()->json(json_encode($topo));
@@ -239,6 +245,7 @@ class TopoController extends Controller
         $topo = Topo::where('id', $id)->first();
 
         if($topo->user_id == Auth::id()){
+            $topo->removeFromIndex();
             $topo->delete();
         }
     }

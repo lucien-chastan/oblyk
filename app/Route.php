@@ -2,10 +2,22 @@
 
 namespace App;
 
+use Elasticquent\ElasticquentTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
+    use ElasticquentTrait;
+
+    public $fillable = ['label'];
+
+    protected $mappingProperties = array(
+        'label' => [
+            'type' => 'string',
+            "analyzer" => "standard",
+        ]
+    );
+
     public function user(){
         return $this->hasOne('App\User','id', 'user_id');
     }
@@ -24,10 +36,6 @@ class Route extends Model
 
     public function tickLists(){
         return $this->hasMany('App\TickList','route_id','id');
-    }
-
-    public function search(){
-        return $this->morphOne('App\Search', 'searchable');
     }
 
     public function crosses(){

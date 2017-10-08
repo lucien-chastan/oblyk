@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Search;
+use App\oldSearch;
 use App\TopoWeb;
 use Validator;
 use Illuminate\Http\Request;
@@ -46,6 +46,11 @@ class TopoWebController extends Controller
         return view('modal.topoWeb', $data);
     }
 
+    //Index tous dans elastic search
+    public function IndexElasticTopoWeb(){
+        TopoWeb::addAllToIndex();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,8 +92,8 @@ class TopoWebController extends Controller
         $topoWeb->user_id = Auth::id();
         $topoWeb->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\TopoWeb', $topoWeb->id, $topoWeb->label);
+        //Elastic indexation
+        $topoWeb->addToIndex();
 
 
         return response()->json(json_encode($topoWeb));
@@ -138,8 +143,8 @@ class TopoWebController extends Controller
             $topoWeb->url = $request->input('url');
             $topoWeb->save();
 
-            //Mise à jour de l'index de recherche
-            Search::index('App\TopoWeb', $topoWeb->id, $topoWeb->label);
+            //Elastic indexation
+            $topoWeb->addToIndex();
 
         }
 
@@ -157,6 +162,7 @@ class TopoWebController extends Controller
         $topoWeb = TopoWeb::where('id', $id)->first();
 
         if($topoWeb->user_id == Auth::id()){
+            $topoWeb->removeFromIndex();
             $topoWeb->delete();
         }
     }

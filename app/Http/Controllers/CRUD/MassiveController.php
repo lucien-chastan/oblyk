@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\Massive;
 use App\MassiveCrag;
-use App\Search;
+use App\oldSearch;
 use Intervention\Image\Facades\Image;
 use Validator;
 use Illuminate\Http\Request;
@@ -43,6 +43,12 @@ class MassiveController extends Controller
         ];
 
         return view('modal.massive', $data);
+    }
+
+
+    //Index tous dans elastic search
+    public function IndexElasticMassive(){
+        Massive::addAllToIndex();
     }
 
 
@@ -94,8 +100,8 @@ class MassiveController extends Controller
             $liaison->save();
         }
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Massive', $massive->id, $massive->label);
+        //Elastic indexation
+        $massive->addToIndex();
 
         return response()->json(json_encode($massive));
 
@@ -141,8 +147,8 @@ class MassiveController extends Controller
         $massive->label = $request->input('label');
         $massive->save();
 
-        //Mise à jour de l'index de recherche
-        Search::index('App\Massive', $massive->id, $massive->label);
+        //Elastic indexation
+        $massive->addToIndex();
 
 
         return response()->json(json_encode($massive));
@@ -159,6 +165,7 @@ class MassiveController extends Controller
         $massive = Massive::where('id', $id)->first();
 
         if($massive->user_id == Auth::id()){
+            $massive->removeFromIndex();
             $massive->delete();
         }
     }

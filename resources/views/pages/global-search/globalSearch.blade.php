@@ -5,14 +5,29 @@
     </div>
 
     <div class="row search-content">
-        <div class="input-field col s12">
+
+        <div class="input-field col s12 m5">
             <i class="material-icons prefix">search</i>
+            <select id="search-type">
+                <option value="crags" selected>@lang('interface/search.cragOption')</option>
+                <option value="gyms">@lang('interface/search.gymOption')</option>
+                <option value="routes">@lang('interface/search.routeOption')</option>
+                <option value="users">@lang('interface/search.userOption')</option>
+                <option value="topics">@lang('interface/search.topicOption')</option>
+                <option value="topos">@lang('interface/search.guideBookOption')</option>
+                <option value="words">@lang('interface/search.wordOption')</option>
+                <option value="helps">@lang('interface/search.helpOption')</option>
+            </select>
+            <label for="search-type">@lang('interface/search.searchTypeOnOblyk')</label>
+        </div>
+
+        <div class="input-field col s12 m7">
             <input onkeyup="globalSearche(this)" id="input-text-global-search" type="search">
             <label for="input-text-global-search">@lang('interface/search.searchOnOblyk')</label>
         </div>
 
         <div class="col s12 tab-search-ligne">
-            <ul class="tabs tabs-fixed-width text-center">
+            <ul class="tabs tabs-fixed-width text-center no-scroll-x">
                 <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-follow" href="#global-search-follow"><i class="material-icons">star</i></a></li>
                 <li class="tab col s1"><a class="tab-global-search" id="tab-global-search-finds" href="#global-search-finds"><i class="material-icons">search</i></a></li>
             </ul>
