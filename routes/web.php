@@ -197,6 +197,13 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/admin/aide/delete', 'AdminController@deleteHelpPage')->name('deleteHelpPage');
     Route::get('/get/aide/{help_id}/information', 'AdminController@getHelpInformation');
 
+    //LES EXCEPTIONS
+    Route::resource('exceptions', 'CRUD\ExceptionController');
+    Route::get('/admin/exception/create', 'AdminController@createExceptionPage')->name('createExceptionPage');
+    Route::get('/admin/exception/update', 'AdminController@updateExceptionPage')->name('updateExceptionPage');
+    Route::get('/admin/exception/delete', 'AdminController@deleteExceptionPage')->name('deleteExceptionPage');
+    Route::get('/get/exception/{exception_id}/information', 'AdminController@getExceptionInformation');
+
 
 });
 

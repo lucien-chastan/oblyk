@@ -68,3 +68,29 @@ function deleteHelp() {
         Materialize.toast('Aide supprimée', 4000);
     });
 }
+
+//VA CHERCHER LES INFORMATIONS D'UNE EXVEPTION
+function getException() {
+    let exception_id = document.getElementById('exception_id').value,
+        informationZone = document.getElementById('insertException');
+
+    axios.get('/get/exception/' + exception_id + '/information').then(function (response) {
+        informationZone.innerHTML = response.data;
+
+        $('select').material_select();
+
+    });
+}
+
+function exceptionUpdated() {
+    showSubmitLoader(false, document.getElementById('formUpdateException'));
+    Materialize.toast('Exception mis à jour', 4000);
+}
+
+function deleteException() {
+    let exception_id = document.getElementById('exception_id').value;
+
+    axios.delete('/exceptions/' + exception_id).then(function () {
+        Materialize.toast('Exception supprimée', 4000);
+    });
+}

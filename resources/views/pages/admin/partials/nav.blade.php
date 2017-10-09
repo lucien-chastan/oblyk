@@ -129,6 +129,43 @@
         </div>
     </li>
 
+
+    {{--LES EXCEPTIONS--}}
+    <li>
+        <div class="collapsible-header truncate">
+            <i class="material-icons">report_problem</i>
+            <span class="hidden-1000">
+                Exceptions
+            </span>
+        </div>
+        <div class="collapsible-body">
+            <a href="{{ route('createExceptionPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">add</i>
+                    <span class="hidden-1000">
+                        Créer une exception
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('updateExceptionPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">create</i>
+                    <span class="hidden-1000">
+                        Modifier une exception
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('deleteExceptionPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">delete</i>
+                    <span class="hidden-1000">
+                        Supprimer une exception
+                    </span>
+                </div>
+            </a>
+        </div>
+    </li>
+
 </ul>
 
 

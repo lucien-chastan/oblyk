@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Exception;
 use App\Help;
 use App\Route;
 use Illuminate\Http\Request;
@@ -96,6 +97,31 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.helps.get-help', $data);
+
+    }
+
+    //LES EXCEPTIONS
+    public function createExceptionPage(){
+        return view('pages.admin.exceptions.create-exception');
+    }
+
+    public function updateExceptionPage(){
+        return view('pages.admin.exceptions.edit-exception');
+    }
+
+    public function deleteExceptionPage(){
+        return view('pages.admin.exceptions.delete-exception');
+    }
+
+    public function getExceptionInformation($exception_id){
+
+        $exception = Exception::where('id', $exception_id)->first();
+
+        $data = [
+            'exception' => $exception,
+        ];
+
+        return view('pages.admin.exceptions.get-exception', $data);
 
     }
 }
