@@ -110,12 +110,6 @@ class GymController extends Controller
         return redirect()->route('gymPage', ['gym_id'=>$gym->id, 'gym_label'=>str_slug($gym->label)]);
     }
 
-
-    //Index tous les salles dans elastic search
-    public function IndexElasticGym(){
-        Gym::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -177,8 +171,6 @@ class GymController extends Controller
         $gym->save();
         $gym->slug = str_slug($gym->label);
 
-        //Elastic indexation
-        $gym->addToIndex();
 
         return response()->json(json_encode($gym));
     }
@@ -242,9 +234,6 @@ class GymController extends Controller
         $gym->lng = $request->input('lng');
         $gym->save();
 
-        //Elastic indexation
-        $gym->addToIndex();
-
         return response()->json(json_encode($gym));
     }
 
@@ -256,9 +245,6 @@ class GymController extends Controller
      */
     public function destroy($id)
     {
-
-        $gym = Gym::find($id);
-        $gym->removeFromIndex();
 
     }
 }

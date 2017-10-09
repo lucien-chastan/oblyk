@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Notifications\MailResetPasswordToken;
-use Elasticquent\ElasticquentTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,23 +31,6 @@ class User extends Authenticatable
     protected $dates = [
         'last_fil_read'
     ];
-
-    use ElasticquentTrait;
-
-    protected $mappingProperties = array(
-        'name' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'localisation' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'description' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ]
-    );
 
     //Customisation du mail de reset de password
     public function sendPasswordResetNotification($token)

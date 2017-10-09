@@ -73,11 +73,6 @@ class AdminController extends Controller
 
     }
 
-    //ELASTIC SEARCH
-    public function ElasticIndexPage(){
-        return view('pages.admin.elastic.index-page');
-    }
-
 
     //LES AIDES
     public function createHelpPage(){

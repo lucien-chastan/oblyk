@@ -9,7 +9,7 @@ window.onload = function () {
             let iptSearch = document.getElementById('input-text-global-search');
             $('ul.tabs').tabs('select_tab', 'global-search-follow');
             $('select').material_select({
-                constrainWidth : falseap
+                constrainWidth : false
             });
             iptSearch.value = '';
             iptSearch.focus();

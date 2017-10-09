@@ -10,66 +10,33 @@ use App\Route;
 use App\Topo;
 use App\User;
 use App\Word;
+use TomLingham\Searchy\Facades\Searchy;
 
 class searchController extends Controller
 {
 
     public function search($limit, $offset, $type, $search){
 
-
-//        //RECHERCHE SUR LA TABLES INDEXÉE SEARCHES
-//        $finds = Search::find($search, $limit, $offset);
-//        $searches = [];
-//        if(count($finds) > 0){
-//            $findSearches = Search::whereIn('id', $finds)
-//                ->with('searchable')
-//                ->get();
-//
-//            foreach ($findSearches as $findSearch){
-//
-//                //Infos supplémentaires sur les routes
-//                if($findSearch->searchable_type == 'App\Route') {
-//                    $findSearch->searchable->crag = Crag::where('id', $findSearch->searchable->crag_id)->first();
-//                    $findSearch->searchable->routeSections = RouteSection::where('route_id', $findSearch->searchable->id)->get();
-//                }
-//
-//                //Infos supplémentaires sur les topos PDF ou Web
-//                if($findSearch->searchable_type == 'App\TopoPdf' || $findSearch->searchable_type == 'App\TopoWeb') {
-//                    $findSearch->searchable->crag = Crag::where('id', $findSearch->searchable->crag_id)->first();
-//                }
-//
-//                //Infos supplémentaires sur les massif
-//                if($findSearch->searchable_type == 'App\Massive') {
-//                    $findSearch->searchable->crags = MassiveCrag::where('massive_id', $findSearch->searchable->id)->get();
-//                }
-//
-//                //Infos supplémentaires sur les topics
-//                if($findSearch->searchable_type == 'App\ForumTopic') {
-//                    $findSearch->searchable->user = User::where('id', $findSearch->searchable->user_id)->first();
-//                }
-//
-//                $searches[] = $findSearch;
-//            }
-//        }
-//
-//        $data = [
-//            'search' => $search,
-//            'limit' => $limit,
-//            'offset' => $offset,
-//            'finds' => $searches
-//        ];
-
         $finds = [];
 
-        if($type == 'words') $finds = Word::search($search);
-        if($type == 'crags') $finds = Crag::search($search);
-        if($type == 'users') $finds = User::search($search);
-        if($type == 'gyms') $finds = Gym::search($search);
-        if($type == 'routes'){ $finds = Route::search($search);}
-        if($type == 'helps'){ $finds = Help::search($search);}
-        if($type == 'topics'){ $finds = ForumTopic::search($search);}
-        if($type == 'topos'){ $finds = Topo::search($search);}
-
+        if($type == 'words') $finds = Searchy::search('words')->fields('label', 'definition')->query($search)->getQuery()->limit(20)->get();
+        if($type == 'crags') $finds = Searchy::search('crags')->fields('label', 'city', 'region')->query($search)->getQuery()->limit(20)->get();
+        if($type == 'users') $finds = Searchy::search('users')->fields('name', 'localisation')->query($search)->getQuery()->limit(20)->get();
+        if($type == 'gyms') $finds = Searchy::search('gyms')->fields('label', 'description', 'city', 'big_city')->query($search)->getQuery()->limit(20)->get();
+        if($type == 'routes') {
+            $finds = Searchy::search('routes')->fields('label')->query($search)->getQuery()->limit(20)->get();
+            $loadsElements = [];
+            foreach ($finds as $find) $loadsElements[] = Route::where('id', $find->id)->with('crag')->with('routeSections')->first();
+            $finds = $loadsElements;
+        }
+        if($type == 'helps') $finds = Searchy::search('helps')->fields('label', 'category', 'contents')->query($search)->getQuery()->limit(20)->get();
+        if($type == 'topics') {
+            $finds = Searchy::search('forum_topics')->fields('label')->query($search)->getQuery()->limit(20)->get();
+            $loadsElements = [];
+            foreach ($finds as $find) $loadsElements[] = ForumTopic::where('id', $find->id)->with('user')->first();
+            $finds = $loadsElements;
+        }
+        if($type == 'topos') $finds = Searchy::search('topos')->fields('label', 'author', 'editor')->query($search)->getQuery()->limit(20)->get();
 
         $data = [
             'search' => $search,
@@ -77,9 +44,6 @@ class searchController extends Controller
             'finds' => $finds,
         ];
 
-//
-//        //view
-//        return view('pages.global-search.searchesVue', $data);
         return view('pages.global-search.elasticVue', $data);
     }
 

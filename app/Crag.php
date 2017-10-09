@@ -2,41 +2,13 @@
 
 namespace App;
 
-use Elasticquent\ElasticquentTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Crag extends Model
 {
 
-    use ElasticquentTrait;
-
     public $fillable = ['label', 'city', 'country', 'region', 'lat', 'lng'];
-
-    protected $mappingProperties = array(
-        'label' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'city' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'country' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'region' => [
-            'type' => 'string',
-            "analyzer" => "standard",
-        ],
-        'lat' => [
-            'type' => 'double'
-        ],
-        'lng' => [
-            'type' => 'double'
-        ]
-    );
 
     public function user(){
         return $this->hasOne('App\User','id', 'user_id');

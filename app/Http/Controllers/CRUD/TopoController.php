@@ -114,12 +114,6 @@ class TopoController extends Controller
 
     }
 
-
-    //Index tous dans elastic search
-    public function IndexElasticTopo(){
-        Topo::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -174,9 +168,6 @@ class TopoController extends Controller
             $liaison->save();
         }
 
-        //Elastic indexation
-        $topo->addToIndex();
-
         return response()->json(json_encode($topo));
 
     }
@@ -227,10 +218,6 @@ class TopoController extends Controller
         $topo->weight = $request->input('weight');
         $topo->save();
 
-        //Elastic indexation
-        $topo->addToIndex();
-
-
         return response()->json(json_encode($topo));
     }
 
@@ -245,7 +232,6 @@ class TopoController extends Controller
         $topo = Topo::where('id', $id)->first();
 
         if($topo->user_id == Auth::id()){
-            $topo->removeFromIndex();
             $topo->delete();
         }
     }

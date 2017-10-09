@@ -87,12 +87,6 @@ class RouteController extends Controller
         return view('modal.route', $data);
     }
 
-
-    //Index tous dans elastic search
-    public function IndexElasticRoute(){
-        Route::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -200,9 +194,6 @@ class RouteController extends Controller
         //mise à jour des informations de la falaise (type de voie, grande-voie,etc.)
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
-
-        //Elastic indexation
-        $route->addToIndex();
 
         return response()->json(json_encode($route));
     }
@@ -323,9 +314,6 @@ class RouteController extends Controller
         //mise à jour des informations de la falaise (type de voie, grande-voie,etc.)
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
-
-        //Elastic indexation
-        $route->addToIndex();
 
         return response()->json(json_encode($route));
     }

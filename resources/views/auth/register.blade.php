@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
 
                     <div class="input-field col s12{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required>
                         <label for="name">@lang('auth.labelUsername')</label>
 
                         @if ($errors->has('name'))

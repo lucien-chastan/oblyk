@@ -46,12 +46,6 @@ class MassiveController extends Controller
     }
 
 
-    //Index tous dans elastic search
-    public function IndexElasticMassive(){
-        Massive::addAllToIndex();
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -100,9 +94,6 @@ class MassiveController extends Controller
             $liaison->save();
         }
 
-        //Elastic indexation
-        $massive->addToIndex();
-
         return response()->json(json_encode($massive));
 
     }
@@ -147,10 +138,6 @@ class MassiveController extends Controller
         $massive->label = $request->input('label');
         $massive->save();
 
-        //Elastic indexation
-        $massive->addToIndex();
-
-
         return response()->json(json_encode($massive));
     }
 
@@ -165,7 +152,6 @@ class MassiveController extends Controller
         $massive = Massive::where('id', $id)->first();
 
         if($massive->user_id == Auth::id()){
-            $massive->removeFromIndex();
             $massive->delete();
         }
     }

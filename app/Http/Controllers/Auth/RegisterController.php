@@ -82,9 +82,6 @@ class RegisterController extends Controller
         $partner->user_id = $user->id;
         $partner->save();
 
-        //Elastic indexation
-        $user->addToIndex();
-
         return $user;
     }
 }

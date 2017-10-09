@@ -199,12 +199,6 @@ class UserController extends Controller
 
     }
 
-
-    //Index tous dans elastic search
-    public function IndexElasticUser(){
-        User::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -279,9 +273,6 @@ class UserController extends Controller
         $user->sex = $request->input('sex');
         $user->description = $request->input('description');
         $user->save();
-
-        //Elastic indexation
-        $user->addToIndex();
 
 
         return response()->json(json_encode($user));

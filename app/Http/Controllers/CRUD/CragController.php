@@ -77,11 +77,6 @@ class CragController extends Controller
         $crag->save();
     }
 
-    //Index tous les falaise dans elastic search
-    public function IndexElasticCrag(){
-        Crag::addAllToIndex();
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -172,9 +167,6 @@ class CragController extends Controller
         $gap->max_grade_text = '';
         $gap->save();
 
-        //Elastic indexation
-        $crag->addToIndex();
-
         return response()->json(json_encode($crag));
     }
 
@@ -258,9 +250,6 @@ class CragController extends Controller
         $orientation->south_west = $request->input('south_west');
         $orientation->save();
 
-        //Elastic indexation
-        $crag->addToIndex();
-
         return response()->json(json_encode($crag));
     }
 
@@ -272,8 +261,6 @@ class CragController extends Controller
      */
     public function destroy($id)
     {
-        $crag = Crag::find($id);
-
-        $crag->removeFromIndex();
+        //
     }
 }

@@ -43,11 +43,6 @@ class TopicController extends Controller
         return view('modal.topic', $data);
     }
 
-    //Index tous dans elastic search
-    public function IndexElasticTopic(){
-        ForumTopic::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -99,10 +94,6 @@ class TopicController extends Controller
         $follow->user_id = Auth::id();
         $follow->save();
 
-        //Elastic indexation
-        $topic->addToIndex();
-
-
         return response()->json(json_encode($topic));
 
     }
@@ -151,9 +142,6 @@ class TopicController extends Controller
             $topic->save();
         }
 
-        //Elastic indexation
-        $topic->addToIndex();
-
         return response()->json(json_encode($topic));
     }
 
@@ -168,7 +156,6 @@ class TopicController extends Controller
         $topic = ForumTopic::where('id', $id)->first();
 
         if($topic->user_id == Auth::id()){
-            $topic->removeFromIndex();
             $topic->delete();
         }
     }

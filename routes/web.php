@@ -190,21 +190,6 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
-
-    //ELASTIC SEARCH
-    Route::get('/admin/elastic/index-page', 'AdminController@ElasticIndexPage')->name('elasticIndexPage');
-    Route::get('/elastic/words', 'CRUD\WordController@IndexElasticWord');
-    Route::get('/elastic/crags', 'CRUD\CragController@IndexElasticCrag');
-    Route::get('/elastic/gyms', 'CRUD\GymController@IndexElasticGym');
-    Route::get('/elastic/helps', 'CRUD\HelpController@IndexElasticHelp');
-    Route::get('/elastic/massives', 'CRUD\MassiveController@IndexElasticMassive');
-    Route::get('/elastic/routes', 'CRUD\RouteController@IndexElasticRoute');
-    Route::get('/elastic/topics', 'CRUD\TopicController@IndexElasticTopic');
-    Route::get('/elastic/topos', 'CRUD\TopoController@IndexElasticTopo');
-    Route::get('/elastic/topoPdfs', 'CRUD\TopoPdfController@IndexElasticTopoPdf');
-    Route::get('/elastic/topoWebs', 'CRUD\TopoWebController@IndexElasticTopoWeb');
-    Route::get('/elastic/users', 'CRUD\UserController@IndexElasticUser');
-
     //AIDES
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');

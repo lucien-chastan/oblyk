@@ -14,11 +14,6 @@ use Mockery\Exception;
 class HelpController extends Controller
 {
 
-    //Index tous les aides dans elastic search
-    public function IndexElasticHelp(){
-        Help::addAllToIndex();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -61,9 +56,6 @@ class HelpController extends Controller
         $help->category = $request->input('category');
         $help->contents = $request->input('contents');
         $help->save();
-
-        //Ajout à elastic search
-        $help->addToIndex();
 
         return redirect()->route('help');
     }
@@ -112,9 +104,6 @@ class HelpController extends Controller
         $help->contents = $request->input('contents');
         $help->save();
 
-        //Ajout à elastic search
-        $help->addToIndex();
-
         return response()->json(json_encode($help));
     }
 
@@ -128,7 +117,6 @@ class HelpController extends Controller
     {
 
         $help = Help::find($id);
-        $help->removeFromIndex();
         $help->delete();
 
     }
