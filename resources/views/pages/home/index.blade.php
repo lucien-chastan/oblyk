@@ -85,25 +85,45 @@
                 </div>
             </div>
 
-            <div class="row">
-
-                <div class="col s12 m6 l6">
-                    <h2>@lang('home.titleAccount')</h2>
-                    <p class="explication-oblyk">@lang('home.descriptionAccount')</p>
-                    @if(Auth::guest())
+            @if(Auth::guest())
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <h2>@lang('home.titleAccount')</h2>
+                        <p class="explication-oblyk">@lang('home.descriptionAccount')</p>
                         <p class="center">
                             <a href="{{ route('register') }}" class="waves-effect waves-light btn">@lang('home.actionAccount')</a>
                         </p>
-                    @endif
-                </div>
+                    </div>
 
-                <div class="col s12 m6 l6">
-                    <div class="svg-container">
-                        @include('pages.home.partials.svg.inscription')
+                    <div class="col s12 m6 l6">
+                        <div class="svg-container">
+                            @include('pages.home.partials.svg.inscription')
+                        </div>
                     </div>
                 </div>
+            @else
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <h2>@lang('pages/projects/supportUs.title')</h2>
+                        <p class="explication-oblyk">@lang('pages/projects/supportUs.para_1')</p>
+                        <p class="explication-oblyk">@lang('pages/projects/supportUs.para_2')</p>
+                        <p class="explication-oblyk">@lang('pages/projects/supportUs.para_3')</p>
+                        <p class="center">
+                            <a href="{{ route('supportUs') }}" class="waves-effect waves-light btn">
+                                <i class="material-icons left">favorite</i>
+                                @lang('pages/projects/supportUs.title')
+                            </a>
+                        </p>
+                    </div>
 
-            </div>
+                    <div class="col s12 m6 l6">
+                        <div class="svg-container">
+                            @include('pages.home.partials.svg.inscription')
+                        </div>
+                    </div>
+                </div>
+            @endif
+
 
             <div class="row">
 
