@@ -11,7 +11,7 @@ return [
     'explication' => "
 <strong class=\"text-underline\">À quoi sert les lieux dans ma recherche de partenaire ?</strong><br>
 La recherche de partenaire d'Oblyk fonctionne par géolocalisation. Tu indiques où tu grimpe (et dans quel rayon tu peux te déplacer autour de ce lieu) et Oblyk te trouvera les grimpeurs qui sont dans les mêmes zones que toi !<br>
-Tu peux avoir autant de lieux que tu le souhaites, donc n'hésite pas à mettre des points un peut partout où tu grimpes, comme : ta salle, les falaises près de chez toi, l'endroit où tu vas en vacances, etc. Sachant que tu peux désactiver un lieu en un clic.",
+Tu peux avoir autant de lieux que tu le souhaites, donc n'hésite pas à mettre des points un peu partout où tu grimpes, comme : ta salle, les falaises près de chez toi, l'endroit où tu vas en vacances, etc. Sachant que tu peux désactiver un lieu en un clic.",
 
     //tableau
     'activeColumn'=>"Actif",
