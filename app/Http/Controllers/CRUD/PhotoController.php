@@ -195,41 +195,7 @@ class PhotoController extends Controller
                 return response()->json($e, 400);
 
             }
-
-
-//            Image::make($request->file('file'))
-//                ->orientate()
-//                ->resize(1300, null, function ($constraint) {
-//                    $constraint->aspectRatio();
-//                })
-//                ->encode('jpg', 85)
-//                ->save(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
-//
-//            //Image en 200px de haut
-//            Image::make($request->file('file'))
-//                ->orientate()
-//                ->resize(null, 200, function ($constraint) {
-//                    $constraint->aspectRatio();
-//                })
-//                ->encode('jpg', 75)
-//                ->save(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
-//
-//            //Crop de l'image en 100 * 100
-//            Image::make($request->file('file'))
-//                ->orientate()
-//                ->fit(100, 100)
-//                ->encode('jpg', 75)
-//                ->save(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
-//
-//            //Crop de l'image en 50 * 50
-//            Image::make($request->file('file'))
-//                ->orientate()
-//                ->fit(50, 50)
-//                ->encode('jpg', 75)
-//                ->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
         }
-
-
     }
 
     /**

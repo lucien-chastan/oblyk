@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Observers;
+
+use App\Description;
+use App\GapGrade;
+use App\Orientation;
+use App\Photo;
+use App\Route;
+use App\Season;
+use App\Sector;
+
+class SectorObserver
+{
+    /**
+     * Listen to the Sector created event.
+     *
+     * @param  Sector  $sector
+     * @return void
+     */
+    public function created(Sector $sector)
+    {
+        //
+    }
+
+    /**
+     * Listen to the Sector deleting event.
+     *
+     * @param  Sector  $sector
+     * @return void
+     */
+    public function deleting(Sector $sector)
+    {
+
+        //Suppression de l'orientation
+        $orientation = Orientation::where([['orientable_id', $sector->id], ['orientable_type', 'App\Sector']])->first();
+        if (isset($orientation)) $orientation->delete();
+
+        //Suppression des seasons
+        $season = Season::where([['seasontable_id', $sector->id], ['seasontable_type', 'App\Sector']])->first();
+        if (isset($season)) $season->delete();
+
+        //Suppression des descriptions
+        $descriptions = Description::where([['descriptive_id', $sector->id], ['descriptive_type', 'App\Sector']])->get();
+        foreach ($descriptions as $description) $description->delete();
+
+        //Suppression du gapGrade
+        $gap = GapGrade::where([['spreadable_id', $sector->id], ['spreadable_type', 'App\Sector']])->first();
+        if (isset($gap)) $gap->delete();
+
+        //Suppression des photos
+        $photos = Photo::where([['illustrable_id', $sector->id], ['illustrable_type', 'App\Sector']])->get();
+        foreach ($photos as $photo) $photo->delete();
+
+        //Suppression des photos
+        $routes = Route::where('sector_id', $sector->id)->get();
+        foreach ($routes as $route) $route->delete();
+
+    }
+}

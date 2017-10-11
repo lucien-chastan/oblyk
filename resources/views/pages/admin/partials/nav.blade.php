@@ -57,6 +57,26 @@
         </div>
     </li>
 
+    {{--LES SECTEURS--}}
+    <li>
+        <div class="collapsible-header truncate">
+            <i class="material-icons">perm_media</i>
+            <span class="hidden-1000">
+                Secteur
+            </span>
+        </div>
+        <div class="collapsible-body">
+            <a href="{{ route('admin_sector_information') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">info</i>
+                    <span class="hidden-1000">
+                        Informations
+                    </span>
+                </div>
+            </a>
+        </div>
+    </li>
+
     {{--LES ARTICLES--}}
     <li>
         <div class="collapsible-header truncate">

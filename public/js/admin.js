@@ -94,3 +94,13 @@ function deleteException() {
         Materialize.toast('Exception supprimée', 4000);
     });
 }
+
+//VA CHERCHER LES INFORMATIONS D'UNE ROUTE
+function getSector() {
+    let sector_id = document.getElementById('sector_id').value,
+        informationZone = document.getElementById('insert-sector-information');
+
+    axios.get('/get/sector/' + sector_id + '/information').then(function (response) {
+        informationZone.innerHTML = response.data;
+    });
+}

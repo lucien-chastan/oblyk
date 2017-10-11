@@ -205,6 +205,12 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/exception/{exception_id}/information', 'AdminController@getExceptionInformation');
 
 
+    //SECTOR
+    Route::get('/admin/sector-information', 'AdminController@sectorInformationPage')->name('admin_sector_information');
+    Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
+    Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
+
+
 });
 
 //IFRAME

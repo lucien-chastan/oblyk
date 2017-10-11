@@ -6,6 +6,7 @@ use App\Article;
 use App\Exception;
 use App\Help;
 use App\Route;
+use App\Sector;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -46,6 +47,29 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.route.get-information', $data);
+
+    }
+
+    //ROUTE
+    public function sectorInformationPage(){
+        return view('pages.admin.sector.information');
+    }
+
+    public function getSectorInformation($sector_id){
+
+        $sector = Sector::where('id', $sector_id)
+            ->with('crag')
+            ->with('routes')
+            ->with('user')
+            ->with('descriptions.user')
+            ->with('photos.user')
+            ->first();
+
+        $data = [
+            'sector' => $sector,
+        ];
+
+        return view('pages.admin.sector.get-information', $data);
 
     }
 
