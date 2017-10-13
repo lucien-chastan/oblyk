@@ -30,6 +30,7 @@ return [
 
     //Menu "Carte et Outils"
     'cragMap' => 'Map of the crags',
+    'gymMap' => 'Map of the Gyms',
     'forum' => 'Forum',
     'glossary' => 'Glossary',
     'grade' => 'The Climbing Grades',

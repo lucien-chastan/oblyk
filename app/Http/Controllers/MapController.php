@@ -22,6 +22,14 @@ class MapController extends Controller
         return view('pages.map.map', $data);
     }
 
+    public function gymPage(){
+        $data = [
+            'gyms' => Gym::get()
+        ];
+
+        return view('pages.map.map-gym', $data);
+    }
+
     //RETOURNE LES FALAISES DANS UN RAYON AUTOUR D'UN POINT DONNÉE
     public function getPopupMarkerAroundPoint($lat, $lng, $rayon){
 

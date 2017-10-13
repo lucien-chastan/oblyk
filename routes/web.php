@@ -56,6 +56,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
+    Route::get('/carte-des-salles', 'MapController@gymPage')->name('mapGym');
 
     //LES PAGES OUTILS
     Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');

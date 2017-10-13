@@ -30,6 +30,7 @@ return [
 
     //Menu "Carte et Outils"
     'cragMap' => 'Carte des falaises',
+    'gymMap' => 'Carte des salles',
     'forum' => 'Forum',
     'glossary' => 'lexique',
     'grade' => 'Les cotations',

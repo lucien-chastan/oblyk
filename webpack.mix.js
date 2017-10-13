@@ -73,9 +73,14 @@ mix.copy('resources/assets/js/app.js', 'public/js')
 //leaflet
 mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/markercluster.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/Control.Geocoder.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/Control.Geocoder.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.plotter.min.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/leaflet.draw.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/leaflet.draw.css', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/leaflet.measure.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
 
 //axios

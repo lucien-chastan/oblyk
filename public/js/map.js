@@ -20,10 +20,37 @@ function loadMap() {
     map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup();
 
+
+    //POSITIONNEMENT DU CONTROLER DE ZOOM
     L.control.zoom({position : 'bottomright'}).addTo(map);
 
-    //ajout du controleur de tuile
+
+    //CONTROLER DES TUILES
     L.control.layers(baseMaps).addTo(map);
+
+
+    //OUTIL DE RECHERCHE
+    L.Control.geocoder(
+        {
+            placeholder : 'Chercher une ville ...',
+            position : 'topleft',
+            errorMessage : 'Aucun résulat',
+            defaultMarkGeocode : false
+        }
+    ).on('markgeocode', function(e) {
+        let bbox = e.geocode.bbox;
+        let poly = L.polygon([
+            bbox.getSouthEast(),
+            bbox.getNorthEast(),
+            bbox.getNorthWest(),
+            bbox.getSouthWest()
+        ], {stroke : false, fill : false }).addTo(map);
+        map.fitBounds(poly.getBounds());
+    }).addTo(map);
+
+
+    //OUTIL DE MEUSURE
+    L.Control.measureControl().addTo(map);
 
     map.on('click', pointMarkerMap);
 

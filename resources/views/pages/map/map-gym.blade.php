@@ -6,9 +6,9 @@
 
 @section('css')
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
-    <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
+    <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
 @endsection
@@ -25,7 +25,6 @@
             </a>
             <ul>
                 <li><a onclick="startAdd('sae')" data-position="right" data-delay="50" data-tooltip="@lang('modals/gym.addTooltip')" class="btn-floating purple tooltipped"><i class="material-icons">store_mall_directory</i></a></li>
-                <li><a onclick="startAdd('crag')" data-position="right" data-delay="50" data-tooltip="@lang('modals/crag.addTooltip')" class="btn-floating blue tooltipped" class="btn-floating blue"><i class="material-icons">terrain</i></a></li>
             </ul>
         </div>
     @endif
@@ -44,54 +43,6 @@
 
         //chargement de la map
         loadMap();
-
-        //boucle sur les falaises pour ajouter les marqueurs sur la carte
-        @foreach($crags as $crag)
-
-            var point = L.marker(
-                [{{$crag['lat']}},{{$crag['lng']}}],
-                {icon: marker_{{$crag['type_voie']}}{{$crag['type_grande_voie']}}{{$crag['type_bloc']}}{{$crag['type_deep_water']}}{{$crag['type_via_ferrata']}}}
-            )
-            .bindPopup(
-                `
-                <img class="photo-couve-site-leaflet" src="{{str_replace('/crags/1300/', '/crags/200/', $crag['bandeau'])}}" alt="photo de couverture de {{$crag['label']}}">
-                <div class="crag-leaflet-info">
-                    <h2 class="loved-king-font titre-crag-leaflet">
-                        <a href="/site-escalade/{{$crag['id']}}/{{str_slug($crag['label'])}}">{{$crag['label']}}</a>
-                    </h2>
-                    <table>
-                        <tr>
-                            <td>Localisation : </td>
-                            <td>{{$crag['city']}}, {{$crag['region']}} ({{$crag['code_country']}})</td>
-                        </tr>
-                        <tr>
-                            <td>Type de grimpe : </td>
-                            <td class="type-grimpe">
-                                @if($crag['type_voie'] == 1)<span class="voie">voie</span>@endif
-                                @if($crag['type_grande_voie'] == 1)<span class="grande-voie">grande-voie</span>@endif
-                                @if($crag['type_bloc'] == 1)<span class="bloc">bloc</span>@endif
-                                @if($crag['type_deep_water'] == 1)<span class="deep-water">deep-water</span>@endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lignes &amp; Cotations : </td>
-                            <td>
-                                {{$crag['routes_count']}} lignes
-                                @if($crag['routes_count'] > 0 ), de <strong class="text-bold color-grade-{{$crag->gapGrade->min_grade_val}}">{{$crag->gapGrade->min_grade_text}}</strong> <i class="material-icons tiny">arrow_forward</i> <strong class="text-bold color-grade-{{$crag->gapGrade->max_grade_val}}">{{$crag->gapGrade->max_grade_text}}</strong> @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="btn-vers-crags">
-                                <a href="/site-escalade/{{$crag['id']}}/{{str_slug($crag['label'])}}" class="waves-effect waves-light btn">voir le site</a>
-                            </td>
-                        </tr>
-                    </table>
-                 </div>
-                `
-            );
-            markers.addLayer(point);
-        @endforeach
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
         @foreach($gyms as $gym)
