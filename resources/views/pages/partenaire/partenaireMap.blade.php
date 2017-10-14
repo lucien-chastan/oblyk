@@ -61,8 +61,8 @@
 
                                 <div class="blue-border-zone">
                                     @foreach($places as $place)
-                                        <div title="@lang('pages/partner/partnerMap.tooltipClicForMap')" class="blue-border-div place-div" onclick="zoomOn({{ $place->lat }}, {{ $place->lng }})">
-                                            <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <span class="blue-text" onclick="openProfile({{ $place->user->id }})">{{ $place->user->name }}</span> à {{$place->label}}</p>
+                                        <div title="@lang('pages/partner/partnerMap.tooltipClicForMap')" class="blue-border-div place-div" onclick="zoomOn({{ $place->lat }}, {{ $place->lng }}); openProfile({{ $place->user->id }})">
+                                            <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <span class="blue-text">{{ $place->user->name }}</span> à {{$place->label}}</p>
                                             <div class="markdownZone grey-text">@markdown($place->description)</div>
                                         </div>
                                     @endforeach
