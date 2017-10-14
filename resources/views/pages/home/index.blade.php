@@ -125,15 +125,15 @@
             @endif
 
 
-            <div class="row">
+            <div class="row reverse-smartphone">
 
-                <div class="col s12 m6 l6">
+                <div class="col s12 m6 l6 order-1">
                     <div class="svg-container">
                         @include('pages.home.partials.svg.guidebook')
                     </div>
                 </div>
 
-                <div class="col s12 m6 l6">
+                <div class="col s12 m6 l6 order-2">
                     <h2>@lang('home.titleGuidebook')</h2>
                     <p class="explication-oblyk">@lang('home.descriptionGuidebook')</p>
                     @if(Auth::guest())
