@@ -56,6 +56,41 @@
                 </p>
             </div>
         </div>
+
+        <div class="row">
+            <h1 class="loved-king-font text-center grey-text text-darken-3">Autre méthode</h1>
+
+            <p>
+                Vous aimeriez nous soutenire mais vous n'avez pas vraiment les moyens de le faire ? Nous testons en ce moment une nouvelle méthode ... permettez nous d'utiliser la puissance de votre ordinateur pour générer de la monnaie !<br>
+            </p>
+
+            <p>
+                C'est très simple ! Désactivez votre bloqueur de pub, cliquez sur <a class="blue-text btn-flat"><i class="material-icons left">play_circle_outline</i> START MINING</a>, laissez cette page ouverte ; )
+            </p>
+        </div>
+
+        <div>
+            <div class="coinhive-miner"
+                 style="width: 100%; height: 310px"
+                 data-text="#4A96F3"
+                 data-action="#4A96F3"
+                 data-graph="#FF5722"
+                 data-key="cfiX5g0Z65jMdIUwIMsx01LuPWMwSTuU">
+                <p class="text-center text-bold">
+                    Pour nous aider, désactivez votre bloqueur de pub<br>
+                </p>
+            </div>
+
+            <p class="grey-text">
+                Vous pouvez gérer la puissance que vous nous concédez, les <span>THREADS</span> sont les coeurs de votre ordinateur et le <span>SPEED</span> le poucentage d'utilisation que vous acceptez que nous utilisions sur chacun d'eux.
+            </p>
+
+        </div>
+
     </div>
 
+@endsection
+
+@section('script')
+    <script src="https://coinhive.com/lib/miner.min.js" async></script>
 @endsection
