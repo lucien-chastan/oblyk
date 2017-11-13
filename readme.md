@@ -1,44 +1,78 @@
-# Oblyk, site communautaire d'escalade
+# Oblyk, Site communautraire dédié à l'escalade
 
-Oblyk est un site communautaire d'escalade outdoor et indoor : on peut y noter ses croix, et voir l'activité des grimpeurs de la communauté
+Oblyk est un site internet open-source communautaire dédié à l'escalade. Il à pour objectif de constituer une grande base de donnée open-data des falaises et voies d'escalades de france et du monde mais aussi des salles. Les grimpeurs peuvent aussi se servire de cet outil pour noter leurs croix ou encore trouver des partenaires d'escalades.
 
-Ici le nouveau dépôt du projet qui subit actuellement une refonte total de son code
+![page d'accueil d'oblyk](https://oblyk.org/img/meta_home.jpg)
 
-Voir le projet actuellement en ligne : [oblyk](http://www.oblyk.net/)
+## Dépandances
 
-## Liste des changements majeurs prévus
+Pour installer Oblyk sur votre machine vous devez avoir les logiciels suivant installer :
 
-**Au niveau du code :**
-- Changement de framework :
-    - PHP : [Laravel](https://laravel.com/)
-    - CSS : [Materialize](http://materializecss.com/)
-    - JS : [Vue.js](http://vuejs.org/) + VanilliaJs
-    - database : on reste sur du MySql pour permettre plus de contribution (téchnologie populaire) 
-- Passer Oblyk en opensource
-- Passer sur le fond de carte [mapbox](https://www.mapbox.com/)
-- Mise en place d'API pour l'utilisation des datas par d'autres sites
-- Passage d'oblyk en https
-- Remaniement des URL avec de l'Url Rewriting (SEO)
-- Réduction du nombre de page qui parle d'un même site (SEO)
-- Amélioration du back-office d'oblyk pour permettre plus de modérateurs
-- Mise en place d'iframe pour le partage des sites sur d'autre site / blog
+- [Git](https://git-scm.com/)
+- Le trio : MySql, Apache, PHP ([Linux](https://doc.ubuntu-fr.org/lamp), [Windows](http://www.wampserver.com/), [Mac](https://www.mamp.info/en/))
+- [Composer](https://getcomposer.org/)
+- [NodeJs](https://nodejs.org/en/)
 
-**Au niveau des fonctionnalités :**
-- Harmonisation de l'interface, en mettant mieux en avant la partie recherche de partenaire
-- Amélioration de l'interactivité entre les grimpeurs dans la recherche de partenaire
-- Pouvoir croixter plusieurs fois une même ligne (et pouvoir croixter seulement une longueur de grande-voie)
-- Pouvoir faire un carnet de croix en intérieur
-- Mieux intégrer la partie flux (falaise, profil, etc.)
-- Rendre la partie massif éditable, comme le reste des infos d'oblyk
-- Fusionner le forum avec le flux pour une meilleur intégration dans le profil
-- Proposer une newsletter des sites par rapport a sa localisation
-- Développement des "Missions" qui rendra ludique le renseignement d'infos sur les falaises (du moins j'espère : )
-- Possibilité d'ajouter le grimpeur avec qui on a fait une voie (pour le souvenir)
+## Framework utilisés
 
+Oblyk utilise principalement Laravel pour le PHP et Materialize pour le CSS, reporté vous à la documentation de ces 2 frameworks pour comprendre la majeur partie du code d'oblyk
+
+- [Laravel](https://laravel.com/)
+- [Materialize](http://materializecss.com/)
 
 ## Installation
-Bientôt je metterais une aide pour installer le projet en local et ainsi contribuer à son développement
 
+Commencez par clonner le projet dans votre environement de développement local
 
-## Contribuer
-Pour l'instant la réécriture d'oblyk en est à ces balbutiement, la contribution sur le code est donc encore un peut précoce, mais vous pouvez envoyer vos suggestions sur la boîte d'oblyk ! : [ekip@oblyk.net](mailto:ekip@oblyk.net)
+```bash
+cd /chemin/vers/votre/dossier/
+git clone https://github.com/lucien-chastan/oblyk.git
+```
+
+Lancez composer pour installer les dépendances
+
+```bash
+cd /dossier/de/votre/app
+composer install
+```
+
+Installer les dépendances node
+
+```bash
+node install
+```
+
+Copier le fichier .env.example et renommez le en .env
+
+```bash
+cp .env.example .env
+```
+
+Générer une clé pour votre application
+
+```bash
+php artisan key:generate
+```
+Créer une base de données sur MySql du nom que vous voulez, avec l'encodage *utf8_general_ci*
+
+Ouvrez le fichier .env et renseigner votre configuration (nom de la base, nom utilisateur, code d'accès, etc.)
+
+Régéner le cache de l'application
+
+```bash
+composer dump-autoload
+```
+
+Lancer la migration pour créer les tables de l'application et les fausses données de test
+
+```bash
+php artisan migrate --seed
+```
+
+Créer un lien symbolique dans le dossier public vers storage
+
+```bash
+php artisan storage:link
+```
+
+bientôt la suite de la procédure
