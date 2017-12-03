@@ -4,7 +4,7 @@ Oblyk est un site internet open-source communautaire dédié à l'escalade. Il �
 
 ![page d'accueil d'oblyk](https://oblyk.org/img/meta_home.jpg)
 
-## Dépandances
+## Dépendances
 
 Pour installer Oblyk sur votre machine vous devez avoir les logiciels suivant installer :
 

@@ -1,16 +1,27 @@
-Et non je ne suis pas ton premier client ; ) désolé de la fausse joie
+# Ligne de commande pour ImageMagik
 
-Ta textarea me souligne les mots français, comme si elle était réglé pour l'anglais, c'est perturbant.
+Pour redimensionner et croper par lot les différentes images d'oblyks (lors du transfer de base de donnée)
 
-J'aime bien ton petit ticket demande de devis toujours présent, par contre je trouve que la police serifé à cette endroit est mal choisi, j'ai plus l'impression que la police n'a pas chargé, comme pour le menu. Mais sinon le serif pour le reste du site est cool. J'aime bien cette typo.
+**Redimensionner en hauteur**
 
-Tu devrais essayer de réduire un peu le poids de ta page d'accueil. Je suis un peu loin de la box à lyon, il galère à charger. tu peux faire des tests de performance avec gtmetrix : https://gtmetrix.com/reports/mojo-creation.fr/0XilJaW1
+exemple : redimensionne les .jpg à 200px de haut
 
-faut que tu passe en https, google ne t'aime pas sinon ; )
+```bash
+mogrify -resize x200 *.jpg
+```
 
-Bonne idée de blog, tu pourras ajouter https dans ton article sur le SEO
+**redimensionne une image pour que la plus petite dimension soit à X px**
 
-Photoshop est open-source ! cool ; )
+exemple : thumbnail de plus petite dimension 200px sur les .jpg
 
-Peut-être quand smartphone, le demande de devis devrait être en haut, la il traîne au milieu de la page, c'est un peu invasif !
-Sinon le reste du responsive à l'air bien géré
+```bash
+mogrify -thumbnail 200x200^ *.jpg
+```
+
+**Crop une image en gardant le centre**
+
+exemple : crop à 200*200px centré sur les .jpg
+
+```bash
+mogrify -gravity Center -crop 200x200+0+0 *.jpg
+```
