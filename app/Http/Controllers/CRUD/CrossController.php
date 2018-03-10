@@ -352,18 +352,6 @@ class CrossController extends Controller
         $oldCross = $cross;
         if($cross->user_id == Auth::id()){
 
-            //on supprime les sections liées
-            $crossSections = CrossSection::where('cross_id', $cross->id)->get();
-            foreach ($crossSections as $crossSection) $crossSection->delete();
-
-            //on supprime les user lié à cette croix
-            $crossUsers = CrossUser::where('cross_id', $cross->id)->get();
-            foreach ($crossUsers as $crossUser) $crossUser->delete();
-
-            //on supprime les user lié à cette croix
-            $crossDescriptions = Description::where('cross_id', $cross->id)->get();
-            foreach ($crossDescriptions as $crossDescription) $crossDescription->delete();
-
             //on supprime la croix
             $cross->delete();
         }

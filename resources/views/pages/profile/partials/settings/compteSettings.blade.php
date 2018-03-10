@@ -62,4 +62,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleDeleteAccount')</h2>
 
+    <p class="text-right">
+        <a class="red-text" href="{{ route('deleteUserPage') }}">Supprimer mon compte</a>
+    </p>
 </form>

@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 /.idea
+charge_database.php
+beta_database.sh
 Homestead.json
 Homestead.yaml
 .env

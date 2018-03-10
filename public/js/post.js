@@ -9,9 +9,12 @@ function getPosts(type, id, target, route = '/post/getVue', skip = 0, take = 10)
         take = takeIpt[(takeIpt.length - 1)].value;
     }
 
-    axios.post(route,{postable_type : type, postable_id : id, skip : skip, take : take}).then(function (response) {
-        target.innerHTML += response.data;
 
+    axios.post(route,{postable_type : type, postable_id : id, skip : skip, take : take}).then(function (response) {
+
+        console.log(response);
+
+        target.innerHTML += response.data;
         afterGetPost();
     });
 }

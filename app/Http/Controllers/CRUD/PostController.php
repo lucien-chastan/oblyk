@@ -235,48 +235,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::where('id', $id)->with('likes')->with('comments.likes')->with('comments.comments.likes')->first();
+        $post = Post::where('id', $id)->first();
 
         if($post->user_id == Auth::id()){
-
-            //loop sur les commentaires de premier niveau
-            foreach ($post->comments as $comment){
-
-                //loop sur les commentaire de deuxième niveau
-                foreach ($comment->comments as $subComment) {
-
-                    //suppresion des likes deuxièmes niveau
-                    foreach ($subComment->likes as $subLike) $subLike->delete();
-
-                    //suppression du commentaire de deuxième niveau
-                    $subComment->delete();
-
-                }
-
-                //suppresion des likes premier niveau
-                foreach ($comment->likes as $comLike) $comLike->delete();
-
-                //suppression du commentaire premier niveau
-                $comment->delete();
-            }
-
-            //suppression des likes du post
-            foreach ($post->likes as $postLike) $post->delete();
-
-            //on va supprimer les photos liées
-            $post_photos = PostPhoto::where('post_id',$post->id)->get();
-            foreach ($post_photos as $photo){
-                Storage::delete(['public/post-photos/' . $photo->slug_label]);
-                $photo->delete();
-            }
-
-            //Si c'est un post sur le forum, alors on enleve -1 au nombre de vu du topic et on rafraichi sa dernière lecture
-            if($post->postable_type == 'App\ForumTopic'){
-                $topic = ForumTopic::where('id',$post->postable_id)->first();
-                $topic->nb_post = $topic->nb_post - 1;
-                $topic->save();
-            }
-
             //suppression du post
             $post->delete();
         }

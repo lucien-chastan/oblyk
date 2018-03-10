@@ -18,4 +18,11 @@ return [
     'title_reset' => 'Réinitialiser votre mot de passe',
     'description_reset' => 'Renseignez le formulaire pour réinitialiser votre mot de passe',
 
+    //Page de suppression d'un compte
+    'title_delete' => 'Supprimer mon compte',
+    'description_delete' => 'supprimer définitivement mon compte d\'oblyk',
+
+    //Page de confirmation de suppression d'un compte
+    'title_confirm_delete' => 'Compte supprimé',
+    'description_confirm_delete' => 'Mon compte a été supprimé',
 ];

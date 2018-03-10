@@ -6,16 +6,6 @@ use App\Photo;
 
 class PhotoObserver
 {
-    /**
-     * Listen to the Photo created event.
-     *
-     * @param  Photo  $photo
-     * @return void
-     */
-    public function created(Photo $photo)
-    {
-        //
-    }
 
     /**
      * Listen to the Photo deleting event.

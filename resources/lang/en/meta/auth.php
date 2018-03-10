@@ -18,4 +18,11 @@ return [
     'title_reset' => 'Reset password',
     'description_reset' => 'Fill the form to reset your password',
 
+    //Page de suppression d'un compte
+    'title_delete' => 'Delete my account',
+    'description_delete' => 'supprimer définitivement mon compte d\'oblyk',
+
+    //Page de confirmation de suppression d'un compte
+    'title_confirm_delete' => 'Account deleted',
+    'description_confirm_delete' => 'Mon compte a été supprimé',
 ];

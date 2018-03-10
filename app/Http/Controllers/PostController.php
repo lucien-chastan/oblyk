@@ -15,8 +15,6 @@ class PostController extends Controller
     //RETOURNE LA VUE D'UN FLUX EN PARTICULIER (USER, CRAG, MASSIVE, TOPO ...ETC)
     function postsVue(Request $request){
 
-        $user = User::where('id',Auth::id())->first();
-
         $skip = $request->input('skip');
         $take = $request->input('take');
 

@@ -44,6 +44,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //LE POFIL
     Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
+    Route::get('/supprimer-mon-compte', 'Auth\DeleteController@deleteUserPage')->name('deleteUserPage');
+    Route::post('/delete-connected-user', 'Auth\DeleteController@deleteConnectedUser')->name('deleteConnectedUser');
+    Route::get('/compte-supprime', 'Auth\DeleteController@userDeletedPage')->name('userDeletedPage');
 
     //OUTDOOR
     Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');

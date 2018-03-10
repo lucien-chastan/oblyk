@@ -171,14 +171,14 @@ class CommentController extends Controller
 
         if($comment->user_id == Auth::id()){
 
-            //suppression des commentaires et like des commentaires liée
-            foreach ($comment->comments as $subComment){
-                foreach ($subComment->likes as $like) $like->delete();
-                $subComment->delete();
-            }
+//            //suppression des commentaires et like des commentaires liée
+//            foreach ($comment->comments as $subComment){
+//                //foreach ($subComment->likes as $like) $like->delete();
+//                $subComment->delete();
+//            }
 
             //suppresion des likes
-            foreach ($comment->likes as $like) $like->delete();
+            //foreach ($comment->likes as $like) $like->delete();
 
             //suppression du commentaire
             $comment->delete();
