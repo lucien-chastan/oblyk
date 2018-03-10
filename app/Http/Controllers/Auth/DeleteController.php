@@ -88,8 +88,8 @@ class DeleteController extends Controller
         TickList::where('user_id', $user->id)->delete();
 
         //Préfixage du user en soft delete
-        $user->name .= '_deleting_user';
-        $user->email .= '_deleting_user';
+        $user->name .= '_deleting_' . date('yyyy-mm-dd_H-i-s');
+        $user->email .= '_deleting_' . date('yyyy-mm-dd_H-i-s');
         $user->save();
 
         $user->delete();
