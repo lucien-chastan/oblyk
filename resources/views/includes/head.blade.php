@@ -1,4 +1,4 @@
-<title>@if(isset($meta_title)){{$meta_title}}@else{{'Oblyk'}}@endif</title>
+<title>{{ env('APP_ENV') == 'beta' ? 'Beta | ' :'' }}@if(isset($meta_title)){{$meta_title}}@else{{'Oblyk'}}@endif</title>
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">

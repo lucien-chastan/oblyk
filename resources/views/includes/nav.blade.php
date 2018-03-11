@@ -76,7 +76,7 @@
                         <path id="path-logo" d="m 396.05664,314.61719 -28.34332,41.7539 33.28263,34.39055 9.65078,-13.23636 12.80994,13.23636 9.65086,-13.23635 16.91395,1e-4 z M 379.44727,377.52539 352.80859,350 332.73828,377.52539 Z" style="fill-opacity:1;fill-rule:evenodd;stroke:none;" />
                     </g>
                 </svg>
-                Oblyk
+                Oblyk{{ env('APP_ENV') == 'beta' ? '- Beta' :'' }}
             </a>
 
             {{--icone de menu quand on est sur smartphone--}}

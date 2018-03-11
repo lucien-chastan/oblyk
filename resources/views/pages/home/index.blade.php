@@ -17,7 +17,7 @@
         <div class="parallax">
             <img class="img-parallax-home" src="/img/oblyk-home-baume-rousse.jpg" alt="escalade à la falaise de baume rousse">
             <div class="div-entete-oblyk">
-                <h1>Oblyk</h1>
+                <h1>Oblyk{{ env('APP_ENV') == 'beta' ? ' beta' :'' }}</h1>
                 <p>@lang('home.slogan')</p>
             </div>
             <span class="credit-philippe">&copy; Philippe LATOURRETTE</span>
@@ -27,6 +27,20 @@
     <div class="container description-oblyk">
 
         <div class="partie-point-home">
+
+            @if(env('APP_ENV') == 'beta')
+                <div class="row">
+                    <div class="col s12">
+                        <p>
+                            La version <strong>beta</strong> d'oblyk est une copie conforme de la <a href="https://oblyk.org">vrai version</a> mais avec un jour de retard par rapport à la base de donnée et avec des amélorations en plus à tester !<br>
+                        </p>
+                        <p class="text-center text-italic">
+                            N'oubliez pas, tous ce que vous faite ici aujourd'hui sera effacé demain !
+                        </p>
+                    </div>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col s12 m6 l6">
                     <h2>@lang('home.titleCheckCragInformation')</h2>
