@@ -110,9 +110,6 @@ class TopoPdfController extends Controller
 
                 $request->file('file')->storeAs('public/topos/PDF/', $topoPdf->slug_label);
 
-                //Elastic indexation
-                $topoPdf->addToIndex();
-
             }
         }
 
@@ -162,10 +159,6 @@ class TopoPdfController extends Controller
             $topoPdf->author = $request->input('author');
             $topoPdf->label = $request->input('label');
             $topoPdf->save();
-
-            //Elastic indexation
-            $topoPdf->addToIndex();
-
         }
 
         return response()->json(json_encode($topoPdf));
@@ -184,12 +177,8 @@ class TopoPdfController extends Controller
         $saveTopoPdf = $topoPdf;
 
         if($topoPdf->user_id == Auth::id()){
-
             //suppression du PDF dans le storage
             Storage::delete(['public/topos/PDF/' . $topoPdf->slug_label]);
-
-            $topoPdf->removeFromIndex();
-
             $topoPdf->delete();
         }
 

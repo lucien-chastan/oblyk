@@ -157,9 +157,6 @@ class WordController extends Controller
         $word = Word::where('id', $id)->first();
 
         if($word->user_id == Auth::id()){
-
-            $word->removeFromIndex();
-
             $word->delete();
         }
     }
