@@ -4,8 +4,7 @@ let cragMap,
     cragVisionneuse;
 
 function initCragMap() {
-    let map = document.getElementById('crag-map'),
-        latCenter = parseFloat(document.getElementById('cragLat').value),
+    let latCenter = parseFloat(document.getElementById('cragLat').value),
         lngCenter = parseFloat(document.getElementById('cragLng').value),
         rayon = 15; //rayon en km
 
