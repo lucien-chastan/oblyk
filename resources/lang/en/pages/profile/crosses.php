@@ -13,12 +13,14 @@ return [
     'regionFigures' => ":count region|:count regions",
     'crossesFigures' => ":count cross|:count crosses",
     'meterFigures' => ":count meters climbed|:count meters climbed",
+    'projectFigures' => ":count project|:count projects",
 
     //onglets
     'cragTab' => "site",
     'countryTab' => "Country",
     'regionTab' => "Regions",
     'yearTab' => "Years",
+    'gradeTab' => "Grade",
 
     //autre
     'noCrosses'=>"You did not add any cross yet",

@@ -345,7 +345,7 @@ class UserVueController extends Controller
                 ->with('route.routeSections')
                 ->get();
 
-            $crags = $pays = $regions = $years = $crossSectionIds = [];
+            $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = [];
             $somme_metre = 0;
             $max_val = 0;
             $max_grade = '';
@@ -356,14 +356,24 @@ class UserVueController extends Controller
                 foreach ($cross->crossSections as $section) $crossSectionIds[] = $section->route_section_id;
             }
 
+            $top = true;
 
-            //Rangement des croix dans différent tableaux (pour le trie ensuite
+            //Rangement des croix dans différent tableaux (pour le trie ensuite)
             foreach ($crosses as $cross){
                 $crags[$cross->route->crag->id][] = $cross;
                 $pays[$cross->route->crag->code_country][] = $cross;
                 $regions[$cross->route->crag->region][] = $cross;
                 $years[$cross->release_at->format('Y')][] = $cross;
                 $somme_metre += $cross->route->height;
+
+                $tempGradVal = 0;
+                foreach ($cross->crossSections as $crossSection) {
+                    $gradeVal = $crossSection->routeSection['grade_val'];
+                    if($gradeVal > $tempGradVal) {
+                        $grades[$gradeVal][] = $cross;
+                        $tempGradVal = $gradeVal;
+                    }
+                }
 
                 //on va cherche la cotation max
                 if($cross->status_id != 1){
@@ -379,12 +389,20 @@ class UserVueController extends Controller
                 }
             }
 
+            foreach ($grades as $key => $value) {
+                $gradeTrad[$key] = Route::valToGrad($key);
+            }
+
+            krsort($grades);
+
             $data = [
                 'user' => $user,
                 'crags' => $crags,
                 'pays' => $pays,
                 'regions' => $regions,
                 'years' => $years,
+                'grades' => $grades,
+                'gradesTrad' => $gradeTrad,
                 'metres' => $somme_metre,
                 'max_val' => $max_val,
                 'max_grade' => $max_grade,

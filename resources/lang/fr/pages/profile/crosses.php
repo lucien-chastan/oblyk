@@ -13,12 +13,14 @@ return [
     'regionFigures' => ":count région|:count régions",
     'crossesFigures' => ":count croix|:count croix",
     'meterFigures' => ":count mètre grimpé|:count mètres grimpé",
+    'projectFigures' => ":count projet|:count projets",
 
     //onglets
     'cragTab' => "site",
     'countryTab' => "Pays",
     'regionTab' => "Regions",
     'yearTab' => "Années",
+    'gradeTab' => "Cotation",
 
     //autre
     'noCrosses'=>"Tu n'as pas encore ajouté tes croix",

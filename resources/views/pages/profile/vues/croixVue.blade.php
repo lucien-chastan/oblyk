@@ -91,14 +91,18 @@
                 <div class="row">
                     <div class="col s12">
                         <ul class="tabs no-scroll-x">
-                            <li class="tab col s3"><a href="#tab-site" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> @lang('pages/profile/crosses.cragTab')</a></li>
-                            <li class="tab col s3"><a href="#tab-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
-                            <li class="tab col s3"><a href="#tab-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
-                            <li class="tab col s3"><a href="#tab-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-site" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> @lang('pages/profile/crosses.cragTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-grade"><i class="material-icons ic-tab-parametre-profile">swap_vert</i> @lang('pages/profile/crosses.gradeTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
                         </ul>
                     </div>
                     <div id="tab-site" class="col s12">
                         @include('pages.profile.partials.croix.tabs.cragsTab')
+                    </div>
+                    <div id="tab-grade" class="col s12">
+                        @include('pages.profile.partials.croix.tabs.gradeTab')
                     </div>
                     <div id="tab-pays" class="col s12">
                         @include('pages.profile.partials.croix.tabs.paysTab')
