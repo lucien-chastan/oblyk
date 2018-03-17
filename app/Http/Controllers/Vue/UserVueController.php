@@ -368,7 +368,10 @@ class UserVueController extends Controller
 
                 $tempGradVal = 0;
                 foreach ($cross->crossSections as $crossSection) {
-                    $gradeVal = $crossSection->routeSection['grade_val'];
+                    $gradeVal = ($crossSection->routeSection['grade_val'] % 2 == 1) ?
+                        $crossSection->routeSection['grade_val']:
+                        $crossSection->routeSection['grade_val'] - 1;
+
                     if($gradeVal > $tempGradVal) {
                         $grades[$gradeVal][] = $cross;
                         $tempGradVal = $gradeVal;
