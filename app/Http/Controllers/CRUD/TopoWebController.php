@@ -92,10 +92,6 @@ class TopoWebController extends Controller
         $topoWeb->user_id = Auth::id();
         $topoWeb->save();
 
-        //Elastic indexation
-        $topoWeb->addToIndex();
-
-
         return response()->json(json_encode($topoWeb));
 
     }
@@ -143,9 +139,6 @@ class TopoWebController extends Controller
             $topoWeb->url = $request->input('url');
             $topoWeb->save();
 
-            //Elastic indexation
-            $topoWeb->addToIndex();
-
         }
 
         return response()->json(json_encode($topoWeb));
@@ -153,16 +146,13 @@ class TopoWebController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $topoWeb = TopoWeb::where('id', $id)->first();
 
         if($topoWeb->user_id == Auth::id()){
-            $topoWeb->removeFromIndex();
             $topoWeb->delete();
         }
     }

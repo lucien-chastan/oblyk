@@ -39,8 +39,6 @@ class RouteCRUDController extends Controller
         foreach ($route->videos as $video) $video->delete();
         foreach ($route->photos as $photo) $photo->delete();
         foreach ($route->tags as $tag) $tag->delete();
-
-        $route->removeFromIndex();
         $route->delete();
 
         //Mise à jour des informations de la falaise
