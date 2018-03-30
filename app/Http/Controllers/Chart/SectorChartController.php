@@ -33,7 +33,7 @@ class SectorChartController extends Controller
         }
 
         $data = [
-            'type'=>'bar',
+            'type'=>"bar",
             'data'=> [
                 'labels' => [
                     "1a", "1b", "1c",
@@ -81,6 +81,8 @@ class SectorChartController extends Controller
                         [
                             'ticks' => [
                                 'beginAtZero' => true,
+                                'stepSize' => 1,
+                                'step' => 1,
                             ]
                         ]
                     ]
@@ -91,6 +93,6 @@ class SectorChartController extends Controller
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 }

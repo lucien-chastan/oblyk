@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Chart;
 
 use App\Http\Controllers\Controller;
 use App\Route;
+use Log;
 
 class CragChartController extends Controller
 {
@@ -27,6 +28,7 @@ class CragChartController extends Controller
 
         foreach ($routes as $route){
             foreach ($route->routeSections as $section) {
+                Log::debug($section->grade_val);
                 if($section->grade_val % 2 == 0) $section->grade_val--;
                 if($section->grade_val > 0) $gradeArray[$section->grade_val]++;
             }
@@ -86,12 +88,12 @@ class CragChartController extends Controller
                     ]
                 ],
                 'legend' => [
-                    'display' => false
+                    'display' => true
                 ]
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 
 
@@ -136,6 +138,6 @@ class CragChartController extends Controller
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 }
