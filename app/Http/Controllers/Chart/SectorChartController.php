@@ -33,7 +33,7 @@ class SectorChartController extends Controller
         }
 
         $data = [
-            'type'=>"bar",
+            'type'=>'bar',
             'data'=> [
                 'labels' => [
                     "1a", "1b", "1c",
