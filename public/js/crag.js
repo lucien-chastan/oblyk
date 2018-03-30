@@ -292,6 +292,31 @@ function getTopoArround() {
 }
 
 
+function getTopoByName() {
+
+    let name = document.getElementById('name-search-topo'),
+        id = document.getElementById('id-search-topo'),
+        zoneValidation = document.getElementById('validation-liaison-topo'),
+        zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
+        zoneListe = document.getElementById('zone-topo-est-il-present'),
+        zoneLoader = document.getElementById('loader-liste-topo'),
+        liste = document.getElementById('liste-topo-proche');
+
+    liste.innerHTML = '';
+    liste.style.display = "none";
+    zoneValidation.style.display = "none";
+    zoneCreerTopo.style.display = "block";
+    zoneListe.style.display = "block";
+    zoneLoader.style.display = "block";
+
+    axios.get('/API/topos/by_name/' + id.value + '/' + name.value).then(function (response) {
+
+        liste.innerHTML = response.data;
+
+        liste.style.display = "block";
+        zoneLoader.style.display = "none";
+    });
+}
 function getMassiveArround() {
     let lat = document.getElementById('lat-search-massive'),
         lng = document.getElementById('lng-search-massive'),
