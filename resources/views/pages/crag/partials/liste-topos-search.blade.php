@@ -27,6 +27,6 @@
     </table>
 @else
     <p class="text-center grey-text">
-        il n'y a pas de topo 
+        @lang('modals/paperGuideBook.noResults')
     </p>
 @endif

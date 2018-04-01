@@ -29,6 +29,7 @@ return [
     'cancel' => "Annuler",
 
     'searchByName' => "Ou recherche titre",
+    'noResults' => "Il n'y a pas de topo",
     'titleNewGuidebook' => "Si votre topo n'est pas dans la liste ci-dessus vous pouvez créer un nouveau topo",
     'newGuidebookTitle' => "Nouveau topo",
     'newGuidebookBtn' => "Créer un nouveau topo",

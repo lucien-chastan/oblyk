@@ -52,11 +52,11 @@
             </div>
         </div>
 
-            <div class="row">
-                <div class="col s12">
-                    <input onkeyup="getTopoByName()" type="text" placeholder="@lang('modals/paperGuideBook.searchByName')" id="name-search-topo" />
-                </div>
+        <div class="row">
+            <div class="col s12">
+                <input onkeyup="getTopoByName()" type="text" placeholder="@lang('modals/paperGuideBook.searchByName')" id="name-search-topo" />
             </div>
+        </div>
 
         {{--ZONE CRÉER UN NOUVEAU TOPO--}}
         <div id="zone-creer-un-nouveau-topo">
