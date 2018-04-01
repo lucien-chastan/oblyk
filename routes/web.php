@@ -255,6 +255,7 @@ Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUser
 
 
 //TOPO (VERS LES SCRIPTS DE LIAISON)
+Route::get('/API/topos/by_name/{crag_id}/{name}', 'TopoController@getToposByName')->name('APIToposByName');
 Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
 Route::post('/topo/create-liaison', 'CRUD\TopoCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/topo/delete-liaison', 'CRUD\TopoCragController@deleteLiaison')->name('ScriptDeleteLiaison');
