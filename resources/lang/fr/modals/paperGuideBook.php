@@ -28,7 +28,8 @@ return [
     'close' => "Fermer",
     'cancel' => "Annuler",
 
-    'searchByName' => "Ou recherche titre",
+    'searchByName' => "Recherche titre",
+    'searchByProximity' => "Recherche par proximité",
     'noResults' => "Il n'y a pas de topo",
     'titleNewGuidebook' => "Si votre topo n'est pas dans la liste ci-dessus vous pouvez créer un nouveau topo",
     'newGuidebookTitle' => "Nouveau topo",

@@ -292,15 +292,31 @@ function getTopoArround() {
 }
 
 
-function getTopoByName() {
+var delay = (function(){
+    // https://stackoverflow.com/a/1909508
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+function getTopoByName(){
+    delay(function(){
+        getTopoByName_();
+    }, 500 );
+}
+function getTopoByName_() {
 
     let name = document.getElementById('name-search-topo'),
         id = document.getElementById('id-search-topo'),
-        zoneValidation = document.getElementById('validation-liaison-topo'),
         zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
-        zoneListe = document.getElementById('zone-topo-est-il-present'),
+        zoneValidation = document.getElementById('validation-liaison-topo-byname'),
+        zoneListe = document.getElementById('zone-topo-est-il-present-byname'),
         zoneLoader = document.getElementById('loader-liste-topo'),
-        liste = document.getElementById('liste-topo-proche');
+        liste = document.getElementById('liste-topo-proche-byname');
+
+    if (name.value.length <= 2)
+        return;
 
     liste.innerHTML = '';
     liste.style.display = "none";
@@ -355,17 +371,23 @@ function selectTopo(topo_id) {
         rayon = document.getElementById('rayon-search-topo'),
         versTopo = document.getElementById('lien-vers-topo'),
         idLiaison = document.getElementById('id-new-liaison'),
-        nomTopo = document.getElementById('nom-topo-liaison');
+        nomTopo = document.getElementById('nom-topo-liaison'),
+        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname'),
+        zoneValidationBName = document.getElementById('validation-liaison-topo-byname');
+
 
     zoneListe.style.display = 'none';
     zoneLoader.style.display = 'block';
     zoneCreerTopo.style.display = 'none';
     zoneValidation.style.display = 'none';
+    zoneListeBName.style.display = 'none';
+    zoneValidationBName.style.display = 'none';
 
     axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
 
         zoneLoader.style.display = 'none';
         zoneValidation.style.display = 'block';
+        zoneValidationBName.style.display = 'block';
 
         let data = response.data;
 

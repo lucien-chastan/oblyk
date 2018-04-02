@@ -5,6 +5,9 @@ $(".button-collapse").sideNav();
 $('.modal').modal(
     {
         endingTop: '10px', // Ending top style attribute
+        ready: function() {
+            $('.topotabs').tabs();
+        },
     }
 );
 
