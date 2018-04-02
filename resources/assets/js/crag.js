@@ -310,7 +310,6 @@ function getTopoByName_() {
     let name = document.getElementById('name-search-topo'),
         id = document.getElementById('id-search-topo'),
         zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
-        zoneValidation = document.getElementById('validation-liaison-topo-byname'),
         zoneListe = document.getElementById('zone-topo-est-il-present-byname'),
         zoneLoader = document.getElementById('loader-liste-topo'),
         liste = document.getElementById('liste-topo-proche-byname');
@@ -320,7 +319,6 @@ function getTopoByName_() {
 
     liste.innerHTML = '';
     liste.style.display = "none";
-    zoneValidation.style.display = "none";
     zoneCreerTopo.style.display = "block";
     zoneListe.style.display = "block";
     zoneLoader.style.display = "block";
@@ -372,8 +370,7 @@ function selectTopo(topo_id) {
         versTopo = document.getElementById('lien-vers-topo'),
         idLiaison = document.getElementById('id-new-liaison'),
         nomTopo = document.getElementById('nom-topo-liaison'),
-        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname'),
-        zoneValidationBName = document.getElementById('validation-liaison-topo-byname');
+        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname');
 
 
     zoneListe.style.display = 'none';
@@ -381,13 +378,11 @@ function selectTopo(topo_id) {
     zoneCreerTopo.style.display = 'none';
     zoneValidation.style.display = 'none';
     zoneListeBName.style.display = 'none';
-    zoneValidationBName.style.display = 'none';
 
     axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
 
         zoneLoader.style.display = 'none';
         zoneValidation.style.display = 'block';
-        zoneValidationBName.style.display = 'block';
 
         let data = response.data;
 

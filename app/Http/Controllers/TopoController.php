@@ -74,8 +74,8 @@ class TopoController extends Controller
         $data = ['topos' => Topo::whereIn('id',$topos)->get(), 'rayon' => $rayon];
 
         return view('pages.crag.partials.liste-topos', $data);
-
     }
+
     public function getToposByName($crag_id, $name){
 
         $topo_ids = Crag::where('crags.id',$crag_id)
@@ -83,14 +83,12 @@ class TopoController extends Controller
             ->get()
             ->pluck('topos')
             ->collapse()
-            ->pluck('id');
+            ->pluck('topo_id');
 
         $topos = Searchy::search('topos')->fields('label')->query($name)->getQuery()->whereNotIn('id', $topo_ids)->limit(20)->get();
 
         $data = ['topos' => $topos];
 
         return view('pages.crag.partials.liste-topos-search', $data);
-
     }
-
 }
