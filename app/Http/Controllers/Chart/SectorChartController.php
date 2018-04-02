@@ -81,6 +81,8 @@ class SectorChartController extends Controller
                         [
                             'ticks' => [
                                 'beginAtZero' => true,
+                                'step' => 1,
+                                'stepSize' => 1,
                             ]
                         ]
                     ]
@@ -91,6 +93,6 @@ class SectorChartController extends Controller
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 }
