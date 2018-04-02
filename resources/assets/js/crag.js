@@ -323,7 +323,7 @@ function getTopoByName_() {
     zoneListe.style.display = "block";
     zoneLoader.style.display = "block";
 
-    axios.get('/API/topos/by_name/' + id.value + '/' + name.value).then(function (response) {
+    axios.get('/API/topos/by-name/' + id.value + '/' + name.value).then(function (response) {
 
         liste.innerHTML = response.data;
 
