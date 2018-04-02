@@ -18,9 +18,11 @@ class SectorVueController extends Controller
             ->with('climb')
             ->with(['tickLists' => function ($query) use ($authId) {$query->where('user_id', $authId);}])
             ->with(['crosses' => function ($query) use ($authId) {$query->where('user_id', $authId);}])
-            ->withCount('descriptions')
-            ->withCount('photos')
-            ->withCount('videos')
+            ->withCount([
+                'photos',
+                'videos',
+                'descriptions' => function ($query) { $query->whereNotNull('description');}
+            ])
             ->orderBy('label')
             ->get();
 
