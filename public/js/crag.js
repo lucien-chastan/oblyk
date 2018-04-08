@@ -196,12 +196,12 @@ function getGraphCrag(crag_id) {
 
     //Graphique des cotations
     axios.get('/chart/crag/' + crag_id + '/grade').then(function (response) {
-        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),response.data);
     });
 
     //Graphique des type de grimpe
     axios.get('/chart/crag/' + crag_id + '/climb').then(function (response) {
-        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),response.data);
     });
 }
 
@@ -212,7 +212,7 @@ function getSectorChart() {
     for(let i = 0 ; i < sectors.length ; i++){
         let sectorId = sectors[i].getAttribute('data-sector-id');
         axios.get('/chart/sector/' + sectorId + '/grade').then(function (response) {
-            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),JSON.parse(response.data));
+            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),response.data);
         });
     }
 }
@@ -310,7 +310,6 @@ function getTopoByName_() {
     let name = document.getElementById('name-search-topo'),
         id = document.getElementById('id-search-topo'),
         zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
-        zoneValidation = document.getElementById('validation-liaison-topo-byname'),
         zoneListe = document.getElementById('zone-topo-est-il-present-byname'),
         zoneLoader = document.getElementById('loader-liste-topo'),
         liste = document.getElementById('liste-topo-proche-byname');
@@ -320,12 +319,11 @@ function getTopoByName_() {
 
     liste.innerHTML = '';
     liste.style.display = "none";
-    zoneValidation.style.display = "none";
     zoneCreerTopo.style.display = "block";
     zoneListe.style.display = "block";
     zoneLoader.style.display = "block";
 
-    axios.get('/API/topos/by_name/' + id.value + '/' + name.value).then(function (response) {
+    axios.get('/API/topos/by-name/' + id.value + '/' + name.value).then(function (response) {
 
         liste.innerHTML = response.data;
 
@@ -372,8 +370,7 @@ function selectTopo(topo_id) {
         versTopo = document.getElementById('lien-vers-topo'),
         idLiaison = document.getElementById('id-new-liaison'),
         nomTopo = document.getElementById('nom-topo-liaison'),
-        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname'),
-        zoneValidationBName = document.getElementById('validation-liaison-topo-byname');
+        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname');
 
 
     zoneListe.style.display = 'none';
@@ -381,13 +378,11 @@ function selectTopo(topo_id) {
     zoneCreerTopo.style.display = 'none';
     zoneValidation.style.display = 'none';
     zoneListeBName.style.display = 'none';
-    zoneValidationBName.style.display = 'none';
 
     axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
 
         zoneLoader.style.display = 'none';
         zoneValidation.style.display = 'block';
-        zoneValidationBName.style.display = 'block';
 
         let data = response.data;
 
