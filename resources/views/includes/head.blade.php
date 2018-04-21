@@ -1,7 +1,7 @@
 <title>{{ env('APP_ENV') == 'beta' ? 'Beta | ' :'' }}@if(isset($meta_title)){{$meta_title}}@else{{'Oblyk'}}@endif</title>
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
 <meta charset="utf-8">
 <meta name="description" content="@if(isset($meta_description)){{$meta_description}}@else{{'Oblyk est un site communautaire d\'escalade outdoor et indoor : on peut y noter ses croix, et voir l\'activité des grimpeurs de la communauté'}}@endif">
 <meta name="author" content="Lucien CHASTAN">
