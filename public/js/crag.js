@@ -190,6 +190,7 @@ function extendSectorDiv(sectorId) {
     secteurDiv.style.overflowY = 'auto';
 }
 
+
 //VA CHERCHER LES DONNÉES DES GRAPHIQUES ET LES AFFICHES
 function getGraphCrag(crag_id) {
 
@@ -231,9 +232,11 @@ function initPhotothequeCrag() {
             }
         );
     }
+
 }
 
 function showPhotoEditor(visible) {
+
     if (visible){
         document.getElementById("zone-photo-editor").style.display = 'block';
         document.getElementById("zone-crag-gallerie").style.display = 'none';
@@ -257,6 +260,7 @@ function showPhotoSectorEditor(visible, sector_id) {
         document.getElementById("bt-show-sector-gallerie-editor-" + sector_id).style.display = 'block';
     }
 }
+
 
 function getTopoArround() {
     let lat = document.getElementById('lat-search-topo'),
@@ -287,6 +291,7 @@ function getTopoArround() {
     });
 }
 
+
 var delay = (function(){
     // https://stackoverflow.com/a/1909508
     var timer = 0;
@@ -295,13 +300,11 @@ var delay = (function(){
         timer = setTimeout(callback, ms);
     };
 })();
-
 function getTopoByName(){
     delay(function(){
         getTopoByName_();
     }, 500 );
 }
-
 function getTopoByName_() {
 
     let name = document.getElementById('name-search-topo'),
@@ -321,13 +324,13 @@ function getTopoByName_() {
     zoneLoader.style.display = "block";
 
     axios.get('/API/topos/by-name/' + id.value + '/' + name.value).then(function (response) {
+
         liste.innerHTML = response.data;
 
         liste.style.display = "block";
         zoneLoader.style.display = "none";
     });
 }
-
 function getMassiveArround() {
     let lat = document.getElementById('lat-search-massive'),
         lng = document.getElementById('lng-search-massive'),
@@ -377,6 +380,7 @@ function selectTopo(topo_id) {
     zoneListeBName.style.display = 'none';
 
     axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
+
         zoneLoader.style.display = 'none';
         zoneValidation.style.display = 'block';
 
@@ -390,6 +394,7 @@ function selectTopo(topo_id) {
         rayon.value = '50';
 
         idLiaison.value = data.liaison.id;
+
     });
 }
 
@@ -410,6 +415,7 @@ function selectMassive(massive_id) {
     zoneValidation.style.display = 'none';
 
     axios.post('/massive/create-liaison',{massive_id : massive_id, crag_id : document.getElementById('id-search-massive').value}).then(function (response) {
+
         zoneLoader.style.display = 'none';
         zoneValidation.style.display = 'block';
 
@@ -423,6 +429,7 @@ function selectMassive(massive_id) {
         rayon.value = '50';
 
         idLiaison.value = data.liaison.id;
+
     });
 }
 
@@ -459,6 +466,7 @@ function deleteMassiveLiaison() {
         getMassiveArround();
     });
 }
+
 
 function goToNewTopo(response) {
     let data = JSON.parse(response.data);
