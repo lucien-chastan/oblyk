@@ -3,6 +3,12 @@
 /vendor
 /.idea
 /public/storage
+/public/css
+/public/js
+/public/fonts
+/public/img
+/public/font
+/public/framework
 charge_database.php
 beta_database.sh
 Homestead.json
