@@ -8,6 +8,7 @@ use App\Topo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use TomLingham\Searchy\Facades\Searchy;
 
 class TopoController extends Controller
 {
@@ -73,7 +74,21 @@ class TopoController extends Controller
         $data = ['topos' => Topo::whereIn('id',$topos)->get(), 'rayon' => $rayon];
 
         return view('pages.crag.partials.liste-topos', $data);
-
     }
 
+    public function getToposByName($crag_id, $name){
+
+        $topo_ids = Crag::where('crags.id',$crag_id)
+            ->with('topos')
+            ->get()
+            ->pluck('topos')
+            ->collapse()
+            ->pluck('topo_id');
+
+        $topos = Searchy::search('topos')->fields('label')->query($name)->getQuery()->whereNotIn('id', $topo_ids)->limit(20)->get();
+
+        $data = ['topos' => $topos];
+
+        return view('pages.crag.partials.liste-topos-search', $data);
+    }
 }

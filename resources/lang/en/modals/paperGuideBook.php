@@ -28,6 +28,9 @@ return [
     'close' => "Close",
     'cancel' => "Cancel",
 
+    'searchByName' => "Search by title",
+    'searchByProximity' => "Search by proximity",
+    'noResults' => "Found no results",
     'titleNewGuidebook' => "If your guidebook is not in the list above you can create a new guidebook",
     'newGuidebookTitle' => "New guidebook",
     'newGuidebookBtn' => "Create a new guidebook",

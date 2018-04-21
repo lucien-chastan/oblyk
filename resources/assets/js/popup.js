@@ -50,6 +50,11 @@ function specialAction(data) {
     //init les selects
     $('select').material_select();
 
+    //init topos popup tabs
+    setTimeout(function () {
+        try {$('.topotabs').tabs();}catch (e){}
+    },500);
+
     //init des inputs date
     $('.datepicker').pickadate({
         monthsFull : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
