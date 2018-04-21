@@ -2,6 +2,7 @@
 /storage/*.key
 /vendor
 /.idea
+/public/storage
 charge_database.php
 beta_database.sh
 Homestead.json
