@@ -9,6 +9,7 @@
 /public/img
 /public/font
 /public/framework
+/public/.htaccess
 charge_database.php
 beta_database.sh
 Homestead.json
