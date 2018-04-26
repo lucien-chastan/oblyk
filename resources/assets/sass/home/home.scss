@@ -113,6 +113,49 @@
     }
 }
 
+
+.activity-part-oblyk {
+
+    .collapsible {
+        box-shadow: none;
+        border : none;
+        border-top : 1px solid #ddd;
+        .collapsible-header {
+            border-bottom : 1px solid #ddd;
+            &.active {
+                border : none;
+            }
+        }
+    }
+
+    .blue-border-activity-part {
+        border-left-style: solid;
+        border-color: #2196F3;
+        margin: 0.7em 0;
+        padding-left: 0.5em;
+    }
+    img.circle {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        margin-right: 0.5em;
+    }
+    .search-climb-type {
+        height: 0.85em;
+        width: 0.85em;
+    }
+    .couverture-topo {
+        max-height: 40px;
+        margin-top: 3px;
+        max-width: 40px;
+        margin-right: 0.5em;
+    }
+
+    .video-title {
+        margin-bottom: 0;
+    }
+}
+
 //ANIMATION SVG
 
 // info des falaises

@@ -160,6 +160,21 @@
             </div>
         </div>
 
+        {{--ACTIVITÉ DE LA COMMUNAUTÉ--}}
+
+        @if($countActivity > 0)
+            <div class="row">
+                <div class="s12 m12 l12">
+                    <h2 class="center">@lang('home.title-community-activity')</h2>
+                </div>
+            </div>
+
+            <div class="activity-part-oblyk">
+                <div class="row">
+                     @include('pages.home.partials.community-activity')
+                </div>
+            </div>
+        @endif
 
         {{--PARTIE ACTUALITÉ D'OBLYK--}}
 
@@ -255,4 +270,19 @@
 @section('script')
     {{--js particulier à la page--}}
     <script type="text/javascript" src="/js/home.js"></script>
+    <script>
+        if(typeof document.getElementById('photo-home-activity') !== "undefined"){
+            new Phototheque('#photo-home-activity',
+                {
+                    "maxHeight" : "100px",
+                    "gouttiere" : "3px",
+                    "lastRow" : "center",
+                    "visiotheque" : true,
+                    "visiotheque-option" : {
+                        "legende" : "data-legende"
+                    }
+                }
+            );
+        }
+    </script>
 @endsection
