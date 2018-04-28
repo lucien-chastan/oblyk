@@ -11,7 +11,7 @@
                         </a><br>
                         <span class="grey-text">
                             {{ $topo->author }}, {{ $topo->editor }} ({{ $topo->editionYear }})
-                        </span>>
+                        </span>
                     </div>
                 @endforeach
             </div>
