@@ -4,7 +4,7 @@
         <div class="row">
             <div>
                 @foreach($activity['routes'] as $route)
-                    <div class="col s12 m6 l4 blue-border-activity-part">
+                    <div class="col s12 m6 l4 blue-border-activity-part truncate">
                         <a class="button-open-route text-cursor" class="button-open-route" onclick="loadRoute({{ $route->id }})">
                             <img src="/img/climb-{{ $route->climb_id }}.png" class="search-climb-type">
                             @if(count($route->routeSections) > 1)
