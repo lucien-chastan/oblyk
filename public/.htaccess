@@ -1,8 +1,3 @@
-AuthType Basic
-AuthUserFile /var/www/html/oblyk.org/public/.passwds
-AuthName "Entrez le mot de passe pour tester la version beta"
-require valid-user
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
