@@ -118,5 +118,3 @@ we test if it works properly on the beta environment
 If it's okay, we merge on the master.
 
 and that's it! You contributed!
-
-Translated with www.DeepL.com/Translator
