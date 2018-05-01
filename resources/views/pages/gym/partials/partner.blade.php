@@ -12,7 +12,7 @@
                 <p class="no-margin">
                     <a href="{{ route('userPage',['user_id'=>$partner->id,'user_label'=>str_slug($partner->name)]) }}"><i class="material-icons left">person_pin_circle</i> {{ $partner->name }}</a>
                     <span class="grey-text">
-                        @lang('elements/sex.sex_' . $partner->sex)
+                        @lang('elements/sex.sex_' . ($partner->sex ?? 0))
                         @if($partner->birth == 0) {{ trans_choice('elements/old.old', 0) }} @endif
                         @if($partner->birth != 0) {{ trans_choice('elements/old.old', date('Y') - $partner->birth) }} @endif
                     </span>
