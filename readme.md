@@ -1,78 +1,122 @@
-# Oblyk, Site communautraire dédié à l'escalade
+# Oblyk, Climbing Community website
 
-Oblyk est un site internet open-source communautaire dédié à l'escalade. Il à pour objectif de constituer une grande base de donnée open-data des falaises et voies d'escalades de france et du monde mais aussi des salles. Les grimpeurs peuvent aussi se servire de cet outil pour noter leurs croix ou encore trouver des partenaires d'escalades.
+[version française](readme-fr.md)
+
+Oblyk is an open-source community website dedicated to climbing. It aims to build a large open-data database of cliffs and climbing routes in France and the world but also of climbing gyms. Climbers can also use this tool to record their crosses or find climbing partners.
 
 ![page d'accueil d'oblyk](https://oblyk.org/img/meta_home.jpg)
 
 ## Dépendances
 
-Pour installer Oblyk sur votre machine vous devez avoir les logiciels suivant installer :
+To install Oblyk on your machine you must have the following software installed:
 
 - [Git](https://git-scm.com/)
-- Le trio : MySql, Apache, PHP ([Linux](https://doc.ubuntu-fr.org/lamp), [Windows](http://www.wampserver.com/), [Mac](https://www.mamp.info/en/))
+- The trio : MySql, Apache, PHP ([Linux](https://doc.ubuntu-fr.org/lamp), [Windows](http://www.wampserver.com/), [Mac](https://www.mamp.info/en/))
 - [Composer](https://getcomposer.org/)
 - [NodeJs](https://nodejs.org/en/)
 
-## Framework utilisés
+## Frameworks used
 
-Oblyk utilise principalement Laravel pour le PHP et Materialize pour le CSS, reporté vous à la documentation de ces 2 frameworks pour comprendre la majeur partie du code d'oblyk
+Oblyk mainly uses Laravel for PHP and Materialize for CSS, refer you to the documentation of these 2 frameworks to understand most of the oblyk code
 
 - [Laravel](https://laravel.com/)
 - [Materialize](http://materializecss.com/)
 
 ## Installation
 
-Commencez par clonner le projet dans votre environement de développement local
+Start by cloning the project in your local development environment
 
 ```bash
 cd /chemin/vers/votre/dossier/
+
 git clone https://github.com/lucien-chastan/oblyk.git
+or
+git clone git@github.com:lucien-chastan/oblyk.git
 ```
 
-Lancez composer pour installer les dépendances
+Launch Composer to install dependencies
 
 ```bash
-cd /dossier/de/votre/app
+cd /your/application's/folder
 composer install
 ```
 
-Installer les dépendances node
+Install node dependencies
 
 ```bash
-node install
+npm install
 ```
 
-Copier le fichier .env.example et renommez le en .env
+**COPY** the file .env.example and rename it to .env
 
 ```bash
 cp .env.example .env
 ```
 
-Générer une clé pour votre application
+Generate a key for your application
 
 ```bash
 php artisan key:generate
 ```
-Créer une base de données sur MySql du nom que vous voulez, avec l'encodage *utf8_general_ci*
+Create a database on MySql of the name you want, with *utf8_general_ci* encoding
 
-Ouvrez le fichier .env et renseigner votre configuration (nom de la base, nom utilisateur, code d'accès, etc.)
+Open the .env file and enter your configuration (database name, user name, access code, etc.)
 
-Régéner le cache de l'application
+Regenerate application cache
 
 ```bash
 composer dump-autoload
 ```
 
-Lancer la migration pour créer les tables de l'application et les fausses données de test
+Start migration to create application tables and false test data
 
 ```bash
 php artisan migrate --seed
 ```
 
-Créer un lien symbolique dans le dossier public vers storage
+Create a symbolic link in the public folder to storage
 
 ```bash
 php artisan storage:link
 ```
 
-bientôt la suite de la procédure
+Give write permission to folder *storage/* and *bootstrap/cache/*
+```bash
+chmod -R 764 storage && chmod -R 764 bootstrap/cache
+## to adapt according to your rights management and your OS
+```
+
+Generate public css/js/img/... folders
+```bash
+## to generate once
+npm run dev
+
+## to generate and listen for changes
+npm run watch
+```
+
+## Workflow
+
+If you want to contribute to Oblyk, here's how we work:
+
+Whether you have an idea or want to fix a bug, the best way to start is to make an issue,
+on this issue we discuss how to do (code, design, etc.) so as not to leave head down alone in his code ^^
+
+When we agree and it seems good to launch the development we affect the issue (to avoid that two people develop the same module)
+
+On our development environment we create a branch from the master (the name is free as long as it is explicit)
+
+When the branch is ready, finished and tested locally, we push it on the repository and we open a pull request
+Now we see if it's okay, we make changes if necessary.
+
+Once the pull request has been validated
+
+The branch will be merged on the beta version of oblyk
+
+we test if it works properly on the beta environment
+
+If it's okay, we merge on the master.
+
+and that's it! You contributed!
+
+Translated with www.DeepL.com/Translator
