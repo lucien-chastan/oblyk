@@ -20,12 +20,6 @@
     {{--contenu de la page--}}
     <div id="map"></div>
 
-        <div class="fixed-action-btn btn-add-map">
-<button onClick="window.bloc=!window.bloc && redraw()">BLOC</button>
-<button onClick="window.grande_voie=!window.grande_voie && redraw('grande_voie')">GV</button>
-<button onClick="redraw('voie')">V</button>
-</div>
-
     @if(Auth::check())
         <div class="fixed-action-btn btn-add-map">
             <a class="btn-floating btn-large red">
