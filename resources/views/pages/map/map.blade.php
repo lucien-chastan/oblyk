@@ -6,9 +6,11 @@
 
 @section('css')
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
+    <link href="/framework/leaflet/easy-button.css" rel="stylesheet">
     <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
 @endsection
@@ -17,6 +19,12 @@
 
     {{--contenu de la page--}}
     <div id="map"></div>
+
+        <div class="fixed-action-btn btn-add-map">
+<button onClick="window.bloc=!window.bloc && redraw()">BLOC</button>
+<button onClick="window.grande_voie=!window.grande_voie && redraw('grande_voie')">GV</button>
+<button onClick="redraw('voie')">V</button>
+</div>
 
     @if(Auth::check())
         <div class="fixed-action-btn btn-add-map">
@@ -35,6 +43,7 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/framework/leaflet/markercluster.js"></script>
+    <script src="/framework/leaflet/easy-button.js"></script>
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
@@ -45,7 +54,25 @@
         //chargement de la map
         loadMap();
 
+        // visibility of types
+            window.voie = true;
+            window.grande_voie = true;
+            window.bloc = true;
+            window.deep_water = true;
+            window.via_ferrata = true;
+        function redraw(t) {
+            window[t] = !window[t];
+            markers.clearLayers();
+            var visible_markers = [];
+            for(var i=0; i<all_markers.length;i++) {
+                if (all_markers[i]['type_'+t]  === undefined ||  (window[t] == true && all_markers[i]['type_'+t] == true)) {
+                    markers.addLayer(all_markers[i]);
+                }
+            }
+        }
+
         //boucle sur les falaises pour ajouter les marqueurs sur la carte
+        var all_markers = [];
         @foreach($crags as $crag)
 
             var point = L.marker(
@@ -61,11 +88,7 @@
                     </h2>
                     <table>
                         <tr>
-                            <td>Localisation : </td>
-                            <td>{{$crag['city']}}, {{$crag['region']}} ({{$crag['code_country']}})</td>
-                        </tr>
-                        <tr>
-                            <td>Type de grimpe : </td>
+
                             <td class="type-grimpe">
                                 @if($crag['type_voie'] == 1)<span class="voie">voie</span>@endif
                                 @if($crag['type_grande_voie'] == 1)<span class="grande-voie">grande-voie</span>@endif
@@ -90,7 +113,15 @@
                  </div>
                 `
             );
+
+            point.type_voie = {{$crag['type_voie']}};
+            point.type_grande_voie = {{$crag['type_grande_voie']}};
+            point.type_bloc = {{$crag['type_bloc']}};
+            point.type_deep_water = {{$crag['type_deep_water']}};
+            point.type_via_ferrata = {{$crag['type_via_ferrata']}};
+
             markers.addLayer(point);
+            all_markers.push(point);
         @endforeach
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
@@ -129,6 +160,7 @@
                  </div>
                 `
                 );
+        all_markers.push(point);
         markers.addLayer(point);
         @endforeach
 

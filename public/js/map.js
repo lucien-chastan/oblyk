@@ -52,6 +52,24 @@ function loadMap() {
     //OUTIL DE MEUSURE
     L.Control.measureControl().addTo(map);
 
+
+    // filter crags
+    L.easyButton( '<strong>V</strong>', function(){
+        redraw('voie');
+    }).addTo(map);
+    L.easyButton( '<strong>GV</strong>', function(){
+        redraw('grande_voie');
+    }).addTo(map);
+    L.easyButton( '<strong>VF</strong>', function(){
+        redraw('via_ferrata');
+    }).addTo(map);
+    L.easyButton( '<strong>B</strong>', function(){
+        redraw('bloc');
+    }).addTo(map);
+    L.easyButton( '<strong>PB</strong>', function(){
+        redraw('deep_water');
+    }).addTo(map);
+
     map.on('click', pointMarkerMap);
 
     map.on('zoomend', function () {changeDash();});

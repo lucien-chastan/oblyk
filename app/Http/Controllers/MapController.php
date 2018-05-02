@@ -11,15 +11,44 @@ use Illuminate\Support\Facades\DB;
 
 class MapController extends Controller
 {
-    public function mapPage(){
+    public function mapPage(Request $request){
+        $crags = Crag::withCount('routes')
+            ->with('gapGrade');
+
+        $this->filter_by_type($request, $crags);
+
+        $crags = $crags->get();
+
         $data = [
-            'crags' => Crag::withCount('routes')->with('gapGrade')->get(),
+            'crags' => $crags,
             'gyms' => Gym::get(),
             'meta_title' => 'Carte des falaises et salle d\'escalade',
             'meta_description' => 'Voir la carte interactive des sites naturels de grimpe et des salles d\'escalade sur Oblyk, que ce soit en France, ou dans le Monde, et voir leurs informations détaillées'
         ];
 
         return view('pages.map.map', $data);
+    }
+    private function filter_by_type($request, $crags) {
+        if ($request->has('crag_type')) {
+            switch($request->input('crag_type')) {
+                //enumerate to block sqli
+                case "bloc":
+                    $crags->where('type_bloc', '=', true);
+                    break;
+                case "voie":
+                    $crags->where('type_voie', '=', true);
+                    break;
+                case "grande_voie":
+                    $crags->where('type_grande_voie', '=', true);
+                    break;
+                case "deep_water":
+                    $crags->where('type_deep_water', '=', true);
+                    break;
+                case "via_ferrata":
+                    $crags->where('type_via_ferrata', '=', true);
+                    break;
+            }
+        }
     }
 
     public function gymPage(){
