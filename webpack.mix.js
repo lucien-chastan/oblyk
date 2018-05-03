@@ -73,6 +73,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
 //leaflet
 mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/markercluster.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/leaflet.featuregroup.subgroup.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/Control.Geocoder.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/Control.Geocoder.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.plotter.min.js', 'public/framework/leaflet')

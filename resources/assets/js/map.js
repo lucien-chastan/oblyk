@@ -26,8 +26,16 @@ function loadMap() {
 
 
     //CONTROLER DES TUILES
-    L.control.layers(baseMaps).addTo(map);
+    L.control.layers(baseMaps).addTo(map, {});
 
+    // group by type of crag
+    marker_group = {};
+    var ll = {'type_voie': "Voie", 'type_grande_voie': "Grande Voie", 'type_bloc': "Bloc", 'type_deep_water': "Deep Water", 'type_via_ferrata': "Via Ferrata"};
+    $.each(ll, function(k, v) {
+        marker_group[k] = L.featureGroup.subGroup(markers, []);
+        control.addOverlay(marker_group[k], v);
+        marker_group[k].addTo(map);
+    });
 
     //OUTIL DE RECHERCHE
     L.Control.geocoder(
