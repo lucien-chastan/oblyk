@@ -91,12 +91,13 @@
                  </div>
                 `
             );
-            //markers.addLayer(point);
-            @if($crag['type_voie'] == 1)marker_group['type_voie'].addLayer(point);@endif
-            @if($crag['type_grande_voie'] == 1)marker_group['type_grande_voie'].addLayer(point);@endif
-            @if($crag['type_bloc'] == 1)marker_group['type_bloc'].addLayer(point);@endif
-            @if($crag['type_deep_water'] == 1)marker_group['type_deep_water'].addLayer(point);@endif
-            @if($crag['type_via_ferrata'] == 1)marker_group['type_via_ferrata'].addLayer(point);@endif
+            @if($crag['type_voie']+$crag['type_grande_voie']+$crag['type_bloc']+$crag['type_deep_water']+$crag['type_via_ferrata'] > 1)
+                markers.addLayer(point);
+            @else
+            @foreach(['type_voie', 'type_grande_voie', 'type_bloc', 'type_deep_water', 'type_via_ferrata'] as $type)
+                @if($crag[$type] == 1)marker_group['{{$type}}'].addLayer(point);@endif
+            @endforeach
+            @endif
         @endforeach
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
