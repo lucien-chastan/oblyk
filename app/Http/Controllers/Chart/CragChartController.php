@@ -91,7 +91,7 @@ class CragChartController extends Controller
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 
 
@@ -136,6 +136,6 @@ class CragChartController extends Controller
             ]
         ];
 
-        return response()->json(json_encode($data));
+        return response()->json($data);
     }
 }

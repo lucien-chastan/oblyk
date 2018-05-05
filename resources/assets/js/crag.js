@@ -196,12 +196,12 @@ function getGraphCrag(crag_id) {
 
     //Graphique des cotations
     axios.get('/chart/crag/' + crag_id + '/grade').then(function (response) {
-        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),response.data);
     });
 
     //Graphique des type de grimpe
     axios.get('/chart/crag/' + crag_id + '/climb').then(function (response) {
-        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),response.data);
     });
 }
 
@@ -212,7 +212,7 @@ function getSectorChart() {
     for(let i = 0 ; i < sectors.length ; i++){
         let sectorId = sectors[i].getAttribute('data-sector-id');
         axios.get('/chart/sector/' + sectorId + '/grade').then(function (response) {
-            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),JSON.parse(response.data));
+            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),response.data);
         });
     }
 }
