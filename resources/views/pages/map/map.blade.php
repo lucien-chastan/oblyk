@@ -35,6 +35,7 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/framework/leaflet/markercluster.js"></script>
+    <script src="/framework/leaflet/leaflet.featuregroup.subgroup.js"></script>
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
@@ -90,7 +91,13 @@
                  </div>
                 `
             );
-            markers.addLayer(point);
+            @if($crag['type_voie']+$crag['type_grande_voie']+$crag['type_bloc']+$crag['type_deep_water']+$crag['type_via_ferrata'] > 1)
+                markers.addLayer(point);
+            @else
+            @foreach(['type_voie', 'type_grande_voie', 'type_bloc', 'type_deep_water', 'type_via_ferrata'] as $type)
+                @if($crag[$type] == 1)marker_group['{{$type}}'].addLayer(point);@endif
+            @endforeach
+            @endif
         @endforeach
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
