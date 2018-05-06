@@ -9,7 +9,8 @@
         <div class="input-field col s12 m5">
             <i class="material-icons prefix">search</i>
             <select id="search-type">
-                <option value="crags" selected>@lang('interface/search.cragOption')</option>
+                <option value="all" selected>Tous</option>
+                <option value="crags">@lang('interface/search.cragOption')</option>
                 <option value="gyms">@lang('interface/search.gymOption')</option>
                 <option value="routes">@lang('interface/search.routeOption')</option>
                 <option value="users">@lang('interface/search.userOption')</option>
