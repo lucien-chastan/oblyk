@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class ForumTopic extends Model
 {
+    public $searchable_type;
+
     protected $dates = [
         'last_post'
     ];
