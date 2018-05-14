@@ -57,6 +57,10 @@ class Route extends Model
         return $this->morphMany('App\Follow', 'followed');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
     public static function similarRoute($crag_id, $route_id , $label){
 
         $routes = Route::where([

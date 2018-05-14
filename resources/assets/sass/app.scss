@@ -177,6 +177,29 @@
     display: none;
 }
 
+.popup-version-table {
+    margin-bottom: 1.5em;
+    .date-cell-popup-version {
+        padding-right: 16px;
+    }
+    .blue-border-version-popup {
+        border: 3px #2196F3;
+        border-left-style: solid;
+        padding-left: 0;
+        width: 14px;
+        div {
+            height: 12px;
+            width: 12px;
+            border: 3px solid #2196F3;
+            border-radius: 50%;
+            position: absolute;
+            background-color: rgb(255,255,255);
+            margin-left: -7px;
+            margin-top: -7px;
+        }
+    }
+}
+
 .div-submit-loader{
     display: none;
 
