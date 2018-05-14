@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Version extends Model
 {
+    private $unwelcomeKey = [
+        'updated_at',
+        'created_at',
+        'deleted_at'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -46,14 +52,26 @@ class Version extends Model
      * @param Model $new
      * @return array
      */
-    public function modelDiffToArray(Model $old, Model $new) : array
+    public function modelDiffToArray(Model $old, Model $new)
     {
         // purge model updated_at, not to match the difference
-        $old = $old->toArray();
-        $new = $new->toArray();
-        unset($old['updated_at']);
-        unset($new['updated_at']);
+        $old = $this->purgeModel($old);
+        $new = $this->purgeModel($new);
 
         return array_diff($old, $new);
+    }
+
+    /**
+     * @param Model $model
+     * @return array
+     */
+    private function purgeModel(Model $model) {
+        $arrayModel = $model->toArray();
+        foreach ($arrayModel as $key => $value) {
+            if (is_array($value) || in_array($key, $this->unwelcomeKey)) {
+                unset($arrayModel[$key]);
+            }
+        }
+        return $arrayModel;
     }
 }
