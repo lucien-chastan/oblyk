@@ -27,6 +27,7 @@ class CragController extends Controller
             ->withCount('topoWebs')
             ->withCount('topoPdfs')
             ->withCount('posts')
+            ->withCount('versions')
             ->with('photos')
             ->with('photos.user')
             ->with('topos.topo')
@@ -37,6 +38,7 @@ class CragController extends Controller
             ->with('descriptions.user')
             ->with('exceptions.user')
             ->first();
+
 
         $partners = User::whereIn('id', UserPlace::getPartnersAroundCenter($crag->lat, $crag->lng))->get();
 

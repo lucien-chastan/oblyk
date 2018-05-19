@@ -77,6 +77,9 @@
         </span>
         @if(Auth::check())
             <i {!! $Helpers::tooltip( trans('modals/crag.tooltip')) !!} {!! $Helpers::modal(route('cragModal'), ["id"=>$crag->id, "title"=>trans('modals/crag.modalTitle'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+            @if($crag->versions_count > 0)
+                <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$crag->id, "model"=>"Crag"]) !!} class="material-icons tooltipped btnModal">history</i>
+            @endif
         @endif
     </div>
 

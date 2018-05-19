@@ -38,7 +38,10 @@
 
             @if(Auth::check())
                 <div class="text-right ligne-btn">
-                    <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/information.editInformation')) !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.editInformation'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+                    <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/information.editInformation')) !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.editInformation'), "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                    @if($topo->versions_count > 0)
+                        <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$topo->id, "model"=>"Topo"]) !!} class="material-icons tiny-btn right tooltipped btnModal">history</i>
+                    @endif
                 </div>
             @endif
 

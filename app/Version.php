@@ -10,7 +10,31 @@ class Version extends Model
     private $unwelcomeKey = [
         'updated_at',
         'created_at',
-        'deleted_at'
+        'deleted_at',
+        'views',
+        'user_id',
+        'id',
+        'photos',
+        'topos',
+        'massives',
+        'topo_webs',
+        'topo_pdfs',
+        'gap_grade',
+        'descriptions',
+        'exceptions',
+        'routes_count',
+        'links_count',
+        'topo_webs_count',
+        'topo_pdfs_count',
+        'posts_count',
+        'versions_count',
+        'orientable_id',
+        'orientable_type',
+        'photos_count',
+        'videos_count',
+        'topos_count',
+        'seasontable_id',
+        'seasontable_type',
     ];
 
     /**
@@ -34,6 +58,7 @@ class Version extends Model
      */
     public function saveVersion(Model $oldModel, Model $newModel, $appType)
     {
+
         // compare old and new model for save only the changes
         $diff = $this->modelDiffToArray($oldModel, $newModel);
 
@@ -67,11 +92,33 @@ class Version extends Model
      */
     private function purgeModel(Model $model) {
         $arrayModel = $model->toArray();
+        $arrayModel = $this->flatArray($arrayModel);
         foreach ($arrayModel as $key => $value) {
-            if (is_array($value) || in_array($key, $this->unwelcomeKey)) {
+            if (in_array($key, $this->unwelcomeKey)) {
                 unset($arrayModel[$key]);
             }
         }
         return $arrayModel;
+    }
+
+    /**
+     * @param $array
+     * @return array
+     */
+    private function flatArray($array) {
+        $flatArray = [];
+        foreach ($array as $key => $value) {
+            if (is_array($value) && count($value) > 0 && !in_array($key, $this->unwelcomeKey)) {
+                foreach ($value as $subKey => $subValue) {
+                    if(!in_array($subKey, $this->unwelcomeKey)) {
+                        if(array_key_exists($subKey, $flatArray)) $subKey .= '_' . $key;
+                        $flatArray[$subKey] = $subValue;
+                    }
+                }
+            } elseif (!in_array($key, $this->unwelcomeKey)) {
+                $flatArray[$key] = $value;
+            }
+        }
+        return $flatArray;
     }
 }

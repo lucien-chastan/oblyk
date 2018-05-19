@@ -20,6 +20,7 @@ class TopoController extends Controller
             ->withCount('crags')
             ->withCount('posts')
             ->withCount('sales')
+            ->withCount('versions')
             ->first();
 
         //on va chercher si l'utilisateur follow ce topo

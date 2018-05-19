@@ -17,7 +17,14 @@ class CragObserver
     public function updating(Crag $crag)
     {
         $version = new Version();
-        $version->saveVersion(Crag::find($crag->id), $crag, 'App\Crag');
+        $version->saveVersion(
+            Crag::where('id',$crag->id)
+                ->with('orientation')
+                ->with('season')
+                ->first(),
+            $crag,
+            'App\Crag'
+        );
     }
 
     /**
