@@ -16,6 +16,7 @@ class RouteVueController extends Controller
             ->with('routeSections')
             ->withCount('photos')
             ->withCount('videos')
+            ->withCount('versions')
             ->with('crag')
             ->with('sector')
             ->first();

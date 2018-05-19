@@ -38,4 +38,8 @@ class Gym extends Model
         return $this->morphMany('App\Follow', 'followed');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
 }

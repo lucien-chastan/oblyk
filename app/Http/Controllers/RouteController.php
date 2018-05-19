@@ -31,6 +31,7 @@ class RouteController extends Controller
             ->with('routeSections.start')
             ->withCount('photos')
             ->withCount('videos')
+            ->withCount('versions')
             ->first();
 
         //route dans la ticklist du connecté

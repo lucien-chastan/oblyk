@@ -34,6 +34,10 @@ class Massive extends Model
         return $this->hasMany('App\MassiveCrag','massive_id', 'id');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
     public static function distincRegions($massive_id){
         $regions = DB::select('
             SELECT DISTINCT crags.region AS region FROM crags 

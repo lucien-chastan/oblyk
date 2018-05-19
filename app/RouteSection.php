@@ -33,4 +33,8 @@ class RouteSection extends Model
     public function CrossSections(){
         return $this->hasMany('App\CrossSection','route_section_id', 'id');
     }
+
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
 }

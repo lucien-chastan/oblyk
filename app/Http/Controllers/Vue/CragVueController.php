@@ -78,6 +78,7 @@ class CragVueController extends Controller
                 ->withCount('routes')
                 ->withCount('descriptions')
                 ->withCount('photos')
+                ->withCount('versions')
                 ->with('gapGrade')
                 ->with('season')
                 ->orderBy('label')
