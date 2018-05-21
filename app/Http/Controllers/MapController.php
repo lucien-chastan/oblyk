@@ -25,7 +25,7 @@ class MapController extends Controller
     }
     public function filterMap(Request $request) {
         $all_climb_types = Cache::remember('climb_types', 666, function() {
-            return Climb::select('label')->get()->toArray();
+            return Climb::select('label')->pluck('label');
         });
 
         $data = [

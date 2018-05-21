@@ -4,6 +4,14 @@ var map, markers,
 function searchCragsOnMap() {
     console.log("fnord");
 }
+function createSearchBox() {
+    axios.get('/API/climbs').then(function(data) {
+        console.log(data.data);
+        for (var i = 0; i< data.data.length; i++) {
+            document.getElementById('crag_type').innerHTML += '<label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label>';
+        }
+    });
+}
 //function au chargement de la map
 function loadMap() {
     let lat = 46.927527,

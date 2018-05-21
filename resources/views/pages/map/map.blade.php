@@ -21,7 +21,14 @@
 <br>&nbsp;
 <br>&nbsp;
 <br>&nbsp;
-<button onClick="searchCragsOnMap()">CCC</button>
+<p> <label> ehhhhh <input type="checkbox" /> <span>Red</span> </label> </p>
+<button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">CCC</button>
+<button  class="waves-effect waves-light btn" onClick="createSearchBox()">create</button>
+<form id="crag_type" action="#">
+  <div class="input-field col s12">
+    <p><label><input type="checkbox" value="ssssss" name="voie_type" /><span>ooo</span></label></p>
+  </div>
+</form>
     <div id="map"></div>
 
     @if(Auth::check())
