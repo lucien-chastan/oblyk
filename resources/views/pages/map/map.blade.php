@@ -16,6 +16,12 @@
 @section('content')
 
     {{--contenu de la page--}}
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<button onClick="searchCragsOnMap()">CCC</button>
     <div id="map"></div>
 
     @if(Auth::check())

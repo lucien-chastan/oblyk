@@ -1,6 +1,9 @@
 var map, markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
+function searchCragsOnMap() {
+    console.log("fnord");
+}
 //function au chargement de la map
 function loadMap() {
     let lat = 46.927527,

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Climb;
 use App\Gym;
 use App\Massive;
 use App\Topo;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +22,38 @@ class MapController extends Controller
         ];
 
         return view('pages.map.map', $data);
+    }
+    public function filterMap(Request $request) {
+        $all_climb_types = Cache::remember('climb_types', 666, function() {
+            return Climb::select('label')->get()->toArray();
+        });
+
+        $data = [
+            'crags' => Crag::withCount('routes')
+            ->with('gapGrade')
+            ->whereExists(function ($q) use ($request, $all_climb_types) {
+                $q->select(DB::raw(1))
+                    ->from('routes')
+                    ->join('climbs', 'climbs.id', 'routes.climb_id')
+                    ->whereIn('climbs.label', $request->input('climb_type', $all_climb_types))
+                    ->whereRaw('routes.crag_id = crags.id');
+            })
+            ->get(),
+        ];
+        return response()->json(['data' => $data, 'request' => $request->all()]);
+        /*
+         * type_voie    1
+         * type_grande_voie 1
+         * type_bloc    1
+         * type_deep_water  0
+         * type_via_ferrata 0
+         * gap_grade    
+         * id   2
+         * spreadable_id    1
+         * spreadable_type  "App\\Crag"
+         * min_grade_val    25
+         * max_grade_val    41
+         */
     }
 
     public function gymPage(){

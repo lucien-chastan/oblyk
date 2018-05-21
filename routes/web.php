@@ -248,6 +248,8 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
+Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
+Route::get('/API/climbs', 'ClimbController@index')->name('climbTypes');
 
 
 // PARTENAIRE
