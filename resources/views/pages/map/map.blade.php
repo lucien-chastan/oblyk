@@ -20,26 +20,17 @@
 
     {{--contenu de la page--}}
     <div id="map"></div>
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<button  class="waves-effect waves-light btn" onClick="createSearchBox()">create</button>
-
-<div id="my-user-circle-partner" class="side-user-map-partner circle-side">
-<div class="row">
-<div class="col s12">
-    <p> <label> ehhhhh <input type="checkbox" /> <span>Red</span> </label> </p>
-    <button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">CCC</button>
-    <form id="crag_type" action="#">
-    <div class="input-field col s12">
-        <p><label><input type="checkbox" value="ssssss" name="voie_type" /><span>ooo</span></label></p>
+    <div id="my-user-circle-partner" class="side-user-map-partner circle-side">
+        <div class="row">
+            <div class="col s12">
+                <h5>@lang('pages/map/map.crag_type')</h5>
+                <form id="crag_type" action="#">
+                    <div class="input-field col s12"></div>
+                </form>
+                <button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">Submit</button>
+            </div>
+        </div>
     </div>
-    </form>
-</div>
-</div>
-</div>
 
     @if(Auth::check())
         <div class="fixed-action-btn btn-add-map">
@@ -115,6 +106,7 @@
             );
             markers.addLayer(point);
         @endforeach
+        map.addLayer(markers);
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
         @foreach($gyms as $gym)
@@ -152,10 +144,10 @@
                  </div>
                 `
                 );
-        markers.addLayer(point);
+        gym_markers.addLayer(point);
         @endforeach
 
-        map.addLayer(markers);
+        map.addLayer(gym_markers);
 
         //passage de la barre de navigation en noir
         var nav_barre = document.getElementById('nav_barre');

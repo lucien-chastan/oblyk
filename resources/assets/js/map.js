@@ -1,13 +1,40 @@
-var map, markers,
+var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
 function searchCragsOnMap() {
-    console.log("fnord");
+    var types = document.getElementsByName('voie_type');
+    var query = "/API/crags/search?";
+    for (var i=0; i<types.length; i++) {
+        var t = types[i];
+        if (t.checked === true) 
+            query += "climb_type[]=" + encodeURIComponent(t.value) + "&";
+    }
+    getCragsList(query);
+}
+function getCragsList(query) {
+    axios.get(query).then(function(data) {
+        console.log(data.data.data);
+    markers.clearLayers();
+    for (var i=0; i<data.data.data.crags.length; i++) {
+        var point = make_point(data.data.data.crags[i]);
+        markers.addLayer(point);
+    }
+    map.addLayer(markers);
+
+    });
+}
+function make_point(crag) {
+    var point = L.marker(
+        [crag.lat, crag.lng],
+        {icon: styleIcon("" + crag.type_voie + crag.type_grande_voie + crag.type_bloc + crag.type_deep_water + crag.type_via_ferrata + "")}
+    ).bindPopup(buildPopup(crag));
+    return point;
 }
 function createSearchBox() {
     axios.get('/API/climbs').then(function(data) {
         for (var i = 0; i< data.data.length; i++) {
-            document.getElementById('crag_type').innerHTML += '<label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label>';
+            var checkbox = '<p><label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label></p>';
+            document.getElementById('crag_type').innerHTML += checkbox;
         }
         volet = document.getElementById('my-user-circle-partner');
         volet.style.transform = 'translateX(0)';
@@ -31,7 +58,20 @@ function loadMap() {
 
     map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup();
+    gym_markers = L.markerClusterGroup();
 
+    var searchMapButton = L.Control.extend({options: { position: 'topleft' }, onAdd: function (map) { 
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom-filter');
+        container.style.backgroundColor = 'white';
+        container.style.width = '35px';
+        container.style.height = '35px';
+                container.innerHTML = '<i class="tiny material-icons">build</i>';
+        container.onclick = function(){
+            createSearchBox();
+        }
+        
+        return container; }, });
+    map.addControl(new searchMapButton());
 
     //POSITIONNEMENT DU CONTROLER DE ZOOM
     L.control.zoom({position : 'bottomright'}).addTo(map);
