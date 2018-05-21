@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\oldSearch;
+use App\Subscriber;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserPartnerSettings;
@@ -60,8 +61,9 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
+     * @throws \Exception
      */
     protected function create(array $data)
     {
@@ -72,6 +74,13 @@ class RegisterController extends Controller
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
         $user->save();
+
+        if (isset($data['newsletter'])) {
+            Subscriber::firstOrCreate(['email' => $user->email]);
+        } else {
+            // the new user was perhaps already registered but no longer wishes to receive the news letter
+            Subscriber::where('email', $user->email)->delete();
+        }
 
         //On créer la table des paramètres pour cet utilisateur
         $setting = New UserSettings();

@@ -11,6 +11,7 @@
     {!! $Inputs::text(['name'=>'birth', 'value'=>$user->birth, 'label'=>trans('pages/profile/settings.labelBirthYear'), 'type'=>'number']) !!}
     {!! $Inputs::sex(['name'=>'sex', 'value'=>$user->sex, 'label'=>trans('pages/profile/settings.labelSex')]) !!}
     {!! $Inputs::mdText(['name'=>'description', 'value'=>$user->description, 'label'=>trans('pages/profile/settings.labelDescription')]) !!}
+    {!! $Inputs::checkbox(['name'=>'newsletter', 'label'=>trans('pages/profile/settings.labelNewsLetter'), 'checked' => $newsletter, 'align' => 'left']) !!}
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'PUT']) !!}
 
