@@ -3,6 +3,8 @@
     'meta_description'=>trans('meta/map.description'),
     'meta_img'=>'https://oblyk.org/img/map_meta.jpg',
     ])
+@inject('Helpers','App\Lib\HelpersTemplates') 
+@inject('Inputs','App\Lib\InputTemplates')
 
 @section('css')
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
@@ -11,25 +13,33 @@
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
+<link href="/css/partner-map.css" rel="stylesheet"> 
 @endsection
 
 @section('content')
 
     {{--contenu de la page--}}
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<br>&nbsp;
-<p> <label> ehhhhh <input type="checkbox" /> <span>Red</span> </label> </p>
-<button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">CCC</button>
-<button  class="waves-effect waves-light btn" onClick="createSearchBox()">create</button>
-<form id="crag_type" action="#">
-  <div class="input-field col s12">
-    <p><label><input type="checkbox" value="ssssss" name="voie_type" /><span>ooo</span></label></p>
-  </div>
-</form>
     <div id="map"></div>
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<button  class="waves-effect waves-light btn" onClick="createSearchBox()">create</button>
+
+<div id="my-user-circle-partner" class="side-user-map-partner circle-side">
+<div class="row">
+<div class="col s12">
+    <p> <label> ehhhhh <input type="checkbox" /> <span>Red</span> </label> </p>
+    <button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">CCC</button>
+    <form id="crag_type" action="#">
+    <div class="input-field col s12">
+        <p><label><input type="checkbox" value="ssssss" name="voie_type" /><span>ooo</span></label></p>
+    </div>
+    </form>
+</div>
+</div>
+</div>
 
     @if(Auth::check())
         <div class="fixed-action-btn btn-add-map">

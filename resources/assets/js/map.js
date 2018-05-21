@@ -6,10 +6,11 @@ function searchCragsOnMap() {
 }
 function createSearchBox() {
     axios.get('/API/climbs').then(function(data) {
-        console.log(data.data);
         for (var i = 0; i< data.data.length; i++) {
             document.getElementById('crag_type').innerHTML += '<label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label>';
         }
+        volet = document.getElementById('my-user-circle-partner');
+        volet.style.transform = 'translateX(0)';
     });
 }
 //function au chargement de la map
