@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
-<link href="/css/partner-map.css" rel="stylesheet"> 
+    <link href="/css/nouislider.css" rel="stylesheet">
+    <link href="/css/partner-map.css" rel="stylesheet"> 
 @endsection
 
 @section('content')
@@ -23,11 +24,21 @@
     <div id="my-user-circle-partner" class="side-user-map-partner circle-side">
         <div class="row">
             <div class="col s12">
-                <h5>@lang('pages/map/map.crag_type')</h5>
-                <form id="crag_type" action="#">
-                    <div class="input-field col s12"></div>
-                </form>
-                <button  class="waves-effect waves-light btn" onClick="searchCragsOnMap()">Submit</button>
+                <div class="section">
+
+                    <h5>@lang('pages/map/map.crag_type')</h5>
+                    <form id="crag_type" action="#">
+                        <div class="input-field col s12"></div>
+                    </form>
+                </div>
+                <div class="section">
+                    <h5>@lang('pages/map/map.route_grade')</h5>
+                    <div id="grades-slider"></div>
+                </div>
+                <div class="section">
+                    <button  type="submit" class="waves-effect waves-light btn" onClick="searchCragsOnMap()">Submit</button>
+                    <button  class="waves-effect waves-light btn blue-grey lighten-5" onClick="hideSearchCrags()">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +63,7 @@
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
+    <script src="/js/nouislider.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/map.js"></script>
     <script>

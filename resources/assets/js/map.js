@@ -11,18 +11,18 @@ function searchCragsOnMap() {
     }
     getCragsList(query);
 }
+
 function getCragsList(query) {
     axios.get(query).then(function(data) {
-        console.log(data.data.data);
-    markers.clearLayers();
-    for (var i=0; i<data.data.data.crags.length; i++) {
-        var point = make_point(data.data.data.crags[i]);
-        markers.addLayer(point);
-    }
-    map.addLayer(markers);
-
+        markers.clearLayers();
+        for (var i=0; i<data.data.data.crags.length; i++) {
+            var point = make_point(data.data.data.crags[i]);
+            markers.addLayer(point);
+        }
+        map.addLayer(markers);
     });
 }
+
 function make_point(crag) {
     var point = L.marker(
         [crag.lat, crag.lng],
@@ -30,16 +30,40 @@ function make_point(crag) {
     ).bindPopup(buildPopup(crag));
     return point;
 }
-function createSearchBox() {
-    axios.get('/API/climbs').then(function(data) {
-        for (var i = 0; i< data.data.length; i++) {
-            var checkbox = '<p><label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label></p>';
-            document.getElementById('crag_type').innerHTML += checkbox;
-        }
+
+function hideSearchCrags() {
         volet = document.getElementById('my-user-circle-partner');
-        volet.style.transform = 'translateX(0)';
-    });
+        volet.style.transform = 'translateX(-100%)';
 }
+
+let search_box_loaded = false;
+
+function createSearchBox() {
+    if (!search_box_loaded) {
+        axios.get('/API/climbs').then(function(data) {
+            for (var i = 0; i< data.data.length; i++) {
+                var checkbox = '<p><label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label></p>';
+                document.getElementById('crag_type').innerHTML += checkbox;
+            }
+
+            var slider = document.getElementById('grades-slider');
+            noUiSlider.create(slider, {
+                start: [20, 80], // TODO
+                connect: true,
+                step: 1,
+                orientation: 'horizontal', 
+                range: {
+                            'min': 0,
+                            'max': 100
+                        },
+                });
+        });
+    }
+    search_box_loaded = true;
+    volet = document.getElementById('my-user-circle-partner');
+    volet.style.transform = 'translateX(0)';
+}
+
 //function au chargement de la map
 function loadMap() {
     let lat = 46.927527,
