@@ -1,6 +1,7 @@
 var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
+var slider = document.getElementById('grades-slider');
 function searchCragsOnMap() {
     var types = document.getElementsByName('voie_type');
     var query = "/API/crags/search?";
@@ -9,6 +10,9 @@ function searchCragsOnMap() {
         if (t.checked === true) 
             query += "climb_type[]=" + encodeURIComponent(t.value) + "&";
     }
+    var ranges = slider.noUiSlider.get();
+    query += "range_from=" + ranges[0] + "&range_to=" + ranges[1];
+
     getCragsList(query);
 }
 
@@ -63,7 +67,6 @@ function createSearchBox() {
                 labels[1*v] = ""+data.data[i].grade;
                 labels_rev[""+data.data[i].grade] = 1*v;
             }
-            var slider = document.getElementById('grades-slider');
             noUiSlider.create(slider, {
                 start: [min_grade, max_grade], 
                 step: 2,
