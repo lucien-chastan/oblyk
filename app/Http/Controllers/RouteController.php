@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cross;
 use App\Route;
+use App\RouteSection;
 use App\TickList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,18 @@ class RouteController extends Controller
         return response()->json(json_encode($similarLabel));
     }
 
+    public function routeGrades(){
+        return response()->json(
+            RouteSection::select(['grade', 'sub_grade', 'grade_val'])
+                ->distinct()
+                ->orderBy('grade_val', 'asc')
+                ->get()
+                ->each(function($e) {
+                    $e->grade .= $e->sub_grade;
+                    unset($e->sub_grade);
+                })
+        );
+    }
     public function routePage($route_id, $route_label){
 
         $route = Route::where('id', $route_id)
