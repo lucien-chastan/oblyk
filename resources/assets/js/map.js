@@ -42,22 +42,47 @@ function createSearchBox() {
     if (!search_box_loaded) {
         axios.get('/API/climbs').then(function(data) {
             for (var i = 0; i< data.data.length; i++) {
-                var checkbox = '<p><label><input type="checkbox" value="'+data.data[i].label+'" name="voie_type"><span>'+data.data[i].label + '</span></label></p>';
+                var checkbox = '<p><input type="checkbox" id="t'+i+'" value="'+data.data[i].label+'" name="voie_type" /><label for="t'+i+'">'+data.data[i].label + '</label></p>';
                 document.getElementById('crag_type').innerHTML += checkbox;
             }
 
+        });
+        axios.get('/API/route_grades').then(function(data) {
+            var min_grade = 10000000;
+            var max_grade = -1000000;
+            var labels = {};
+            var labels_rev = {};
+
+            for(var i=0;i<data.data.length;i++) {
+                var v = data.data[i].grade_val;
+                if (v > max_grade)
+                    max_grade = v;
+                if (v < min_grade)
+                    min_grade = v;
+
+                labels[1*v] = ""+data.data[i].grade;
+                labels_rev[""+data.data[i].grade] = 1*v;
+            }
             var slider = document.getElementById('grades-slider');
             noUiSlider.create(slider, {
-                start: [20, 80], // TODO
-                connect: true,
-                step: 1,
+                start: [min_grade, max_grade], 
+                step: 2,
                 orientation: 'horizontal', 
+                format: {
+                    to: function (value) {
+                        value = Math.round(value);
+                        return (value in labels) ?  labels[value] : Math.round(value);
+                    },
+                    from: function (value) {
+                        return (value in labels_rev) ? Math.round(labels_rev[value]) : value;
+                    }
+                },
                 range: {
-                            'min': 0,
-                            'max': 100
+                            'min': min_grade,
+                            'max': max_grade
                         },
                 });
-        });
+            });
     }
     search_box_loaded = true;
     volet = document.getElementById('my-user-circle-partner');

@@ -8,6 +8,7 @@ use App\RouteSection;
 use App\TickList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Cache;
 
 class RouteController extends Controller
 {
@@ -19,16 +20,14 @@ class RouteController extends Controller
     }
 
     public function routeGrades(){
-        return response()->json(
-            RouteSection::select(['grade', 'sub_grade', 'grade_val'])
-                ->distinct()
-                ->orderBy('grade_val', 'asc')
-                ->get()
-                ->each(function($e) {
-                    $e->grade .= $e->sub_grade;
-                    unset($e->sub_grade);
-                })
-        );
+        $grades_calc = Cache::remember('grades_transformer', 66666, function() {
+            $grades_calc = [];
+            for($i=1; $i<=54; $i++) {
+                array_push($grades_calc, ['grade' => Route::valToGrad($i), 'grade_val' => $i]);
+            }
+            return $grades_calc;
+        });
+        return response()->json($grades_calc);
     }
     public function routePage($route_id, $route_label){
 
