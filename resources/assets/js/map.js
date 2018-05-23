@@ -1,5 +1,96 @@
-var map, markers,
+var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
+
+var slider = document.getElementById('grades-slider');
+function searchCragsOnMap() {
+    var types = document.getElementsByName('voie_type');
+    var query = "/API/crags/search?";
+    for (var i=0; i<types.length; i++) {
+        var t = types[i];
+        if (t.checked === true) 
+            query += "climb_type[]=" + encodeURIComponent(t.value) + "&";
+    }
+    var ranges = slider.noUiSlider.get();
+    query += "range_from=" + ranges[0] + "&range_to=" + ranges[1];
+
+    getCragsList(query);
+}
+
+function getCragsList(query) {
+    axios.get(query).then(function(data) {
+        markers.clearLayers();
+        for (var i=0; i<data.data.data.crags.length; i++) {
+            var point = make_point(data.data.data.crags[i]);
+            markers.addLayer(point);
+        }
+        map.addLayer(markers);
+    });
+}
+
+function make_point(crag) {
+    var point = L.marker(
+        [crag.lat, crag.lng],
+        {icon: styleIcon("" + crag.type_voie + crag.type_grande_voie + crag.type_bloc + crag.type_deep_water + crag.type_via_ferrata + "")}
+    ).bindPopup(buildPopup(crag));
+    return point;
+}
+
+function hideSearchCrags() {
+        volet = document.getElementById('my-user-circle-partner');
+        volet.style.transform = 'translateX(-100%)';
+}
+
+let search_box_loaded = false;
+
+function createSearchBox() {
+    if (!search_box_loaded) {
+        axios.get('/API/climbs').then(function(data) {
+            for (var i = 0; i< data.data.length; i++) {
+                var checkbox = '<p><input type="checkbox" id="t'+i+'" value="'+data.data[i].label+'" name="voie_type" /><label for="t'+i+'">'+data.data[i].label + '</label></p>';
+                document.getElementById('crag_type').innerHTML += checkbox;
+            }
+
+        });
+        axios.get('/API/route_grades').then(function(data) {
+            var min_grade = 10000000;
+            var max_grade = -1000000;
+            var labels = {};
+            var labels_rev = {};
+
+            for(var i=0;i<data.data.length;i++) {
+                var v = data.data[i].grade_val;
+                if (v > max_grade)
+                    max_grade = v;
+                if (v < min_grade)
+                    min_grade = v;
+
+                labels[1*v] = ""+data.data[i].grade;
+                labels_rev[""+data.data[i].grade] = 1*v;
+            }
+            noUiSlider.create(slider, {
+                start: [min_grade, max_grade], 
+                step: 2,
+                orientation: 'horizontal', 
+                format: {
+                    to: function (value) {
+                        value = Math.round(value);
+                        return (value in labels) ?  labels[value] : Math.round(value);
+                    },
+                    from: function (value) {
+                        return (value in labels_rev) ? Math.round(labels_rev[value]) : value;
+                    }
+                },
+                range: {
+                            'min': min_grade,
+                            'max': max_grade
+                        },
+                });
+            });
+    }
+    search_box_loaded = true;
+    volet = document.getElementById('my-user-circle-partner');
+    volet.style.transform = 'translateX(0)';
+}
 
 //function au chargement de la map
 function loadMap() {
@@ -19,7 +110,20 @@ function loadMap() {
 
     map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup();
+    gym_markers = L.markerClusterGroup();
 
+    var searchMapButton = L.Control.extend({options: { position: 'topleft' }, onAdd: function (map) { 
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom-filter');
+        container.style.backgroundColor = 'white';
+        container.style.width = '35px';
+        container.style.height = '35px';
+                container.innerHTML = '<i class="tiny material-icons">build</i>';
+        container.onclick = function(){
+            createSearchBox();
+        }
+        
+        return container; }, });
+    map.addControl(new searchMapButton());
 
     //POSITIONNEMENT DU CONTROLER DE ZOOM
     L.control.zoom({position : 'bottomright'}).addTo(map);

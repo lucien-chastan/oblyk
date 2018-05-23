@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Climb;
 use App\Gym;
 use App\Massive;
 use App\Topo;
+use App\Route;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +23,35 @@ class MapController extends Controller
         ];
 
         return view('pages.map.map', $data);
+    }
+    public function filterMap(Request $request) {
+        $all_climb_types = Cache::remember('climb_types', 666, function() {
+            return Climb::select('label')->pluck('label');
+        });
+
+        $data = Cache::remember('search_map_'.serialize($request->all()), 360, function() use ($request, $all_climb_types) {
+            $data = [
+                'crags' => Crag::withCount('routes')
+                ->with('gapGrade')
+                ->whereExists(function ($q) use ($request, $all_climb_types) {
+
+                    $grade_from = Route::gradeToVal($request->input('range_from', '1a'), '');
+                    $grade_to = Route::gradeToVal($request->input('range_to', '9c'), '');
+
+                    $q->select(DB::raw(1))
+                        ->from('routes')
+                        ->join('climbs', 'climbs.id', 'routes.climb_id')
+                        ->join('route_sections', 'route_sections.route_id', 'routes.id')
+                        ->whereIn('climbs.label', $request->input('climb_type', $all_climb_types))
+                        ->whereRaw('routes.crag_id = crags.id')
+                        ->whereBetween('grade_val', [$grade_from, $grade_to+1]);
+                })
+                ->get(),
+            ];
+            return $data;
+        });
+
+        return response()->json(['data' => $data, 'request' => $request->all()]);
     }
 
     public function gymPage(){
