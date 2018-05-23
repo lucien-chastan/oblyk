@@ -24,21 +24,34 @@
     <div id="my-user-circle-partner" class="side-user-map-partner circle-side">
         <div class="row">
             <div class="col s12">
-                <div class="section">
-
-                    <h5>@lang('pages/map/map.crag_type')</h5>
-                    <form id="crag_type" action="#">
-                        <div class="input-field col s12"></div>
-                    </form>
-                </div>
-                <div class="section">
-                    <h5>@lang('pages/map/map.route_grade')</h5>
-                    <div id="grades-slider"></div>
-                </div>
-                <div class="section">
-                    <button  type="submit" class="waves-effect waves-light btn" onClick="searchCragsOnMap()">Submit</button>
-                    <button  class="waves-effect waves-light btn blue-grey lighten-5" onClick="hideSearchCrags()">Close</button>
-                </div>
+                    <strong>@lang('pages/map/map.crag_type')</strong>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s6" id="crag_type0"></div>
+                        <div class="col s6" id="crag_type1"></div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                    <strong>@lang('pages/map/map.route_grade')</strong>
+                    <div class="divider"></div>
+                    <br>&nbsp;
+        <div class="row">
+            <div class="col s1" id="min_range"></div>
+            <div class="col s10">
+                    <div id="grades-slider" style="margin:10px"></div>
+            </div>
+            <div class="col s1" id="max_range"></div>
+            </div>
+        </div>
+        <div class="row text-right">
+            <div class="col s12">
+                <button  class="btn-flat waves-effect waves-light grey-text text-darken-2" onClick="hideSearchCrags()">@lang('pages/map/map.cancel')</button>
+                <button  type="submit" class="btn waves-effect blue waves-light" onClick="searchCragsOnMap()">@lang('pages/map/map.search')
+                    <i class="material-icons right">send</i>
+                </button>
+                <div class="progress" id="progress_bar" style="display:none"> <div class="indeterminate"></div> </div>
             </div>
         </div>
     </div>

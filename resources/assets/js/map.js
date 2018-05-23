@@ -2,7 +2,10 @@ var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
 var slider = document.getElementById('grades-slider');
+var progress_bar = document.getElementById('progress_bar');
+
 function searchCragsOnMap() {
+    progress_bar.style.display = "block";
     var types = document.getElementsByName('voie_type');
     var query = "/API/crags/search?";
     for (var i=0; i<types.length; i++) {
@@ -24,6 +27,7 @@ function getCragsList(query) {
             markers.addLayer(point);
         }
         map.addLayer(markers);
+        progress_bar.style.display = "none";
     });
 }
 
@@ -47,7 +51,7 @@ function createSearchBox() {
         axios.get('/API/climbs').then(function(data) {
             for (var i = 0; i< data.data.length; i++) {
                 var checkbox = '<p><input type="checkbox" id="t'+i+'" value="'+data.data[i].label+'" name="voie_type" /><label for="t'+i+'">'+data.data[i].label + '</label></p>';
-                document.getElementById('crag_type').innerHTML += checkbox;
+                document.getElementById('crag_type'+i%2).innerHTML += checkbox;
             }
 
         });
@@ -56,6 +60,8 @@ function createSearchBox() {
             var max_grade = -1000000;
             var labels = {};
             var labels_rev = {};
+            var min_r_label = document.getElementById('min_range');
+            var max_r_label = document.getElementById('max_range');
 
             for(var i=0;i<data.data.length;i++) {
                 var v = data.data[i].grade_val;
@@ -84,6 +90,9 @@ function createSearchBox() {
                             'min': min_grade,
                             'max': max_grade
                         },
+                }).on('update', function(v, h) {
+                    min_r_label.innerHTML = v[0];
+                    max_r_label.innerHTML = v[1];
                 });
             });
     }

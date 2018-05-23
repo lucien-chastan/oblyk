@@ -41,10 +41,12 @@ class MapController extends Controller
                     $q->select(DB::raw(1))
                         ->from('routes')
                         ->join('climbs', 'climbs.id', 'routes.climb_id')
-                        ->join('route_sections', 'route_sections.route_id', 'routes.id')
+                        ->join('gap_grades', 'gap_grades.spreadable_id', '=', 'routes.crag_id')
                         ->whereIn('climbs.label', $request->input('climb_type', $all_climb_types))
                         ->whereRaw('routes.crag_id = crags.id')
-                        ->whereBetween('grade_val', [$grade_from, $grade_to+1]);
+                        ->where('spreadable_type', '=', 'App\Crag')
+                        ->where('min_grade_val', '<=', $grade_from)
+                        ->where('max_grade_val', '<=', $grade_to+1);
                 })
                 ->get(),
             ];
