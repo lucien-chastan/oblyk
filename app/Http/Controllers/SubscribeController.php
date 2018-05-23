@@ -8,6 +8,8 @@ use App\Cross;
 use App\Description;
 use App\Gym;
 use App\Link;
+use App\Mail\sendSubscribeNewsletter;
+use App\Mail\sendUnsubscribeNewsletter;
 use App\Photo;
 use App\Route;
 use App\Subscriber;
@@ -19,6 +21,7 @@ use App\Video;
 use App\Word;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SubscribeController extends Controller
 {
@@ -42,6 +45,12 @@ class SubscribeController extends Controller
         $email = $request->input('subscribe_mail');
         Subscriber::firstOrCreate(['email' => $email]);
 
+        $data = [
+            'email' => $email,
+        ];
+
+        Mail::to($email)->send(new sendSubscribeNewsletter($data));
+
         return view('pages.news-letter.subscribe', ['email' => $email]);
     }
 
@@ -55,6 +64,7 @@ class SubscribeController extends Controller
         $this->validate($request, ['email' => 'email']);
         $email = $request->input('email');
         Subscriber::where('email',$request->input('email'))->delete();
+        Mail::to($email)->send(new sendUnsubscribeNewsletter(['email' => $email]));
         return view('pages.news-letter.unsubscribe', ['email' => $email]);
     }
 }
