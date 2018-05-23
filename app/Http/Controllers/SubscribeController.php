@@ -41,15 +41,19 @@ class SubscribeController extends Controller
      */
     public function subscribePage(Request $request)
     {
-        $this->validate($request, ['subscribe_mail' => 'email']);
-        $email = $request->input('subscribe_mail');
-        Subscriber::firstOrCreate(['email' => $email]);
+        $email = $request->input('subscribe_mail') ?? null;
+        if(isset($email)) {
 
-        $data = [
-            'email' => $email,
-        ];
+            $this->validate($request, ['subscribe_mail' => 'email']);
+            Subscriber::firstOrCreate(['email' => $email]);
 
-        Mail::to($email)->send(new sendSubscribeNewsletter($data));
+            $data = [
+                'email' => $email,
+            ];
+
+            Mail::to($email)->send(new sendSubscribeNewsletter($data));
+        }
+
 
         return view('pages.news-letter.subscribe', ['email' => $email]);
     }
