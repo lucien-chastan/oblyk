@@ -10,7 +10,6 @@ class ClimbController extends Controller
         return response()->json(Climb::select('id')->get()
             ->each(function($e) {
                 $e->label = __("elements/climbs.climb_" . $e->id);
-                unset($e->id);
             })
         );
     }

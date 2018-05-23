@@ -26,7 +26,7 @@ class MapController extends Controller
     }
     public function filterMap(Request $request) {
         $all_climb_types = Cache::remember('climb_types', 666, function() {
-            return Climb::select('label')->pluck('label');
+            return Climb::select('id')->pluck('id');
         });
 
         $data = Cache::remember('search_map_'.serialize($request->all()), 360, function() use ($request, $all_climb_types) {
@@ -36,17 +36,14 @@ class MapController extends Controller
                 ->whereExists(function ($q) use ($request, $all_climb_types) {
 
                     $grade_from = Route::gradeToVal($request->input('range_from', '1a'), '');
-                    $grade_to = Route::gradeToVal($request->input('range_to', '9c'), '');
+                    $grade_to = Route::gradeToVal($request->input('range_to', '9c'), '') + 1;
 
                     $q->select(DB::raw(1))
                         ->from('routes')
-                        ->join('climbs', 'climbs.id', 'routes.climb_id')
-                        ->join('gap_grades', 'gap_grades.spreadable_id', '=', 'routes.crag_id')
-                        ->whereIn('climbs.label', $request->input('climb_type', $all_climb_types))
+                        ->join('route_sections', 'route_sections.route_id', '=', 'routes.id')
+                        ->whereIn('routes.climb_id', $request->input('climb_type', $all_climb_types))
                         ->whereRaw('routes.crag_id = crags.id')
-                        ->where('spreadable_type', '=', 'App\Crag')
-                        ->where('min_grade_val', '<=', $grade_from)
-                        ->where('max_grade_val', '<=', $grade_to+1);
+                        ->whereBetween('grade_val', [$grade_from, $grade_to]);
                 })
                 ->get(),
             ];
