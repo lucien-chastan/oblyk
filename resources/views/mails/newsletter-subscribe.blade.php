@@ -6,7 +6,7 @@ Merci de votre inscription à la news letter d'oblyk, vous receverez à peu prè
 
 Dans nos newslettes nous parlons des nouveautés d'oblyk, de l'expansion de la communauté, des développements réalisés et des projets à venir !
 
-Vous pouvez vous désinscrir à tous moments en suivant ce lien : [me désinscrir]({{ route('unsubscribe') }}?email={{ $data['email'] }})
+Vous pouvez vous désinscrir à tous moments en suivant ce lien : [me désinscrir]({{ route('unsubscribe') }}?email={{ $data['email'] }}) (ou dans vos paramètres si vous avez un compte)
 
 À bientôt et bonne grimpe !
 
