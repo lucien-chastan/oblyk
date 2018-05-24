@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\sendWelcome;
 use App\oldSearch;
 use App\Subscriber;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserPartnerSettings;
 use App\UserSettings;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -90,6 +92,9 @@ class RegisterController extends Controller
         $partner = New UserPartnerSettings();
         $partner->user_id = $user->id;
         $partner->save();
+
+        // welcome email
+        Mail::to($user->email)->send(new sendWelcome(['user' => $user]));
 
         return $user;
     }
