@@ -1,7 +1,7 @@
 <tr>
     <td class="header">
         <a href="{{ $url }}">
-            Oblyk - Climbing community website
+            Oblyk - Climbing community
         </a>
     </td>
 </tr>

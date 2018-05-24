@@ -28,7 +28,7 @@ class sendUnsubscribeNewsletter extends Mailable
      */
     public function build()
     {
-        return $this->subject('Oblyk - désinscription de la news letter')->markdown('mails.newsletter-unsubscribe')->with(
+        return $this->subject('Oblyk - Désinscription de la news letter')->markdown('mails.newsletter-unsubscribe')->with(
             [
                 'data'=>$this->data
             ]

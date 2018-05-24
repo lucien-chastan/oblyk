@@ -28,7 +28,7 @@ class sendSubscribeNewsletter extends Mailable
      */
     public function build()
     {
-        return $this->subject('Oblyk - inscription à la news letter')->markdown('mails.newsletter-subscribe')->with(
+        return $this->subject('Oblyk - Inscription à la news letter')->markdown('mails.newsletter-subscribe')->with(
             [
                 'data'=>$this->data
             ]
