@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\oldSearch;
+use App\Subscriber;
 use App\User;
 use App\UserSettings;
 use Illuminate\Support\Facades\Hash;
@@ -255,8 +256,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function update(Request $request)
     {
@@ -274,6 +276,11 @@ class UserController extends Controller
         $user->description = $request->input('description');
         $user->save();
 
+        if (Subscriber::where('email', $user->email)->exists()) {
+            Subscriber::where('email', $user->email)->delete();
+        } else {
+            Subscriber::firstOrCreate(['email' => $user->email]);
+        }
 
         return response()->json(json_encode($user));
     }

@@ -18,6 +18,8 @@ return [
     'labelSex' => "Je suis",
     'labelDescription' => "Qui je suis en quelques mots",
 
+    'labelNewsLetter' => "Recevoir la news letter",
+
     'titlePhotoAndHeadband' => "Photo de profil &amp; Bandeau",
     'labelProfilePicture' => "Photo de profil",
     'labelHeadband' => "Bandeau",

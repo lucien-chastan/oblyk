@@ -35,6 +35,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
+    //NEXS LETTER
+    Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
+    Route::get('/news-letter/unsubscribe', 'SubscribeController@unsubscribePage')->name('unsubscribe');
+
 
     //UN ARTICLE
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
