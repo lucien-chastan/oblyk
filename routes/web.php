@@ -36,9 +36,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
     //NEXS LETTER
-    Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
     Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
     Route::get('/news-letter/unsubscribe', 'SubscribeController@unsubscribePage')->name('unsubscribe');
+    Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
 
 
     //UN ARTICLE
@@ -219,6 +219,8 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
+    // NEWS LETTER
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
 });
 

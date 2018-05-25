@@ -8,6 +8,7 @@ use App\Cross;
 use App\Description;
 use App\Gym;
 use App\Link;
+use App\Mail\sendNewsletter;
 use App\Mail\sendSubscribeNewsletter;
 use App\Mail\sendUnsubscribeNewsletter;
 use App\Newsletter;
@@ -44,5 +45,24 @@ class NewsletterController extends Controller
     {
         $newsletter = Newsletter::where('ref', $ref)->first();
         return view('pages.news-letter.news-letter', ['newsletter' => $newsletter]);
+    }
+
+    /**
+     * @param string $ref
+     */
+    public function sendNewsletter(string $ref)
+    {
+        $newsletter = Newsletter::where('ref', $ref)->first();
+        $subscribers = Subscriber::all();
+
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new sendNewsletter(
+                [
+                    'newsletter' => $newsletter,
+                    'email' => $subscriber->email,
+                ]
+            ));
+        }
+
     }
 }
