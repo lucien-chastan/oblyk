@@ -253,7 +253,6 @@ Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo'
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
-Route::get('/API/climbs', 'ClimbController@index')->name('climbTypes');
 Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 

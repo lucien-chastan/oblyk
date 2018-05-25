@@ -2,13 +2,19 @@ var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
 
 var slider = document.getElementById('grades-slider');
+var progress_bar = document.getElementById('progress_bar');
+
+let search_box_loaded = false;
+
 function searchCragsOnMap() {
+    progress_bar.style.display = "block";
     var types = document.getElementsByName('voie_type');
     var query = "/API/crags/search?";
     for (var i=0; i<types.length; i++) {
         var t = types[i];
-        if (t.checked === true) 
-            query += "climb_type[]=" + encodeURIComponent(t.value) + "&";
+        if (t.checked === true)  {
+            query += "climb_type[]=" + t.value + "&";
+        }
     }
     var ranges = slider.noUiSlider.get();
     query += "range_from=" + ranges[0] + "&range_to=" + ranges[1];
@@ -24,6 +30,7 @@ function getCragsList(query) {
             markers.addLayer(point);
         }
         map.addLayer(markers);
+        progress_bar.style.display = "none";
     });
 }
 
@@ -40,22 +47,16 @@ function hideSearchCrags() {
         volet.style.transform = 'translateX(-100%)';
 }
 
-let search_box_loaded = false;
 
 function createSearchBox() {
     if (!search_box_loaded) {
-        axios.get('/API/climbs').then(function(data) {
-            for (var i = 0; i< data.data.length; i++) {
-                var checkbox = '<p><input type="checkbox" id="t'+i+'" value="'+data.data[i].label+'" name="voie_type" /><label for="t'+i+'">'+data.data[i].label + '</label></p>';
-                document.getElementById('crag_type').innerHTML += checkbox;
-            }
-
-        });
         axios.get('/API/route_grades').then(function(data) {
             var min_grade = 10000000;
             var max_grade = -1000000;
             var labels = {};
             var labels_rev = {};
+            var min_r_label = document.getElementById('min_range');
+            var max_r_label = document.getElementById('max_range');
 
             for(var i=0;i<data.data.length;i++) {
                 var v = data.data[i].grade_val;
@@ -84,6 +85,9 @@ function createSearchBox() {
                             'min': min_grade,
                             'max': max_grade
                         },
+                }).on('update', function(v, h) {
+                    min_r_label.innerHTML = v[0];
+                    max_r_label.innerHTML = v[1];
                 });
             });
     }

@@ -2,6 +2,8 @@
 
 return [
 
-    'crag_type' => "Crag typeque ;-)",
-    'route_grade' => "Route grade (TODO)",
+    'crag_type' => "Type d'escalade",
+    'route_grade' => "Écart de cotation",
+    'search' => "Rechercher",
+    'cancel' => "Annuler",
 ];
