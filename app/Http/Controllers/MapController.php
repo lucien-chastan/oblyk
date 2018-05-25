@@ -16,6 +16,10 @@ class MapController extends Controller
 {
     public function mapPage(){
         $data = [
+            'climb_types' => Climb::select('id')->get()
+                ->each(function($e) {
+                    $e->label = __("elements/climbs.climb_" . $e->id);
+                }),
             'crags' => Crag::withCount('routes')->with('gapGrade')->get(),
             'gyms' => Gym::get(),
             'meta_title' => 'Carte des falaises et salle d\'escalade',
@@ -25,7 +29,7 @@ class MapController extends Controller
         return view('pages.map.map', $data);
     }
     public function filterMap(Request $request) {
-        $all_climb_types = Cache::remember('climb_types', 666, function() {
+        $all_climb_types = Cache::rememberForever('climb_types', function() {
             return Climb::select('id')->pluck('id');
         });
 

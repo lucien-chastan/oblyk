@@ -4,7 +4,6 @@ var map, markers, gym_markers,
 var slider = document.getElementById('grades-slider');
 var progress_bar = document.getElementById('progress_bar');
 
-let climb_types = {};
 let search_box_loaded = false;
 
 function searchCragsOnMap() {
@@ -14,7 +13,7 @@ function searchCragsOnMap() {
     for (var i=0; i<types.length; i++) {
         var t = types[i];
         if (t.checked === true)  {
-            query += "climb_type[]=" + climb_types[t.value] + "&";
+            query += "climb_type[]=" + t.value + "&";
         }
     }
     var ranges = slider.noUiSlider.get();
@@ -51,14 +50,6 @@ function hideSearchCrags() {
 
 function createSearchBox() {
     if (!search_box_loaded) {
-        axios.get('/API/climbs').then(function(data) {
-            for (var i = 0; i< data.data.length; i++) {
-                var checkbox = '<p><input type="checkbox" id="t'+i+'" value="'+data.data[i].label+'" name="voie_type" /><label for="t'+i+'">'+data.data[i].label + '</label></p>';
-                climb_types[data.data[i].label] = data.data[i].id;
-                document.getElementById('crag_type'+i%2).innerHTML += checkbox;
-            }
-
-        });
         axios.get('/API/route_grades').then(function(data) {
             var min_grade = 10000000;
             var max_grade = -1000000;
