@@ -27,9 +27,9 @@
                     <strong>@lang('pages/map/map.crag_type')</strong>
                     <div class="divider"></div>
                     <div class="row">
-                        <div class="col s6" id="crag_type0">
+                        <div class="col s6">
                             @for ($i = 0; $i < count($climb_types); $i+=2)
-                                <p><input type="checkbox" class="filled-in" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
+                                <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
                                     <label for="t{{$i}}">
                                         <i class="tiny material-icons climb-color-{{$climb_types[$i]['id']}}">brightness_1</i>
                                         {{$climb_types[$i]['label']}}
@@ -37,7 +37,7 @@
                                 </p>
                             @endfor
                         </div>
-                        <div class="col s6" id="crag_type1">
+                        <div class="col s6">
                             @for ($i = 1; $i < count($climb_types); $i+=2)
                                 <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
                                     <label for="t{{$i}}">
