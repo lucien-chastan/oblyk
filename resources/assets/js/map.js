@@ -48,15 +48,22 @@ function hideSearchCrags() {
 }
 
 
+let labels_rev = {};
+var min_r_label = document.getElementById('min_range');
+var max_r_label = document.getElementById('max_range');
+
+function onUp(v, h) {
+    min_r_label.innerHTML = v[0];
+    min_r_label.className = "color-grade-"+labels_rev[v[0]];
+    max_r_label.innerHTML = v[1];
+    max_r_label.className = "color-grade-"+labels_rev[v[1]];
+};
 function createSearchBox() {
     if (!search_box_loaded) {
         axios.get('/API/route_grades').then(function(data) {
             var min_grade = 10000000;
             var max_grade = -1000000;
             var labels = {};
-            var labels_rev = {};
-            var min_r_label = document.getElementById('min_range');
-            var max_r_label = document.getElementById('max_range');
 
             for(var i=0;i<data.data.length;i++) {
                 var v = data.data[i].grade_val;
@@ -85,15 +92,19 @@ function createSearchBox() {
                             'min': min_grade,
                             'max': max_grade
                         },
-                }).on('update', function(v, h) {
-                    min_r_label.innerHTML = v[0];
-                    max_r_label.innerHTML = v[1];
-                });
+                }).on('update', onUp);
             });
     }
     search_box_loaded = true;
     volet = document.getElementById('my-user-circle-partner');
     volet.style.transform = 'translateX(0)';
+}
+function toggleGyms() {
+    var t = document.getElementById('show_gyms').checked;
+    if (!t)
+        map.removeLayer(gym_markers);
+    else
+        map.addLayer(gym_markers);
 }
 
 //function au chargement de la map
@@ -121,7 +132,7 @@ function loadMap() {
         container.style.backgroundColor = 'white';
         container.style.width = '35px';
         container.style.height = '35px';
-                container.innerHTML = '<i class="tiny material-icons">build</i>';
+        container.innerHTML = '<i class="tiny material-icons">tune</i>';
         container.onclick = function(){
             createSearchBox();
         }

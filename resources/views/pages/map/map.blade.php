@@ -48,6 +48,12 @@
                             @endfor
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col s12">
+                                <input type="checkbox" id="show_gyms" checked name="show_gyms" onClick="toggleGyms()" />
+                                <label for="show_gyms">@lang('pages/map/map.toggle_gyms')</label>
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="row">
@@ -55,12 +61,11 @@
                     <strong>@lang('pages/map/map.route_grade')</strong>
                     <div class="divider"></div>
                     <br>&nbsp;
-        <div class="row">
-            <div class="col s1" id="min_range"></div>
-            <div class="col s10">
-                    <div id="grades-slider" style="margin:10px"></div>
-            </div>
-            <div class="col s1" id="max_range"></div>
+                    <div class="row">
+                        <div class="col s1"><span id="min_range"></span></div>
+                        <div class="col s10"><div id="grades-slider" style="margin:10px"></div></div>
+                        <div class="col s1"><span id="max_range"></span></div>
+                    </div>
             </div>
         </div>
         <div class="row text-right">

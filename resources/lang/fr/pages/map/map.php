@@ -6,4 +6,5 @@ return [
     'route_grade' => "Écart de cotation",
     'search' => "Rechercher",
     'cancel' => "Annuler",
+    'toggle_gyms' => "Toggle gyms",
 ];
