@@ -2,27 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Crag;
-use App\Cross;
-use App\Description;
-use App\Gym;
-use App\Link;
 use App\Mail\sendNewsletter;
-use App\Mail\sendSubscribeNewsletter;
-use App\Mail\sendUnsubscribeNewsletter;
 use App\Newsletter;
-use App\Photo;
-use App\Route;
 use App\Subscriber;
-use App\Topo;
-use App\TopoPdf;
-use App\TopoWeb;
-use App\User;
-use App\Video;
-use App\Word;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class NewsletterController extends Controller
@@ -41,7 +23,7 @@ class NewsletterController extends Controller
      * @param string $ref
      * @return \Illuminate\Http\Response
      */
-    public function newsletterPage(string $ref)
+    public function newsletterPage($ref)
     {
         $newsletter = Newsletter::where('ref', $ref)->first();
         return view('pages.news-letter.news-letter', ['newsletter' => $newsletter]);
@@ -50,19 +32,32 @@ class NewsletterController extends Controller
     /**
      * @param string $ref
      */
-    public function sendNewsletter(string $ref)
+    public function sendNewsletter($ref)
     {
         $newsletter = Newsletter::where('ref', $ref)->first();
-        $subscribers = Subscriber::all();
+        $subscribers = Subscriber::where([['send','=',false],['error', '<' , '3']])->limit(env('MAILING_LOT'))->get();
+        $newsletterTitle = 'Oblyk #' . str_replace('-','.', $newsletter->ref) . ' ' . $newsletter->title;
+        $onlineRoute = route('newsletter', ['ref' => $newsletter->ref]);
+        $unsubscribeRoute = route('unsubscribe');
 
         foreach ($subscribers as $subscriber) {
-            Mail::to($subscriber->email)->send(new sendNewsletter(
-                [
-                    'newsletter' => $newsletter,
-                    'email' => $subscriber->email,
-                ]
-            ));
+            try {
+                Mail::to($subscriber->email)->send(new sendNewsletter(
+                    [
+                        'title' => $newsletterTitle,
+                        'newsletter' => $newsletter,
+                        'email' => $subscriber->email,
+                        'onlineRoute' => $onlineRoute,
+                        'unsubscribeRoute' => $unsubscribeRoute . '?email=' . $subscriber->email,
+                    ]
+                ));
+                $subscriber->send = true;
+                $subscriber->save();
+            } catch (\Exception $ex) {
+                $subscriber->send = true;
+                $subscriber->error++;
+                $subscriber->save();
+            }
         }
-
     }
 }

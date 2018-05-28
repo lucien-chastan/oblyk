@@ -28,14 +28,8 @@ class sendNewsletter extends Mailable
      */
     public function build()
     {
-        $newsletter = $this->data['newsletter'];
-        $email = $this->data['email'];
-
-        return $this->subject('Oblyk #' . str_replace('-','.', $newsletter->ref) . ' ' . $newsletter->title)->markdown('mails.newsletter')->with(
-            [
-                'newsletter'=>$newsletter,
-                'email' => $email
-            ]
+        return $this->subject($this->data['title'])->markdown('mails.newsletter')->with(
+            $this->data
         );
     }
 }
