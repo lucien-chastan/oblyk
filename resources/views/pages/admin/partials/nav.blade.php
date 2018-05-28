@@ -186,6 +186,34 @@
         </div>
     </li>
 
+    {{--NEWS LETTER--}}
+    <li>
+        <div class="collapsible-header truncate">
+            <i class="material-icons">mail</i>
+            <span class="hidden-1000">
+                Newsletter
+            </span>
+        </div>
+        <div class="collapsible-body">
+            <a href="{{ route('createNewsletterPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">add</i>
+                    <span class="hidden-1000">
+                        Créer une news letter
+                    </span>
+                </div>
+            </a>
+            <a href="{{ route('updateNewsletterPage') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">create</i>
+                    <span class="hidden-1000">
+                        Modifier une news letter
+                    </span>
+                </div>
+            </a>
+        </div>
+    </li>
+
 </ul>
 
 

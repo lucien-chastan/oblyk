@@ -14,6 +14,7 @@ class CreateNewslettersTable extends Migration
     public function up()
     {
         Schema::create('newsletters', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('ref',10)->unique(); // yy-mm[-dd] (example : 18-05[-24])
             $table->string('title',255)->nullable();
             $table->string('abstract',255)->nullable();

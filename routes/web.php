@@ -199,6 +199,12 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
+    //NEWSLETTER
+    Route::get('/admin/newsletter/create', 'AdminController@createNewsletterPage')->name('createNewsletterPage');
+    Route::get('/admin/newsletter/update', 'AdminController@updateNewsletterPage')->name('updateNewsletterPage');
+    Route::get('/get/newsletter/{newsletter_ref}/information', 'AdminController@getNewsletterInformation');
+    Route::resource('newsletters', 'CRUD\NewsletterController');
+
     //AIDES
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
