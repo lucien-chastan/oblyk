@@ -18,7 +18,7 @@ class CreateApproachesTable extends Migration
             $table->integer('crag_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('polyline');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('length');
             $table->timestamps();
 
