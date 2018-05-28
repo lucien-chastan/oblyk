@@ -21,6 +21,7 @@ class SectorVueController extends Controller
             ->withCount([
                 'photos',
                 'videos',
+                'versions',
                 'descriptions' => function ($query) { $query->whereNotNull('description');}
             ])
             ->orderBy('label')

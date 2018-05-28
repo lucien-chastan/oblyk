@@ -318,6 +318,7 @@ Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('pa
 Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
 Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
+Route::post('/modal/version', 'VersionController@versionModal')->name('versionModal');
 
 
 //CRUD AJAX

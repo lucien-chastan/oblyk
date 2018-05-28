@@ -36,4 +36,8 @@ class Topo extends Model
     public function sales(){
         return $this->hasMany('App\TopoSale','topo_id', 'id');
     }
+
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
 }

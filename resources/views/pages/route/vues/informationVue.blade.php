@@ -191,10 +191,15 @@
 
     {{--BOUTON POUR LA MODIFICATION--}}
     <div class="ligne-bt-route">
-        <p class="text-right">
-            <i {!! $Helpers::tooltip(trans('modals/route.editTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>trans('modals/route.modalEditeTitle'),'method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
-            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
-        </p>
+        @if(Auth::check())
+            <p class="text-right">
+                <i {!! $Helpers::tooltip(trans('modals/route.editTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>trans('modals/route.modalEditeTitle'),'method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
+                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
+                @if($route->versions_count > 0)
+                    <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$route->id, "model"=>"Route"]) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">history</i>
+                @endif
+            </p>
+        @endif
     </div>
 
 

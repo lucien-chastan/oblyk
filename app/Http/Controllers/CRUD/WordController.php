@@ -81,9 +81,6 @@ class WordController extends Controller
         $word->user_id = Auth::id();
         $word->save();
 
-        //Elasticindexation
-        $word->addToIndex();
-
         return response()->json(json_encode($word));
 
     }
@@ -137,10 +134,6 @@ class WordController extends Controller
             $word->label = $request->input('label');
             $word->definition = $request->input('definition');
             $word->save();
-
-            //Elasticindexation
-            $word->addToIndex();
-
         }
 
         return response()->json(json_encode($word));
