@@ -5,7 +5,6 @@ namespace App;
 use App\Route;
 
 use Illuminate\Database\Eloquent\Model;
-use Cache;
 
 class GapGrade extends Model
 {
@@ -21,6 +20,7 @@ class GapGrade extends Model
                     $minGrade = $r->grade_val;
             }
         });
+        // in case there is only one (0/?) route, leave as is
         $minGrade = ($minGrade == 10000) ? $this->min_grade_val : $minGrade;
         return $minGrade;
     }
@@ -35,6 +35,9 @@ class GapGrade extends Model
         if ($v != "?")
             return $v;
 
+
+        // would be nice to update $this in the DB here, but im not sure how to
+        // do it from here
         $minGrade = $this->get_corrected_min_grade($v);
         return Route::valToGrad($minGrade);
     }
