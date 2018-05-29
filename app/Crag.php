@@ -89,6 +89,9 @@ class Crag extends Model
     public function routes(){
         return $this->hasMany('App\Route','crag_id', 'id');
     }
+    public function routeSections(){
+        return $this->hasManyThrough('App\RouteSection', 'App\Route');
+    }
 
     public static function getCragsAroundPoint($lat, $lng, $rayon){
         //retourne les falaises dans un certain rayon

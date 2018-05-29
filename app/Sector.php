@@ -45,6 +45,9 @@ class Sector extends Model
     public function routes(){
         return $this->hasMany('App\Route','sector_id','id');
     }
+    public function routeSections(){
+        return $this->hasManyThrough('App\RouteSection', 'App\Route');
+    }
 
 
     //MET À JOUR LES INFORMATIONS STOCKÉES DU SECTEUR (ÉCART DE COTATION)
