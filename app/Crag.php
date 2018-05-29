@@ -136,7 +136,7 @@ class Crag extends Model
             if($route->climb_id == 8) $via_ferrata = 1;
 
             foreach ($route->routeSections as $section){
-                if($section->grade_val < $min_grade_val){
+                if($section->grade_val < $min_grade_val && $section->grade_val > 0){
                     $min_grade_val = $section->grade_val;
                     $min_grade_text = $section->grade . $section->sub_grade;
                 }

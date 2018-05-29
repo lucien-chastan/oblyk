@@ -7,6 +7,7 @@ use DB;
 use App\Route;
 use App\Crag;
 use App\Sector;
+use App\GapGrade;
 
 class FixLowerGrade extends Command
 {
@@ -56,11 +57,12 @@ class FixLowerGrade extends Command
                 if ($min_grade_val > 0) {
                     $min_grade_text = Route::valToGrad($min_grade_val);
 
-                    $gg->update([
+                    GapGrade::where('id', '=', $gg->id)->update([
                         'min_grade_val' => $min_grade_val,
                         'min_grade_text' => $min_grade_text
                     ]);
-                    //$this->info($min_grade_text);
+
+                    $this->info($min_grade_text);
                 }
 
             }

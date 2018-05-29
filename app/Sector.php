@@ -63,7 +63,7 @@ class Sector extends Model
 
         foreach ($routes as $route){
             foreach ($route->routeSections as $section){
-                if($section->grade_val < $min_grade_val){
+                if($section->grade_val < $min_grade_val && $section->grade_val > 0){
                     $min_grade_val = $section->grade_val;
                     $min_grade_text = $section->grade . $section->sub_grade;
                 }
