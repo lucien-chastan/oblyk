@@ -57,18 +57,16 @@ class FixLowerGrade extends Command
             if ($routes->count() > 0) {
                 $min_grade_val = $routes->min('grade_val');
                 $max_grade_val = $routes->max('grade_val');
-                $min_grade_text = Route::valToGrad($min_grade_val);
-                $max_grade_text = Route::valToGrad($max_grade_val);
-
-                GapGrade::where('id', '=', $gg->id)->update([
-                    'min_grade_val' => $min_grade_val,
-                    'min_grade_text' => $min_grade_text,
-                    'max_grade_val' => $max_grade_val,
-                    'max_grade_text' => $max_grade_text,
-                ]);
-
             }
+            $min_grade_text = Route::valToGrad($min_grade_val);
+            $max_grade_text = Route::valToGrad($max_grade_val);
 
+            GapGrade::where('id', '=', $gg->id)->update([
+                'min_grade_val' => $min_grade_val,
+                'min_grade_text' => $min_grade_text,
+                'max_grade_val' => $max_grade_val,
+                'max_grade_text' => $max_grade_text,
+            ]);
         }
     }
 }
