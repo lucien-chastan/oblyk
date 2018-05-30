@@ -105,6 +105,10 @@ mix.copy('resources/assets/framework/cookiebanner/cookiebanner.min.js', 'public/
 //marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
 
+//nouislider
+mix.copy('resources/assets/framework/noUiSlider/nouislider.js', 'public/js')
+    .copy('resources/assets/framework/noUiSlider/nouislider.css', 'public/css');
+
 //image
 mix.copy('resources/assets/img/','public/img/');
 

@@ -3,6 +3,8 @@
     'meta_description'=>trans('meta/map.description'),
     'meta_img'=>'https://oblyk.org/img/map_meta.jpg',
     ])
+@inject('Helpers','App\Lib\HelpersTemplates') 
+@inject('Inputs','App\Lib\InputTemplates')
 
 @section('css')
     <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
@@ -11,12 +13,74 @@
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
+    <link href="/css/nouislider.css" rel="stylesheet">
+    <link href="/css/partner-map.css" rel="stylesheet"> 
 @endsection
 
 @section('content')
 
     {{--contenu de la page--}}
     <div id="map"></div>
+    <div id="my-user-circle-partner" class="side-user-map-partner circle-side">
+        <div class="row">
+            <div class="col s12">
+                    <strong>@lang('pages/map/map.crag_type')</strong>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            @for ($i = 0; $i < count($climb_types); $i+=2)
+                                <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
+                                    <label for="t{{$i}}">
+                                        <i class="tiny material-icons climb-color-{{$climb_types[$i]['id']}}">brightness_1</i>
+                                        {{$climb_types[$i]['label']}}
+                                    </label>
+                                </p>
+                            @endfor
+                        </div>
+                        <div class="col s12 m6">
+                            @for ($i = 1; $i < count($climb_types); $i+=2)
+                                <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
+                                    <label for="t{{$i}}">
+                                        <i class="tiny material-icons climb-color-{{$climb_types[$i]['id']}}">brightness_1</i>
+                                        {{$climb_types[$i]['label']}}
+                                    </label>
+                                </p>
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="checkbox" id="show_gyms" value="gym" checked name="voie_type" onClick="toggleGyms()" />
+                            <label for="show_gyms">
+                                <i class="tiny material-icons climb-color-gym">brightness_1</i>
+                                @lang('pages/map/map.toggle_gyms')
+                            </label>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                    <strong>@lang('pages/map/map.route_grade')</strong>
+                    <div class="divider"></div>
+                    <br>&nbsp;
+                    <div class="row">
+                        <div class="col s1"><span id="min_range"></span></div>
+                        <div class="col s10"><div id="grades-slider" style="margin:10px"></div></div>
+                        <div class="col s1"><span id="max_range"></span></div>
+                    </div>
+            </div>
+        </div>
+        <div class="row text-right">
+            <div class="col s12">
+                <button  class="btn-flat waves-effect waves-light grey-text text-darken-2" onClick="hideSearchCrags()">@lang('pages/map/map.close')</button>
+                <button  type="submit" class="btn waves-effect blue waves-light" onClick="searchCragsOnMap()">@lang('pages/map/map.search')
+                    <i class="material-icons right">send</i>
+                </button>
+                <div class="progress" id="progress_bar" style="display:none"> <div class="indeterminate"></div> </div>
+            </div>
+        </div>
+    </div>
 
     @if(Auth::check())
         <div class="fixed-action-btn btn-add-map">
@@ -38,6 +102,7 @@
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
+    <script src="/js/nouislider.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/map.js"></script>
     <script>
@@ -131,8 +196,8 @@
                 );
         markers.addLayer(point);
         @endforeach
-
         map.addLayer(markers);
+        // map.addLayer(gym_markers);
 
         //passage de la barre de navigation en noir
         var nav_barre = document.getElementById('nav_barre');
