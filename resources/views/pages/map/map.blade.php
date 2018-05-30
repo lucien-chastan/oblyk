@@ -50,8 +50,11 @@
                     </div>
                     <div class="row">
                         <div class="col s12">
-                                <input type="checkbox" id="show_gyms" checked name="show_gyms" onClick="toggleGyms()" />
-                                <label for="show_gyms">@lang('pages/map/map.toggle_gyms')</label>
+                            <input type="checkbox" id="show_gyms" checked name="show_gyms" onClick="toggleGyms()" />
+                            <label for="show_gyms">
+                                <i class="tiny material-icons climb-color-gym">brightness_1</i>
+                                @lang('pages/map/map.toggle_gyms')
+                            </label>
                         </div>
                     </div>
             </div>
