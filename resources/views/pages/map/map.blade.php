@@ -27,7 +27,7 @@
                     <strong>@lang('pages/map/map.crag_type')</strong>
                     <div class="divider"></div>
                     <div class="row">
-                        <div class="col s6">
+                        <div class="col s12 m6">
                             @for ($i = 0; $i < count($climb_types); $i+=2)
                                 <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
                                     <label for="t{{$i}}">
@@ -37,7 +37,7 @@
                                 </p>
                             @endfor
                         </div>
-                        <div class="col s6">
+                        <div class="col s12 m6">
                             @for ($i = 1; $i < count($climb_types); $i+=2)
                                 <p><input type="checkbox" id="t{{$i}}" value="{{$climb_types[$i]['id']}}" name="voie_type" />
                                     <label for="t{{$i}}">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <input type="checkbox" id="show_gyms" checked name="show_gyms" onClick="toggleGyms()" />
+                            <input type="checkbox" id="show_gyms" value="gym" checked name="voie_type" onClick="toggleGyms()" />
                             <label for="show_gyms">
                                 <i class="tiny material-icons climb-color-gym">brightness_1</i>
                                 @lang('pages/map/map.toggle_gyms')
@@ -157,7 +157,6 @@
             );
             markers.addLayer(point);
         @endforeach
-        map.addLayer(markers);
 
         //boucle sur les salles pour ajouter les marqueurs sur la carte
         @foreach($gyms as $gym)
@@ -195,10 +194,10 @@
                  </div>
                 `
                 );
-        gym_markers.addLayer(point);
+        markers.addLayer(point);
         @endforeach
-
-        map.addLayer(gym_markers);
+        map.addLayer(markers);
+        // map.addLayer(gym_markers);
 
         //passage de la barre de navigation en noir
         var nav_barre = document.getElementById('nav_barre');
