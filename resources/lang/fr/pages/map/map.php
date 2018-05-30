@@ -6,5 +6,6 @@ return [
     'route_grade' => "Écart de cotation",
     'search' => "Rechercher",
     'cancel' => "Annuler",
+    'close' => "Fermer",
     'toggle_gyms' => "Afficher les salles",
 ];

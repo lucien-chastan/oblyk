@@ -73,7 +73,7 @@
         </div>
         <div class="row text-right">
             <div class="col s12">
-                <button  class="btn-flat waves-effect waves-light grey-text text-darken-2" onClick="hideSearchCrags()">@lang('pages/map/map.cancel')</button>
+                <button  class="btn-flat waves-effect waves-light grey-text text-darken-2" onClick="hideSearchCrags()">@lang('pages/map/map.close')</button>
                 <button  type="submit" class="btn waves-effect blue waves-light" onClick="searchCragsOnMap()">@lang('pages/map/map.search')
                     <i class="material-icons right">send</i>
                 </button>

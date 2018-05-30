@@ -6,5 +6,6 @@ return [
     'route_grade' => "Route grade",
     'search' => "Search",
     'cancel' => "Cancel",
+    'close' => "Close",
     'toggle_gyms' => "Toggle gyms",
 ];
