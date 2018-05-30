@@ -42,7 +42,22 @@ function collapseArea(area_id, element) {
         collapseTable[area_id] = false;
         indicator.textContent = '-';
     }
+}
 
+
+// GET NEWSLETTER INFORMATION
+function getNewsletter() {
+    let ref = document.getElementById('newsletter_ref').value,
+        informationZone = document.getElementById('insertNewsletter');
+
+    axios.get('/get/newsletter/' + ref + '/information').then(function (response) {
+        informationZone.innerHTML = response.data;
+    });
+}
+
+function newsletterUpdated() {
+    showSubmitLoader(false, document.getElementById('formUpdateNewsletter'));
+    Materialize.toast('newsletter mise à jour', 4000);
 }
 
 
