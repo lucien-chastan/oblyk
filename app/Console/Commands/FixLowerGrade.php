@@ -8,6 +8,7 @@ use App\Route;
 use App\Crag;
 use App\Sector;
 use App\GapGrade;
+use Log;
 
 class FixLowerGrade extends Command
 {
@@ -45,15 +46,19 @@ class FixLowerGrade extends Command
         foreach(DB::table("gap_grades")->get() as $gg) {
             $min_grade_val = $gg->min_grade_val;
             if ($min_grade_val == 0) {
+                $this->info("pre ".$min_grade_val);
                 switch($gg->spreadable_type) {
-                    case "App\Crag": 
-                        $min_grade_val = Sector::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0)->min('grade_val');
-                        break;
                     case "App\Sector": 
-                        $min_grade_val = Crag::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0)->min('grade_val');
+                        $routes = Sector::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
+                        break;
+                    case "App\Crag": 
+                        $routes = Crag::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
                         break;
                 }
+                if ($routes->count() > 0)
+                    $min_grade_val = $routes->min('grade_val');
 
+                $this->info("post ".$min_grade_val);
                 if ($min_grade_val > 0) {
                     $min_grade_text = Route::valToGrad($min_grade_val);
 

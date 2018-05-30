@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class Crag extends Model
 {
@@ -122,9 +123,9 @@ class Crag extends Model
 
         //min et max
         $min_grade_val = 100;
-        $min_grade_text = '';
+        $min_grade_text = '?';
         $max_grade_val = 0;
-        $max_grade_text = '';
+        $max_grade_text = '?';
 
         foreach ($routes as $route){
 
@@ -145,6 +146,7 @@ class Crag extends Model
                     $max_grade_text = $section->grade . $section->sub_grade;
                 }
             }
+            $min_grade_val = ($min_grade_val == 100) ? 0 : $min_grade_val; // if no min value - set it as 0/? since there is no other grades
         }
 
         //MISE À JOUR DU TYPE DE VOIE

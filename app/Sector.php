@@ -57,9 +57,9 @@ class Sector extends Model
 
         //min et max
         $min_grade_val = 100;
-        $min_grade_text = '';
+        $min_grade_text = '?';
         $max_grade_val = 0;
-        $max_grade_text = '';
+        $max_grade_text = '?';
 
         foreach ($routes as $route){
             foreach ($route->routeSections as $section){
@@ -73,6 +73,7 @@ class Sector extends Model
                 }
             }
         }
+        $min_grade_val = ($min_grade_val == 100) ? 0 : $min_grade_val; // if no min value - set it as 0/? since there is no other grades
 
         //MISE À JOUR DE L'ÉCART DE COTATION
         if(isset($sector->gapGrade)){
