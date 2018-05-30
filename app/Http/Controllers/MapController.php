@@ -21,13 +21,12 @@ class MapController extends Controller
                     $e->label = __("elements/climbs.climb_" . $e->id);
                 }),
             'crags' => Crag::withCount('routes')->with('gapGrade')->get(),
-            'gyms' => Gym::get(),
-            'meta_title' => 'Carte des falaises et salle d\'escalade',
-            'meta_description' => 'Voir la carte interactive des sites naturels de grimpe et des salles d\'escalade sur Oblyk, que ce soit en France, ou dans le Monde, et voir leurs informations détaillées'
+            'gyms' => Gym::get()
         ];
 
         return view('pages.map.map', $data);
     }
+
     public function filterMap(Request $request) {
         $all_climb_types = Cache::rememberForever('climb_types', function() {
             return Climb::select('id')->pluck('id');
@@ -53,6 +52,9 @@ class MapController extends Controller
             ];
             return $data;
         });
+
+        // include climbing gym if toogle gym is checked
+        $data['gyms'] = (in_array('gym',$request->input('climb_type'))) ? Gym::get() : [];
 
         return response()->json(['data' => $data, 'request' => $request->all()]);
     }

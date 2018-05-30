@@ -10,7 +10,7 @@ function searchCragsOnMap() {
     progress_bar.style.display = "block";
     var types = document.getElementsByName('voie_type');
     var query = "/API/crags/search?";
-    for (var i=0; i<types.length; i++) {
+    for (var i = 0; i < types.length; i++) {
         var t = types[i];
         if (t.checked === true)  {
             query += "climb_type[]=" + t.value + "&";
@@ -23,18 +23,27 @@ function searchCragsOnMap() {
 }
 
 function getCragsList(query) {
+    var i, point;
     axios.get(query).then(function(data) {
         markers.clearLayers();
-        for (var i=0; i<data.data.data.crags.length; i++) {
-            var point = make_point(data.data.data.crags[i]);
+        for (i = 0; i < data.data.data.crags.length; i++) {
+            point = make_crag_point(data.data.data.crags[i]);
             markers.addLayer(point);
         }
+
+        console.log(data.data.data.gyms.length);
+
+        for (i = 0; i < data.data.data.gyms.length; i++) {
+            point = make_gym_point(data.data.data.gyms[i]);
+            markers.addLayer(point);
+        }
+
         map.addLayer(markers);
         progress_bar.style.display = "none";
     });
 }
 
-function make_point(crag) {
+function make_crag_point(crag) {
     var point = L.marker(
         [crag.lat, crag.lng],
         {icon: styleIcon("" + crag.type_voie + crag.type_grande_voie + crag.type_bloc + crag.type_deep_water + crag.type_via_ferrata + "")}
@@ -42,9 +51,17 @@ function make_point(crag) {
     return point;
 }
 
+function make_gym_point(gym) {
+    var point = L.marker(
+        [gym.lat, gym.lng],
+        {icon: styleGymIcon("" + gym.type_boulder + gym.type_route + "")}
+    ).bindPopup(buildGymPopup(gym));
+    return point;
+}
+
 function hideSearchCrags() {
-        volet = document.getElementById('my-user-circle-partner');
-        volet.style.transform = 'translateX(-100%)';
+    volet = document.getElementById('my-user-circle-partner');
+    volet.style.transform = 'translateX(-100%)';
 }
 
 
@@ -52,12 +69,13 @@ let labels_rev = {};
 var min_r_label = document.getElementById('min_range');
 var max_r_label = document.getElementById('max_range');
 
-function onUp(v, h) {
+function onUp(v) {
     min_r_label.innerHTML = v[0];
     min_r_label.className = "color-grade-"+labels_rev[v[0]];
     max_r_label.innerHTML = v[1];
     max_r_label.className = "color-grade-"+labels_rev[v[1]];
-};
+}
+
 function createSearchBox() {
     if (!search_box_loaded) {
         axios.get('/API/route_grades').then(function(data) {
@@ -135,9 +153,10 @@ function loadMap() {
         container.innerHTML = '<i class="tiny material-icons">tune</i>';
         container.onclick = function(){
             createSearchBox();
-        }
-        
-        return container; }, });
+        };
+        return container;
+        },
+    });
     map.addControl(new searchMapButton());
 
     //POSITIONNEMENT DU CONTROLER DE ZOOM

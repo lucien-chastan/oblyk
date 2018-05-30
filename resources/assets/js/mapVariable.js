@@ -110,6 +110,44 @@ function buildPopup(crag) {
     return html;
 }
 
+
+//créer la popup html avec les données d'une salle
+function buildGymPopup(gym) {
+
+    var type_escalade = '';
+    if(gym.type_voie == 1) type_escalade += '<span class="voie">voie</span>';
+    if(gym.type_boulder == 1) type_escalade += '<span class="bloc">bloc</span>';
+
+    let html = `
+        <img class="photo-couve-site-leaflet" src="${gym.bandeau}" alt="photo de couverture de ${gym.label}">
+        <div class="crag-leaflet-info">
+            <h2 class="loved-king-font titre-crag-leaflet">
+                <a href="/salle-escalade/${gym.id}/${string_to_slug(gym.label)}">${gym.label}</a>
+            </h2>
+            <table>
+                <tr>
+                    <td>Localisation : </td>
+                    <td>${gym.big_city}, ${gym.region} (${gym.code_country})</td>
+                </tr>
+                <tr>
+                    <td>Type de grimpe : </td>
+                    <td class="type-grimpe">
+                        ${type_escalade}
+                    </td>
+                </tr>
+            <tr>
+                <td></td>
+                <td class="btn-vers-crags">
+                    <a href="/salle-escalade/${gym.id}/${string_to_slug(gym.label)}" class="waves-effect waves-light btn">voir la salle</a>
+                    </td>
+                </tr>
+            </table>
+         </div>
+    `;
+
+    return html;
+}
+
 //retourn l'objet icone qu'il faut utiliser
 function styleIcon(type) {
 
@@ -147,5 +185,14 @@ function styleIcon(type) {
     if(type === '01111') point = marker_01111;
     if(type === '11111') point = marker_11111;
 
+    return point;
+}
+
+function styleGymIcon(type) {
+    let point;
+    if(type === '00') point = marker_gym_00;
+    if(type === '01') point = marker_gym_01;
+    if(type === '10') point = marker_gym_10;
+    if(type === '11') point = marker_gym_11;
     return point;
 }
