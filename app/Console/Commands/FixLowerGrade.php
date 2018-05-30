@@ -44,33 +44,31 @@ class FixLowerGrade extends Command
     public function handle()
     {
         foreach(DB::table("gap_grades")->get() as $gg) {
-            $min_grade_val = $gg->min_grade_val;
-            if ($min_grade_val == 0) {
-                $this->info("pre ".$min_grade_val);
-                switch($gg->spreadable_type) {
-                    case "App\Sector": 
-                        $routes = Sector::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
-                        break;
-                    case "App\Crag": 
-                        $routes = Crag::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
-                        break;
-                }
-                if ($routes->count() > 0)
-                    $min_grade_val = $routes->min('grade_val');
+            $min_grade_val = 0;
+            $max_grade_val = 0;
+            switch($gg->spreadable_type) {
+                case "App\Sector": 
+                    $routes = Sector::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
+                    break;
+                case "App\Crag": 
+                    $routes = Crag::find($gg->spreadable_id)->routeSections->where('grade_val', '>', 0);
+                    break;
+            }
+            if ($routes->count() > 0) {
+                $min_grade_val = $routes->min('grade_val');
+                $max_grade_val = $routes->max('grade_val');
+                $min_grade_text = Route::valToGrad($min_grade_val);
+                $max_grade_text = Route::valToGrad($max_grade_val);
 
-                $this->info("post ".$min_grade_val);
-                if ($min_grade_val > 0) {
-                    $min_grade_text = Route::valToGrad($min_grade_val);
-
-                    GapGrade::where('id', '=', $gg->id)->update([
-                        'min_grade_val' => $min_grade_val,
-                        'min_grade_text' => $min_grade_text
-                    ]);
-
-                    $this->info($min_grade_text);
-                }
+                GapGrade::where('id', '=', $gg->id)->update([
+                    'min_grade_val' => $min_grade_val,
+                    'min_grade_text' => $min_grade_text,
+                    'max_grade_val' => $max_grade_val,
+                    'max_grade_text' => $max_grade_text,
+                ]);
 
             }
+
         }
     }
 }
