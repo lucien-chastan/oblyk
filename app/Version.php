@@ -36,6 +36,7 @@ class Version extends Model
         'seasontable_id',
         'seasontable_type',
         'tags',
+        'route_sections',
     ];
 
     /**
