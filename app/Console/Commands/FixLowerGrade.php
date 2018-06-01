@@ -38,12 +38,10 @@ class FixLowerGrade extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
-        foreach(DB::table("gap_grades")->get() as $gg) {
+        foreach(DB::table("gap_grades")->where('min_grade_val',0)->get() as $gg) {
             $min_grade_val = 0;
             $max_grade_val = 0;
             switch($gg->spreadable_type) {
@@ -67,6 +65,8 @@ class FixLowerGrade extends Command
                 'max_grade_val' => $max_grade_val,
                 'max_grade_text' => $max_grade_text,
             ]);
+
+            $this->info($gg->spreadable_type . ' ' . $gg->spreadable_id);
         }
     }
 }
