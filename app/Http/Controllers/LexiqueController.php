@@ -16,9 +16,8 @@ class LexiqueController extends Controller
         $data = [
             'meta_title' => 'Le lexique de l\'escalade',
             'alphas' => $alphaTab,
-            'words' => Word::with('user')->get(),
-            ];
+            'words' => Word::with('user')->withCount('versions')->get(),
+        ];
         return view('pages.lexique.lexique', $data);
     }
-
 }

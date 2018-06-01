@@ -49,6 +49,9 @@ class Sector extends Model
         return $this->hasManyThrough('App\RouteSection', 'App\Route');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
 
     //MET À JOUR LES INFORMATIONS STOCKÉES DU SECTEUR (ÉCART DE COTATION)
     public static function majInformation($sector_id){

@@ -51,6 +51,9 @@
                                         @if($word->user_id == Auth::id())
                                             <i {!! $Helpers::tooltip(trans('modals/word.editTooltip')) !!} {!! $Helpers::modal(route('wordModal'), ["word_id"=>$word->id, "title"=>trans('modals/word.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                             <i {!! $Helpers::tooltip(trans('modals/word.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/words/" . $word->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                            @if($word->versions_count > 0)
+                                                <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">history</i>
+                                            @endif
                                         @endif
                                     @endif
                                 </p>

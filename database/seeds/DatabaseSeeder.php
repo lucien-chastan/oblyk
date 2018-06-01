@@ -104,5 +104,7 @@ class DatabaseSeeder extends Seeder
         //Table de recherche
         $this->call(SearchesTableSeeder::class);
 
+        // Table news-letter
+        $this->call(NewslettersTableSeeder::class);
     }
 }

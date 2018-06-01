@@ -42,6 +42,9 @@
         <div class="col s12 text-right zone-action-secteur">
             <i {!! $Helpers::tooltip(trans('modals/sector.editTooltip')) !!} {!! $Helpers::modal(route('sectorModal'),['id' => $sector->id ,'title'=>trans('modals/sector.modalEditeTitle'),'method'=>'PUT']) !!} class="tooltipped material-icons right btnModal">edit</i>
             <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $sector->id , "model"=> "Sector"]) !!} class="tooltipped material-icons right btnModal">flag</i>
+            @if($sector->versions_count > 0)
+                <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$sector->id, "model"=>"Sector"]) !!} class="material-icons tooltipped btnModal">history</i>
+            @endif
         </div>
     </div>
 @endif

@@ -1,5 +1,129 @@
-var map, markers,
+var map, markers, gym_markers,
     markerNewElement, newLat, newLng, addStarted = false, suiteIsVisible = false, addType, longToast;
+
+var slider = document.getElementById('grades-slider');
+var progress_bar = document.getElementById('progress_bar');
+
+let search_box_loaded = false;
+
+function searchCragsOnMap() {
+    progress_bar.style.display = "block";
+    var types = document.getElementsByName('voie_type');
+    var query = "/API/crags/search?";
+    for (var i = 0; i < types.length; i++) {
+        var t = types[i];
+        if (t.checked === true)  {
+            query += "climb_type[]=" + t.value + "&";
+        }
+    }
+    var ranges = slider.noUiSlider.get();
+    query += "range_from=" + ranges[0] + "&range_to=" + ranges[1];
+
+    getCragsList(query);
+}
+
+function getCragsList(query) {
+    var i, point;
+    axios.get(query).then(function(data) {
+        markers.clearLayers();
+        for (i = 0; i < data.data.data.crags.length; i++) {
+            point = make_crag_point(data.data.data.crags[i]);
+            markers.addLayer(point);
+        }
+
+        console.log(data.data.data.gyms.length);
+
+        for (i = 0; i < data.data.data.gyms.length; i++) {
+            point = make_gym_point(data.data.data.gyms[i]);
+            markers.addLayer(point);
+        }
+
+        map.addLayer(markers);
+        progress_bar.style.display = "none";
+    });
+}
+
+function make_crag_point(crag) {
+    var point = L.marker(
+        [crag.lat, crag.lng],
+        {icon: styleIcon("" + crag.type_voie + crag.type_grande_voie + crag.type_bloc + crag.type_deep_water + crag.type_via_ferrata + "")}
+    ).bindPopup(buildPopup(crag));
+    return point;
+}
+
+function make_gym_point(gym) {
+    var point = L.marker(
+        [gym.lat, gym.lng],
+        {icon: styleGymIcon("" + gym.type_boulder + gym.type_route + "")}
+    ).bindPopup(buildGymPopup(gym));
+    return point;
+}
+
+function hideSearchCrags() {
+    volet = document.getElementById('my-user-circle-partner');
+    volet.style.transform = 'translateX(-100%)';
+}
+
+
+let labels_rev = {};
+var min_r_label = document.getElementById('min_range');
+var max_r_label = document.getElementById('max_range');
+
+function onUp(v) {
+    min_r_label.innerHTML = v[0];
+    min_r_label.className = "color-grade-"+labels_rev[v[0]];
+    max_r_label.innerHTML = v[1];
+    max_r_label.className = "color-grade-"+labels_rev[v[1]];
+}
+
+function createSearchBox() {
+    if (!search_box_loaded) {
+        axios.get('/API/route_grades').then(function(data) {
+            var min_grade = 10000000;
+            var max_grade = -1000000;
+            var labels = {};
+
+            for(var i=0;i<data.data.length;i++) {
+                var v = data.data[i].grade_val;
+                if (v > max_grade)
+                    max_grade = v;
+                if (v < min_grade)
+                    min_grade = v;
+
+                labels[1*v] = ""+data.data[i].grade;
+                labels_rev[""+data.data[i].grade] = 1*v;
+            }
+            noUiSlider.create(slider, {
+                start: [min_grade, max_grade], 
+                step: 2,
+                orientation: 'horizontal', 
+                format: {
+                    to: function (value) {
+                        value = Math.round(value);
+                        return (value in labels) ?  labels[value] : Math.round(value);
+                    },
+                    from: function (value) {
+                        return (value in labels_rev) ? Math.round(labels_rev[value]) : value;
+                    }
+                },
+                range: {
+                            'min': min_grade,
+                            'max': max_grade
+                        },
+                }).on('update', onUp);
+            });
+    }
+    search_box_loaded = true;
+    volet = document.getElementById('my-user-circle-partner');
+    volet.style.transform = 'translateX(0)';
+}
+function toggleGyms() {
+    var t = document.getElementById('show_gyms').checked;
+    if (!t)
+        map.removeLayer(gym_markers);
+    else
+        map.addLayer(gym_markers);
+}
 
 //function au chargement de la map
 function loadMap() {
@@ -19,7 +143,21 @@ function loadMap() {
 
     map = L.map('map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
     markers = L.markerClusterGroup();
+    gym_markers = L.markerClusterGroup();
 
+    var searchMapButton = L.Control.extend({options: { position: 'topleft' }, onAdd: function (map) { 
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom-filter');
+        container.style.backgroundColor = 'white';
+        container.style.width = '35px';
+        container.style.height = '35px';
+        container.innerHTML = '<i class="tiny material-icons">tune</i>';
+        container.onclick = function(){
+            createSearchBox();
+        };
+        return container;
+        },
+    });
+    map.addControl(new searchMapButton());
 
     //POSITIONNEMENT DU CONTROLER DE ZOOM
     L.control.zoom({position : 'bottomright'}).addTo(map);

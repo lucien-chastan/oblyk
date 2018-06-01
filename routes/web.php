@@ -35,6 +35,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
 
+    //NEXS LETTER
+    Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
+    Route::get('/news-letter/unsubscribe', 'SubscribeController@unsubscribePage')->name('unsubscribe');
+    Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
+
 
     //UN ARTICLE
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
@@ -194,6 +199,12 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
+    //NEWSLETTER
+    Route::get('/admin/newsletter/create', 'AdminController@createNewsletterPage')->name('createNewsletterPage');
+    Route::get('/admin/newsletter/update', 'AdminController@updateNewsletterPage')->name('updateNewsletterPage');
+    Route::get('/get/newsletter/{newsletter_ref}/information', 'AdminController@getNewsletterInformation');
+    Route::resource('newsletters', 'CRUD\NewsletterController');
+
     //AIDES
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
@@ -214,6 +225,8 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
+    // NEWS LETTER
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
 });
 
@@ -248,6 +261,8 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
+Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
+Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 
 // PARTENAIRE
@@ -305,6 +320,7 @@ Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('pa
 Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
 Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
+Route::post('/modal/version', 'VersionController@versionModal')->name('versionModal');
 
 
 //CRUD AJAX

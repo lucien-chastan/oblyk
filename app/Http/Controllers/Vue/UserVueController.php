@@ -17,6 +17,7 @@ use App\Notification;
 use App\Photo;
 use App\Post;
 use App\Route;
+use App\Subscriber;
 use App\TickList;
 use App\Topo;
 use App\User;
@@ -635,8 +636,13 @@ class UserVueController extends Controller
             $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
             $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg?cache=' . date('Ymdhis') : '';
 
-            $data = ['user' => $user,];
-            return view('pages.profile.vues.settingsVue', $data);
+            // News Letter subscribe
+            $newsletter = Subscriber::where('email',$user->email)->exists();
+
+            return view('pages.profile.vues.settingsVue', [
+                'user' => $user,
+                'newsletter' => $newsletter,
+            ]);
 
         }else{
 

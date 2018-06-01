@@ -21,12 +21,18 @@
                 <li><a target="_blank" class="grey-text text-lighten-3" href="https://www.facebook.com/pageoblyk/" rel="nofollow"><img class="img-footer" src="/img/logo_facebook.svg" alt="logo de facebook"> Facebook</a></li>
                 <li><a target="_blank" class="grey-text text-lighten-3" href="https://github.com/lucien-chastan/oblyk" rel="nofollow"><img class="img-footer" src="/img/logo_github.svg" alt="logo de facebook"> Github</a></li>
             </ul>
+            <form name="subscribe_form" action="{{ route('subscribe') }}" method="GET">
+                <div class="input-field col s12">
+                    <input class="white-text" type="email" name="subscribe_mail" id="subscribe_mail">
+                    <label for="subscribe_mail">@lang('interface/footer.newsletter')</label>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 <div class="footer-copyright">
     <div class="container">
-        © 2017 Oblyk
+        © {{ date('Y') }} Oblyk
         <a class="grey-text text-lighten-4 right" href="{{ route('termsOfUse') }}">@lang('interface/nav.TermsOfService ')</a>
     </div>
 </div>

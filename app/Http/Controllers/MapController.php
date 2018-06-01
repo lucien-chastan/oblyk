@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Crag;
+use App\Climb;
 use App\Gym;
 use App\Massive;
 use App\Topo;
+use App\Route;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,13 +16,47 @@ class MapController extends Controller
 {
     public function mapPage(){
         $data = [
+            'climb_types' => Climb::select('id')->get()
+                ->each(function($e) {
+                    $e->label = __("elements/climbs.climb_" . $e->id);
+                }),
             'crags' => Crag::withCount('routes')->with('gapGrade')->get(),
-            'gyms' => Gym::get(),
-            'meta_title' => 'Carte des falaises et salle d\'escalade',
-            'meta_description' => 'Voir la carte interactive des sites naturels de grimpe et des salles d\'escalade sur Oblyk, que ce soit en France, ou dans le Monde, et voir leurs informations détaillées'
+            'gyms' => Gym::get()
         ];
 
         return view('pages.map.map', $data);
+    }
+
+    public function filterMap(Request $request) {
+        $all_climb_types = Cache::rememberForever('climb_types', function() {
+            return Climb::select('id')->pluck('id');
+        });
+
+        $data = Cache::remember('search_map_'.serialize($request->all()), 360, function() use ($request, $all_climb_types) {
+            $data = [
+                'crags' => Crag::withCount('routes')
+                ->with('gapGrade')
+                ->whereExists(function ($q) use ($request, $all_climb_types) {
+
+                    $grade_from = Route::gradeToVal($request->input('range_from', '1a'), '');
+                    $grade_to = Route::gradeToVal($request->input('range_to', '9c'), '') + 1;
+
+                    $q->select(DB::raw(1))
+                        ->from('routes')
+                        ->join('route_sections', 'route_sections.route_id', '=', 'routes.id')
+                        ->whereIn('routes.climb_id', $request->input('climb_type', $all_climb_types))
+                        ->whereRaw('routes.crag_id = crags.id')
+                        ->whereBetween('grade_val', [$grade_from, $grade_to]);
+                })
+                ->get(),
+            ];
+            return $data;
+        });
+
+        // include climbing gym if toogle gym is checked
+        $data['gyms'] = (in_array('gym',$request->input('climb_type'))) ? Gym::get() : [];
+
+        return response()->json(['data' => $data, 'request' => $request->all()]);
     }
 
     public function gymPage(){

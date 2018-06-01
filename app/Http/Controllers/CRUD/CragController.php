@@ -6,7 +6,6 @@ use App\Crag;
 use App\GapGrade;
 use App\Orientation;
 use App\Photo;
-use App\oldSearch;
 use App\Season;
 use Validator;
 use Illuminate\Http\Request;
@@ -208,7 +207,10 @@ class CragController extends Controller
         ]);
 
         //mise à jour des données de la falaise
-        $crag = Crag::where('id', $request->input('id'))->first();
+        $crag = Crag::where('id', $request->input('id'))
+            ->with('season')
+            ->with('orientation')
+            ->first();
 
         $crag->label = $request->input('label');
         $crag->city = $request->input('city');
@@ -216,39 +218,24 @@ class CragController extends Controller
         $crag->region = $request->input('region');
         $crag->lat = $request->input('lat');
         $crag->lng = $request->input('lng');
+
+        $crag->season->summer = $request->input('summer');
+        $crag->season->autumn = $request->input('autumn');
+        $crag->season->winter = $request->input('winter');
+        $crag->season->spring = $request->input('spring');
+
+        $crag->orientation->north = $request->input('north');
+        $crag->orientation->east = $request->input('east');
+        $crag->orientation->south = $request->input('south');
+        $crag->orientation->west = $request->input('west');
+        $crag->orientation->north_east = $request->input('north_east');
+        $crag->orientation->north_west = $request->input('north_west');
+        $crag->orientation->south_east = $request->input('south_east');
+        $crag->orientation->south_west = $request->input('south_west');
+
+        $crag->orientation->save();
+        $crag->season->save();
         $crag->save();
-
-        //mise à jour des données des saisons
-        $season = Season::where(
-            [
-                ['seasontable_id', $request->input('seasontable_id')],
-                ['seasontable_type', $request->input('seasontable_type')]
-            ]
-        )->first();
-
-        $season->summer = $request->input('summer');
-        $season->autumn = $request->input('autumn');
-        $season->winter = $request->input('winter');
-        $season->spring = $request->input('spring');
-        $season->save();
-
-        //mise à jour des données d'orientation
-        $orientation = Orientation::where(
-            [
-                ['orientable_id', $request->input('orientable_id')],
-                ['orientable_type', $request->input('orientable_type')]
-            ]
-        )->first();
-
-        $orientation->north = $request->input('north');
-        $orientation->east = $request->input('east');
-        $orientation->south = $request->input('south');
-        $orientation->west = $request->input('west');
-        $orientation->north_east = $request->input('north_east');
-        $orientation->north_west = $request->input('north_west');
-        $orientation->south_east = $request->input('south_east');
-        $orientation->south_west = $request->input('south_west');
-        $orientation->save();
 
         return response()->json(json_encode($crag));
     }

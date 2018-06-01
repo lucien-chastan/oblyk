@@ -10,6 +10,9 @@
             @if(Auth::check())
                 <div class="text-right ligne-btn">
                     <i {!! $Helpers::tooltip('Modifier les informations') !!} {!! $Helpers::modal(route('massiveModal'), ["massive_id"=>$massive->id, "title"=>"Modifier ce regroupement", "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+                    @if($massive->versions_count > 0)
+                        <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$massive->id, "model"=>"Massive"]) !!} class="material-icons tooltipped btnModal">history</i>
+                    @endif
                 </div>
             @endif
 
