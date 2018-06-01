@@ -21,8 +21,9 @@
 
                 <h1 class="loved-king-font text-center grey-text text-darken-3">#{{ str_replace('-','.',$newsletter->ref) }} {{ $newsletter->title }}</h1>
 
-                @markdown($newsletter->content)
-
+                <div class="markdownZone">
+                    @markdown($newsletter->content)
+                </div>
             </div>
         </div>
     </div>

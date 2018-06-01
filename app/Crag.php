@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class Crag extends Model
 {
@@ -89,6 +90,9 @@ class Crag extends Model
     public function routes(){
         return $this->hasMany('App\Route','crag_id', 'id');
     }
+    public function routeSections(){
+        return $this->hasManyThrough('App\RouteSection', 'App\Route');
+    }
 
     public function versions() {
         return $this->morphMany('App\Version', 'versionnable');
@@ -123,9 +127,9 @@ class Crag extends Model
 
         //min et max
         $min_grade_val = 100;
-        $min_grade_text = '';
+        $min_grade_text = '?';
         $max_grade_val = 0;
-        $max_grade_text = '';
+        $max_grade_text = '?';
 
         foreach ($routes as $route){
 
@@ -137,7 +141,7 @@ class Crag extends Model
             if($route->climb_id == 8) $via_ferrata = 1;
 
             foreach ($route->routeSections as $section){
-                if($section->grade_val < $min_grade_val){
+                if($section->grade_val < $min_grade_val && $section->grade_val > 0){
                     $min_grade_val = $section->grade_val;
                     $min_grade_text = $section->grade . $section->sub_grade;
                 }
@@ -146,6 +150,7 @@ class Crag extends Model
                     $max_grade_text = $section->grade . $section->sub_grade;
                 }
             }
+            $min_grade_val = ($min_grade_val == 100) ? 0 : $min_grade_val; // if no min value - set it as 0/? since there is no other grades
         }
 
         //MISE À JOUR DU TYPE DE VOIE

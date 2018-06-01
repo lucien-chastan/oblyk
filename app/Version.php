@@ -35,6 +35,8 @@ class Version extends Model
         'topos_count',
         'seasontable_id',
         'seasontable_type',
+        'tags',
+        'route_sections',
     ];
 
     /**
