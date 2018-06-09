@@ -12,7 +12,7 @@ class GymsTableSeeder extends Seeder
     public function run()
     {
 
-        //1 : M'roc 2
+        //1 : M'roc Villerbanne
         DB::table('gyms')->insert([
             'user_id' => 1,
             'label' => 'M\'Roc 2',
@@ -54,5 +54,48 @@ class GymsTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
+        //3 : Climb'Up Lyon
+        DB::table('gyms')->insert([
+            'user_id' => 1,
+            'label' => 'Climb\'Up Lyon',
+            'description' => 'Meilleurs salle de voie de Lyon',
+            'type_boulder' => 1,
+            'type_route' => 1,
+            'free' => 1,
+            'address' => '11 Rue Lortet, 69007 Lyon',
+            'postal_code' => 69007,
+            'code_country' => 'fr',
+            'city' => 'Lyon',
+            'big_city' => 'Lyon',
+            'country' => 'France',
+            'region' => 'Rhône',
+            'lat' => 45.743047,
+            'lng' => 4.835540,
+            'email' => 'info@email.com',
+            'phone_number' => '0472718384',
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        //4 : M'roc Laennec
+        DB::table('gyms')->insert([
+            'user_id' => 1,
+            'label' => 'M\'Roc Laennec',
+            'description' => 'Meilleurs salle de bloc de Lyon',
+            'type_boulder' => 1,
+            'type_route' => 0,
+            'free' => 1,
+            'address' => '49 Rue Président Krüger',
+            'postal_code' => 69008,
+            'code_country' => 'fr',
+            'city' => 'Lyon',
+            'big_city' => 'Lyon',
+            'country' => 'France',
+            'region' => 'Rhône',
+            'lat' => 45.737306,
+            'lng' => 4.879983,
+            'email' => 'contact@mroc3.com',
+            'phone_number' => '0486112721',
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

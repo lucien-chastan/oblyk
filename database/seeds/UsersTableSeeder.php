@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'localisation' => 'Drôme, Vosges, Alpes Maritime',
             'birth' => 1990,
             'sex' => 2,
+            'admin_level' => 1,
             'description' => 'Bonjour, je suis Lucien !',
             'last_fil_read' => date('Y-m-d H:m:s'),
             'created_at' => date('Y-m-d H:m:s'),

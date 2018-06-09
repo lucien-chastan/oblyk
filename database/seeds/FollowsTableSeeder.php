@@ -52,5 +52,26 @@ class FollowsTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
+        DB::table('follows')->insert([
+            'followed_id' => 1,
+            'followed_type' => 'App\Gym',
+            'user_id' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        DB::table('follows')->insert([
+            'followed_id' => 3,
+            'followed_type' => 'App\Gym',
+            'user_id' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
+
+        DB::table('follows')->insert([
+            'followed_id' => 4,
+            'followed_type' => 'App\Gym',
+            'user_id' => 1,
+            'created_at' => date('Y-m-d H:m:s'),
+        ]);
     }
 }

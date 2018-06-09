@@ -1,0 +1,213 @@
+.full-height-row{
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: stretch;
+    flex-direction: row;
+
+    .admin-gym-bandeau{
+        height: 200px;
+        background-size: cover;
+        padding-top: 84px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .left-col {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .right-col{
+            padding-top: 13px;
+            vertical-align: top;
+            display: inline-block;
+            width: calc(100% - 110px);
+        }
+
+        img{
+            border: 4px solid rgb(255, 255, 255);
+            height: 90px;
+        }
+
+        p {
+            background-color: rgba(0,0,0,0.8);
+            margin: 0 0 0.5em 0;
+            padding: 0.2em 0.2em;
+        }
+    }
+
+    #admin-nav {
+        box-shadow: 1px 0 10px 2px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        width: 250px;
+        overflow-y: auto;
+        padding: 0 0 0 0;
+        color: rgb(255,255,255);
+
+        a {
+            color: white;
+        }
+
+        .collapsible {
+            margin-top: 0;
+            border: none;
+            box-shadow: none;
+
+            .refresh-btn {
+                display: none;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                transition: transform 0.5s;
+
+                &:hover {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .collapsible-header{
+                background-color: rgba(0,0,0,0);
+                border: 4px none transparent;
+                border-left-style: solid;
+                &.active-item{
+                    border-color: #2196F3;
+
+                    .refresh-btn {
+                        display: inline;
+                    }
+                }
+            }
+
+            .collapsible-body {
+                padding: 0.3rem 0 0 1.6rem;
+                background-color: rgba(0,0,0,0);
+                border: none;
+
+                .row {
+                    padding-left: 0.9em;
+                    border: 4px none transparent;
+                    border-left-style: solid;
+                    &.active-item{
+                        border-color: #2196F3;
+
+                        .refresh-btn {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+
+        div {
+            cursor: pointer;
+        }
+
+        .collapsible-header {
+            transition: background-color 0.3s;
+            &:hover{
+                background-color: #2196F3;
+            }
+        }
+        .collapsible-body {
+            .row {
+                transition: background-color 0.3s;
+                margin-bottom: 0;
+                padding: 0.5em 0.1em;
+
+                &:hover{
+                    background-color: #2196F3;
+                }
+            }
+        }
+    }
+}
+
+#content-admin-zone{
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 75px;
+
+    .title-admmin-gym {
+        font-size: 1.1em;
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-color: #c6c6c6;
+        margin-top: 0.4em;
+        padding-bottom: 4px;
+        color: rgb(114, 114, 114);
+        font-weight: bold;
+    }
+
+    .card-scheme-image {
+        height: 120px;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+.property-table {
+
+    .property-column {
+        white-space: nowrap;
+        font-weight: 500;
+        text-align: right;
+        vertical-align: top;
+    }
+}
+
+//RESPONSIVE MENU
+@media screen and (max-width:1000px){
+
+    #admin-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 40px !important;
+
+        .admin-gym-bandeau {
+            display: none;
+        }
+
+        .collapsible {
+            margin-top: 56px !important;
+
+            .collapsible-header {
+                padding: 0 0 0 2px;
+                text-align: center;
+            }
+
+            .collapsible-body {
+                padding: 0 !important;
+                div {
+                    padding-left: 0.4em !important;
+                }
+            }
+        }
+    }
+
+    #content-admin-zone {
+        padding-top: 55px;
+        position: fixed;
+        width: 100%;
+        padding-left: 44px;
+        height: 100%;
+    }
+
+    .hidden-1000 {
+        display: none;
+    }
+
+    .card-panel {
+        padding: 5px;
+    }
+
+    .row .col {
+        padding: 0 5px;
+    }
+}

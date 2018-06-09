@@ -12,6 +12,7 @@ use App\Description;
 use App\Exception;
 use App\ForumTopic;
 use App\Gym;
+use App\GymRoom;
 use App\Help;
 use App\Link;
 use App\Massive;
@@ -33,6 +34,7 @@ use App\Observers\MessageObserver;
 use App\Observers\ParkingObserver;
 use App\Observers\PhotoObserver;
 use App\Observers\PostObserver;
+use App\Observers\RoomObserver;
 use App\Observers\PostPhotoObserver;
 use App\Observers\RouteObserver;
 use App\Observers\RouteSectionObserver;
@@ -111,6 +113,7 @@ class AppServiceProvider extends ServiceProvider
         UserSocialNetwork::observe(UserSocialNetworkObserver::class);
         User::observe(UserObserver::class);
         Video::observe(VideoObserver::class);
+        GymRoom::observe(RoomObserver::class);
     }
 
     /**

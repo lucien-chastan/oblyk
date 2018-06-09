@@ -2,31 +2,13 @@
 
     {{--DROPDOWN DE LA CONNEXION--}}
     <ul id="dropdown_connexion" class="dropdown-content dropD-180">
-        @if (Auth::guest())
-            <li><a href="{{ route('login') }}"><i class="material-icons left">person</i>@lang('interface/nav.connect')</a></li>
-            <li><a href="{{ route('register') }}"><i class="material-icons left">person_add</i>@lang('interface/nav.joinUs')</a></li>
-        @else
-            <li><a @if(isset($user)) data-route="{{route('vueDashboardUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}"><i class="material-icons left">person</i>@lang('interface/nav.myProfile')</a></li>
-            <li><a @if(isset($user)) data-route="{{route('vueFilActuUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}#fil-actu"><i class="material-icons left">shuffle</i>@lang('interface/nav.newsFeed') <span class="red-text badge-dropdown-navbar" id="badge-nb-new-posts"></span></a></li>
-            <li><a @if(isset($user)) data-route="{{route('vueCroixUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}#croix"><i class="material-icons left">playlist_add_check</i>@lang('interface/nav.myCross')</a></li>
-            <li><a @if(isset($user)) data-route="{{route('vueMessagesUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}#messages"><i class="material-icons left">email</i>@lang('interface/nav.messenger') <span class="red-text badge-dropdown-navbar" id="badge-nb-new-message"></span></a></li>
-            <li><a @if(isset($user)) data-route="{{route('vueNotificationsUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}#notifications"><i class="material-icons left">notifications</i>@lang('interface/nav.notifications') <span class="red-text badge-dropdown-navbar" id="badge-nb-new-notification"></span></a></li>
-            <li><a @if(isset($user)) data-route="{{route('vueEditSettingsUser',['user_id'=>$user->id])}}" class="router-profile-link" @endif href="{{ Auth::user()->url() }}#parametres"><i class="material-icons left">settings</i>@lang('interface/nav.settings')</a></li>
-            <li class="divider"></li>
-            <li>
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">power_settings_new</i>@lang('interface/nav.logOut')</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </li>
-        @endif
+        @include('includes.nav-user')
     </ul>
 
     {{--DROPDOWN DU PROJET--}}
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
         <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
-{{--        <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>--}}
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
         <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
         <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
@@ -44,15 +26,9 @@
         <li><a href="{{ route('indexes') }}"><i class="material-icons left">storage</i>@lang('interface/nav.dataBase')</a></li>
     </ul>
 
-    {{--DROPDOWN DES OUTILS--}}
+    {{--DROPDOWN DES LANGUES--}}
     <ul id="dropdown_language" class="dropdown-content dropD-auto">
-        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-            <li>
-                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                    <img class="flag-icon" src="/img/flag_{{ $localeCode }}.jpg"> {{ $properties['native'] }}
-                </a>
-            </li>
-        @endforeach
+        @include('includes.nav-localization')
     </ul>
 
     {{--DROPDOWN DU PARTENAIRE--}}
@@ -179,7 +155,6 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
-{{--                                <li><a href="{{ route('who') }}"><i class="material-icons left">group</i>@lang('interface/nav.whoAreWe')</a></li>--}}
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
                                 <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>

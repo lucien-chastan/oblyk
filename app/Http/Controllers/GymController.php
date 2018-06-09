@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Crag;
-use App\Cross;
 use App\Follow;
 use App\Gym;
-use App\TickList;
 use App\User;
 use App\UserPlace;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GymController extends Controller
@@ -21,7 +17,9 @@ class GymController extends Controller
             ->withCount('photos')
             ->withCount('videos')
             ->withCount('posts')
+            ->withCount('rooms')
             ->with('photos')
+            ->with('rooms')
             ->with('descriptions.user')
             ->first();
 

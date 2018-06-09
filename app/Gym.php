@@ -14,6 +14,10 @@ class Gym extends Model
         return $this->hasOne('App\User','id', 'user_id');
     }
 
+    public function rooms(){
+        return $this->hasMany('App\GymRoom','gym_id', 'id');
+    }
+
     public function descriptions(){
         return $this->morphMany('App\Description', 'descriptive');
     }
@@ -42,7 +46,7 @@ class Gym extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
-    /**
+     /**
      * @param bool $absolute
      * @return string
      */
@@ -65,5 +69,9 @@ class Gym extends Model
             ],
             $absolute
         );
+    }
+
+    public function administrators (){
+        return $this->hasMany('App\GymAdministrator', 'gym_id','id');
     }
 }
