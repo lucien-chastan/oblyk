@@ -29,13 +29,6 @@ class GymAdministratorsTableSeeder extends Seeder
         // Lucien - M'Roc Laennec
         DB::table('gym_administrators')->insert([
             'gym_id' => 4,
-            'user_id' => 1,
-            'created_at' => date('Y-m-d H:m:s'),
-        ]);
-
-        // Oblyk - Azium
-        DB::table('gym_administrators')->insert([
-            'gym_id' => 2,
             'user_id' => 2,
             'created_at' => date('Y-m-d H:m:s'),
         ]);

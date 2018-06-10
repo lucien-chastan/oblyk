@@ -21,11 +21,20 @@
 
             @markdown($gym->description)
 
-            @if(Auth::check() && $gym->free == 1)
+            @if(Auth::check() && $administrator_count == 0)
                 <div class="text-right ligne-btn">
                     <i {!! $Helpers::tooltip(trans('modals/gym.editTooltip')) !!} {!! $Helpers::modal(route('gymModal'), ["id"=>$gym->id, "title"=>trans('modals/gym.modalEditeTitle'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
                 </div>
             @endif
+
+            @if($administrator_count == 0)
+                <div class="text-center">
+                    <button {!! $Helpers::modal(route('managerModal'), ['gym_id'=>$gym->id]) !!} class="btn-flat btnModal">
+                        Je suis gérant de cette salle
+                    </button>
+                </div>
+            @endif
+
         </div>
     </div>
 

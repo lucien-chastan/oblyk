@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Gym;
+use App\GymAdministrator;
+use App\Mail\sendManagerConfirmation;
+use App\Mail\sendManagerRequest;
 use App\oldSearch;
+use App\User;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,6 +51,28 @@ class GymController extends Controller
         ];
 
         return view('modal.gym', $data);
+    }
+
+    // DISPLAY MANAGER POPUP
+    function managerModal(Request $request){
+        return view('modal.gym-manager', ['gym_id' => $request->input('gym_id')]);
+    }
+
+    public function sendManagerRequest(Request $request)
+    {
+
+        $user = Auth::user();
+        $data = [
+            'gym' => Gym::find($request->input('gym_id')),
+            'user' => $user,
+            'email' => $request->input('email'),
+            'justification' => $request->input('justification'),
+            'user_id' => Auth::id()
+        ];
+
+        Mail::to('ekip@oblyk.org')->send(new sendManagerRequest($data));
+
+        Mail::to($user->email)->send(new sendManagerConfirmation($data));
     }
 
 

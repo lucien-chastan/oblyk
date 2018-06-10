@@ -20,3 +20,10 @@ function getGymPosts(){
 function uploadGymLogo() {
     console.log('ok');
 }
+
+function closeManagerModal() {
+    $('#modal').modal('close');
+    setTimeout(function () {
+        Materialize.toast('Votre demande a été envoyée<br>Nous vous répondrons dans les plus brefs délais', 3000);
+    },1500);
+}

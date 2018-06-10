@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Crag;
+use App\Cross;
 use App\Follow;
 use App\Gym;
+use App\TickList;
 use App\User;
 use App\UserPlace;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\GymAdministrator;
 
 class GymController extends Controller
 {
@@ -55,6 +60,10 @@ class GymController extends Controller
         $gym->logo = file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png')) ? '/storage/gyms/100/logo-' . $gym->id . '.png' : '/img/icon-gym.svg';
         $gym->type = $gymType;
 
+        // Administrator
+        $isAdministrator = GymAdministrator::where([['user_id', Auth::id()], ['gym_id',$gym_id]])->exists();
+        $administrator_count = GymAdministrator::where('gym_id', $gym_id)->count();
+
         $data = [
             'gym' => $gym,
             'user' => $user,
@@ -62,6 +71,8 @@ class GymController extends Controller
             'meta_description' => 'description de ' . $gym['label'],
             'user_follow' => $userFollow,
             'partners' => $partners,
+            'is_administrator' => $isAdministrator,
+            'administrator_count' => $administrator_count,
         ];
 
         return view('pages.gym.gym', $data);

@@ -374,6 +374,7 @@ Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('a
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
 Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
 Route::post('/modal/version', 'VersionController@versionModal')->name('versionModal');
+Route::post('/modal/gym-manager', 'CRUD\GymController@managerModal')->name('managerModal');
 
 
 //CRUD AJAX
@@ -446,6 +447,8 @@ Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendPr
 //BANDEAU
 Route::post('/bandeau/define', 'CRUD\CragController@defineBandeau')->name('defineBandeau');
 
+// MANAGER REQUEST
+Route::post('/send/manager-request', 'CRUD\GymController@sendManagerRequest')->name('sendManagerRequest');
 
 //CHART
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');

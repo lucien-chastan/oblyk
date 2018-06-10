@@ -9,7 +9,9 @@
                 <li class="tab col s2"><a href="#"><i class="material-icons">view_quilt</i><span>Topos</span></a></li>
             @endif
             <li class="tab col s2"><a data-route="{{ route('vueMapGym',[$gym->id]) }}" data-callback="initGymMap" class="router-link" href="#map"><i class="material-icons">map</i><span>@lang('pages/gyms/global.tabMap')</span></a></li>
-            <li class="tab col s2"><a class="router-link" href="{{ route('gym_admin_home', ['gym_id' => $gym->id, 'gym_label'=> str_slug($gym->label)]) }}"><i class="material-icons">settings</i><span>Administrer</span></a></li>
+            @if($is_administrator)
+                <li class="tab col s2"><a class="router-link" href="{{ route('gym_admin_home', ['gym_id' => $gym->id, 'gym_label'=> str_slug($gym->label)]) }}"><i class="material-icons">settings</i><span>Administrer</span></a></li>
+            @endif
         </ul>
     </div>
 </div>
