@@ -15,6 +15,11 @@ class RoomsTableSeeder extends Seeder
         DB::table('gym_rooms')->insert([
             'gym_id' => 1,
             'label' => 'Salle principal Villerbanne',
+            'banner_color' => '#005e28',
+            'banner_bg_color' => 'rgb(0, 94, 40, 0.2)',
+            'scheme_bg_color' => 'rgb(255,255,255)',
+            'scheme_height' => '578',
+            'scheme_width' => '2000',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 

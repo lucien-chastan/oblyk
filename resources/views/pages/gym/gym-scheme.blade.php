@@ -15,7 +15,17 @@
 
 @section('content')
 
-    <div id="gym-scheme"></div>
+    <div id="gym-scheme"
+         data-room-id="{{ $room->id }}"
+         data-gym-id="{{ $room->gym_id }}"
+         data-gym-label="{{ $gym->label }}"
+         data-gym-url="{{ route('gymPage', ['gym_label'=>str_slug($gym->label), 'gym_id'=>$gym->id]) }}"
+         data-banner-color="{{ $room->banner_color ?? 'rgb(40,40,40)' }}"
+         data-banner-bg-color="{{ $room->banner_bg_color ?? 'rgba(255, 255, 255, 0.7)' }}"
+         data-scheme-bg-color="{{ $room->scheme_bg_color ?? 'rgb(221,221,221)' }}"
+         data-scheme-height="{{ $room->scheme_height }}"
+         data-scheme-width="{{ $room->scheme_width }}"
+    ></div>
 
 @endsection
 
@@ -23,6 +33,7 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/gym-scheme.js"></script>
     <script>
+
         initSchemeGymMap();
 
         //passage de la barre de navigation en noir
