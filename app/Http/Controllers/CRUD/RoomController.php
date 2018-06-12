@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Gym;
+use App\GymAdministrator;
 use App\GymRoom;
-use App\oldSearch;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Mockery\Exception;
-
 
 
 class RoomController extends Controller
@@ -36,7 +34,7 @@ class RoomController extends Controller
         }
 
         //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/rooms/' . $gym_id : '/rooms/' . $gym_id . '/' . $id;
+        $outputRoute = ($request->input('method') == 'POST')? '/rooms' : '/rooms/' . $id;
 
         $data = [
             'dataModal' => [
@@ -56,12 +54,12 @@ class RoomController extends Controller
     function uploadSchemeModal (Request $request) {
 
         $id_room = $request->input('room_id');
-        $roomGym = GymRoom::find($id_room);
+        $gymRoom = GymRoom::find($id_room);
 
         $data = [
             'dataModal' => [
                 'room_id' => $id_room,
-                'gym_id' => $roomGym->gym_id,
+                'gym_id' => $gymRoom->gym_id,
                 'title' => $request->input('title'),
             ]
         ];
@@ -114,6 +112,8 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
+        $this->checkIsAdmin($request->input('gym_id'));
+
         //validation du formulaire
         $this->validate($request, ['label' => 'String|max:255']);
 
@@ -143,6 +143,8 @@ class RoomController extends Controller
         //mise à jour des données de la salle
         $gymRoom = GymRoom::where('id', $request->input('id'))->first();
 
+        $this->checkIsAdmin($gymRoom->gym_id);
+
         $gymRoom->label = $request->input('label');
         $gymRoom->description = $request->input('description');
         $gymRoom->lat = $request->input('lat');
@@ -162,8 +164,24 @@ class RoomController extends Controller
     public function destroy($id)
     {
         //mise à jour des données de la salle
-        $gymRoom = GymRoom::find($id)->delete();
+        $gymRoom = GymRoom::find($id);
+
+        $this->checkIsAdmin($gymRoom->gym_id);
+
+        $gymRoom->delete();
 
         return response()->json(json_encode($gymRoom));
+    }
+
+    /**
+     * @param $gym_id
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    private function checkIsAdmin ($gym_id){
+        $isAdministrator = GymAdministrator::where([['user_id', Auth::id()], ['gym_id',$gym_id]])->exists();
+        if(!$isAdministrator) {
+            return redirect()->route('index');
+        }
+        return true;
     }
 }

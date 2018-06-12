@@ -8,7 +8,7 @@
                 <div class="card-content text-center">
                     <span class="card-title activator grey-text text-darken-4">{{ $room->label }}</span><br>
                     <p>
-                        <strong>Secteurs :</strong> 5 <strong>voies :</strong> 25
+                        <strong>Secteurs :</strong> x <strong>voies :</strong> x
                     </p>
                 </div>
             </div>

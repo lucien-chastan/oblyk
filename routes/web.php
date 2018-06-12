@@ -239,18 +239,23 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
-    // NEWS LETTER
+     // NEWS LETTER
     Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
 });
 
 // ADMIN DES GYMS
+
+
 Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
     Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
 
     // DASHBOARD
     Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
+
+    // ACTUALITY
+    Route::get('/admin/{gym_id}/view/flux', 'GymAdminController@gymFluxView')->name('gym_admin_flux_view');
 
     // LOGO AND BANDEAU
     Route::get('/admin/{gym_id}/view/upload-logo-bandeau', 'GymAdminController@uploadLogoBandeauView')->name('gym_admin_logo_bandeau_upload_view');
@@ -259,16 +264,35 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
     Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
     Route::get('/admin/{gym_id}/view/topo/salle/{room_id}', 'GymAdminController@gymSchemeView')->name('gym_admin_scheme_gym');
-    Route::resource('rooms/{gym_id}', 'CRUD\RoomController');
+Route::get('/admin/{gym_id}/view/topo/sector/{sector_id}', 'GymAdminController@gymSectorRoutesView')->name('gym_admin_sector_routes');
+
+    Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
 
     Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
     Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
+
+    Route::post('/modal/gym-sectors/{gym_id}', 'CRUD\GymSectorController@gymSectorModal')->name('gymSectorModal');
+
+    // COMMUNITY
+    Route::get('/admin/{gym_id}/view/community', 'GymAdminController@gymCommunityView')->name('gym_admin_community_view');
+
+    // STATISTIC
+    Route::get('/admin/{gym_id}/view/statistique', 'GymAdminController@gymStatisticView')->name('gym_admin_statistic_view');
+
+
+    // GESTION
+    Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
+    Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
+
 });
+
+// GYM ADMIN RESSOURCE ROUTE
+Route::resource('rooms', 'CRUD\RoomController');
+Route::resource('gym_sectors', 'CRUD\GymSectorController');
 
 //IFRAME
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
-
 
 // SITE MAP
 Route::get('/sitemap.xml','SitemapController@sitemapIndex')->name('sitemap');
@@ -281,7 +305,6 @@ Route::get('/sitemap/topics.xml','SitemapController@sitemapTopics')->name('sitem
 // SITE MAP CRAGS AND ROUTES
 Route::get('/sitemap-crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
 Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
-
 
 //LE FIL D'ACTUALITÉ
 Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');

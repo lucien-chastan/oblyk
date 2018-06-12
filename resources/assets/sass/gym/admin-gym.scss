@@ -148,6 +148,12 @@
         background-repeat: no-repeat;
         background-size: contain;
     }
+
+    .blue-card-panel {
+        border-radius: 0 0 2px 2px;
+        border: 3px #2196F3;
+        border-top-style: solid;
+    }
 }
 
 .property-table {

@@ -18,7 +18,7 @@ class CreateGymRoutesTable extends Migration
             $table->integer('sector_id')->unsigned();
             $table->text('reference')->nullable();
             $table->string('label',255)->nullable();
-            $table->string('cotation',255)->nullable();
+            $table->string('grade',255)->nullable();
             $table->integer('val_grade')->nullable();
             $table->text('description')->nullable();
             $table->string('color',255)->nullable();

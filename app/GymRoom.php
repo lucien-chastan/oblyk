@@ -11,10 +11,6 @@ class GymRoom extends Model
     }
 
     public function sectors() {
-        return $this->hasMany('App\GymSector','id', 'room_id');
-    }
-
-    public function routes (){
-        return $this->hasManyThrough('App\GymSector', 'App\GymRoute');
+        return $this->hasMany('App\GymSector','room_id', 'id');
     }
 }
