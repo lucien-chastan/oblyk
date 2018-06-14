@@ -104,6 +104,17 @@ class Notification extends Model
             ];
         }
 
+        //ACCEPTE DEMANDE D'AMIS
+        if($notification_type == 'new_administrator'){
+            $data = [
+                'title' => 'Vous êtes administrateur de la page de ' . $title,
+                'icon' => $icon,
+                'content' => 'Aller à la zone d\'administration : <a href="' . $content[0] . '">' . $content[1] . '</a>',
+                'action' => 'goToRoute("' . $content[0] . '")'
+            ];
+        }
+
+
         return json_encode($data);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gym;
+use App\GymAdministrator;
 use App\GymRoom;
 use App\GymSector;
 
@@ -81,7 +82,15 @@ class GymAdminController extends Controller
 
     // GESTION
     public function gymTeamView ($gym_id) {
-        return view('pages.gym-admin.vues.team', ['gym' => Gym::find($gym_id)]);
+
+        $administrators = GymAdministrator::where('gym_id', $gym_id)
+            ->with('user')
+            ->get();
+
+        return view('pages.gym-admin.vues.team', [
+            'gym' => Gym::find($gym_id),
+            'administrators' => $administrators
+        ]);
     }
 
     public function gymSettingsView ($gym_id) {

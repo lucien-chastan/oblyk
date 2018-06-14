@@ -304,6 +304,10 @@ function vueProfile(profil_id) {
     location.href = '/grimpeur/' + profil_id +  '/profil';
 }
 
+function goToRoute(route) {
+    location.href = route;
+}
+
 function changeRelation(user_id, relation_status) {
     axios.post('/user/relation', {user_id : user_id , relation_status : relation_status}).then(function () {
 
