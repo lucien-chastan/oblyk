@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Follow;
 use App\Gym;
 use App\GymAdministrator;
 use App\GymRoom;
@@ -73,7 +74,15 @@ class GymAdminController extends Controller
     }
 
     public function gymCommunityView ($gym_id) {
-        return view('pages.gym-admin.vues.community', ['gym' => Gym::find($gym_id)]);
+
+        $followers = Follow::where([['followed_id', '=', $gym_id], ['followed_type', '=', 'App\Gym']])
+            ->with('user')
+            ->get();
+
+        return view('pages.gym-admin.vues.community', [
+            'followers' => $followers,
+            'gym' => Gym::find($gym_id),
+        ]);
     }
 
     public function gymStatisticView ($gym_id) {
