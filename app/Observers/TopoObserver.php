@@ -9,6 +9,15 @@ class TopoObserver
 {
 
     /**
+     * @param Topo $topo
+     */
+    public function creating(Topo $topo) {
+        $topo->label = strip_tags($topo->label);
+        $topo->author = strip_tags($topo->author);
+        $topo->editor = strip_tags($topo->editor);
+    }
+
+    /**
      * Listen to the Topo updating event.
      *
      * @param Topo $topo
@@ -16,6 +25,10 @@ class TopoObserver
      */
     public function updating(Topo $topo)
     {
+        $topo->label = strip_tags($topo->label);
+        $topo->author = strip_tags($topo->author);
+        $topo->editor = strip_tags($topo->editor);
+
         $version = new Version();
         $version->saveVersion(Topo::find($topo->id), $topo, 'App\Topo');
     }

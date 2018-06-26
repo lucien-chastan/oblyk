@@ -9,6 +9,14 @@ class WordObserver
 {
 
     /**
+     * @param Word $word
+     */
+    public function creating(Word $word) {
+        $word->label = strip_tags($word->label);
+        $word->definition = strip_tags($word->definition);
+    }
+
+    /**
      * Listen to the Word updating event.
      *
      * @param Word $word
@@ -16,6 +24,9 @@ class WordObserver
      */
     public function updating(Word $word)
     {
+        $word->label = strip_tags($word->label);
+        $word->definition = strip_tags($word->definition);
+
         $version = new Version();
         $version->saveVersion(Word::find($word->id), $word, 'App\Word');
     }

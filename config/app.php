@@ -184,6 +184,7 @@ return [
         App\Lib\HelpersTemplates::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         TomLingham\Searchy\SearchyServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
     ],
 
     /*
@@ -237,6 +238,7 @@ return [
         'Markdown' => Indal\Markdown\Facade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Searchy' => TomLingham\Searchy\Facades\Searchy::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 

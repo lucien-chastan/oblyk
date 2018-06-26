@@ -9,6 +9,14 @@ class RouteObserver
 {
 
     /**
+     * @param Route $route
+     */
+    public function creating(Route $route) {
+        $route->label = strip_tags($route->label);
+        $route->opener = strip_tags($route->opener);
+    }
+
+    /**
      * Listen to the Route updating event.
      *
      * @param Route $route
@@ -16,6 +24,9 @@ class RouteObserver
      */
     public function updating(Route $route)
     {
+        $route->label = strip_tags($route->label);
+        $route->opener = strip_tags($route->opener);
+
         $version = new Version();
         $version->saveVersion(Route::find($route->id), $route, 'App\Route');
     }
