@@ -9,6 +9,13 @@ class MassiveObserver
 {
 
     /**
+     * @param Massive $massive
+     */
+    public function creating(Massive $massive) {
+        $massive->label = strip_tags($massive->label);
+    }
+
+    /**
      * Listen to the Massive updating event.
      *
      * @param Massive $massive
@@ -16,6 +23,8 @@ class MassiveObserver
      */
     public function updating(Massive $massive)
     {
+        $massive->label = strip_tags($massive->label);
+
         $version = new Version();
         $version->saveVersion(Massive::find($massive->id), $massive, 'App\Massive');
     }

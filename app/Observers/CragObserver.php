@@ -9,6 +9,16 @@ class CragObserver
 {
 
     /**
+     * @param Crag $crag
+     */
+    public function creating(Crag $crag) {
+        $crag->label = strip_tags($crag->label);
+        $crag->country = strip_tags($crag->country);
+        $crag->city = strip_tags($crag->city);
+        $crag->region = strip_tags($crag->region);
+    }
+
+    /**
      * Listen to the Crag updating event.
      *
      * @param Crag $crag
@@ -16,6 +26,11 @@ class CragObserver
      */
     public function updating(Crag $crag)
     {
+        $crag->label = strip_tags($crag->label);
+        $crag->country = strip_tags($crag->country);
+        $crag->city = strip_tags($crag->city);
+        $crag->region = strip_tags($crag->region);
+
         $version = new Version();
         $version->saveVersion(
             Crag::where('id',$crag->id)

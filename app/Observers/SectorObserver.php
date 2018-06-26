@@ -13,6 +13,14 @@ use App\Version;
 
 class SectorObserver
 {
+
+    /**
+     * @param Sector $sector
+     */
+    public function creating(Sector $sector) {
+        $sector->label = strip_tags($sector->label);
+    }
+
     /**
      * Listen to the Sector updating event.
      *

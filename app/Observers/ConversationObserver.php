@@ -10,10 +10,25 @@ class ConversationObserver
 {
 
     /**
+     * @param Conversation $conversation
+     */
+    public function creating(Conversation $conversation) {
+        $conversation->label = strip_tags($conversation->label);
+    }
+
+    /**
+     * @param Conversation $conversation
+     */
+    public function updating(Conversation $conversation) {
+        $conversation->label = strip_tags($conversation->label);
+    }
+
+    /**
      * Listen to the Conversation deleting event.
      *
      * @param Conversation $conversation
      * @return void
+     * @throws \Exception
      */
     public function deleting(Conversation $conversation)
     {

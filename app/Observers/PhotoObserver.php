@@ -8,6 +8,20 @@ class PhotoObserver
 {
 
     /**
+     * @param Photo $photo
+     */
+    public function creating(Photo $photo) {
+        $photo->description = strip_tags($photo->description);
+    }
+
+    /**
+     * @param Photo $photo
+     */
+    public function updating(Photo $photo) {
+        $photo->description = strip_tags($photo->description);
+    }
+
+    /**
      * Listen to the Photo deleting event.
      *
      * @param  Photo  $photo
