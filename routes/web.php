@@ -72,6 +72,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
     Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
 
+// INDOOR SCHEME
+    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+    Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
+    Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
+    Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
+
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
     Route::get('/carte-des-salles', 'MapController@gymPage')->name('mapGym');
@@ -244,9 +250,7 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
 });
 
-// ADMIN DES GYMS
-
-
+// ADMIN GYMS
 Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
     Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
@@ -264,7 +268,7 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
     Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
     Route::get('/admin/{gym_id}/view/topo/salle/{room_id}', 'GymAdminController@gymSchemeView')->name('gym_admin_scheme_gym');
-Route::get('/admin/{gym_id}/view/topo/sector/{sector_id}', 'GymAdminController@gymSectorRoutesView')->name('gym_admin_sector_routes');
+    Route::get('/admin/{gym_id}/view/topo/sector/{sector_id}', 'GymAdminController@gymSectorRoutesView')->name('gym_admin_sector_routes');
 
     Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
 
@@ -295,6 +299,7 @@ Route::resource('rooms', 'CRUD\RoomController');
 Route::resource('gym_sectors', 'CRUD\GymSectorController');
 Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
+
 
 //IFRAME
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
@@ -342,7 +347,7 @@ Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
 Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 //INDOOR
-Route::get('/API/gyms/get-sectors/{gym_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
+Route::get('/API/gyms/get-sectors/{room_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
 
 // PARTENAIRE
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');

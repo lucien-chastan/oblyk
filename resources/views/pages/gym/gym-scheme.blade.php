@@ -27,6 +27,41 @@
          data-scheme-width="{{ $room->scheme_width }}"
     ></div>
 
+    {{-- SECTOR AND ROUTE SIDENAV--}}
+    <div id="side-map-gym-scheme" class="side-map-gym-scheme">
+        <div class="sector-banner grey darken-1" style="background-image: url('/storage/gyms/1300/bandeau-1.jpg')">
+            <div class="bottom-information">
+                <nav>
+                    <div class="nav-wrapper loved-king-font">
+                        <div class="col s12">
+                            <a class="breadcrumb" id="item-nav-1" onclick="getSectors({{ $room->id }});animationLoadSideNav('l')">Les secteurs</a>
+                            <a class="breadcrumb" id="item-nav-2">Second</a>
+                            <a class="breadcrumb" id="item-nav-3">Third</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div id="animation-div">
+            <div id="content-side-map-gym-scheme" class="content-side-map-gym-scheme">
+                {{--Ajax--}}
+            </div>
+            <div id="load-side-map-gym-scheme" class="load-side-map-gym-scheme">
+                <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
@@ -35,6 +70,7 @@
     <script>
 
         initSchemeGymMap();
+        getSectors({{ $room->id }});
 
         //passage de la barre de navigation en noir
         var nav_barre = document.getElementById('nav_barre');

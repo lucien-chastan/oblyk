@@ -12,25 +12,25 @@ class GymsTableSeeder extends Seeder
     public function run()
     {
 
-        //1 : M'roc Villerbanne
+        //1 : M'roc Laennec
         DB::table('gyms')->insert([
             'user_id' => 1,
-            'label' => 'M\'Roc 2',
-            'description' => 'Anciennement M\'Roc 2, première salle modérne de Lyon',
+            'label' => 'M\'Roc Laennec',
+            'description' => 'Meilleurs salle de bloc de Lyon',
             'type_boulder' => 1,
             'type_route' => 0,
             'free' => 1,
-            'address' => '52 Rue Alexis Perroncel',
-            'postal_code' => 69100,
+            'address' => '49 Rue Président Krüger',
+            'postal_code' => 69008,
             'code_country' => 'fr',
-            'city' => 'Villeurbanne',
+            'city' => 'Lyon',
             'big_city' => 'Lyon',
             'country' => 'France',
             'region' => 'Rhône',
-            'lat' => 45.774841,
-            'lng' => 4.876160,
-            'email' => 'contact@mroc2.com',
-            'phone_number' => '0437478001',
+            'lat' => 45.737306,
+            'lng' => 4.879983,
+            'email' => 'contact@mroc3.com',
+            'phone_number' => '0486112721',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
@@ -76,26 +76,27 @@ class GymsTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s'),
         ]);
 
-        //4 : M'roc Laennec
+        //4 : M'roc Villerbanne
         DB::table('gyms')->insert([
             'user_id' => 1,
-            'label' => 'M\'Roc Laennec',
-            'description' => 'Meilleurs salle de bloc de Lyon',
+            'label' => 'M\'Roc 2',
+            'description' => 'Anciennement M\'Roc 2, première salle modérne de Lyon',
             'type_boulder' => 1,
             'type_route' => 0,
             'free' => 1,
-            'address' => '49 Rue Président Krüger',
-            'postal_code' => 69008,
+            'address' => '52 Rue Alexis Perroncel',
+            'postal_code' => 69100,
             'code_country' => 'fr',
-            'city' => 'Lyon',
+            'city' => 'Villeurbanne',
             'big_city' => 'Lyon',
             'country' => 'France',
             'region' => 'Rhône',
-            'lat' => 45.737306,
-            'lng' => 4.879983,
-            'email' => 'contact@mroc3.com',
-            'phone_number' => '0486112721',
+            'lat' => 45.774841,
+            'lng' => 4.876160,
+            'email' => 'contact@mroc2.com',
+            'phone_number' => '0437478001',
             'created_at' => date('Y-m-d H:m:s'),
         ]);
+
     }
 }

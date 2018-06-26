@@ -7,6 +7,7 @@ use App\Cross;
 use App\Follow;
 use App\Gym;
 use App\GymRoom;
+use App\GymRoute;
 use App\GymSector;
 use App\TickList;
 use App\User;
@@ -29,8 +30,31 @@ class GymSchemeController extends Controller
         return view('pages.gym.gym-scheme', $data);
     }
 
-    function getGymSectors($gym_id) {
-        $sectors = GymSector::where('gym_id',$gym_id)->get();
+    function getGymSectorsView($room_id) {
+        return view('pages.gym.vues.sectorsVue', [
+            'sectors' => GymSector::where('room_id',$room_id)
+                ->withCount('routes')
+                ->get()
+        ]);
+    }
+
+    function getGymSectorView($sector_id) {
+        return view('pages.gym.vues.sectorVue', [
+            'sector' => GymSector::where('id',$sector_id)
+                ->withCount('routes')
+                ->with('routes')
+                ->first()
+        ]);
+    }
+
+    function getGymRouteView($route_id) {
+        return view('pages.gym.vues.routeVue', [
+            'route' => GymRoute::find($route_id)
+        ]);
+    }
+
+    function getGymSectors($room_id) {
+        $sectors = GymSector::where([['room_id','=',$room_id], ['area','!=',null]])->get();
         return response()->json(['sectors' => $sectors]);
     }
 }

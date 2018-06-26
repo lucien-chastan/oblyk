@@ -1,4 +1,8 @@
-let scheme;
+let scheme, timeToLoad;
+
+window.addEventListener('load', function () {
+    openVoletSectors(true);
+});
 
 function initSchemeGymMap() {
     let mapArea = document.getElementById('gym-scheme'),
@@ -48,12 +52,137 @@ function initSchemeGymMap() {
     ).addTo(scheme);
 
     scheme.fitBounds([[0, 0],[heightScheme, widthScheme]]);
+    scheme.on('click',function (e) {
+        console.log('[' + Math.round(e['latlng']['lat'],2) + ',' + Math.round(e['latlng']['lng'],2) + ']');
+    });
 
-    // loadGymSector(data.gym_id);
+    getJsonGymSector(data.room_id);
 }
 
-function loadGymSector(gym_id) {
-    axios.get('/API/gyms/get-sectors/' + gym_id).then(function (response) {
-        console.log(response);
+function getJsonGymSector(room_id) {
+    axios.get('/API/gyms/get-sectors/' + room_id).then(function (response) {
+
+        for(var i = 0 ; i < response.data.sectors.length; i++) {
+            var sector = response.data.sectors[i];
+            var polygon = L.polygon(JSON.parse(sector.area), {color: 'red'}).addTo(scheme);
+        }
     });
+}
+
+// OUVRE OU FERME LE VOLET LATÉRAL
+function openVoletSectors(open) {
+    let volet = document.getElementById('side-map-gym-scheme');
+
+    if (open){
+        volet.style.transform = 'translateX(0)';
+    }else{
+        volet.style.transform = 'translateX(-100%)';
+    }
+}
+
+// LOAD ROOM SECTORS
+function getSectors(room_id) {
+    var content = document.getElementById('content-side-map-gym-scheme'),
+        item2 = document.getElementById('item-nav-2'),
+        item3 = document.getElementById('item-nav-3');
+
+    sideNavLoader(false);
+
+    axios.get('/salle-escalade/topo/sectors/' + room_id).then(function (response) {
+        sweetDisappearance(false,item2);
+        sweetDisappearance(false,item3);
+        content.innerHTML = response.data;
+        sideNavLoader(true);
+    });
+}
+
+// LOAD SECTOR
+function getGymSector(sector_id, sector_label) {
+    var content = document.getElementById('content-side-map-gym-scheme'),
+        item2 = document.getElementById('item-nav-2'),
+        item3 = document.getElementById('item-nav-3');
+
+    sideNavLoader(false);
+
+    axios.get('/salle-escalade/topo/sector/' + sector_id).then(function (response) {
+        sweetDisappearance(true,item2);
+        sweetDisappearance(false,item3);
+        sideNavLoader(true);
+        item2.textContent = sector_label;
+        content.innerHTML = response.data;
+
+        item2.onclick = function () {
+            getGymSector(sector_id, sector_label);
+            animationLoadSideNav('l');
+        };
+    });
+}
+
+// LOAD ROUTE
+function getGymRoute(route_id, route_label) {
+    var content = document.getElementById('content-side-map-gym-scheme'),
+        item3 = document.getElementById('item-nav-3');
+
+    sideNavLoader(false);
+
+    axios.get('/salle-escalade/topo/route/' + route_id).then(function (response) {
+        sweetDisappearance(true,item3);
+        item3.textContent = route_label;
+        content.innerHTML = response.data;
+        sideNavLoader(true);
+    });
+}
+
+function sideNavLoader(status) {
+    var loader = document.getElementById('load-side-map-gym-scheme'),
+        contentArea = document.getElementById('content-side-map-gym-scheme');
+
+    if (status) {
+        clearTimeout(timeToLoad);
+        loader.style.display = 'none';
+        contentArea.style.display = 'block';
+    } else {
+        timeToLoad = setTimeout(function () {
+            loader.style.display = 'block';
+            contentArea.style.display = 'none';
+        }, 200);
+    }
+}
+
+function animationLoadSideNav(direction = 'r') {
+    var animationDiv = document.getElementById('animation-div');
+
+    animationDiv.style.opacity = '0';
+
+    rightLeftAnimation(direction, animationDiv);
+
+    setTimeout(function () {
+        rightLeftAnimation(direction === 'r' ? 'l' : 'r', animationDiv);
+        setTimeout(function () {
+            animationDiv.style.transform = 'translateX(0)';
+            animationDiv.style.opacity = '1';
+        }, 100);
+    }, 100);
+}
+
+function rightLeftAnimation(direction, element) {
+    if(direction === 'r') {
+        element.style.transform = 'translateX(-100px)'
+    } else {
+        element.style.transform = 'translateX(100px)'
+    }
+}
+
+function sweetDisappearance(status, element) {
+    if (status) {
+        element.style.display = 'inline';
+        setTimeout(function () {
+            element.style.opacity = '1';
+        }, 10);
+    } else {
+        element.style.opacity = '0';
+        setTimeout(function () {
+            element.style.display = 'none';
+        }, 300);
+    }
 }

@@ -7,3 +7,92 @@
     top:62px;
   }
 }
+
+.side-map-gym-scheme {
+  z-index: 3;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease-out;
+  position: fixed;
+  padding: 0;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 370px;
+  max-width: calc(100vw - 40px);
+  background-color: white;
+  height: 100%;
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  #animation-div {
+    transition: all 0.1s;
+  }
+
+  .content-side-map-gym-scheme {
+    display: none;
+  }
+
+  .load-side-map-gym-scheme {
+    height: 100vh;
+    line-height: 100vh;
+    text-align: center;
+
+    .load-side-map-gym-scheme {
+      vertical-align: middle;
+    }
+  }
+
+  .sectors-title {
+    font-size: 2em;
+    margin-top: 0.4em;
+  }
+
+  .collapsible {
+    box-shadow: none;
+    border: none;
+
+    .collapsible-body {
+      border-bottom: none;
+    }
+
+    .collapsible-header {
+      padding: 0;
+    }
+    .collapsible-body {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  .sector-banner{
+    height: 200px;
+    background-size: cover;
+    padding-top: 84px;
+    position: relative;
+
+    .bottom-information{
+      vertical-align: top;
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+
+    nav {
+      background: linear-gradient(to top,rgba(0,0,0,0.65),rgba(0,0,0,0));
+      margin: 0 0 0 0;
+      color: rgb(255,255,255);
+      padding: 1em 0.2em 0.2em 0.2em;
+      a { font-size: 1.5em;}
+      #item-nav-2, #item-nav-3  {
+        display: none;
+        opacity: 0;
+      }
+      .breadcrumb {
+        color: rgb(255,255,255);
+        transition: opacity 0.3s;
+        cursor: pointer;}
+    }
+  }
+}

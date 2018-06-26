@@ -16,7 +16,7 @@
 
             {{--logo de oblyk--}}
             <a href="{{ route('gymPage', ['gym_id' => $gym->id, 'gym_label' => str_slug($gym->label)]) }}" class="brand-logo">
-                <img src="/storage/gyms/50/logo-141.png" class="logo-de-oblyk">
+                <img src="/storage/gyms/50/logo-{{ $gym->id }}.png" class="logo-de-oblyk">
                 {{ $gym->label }}{{ env('APP_ENV') == 'beta' ? '- Beta' :'' }}
             </a>
 
