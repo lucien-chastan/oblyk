@@ -38,5 +38,7 @@ return [
     'title_who' => 'Voir les créateurs du site d\'escalade oblyk',
     'description_who' => 'En savoir plus sur les créateurs d\'oblyk, leur vision de l\'escalade et pourquoi ils ont créé ce site communautaire d\'escalade',
 
-
+    //Articles
+    'title_articles' => 'Les actualités d\'Oblyk',
+    'description_articles' => 'Voir toutes les actualités d\'Oblyk',
 ];

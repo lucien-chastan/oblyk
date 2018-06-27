@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
 
-    public function articlePage($article_id, $article_label){
+    public function articlePage($article_id){
 
         $article = Article::where('id', $article_id)->with('descriptions')->withCount('descriptions')->first();
 
@@ -20,13 +18,24 @@ class ArticleController extends Controller
         $article->views++;
         $article->save();
 
-        $data = [
+        return view('pages.article.article', [
             'meta_title' => $article->label,
             'meta_description' => $article->description,
             'article' => $article,
             'bandeau' => $bandeau
-            ];
-        return view('pages.article.article', $data);
+        ]);
+    }
+
+    public function articlesPage() {
+
+        $articles = Article::where('publish',1)
+            ->orderBy('created_at', 'DESC')
+            ->withCount('descriptions')
+            ->paginate(5);
+
+        return view('pages.article.articles', [
+            'articles' => $articles
+        ]);
     }
 
 }

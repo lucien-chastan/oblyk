@@ -41,8 +41,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
 
 
-    //UN ARTICLE
+    // ARTICLES
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+    Route::get('/articles', 'ArticleController@articlesPage')->name('articlesPage');
 
     //LE LEXIQUE
     Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');

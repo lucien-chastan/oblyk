@@ -208,6 +208,9 @@
                     </div>
                 </div>
             @endforeach
+            <div class="text-right">
+                <a class="btn-flat" href="{{ route('articlesPage') }}">@lang('home.seeArticles')</a>
+            </div>
         </div>
 
         {{--PARTIE CHIFFRE D'OBLYK--}}

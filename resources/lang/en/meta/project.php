@@ -38,4 +38,7 @@ return [
     'title_who' => 'See Oblyk website creators',
     'description_who' => 'Know more about Oblyk website creators, their views of climbing, and why the created this community platform',
 
+    //Articles
+    'title_articles' => 'Oblyk actuality',
+    'description_articles' => 'See all Oblyk articles',
 ];
