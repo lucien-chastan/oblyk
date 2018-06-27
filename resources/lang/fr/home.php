@@ -91,6 +91,7 @@ return [
 
     //Quoi de neuf
     'titleWhatUp' => 'Quoi de neuf ?',
+    'seeArticles' => 'Voir tous les articles',
 
     //Les articles
     'readMore' => 'Lire la suite',

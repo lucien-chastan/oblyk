@@ -6,6 +6,7 @@ return [
     'partner' => 'Partner', // Partenaire
     'mapAndTool' => 'Map &amp; Tools', // Carte et Outils
     'theProject' => 'The project', // Le projet
+    'actuality' => 'Actuality', // Le projet
     'connect' => 'Log in', // Connexion
     'joinUs' => 'Join us', // Créer un compte
     'logOut' => 'Log out', // Déconnexion

@@ -18,7 +18,7 @@
         'includes.article-parallax',
          [
             'imgSrc' => $bandeau,
-            'imgAlt' => 'Falaise de baume rousse'
+            'imgAlt' => $article->label
          ]
     )
 

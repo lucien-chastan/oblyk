@@ -8,6 +8,7 @@
             <h5 class="white-text">@lang('interface/footer.moreAboutOblyk')</h5>
             <ul>
                 <li><a class="grey-text text-lighten-3" href="{{ route('project') }}">@lang('interface/nav.theProject')</a></li>
+                <li><a class="grey-text text-lighten-3" href="{{ route('articlesPage') }}">@lang('interface/nav.actuality')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('contact') }}">@lang('interface/nav.contact')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('about') }}">@lang('interface/nav.aboutUs')</a></li>
                 <li><a class="grey-text text-lighten-3" href="{{ route('supportUs') }}"><i class="material-icons tiny red-text">favorite</i> @lang('interface/nav.supportUs')</a></li>

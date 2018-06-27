@@ -88,6 +88,7 @@ return [
 
     //Quoi de neuf
     'titleWhatUp' => 'What\'s up ?',
+    'seeArticles' => 'See all articles',
 
     //Les articles
     'readMore' => 'Read more',
