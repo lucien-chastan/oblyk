@@ -27,6 +27,11 @@
 <link href="/framework/phototheque/phototheque.css" rel="stylesheet">
 <link href="/framework/trumbowyg/ui/trumbowyg.min.css" rel="stylesheet">
 
+{{-- Alternative language --}}
+@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+@endforeach
+
 <meta name="google-site-verification" content="MA_dg_DndaPfduYn-hra1oRpDBYVlWyoAQoluxMLLPI" />
 
 @yield('css')
