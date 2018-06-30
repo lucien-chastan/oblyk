@@ -9,10 +9,6 @@
         <lastmod>{{ $lastUser->created_at->format('Y-m-d') }}</lastmod>
     </sitemap>
     <sitemap>
-        <loc>{{ route('sitemapCrags') }}</loc>
-        <lastmod>{{ $lastCrag->created_at->format('Y-m-d') }}</lastmod>
-    </sitemap>
-    <sitemap>
         <loc>{{ route('sitemapTopos') }}</loc>
         <lastmod>{{ $lastTopo->created_at->format('Y-m-d') }}</lastmod>
     </sitemap>
