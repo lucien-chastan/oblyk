@@ -238,11 +238,13 @@ Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIf
 Route::get('/sitemap.xml','SitemapController@sitemapIndex')->name('sitemap');
 Route::get('/sitemap/common.xml','SitemapController@sitemapCommon')->name('sitemapCommon');
 Route::get('/sitemap/climbers.xml','SitemapController@sitemapClimbers')->name('sitemapClimbers');
-Route::get('/sitemap/crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
-Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
 Route::get('/sitemap/topos.xml','SitemapController@sitemapTopos')->name('sitemapTopos');
 Route::get('/sitemap/gyms.xml','SitemapController@sitemapGyms')->name('sitemapGyms');
 Route::get('/sitemap/topics.xml','SitemapController@sitemapTopics')->name('sitemapTopics');
+
+// SITE MAP CRAGS AND ROUTES
+Route::get('/sitemap-crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
+Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
 
 
 //LE FIL D'ACTUALITÉ
