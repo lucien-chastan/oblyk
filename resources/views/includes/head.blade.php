@@ -33,5 +33,6 @@
 @endforeach
 
 <meta name="google-site-verification" content="MA_dg_DndaPfduYn-hra1oRpDBYVlWyoAQoluxMLLPI" />
+<meta name="msvalidate.01" content="532EFD7F332DDAB9EF837D4BCC8B895E" />
 
 @yield('css')
