@@ -180,4 +180,30 @@ class Crag extends Model
             $gapGrade->save();
         }
     }
+
+    public function AllPhoto() {
+        $photos = [];
+
+        $crag = Crag::where('id', $this->id)->with('photos')->first();
+        $sectors = Sector::where('crag_id', $this->id)->with('photos')->get();
+        $routes = Route::where('crag_id',$this->id)->with('photos')->get();
+
+        foreach ($sectors as $sector) {
+            foreach ($sector->photos as $photo) {
+                $photos[] = $photo;
+            }
+        }
+
+        foreach ($routes as $route) {
+            foreach ($route->photos as $photo) {
+                $photos[] = $photo;
+            }
+        }
+
+        foreach ($crag->photos as $photo) {
+            $photos[] = $photo;
+        }
+
+        return $photos;
+    }
 }

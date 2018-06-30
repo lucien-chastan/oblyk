@@ -26,7 +26,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //PAGE LIÉES AU POJET
     Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
-    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
     Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
     Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
     Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
@@ -42,8 +41,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
 
     // ARTICLES
-    Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
     Route::get('/articles', 'ArticleController@articlesPage')->name('articlesPage');
+    Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
 
     //LE LEXIQUE
     Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
@@ -233,6 +232,17 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
 //IFRAME
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
+
+
+// SITE MAP
+Route::get('/sitemap.xml','SitemapController@sitemapIndex')->name('sitemap');
+Route::get('/sitemap/common.xml','SitemapController@sitemapCommon')->name('sitemapCommon');
+Route::get('/sitemap/climbers.xml','SitemapController@sitemapClimbers')->name('sitemapClimbers');
+Route::get('/sitemap/crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
+Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
+Route::get('/sitemap/topos.xml','SitemapController@sitemapTopos')->name('sitemapTopos');
+Route::get('/sitemap/gyms.xml','SitemapController@sitemapGyms')->name('sitemapGyms');
+Route::get('/sitemap/topics.xml','SitemapController@sitemapTopics')->name('sitemapTopics');
 
 
 //LE FIL D'ACTUALITÉ
