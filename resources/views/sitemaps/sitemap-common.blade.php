@@ -151,9 +151,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}/articles</loc>
+                <loc>{{ $app }}/{{$language}}{{ route('articlesPage',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}/articles" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('articlesPage',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastArticles->format('Y-m-d') }}</lastmod>

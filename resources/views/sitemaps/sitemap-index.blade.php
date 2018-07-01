@@ -18,6 +18,6 @@
     </sitemap>
     <sitemap>
         <loc>{{ route('sitemapTopics') }}</loc>
-        <lastmod>{{ $lastGym->created_at->format('Y-m-d') }}</lastmod>
+        <lastmod>{{ $lastTopic->created_at->format('Y-m-d') }}</lastmod>
     </sitemap>
 </sitemapindex>
