@@ -101,6 +101,24 @@ body{
     }
 }
 
+.vieux-camp-btn {
+    background: linear-gradient(to right, #fed009, #f6a318);
+    background: linear-gradient(to right, #fed009, #fab512);
+    transition: opacity 0.3s;
+    color: #01972b;
+    padding-left: 1em;
+    //font-family: Serif;
+    img {
+        height: 1.5em;
+        margin-right: 0.7em;
+        margin-bottom: -0.4em;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
 
