@@ -40,6 +40,7 @@ class sitemapController extends Controller
         $lastWors = Word::OrderBy('created_at', 'DESC')->first();
         $lastCrag = Crag::OrderBy('created_at', 'DESC')->first();
         $lastGym = Gym::OrderBy('created_at', 'DESC')->first();
+        $lastTopic = ForumTopic::orderBy('created_at', 'DESC')->first();
 
         return view('sitemaps.sitemap-common', [
             'app' => env('APP_URL'),
@@ -48,6 +49,7 @@ class sitemapController extends Controller
             'lastWord' => $lastWors->created_at,
             'lastCrag' => $lastCrag->created_at,
             'lastGym' => $lastGym->created_at,
+            'lastTopic' => $lastTopic->created_at,
             'articles' => $articles
         ]);
     }
