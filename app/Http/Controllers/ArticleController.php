@@ -9,7 +9,12 @@ class ArticleController extends Controller
 
     public function articlePage($article_id){
 
-        $article = Article::where('id', $article_id)->with('descriptions')->withCount('descriptions')->first();
+        $article = Article::where('id', $article_id)
+            ->with('descriptions')
+            ->withCount('descriptions')
+            ->with('articleCrags.crag')
+            ->with('articleTopos.topo')
+            ->first();
 
         //bandeau de l'article
         $bandeau = file_exists(storage_path('app/public/articles/1300/article-' . $article->id . '.jpg')) ? '/storage/articles/1300/article-' . $article->id . '.jpg' : '/img/default-article-bandeau.jpg';

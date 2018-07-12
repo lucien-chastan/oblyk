@@ -41,6 +41,29 @@
                 </div>
             </div>
 
+            <div>
+                <div class="col s12 m6 l8">
+                    <h4 class="loved-king-font">Sites de grimpes</h4>
+                    <div id="articleMap"></div>
+                </div>
+                <div class="col s12 m6 l4">
+                    <h4 class="loved-king-font">Topos en lien</h4>
+                    @foreach($article->articleTopos as $articleTopo)
+                        <a class="grey-text" href="{{ route('topoPage', ['topo_id' => $articleTopo->topo->id, 'topo_label' => str_slug($articleTopo->topo->label)]) }}">
+                            <img class="responsive-img z-depth-3" src="{{ $articleTopo->topo->cover() }}">
+                            <p class="text-center loved-king-font no-margin truncate" style="font-size: 1.5em">
+                                {{ $articleTopo->topo->label }}
+                            </p>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <div>
+                @foreach($article->articleCrags as $articleCrag)
+                    {{ $articleCrag->crag->label }}
+                @endforeach
+            </div>
+
 
             {{--LES COMMMENTAIRES--}}
             <div class="col s12">
