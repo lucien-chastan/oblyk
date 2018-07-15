@@ -17,4 +17,16 @@ class Article extends Model
     public function bandeau($size = 1300){
         return file_exists(storage_path('app/public/articles/' . $size . '/article-' . $this->id . '.jpg')) ? '/storage/articles/' . $size . '/article-' . $this->id . '.jpg' : '/img/default-article-bandeau.jpg';
     }
+
+    public function articleCrags(){
+        return $this->hasMany('App\ArticleCrag','article_id','id');
+    }
+
+    public function articleTopos(){
+        return $this->hasMany('App\ArticleTopo','article_id','id');
+    }
+
+    public function enrichedAuthor(){
+        return $this->hasOne('App\Author','id','author_id');
+    }
 }

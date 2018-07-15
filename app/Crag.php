@@ -206,4 +206,8 @@ class Crag extends Model
 
         return $photos;
     }
+
+    public function articleCrags(){
+        return $this->hasMany('App\ArticleCrag','crag_id','id');
+    }
 }

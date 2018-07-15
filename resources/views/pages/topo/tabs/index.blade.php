@@ -94,19 +94,13 @@
 
     </div>
     <div class="col s12 m12 l5">
-
         <div class="card-panel">
-            @if(file_exists(storage_path('app/public/topos/700/topo-' . $topo->id . '.jpg')))
-                <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/700/topo-{{$topo->id}}.jpg">
-            @else
-                <img class="responsive-img z-depth-3" alt="" src="/img/default-topo-couverture.svg">
+            <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="{{ $topo->cover() }}">
+            @if(Auth::check())
+                <p class="text-center">
+                    <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.changeCover')]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i>@lang('pages/guidebooks/tabs/information.changeCover')</a>
+                </p>
             @endif
-
-                @if(Auth::check())
-                    <p class="text-center">
-                        <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.changeCover')]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i>@lang('pages/guidebooks/tabs/information.changeCover')</a>
-                    </p>
-                @endif
         </div>
 
     </div>

@@ -27,6 +27,42 @@ iframe {
     margin-bottom: 2em;
 }
 
+.author-resume {
+    .author-picture {
+        margin-right: 1em;
+        height: 60px;
+        width: 60px;
+    }
+}
+
+.author-title {
+    padding-top: 1em;
+    border: 1px rgb(225, 225, 225);
+    border-top-style: solid;
+}
+
+.enriched-article-area {
+    #article-map {
+        height: 400px;
+        max-height: calc(100vh - 120px);
+    }
+
+    .guide-book-cover {
+        height: 360px;
+        max-height: calc(100vh - 160px);
+        max-width: 100%;
+    }
+
+    .topos-and-crags-title {
+        font-size: 1.6em;
+    }
+
+    .col {
+        margin-bottom: 2em;
+    }
+}
+
+
 .articles-container {
     margin-top: 64px;
 

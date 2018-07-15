@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->text('body');
             $table->string('author',255)->nullable();
             $table->integer('views')->nullable()->default(0);
+            $table->integer('author_id')->nullable()->default(null);
             $table->boolean('publish')->nullable()->default(0);
             $table->timestamps();
         });

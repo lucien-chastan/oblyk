@@ -34,5 +34,6 @@
 
 <meta name="google-site-verification" content="MA_dg_DndaPfduYn-hra1oRpDBYVlWyoAQoluxMLLPI" />
 <meta name="msvalidate.01" content="532EFD7F332DDAB9EF837D4BCC8B895E" />
+<meta name="yandex-verification" content="196146f7eeb9430d" />
 
 @yield('css')
