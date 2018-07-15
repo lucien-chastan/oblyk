@@ -25,4 +25,8 @@ class Article extends Model
     public function articleTopos(){
         return $this->hasMany('App\ArticleTopo','article_id','id');
     }
+
+    public function enrichedAuthor(){
+        return $this->hasOne('App\Author','id','author_id');
+    }
 }
