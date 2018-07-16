@@ -54,7 +54,7 @@
 
             @if($nbTopo > 0 || $nbCrag > 0)
                 <div class="enriched-article-area">
-                    <h2 class="loved-king-font topos-and-crags-title">
+                    <h2 class="loved-king-font topos-and-crags-title" id="map-et-topo">
                         {{ ($nbCrag > 0) ? 'Sites de grimpes' : '' }}
                         {{ ($nbCrag > 0 && $nbTopo > 0) ? '&amp;' : '' }}
                         {{ ($nbTopo > 0) ? 'Topos' : '' }}
