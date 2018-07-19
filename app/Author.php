@@ -12,7 +12,7 @@ class Author extends Model
      * @return string
      */
     public function picture($size = 1300){
-        return file_exists(storage_path('app/public/authors/' . $size . '/author-' . $this->id . '.png')) ? '/storage/articles/' . $size . '/article-' . $this->id . '.jpg' : '/img/default-article-bandeau.jpg';
+        return file_exists(storage_path('app/public/authors/' . $size . '/author-' . $this->id . '.png')) ? '/storage/authors/' . $size . '/author-' . $this->id . '.png' : '/img/default-article-bandeau.jpg';
     }
 
     public function articles(){
