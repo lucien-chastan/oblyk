@@ -39,7 +39,7 @@
                         <h2 class="author-title">À propos de l'auteur</h2>
                         <div class="author-resume row">
                             <div class="col s12">
-                                <img src="{{ $article->enrichedAuthor->picture() }}" alt="image de l'auteur" class="circle left author-picture">
+                                <img src="{{ $article->enrichedAuthor->picture(100) }}" alt="image de l'auteur" class="circle left author-picture">
                                 @markdown($article->enrichedAuthor->resume)
                             </div>
                         </div>
