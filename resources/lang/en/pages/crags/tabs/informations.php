@@ -59,4 +59,6 @@ return [
     'routeTypeTitle'=>'Route type',
     'gradeTitle'=>'Number of routes by grades',
 
+    // Boite article
+    'relatedArticles' => 'Articles linked to this site'
 ];

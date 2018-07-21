@@ -37,6 +37,7 @@ class CragController extends Controller
             ->with('gapGrade')
             ->with('descriptions.user')
             ->with('exceptions.user')
+            ->with('articleCrags.article')
             ->first();
 
 

@@ -31,5 +31,6 @@ return [
     'descriptionTitle' => "Description des grimpeurs",
     'noDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as ce topo, n'hésite pas à le décrire",
 
-
+    // Boite article
+    'relatedArticles' => 'Articles liés à ce topo'
 ];

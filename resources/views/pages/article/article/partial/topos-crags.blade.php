@@ -11,7 +11,7 @@
                     @foreach($article->articleTopos as $articleTopo)
                         <a class="grey-text" href="{{ route('topoPage', ['topo_id' => $articleTopo->topo->id, 'topo_label' => str_slug($articleTopo->topo->label)]) }}">
                             <img class="z-depth-3 guide-book-cover" src="{{ $articleTopo->topo->cover() }}">
-                            <p class="loved-king-font no-margin truncate" style="font-size: 1.5em">
+                            <p class="loved-king-font no-margin truncate article-topo-link">
                                 {{ $articleTopo->topo->label }}
                             </p>
                         </a>
