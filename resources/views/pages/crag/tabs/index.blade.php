@@ -21,6 +21,13 @@
     @include('pages.crag.partials.topos')
 </div>
 
+{{--ARTICLES--}}
+@if(count($crag->articleCrags) > 0)
+    <div class="row stretchCol">
+        @include('pages.crag.partials.articles')
+    </div>
+@endif
+
 <div class="row stretchCol">
 
     {{--RECHERCHE DE PARTENRAIRE--}}
