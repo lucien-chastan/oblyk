@@ -33,13 +33,18 @@
                 </div>
 
                 <div class="article-markdown">
-                    @markdown($article->body)
+
+                    @if($article->file_view == null)
+                        @markdown($article->body)
+                    @else
+                        @include('pages.article.article.' . $article->file_view)
+                    @endif
 
                     @if(isset($article->enrichedAuthor))
-                        <h2 class="author-title">À propos de l'auteur</h2>
                         <div class="author-resume row">
+                            <h2 class="author-title loved-king-font">À propos de l'auteur</h2>
                             <div class="col s12">
-                                <img src="{{ $article->enrichedAuthor->picture(100) }}" alt="image de l'auteur" class="circle left author-picture">
+                                <img src="{{ $article->enrichedAuthor->picture(200) }}" alt="image de l'auteur" class="right author-picture">
                                 @markdown($article->enrichedAuthor->resume)
                             </div>
                         </div>
@@ -51,35 +56,6 @@
                     @lang('pages/articles/article.views',['nb'=>$article->views])
                 </div>
             </div>
-
-            @if($nbTopo > 0 || $nbCrag > 0)
-                <div class="enriched-article-area">
-                    <h2 class="loved-king-font topos-and-crags-title" id="map-et-topo">
-                        {{ ($nbCrag > 0) ? 'Sites de grimpes' : '' }}
-                        {{ ($nbCrag > 0 && $nbTopo > 0) ? '&amp;' : '' }}
-                        {{ ($nbTopo > 0) ? 'Topos' : '' }}
-                    </h2>
-                    @if($nbCrag > 0)
-                        <div class="col s12 {{ ($nbTopo > 0) ? 'm6 l8' : '' }}">
-                            <div id="article-map"></div>
-                        </div>
-                    @endif
-                    @if($nbTopo > 0)
-                        <div class="col s12 {{ ($nbCrag > 0) ? 'm6 l4' : '' }} text-center">
-                            <div class="text-center">
-                                @foreach($article->articleTopos as $articleTopo)
-                                    <a class="grey-text" href="{{ route('topoPage', ['topo_id' => $articleTopo->topo->id, 'topo_label' => str_slug($articleTopo->topo->label)]) }}">
-                                        <img class="z-depth-3 guide-book-cover" src="{{ $articleTopo->topo->cover() }}">
-                                        <p class="loved-king-font no-margin truncate" style="font-size: 1.5em">
-                                            {{ $articleTopo->topo->label }}
-                                        </p>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            @endif
 
             {{--LES COMMMENTAIRES--}}
             <div class="col s12">
@@ -124,7 +100,10 @@
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/article.js"></script>
+    <script src="/framework/chartJs/Chart.min.js"></script>
+
     <script>
         initArticleMap({{ $article->id }});
+        buildArticleGraph();
     </script>
 @endsection
