@@ -33,7 +33,25 @@ function initArticleMap(articleId) {
         // zoom the map to the polyline
         articleMap.fitBounds(polyline.getBounds());
 
+        // Zoom -1
+        articleMap.setZoom(articleMap.getZoom() - 1);
+
         //on supprime la polyline de zoom
         polyline.remove();
+    });
+}
+
+function buildArticleGraph() {
+    var graphArea = document.getElementsByClassName('article-graph');
+    for (var i = 0; i < graphArea.length; i++) {
+        var cragId = graphArea[i].getAttribute('data-crag');
+        buildeGraph(cragId, 'climb');
+        buildeGraph(cragId, 'grade');
+    }
+}
+
+function buildeGraph(cragId, type) {
+    axios.get('/chart/crag/' + cragId + '/' + type).then(function (response) {
+        new Chart(document.getElementById(type + "-" + cragId).getContext('2d'),response.data);
     });
 }

@@ -28,17 +28,27 @@ iframe {
 }
 
 .author-resume {
+    margin-top: 2em;
+    background-color: rgb(235,235,235);
+    padding: 1em;
+    border-radius: 5px;
     .author-picture {
-        margin-right: 1em;
-        height: 60px;
-        width: 60px;
+        height: 150px;
+        border-radius: 5px;
+        margin-left: 1em;
+    }
+}
+
+.article-graph {
+    margin-bottom: 5em;
+    .graph{
+        position: relative;
+        height: 250px;
     }
 }
 
 .author-title {
-    padding-top: 1em;
-    border: 1px rgb(225, 225, 225);
-    border-top-style: solid;
+    margin-top: 0;
 }
 
 .enriched-article-area {
@@ -62,6 +72,22 @@ iframe {
     }
 }
 
+.article-markdown {
+    h2 {
+        &.loved-king-font {
+            font-size: 2em;
+        }
+
+        .voir-sur-oblyk {
+            font-family: Roboto, sans-serif;
+            font-size: 0.45em;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+}
 
 .articles-container {
     margin-top: 64px;
