@@ -55,7 +55,8 @@
 </h2>
 
 <p>
-    Sûrement un des secteurs le plus fréquenté de Cap Canaille. Il est à l'ombre le matin.
+    Ce secteur est caractérisé par un rocher orangé, en states de grès légèrement déversant, et assez friable.<br>
+    Surement un des secteurs le plus fréquenté de Cap Canaille. Il est à l'ombre le matin et l'accès se fait en rappel.
 </p>
 
 <div class="row">
@@ -73,11 +74,11 @@
         <div class="row">
             <div class="col s12 m6">
                 <img alt="Secteur Ouvreur de Bouse – Cap Canaille" title="Secteur Ouvreur de Bouse – Cap Canaille" src="/storage/articles/1300/cap-canaille-6-3.jpg" class="responsive-img">
-                <p class="text-center grey-text">Départ et vu sur la mer</p>
+                <p class="text-center grey-text">Départ et vue sur la mer</p>
             </div>
             <div class="col s12 m6">
                 <img alt="Rappel Ouvreur de Bouse – Cap Canaille" title="Rappel Ouvreur de Bouse – Cap Canaille" src="/storage/articles/1300/rappels-un-peu-gazeux-a-cap-canaille-au-secteur-ouvreur-de-bouse-6.jpg" class="responsive-img">
-                <p class="grey-text text-center">Rappel d'Ouvreur de Bouse</p>
+                <p class="grey-text text-center">Rappel d'<a href="{{ route('routePage', ['route_id'=>'3022', 'route_label'=>'ouvreur-de-bouse']) }}">"Ouvreur de Bouse"<a></a></p>
             </div>
         </div>
     </div>
@@ -92,7 +93,10 @@
     <a class="voir-sur-oblyk" href="{{ route('cragPage', ['crag_id' => '1641', 'crag_label' => 'draioun']) }}">voir sur oblyk</a>
 </h2>
 
-<p>La falaise est à l'ombre le matin.</p>
+<p>
+    La paroi est composée de quatre strates de roches bien différentes donnant une grande variété lors des ascensions.<br>
+    La falaise est à l'ombre le matin. Une petite marche d'approche permet d'atteindre le pied de la falaise.
+</p>
 
 <div class="row">
     <div class="col s12 m4">
@@ -128,6 +132,11 @@
     <a class="voir-sur-oblyk" href="{{ route('cragPage', ['crag_id' => '1639', 'crag_label' => 'le-pendule']) }}">voir sur oblyk</a>
 </h2>
 
+<p>
+    La falaise est à l'ombre le matin.<br>
+    Le départ des voies se fait après une petite marche d'approche et plusieurs rappels dont un donnant accès à une grotte.
+</p>
+
 <div class="row">
     <div class="col s12 m4">
         <img alt="Grande voie La Ciotat - Cri Primal" title="Grande voie La Ciotat - Cri Primal" src="/storage/articles/1300/grande-voie-cri-primal-la-ciotat-6.jpg" class="responsive-img">
@@ -141,6 +150,11 @@
 
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1639'])
 
+
+<p>
+    De nombreuses grandes voies magnifiques sont possibles sur cette falaise de Cap Canaille, comme celles présentées ci-dessus.<br>
+    D'autres secteurs sont également présents sur ce site comme <a href="{{ route('cragPage', ['crag_id'=>'1636', 'crag_label'=>'belvedere']) }}">Belvédère</a>, <a href="{{ route('cragPage', ['crag_id'=>'1750', 'crag_label'=>'le-pas-de-la-chevre']) }}">Pas de la Chèvre</a>, <a href="{{ route('cragPage', ['crag_id'=>'1637','crag_label'=>'le-semaphore']) }}">Sémaphore</a>
+</p>
 <p>
     Vous pouvez découvrir l'intégralité de cet article sur le <a href="https://blog.le-yeti.net/cap-canaille-calanques/)">blog du Yéti</a>
 </p>
