@@ -21,7 +21,7 @@ class Link extends Model
 
         if ($this->linkable_type == 'App\Crag') {
             $name = Crag::find($this->linkable_id)->label;
-            $link = route('cragPage', ['crag_id' => $this->linkable_id, 'crag_label' => str_slug($name)]);
+            $link = Crag::webUrl($this->linkable_id,$name);
         }
 
         if ($this->linkable_type == 'App\Topo') {

@@ -8,11 +8,11 @@
                 <img src="{{str_replace('1300',"50",$crag->bandeau)}}" class="left circle circle-40" alt="">
             @endif
             <div class="text-bold">
-                <img src="/img/point-{{$crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water . $crag->type_via_ferrata}}.svg" alt="" height="11">
-                <a href="{{route('cragPage',['crag_id'=>$crag->id,'crag_label'=>$crag->label])}}">{{$crag->label}}</a>
+                <img src="/img/point-{{ $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water . $crag->type_via_ferrata }}.svg" alt="" height="11">
+                <a href="{{ $crag->url() }}">{{ $crag->label }}</a>
             </div>
             <p class="info-user grey-text">
-                ajouté par <a href="{{route('userPage',['user_id'=>$crag->user_id,'user_label'=>str_slug($crag->user->name)])}}">{{$crag->user->name}}</a> le {{$crag->created_at->format('d M Y')}}
+                ajouté par <a href="{{ route('userPage',['user_id'=>$crag->user_id,'user_label'=>str_slug($crag->user->name)]) }}">{{ $crag->user->name }}</a> le {{ $crag->created_at->format('d M Y') }}
             </p>
         </div>
 

@@ -52,7 +52,7 @@ class UserVueController extends Controller
 
                     //FALAISE
                     if($follow->followed_type == 'App\Crag'){
-                        $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
+                        $follow->followUrl = Crag::webUrl($follow->followed_id, $follow->followed->label);
                         $follow->followName = $follow->followed->label;
                         $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
                         $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);

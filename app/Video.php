@@ -73,7 +73,7 @@ class Video extends Model
 
         if ($this->viewable_type == 'App\Crag') {
             $name = Crag::find($this->viewable_id)->label;
-            $link = route('cragPage', ['crag_id' => $this->viewable_id, 'crag_label' => str_slug($name)]);
+            $link = Crag::webUrl($this->viewable_id, $name);
         }
 
         if ($this->viewable_type == 'App\Route') {

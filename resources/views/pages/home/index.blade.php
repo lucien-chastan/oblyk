@@ -203,7 +203,7 @@
                             </p>
                         </div>
                         <div class="card-action text-right">
-                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label' => str_slug($article->label)])}}">@lang('home.readMore')</a>
+                            <a href="{{ $article->url() }}">@lang('home.readMore')</a>
                         </div>
                     </div>
                 </div>

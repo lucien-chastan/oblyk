@@ -166,9 +166,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('articlePage', ['article_label'=> str_slug($article->label), 'article_id'=>$article->id], false)}}</loc>
+                    <loc>{{ $app }}/{{$language}}{{ $article->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('articlePage', ['article_label'=> str_slug($article->label), 'article_id'=>$article->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ $article->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $article->updated_at->format('Y-m-d') }}</lastmod>
