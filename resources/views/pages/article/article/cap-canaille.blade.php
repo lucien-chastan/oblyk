@@ -1,7 +1,24 @@
+{{-- CARACTÉRISTIQUE --}}
+
+<h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">notes</i>Caractéristiques</h2>
+
+<p>
+    Depuis les calanques de Marseille, vous pouvez voir un rocher étrange au loin, marron, orangé, avec plusieurs strates empilés… C'est <a href="{{ route('cragPage', ['crag_id' => '96', 'crag_label' => 'cap-canaille']) }}">Cap Canaille</a> ! Pourquoi ne pas aller le découvrir d'un peu plus près ?
+</p>
+
+<p>
+    Cette falaise offre un cadre unique avec une vue imprenable sur <strong>les calanques</strong> et une <strong>mer bleue</strong> impressionnante. Ce sont les plus hautes falaises de France avec une altitude maximale de 394 mètres.
+    L'escalade se fait sur <strong>quatre rochers</strong> au sein d'une même ascension (marnes, calcaires roux et blanc et le fameux poudingue). Elle mêle également une grande diversité de profils, passant du toit au dièdre ou aux grandes traversées sur une même ligne avec même la possibilité de visiter des grottes ! C'est vraiment un grand dépaysement de grimper à cet endroit.
+</p>
+
+<p>
+    Les <strong>marches d'approches</strong> sont de manière générale assez raisonnable avec des parkings qui peuvent être très fréquentés lors des beaux jours mais qui sont à proximité des départs de voies.
+</p>
+
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">place</i> Localisation &amp; Topo</h2>
 
 <p>
-    La Ciotat, près de Cassis et Marseille dans les Bouches du Rhône, France
+    Cap Canaille est situé à la Ciotat, près de Cassis et Marseille dans les Bouches du Rhône, France
 </p>
 
 <p>
@@ -27,24 +44,6 @@
 
 <p>
     Les calanques peuvent subir fortement le vent, mais aussi les entrées maritimes ou de fortes chaleurs, il est vraiment important de bien regarder la météo avant de se lancer et de s'équiper en conséquence sinon, ça peut vite devenir bien moins marrant surtout en grande voie !
-</p>
-
-
-{{-- CARACTÉRISTIQUE --}}
-
-<h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">notes</i>Caractéristiques</h2>
-
-<p>
-    Depuis les calanques de Marseille, vous pouvez voir un rocher étrange au loin, marron, orangé, avec plusieurs strates empilés… C'est <a href="{{ route('cragPage', ['crag_id' => '96', 'crag_label' => 'cap-canaille']) }}">Cap Canaille</a> ! Pourquoi ne pas aller le découvrir d'un peu plus près ?
-</p>
-
-<p>
-    Cette falaise offre un cadre unique avec une vue imprenable sur <strong>les calanques</strong> et une <strong>mer bleue</strong> impressionnante. Ce sont les plus hautes falaises de France avec une altitude maximale de 394 mètres.
-    L'escalade se fait sur <strong>quatre rochers</strong> au sein d'une même ascension (marnes, calcaires roux et blanc et le fameux poudingue). Elle mêle également une grande diversité de profils, passant du toit au dièdre ou aux grandes traversées sur une même ligne avec même la possibilité de visiter des grottes ! C'est vraiment un grand dépaysement de grimper à cet endroit.
-</p>
-
-<p>
-    Les <strong>marches d'approches</strong> sont de manière générale assez raisonnable avec des parkings qui peuvent être très fréquentés lors des beaux jours mais qui sont à proximité des départs de voies.
 </p>
 
 {{-- SECTEUR OUVREUR DE BOUSE - CAP CANAILLE --}}
