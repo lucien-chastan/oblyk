@@ -22,7 +22,7 @@
 </div>
 
 {{--ARTICLES--}}
-@if(count($crag->articleCrags) > 0)
+@if($nbArticle > 0)
     <div class="row stretchCol">
         @include('pages.crag.partials.articles')
     </div>
