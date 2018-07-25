@@ -68,7 +68,8 @@ class User extends Authenticatable
     public function tickLists() { return $this->hasMany('App\TickList','user_id', 'id'); }
     public function userConversations(){ return $this->hasMany('App\UserConversation','user_id', 'id'); }
     public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }
-
+    public function author() { return $this->hasOne('App\Author','user_id', 'id'); }
+	
     /**
      * @param bool $absolute
      * @return string
@@ -93,5 +94,4 @@ class User extends Authenticatable
             $absolute
         );
     }
-
 }

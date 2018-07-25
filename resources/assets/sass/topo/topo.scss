@@ -101,6 +101,15 @@ body{
     }
 }
 
+.topo-article-area {
+    h2 {
+        font-size: 2em;
+        margin-top: 0
+    }
+    .img-article {
+        margin-right: 1em;
+    }
+}
 //version smartphone
 @media screen and (max-width:600px){
 

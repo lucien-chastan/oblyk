@@ -41,6 +41,17 @@ class Topo extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
+    public function articleTopos(){
+        return $this->hasMany('App\ArticleTopo','topo_id','id');
+    }
+
+    public function cover($size = 700) {
+        $cover = file_exists(storage_path('app/public/topos/' . $size . '/topo-' . $this->id . '.jpg')) ?
+            '/storage/topos/' . $size . '/topo-' . $this->id . '.jpg' :
+            '/img/default-topo-couverture.svg';
+        return $cover;
+    }
+
     /**
      * @param bool $absolute
      * @return string

@@ -277,7 +277,6 @@ Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo'
 Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
 Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
-
 // PARTENAIRE
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
 
@@ -293,6 +292,8 @@ Route::get('/API/massives/{lat}/{lng}/{rayon}/{crag_id}', 'MassiveController@get
 Route::post('/massive/create-liaison', 'CRUD\MassiveCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/massive/delete-liaison', 'CRUD\MassiveCragController@deleteLiaison')->name('ScriptDeleteLiaison');
 
+// ARTILCE API
+Route::get('/api/article/crags/{article_id}','ArticleController@getArticleCrags')->name('ApiArticleCrags');
 
 //UPLOAD
 Route::post('/upload/topoCouverture', 'CRUD\TopoController@uploadCouvertureTopo')->name('uploadCouvertureTopo');

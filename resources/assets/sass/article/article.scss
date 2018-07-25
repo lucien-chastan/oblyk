@@ -27,6 +27,73 @@ iframe {
     margin-bottom: 2em;
 }
 
+.author-resume {
+    margin-top: 2em;
+    background-color: rgb(235,235,235);
+    padding: 1em;
+    border-radius: 5px;
+    .author-picture {
+        height: 150px;
+        border-radius: 5px;
+        margin-left: 1em;
+    }
+}
+
+.article-graph {
+    margin-bottom: 5em;
+    .graph{
+        position: relative;
+        height: 250px;
+    }
+}
+
+.author-title {
+    margin-top: 0;
+}
+
+.enriched-article-area {
+    #article-map {
+        height: 400px;
+        max-height: calc(100vh - 120px);
+    }
+
+    .guide-book-cover {
+        height: 360px;
+        max-height: calc(100vh - 160px);
+        max-width: 100%;
+    }
+
+    .topos-and-crags-title {
+        font-size: 1.6em;
+    }
+
+    .col {
+        margin-bottom: 2em;
+    }
+
+    .article-topo-link {
+        font-size: 1.5em;
+        text-align: center;
+    }
+}
+
+.article-markdown {
+    h2 {
+        &.loved-king-font {
+            font-size: 2em;
+        }
+
+        .voir-sur-oblyk {
+            font-family: Roboto, sans-serif;
+            font-size: 0.45em;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+}
+
 .articles-container {
     margin-top: 64px;
 
