@@ -6,7 +6,7 @@
                 @foreach($activity['climbers'] as $user)
                     <div class="col s12 m6 l4 blue-border-activity-part">
                         <img class="left circle" src="{{ file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg' }}">
-                        <a href="{{ route('userPage',['user_id' => $user->id, 'user_label'=>str_slug($user->name)]) }}">
+                        <a href="{{ $user->url() }}">
                             {{ $user->name }}
                         </a><br>
                         <span class="grey-text">

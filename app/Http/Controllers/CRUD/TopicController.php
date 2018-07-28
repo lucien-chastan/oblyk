@@ -85,7 +85,7 @@ class TopicController extends Controller
         $topic->user_id = Auth::id();
         $topic->save();
 
-        $topic->location = route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]);
+        $topic->location = $topic->url();
 
         //on ajout automatiquement le topic au élément suivi par l'auteur
         $follow = new Follow();

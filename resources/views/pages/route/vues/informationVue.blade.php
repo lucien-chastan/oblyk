@@ -263,7 +263,7 @@
                             @if($description->note != 0)
                                 <img class="note-description" src="/img/note_{{$description->note}}.png" alt="">
                             @endif
-                                @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>route('userPage',['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]), 'date'=>$description->created_at->format('d M Y')])
+                                @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>$description->user->url(), 'date'=>$description->created_at->format('d M Y')])
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>

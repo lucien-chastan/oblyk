@@ -108,7 +108,7 @@
                                 @endif
                             </td>
                             <td><img src="/img/note_{{ $route->note }}.png" alt="" height="15"></td>
-                            <td><a href="{{ route('cragPage', ['crag_id'=>$route->crag->id, 'crag_label'=>str_slug($route->crag->label)]) }}">{{ $route->crag->label }}</a></td>
+                            <td><a href="{{ $route->crag->url() }}">{{ $route->crag->label }}</a></td>
                             <td>{{ $route->created_at->format('d M Y') }}</td>
                         </tr>
                     @endforeach

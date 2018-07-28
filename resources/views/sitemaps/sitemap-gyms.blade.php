@@ -4,9 +4,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('gymPage', ['gym_label'=> str_slug($gym->label), 'gym_id'=>$gym->id], false)}}</loc>
+                    <loc>{{ $app }}/{{ $language }}{{ $gym->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('gymPage', ['gym_label'=> str_slug($gym->label), 'gym_id'=>$gym->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ $gym->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $gym->updated_at ? $gym->updated_at->format('Y-m-d') : $gym->created_at->format('Y-m-d') }}</lastmod>

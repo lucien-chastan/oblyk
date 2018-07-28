@@ -95,7 +95,7 @@
                         <tr>
                             <td><img src="{{ (file_exists(storage_path('app/public/topos/100/topo-' . $guidebook->id . '.jpg')) ? '/storage/topos/100/topo-' . $guidebook->id . '.jpg' : '/img/icon-search-guidebook.svg') }}" class="max-min-img"></td>
                             <td class="text-bold">
-                                <a href="{{ route('topoPage', ['topo_id'=>$guidebook->id, 'topo_label'=>str_slug($guidebook->label)]) }}">
+                                <a href="{{ $guidebook->url() }}">
                                     {{ $guidebook->label }}
                                 </a>
                             </td>

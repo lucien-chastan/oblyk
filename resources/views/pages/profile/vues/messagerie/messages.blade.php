@@ -15,7 +15,7 @@
             avec :
             @foreach($conversation->userConversations as $userConversation)
                 @if($userConversation->user->id != Auth::id())
-                    <span><a href="{{route('userPage',['user_id'=>$userConversation->user->id,'user_label'=>str_slug($userConversation->user->name)])}}">{{$userConversation->user->name}}</a></span>
+                    <span><a href="{{ $userConversation->user->url() }}">{{ $userConversation->user->name }}</a></span>
                 @endif
             @endforeach
         </span>

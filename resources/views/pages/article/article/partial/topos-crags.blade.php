@@ -9,7 +9,7 @@
             <div class="col s12 {{ ($nbCrag > 0) ? 'm6 l4' : '' }} text-center">
                 <div class="text-center">
                     @foreach($article->articleTopos as $articleTopo)
-                        <a class="grey-text" href="{{ route('topoPage', ['topo_id' => $articleTopo->topo->id, 'topo_label' => str_slug($articleTopo->topo->label)]) }}">
+                        <a class="grey-text" href="{{ $articleTopo->topo->url() }}">
                             <img class="z-depth-3 guide-book-cover" src="{{ $articleTopo->topo->cover() }}">
                             <p class="loved-king-font no-margin truncate article-topo-link">
                                 {{ $articleTopo->topo->label }}

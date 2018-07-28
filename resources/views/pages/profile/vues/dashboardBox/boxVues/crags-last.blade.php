@@ -12,7 +12,7 @@
                 <a href="{{ $crag->url() }}">{{ $crag->label }}</a>
             </div>
             <p class="info-user grey-text">
-                ajouté par <a href="{{ route('userPage',['user_id'=>$crag->user_id,'user_label'=>str_slug($crag->user->name)]) }}">{{ $crag->user->name }}</a> le {{ $crag->created_at->format('d M Y') }}
+                ajouté par <a href="{{ $crag->user->url() }}">{{ $crag->user->name }}</a> le {{ $crag->created_at->format('d M Y') }}
             </p>
         </div>
 

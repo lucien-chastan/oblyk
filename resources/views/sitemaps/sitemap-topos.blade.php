@@ -4,9 +4,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('topoPage', ['topo_label'=> str_slug($topo->label), 'topo_id'=>$topo->id], false)}}</loc>
+                    <loc>{{ $app }}/{{ $language }}{{ $topo->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $app }}/{{$language}}{{route('topoPage', ['topo_label'=> str_slug($topo->label), 'topo_id'=>$topo->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $app }}/{{ $language }}{{ $topo->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $topo->updated_at ? $topo->updated_at->format('Y-m-d') : $topo->created_at->format('Y-m-d') }}</lastmod>

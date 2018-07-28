@@ -4,9 +4,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('userPage', ['user_name'=> str_slug($climber->name), 'user_id'=>$climber->id], false)}}</loc>
+                    <loc>{{ $app }}/{{ $language }}{{ $climber->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('userPage', ['user_name'=> str_slug($climber->name), 'user_id'=>$climber->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ $climber->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $climber->updated_at ? $climber->updated_at->format('Y-m-d') : $climber->created_at->format('Y-m-d') }}</lastmod>

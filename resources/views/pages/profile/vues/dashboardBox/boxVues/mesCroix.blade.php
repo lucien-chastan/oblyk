@@ -52,7 +52,7 @@
                 </strong>
                 {{ $tick->route->label }}
             </span>
-            <span class="grey-text"><a class="grey-text text-hover" href="{{ route('cragPage',['crag_id'=>$tick->route->crag->id, 'crag_label'=>str_slug($tick->route->crag->label)]) }}">{{ $tick->route->crag->label }}</a>, {{ $tick->route->crag->region }} ({{ $tick->route->crag->code_country }})</span>
+            <span class="grey-text"><a class="grey-text text-hover" href="{{ $tick->route->crag->url() }}">{{ $tick->route->crag->label }}</a>, {{ $tick->route->crag->region }} ({{ $tick->route->crag->code_country }})</span>
         </p>
     @endforeach
 
@@ -76,7 +76,7 @@
                 </strong>
                 {{ $cross->route->label }}
             </span>
-            <span class="grey-text"><a class="grey-text text-hover" href="{{ route('cragPage',['crag_id'=>$cross->route->crag->id, 'crag_label'=>str_slug($cross->route->crag->label)]) }}">{{ $cross->route->crag->label }}</a>, {{ $cross->route->crag->region }} ({{ $cross->route->crag->code_country }})</span>
+            <span class="grey-text"><a class="grey-text text-hover" href="{{ $cross->route->crag->url() }}">{{ $cross->route->crag->label }}</a>, {{ $cross->route->crag->region }} ({{ $cross->route->crag->code_country }})</span>
         </p>
     @endforeach
 

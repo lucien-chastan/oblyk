@@ -8,7 +8,7 @@
     </div>
 
     <div class="right-col">
-        <p class="truncate text-bold loved-king-font"><a href="{{ route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]) }}" class="white-text">{{$user->name}}</a></p>
+        <p class="truncate text-bold loved-king-font"><a href="{{ $user->url() }}" class="white-text">{{$user->name}}</a></p>
         <p class="truncate">{{$user->genre}}, {{$user->age}}</p>
     </div>
 
@@ -50,7 +50,7 @@
     @else
         <div class="row">
             <div class="col s12">
-                <a class="right" href="{{ route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]) }}">@lang('pages/partner/userView.actionSeeProfil')</a>
+                <a class="right" href="{{ $user->url() }}">@lang('pages/partner/userView.actionSeeProfil')</a>
                 <h2 class="loved-king-font">@lang('pages/partner/userView.titleDescription') </h2>
                 @if($user->partnerSettings->description != '')
                     <div class="markdownZone">

@@ -13,10 +13,10 @@
                     @endif
                 </td>
                 <td><span onclick="loadRoute({{$route->id}})" class="button-open-route">{{ $route->label }}</span></td>
-                <td><a href="{{ route('cragPage', ['crag_id'=>$route->crag->id,'crag_label'=>str_slug($route->crag->label)]) }}">{{ $route->crag->label }}</a></td>
+                <td><a href="{{ $route->crag->url() }}">{{ $route->crag->label }}</a></td>
                 <td>{{ $route->height }} mètres</td>
                 <td>
-                    <a {!! $Helpers::tooltip('ajouté par' . $route->user->label) !!} href="{{ route('userPage',['user_id'=>$route->user->id,'user_label'=>str_slug($route->user->label)]) }}">{{ $route->user->name }}</a>
+                    <a {!! $Helpers::tooltip('ajouté par' . $route->user->label) !!} href="{{ $route->user->url() }}">{{ $route->user->name }}</a>
                 </td>
             </tr>
         @endforeach

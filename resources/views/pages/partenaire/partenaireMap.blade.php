@@ -76,7 +76,7 @@
                                 @endif
 
                                 <p class="text-right">
-                                    <a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux" class="btn-flat blue-text"><i class="material-icons left">location_on</i> @lang('pages/partner/partnerMap.seeMyPlaces')</a>
+                                    <a href="{{ Auth::user()->url() }}#mes-lieux" class="btn-flat blue-text"><i class="material-icons left">location_on</i> @lang('pages/partner/partnerMap.seeMyPlaces')</a>
                                 </p>
                             @else
                                 <h2 class="loved-king-font text-center">@lang('pages/partner/partnerMap.titlePlaces')</h2>
@@ -85,7 +85,7 @@
                                     @lang('pages/partner/partnerMap.introPlaces')
                                 </p>
                                 <p class="text-center">
-                                    <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux">@lang('pages/partner/partnerMap.actionPlaces')</a>
+                                    <a class="btn-flat waves-effect blue-text" href="{{ Auth::user()->url() }}#mes-lieux">@lang('pages/partner/partnerMap.actionPlaces')</a>
                                 </p>
                             @endif
                         @else
@@ -96,7 +96,7 @@
                                 @lang('pages/partner/partnerMap.introWelcome')
                             </p>
                             <p class="text-center">
-                                <a class="btn-flat waves-effect blue-text" href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres">@lang('pages/partner/partnerMap.actionWelcome')</a>
+                                <a class="btn-flat waves-effect blue-text" href="{{ Auth::user()->url() }}#partenaire-parametres">@lang('pages/partner/partnerMap.actionWelcome')</a>
                             </p>
                             <div class="svg-container">
                                 @include('pages.home.partials.svg.partenaire_grimpe')

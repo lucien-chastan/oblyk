@@ -5,7 +5,7 @@
             @foreach($activity['gyms'] as $gym)
                 <div class="col s12 m6 l4 blue-border-activity-part">
                     <img class="left circle" src="{{ file_exists(storage_path('app/public/gyms/50/logo-' . $gym->id . '.png')) ? '/storage/gyms/50/logo-' . $gym->id . '.png' : '/img/icon-search-gym.svg' }}">
-                    <a href="{{ route('gymPage',['gym_id' => $gym->id, 'gym_label'=>str_slug($gym->label)]) }}">
+                    <a href="{{ $gym->url() }}">
                         {{ $gym->label }}
                     </a><br>
                     <span class="grey-text">

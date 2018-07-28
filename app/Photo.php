@@ -36,7 +36,7 @@ class Photo extends Model
 
         if ($this->illustrable_type == 'App\Route') {
             $name = Route::find($this->illustrable_id)->label;
-            $link = route('routePage', ['route_id' => $this->illustrable_id, 'route_label' => str_slug($name)]);
+            $link = Route::webUrl($this->illustrable_id, $name);
         }
 
         return [

@@ -78,12 +78,12 @@ class Video extends Model
 
         if ($this->viewable_type == 'App\Route') {
             $name = Route::find($this->viewable_id)->label;
-            $link = route('routePage', ['route_id' => $this->viewable_id, 'route_label' => str_slug($name)]);
+            $link = Route::webUrl($this->viewable_id, $name);
         }
 
         if ($this->viewable_type == 'App\Gym') {
             $name = Gym::find($this->viewable_id)->label;
-            $link = route('gymPage', ['gym_id' => $this->viewable_id, 'gym_label' => str_slug($name)]);
+            $link = Gym::webUrl($this->viewable_id,$name);
         }
 
         return [
