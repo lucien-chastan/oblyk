@@ -20,7 +20,7 @@
                 </td>
                 <td onclick="selectTopo({{ $topo->id }})"><a class="btn-flat waves-effect">{{ $topo->label }}</a></td>
                 <td>{{ $topo->editionYear }}</td>
-                <td><a target="_blank" href="{{ $topo->url() }}">voir le topo</a></td>
+                <td><a target="_blank" href="{{ \App\Topo::webUrl($topo->id, $topo->label) }}">voir le topo</a></td>
             </tr>
             @endforeach
         </tbody>
