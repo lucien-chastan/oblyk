@@ -22,7 +22,7 @@
                         <a target="_blank" href="{{$sale->url}}">{{$sale->url}}</a>
                         <div class="markdownZone">{{ $sale->description }}</div>
                         <p class="info-user grey-text">
-                            @lang('modals/buy.postByDate', ['name'=>$sale->user->name, 'date'=>$sale->created_at->format('d M Y') ,'url'=>route('userPage', ['user_id'=>$sale->user->id, 'user_label'=>str_slug($sale->user->name)])])
+                            @lang('modals/buy.postByDate', ['name'=>$sale->user->name, 'date'=>$sale->created_at->format('d M Y') ,'url'=>$sale->user->url()])
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$sale->id, "model"=>"TopoSale"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                 @if($sale->user_id == Auth::id())

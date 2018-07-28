@@ -10,7 +10,7 @@
                 </div>
                 <p class="i-cursor">
                     {{$video->description}}<br>
-                    @lang('modals/video.postByDate', ['name'=>$video->user->name, 'date' => $video->created_at->format('d-M-Y H:i'), 'url'=>route('userPage', ['user_id'=>$video->user->id, 'user_label'=>str_slug($video->user->name)])])
+                    @lang('modals/video.postByDate', ['name'=>$video->user->name, 'date' => $video->created_at->format('d-M-Y H:i'), 'url'=>$video->user->url()])
                     <br>
                     @if(Auth::check())
                         <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>

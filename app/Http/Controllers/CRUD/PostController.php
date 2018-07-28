@@ -159,7 +159,7 @@ class PostController extends Controller
                     'new_post_in_forum',
                     [$user->name,$topic->label],
                     '/img/forum-' . $topic->category_id . '.svg',
-                    [route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]),$user->name],
+                    [$user->url(), $user->name],
                     [$topic->id]
                 );
                 $notification->save();

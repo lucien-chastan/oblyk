@@ -20,7 +20,7 @@
                             <p class="i-cursor no-margin">
                                 {{$video->description}}<br>
                                 @if($video->viewable_type == 'App\Crag')
-                                    @lang('pages/profile/video.addOn') <a href="{{route('cragPage',['crag_id'=>$video->viewable_id, 'crag_label'=>str_slug($video->viewable->label)])}}">{{$video->viewable->label}}</a> <br>
+                                    @lang('pages/profile/video.addOn') <a href="{{ \App\Crag::webUrl($video->viewable_id, $video->viewable->label) }}">{{$video->viewable->label}}</a> <br>
                                 @endif
                                 @if($video->viewable_type == 'App\Route')
                                     @lang('pages/profile/video.addOn') <a class="button-open-route" onclick="loadRoute({{$video->viewable_id}})">{{$video->viewable->label}}</a> <br>

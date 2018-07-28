@@ -95,7 +95,7 @@
                         <tr>
                             <td><img src="{{ ($crag->bandeau != '/img/default-crag-bandeau.jpg') ? str_replace('1300', '50', $crag->bandeau) : '/img/default-crag-bandeau.jpg' }}" class="circle circle-img"></td>
                             <td class="text-bold">
-                                <a href="{{ route('cragPage', ['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]) }}">
+                                <a href="{{ $crag->url() }}">
                                     <img src="/img/marker-{{ $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water . $crag->type_via_ferrata }}.svg" alt="" class="left" height="25">
                                     {{ $crag->label }}
                                 </a>

@@ -11,13 +11,13 @@
 @section('content')
 <div class="content-iframe">
     <div class="img-area">
-        <a class="inherit-link" target="_blank" href="{{ route('cragPage', ['crag_id' => $crag->id, 'crag_label' => str_slug($crag->label)]) }}">
+        <a class="inherit-link" target="_blank" href="{{ $crag->url() }}">
             <img alt="photo de couverture de {{ $crag->label }}" src="{{ ($crag->bandeau != '/img/default-crag-bandeau.jpg') ? str_replace('1300','200',$crag->bandeau) : '/img/bandeau_oblyk.png' }}">
         </a>
     </div>
     <div class="content-area">
         <a class="lien-oblyk" href="https://oblyk.org">oblyk.org</a>
-        <a class="inherit-link" target="_blank" href="{{ route('cragPage', ['crag_id' => $crag->id, 'crag_label' => str_slug($crag->label)]) }}">
+        <a class="inherit-link" target="_blank" href="{{ $crag->url() }}">
             <h1>{{ $crag->label }}</h1>
         </a>
         <table>

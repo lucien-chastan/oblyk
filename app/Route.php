@@ -62,6 +62,31 @@ class Route extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'routePage',
+            [
+                'route_id' => $id,
+                'route_label' => (str_slug($label) != '') ? str_slug($label) : 'ligne'
+            ],
+            $absolute
+        );
+    }
+
     public static function similarRoute($crag_id, $route_id , $label){
 
         $routes = Route::where([

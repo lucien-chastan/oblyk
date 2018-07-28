@@ -14,7 +14,7 @@
                             @endif
                             {{ $route->label }}
                         </a>,
-                        <a href="{{ route('cragPage',['crag_id'=>$route->crag->id, 'crag_label'=>str_slug($route->crag->label)]) }}">
+                        <a href="{{ $route->crag->url() }}">
                             {{ $route->crag->label }}
                         </a>
                     </div>

@@ -29,7 +29,7 @@
                 <div class="title-topic-bar">
                     <h1 class="loved-king-font text-center grey-text text-darken-3 titre-topic">{{$topic->label}}</h1>
                     <p class="text-center grey-text no-margin info-topic">
-                        @lang('pages/forums/topic.postBy') <a href="{{ route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)]) }}">{{$topic->user->name}}</a>
+                        @lang('pages/forums/topic.postBy') <a href="{{ $topic->user->url() }}">{{$topic->user->name}}</a>
                         , {{ trans_choice('pages/forums/topic.nbPost', $topic->nb_post) }}
                         , {{ trans_choice('pages/forums/topic.postView', $topic->views) }}
                         @if(Auth::check())

@@ -12,10 +12,10 @@ Ou alors cherches-tu un partenaire de grimpe ? on t'explique comme on a pensé �
 
 C'est pour un carnet de croix ?<br>
 alors rends-toi sur les falaises où tu as grimpé
-([Bas Cuvier]({{ route('cragPage',['crag_id'=>117,'crag_label'=>'bas-cuvier']) }}) ?
-[Buoux]({{ route('cragPage',['crag_id'=>103,'crag_label'=>'buoux']) }}) ?
-[Cimaî]({{ route('cragPage',['crag_id'=>60,'crag_label'=>'cimai']) }}) ?) et coche tes croix<br>
-Tu trouvera ensuite quelques [graphiques]({{ route('userPage', ['user_id' => $user->id, 'user_name'=> str_slug($user->name)]) }}#analytiks) sympa sur ton dashboard.
+([Bas Cuvier]({{ \App\Crag::webUrl(117,'bas-cuvier') }}) ?
+[Buoux]({{ \App\Crag::webUrl(103,'buoux') }}) ?
+[Cimaî]({{ \App\Crag::webUrl(60,'cimai') }}) ?) et coche tes croix<br>
+Tu trouvera ensuite quelques [graphiques]({{ $user->url() }}#analytiks) sympa sur ton dashboard.
 
 On te laisse découvrir le reste ^^
 

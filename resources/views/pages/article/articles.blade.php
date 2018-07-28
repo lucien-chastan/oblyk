@@ -20,7 +20,7 @@
             @foreach($articles as $article)
                 @if($loop->first)
                     <div class="col s12">
-                        <a style="background-image: url('{{ $article->bandeau() }}')" href="{{ route('articlePage', ['article_id' => $article->id, 'article_label' => str_slug($article->label)]) }}" class="first-article">
+                        <a style="background-image: url('{{ $article->bandeau() }}')" href="{{ $article->url() }}" class="first-article">
                             <div class="article-footer">
                                 <h1 class="loved-king-font">{{ $article->label }}</h1>
                                 <p>
@@ -32,7 +32,7 @@
                     </div>
                 @else
                     <div class="col s12 m6 col-next-article">
-                        <a style="background-image: url('{{ $article->bandeau(200) }}')" href="{{ route('articlePage', ['article_id' => $article->id, 'article_label' => str_slug($article->label)]) }}" class="next-article">
+                        <a style="background-image: url('{{ $article->bandeau(200) }}')" href="{{ $article->url() }}" class="next-article">
                             <div class="article-footer">
                                 <h2 class="loved-king-font truncate">{{ $article->label }}</h2>
                                 <p>

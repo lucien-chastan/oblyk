@@ -22,14 +22,14 @@
             <td class="property-column">Site : </td>
             <td>
                 id : {{ $sector->crag_id }}<br>
-                nom : <a href="{{ route('cragPage', ['crag_id'=>$sector->crag_id, 'crag_label'=>str_slug($sector->crag->label)]) }}">{{ $sector->crag->label }}</a>
+                nom : <a href="{{ $sector->crag->url() }}">{{ $sector->crag->label }}</a>
             </td>
         </tr>
         <tr>
             <td class="property-column">Grimpeur : </td>
             <td>
                 id : {{ $sector->user_id }}<br>
-                nom : <a href="{{ route('userPage', ['user_id'=>$sector->user_id, 'user_label'=>str_slug($sector->user->name)]) }}">{{ $sector->user->name }}</a>
+                nom : <a href="{{ $sector->user->url() }}">{{ $sector->user->name }}</a>
             </td>
         </tr>
         <tr>
@@ -67,7 +67,7 @@
     @foreach($sector->descriptions as $description)
         <p>
             {{ $description->description }}<br>
-            par : <a href="{{ route('userPage', ['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]) }}">{{ $description->user->name }}</a>
+            par : <a href="{{ $description->user->url() }}">{{ $description->user->name }}</a>
         </p>
     @endforeach
 </div>
@@ -78,7 +78,7 @@
     @foreach($sector->photos as $photo)
         <p>
             <a href="/storage/photos/crags/1300/{{ $photo->slug_label }}">{{ $photo->slug_label }}</a><br>
-            par : <a href="{{ route('userPage', ['user_id'=>$photo->user->id, 'user_label'=>str_slug($photo->user->name)]) }}">{{ $photo->user->name }}</a>
+            par : <a href="{{ $photo->user->url() }}">{{ $photo->user->name }}</a>
         </p>
     @endforeach
 </div>

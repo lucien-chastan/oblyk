@@ -16,7 +16,7 @@
                         <p class="no-margin">{{ str_limit($article->description, $limit = 90, $end = '...') }}</p>
                         <p class="grey-text no-margin">
                             Le {{$article->created_at->format('d M Y')}}, {{$article->views}} vus, {{$article->descriptions_count}} commentaires
-                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label'=>str_slug($article->label)])}}">lire l'article</a>
+                            <a href="{{ $article->url() }}">lire l'article</a>
                         </p>
                     </div>
                 </div>

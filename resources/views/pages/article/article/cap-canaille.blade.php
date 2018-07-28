@@ -3,7 +3,7 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">notes</i>Caractéristiques</h2>
 
 <p>
-    Depuis les calanques de Marseille, vous pouvez voir un rocher étrange au loin, marron, orangé, avec plusieurs strates empilés… C'est <a href="{{ route('cragPage', ['crag_id' => '96', 'crag_label' => 'cap-canaille']) }}">Cap Canaille</a> ! Pourquoi ne pas aller le découvrir d'un peu plus près ?
+    Depuis les calanques de Marseille, vous pouvez voir un rocher étrange au loin, marron, orangé, avec plusieurs strates empilés… C'est <a href="{{ \App\Crag::webUrl(96,'cap-canaille') }}">Cap Canaille</a> ! Pourquoi ne pas aller le découvrir d'un peu plus près ?
 </p>
 
 <p>
@@ -50,7 +50,7 @@
 <h2 class="loved-king-font">
     <i class="material-icons left deep-orange-text text-darken-2">terrain</i>
     Secteur Ouvreur de Bouse - Cap Canaille
-    <a class="voir-sur-oblyk" href="{{ route('cragPage', ['crag_id' => '1633', 'crag_label' => 'ouvreur-de-bouse']) }}">voir sur oblyk</a>
+    <a class="voir-sur-oblyk" href="{{ \App\Crag::webUrl(1633,'ouvreur-de-bouse') }}">voir sur oblyk</a>
 </h2>
 
 <p>
@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col s12">
                 <img alt="Le H il aime - grande-voie Cap Canaille" title="Le H il aime - grande-voie Cap Canaille" src="/storage/articles/1300/grande-voie-le-h-il-aime-ouvreur-de-bouse-6.jpg" class="responsive-img">
-                <p class="text-center grey-text">Grande-voie <a href="{{ route('routePage', ['route_id' => '61661', 'route_label'=>'le-h-il-aime']) }}">"Le H il aime"</a></p>
+                <p class="text-center grey-text">Grande-voie <a href="{{ \App\Route::webUrl(61661, 'le-h-il-aime') }}">"Le H il aime"</a></p>
             </div>
         </div>
         <div class="row">
@@ -77,7 +77,7 @@
             </div>
             <div class="col s12 m6">
                 <img alt="Rappel Ouvreur de Bouse – Cap Canaille" title="Rappel Ouvreur de Bouse – Cap Canaille" src="/storage/articles/1300/rappels-un-peu-gazeux-a-cap-canaille-au-secteur-ouvreur-de-bouse-6.jpg" class="responsive-img">
-                <p class="grey-text text-center">Rappel d'<a href="{{ route('routePage', ['route_id'=>'3022', 'route_label'=>'ouvreur-de-bouse']) }}">"Ouvreur de Bouse"<a></a></p>
+                <p class="grey-text text-center">Rappel d'<a href="{{ \App\Route::webUrl(3022,'ouvreur-de-bouse') }}">"Ouvreur de Bouse"<a></a></p>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
 <h2 class="loved-king-font sector-title">
     <i class="material-icons left deep-orange-text text-darken-2">terrain</i>
     Secteur Grand Draouïn – Cap Canaille
-    <a class="voir-sur-oblyk" href="{{ route('cragPage', ['crag_id' => '1641', 'crag_label' => 'draioun']) }}">voir sur oblyk</a>
+    <a class="voir-sur-oblyk" href="{{ \App\Crag::webUrl(1641,'draioun') }}">voir sur oblyk</a>
 </h2>
 
 <p>
@@ -100,7 +100,7 @@
 <div class="row">
     <div class="col s12 m4">
         <img alt="Grande-voie - Bleu comme la mer rouge" title="Grande-voie - Bleu comme la mer rouge" src="/storage/articles/1300/cap-canaille-6-2.jpg" class="responsive-img">
-        <p class="text-center grey-text">Grande-voie <a href="{{ route('routePage', ['route_id'=>'61753', 'route_label'=>'bleu-comme-la-mer-rouge']) }}">"Bleu comme la mer rouge"</a></p>
+        <p class="text-center grey-text">Grande-voie <a href="{{ \App\Route::webUrl(61753, 'bleu-comme-la-mer-rouge') }}">"Bleu comme la mer rouge"</a></p>
     </div>
     <div class="col s12 m4">
         <img alt="Marche d'approche Grand Draouïn" title="Marche d'approche Grand Draouïn" src="/storage/articles/1300/vue-des-falaises-de-soubeyrannes-et-de-la-marche-dapproche-2-6.jpg" class="responsive-img">
@@ -118,7 +118,7 @@
     </div>
     <div class="col s12 m6">
         <img alt="Grande-voie - Galet-jade" title="Grande-voie - Galet-jade" src="/storage/articles/1300/grande-voie-galet-jade-la-ciotat-a-cap-canaille-6.jpg" class="responsive-img">
-        <p class="grey-text text-center">Grande-voie <a href="{{ route('routePage', ['route_id'=>'61754', 'route_label'=>'galet-jade']) }}">"Galet-Jade"</a></p>
+        <p class="grey-text text-center">Grande-voie <a href="{{ \App\Route::webUrl(61754, 'galet-jade') }}">"Galet-Jade"</a></p>
     </div>
 </div>
 
@@ -128,7 +128,7 @@
 <h2 class="loved-king-font">
     <i class="material-icons left deep-orange-text text-darken-2">terrain</i>
     Secteur Le Pendule – Cap Canaille
-    <a class="voir-sur-oblyk" href="{{ route('cragPage', ['crag_id' => '1639', 'crag_label' => 'le-pendule']) }}">voir sur oblyk</a>
+    <a class="voir-sur-oblyk" href="{{ \App\Crag::webUrl(1639,'le-pendule') }}">voir sur oblyk</a>
 </h2>
 
 <p>
@@ -139,7 +139,7 @@
 <div class="row">
     <div class="col s12 m4">
         <img alt="Grande voie La Ciotat - Cri Primal" title="Grande voie La Ciotat - Cri Primal" src="/storage/articles/1300/grande-voie-cri-primal-la-ciotat-6.jpg" class="responsive-img">
-        <p class="grey-text text-center">Grande-voie <a href="{{ route('routePage', ['route_id'=>'6609', 'route_label'=>'cri-primal']) }}">"Cri primal"</a></p>
+        <p class="grey-text text-center">Grande-voie <a href="{{ \App\Route::webUrl(6609, 'cri-primal') }}">"Cri primal"</a></p>
     </div>
     <div class="col s12 m8">
         <img alt="Grotte du 14 juillet" title="Grotte du 14 juillet" src="/storage/articles/1300/grotte-du-14-juillet-a-visiter-lors-de-la-descente-en-rappel-6.jpg" class="responsive-img">
@@ -152,7 +152,7 @@
 
 <p>
     De nombreuses grandes voies magnifiques sont possibles sur cette falaise de Cap Canaille, comme celles présentées ci-dessus.<br>
-    D'autres secteurs sont également présents sur ce site comme <a href="{{ route('cragPage', ['crag_id'=>'1636', 'crag_label'=>'belvedere']) }}">Belvédère</a>, <a href="{{ route('cragPage', ['crag_id'=>'1750', 'crag_label'=>'le-pas-de-la-chevre']) }}">Pas de la Chèvre</a>, <a href="{{ route('cragPage', ['crag_id'=>'1637','crag_label'=>'le-semaphore']) }}">Sémaphore</a>
+    D'autres secteurs sont également présents sur ce site comme <a href="{{ \App\Crag::webUrl(1636,'belvedere') }}">Belvédère</a>, <a href="{{ \App\Crag::webUrl(1750,'le-pas-de-la-chevre') }}">Pas de la Chèvre</a>, <a href="{{ \App\Crag::webUrl(1639,'le-semaphore') }}">Sémaphore</a>
 </p>
 <p>
     Vous pouvez découvrir l'intégralité de cet article sur le <a href="https://blog.le-yeti.net/cap-canaille-calanques/)">blog du Yéti</a>

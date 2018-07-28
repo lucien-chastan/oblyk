@@ -6,7 +6,7 @@
                 <div class="col s12 m6 l4 blue-border-activity-part">
                     <img class="left circle"
                          src="{{ ($crag->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $crag->bandeau) }}">
-                    <a href="{{ route('cragPage',['crag_id' => $crag->id, 'crag_label'=>str_slug($crag->label)]) }}">
+                    <a href="{{ $crag->url() }}">
                         <img src="/img/point-{{ $crag->type_voie . $crag->type_grande_voie . $crag->type_bloc . $crag->type_deep_water . $crag->type_via_ferrata }}.svg" class="search-climb-type">
                         {{ $crag->label }}
                     </a><br>

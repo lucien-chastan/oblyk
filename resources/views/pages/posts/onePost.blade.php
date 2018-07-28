@@ -47,18 +47,18 @@
     {{--INFORMATION SUR L'ÉLÉMENT--}}
     <p>
         @if($post->postable_type == 'App\\Crag')
-            <a class="lien-title-post" href="{{route('cragPage',['crag_id'=>$post->postable->id, 'crag_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a> <span class="grey-text">{{$post->postable->region}}, ({{$post->postable->code_country}})</span>
+            <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->label}}</a> <span class="grey-text">{{$post->postable->region}}, ({{$post->postable->code_country}})</span>
         @elseif($post->postable_type == 'App\\Topo')
-            <a class="lien-title-post" href="{{route('topoPage',['topo_id'=>$post->postable->id, 'topo_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a> <span class="grey-text">édité en {{$post->postable->editionYear}}</span>
+            <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->label}}</a> <span class="grey-text">édité en {{$post->postable->editionYear}}</span>
         @elseif($post->postable_type == 'App\\Massive')
-            <a class="lien-title-post" href="{{route('massivePage',['massive_id'=>$post->postable->id, 'massive_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a> <span class="grey-text">regroupement de site</span>
+            <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->label}}</a> <span class="grey-text">regroupement de site</span>
         @elseif($post->postable_type == 'App\\User')
-            <a class="lien-title-post" href="{{route('userPage',['user_id'=>$post->postable->id, 'user_label'=>str_slug($post->postable->name)])}}">{{$post->postable->name}}</a>
+            <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->name}}</a>
         @elseif($post->postable_type == 'App\\Gym')
-            <a class="lien-title-post" href="{{route('gymPage',['gym_id'=>$post->postable->id, 'gym_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a>
+            <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->label}}</a>
         @elseif($post->postable_type == 'App\\ForumTopic')
             @if($postable_type != 'ForumTopic')
-                <a class="lien-title-post" href="{{route('topicPage',['topic_id'=>$post->postable->id, 'topic_label'=>str_slug($post->postable->label)])}}">{{$post->postable->label}}</a>
+                <a class="lien-title-post" href="{{ $post->postable->url() }}">{{$post->postable->label}}</a>
             @endif
         @endif
         <br>
@@ -66,7 +66,7 @@
             @lang('pages/post/onePost.postBy',
                 [
                     'name'=> ($post->user->id == Auth::id()) ? trans('pages/post/onePost.me') : $post->user->name,
-                    'url' => route('userPage',['user_id'=>$post->user->id, 'user_label'=>$post->user->name])
+                    'url' => $post->user->url()
                 ]
             )
             @if($post->created_at->format('d M Y') == date('d M Y'))
@@ -101,9 +101,9 @@
                 <p class="user-comment-info grey-text">
 
                     @if($commentaire->user->id == Auth::id())
-                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">@lang('pages/post/onePost.me')</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
+                        <a href="{{ $commentaire->user->url() }}">@lang('pages/post/onePost.me')</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
                     @else
-                        <a href="{{route('userPage',['user_id'=>$commentaire->user->id, 'user_label'=>$commentaire->user->name])}}">{{$commentaire->user->name}}</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
+                        <a href="{{ $commentaire->user->url() }}">{{$commentaire->user->name}}</a> @lang('pages/post/onePost.on') {{$commentaire->created_at->format('d M Y à H:i')}}
                     @endif
 
                     @if(count($commentaire->likes) > 0)
@@ -142,9 +142,9 @@
                             <p class="user-comment-info grey-text">
 
                                 @if($subCommentaire->user->id == Auth::id())
-                                    <a href="{{route('userPage',['user_id'=>$subCommentaire->user->id, 'user_label'=>$subCommentaire->user->name])}}">moi</a> le {{$subCommentaire->created_at->format('d M Y à H:i')}}
+                                    <a href="{{ $subCommentaire->user->url() }}">moi</a> le {{$subCommentaire->created_at->format('d M Y à H:i')}}
                                 @else
-                                    <a href="{{route('userPage',['user_id'=>$subCommentaire->user->id, 'user_label'=>$subCommentaire->user->name])}}">{{$subCommentaire->user->name}}</a> le {{$subCommentaire->created_at->format('d M Y à H:i')}}
+                                    <a href="{{ $subCommentaire->user->url() }}">{{$subCommentaire->user->name}}</a> le {{$subCommentaire->created_at->format('d M Y à H:i')}}
                                 @endif
 
                                 @if(count($subCommentaire->likes) > 0)

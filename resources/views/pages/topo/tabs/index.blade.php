@@ -64,7 +64,7 @@
                     <div class="blue-border-div">
                         <div class="markdownZone">{{ $description->description }}</div>
                         <p class="info-user grey-text">
-                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>route('userPage',['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]), 'date'=>$description->created_at->format('d M Y')])
+                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>$description->user->url(), 'date'=>$description->created_at->format('d M Y')])
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -126,7 +126,7 @@
                                 <p class="no-margin">{{ str_limit($article->description, $limit = 90, $end = '...') }}</p>
                                 <p class="grey-text no-margin">
                                     Le {{$article->created_at->format('d M Y')}}, {{$article->views}} vus, {{$article->descriptions_count}} commentaires
-                                    <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label'=>str_slug($article->label)])}}">lire l'article</a>
+                                    <a href="{{ $article->url() }}">lire l'article</a>
                                 </p>
                             </div>
                         </div>

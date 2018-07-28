@@ -4,7 +4,7 @@
     @if($find->searchable_type == 'App\Massive')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left circle" src="/img/icon-search-massive.svg">
-            <a href="{{ route('massivePage',['massive_id' => $find->searchable->id, 'massive_label'=>str_slug($find->searchable->label)]) }}">
+            <a href="{{ $find->searchable->url() }}">
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
@@ -17,7 +17,7 @@
     @if($find->searchable_type == 'App\Crag')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left circle" src="{{ ($find->searchable->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $find->searchable->bandeau) }}">
-            <a href="{{ route('cragPage',['crag_id' => $find->searchable->id, 'crag_label'=>str_slug($find->searchable->label)]) }}">
+            <a href="{{ $find->searchable->url() }}">
                 <img src="/img/point-{{ $find->searchable->type_voie . $find->searchable->type_grande_voie . $find->searchable->type_bloc . $find->searchable->type_deep_water . $find->searchable->type_via_ferrata }}.svg" class="search-climb-type">
                 {{ $find->searchable->label }}
             </a><br>
@@ -32,7 +32,7 @@
     @if($find->searchable_type == 'App\Gym')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left circle" src="{{ file_exists(storage_path('app/public/gyms/50/logo-' . $find->searchable->id . '.png')) ? '/storage/gyms/50/logo-' . $find->searchable->id . '.png' : '/img/icon-search-gym.svg' }}">
-            <a href="{{ route('gymPage',['gym_id' => $find->searchable->id, 'gym_label'=>str_slug($find->searchable->label)]) }}">
+            <a href="{{ $find->searchable->url() }}">
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
@@ -45,7 +45,7 @@
     @if($find->searchable_type == 'App\User')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left circle" src="{{ file_exists(storage_path('app/public/users/100/user-' . $find->searchable->id . '.jpg')) ? '/storage/users/100/user-' . $find->searchable->id . '.jpg' : '/img/icon-search-user.svg' }}">
-            <a href="{{ route('userPage',['user_id' => $find->searchable->id, 'user_label'=>str_slug($find->searchable->name)]) }}">
+            <a href="{{ $find->searchable->url() }}">
                 {{ $find->searchable->name }}
             </a><br>
             <span class="grey-text">
@@ -70,7 +70,7 @@
             </a><br>
             <span class="grey-text">
                 @lang('interface/search.inCrag')
-                <a href="{{ route('cragPage',['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
+                <a href="{{ $find->searchable->crag->url() }}">
                     {{ $find->searchable->crag->label }}
                 </a>,
                 {{ $find->searchable->crag->region }} ({{ $find->searchable->crag->code_country }})
@@ -83,7 +83,7 @@
     @if($find->searchable_type == 'App\Topo')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left couverture-topo" src="{{ (file_exists(storage_path('app/public/topos/50/topo-' . $find->searchable->id . '.jpg'))) ? '/storage/topos/50/topo-' . $find->searchable->id . '.jpg' : '/img/default-topo-couverture.svg' }}">
-            <a href="{{ route('topoPage',['topo_id' => $find->searchable->id, 'topo_label'=>str_slug($find->searchable->label)]) }}">
+            <a href="{{ $find->searchable->url() }}">
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
@@ -102,7 +102,7 @@
             </a><br>
             <span class="grey-text">
                 @lang('interface/search.inCrag')
-                <a href="{{ route('cragPage', ['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
+                <a href="{{ $find->searchable->crag->url() }}">
                     {{ $find->searchable->crag->label }}
                 </a>
             </span>
@@ -119,7 +119,7 @@
             </a><br>
             <span class="grey-text">
                 @lang('interface/search.inCrag')
-                <a href="{{ route('cragPage', ['crag_id'=>$find->searchable->crag->id, 'crag_label'=>str_slug($find->searchable->crag->label)]) }}">
+                <a href="{{ $find->searchable->crag->url() }}">
                     {{ $find->searchable->crag->label }}
                 </a>
             </span>
@@ -131,12 +131,12 @@
     @if($find->searchable_type == 'App\ForumTopic')
         <div class="col s12 blue-border-search crag-result rideau-animation">
             <img class="left circle" src="/img/forum-{{ $find->searchable->category_id }}.svg">
-            <a target="_blank" href="{{  route('topicPage',['topic_id'=>$find->searchable->id,'topic_label'=>str_slug($find->searchable->label)]) }}">
+            <a target="_blank" href="{{ $find->searchable->url() }}">
                 {{ $find->searchable->label }}
             </a><br>
             <span class="grey-text">
                 @lang('interface/search.suggestedBy')
-                <a href="{{ route('userPage', ['user_id'=>$find->searchable->user->id, 'user_label'=>str_slug($find->searchable->user->name)]) }}">
+                <a href="{{ $find->searchable->user->url() }}">
                     {{ $find->searchable->user->name }}
                 </a>
             </span>

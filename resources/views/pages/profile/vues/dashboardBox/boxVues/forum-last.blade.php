@@ -11,8 +11,8 @@
         @foreach($topics as $topic)
             <tr>
                 <td>
-                    <a href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}">{{ $topic->label }}</a><br>
-                    <span class="grey-text">proposé par <a href="{{ route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)]) }}">{{ $topic->user->name }}</a></span>
+                    <a href="{{ $topic->url() }}">{{ $topic->label }}</a><br>
+                    <span class="grey-text">proposé par <a href="{{ $topic->user->url() }}">{{ $topic->user->name }}</a></span>
                 </td>
                 <td class="text-center"><img src="/img/forum-{{ $topic->category_id }}.svg" alt="" class="circle circle-40"></td>
                 <td class="text-center">{{ $topic->views }}</td>

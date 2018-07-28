@@ -21,7 +21,7 @@
                         </span>
                     </p>
                 @endforeach
-                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#croix">@lang('pages/crags/tabs/informations.seeMyCrossesBook')</a></p>
+                <p class="text-center"><a href="{{ Auth::user()->url() }}#croix">@lang('pages/crags/tabs/informations.seeMyCrossesBook')</a></p>
             </div>
 
             {{--TICK LIST--}}
@@ -42,7 +42,7 @@
                         </span>
                     </p>
                 @endforeach
-                <p class="text-center"><a href="{{ route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)]) }}#tick-list">@lang('pages/crags/tabs/informations.seeMyTickList')</a></p>
+                <p class="text-center"><a href="{{ Auth::user()->url() }}#tick-list">@lang('pages/crags/tabs/informations.seeMyTickList')</a></p>
             </div>
         </div>
     @else

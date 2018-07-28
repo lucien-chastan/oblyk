@@ -96,7 +96,7 @@ class CommentController extends Controller
                     'new_post_comment',
                     [Auth::user()->name, $post->postable->label],
                     '/img/icon-fil-actu.svg',
-                    [route('userPage',['user_id'=>Auth::id(),'user_label'=>Auth::user()->name]), Auth::user()->name],
+                    [Auth::user()->url(), Auth::user()->name],
                     [$post->id]
                 );
                 $notification->save();

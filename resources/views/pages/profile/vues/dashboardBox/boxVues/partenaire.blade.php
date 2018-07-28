@@ -47,7 +47,7 @@
                 <div class="blue-border-zone">
                     @foreach($places as $place)
                         <div class="blue-border-div">
-                            <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <a href="{{ route('userPage',['user_id'=>$place->user->id,'user_label'=>str_slug($place->user->name)]) }}">{{ $place->user->name }}</a> à {{$place->label}}</p>
+                            <p class="no-margin text-bold"><i class="material-icons left blue-text">location_on</i> <a href="{{ $place->user->url() }}">{{ $place->user->name }}</a> à {{$place->label}}</p>
                             <div class="markdownZone grey-text">@markdown($place->description)</div>
                         </div>
                     @endforeach
