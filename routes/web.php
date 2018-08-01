@@ -43,12 +43,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     // ARTICLES
     Route::get('/les-articles', 'ArticleController@articlesPage')->name('articlesPage');
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+    Route::get('/article/{article_id}', 'ArticleController@articleRedirectionPage')->name('articleRedirectionPage');
 
     //LE LEXIQUE
     Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
     //LE POFIL
     Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
+    Route::get('/grimpeur/{user_id}', 'UserController@userRedirectionPage')->name('userRedirectionPage');
     Route::get('/supprimer-mon-compte', 'Auth\DeleteController@deleteUserPage')->name('deleteUserPage');
     Route::post('/delete-connected-user', 'Auth\DeleteController@deleteConnectedUser')->name('deleteConnectedUser');
     Route::get('/compte-supprime', 'Auth\DeleteController@userDeletedPage')->name('userDeletedPage');
@@ -59,8 +61,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
     Route::get('/voie-escalade/{route_id}/{route_label}', 'RouteController@routePage')->name('routePage');
 
+    // OUTDOOR REDIRECTION
+    Route::get('/site-escalade/{crag_id}', 'CragController@cragRedirectionPage')->name('cragRedirectionPage');
+    Route::get('/topo-escalade/{topo_id}', 'TopoController@topoRedirectionPage')->name('topoRedirectionPage');
+    Route::get('/voie-escalade/{route_id}', 'RouteController@routeRedirectionPage')->name('routeRedirectionPage');
+    Route::get('/sites-escalade/{massive_id}', 'MassiveController@massiveRedirectionPage')->name('massiveRedirectionPage');
+
     //LES SALLES D'ESCALADE
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
+    Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');

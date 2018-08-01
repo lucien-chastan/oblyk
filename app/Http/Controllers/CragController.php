@@ -42,6 +42,11 @@ class CragController extends Controller
             }])
             ->first();
 
+        // Si le label à changé alors on redirige
+        if(Crag::webUrl($crag_id, $crag_title) != $crag->url()) {
+            return $this->cragRedirectionPage($crag_id);
+        }
+
         // Compte le nombre d'article on vide
         $nbArticle = 0;
         foreach ($crag->articleCrags as $articleCrag) {
@@ -105,5 +110,10 @@ class CragController extends Controller
         ];
 
         return view('pages.crag.crag', $data);
+    }
+
+    public function cragRedirectionPage($crag_id) {
+        $crag = Crag::find($crag_id);
+        return redirect($crag->url(),301);
     }
 }

@@ -9,7 +9,7 @@ use App\Crag;
 class ArticleController extends Controller
 {
 
-    public function articlePage($article_id){
+    public function articlePage($article_id, $article_title){
 
         $article = Article::where('id', $article_id)
             ->with('descriptions')
@@ -18,6 +18,11 @@ class ArticleController extends Controller
             ->with('articleTopos.topo')
             ->with('enrichedAuthor')
             ->first();
+
+        // Si le label à changé alors on redirige
+        if(Article::webUrl($article_id, $article_title) != $article->url()) {
+            return $this->articleRedirectionPage($article_id);
+        }
 
         //bandeau de l'article
         $bandeau = file_exists(storage_path('app/public/articles/1300/article-' . $article->id . '.jpg')) ? '/storage/articles/1300/article-' . $article->id . '.jpg' : '/img/default-article-bandeau.jpg';
@@ -60,4 +65,8 @@ class ArticleController extends Controller
         );
     }
 
+    public function articleRedirectionPage($article_id) {
+        $article = Article::find($article_id);
+        return redirect($article->url(),301);
+    }
 }

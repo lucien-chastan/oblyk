@@ -21,6 +21,11 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)->first();
 
+        // Si le label à changé alors on redirige
+        if(User::webUrl($user_id, $user_title) != $user->url()) {
+            return $this->userRedirectionPage($user_id);
+        }
+
         $user->genre = ($user->sex != null) ? trans('elements/sex.sex_' . $user->sex) : trans('elements/sex.sex_0');
         $user->age = $user->birth != 0 ? trans_choice('elements/old.old', date('Y') - $user->birth) : trans_choice('elements/old.old', 0);
 
@@ -89,5 +94,10 @@ class UserController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function userRedirectionPage($user_id) {
+        $user = User::find($user_id);
+        return redirect($user->url(),301);
     }
 }

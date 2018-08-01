@@ -26,6 +26,11 @@ class TopoController extends Controller
             }])
             ->first();
 
+        // Si le label à changé alors on redirige
+        if(Topo::webUrl($topo_id, $topo_title) != $topo->url()) {
+            return $this->topoRedirectionPage($topo_id);
+        }
+
         // Compte le nombre d'article on vide
         $nbArticle = 0;
         foreach ($topo->articleTopos as $articleTopo) {
@@ -103,5 +108,10 @@ class TopoController extends Controller
         $data = ['topos' => $topos];
 
         return view('pages.crag.partials.liste-topos-search', $data);
+    }
+
+    public function topoRedirectionPage($topo_id) {
+        $topo = Topo::find($topo_id);
+        return redirect($topo->url(),301);
     }
 }
