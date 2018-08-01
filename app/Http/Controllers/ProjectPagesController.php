@@ -14,8 +14,7 @@ class ProjectPagesController extends Controller
     }
 
     public function whoPage(){
-        $data = ['meta_title' => 'Qui sommes-nous ?',];
-        return view('pages.project.who', $data);
+        return redirect(route('project'), 301);
     }
 
     public function contactPage(){
