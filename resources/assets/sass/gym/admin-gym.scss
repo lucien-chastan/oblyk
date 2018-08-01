@@ -166,6 +166,24 @@
     }
 }
 
+.img-settings {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    background-size: cover;
+}
+
+.upload-settings-col-image {
+    width: 120px;
+    display: inline-block;
+}
+
+.upload-settings-col-input {
+    width: calc(100% - 130px);
+    display: inline-block;
+    vertical-align: top;
+}
+
 //RESPONSIVE MENU
 @media screen and (max-width:1000px){
 

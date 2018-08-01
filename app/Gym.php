@@ -46,7 +46,27 @@ class Gym extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
-     /**
+    public function administrators (){
+        return $this->hasMany('App\GymAdministrator', 'gym_id','id');
+    }
+
+    /**
+     * @param int $size [50, 100]
+     * @return string
+     */
+    public function logo ($size = 100) {
+        return file_exists(storage_path('app/public/gyms/' . $size . '/logo-' . $this->id . '.png')) ? '/storage/gyms/' . $size . '/logo-' . $this->id . '.png' : '/img/icon-search-gym.svg';
+    }
+
+    /**
+     * @param int $size [200, 1300]
+     * @return string
+     */
+    public function bandeau ($size = 1300) {
+        return file_exists(storage_path('app/public/gyms/' . $size . '/bandeau-' . $this->id . '.jpg')) ? '/storage/gyms/' . $size . '/bandeau-' . $this->id . '.jpg' : '/img/default-gym-bandeau.jpg';
+    }
+
+    /**
      * @param bool $absolute
      * @return string
      */
@@ -69,9 +89,5 @@ class Gym extends Model
             ],
             $absolute
         );
-    }
-
-    public function administrators (){
-        return $this->hasMany('App\GymAdministrator', 'gym_id','id');
     }
 }

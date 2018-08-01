@@ -75,3 +75,111 @@ function addTeamMember(user_id) {
         reloadCurrentVue();
     });
 }
+
+function uploadBandeauGym() {
+    let form = document.getElementById('form-upload-photo-bandeau-setting'),
+        inputData = form.getElementsByClassName('input-data'),
+        data = new FormData();
+
+    data.append('foo', 'bar');
+    data.append('bandeau', document.getElementById('upload-bandeau-gym').files[0]);
+
+    //ajout les autres données à passage de la form
+    for(let i in inputData){
+        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+    }
+
+    let config = {
+        onUploadProgress: function(progressEvent) {
+            let percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            document.getElementById('progressbar-upload-bandeau-gym').style.width = percentCompleted + '%';
+        }
+    };
+
+    axios.post('/gym-admin/upload-bandeau', data, config).then(
+        function (response) {
+            reloadCurrentVue();
+        }
+    ).catch(
+        function (err) {
+
+            if(err.response.status === 422){
+
+                //table des erreurs
+                let errorArray = [];
+
+                // on boucle sur les erreurs renvoyées
+                for(let key in err.response.data){
+
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(err.response.data[key]);
+
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                alert(textError);
+            }else{
+                alert('Erreur ' + err.response.status);
+            }
+
+            document.getElementById('progressbar-upload-bandeau-gym').style.width = '0%';
+        }
+    );
+}
+
+
+function uploadLogoGym() {
+    let form = document.getElementById('form-upload-photo-profil-setting'),
+        inputData = form.getElementsByClassName('input-data'),
+        data = new FormData();
+
+    data.append('foo', 'bar');
+    data.append('logo', document.getElementById('upload-logo-gym').files[0]);
+
+    //ajout les autres données à passage de la form
+    for(let i in inputData){
+        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+    }
+
+    let config = {
+        onUploadProgress: function(progressEvent) {
+            let percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            document.getElementById('progressbar-upload-logo-gym').style.width = percentCompleted + '%';
+        }
+    };
+
+    axios.post('/gym-admin/upload-logo', data, config).then(
+        function (response) {
+            reloadCurrentVue();
+        }
+    ).catch(
+        function (err) {
+            if(err.response.status === 422){
+
+                //table des erreurs
+                let errorArray = [];
+
+                // on boucle sur les erreurs renvoyées
+                for(let key in err.response.data){
+
+                    //on ajout au tableau l'erreur courante
+                    errorArray.push(err.response.data[key]);
+
+                }
+
+                //compil les erreurs
+                let textError = errorArray.join('<br>');
+
+                //on affiche les erreurs
+                alert(textError);
+            }else{
+                alert('Erreur ' + err.response.status);
+            }
+
+            document.getElementById('progressbar-upload-logo-gym').style.width = '0%';
+        }
+    );
+}

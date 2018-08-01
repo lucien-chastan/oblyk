@@ -10,6 +10,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use TomLingham\Searchy\Facades\Searchy;
+use Intervention\Image\Facades\Image;
+
 
 class GymAdministratorController extends Controller
 {
@@ -78,5 +80,59 @@ class GymAdministratorController extends Controller
             return redirect()->route('index');
         }
         return true;
+    }
+
+    // UPLOAD DU BANDEAU
+    function uploadBandeau(Request $request){
+        $gym_id = $request->input('gym_id');
+
+        $this->validate($request, [
+            'bandeau' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
+        ]);
+
+        if ($request->hasFile('bandeau')) {
+
+            //Image en 1300px de large
+            Image::make($request->file('bandeau'))
+                ->orientate()
+                ->resize(1300, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/gyms/1300/bandeau-' . $gym_id . '.jpg'));
+
+            //Image en 500px de large
+            Image::make($request->file('bandeau'))
+                ->orientate()
+                ->resize(200, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('jpg', 85)
+                ->save(storage_path('app/public/gyms/200/bandeau-' . $gym_id . '.jpg'));
+        }
+    }
+
+    // UPLOAD LOGO
+    function uploadLogo(Request $request){
+        $gym_id = $request->input('gym_id');
+
+        var_dump($gym_id);
+
+        $this->validate($request, [
+            'logo' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
+        ]);
+
+        if ($request->hasFile('logo')) {
+
+            //Image en 1300px de large
+            Image::make($request->file('logo'))
+                ->orientate()
+                ->resize(100, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('png', 85)
+                ->save(storage_path('app/public/gyms/100/logo-' . $gym_id . '.png'));
+
+            //Image en 500px de large
+            Image::make($request->file('logo'))
+                ->orientate()
+                ->resize(50, null, function ($constraint) {$constraint->aspectRatio();})
+                ->encode('png', 85)
+                ->save(storage_path('app/public/gyms/50/logo-' . $gym_id . '.png'));
+        }
     }
 }

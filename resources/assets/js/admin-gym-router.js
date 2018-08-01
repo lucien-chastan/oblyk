@@ -30,9 +30,6 @@ function loadProfileRoute(element, forced = false) {
     let route = element.getAttribute('data-route'),
         target = document.getElementById('content-admin');
 
-    console.log(route);
-    console.log(target);
-
     if(currentVue !== element || forced){
         showUserLoader(true);
 
@@ -101,15 +98,20 @@ function afterLoad() {
     //ajoute les événements open modal sur les boutons
     initOpenModal();
 
+    // Chargement de la map
+    if (typeof document.getElementById('input-map') !== 'undefined' && document.getElementById('input-map') !== null) {
+        creatInputMap();
+    }
+
     //charge les boxes du dashboard
     try {
         //loadDashBoxs();
-    }catch (e){}
+    } catch (e){}
 
     //Intialise l'opener de route
     try {
         initRouteOpener();
-    }catch (e){}
+    } catch (e){}
 }
 
 

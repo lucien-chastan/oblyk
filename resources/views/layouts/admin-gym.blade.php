@@ -3,6 +3,8 @@
     <head>
         @include('includes.head')
         <link href="/css/admin-gym.css" rel="stylesheet">
+        <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
+        <link href="/css/popupMapStyle.css" rel="stylesheet">
     </head>
     <body>
     <header>
@@ -48,6 +50,8 @@
 
     <script src="/js/admin-gym.js"></script>
     <script src="/js/admin-gym-router.js"></script>
+    <script src="/framework/leaflet/leaflet.js"></script>
+    <script src="/js/mapVariable.js"></script>
 
     </body>
 </html>
