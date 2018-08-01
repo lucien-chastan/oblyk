@@ -25,6 +25,11 @@ class GymController extends Controller
             ->with('descriptions.user')
             ->first();
 
+        // Si le label à changé alors on redirige
+        if(Gym::webUrl($gym_id, $gym_title) != $gym->url()) {
+            return $this->gymRedirectionPage($gym_id);
+        }
+
         $gymType = '';
         if($gym->type_boulder == 1 && $gym->type_route == 1) $gymType = '<span class="type-bloc text-bold">' . trans('elements/climbs.climb_2') . '</span>, <span class="type-voie text-bold">' . trans('elements/climbs.climb_3') . '</span>';
         if($gym->type_boulder == 0 && $gym->type_route == 1) $gymType = '<span class="type-voie text-bold">' . trans('elements/climbs.climb_3') . '</span>';
@@ -62,5 +67,10 @@ class GymController extends Controller
         ];
 
         return view('pages.gym.gym', $data);
+    }
+
+    public function gymRedirectionPage($gym_id) {
+        $gym = Gym::find($gym_id);
+        return redirect($gym->url(),301);
     }
 }

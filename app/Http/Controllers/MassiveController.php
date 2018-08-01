@@ -21,6 +21,11 @@ class MassiveController extends Controller
             ->withCount('versions')
             ->first();
 
+        // Si le label à changé alors on redirige
+        if(Massive::webUrl($massive_id, $massive_title) != $massive->url()) {
+            return $this->massiveRedirectionPage($massive_id);
+        }
+
         //on va chercher si l'utilisateur follow ce regroupement
         $userFollow = Follow::where(
             [
@@ -79,6 +84,11 @@ class MassiveController extends Controller
 
         return view('pages.crag.partials.liste-massives', $data);
 
+    }
+
+    public function massiveRedirectionPage($massive_id) {
+        $massive = Massive::find($massive_id);
+        return redirect($massive->url(),301);
     }
 
 }
