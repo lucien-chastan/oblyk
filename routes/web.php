@@ -33,6 +33,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/merci', 'ProjectPagesController@thanksPage')->name('thanks');
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
 
     //NEXS LETTER
     Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
