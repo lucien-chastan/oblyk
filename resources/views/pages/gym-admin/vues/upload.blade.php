@@ -9,10 +9,11 @@
                 <form id="form-upload-photo-profil-setting" class="submit-form row" onsubmit="return false">
 
                     {!! $Inputs::popupError([]) !!}
+                    {{ csrf_field() }}
 
                     <div class="row">
                         <div class="upload-settings-col-image">
-                            <img src="{{ $gym->logo(50) }}?cache={{date('Ymdhis')}}" alt="" class="circle left img-settings">
+                            <img src="{{ $gym->logo(100) }}?cache={{ date('Ymdhis') }}" alt="" class="circle left img-settings">
                         </div>
                         <div class="upload-settings-col-input">
                             {!! $Inputs::Hidden(['name'=>'gym_id','value'=>$gym->id]) !!}
@@ -26,10 +27,11 @@
                 <form id="form-upload-photo-bandeau-setting" class="submit-form row" onsubmit="return false">
 
                     {!! $Inputs::popupError([]) !!}
+                    {{ csrf_field() }}
 
                     <div class="row">
                         <div class="upload-settings-col-image">
-                            <div class="left img-settings grey darken-1" style="background-image: url('{{ $gym->bandeau(200) }}')">
+                            <div class="left img-settings grey darken-1" style="background-image: url('{{ $gym->bandeau(200) }}?cache={{ date('Ymdhis') }}')">
 
                             </div>
                         </div>
@@ -45,10 +47,3 @@
         </div>
     </div>
 </div>
-
-{{--<h3 class="title-admmin-gym">Changer le bandeau de {{ $gym->label }}</h3>--}}
-
-{{--<form method="POST" name="uploadLogo" action="{{ route('uploadLogoBandeauSae') }}" enctype="multipart/form-data" class="col s12 l8 offset-l2">--}}
-    {{--{{ csrf_field() }}--}}
-    {{----}}
-{{--</form>--}}

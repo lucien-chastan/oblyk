@@ -79,6 +79,7 @@ function addTeamMember(user_id) {
 function uploadBandeauGym() {
     let form = document.getElementById('form-upload-photo-bandeau-setting'),
         inputData = form.getElementsByClassName('input-data'),
+        gym_id = document.getElementById('gym_id').value,
         data = new FormData();
 
     data.append('foo', 'bar');
@@ -96,7 +97,7 @@ function uploadBandeauGym() {
         }
     };
 
-    axios.post('/gym-admin/upload-bandeau', data, config).then(
+    axios.post('/gym-admin/' + gym_id + '/upload-bandeau', data, config).then(
         function (response) {
             reloadCurrentVue();
         }
@@ -134,6 +135,7 @@ function uploadBandeauGym() {
 function uploadLogoGym() {
     let form = document.getElementById('form-upload-photo-profil-setting'),
         inputData = form.getElementsByClassName('input-data'),
+        gym_id = document.getElementById('gym_id').value,
         data = new FormData();
 
     data.append('foo', 'bar');
@@ -151,7 +153,7 @@ function uploadLogoGym() {
         }
     };
 
-    axios.post('/gym-admin/upload-logo', data, config).then(
+    axios.post('/gym-admin/' + gym_id + '/upload-logo', data, config).then(
         function (response) {
             reloadCurrentVue();
         }

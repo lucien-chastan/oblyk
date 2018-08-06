@@ -83,7 +83,7 @@ class GymAdministratorController extends Controller
     }
 
     // UPLOAD DU BANDEAU
-    function uploadBandeau(Request $request){
+    public function uploadBandeau(Request $request){
         $gym_id = $request->input('gym_id');
 
         $this->validate($request, [
@@ -109,10 +109,8 @@ class GymAdministratorController extends Controller
     }
 
     // UPLOAD LOGO
-    function uploadLogo(Request $request){
+    public function uploadLogo(Request $request){
         $gym_id = $request->input('gym_id');
-
-        var_dump($gym_id);
 
         $this->validate($request, [
             'logo' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',

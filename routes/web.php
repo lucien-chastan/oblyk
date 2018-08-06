@@ -263,8 +263,8 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
     // LOGO AND BANDEAU
     Route::get('/admin/{gym_id}/view/upload-logo-bandeau', 'GymAdminController@uploadLogoBandeauView')->name('gym_admin_logo_bandeau_upload_view');
-    Route::post('/gym-admin/upload-logo', 'GymAdminController@uploadLogo')->name('gym_admin_upload_logo');
-    Route::post('/gym-admin/upload-bandeau', 'GymAdminController@uploadBandeau')->name('gym_admin_upload_bandeau');
+    Route::post('/gym-admin/{gym_id}/upload-logo', 'CRUD\GymAdministratorController@uploadLogo')->name('gym_admin_upload_logo');
+    Route::post('/gym-admin/{gym_id}/upload-bandeau', 'CRUD\GymAdministratorController@uploadBandeau')->name('gym_admin_upload_bandeau');
 
     // SCHEMES
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
