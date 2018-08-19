@@ -59,8 +59,8 @@
                             <label for="password-confirm">@lang('auth.labelConfirmPassword')</label>
                         </div>
 
-                        <div class="finput-field col s12">
-                            <input type="checkbox" name="newsletter" id="newsletter" {{ old('newsletter') ?? 'checked' }}>
+                        <div class="input-field col s12">
+                            <input type="checkbox" name="newsletter" id="newsletter" {{ old('newsletter') ? 'checked' : '' }}>
                             <label for="newsletter">@lang('auth.labelNewsletter')</label>
                         </div>
                     </div>
