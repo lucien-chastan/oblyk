@@ -4,9 +4,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{route('cragPage', ['crag_label'=> str_slug($crag->label), 'crag_id'=>$crag->id], false)}}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ $crag->url(false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('cragPage', ['crag_label'=> str_slug($crag->label), 'crag_id'=>$crag->id], false)}}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ $crag->url(false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $crag->updated_at ? $crag->updated_at->format('Y-m-d') : $crag->created_at->format('Y-m-d') }}</lastmod>
@@ -19,9 +19,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('routePage', ['route_label'=> str_slug($route->label), 'route_id'=>$route->id], false)}}</loc>
+                    <loc>{{ $app }}/{{$language}}{{ $route->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('routePage', ['route_label'=> str_slug($route->label), 'route_id'=>$route->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ $route->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $route->updated_at ? $route->updated_at->format('Y-m-d') : $route->created_at->format('Y-m-d') }}</lastmod>
@@ -32,7 +32,7 @@
 
     {{-- Photo --}}
     <url>
-        <loc>{{ $app }}/{{$language}}{{route('cragPage', ['crag_label'=> str_slug($crag->label), 'crag_id'=>$crag->id], false)}}</loc>
+        <loc>{{ $app }}/{{$language}}{{ $crag->url(false) }}</loc>
         @foreach($photos as $photo)
             <image:image>
                 <image:loc>{{ $app }}/storage/photos/crags/1300/{{ $photo->slug_label }}</image:loc>

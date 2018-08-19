@@ -73,7 +73,7 @@
                 {{--FrameWork--}}
                 <p><strong class="text-underline">@lang('pages/projects/about.title_beers')</strong></p>
                 <ul>
-                    <li><img class="logo-outil-about" src="/img/logo_markus.png" alt="logo markus"> <a href="https://www.markusbiere.com/">Markus</a> <span class="grey-text">@lang('pages/projects/about.markus', ['url'=> route('massivePage',['massive_id'=>1,'massive_label'=>"la-foret-de-saou"])])</span></li>
+                    <li><img class="logo-outil-about" src="/img/logo_markus.png" alt="logo markus"> <a href="https://www.markusbiere.com/">Markus</a> <span class="grey-text">@lang('pages/projects/about.markus', ['url'=> \App\Massive::webUrl(1,'la-foret-de-saou')])</span></li>
                     <li><img class="logo-outil-about" src="/img/logo_vieille_mule.svg" alt="logo la vieille mule"> <a href="https://www.lavieillemule.com/">La Vieille Mule</a> <span class="grey-text">@lang('pages/projects/about.vieille_mule')</span></li>
                 </ul>
 

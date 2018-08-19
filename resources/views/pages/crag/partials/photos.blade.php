@@ -7,7 +7,7 @@
 
                 <div id="accueilPhototheque" class="phototheque">
                     @foreach($crag->photos as $photo)
-                        <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{ trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$crag->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name]) }}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                        <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{ trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url(), 'elementLabel'=>$crag->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name]) }}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
                     @endforeach
                 </div>
 

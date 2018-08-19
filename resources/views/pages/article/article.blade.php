@@ -7,6 +7,8 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @section('css')
+    <link href="/framework/leaflet/leaflet.css" rel="stylesheet">
+    <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/article.css" rel="stylesheet">
     <link href="/css/article-markdown.css" rel="stylesheet">
 @endsection
@@ -22,7 +24,6 @@
          ]
     )
 
-    {{--contenu de la page--}}
     <div class="container">
         <div class="row">
             <div class="col s12">
@@ -32,7 +33,22 @@
                 </div>
 
                 <div class="article-markdown">
-                    @markdown($article->body)
+
+                    @if($article->file_view == null)
+                        @markdown($article->body)
+                    @else
+                        @include('pages.article.article.' . $article->file_view)
+                    @endif
+
+                    @if(isset($article->enrichedAuthor))
+                        <div class="author-resume row">
+                            <h2 class="author-title loved-king-font">À propos de l'auteur</h2>
+                            <div class="col s12">
+                                <img src="{{ $article->enrichedAuthor->picture(200) }}" alt="image de l'auteur" class="right author-picture">
+                                @markdown($article->enrichedAuthor->resume)
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="text-right grey-text">
@@ -40,7 +56,6 @@
                     @lang('pages/articles/article.views',['nb'=>$article->views])
                 </div>
             </div>
-
 
             {{--LES COMMMENTAIRES--}}
             <div class="col s12">
@@ -82,5 +97,13 @@
 @endsection
 
 @section('script')
+    <script src="/framework/leaflet/leaflet.js"></script>
+    <script src="/js/mapVariable.js"></script>
     <script src="/js/article.js"></script>
+    <script src="/framework/chartJs/Chart.min.js"></script>
+
+    <script>
+        initArticleMap({{ $article->id }});
+        buildArticleGraph();
+    </script>
 @endsection

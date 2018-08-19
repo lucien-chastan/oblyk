@@ -17,7 +17,7 @@
                                 <img class="img-tick-list circle left" src="{{$crag[0]->route->crag->bandeau}}">
                             @endif
                             <p class="no-margin">
-                                <strong><a href="{{route('cragPage',['crag_id'=>$crag[0]->route->crag->id,'crag_label'=>str_slug($crag[0]->route->crag->label)])}}">{{$crag[0]->route->crag->label}}</a><br></strong>
+                                <strong><a href="{{ \App\Crag::webUrl($crag[0]->route->crag->id,$crag[0]->route->crag->label) }}">{{$crag[0]->route->crag->label}}</a><br></strong>
                                 <span class="grey-text">{{$crag[0]->route->crag->region}}, {{$crag[0]->route->crag->city}} , ({{$crag[0]->route->crag->code_country}})</span>
                             </p>
                         </div>

@@ -68,4 +68,30 @@ class User extends Authenticatable
     public function tickLists() { return $this->hasMany('App\TickList','user_id', 'id'); }
     public function userConversations(){ return $this->hasMany('App\UserConversation','user_id', 'id'); }
     public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }
+    public function author() { return $this->hasOne('App\Author','user_id', 'id'); }
+	
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->name, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'userPage',
+            [
+                'user_id' => $id,
+                'user_label' => (str_slug($label) != '') ? str_slug($label) : 'grimpeur'
+            ],
+            $absolute
+        );
+    }
 }

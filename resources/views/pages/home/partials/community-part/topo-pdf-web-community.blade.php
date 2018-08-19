@@ -11,7 +11,7 @@
                         </a><br>
                         <span class="grey-text">
                             @lang('interface/search.inCrag')
-                            <a href="{{ route('cragPage', ['crag_id'=>$topoPdf->crag->id, 'crag_label'=>str_slug($topoPdf->crag->label)]) }}">
+                            <a href="{{ $topoPdf->crag->url() }}">
                                 {{ $topoPdf->crag->label }}
                             </a>
                         </span>
@@ -26,7 +26,7 @@
                         </a><br>
                         <span class="grey-text">
                             @lang('interface/search.inCrag')
-                            <a href="{{ route('cragPage', ['crag_id'=>$topoWeb->crag->id, 'crag_label'=>str_slug($topoWeb->crag->label)]) }}">
+                            <a href="{{ $topoWeb->crag->url() }}">
                                 {{ $topoWeb->crag->label }}
                             </a>
                         </span>

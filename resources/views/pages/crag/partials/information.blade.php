@@ -56,7 +56,7 @@
         <p>
             @lang('pages/crags/tabs/informations.boxInformationGroup', ['name'=>$crag->label])<br>
             @foreach($crag->massives as $liaison)
-                - <a href="{{route('massivePage',['massive_id'=>$liaison->massive->id, 'massive_label'=>str_slug($liaison->massive->label)])}}">{{$liaison->massive->label}}</a><br>
+                - <a href="{{ $liaison->massive->url() }}">{{$liaison->massive->label}}</a><br>
             @endforeach
             @if(Auth::check())
                 + <a {!! $Helpers::modal(route('massiveCragModal'), ["crag_id"=>$crag->id, "lat"=>$crag->lat, "lng"=>$crag->lng, "rayon"=>50, "title"=> trans('modals/massive.tooltip')]) !!} class="btnModal text-cursor">@lang('modals/massive.tooltip')</a>

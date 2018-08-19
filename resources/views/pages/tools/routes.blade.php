@@ -93,7 +93,7 @@
                     @foreach($routes as $route)
                         <tr>
                             <td class="text-bold">
-                                <a href="{{ route('routePage', ['route_id'=>$route->id, 'route_label'=>(str_slug($route->label) != '') ? str_slug($route->label) : 'ligne' ]) }}">
+                                <a href="{{ $route->url() }}">
                                     <img src="/img/climb-{{ $route->climb_id }}.png" alt="" class="left" height="12">
                                     {{ $route->label }}
                                 </a>
@@ -108,7 +108,7 @@
                                 @endif
                             </td>
                             <td><img src="/img/note_{{ $route->note }}.png" alt="" height="15"></td>
-                            <td><a href="{{ route('cragPage', ['crag_id'=>$route->crag->id, 'crag_label'=>str_slug($route->crag->label)]) }}">{{ $route->crag->label }}</a></td>
+                            <td><a href="{{ $route->crag->url() }}">{{ $route->crag->label }}</a></td>
                             <td>{{ $route->created_at->format('d M Y') }}</td>
                         </tr>
                     @endforeach

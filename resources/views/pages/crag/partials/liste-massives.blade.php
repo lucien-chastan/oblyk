@@ -11,7 +11,7 @@
             @foreach($massives as $massive)
             <tr>
                 <td onclick="selectMassive({{$massive->id}})"><a class="btn-flat waves-effect">{{$massive->label}}</a></td>
-                <td><a target="_blank" href="{{route('massivePage',['massive_id'=>$massive->id,'massive_label'=>str_slug($massive->label)])}}">voir le groupe</a></td>
+                <td><a target="_blank" href="{{ $massive->url() }}">voir le groupe</a></td>
             </tr>
             @endforeach
         </tbody>

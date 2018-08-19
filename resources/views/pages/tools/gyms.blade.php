@@ -83,7 +83,7 @@
                         <tr>
                             <td><img src="{{ (file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png')) ? '/storage/gyms/100/logo-' . $gym->id . '.png' : '/img/icon-gym.svg') }}" class="max-min-img"></td>
                             <td class="text-bold">
-                                <a href="{{ route('gymPage', ['gym_id'=>$gym->id, 'gym_label'=>str_slug($gym->label)]) }}">
+                                <a href="{{ $gym->url() }}">
                                     <img src="/img/marker-sae-{{ $gym->type_boulder . $gym->type_route }}.svg" alt="" class="left" height="25">
                                     {{ $gym->label }}
                                 </a>

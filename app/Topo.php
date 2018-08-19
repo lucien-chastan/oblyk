@@ -40,4 +40,40 @@ class Topo extends Model
     public function versions() {
         return $this->morphMany('App\Version', 'versionnable');
     }
+
+    public function articleTopos(){
+        return $this->hasMany('App\ArticleTopo','topo_id','id');
+    }
+
+    public function cover($size = 700) {
+        $cover = file_exists(storage_path('app/public/topos/' . $size . '/topo-' . $this->id . '.jpg')) ?
+            '/storage/topos/' . $size . '/topo-' . $this->id . '.jpg' :
+            '/img/default-topo-couverture.svg';
+        return $cover;
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'topoPage',
+            [
+                'topo_id' => $id,
+                'topo_label' => (str_slug($label) != '') ? str_slug($label) : 'topo'
+            ],
+            $absolute
+        );
+    }
 }

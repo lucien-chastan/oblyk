@@ -37,8 +37,23 @@ class CragController extends Controller
             ->with('gapGrade')
             ->with('descriptions.user')
             ->with('exceptions.user')
+            ->with(['articleCrags.article' => function($query) {
+                $query->where('publish','1');
+            }])
             ->first();
 
+        // Si le label à changé alors on redirige
+        if(Crag::webUrl($crag_id, $crag_title) != $crag->url()) {
+            return $this->cragRedirectionPage($crag_id);
+        }
+
+        // Compte le nombre d'article on vide
+        $nbArticle = 0;
+        foreach ($crag->articleCrags as $articleCrag) {
+            if ($articleCrag->article != null) {
+                $nbArticle++;
+            }
+        }
 
         $partners = User::whereIn('id', UserPlace::getPartnersAroundCenter($crag->lat, $crag->lng))->get();
 
@@ -91,8 +106,14 @@ class CragController extends Controller
             'meta_description' => 'description de ' . $crag['label'],
             'user_follow' => $userFollow,
             'partners' => $partners,
+            'nbArticle' => $nbArticle,
         ];
 
         return view('pages.crag.crag', $data);
+    }
+
+    public function cragRedirectionPage($crag_id) {
+        $crag = Crag::find($crag_id);
+        return redirect($crag->url(),301);
     }
 }

@@ -14,20 +14,20 @@
 
                             {{--photos de la falaise--}}
                             @foreach($crag->photos as $photo)
-                                <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$crag->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url(), 'elementLabel'=>$crag->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
                             @endforeach
 
                             {{--photos des secteurs--}}
                             @foreach($crag->sectors as $sector)
                                 @foreach($sector->photos as $photo)
-                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]) . '#voies', 'elementLabel'=>$sector->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url() . '#voies', 'elementLabel'=>$sector->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
                                 @endforeach
                             @endforeach
 
                             {{--photos des lignes--}}
                             @foreach($crag->routes as $route)
                                 @foreach($route->photos as $photo)
-                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>route('cragPage',['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]), 'elementLabel'=>$route->label, 'userUrl'=>route('userPage', ['user_id'=>$photo->user_id, 'user_label'=>str_slug($photo->user->name)]), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
+                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url(), 'elementLabel'=>$route->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
                                 @endforeach
                             @endforeach
 
@@ -141,7 +141,7 @@
                             </div>
                             <p class="i-cursor">
                                 {{$video->description}}<br>
-                                @lang('modals/video.postByDate', ['url'=>route('userPage',['user_id'=>$video->user->id, 'user_label'=>str_slug($video->user->name)]), 'name'=>$video->user->name, 'date'=>$video->created_at->format('D M Y')])
+                                @lang('modals/video.postByDate', ['url'=>$video->user->url(), 'name'=>$video->user->name, 'date'=>$video->created_at->format('D M Y')])
                                 @if(Auth::check())
                                     <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$video->id, "model"=>"Video"]) !!} class="material-icons tiny-btn tooltipped btnModal">flag</i>
                                     @if(Auth::id() == $video->user_id)

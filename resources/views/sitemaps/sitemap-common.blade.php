@@ -5,9 +5,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{</loc>
+                <loc>{{ $app }}/{{ $language }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $app }}/{{$language}}" />
+                <xhtml:link rel="alternate" hreflang="{{ $app }}/{{ $language }}" />
             @endif
         @endforeach
         <lastmod>{{ \Carbon\Carbon::now()->format('Y-m-d') }}</lastmod>
@@ -19,9 +19,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('project',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('project',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('project',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('project',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -31,9 +31,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('contact',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('contact',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('contact',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('contact',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -43,9 +43,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('about',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('about',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('about',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('about',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -55,9 +55,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('help',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('help',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('help',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('help',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -67,9 +67,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('supportUs',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('supportUs',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('supportUs',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('supportUs',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -79,9 +79,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('developer',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('developer',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('developer',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('developer',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -91,9 +91,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('termsOfUse',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('termsOfUse',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('termsOfUse',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('termsOfUse',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2017-10-01</lastmod>
@@ -103,9 +103,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('subscribe',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('subscribe',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('subscribe',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('subscribe',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-05-01</lastmod>
@@ -115,9 +115,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('lexique',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('lexique',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('lexique',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('lexique',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastWord->format('Y-m-d') }}</lastmod>
@@ -127,9 +127,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('grade',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('grade',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('grade',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('grade',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-01-01</lastmod>
@@ -139,9 +139,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('partnerHowPage',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('partnerHowPage',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('partnerHowPage',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('partnerHowPage',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-01-01</lastmod>
@@ -151,9 +151,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('articlesPage',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('articlesPage',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('articlesPage',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('articlesPage',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastArticles->format('Y-m-d') }}</lastmod>
@@ -166,9 +166,9 @@
         <url>
             @foreach($languages as $language)
                 @if($loop->first)
-                    <loc>{{ $app }}/{{$language}}{{route('articlePage', ['article_label'=> str_slug($article->label), 'article_id'=>$article->id], false)}}</loc>
+                    <loc>{{ $app }}/{{ $language }}{{ $article->url(false) }}</loc>
                 @else
-                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{route('articlePage', ['article_label'=> str_slug($article->label), 'article_id'=>$article->id], false)}}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ $article->url(false) }}" />
                 @endif
             @endforeach
             <lastmod>{{ $article->updated_at->format('Y-m-d') }}</lastmod>
@@ -182,9 +182,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('map',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('map',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('map',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('map',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastCrag->format('Y-m-d') }}</lastmod>
@@ -194,9 +194,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('mapGym',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('mapGym',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('mapGym',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('mapGym',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastGym->format('Y-m-d') }}</lastmod>
@@ -208,9 +208,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('forum',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('forum',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('forum',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('forum',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-01-01</lastmod>
@@ -220,9 +220,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('forumCategories',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('forumCategories',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('forumCategories',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('forumCategories',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-01-01</lastmod>
@@ -232,9 +232,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('forumTopics',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('forumTopics',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('forumTopics',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('forumTopics',[],false) }}" />
             @endif
         @endforeach
         <lastmod>{{ $lastTopic->format('Y-m-d') }}</lastmod>
@@ -244,9 +244,9 @@
     <url>
         @foreach($languages as $language)
             @if($loop->first)
-                <loc>{{ $app }}/{{$language}}{{ route('forumRules',[],false) }}</loc>
+                <loc>{{ $app }}/{{ $language }}{{ route('forumRules',[],false) }}</loc>
             @else
-                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{$language}}{{ route('forumRules',[],false) }}" />
+                <xhtml:link rel="alternate" hreflang="{{ $language }}" href="{{ $app }}/{{ $language }}{{ route('forumRules',[],false) }}" />
             @endif
         @endforeach
         <lastmod>2018-01-01</lastmod>

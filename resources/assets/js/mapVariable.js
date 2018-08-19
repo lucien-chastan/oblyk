@@ -69,6 +69,18 @@ let baseMaps = {
 
 //créer la popup html avec les données d'une falaise
 function buildPopup(crag) {
+    var minGradeVal, maxGradeVal, minGradeText, maxGradeText;
+
+    if (typeof crag.gapGrade !== 'undefined') {
+        minGradeVal = crag.gapGrade.min_grade_val;
+        maxGradeVal = crag.gapGrade.max_grade_val;
+        minGradeText = crag.gapGrade.min_grade_text;
+        maxGradeText = crag.gapGrade.max_grade_text;
+    } else {
+        minGradeVal = maxGradeVal = null;
+        minGradeText = maxGradeText = '?';
+    }
+
     let html = `
         <img class="photo-couve-site-leaflet" src="${crag.bandeau}" alt="photo de couverture de ${crag.label}">
         <div class="crag-leaflet-info">
@@ -95,7 +107,7 @@ function buildPopup(crag) {
                 </tr>
                 <tr>
                     <td>Lignes &amp; Cotations : </td>
-                    <td>${crag.routes_count} lignes, de <span class="color-grade-${crag.gap_grade.min_grade_val}">${crag.gap_grade.min_grade_text}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${crag.gap_grade.max_grade_val}">${crag.gap_grade.max_grade_text}</span></td>
+                    <td>${crag.routes_count} lignes, de <span class="color-grade-${minGradeVal}">${minGradeText}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${maxGradeVal}">${maxGradeText}</span></td>
                 </tr>
                 <tr>
                     <td></td>

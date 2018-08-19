@@ -44,7 +44,7 @@
                                 <p class="text-bold">{{$word->label}}</p>
                                 <div class="markdownZone">{{$word->definition}}</div>
                                 <p class="info-user grey-text">
-                                    @lang('modals/word.postByDate', ['name'=>$word->user->name, 'url'=>route('userPage',['user_id'=>$word->user->id, 'user_label'=>str_slug($word->user->name)]), 'date'=>$word->created_at->format('d M Y')])
+                                    @lang('modals/word.postByDate', ['name'=>$word->user->name, 'url'=>$word->user->url(), 'date'=>$word->created_at->format('d M Y')])
 
                                     @if(Auth::check())
                                         <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>

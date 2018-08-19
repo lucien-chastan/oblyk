@@ -60,15 +60,15 @@
                         @foreach($topics as $topic)
                             <tr>
                                 <td>
-                                    <a class="text-bold" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}">{{$topic->label}}</a><br>
-                                    <span class="grey-text">@lang('pages/forums/topics.addedBy') <a href="{{route('userPage',['user_id'=>$topic->user->id,'user_label'=>str_slug($topic->user->name)])}}">{{$topic->user->name}}</a></span>
+                                    <a class="text-bold" href="{{ $topic->url() }}">{{ $topic->label }}</a><br>
+                                    <span class="grey-text">@lang('pages/forums/topics.addedBy') <a href="{{ $topic->user->url() }}">{{ $topic->user->name }}</a></span>
                                 </td>
-                                <td {!! $Helpers::tooltip(trans('elements/Categories.label_' . $topic->category->id)) !!} class="text-center tooltipped"><img class="img-topics" src="/img/forum-{{$topic->category_id}}.svg"></td>
-                                <td class="text-center">{{$topic->views}}</td>
-                                <td class="text-center">{{$topic->nb_post}}</td>
+                                <td {!! $Helpers::tooltip(trans('elements/Categories.label_' . $topic->category->id)) !!} class="text-center tooltipped"><img class="img-topics" src="/img/forum-{{ $topic->category_id }}.svg"></td>
+                                <td class="text-center">{{ $topic->views }}</td>
+                                <td class="text-center">{{ $topic->nb_post }}</td>
                                 <td class="grey-text text-center">{{$topic->last_post->format('d M Y à H:i')}}</td>
                                 <td>
-                                    <a {!! $Helpers::tooltip(trans('pages/forums/topics.goToLastPage')) !!} class="tooltipped" rel="nofollow" href="{{ route('topicPage',['topic_id'=>$topic->id,'topic_label'=>str_slug($topic->label)]) }}?page={{ ceil($topic->nb_post / 10) }}">
+                                    <a {!! $Helpers::tooltip(trans('pages/forums/topics.goToLastPage')) !!} class="tooltipped" rel="nofollow" href="{{ $topic->url() }}?page={{ ceil($topic->nb_post / 10) }}">
                                         <i class="material-icons right">last_page</i>
                                     </a>
                                 </td>

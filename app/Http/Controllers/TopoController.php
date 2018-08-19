@@ -21,7 +21,23 @@ class TopoController extends Controller
             ->withCount('posts')
             ->withCount('sales')
             ->withCount('versions')
+            ->with(['articleTopos.article' => function($query) {
+                $query->where('publish','1');
+            }])
             ->first();
+
+        // Si le label à changé alors on redirige
+        if(Topo::webUrl($topo_id, $topo_title) != $topo->url()) {
+            return $this->topoRedirectionPage($topo_id);
+        }
+
+        // Compte le nombre d'article on vide
+        $nbArticle = 0;
+        foreach ($topo->articleTopos as $articleTopo) {
+            if ($articleTopo->article != null) {
+                $nbArticle++;
+            }
+        }
 
         //on va chercher si l'utilisateur follow ce topo
         $userFollow = Follow::where(
@@ -40,7 +56,8 @@ class TopoController extends Controller
             'topo' => $topo,
             'meta_title' => $topo['label'],
             'meta_description' => 'description de ' . $topo['label'],
-            'user_follow' => $userFollow
+            'user_follow' => $userFollow,
+            'nbArticle' => $nbArticle
         ];
 
         return view('pages.topo.topo', $data);
@@ -91,5 +108,10 @@ class TopoController extends Controller
         $data = ['topos' => $topos];
 
         return view('pages.crag.partials.liste-topos-search', $data);
+    }
+
+    public function topoRedirectionPage($topo_id) {
+        $topo = Topo::find($topo_id);
+        return redirect($topo->url(),301);
     }
 }

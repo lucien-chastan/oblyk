@@ -64,7 +64,7 @@
                     <div class="blue-border-div">
                         <div class="markdownZone">{{ $description->description }}</div>
                         <p class="info-user grey-text">
-                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>route('userPage',['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]), 'date'=>$description->created_at->format('d M Y')])
+                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>$description->user->url(), 'date'=>$description->created_at->format('d M Y')])
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -94,20 +94,45 @@
 
     </div>
     <div class="col s12 m12 l5">
-
         <div class="card-panel">
-            @if(file_exists(storage_path('app/public/topos/700/topo-' . $topo->id . '.jpg')))
-                <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="/storage/topos/700/topo-{{$topo->id}}.jpg">
-            @else
-                <img class="responsive-img z-depth-3" alt="" src="/img/default-topo-couverture.svg">
+            <img class="responsive-img z-depth-3" alt="couverture du topo {{$topo->label}}" src="{{ $topo->cover() }}">
+            @if(Auth::check())
+                <p class="text-center">
+                    <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.changeCover')]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i>@lang('pages/guidebooks/tabs/information.changeCover')</a>
+                </p>
             @endif
-
-                @if(Auth::check())
-                    <p class="text-center">
-                        <a {!! $Helpers::modal(route('topoCouvertureModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.changeCover')]) !!} class="btn-flat waves-effect btnModal"><i class="material-icons left">wallpaper</i>@lang('pages/guidebooks/tabs/information.changeCover')</a>
-                    </p>
-                @endif
         </div>
 
     </div>
 </div>
+
+@if($nbArticle > 0)
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel topo-article-area">
+                <h2 class="loved-king-font">@lang('pages/guidebooks/tabs/information.relatedArticles')</h2>
+
+                @foreach($topo->articleTopos as $articleTopo)
+                    @if($articleTopo->article != null)
+                        <div class="row">
+                            <div class="col s12">
+                                @php($article = $articleTopo->article)
+                                @if(file_exists(storage_path('app/public/articles/100/article-' . $article->id . '.jpg')))
+                                    <img src="/storage/articles/100/article-{{$article->id}}.jpg" class="left img-article">
+                                @else
+                                    <img src="/img/default-article-bandeau.jpg" class="left img-article">
+                                @endif
+                                <p class="text-bold truncate no-margin">{{$article->label}}</p>
+                                <p class="no-margin">{{ str_limit($article->description, $limit = 90, $end = '...') }}</p>
+                                <p class="grey-text no-margin">
+                                    Le {{$article->created_at->format('d M Y')}}, {{$article->views}} vus, {{$article->descriptions_count}} commentaires
+                                    <a href="{{ $article->url() }}">lire l'article</a>
+                                </p>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+@endif

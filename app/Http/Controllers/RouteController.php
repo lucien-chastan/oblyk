@@ -29,6 +29,7 @@ class RouteController extends Controller
         });
         return response()->json($grades_calc);
     }
+
     public function routePage($route_id, $route_label){
 
         $route = Route::where('id', $route_id)
@@ -45,6 +46,11 @@ class RouteController extends Controller
             ->withCount('videos')
             ->withCount('versions')
             ->first();
+
+        // Si le label à changé alors on redirige
+        if(Route::webUrl($route_id, $route_label) != $route->url()) {
+            return $this->routeRedirectionPage($route_id);
+        }
 
         //route dans la ticklist du connecté
         $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
@@ -86,5 +92,10 @@ class RouteController extends Controller
         ];
 
         return view('pages.route.line', $data);
+    }
+
+    public function routeRedirectionPage($route_id) {
+        $route = Route::find($route_id);
+        return redirect($route->url(),301);
     }
 }

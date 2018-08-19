@@ -17,7 +17,7 @@
                 @if($description->note != 0)
                     <img src="/img/note_{{ $description->note }}.png" alt="" height="12">
                 @endif
-                par <a href="{{ route('userPage',['user_id'=>$description->user->id,'user_label'=>str_slug($description->user->name)]) }}">{{ $description->user->name }}</a>
+                par <a href="{{ $description->user->url() }}">{{ $description->user->name }}</a>
                 le {{ $description->created_at->format('d M Y à H:i') }} sur <a onclick="loadRoute({{$description->descriptive->id}})" class="button-open-route">{{ $description->descriptive->label }}</a>
             </div>
         </div>

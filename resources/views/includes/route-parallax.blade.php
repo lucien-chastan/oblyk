@@ -12,7 +12,7 @@
                     <strong>{{$route->routeSections[0]->grade}}{{$route->routeSections[0]->sub_grade}}</strong>
                 @endif
             </h1>
-            <p><i class="material-icons left">terrain</i><a class="white-text" href="{{ route('cragPage', ['crag_id'=>$crag->id, 'crag_label'=>str_slug($crag->label)]) }}">{{$crag->label}}</a></p>
+            <p><i class="material-icons left">terrain</i><a class="white-text" href="{{ $crag->url() }}">{{$crag->label}}</a></p>
             <p><a class="white-text" href="{{ route('map') }}#{{$crag->lat}}/{{$crag->lng}}/15">{{$crag->city}}, {{$crag->region}} ({{$crag->code_country}})</a></p>
         </div>
     </div>

@@ -13,14 +13,14 @@
             <tr>
                 <td class="couverture-zone-liste-topo text-center">
                     @if(file_exists(storage_path('app/public/topos/200/topo-' . $topo->id . '.jpg')))
-                        <img class="responsive-img z-depth-2" alt="couverture du topo {{$topo->label}}" src="/storage/topos/200/topo-{{$topo->id}}.jpg">
+                        <img class="responsive-img z-depth-2" alt="couverture du topo {{ $topo->label }}" src="/storage/topos/200/topo-{{ $topo->id }}.jpg">
                     @else
                         <img class="responsive-img z-depth-2" alt="" src="/img/default-topo-couverture.svg">
                     @endif
                 </td>
-                <td onclick="selectTopo({{$topo->id}})"><a class="btn-flat waves-effect">{{$topo->label}}</a></td>
-                <td>{{$topo->editionYear}}</td>
-                <td><a target="_blank" href="{{route('topoPage',['topo_id'=>$topo->id,'topo_label'=>str_slug($topo->label)])}}">voir le topo</a></td>
+                <td onclick="selectTopo({{ $topo->id }})"><a class="btn-flat waves-effect">{{ $topo->label }}</a></td>
+                <td>{{ $topo->editionYear }}</td>
+                <td><a target="_blank" href="{{ \App\Topo::webUrl($topo->id, $topo->label) }}">voir le topo</a></td>
             </tr>
             @endforeach
         </tbody>

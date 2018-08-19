@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Crag;
 use App\Follow;
+use App\Gym;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +25,7 @@ class FollowController extends Controller
 
                 //FALAISE
                 if($follow->followed_type == 'App\Crag'){
-                    $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->label;
                     $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
                     $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
@@ -31,7 +33,7 @@ class FollowController extends Controller
 
                 //TOPO
                 if($follow->followed_type == 'App\Topo'){
-                    $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->label;
                     $follow->followIcon = (file_exists(storage_path('app/public/topos/50/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/50/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
                     $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
@@ -39,7 +41,7 @@ class FollowController extends Controller
 
                 //MASSIF
                 if($follow->followed_type == 'App\Massive'){
-                    $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->label;
                     $follow->followIcon = '/img/icon-search-massive.svg';
                     $follow->followInformation = 'regroupement de site';
@@ -47,7 +49,7 @@ class FollowController extends Controller
 
                 //USER
                 if($follow->followed_type == 'App\User'){
-                    $follow->followUrl = route('userPage', ['user_id'=>$follow->followed_id, 'user_name'=>str_slug($follow->followed->name)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->name;
                     $follow->followIcon = file_exists(storage_path('app/public/users/50/user-' . $follow->followed_id . '.jpg')) ? '/storage/users/50/user-' . $follow->followed_id . '.jpg' : '/img/icon-search-user.svg';
 
@@ -62,7 +64,7 @@ class FollowController extends Controller
 
                 //SALLE
                 if($follow->followed_type == 'App\Gym'){
-                    $follow->followUrl = route('gymPage', ['gym_id'=>$follow->followed_id, 'gym_name'=>str_slug($follow->followed->label)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->label;
                     $follow->followIcon = file_exists(storage_path('app/public/gyms/100/logo-' . $follow->followed_id . '.png')) ? '/storage/gyms/100/logo-' . $follow->followed_id . '.png' : '/img/icon-search-gym.svg';
                     $follow->followInformation = $follow->followed->big_city . ' (' . $follow->followed->code_country . ')';

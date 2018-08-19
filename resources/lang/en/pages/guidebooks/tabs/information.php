@@ -32,5 +32,6 @@ return [
     'descriptionTitle' => "Climbers descriptions",
     'noDescription' => "There are no climbers descriptions, if you have this guidebook, please describe it",
 
-
+    // Boite article
+    'relatedArticles' => 'Articles linked to this guide book'
 ];

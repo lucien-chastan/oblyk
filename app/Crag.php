@@ -112,6 +112,30 @@ class Crag extends Model
         return $cragsInRayon;
     }
 
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'cragPage',
+            [
+                'crag_id' => $id,
+                'crag_label' => (str_slug($label) != '') ? str_slug($label) : 'falaise'
+            ],
+            $absolute
+        );
+    }
 
     //met à jour les informations stocké de la falaise en question
     public static function majInformation($crag_id){
@@ -205,5 +229,9 @@ class Crag extends Model
         }
 
         return $photos;
+    }
+
+    public function articleCrags(){
+        return $this->hasMany('App\ArticleCrag','crag_id','id');
     }
 }

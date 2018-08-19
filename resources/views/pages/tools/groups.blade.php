@@ -56,7 +56,7 @@
                     <tbody>
                     @foreach($groups as $group)
                         <tr>
-                            <td class="text-bold"><a href="{{ route('massivePage', ['massive_id'=>$group->id, 'massive_label'=>str_slug($group->label)]) }}">{{ $group->label }}</a></td>
+                            <td class="text-bold"><a href="{{ $group->url() }}">{{ $group->label }}</a></td>
                             <td>{{ $group->created_at->format('d M Y') }}</td>
                         </tr>
                     @endforeach
