@@ -45,13 +45,12 @@
 
 <div class="row">
     <div class="col s12 m6">
-        <img alt="canoë" title="canoë" src="/storage/articles/1300/deep-w-1.jpg" class="responsive-img">
-        <p class="grey-text text-center">Voie 1</p>
+        <img alt="Psychobloc dans les calanques" title="Psychobloc dans les calanques" src="/storage/articles/photos/deep-water/psychobloc-dans-les-calanques-1.jpg" class="responsive-img">
     </div>
     <div class="col s12 m6">
-        <img alt="La trou du Diable" title="La trou du Diable" src="/storage/articles/1300/deep-w-2.jpg" class="responsive-img">
-        <p class="grey-text text-center">Voie 2</p>
+        <img alt="Psychobloc dans les calanques" title="Psychobloc dans les calanques" src="/storage/articles/photos/deep-water/psychobloc-dans-les-calanques-2.jpg" class="responsive-img">
     </div>
+    <p class="grey-text text-center">Psychobloc dans les calanques</p>
 </div>
 
 {{-- TRAVERSÉE FIGUEROLLES – MUGEL --}}
@@ -67,12 +66,12 @@
 
 <div class="row">
     <div class="col s12 m7">
-        <img alt="canoë" title="canoë" src="/storage/articles/1300/deep-w-3.jpg" class="responsive-img">
-        <p class="grey-text text-center">canoë</p>
+        <img alt="Accès au psychobloc en canoë" title="Accès au psychobloc en canoë" src="/storage/articles/photos/deep-water/acces-au-psychobloc-en-canoe.jpg" class="responsive-img">
+        <p class="grey-text text-center">Accès au psychobloc en canoë</p>
     </div>
     <div class="col s12 m5">
-        <img alt="La trou du Diable" title="La trou du Diable" src="/storage/articles/1300/deep-w-4.jpg" class="responsive-img">
-        <p class="grey-text text-center">La trou du Diable</p>
+        <img alt="Le trou du Diable" title="Le trou du Diable" src="/storage/articles/photos/deep-water/le-trou-du-diable.jpg" class="responsive-img">
+        <p class="grey-text text-center">Le trou du Diable</p>
     </div>
 </div>
 
@@ -93,17 +92,17 @@
 
 <div class="row">
     <div class="col s12 m4">
-        <img alt="Grande-voie - Bleu comme la mer rouge" title="Grande-voie - Bleu comme la mer rouge" src="/storage/articles/1300/deep-w-5.jpg" class="responsive-img">
-        <p class="text-center grey-text">Voie 1</p>
+        <img alt="Psychobloc au Trou du diable à Figuerolles" title="Psychobloc au Trou du diable à Figuerolles" src="/storage/articles/photos/deep-water/psychobloc-au-trou-du-diable-a-figuerolles-1.jpg" class="responsive-img">
     </div>
     <div class="col s12 m4">
-        <img alt="Marche d'approche Grand Draouïn" title="Marche d'approche Grand Draouïn" src="/storage/articles/1300/deep-w-6.jpg" class="responsive-img">
-        <p class="text-center grey-text">Voie 2</p>
+        <img alt="Marche Psychobloc au Trou du diable à Figuerolles" title="Psychobloc au Trou du diable à Figuerolles" src="/storage/articles/photos/deep-water/psychobloc-au-trou-du-diable-a-figuerolles-2.jpg" class="responsive-img">
     </div>
     <div class="col s12 m4">
-        <img alt="Falaise de Soubeyrannes" title="Falaise de Soubeyrannes" src="/storage/articles/1300/deep-w-7.jpg" class="responsive-img">
-        <p class="grey-text text-center">Voie 3</p>
+        <img alt="Psychobloc au Trou du diable à Figuerolles" title="Psychobloc au Trou du diable à Figuerolles" src="/storage/articles/photos/deep-water/psychobloc-au-trou-du-diable-a-figuerolles-3.jpg" class="responsive-img">
     </div>
+    <p class="grey-text text-center">
+        Psychobloc au Trou du diable à Figuerolles
+    </p>
 </div>
 
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1760'])
