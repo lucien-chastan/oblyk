@@ -15,7 +15,7 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">date_range</i>Saisons</h2>
 
 <p>
-    A privilégier lors des fortes chaleurs des journées estivales. La mer peut être agitée, pensez à regarder la météo marine. À privilégier lors des fortes chaleurs des journées estivales. La mer peut être agitée, pensez à regarder la météo marine.
+    A privilégier lors des fortes chaleurs des journées estivales. La mer peut être agitée, pensez à regarder la météo marine.
 </p>
 
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">place</i>Localisation</h2>
