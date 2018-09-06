@@ -12,6 +12,7 @@ return [
 
     // Prix
     'priceTitle' => 'Average price : ',
+    'priceVcTitle' => 'Au Vieux Campeur price : ',
     'noPrice' => 'Price not filled',
 
     // Pages

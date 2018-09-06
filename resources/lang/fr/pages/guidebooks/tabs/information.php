@@ -11,6 +11,7 @@ return [
 
     // Prix
     'priceTitle' => 'Prix conseillé : ',
+    'priceVcTitle' => 'Prix Au Vieux Campeur : ',
     'noPrice' => 'prix non renseigné',
 
     // Pages

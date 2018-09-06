@@ -6,4 +6,6 @@ return [
     'intro_2' => 'We recommend buying directly from the editor, or near spots that are in the guidebooks',
     'noPointOfSale' => 'There are no sales spot added yet',
 
+    'byAtVieuxCampeur' => 'Also find this guidebook in Au Vieux Campeur',
+
 ];

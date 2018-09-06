@@ -92,15 +92,26 @@ class Topo extends Model
         if ($this->ean != null && $vc_base_url != null) {
             try {
                 $client = new Client();
-                $reponse = $client->request('GET', $vc_base_url . $this->ean);
+                $reponse = $client->request(
+                    'GET',
+                    $vc_base_url . $this->ean,
+                    [
+                        'verify' => (bool)env('VERIFY_VIEUX_CAMPEUR_SSL_CERTIFICATE'),
+                        'connect_timeout' => (int)env('REQUEST_CONNECT_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
+                        'timeout' => (int)env('REQUEST_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
+                    ]
+                );
+
                 if($reponse->getStatusCode() == 200) {
                     $response_data = json_decode($reponse->getBody()->getContents());
-                    $data_vc = [
-                        'title' => $response_data->nom,
-                        'url' => $response_data->url,
-                        'price' => $response_data->prix
-                    ];
-                    $this->price = round((int)$data_vc['price'], 2) ?? 'NA';
+                    if($response_data != null) {
+                        $data_vc = [
+                            'title' => $response_data->nom,
+                            'url' => $response_data->url,
+                            'price' => str_replace(',', '.', $response_data->prix)
+                        ];
+                        $this->vc_price = round((double)$data_vc['price'], 2) ?? null;
+                    }
                 }
             } catch (\Exception $e) {
                 Log::error('Exception : ' . $e->getMessage());
