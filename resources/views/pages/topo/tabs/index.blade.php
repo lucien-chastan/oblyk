@@ -34,14 +34,21 @@
                 @else
                     <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noWeight')</span>
                 @endif
+                <br>
+                <strong>@lang('pages/guidebooks/tabs/information.eanTitle')</strong>
+                @if($topo->ean)
+                    {{ $topo->ean }}
+                @else
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noEan')</span>
+                @endif
             </p>
 
-            @if($topo->id == 3)
+            @if($data_vc != null)
                 <div class="row">
                     <div class="col s12 text-center">
-                        <a href="https://www.auvieuxcampeur.fr/escalade-en-drome-provencale.html" class="btn-flat vieux-camp-btn">
+                        <a href="{{ $data_vc['url'] }}" class="btn-flat vieux-camp-btn">
                             <img height="10" src="/img/logo_vieux_campeur.png">
-                            Acheter au Vieux Campeur
+                            @lang('pages/guidebooks/tabs/information.buyAtVieuxCampeur')
                         </a>
                     </div>
                 </div>

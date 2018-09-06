@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Crag;
 use App\Follow;
 use App\Topo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use TomLingham\Searchy\Facades\Searchy;
@@ -52,12 +51,16 @@ class TopoController extends Controller
         $topo->views++;
         $topo->save();
 
+        // Récupération des infos du vieux campeur
+        $data_vc = $topo->getVieuxCampeurInformation();
+
         $data = [
             'topo' => $topo,
             'meta_title' => $topo['label'],
             'meta_description' => 'description de ' . $topo['label'],
             'user_follow' => $userFollow,
-            'nbArticle' => $nbArticle
+            'nbArticle' => $nbArticle,
+            'data_vc' => $data_vc
         ];
 
         return view('pages.topo.topo', $data);
