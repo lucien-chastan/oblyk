@@ -46,6 +46,18 @@
                 @endif
 
             </div>
+
+            @if($data_vc != null)
+                <p class="text-center">@lang('pages/guidebooks/tabs/buy.byAtVieuxCampeur')</p>
+                <div class="row">
+                    <div class="col s12 text-center">
+                        <a target="_blank" href="{{ $data_vc['url'] }}" class="btn-flat vieux-camp-btn">
+                            <img height="10" src="/img/logo_vieux_campeur.png">
+                            @lang('pages/guidebooks/tabs/information.buyAtVieuxCampeur')
+                        </a>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

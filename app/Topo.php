@@ -2,8 +2,11 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Topo extends Model
 {
@@ -75,5 +78,48 @@ class Topo extends Model
             ],
             $absolute
         );
+    }
+
+    /**
+     * Récupère les informations du topos aux vieux campeur
+     *
+     * @return array|null
+     */
+    public function getVieuxCampeurInformation() {
+        $data_vc = null;
+        $vc_base_url = env('VIEUX_CAMPEUR_BASE_URL');
+
+        if ($this->ean != null && $vc_base_url != null) {
+            try {
+                $client = new Client();
+                $reponse = $client->request(
+                    'GET',
+                    $vc_base_url . $this->ean,
+                    [
+                        'verify' => (bool)env('VERIFY_VIEUX_CAMPEUR_SSL_CERTIFICATE'),
+                        'connect_timeout' => (int)env('REQUEST_CONNECT_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
+                        'timeout' => (int)env('REQUEST_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
+                    ]
+                );
+
+                if($reponse->getStatusCode() == 200) {
+                    $response_data = json_decode($reponse->getBody()->getContents());
+                    if($response_data != null) {
+                        $data_vc = [
+                            'title' => $response_data->nom,
+                            'url' => $response_data->url,
+                            'price' => str_replace(',', '.', $response_data->prix)
+                        ];
+                        $this->vc_price = round((double)$data_vc['price'], 2) ?? null;
+                    }
+                }
+            } catch (\Exception $e) {
+                Log::error('Exception : ' . $e->getMessage());
+            } catch (GuzzleException $e) {
+                Log::error('GuzzleException : ' . $e->getMessage());
+            }
+        }
+
+        return $data_vc;
     }
 }

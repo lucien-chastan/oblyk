@@ -5,10 +5,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0",
         "andreasindal/laravel-markdown": "^1.1",
         "barryvdh/laravel-debugbar": "^2.3",
         "caouecs/laravel-lang": "~3.0",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

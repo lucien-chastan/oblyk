@@ -2,25 +2,31 @@
     <div class="col s12 m12 l7">
 
         <div class="card-panel">
-            <h1 class="loved-king-font titre-1-topo">{{$topo->label}}</h1>
+            <h1 class="loved-king-font titre-1-topo">{{ $topo->label }}</h1>
 
             <p>
                 @lang('pages/guidebooks/tabs/information.description', ['name'=>$topo->label, 'editor'=>$topo->editor, 'year'=>$topo->editionYear])<br>
-                <strong>@lang('pages/guidebooks/tabs/information.nbCrags')</strong> {{$topo->crags_count}}<br>
+                <strong>@lang('pages/guidebooks/tabs/information.nbCrags')</strong> {{ $topo->crags_count }}<br>
                 <strong>@lang('pages/guidebooks/tabs/information.authorTitle') </strong>
                 @if($topo->author != '')
-                    {{$topo->author}}
+                    {{ $topo->author }}
                 @else
                     <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noAuthor') </span>
                 @endif
                 <br>
-                <strong>@lang('pages/guidebooks/tabs/information.priceTitle')</strong>
-                @if($topo->price != 0)
-                    {{$topo->price}} €
+                @if($topo->vc_price != null)
+                    <strong>@lang('pages/guidebooks/tabs/information.priceVcTitle')</strong>
+                    <span class="green-text text-bold">{{ $topo->vc_price }} €</span>
+                    <br>
                 @else
-                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noPrice')</span>
+                    <strong>@lang('pages/guidebooks/tabs/information.priceTitle')</strong>
+                    @if($topo->price != 0)
+                        {{ $topo->price }} €
+                    @else
+                        <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noPrice')</span>
+                    @endif
+                    <br>
                 @endif
-                <br>
                 <strong>@lang('pages/guidebooks/tabs/information.pagesTitle')</strong>
                 @if($topo->page != 0)
                     @choice('pages/guidebooks/tabs/information.nbPage', $topo->page)
@@ -34,28 +40,34 @@
                 @else
                     <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noWeight')</span>
                 @endif
+                <br>
+                <strong>@lang('pages/guidebooks/tabs/information.eanTitle')</strong>
+                @if($topo->ean)
+                    {{ $topo->ean }}
+                @else
+                    <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noEan')</span>
+                @endif
             </p>
 
-            @if($topo->id == 3)
+            @if(Auth::check())
+                <div class="text-right ligne-btn">
+                    <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/information.editInformation')) !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.editInformation'), "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
+                    @if($topo->versions_count > 0)
+                        <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$topo->id, "model"=>"Topo"]) !!} class="material-icons tiny-btn right tooltipped btnModal">history</i>
+                    @endif
+                </div>
+            @endif
+
+            @if($data_vc != null)
                 <div class="row">
                     <div class="col s12 text-center">
-                        <a href="https://www.auvieuxcampeur.fr/escalade-en-drome-provencale.html" class="btn-flat vieux-camp-btn">
+                        <a target="_blank" href="{{ $data_vc['url'] }}" class="btn-flat vieux-camp-btn">
                             <img height="10" src="/img/logo_vieux_campeur.png">
-                            Acheter au Vieux Campeur
+                            @lang('pages/guidebooks/tabs/information.buyAtVieuxCampeur')
                         </a>
                     </div>
                 </div>
-            @else
-                @if(Auth::check())
-                    <div class="text-right ligne-btn">
-                        <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/information.editInformation')) !!} {!! $Helpers::modal(route('topoModal'), ["topo_id"=>$topo->id, "title"=>trans('pages/guidebooks/tabs/information.editInformation'), "method" => "PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
-                        @if($topo->versions_count > 0)
-                            <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$topo->id, "model"=>"Topo"]) !!} class="material-icons tiny-btn right tooltipped btnModal">history</i>
-                        @endif
-                    </div>
-                @endif
             @endif
-
 
             <h2 class="loved-king-font titre-2-topo">@lang('pages/guidebooks/tabs/information.descriptionTitle')</h2>
 

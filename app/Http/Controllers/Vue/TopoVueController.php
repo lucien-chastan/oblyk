@@ -33,10 +33,12 @@ class TopoVueController extends Controller
     }
 
     function vueAcheter($id){
-        $data = [
-            'topo' => Topo::where('id',$id)->with('sales.user')->first()
-        ];
-        return view('pages.topo.vues.acheterVue', $data);
+        $topo = Topo::where('id',$id)->with('sales.user')->first();
+
+        return view('pages.topo.vues.acheterVue', [
+            'topo' => $topo,
+            'data_vc' => $topo->getVieuxCampeurInformation()
+        ]);
     }
 
     function vueMap($id){
