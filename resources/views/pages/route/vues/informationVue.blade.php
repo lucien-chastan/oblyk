@@ -250,7 +250,7 @@
                 @foreach ($route->descriptions as $description)
                     <div class="blue-border-div">
                         @if($description->private == 1)
-                            @if($description->user_id == Auth::user()->id)
+                            @if(Auth::check() && $description->user_id == Auth::user()->id)
                                 <i {!! $Helpers::tooltip(trans('modals/cross.private_comment')) !!} class="material-icons left grey-text text-lighten-1 tooltipped">vpn_key</i>
                                 <div class="markdownZone">{{ $description->description }}</div>
                             @else
