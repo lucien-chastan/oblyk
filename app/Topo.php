@@ -108,6 +108,7 @@ class Topo extends Model
                         $data_vc = [
                             'title' => $response_data->nom,
                             'url' => $response_data->url,
+                            'description' => $response_data->description ?? null,
                             'price' => str_replace(',', '.', $response_data->prix)
                         ];
                         $this->vc_price = round((double)$data_vc['price'], 2) ?? null;
