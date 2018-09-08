@@ -59,6 +59,13 @@
             @endif
 
             @if($data_vc != null)
+                @if($data_vc['description'] != null)
+                    <h2 class="loved-king-font titre-2-topo">Description du Vieux Campeur</h2>
+                    <p>
+                        {{ $data_vc['description'] }}
+                    </p>
+                @endif
+
                 <div class="row">
                     <div class="col s12 text-center">
                         <a target="_blank" href="{{ $data_vc['url'] }}" class="btn-flat vieux-camp-btn">
