@@ -16,12 +16,14 @@
                 <br>
                 @if($topo->vc_price != null)
                     <strong>@lang('pages/guidebooks/tabs/information.priceVcTitle')</strong>
-                    <span class="green-text text-bold">{{ $topo->vc_price }} €</span>
+                    <span class="green-text text-bold">
+                        {{ str_replace('.', ',', number_format($topo->vc_price, 2)) }} €
+                    </span>
                     <br>
                 @else
                     <strong>@lang('pages/guidebooks/tabs/information.priceTitle')</strong>
                     @if($topo->price != 0)
-                        {{ $topo->price }} €
+                        {{ str_replace('.', ',', number_format($topo->price, 2)) }} €
                     @else
                         <span class="grey-text text-italic">@lang('pages/guidebooks/tabs/information.noPrice')</span>
                     @endif
