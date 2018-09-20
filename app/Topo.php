@@ -48,6 +48,10 @@ class Topo extends Model
         return $this->hasMany('App\ArticleTopo','topo_id','id');
     }
 
+    public function hasCover(){
+        return file_exists(storage_path('app/public/topos/700/topo-' . $this->id . '.jpg'));
+    }
+
     public function cover($size = 700) {
         $cover = file_exists(storage_path('app/public/topos/' . $size . '/topo-' . $this->id . '.jpg')) ?
             '/storage/topos/' . $size . '/topo-' . $this->id . '.jpg' :
