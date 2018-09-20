@@ -98,8 +98,22 @@ class Crag extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
+    /**
+     * @return bool
+     */
+    public function hasCover() : bool
+    {
+        return ($this->bandean != '/img/default-crag-bandeau.jpg');
+    }
+
+    /**
+     * Return crags around point
+     * @param $lat
+     * @param $lng
+     * @param $rayon
+     * @return mixed
+     */
     public static function getCragsAroundPoint($lat, $lng, $rayon){
-        //retourne les falaises dans un certain rayon
         $cragsInRayon = DB::select(
             'SELECT id FROM crags WHERE getRange(lat, lng, :lat, :lng) <= :rayon',
             [
@@ -108,7 +122,6 @@ class Crag extends Model
                 'rayon' => $rayon * 1000
             ]
         );
-
         return $cragsInRayon;
     }
 
