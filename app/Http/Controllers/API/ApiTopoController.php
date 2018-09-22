@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Guidebook\GetGuidebookByIdRequest;
 use App\Topo;
 use App\TopoCrag;
 use Illuminate\Http\JsonResponse;
@@ -58,15 +59,13 @@ class ApiTopoController extends Controller
     /**
      * GET : Guidebook by Oblyk Id or Ean
      *
-     * Get guidebook information : ean, author, price, crags, etc.
+     * Get guidebook information : ean, author, price, crags, etc. by oblyk id or EAN
      *
-     * **Parameters**
-     * - `idOrEan` : Oblyk id or ean *(example : 2 [oblyk id] or  9782915025910 [ean])*
-     *
+     * @param GetGuidebookByIdRequest $request
      * @param $idOrEan
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getTopoResponse($idOrEan) : JsonResponse
+    public function getTopoResponse(GetGuidebookByIdRequest $request, $idOrEan) : JsonResponse
     {
         return response()->json(['data' => $this->getTopo($idOrEan)]);
     }
