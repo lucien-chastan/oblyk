@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(array('prefix' => 'v1', 'middleware' => []), function () {
-    Route::get('topos/{idOrEan}', 'API\ApiTopoController@getTopoResponse')->name('apiGetTopo');
+    Route::get('guidebooks/{idOrEan}', 'API\ApiTopoController@getTopoResponse')->name('apiGetTopo');
     Route::get('crags/{id}', 'API\ApiCragController@getCragResponse')->name('apiGetCrag');
-    Route::get('crags/around-place/{lat}/{lng}/{rayon}', 'API\ApiCragController@getCragsAroundPlaceResponse')->name('apiGetCragsAroundPlace');
+    Route::get('crags/around-place/{lat}/{lng}/{radius}', 'API\ApiCragController@getCragsAroundPlaceResponse')->name('apiGetCragsAroundPlace');
 });

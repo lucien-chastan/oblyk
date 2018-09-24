@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Crag;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Crag\GetCragAroundPlaceRequest;
+use App\MapTool;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-
+use App\Http\Requests\API\Crag\GetCragByIdRequest;
 
 /**
  * @resource Crag
@@ -61,13 +62,11 @@ class ApiCragController extends Controller
      *
      * Get crag by oblyk Id with his information
      *
-     * **Parameters**
-     * - `id` : oblyk id *(you can get it from the crag url)*
-     *
+     * @param GetCragByIdRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    function getCragResponse($id) : JsonResponse
+    function getCragResponse(GetCragByIdRequest $request, $id) : JsonResponse
     {
         return response()->json(['data' => $this->getCrag($id)]);
     }
@@ -100,35 +99,39 @@ class ApiCragController extends Controller
      */
     function getCragsAroundPlace($lat, $lgn, $radius) : array
     {
+
+        // get crag id around place
         $crags = [];
         $cragsId = Crag::getCragsAroundPoint($lat, $lgn, $radius);
         foreach ($cragsId as $crag) {
             $crags[] = $crag->id;
         }
 
-        return $this->getCrags($crags);
+        // get crags information
+        $crags = $this->getCrags($crags);
+
+        // calculate distance
+        foreach ($crags as &$crag) {
+            $crag['distance'] = MapTool::getDistance($crag['lat'], $crag['lng'], $lat, $lgn);
+        }
+
+        return $crags;
     }
 
     /**
      *
      * GET : Crags around place
      *
-     * Get all crags around a point with a given radius
+     * Get all crags around a point with a given radius (in kilometers)
      *
-     * **Parameters**
-     * - `lat` : latitude *(example : 48.03477)*
-     * - `lng` : longitude *(example : 6.569101)*
-     * - `radius` : radius in kilometers *(example : 5)*
-     *
+     * @param GetCragAroundPlaceRequest $request
      * @param $lat
      * @param $lgn
      * @param $radius in kilometres
      * @return JsonResponse
      */
-    public function getCragsAroundPlaceResponse($lat, $lgn, $radius) : JsonResponse
+    public function getCragsAroundPlaceResponse(GetCragAroundPlaceRequest $request, $lat, $lgn, $radius) : JsonResponse
     {
-        $radius = ($radius > 100) ? 20 : $radius;
-
         $crags = $this->getCragsAroundPlace($lat, $lgn, $radius);
 
         $data['lng'] = $lgn;

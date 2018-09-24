@@ -45,7 +45,7 @@
       <div class="content">
           <!-- START_INFO -->
 <h1>Oblyk API</h1>
-<p>Welcome to the documentation of the oblyk api. Find here a set of routes allowing you to use the oblyk database</p>
+<p>Welcome to oblyk api documentation. Find here a set of routes allowing you to use the oblyk open database</p>
 <p>See Oblyk web site : <a href="https://oblyk.org">oblyk</a></p>
 <!-- END_INFO -->
 <h1>Crag</h1>
@@ -53,20 +53,21 @@
 <!-- START_17f4ee457977a4cbe2c4f05963016071 -->
 <h2>GET : Crag by Id</h2>
 <p>Get crag by oblyk Id with his information</p>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>id</code> : oblyk id <em>(you can get it from the crag url)</em></li>
-</ul>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET "http://oblyk-dev.org/api/v1/crags/{id}" \
--H "Accept: application/json"</code></pre>
+-H "Accept: application/json" \
+    -d "id"="788027437" \
+</code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://oblyk-dev.org/api/v1/crags/{id}",
     "method": "GET",
+    "data": {
+        "id": 788027437
+},
     "headers": {
         "accept": "application/json"
     }
@@ -104,26 +105,48 @@ $.ajax(settings).done(function (response) {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/v1/crags/{id}</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
 <!-- END_17f4ee457977a4cbe2c4f05963016071 -->
-<!-- START_2e4f66b07e8bb27c0f426de215cb4abb -->
+<!-- START_502be1125bdbf3f26c76938902b4e4b4 -->
 <h2>GET : Crags around place</h2>
-<p>Get all crags around a point with a given radius</p>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>lat</code> : latitude <em>(example : 48.03477)</em></li>
-<li><code>lng</code> : longitude <em>(example : 6.569101)</em></li>
-<li><code>radius</code> : radius in kilometers <em>(example : 5)</em></li>
-</ul>
+<p>Get all crags around a point with a given radius (in kilometers)</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{rayon}" \
--H "Accept: application/json"</code></pre>
+<pre><code class="language-bash">curl -X GET "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{radius}" \
+-H "Accept: application/json" \
+    -d "lat"="89" \
+    -d "lng"="178" \
+    -d "radius"="99" \
+</code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{rayon}",
+    "url": "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{radius}",
     "method": "GET",
+    "data": {
+        "lat": 89,
+        "lng": 178,
+        "radius": 99
+},
     "headers": {
         "accept": "application/json"
     }
@@ -145,27 +168,59 @@ $.ajax(settings).done(function (response) {
     }
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET api/v1/crags/around-place/{lat}/{lng}/{rayon}</code></p>
-<!-- END_2e4f66b07e8bb27c0f426de215cb4abb -->
+<p><code>GET api/v1/crags/around-place/{lat}/{lng}/{radius}</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lat</td>
+<td>numeric</td>
+<td>required</td>
+<td>Minimum: <code>-90</code> Maximum: <code>90</code></td>
+</tr>
+<tr>
+<td>lng</td>
+<td>numeric</td>
+<td>required</td>
+<td>Minimum: <code>-180</code> Maximum: <code>180</code></td>
+</tr>
+<tr>
+<td>radius</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code> Maximum: <code>100</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_502be1125bdbf3f26c76938902b4e4b4 -->
 <h1>Guidebook</h1>
 <p>Routes to retrieve information on oblyk guidebook</p>
-<!-- START_fee45cda504a9ec9684644401b95f7ba -->
+<!-- START_f1d3480b88ef66b73a11333579877f38 -->
 <h2>GET : Guidebook by Oblyk Id or Ean</h2>
-<p>Get guidebook information : ean, author, price, crags, etc.</p>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>idOrEan</code> : Oblyk id or ean <em>(example : 2 [oblyk id] or  9782915025910 [ean])</em></li>
-</ul>
+<p>Get guidebook information : ean, author, price, crags, etc. by oblyk id or EAN</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET "http://oblyk-dev.org/api/v1/topos/{idOrEan}" \
--H "Accept: application/json"</code></pre>
+<pre><code class="language-bash">curl -X GET "http://oblyk-dev.org/api/v1/guidebooks/{idOrEan}" \
+-H "Accept: application/json" \
+    -d "idOrEan"="408533953" \
+</code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://oblyk-dev.org/api/v1/topos/{idOrEan}",
+    "url": "http://oblyk-dev.org/api/v1/guidebooks/{idOrEan}",
     "method": "GET",
+    "data": {
+        "idOrEan": 408533953
+},
     "headers": {
         "accept": "application/json"
     }
@@ -548,8 +603,27 @@ $.ajax(settings).done(function (response) {
     }
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET api/v1/topos/{idOrEan}</code></p>
-<!-- END_fee45cda504a9ec9684644401b95f7ba -->
+<p><code>GET api/v1/guidebooks/{idOrEan}</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>idOrEan</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_f1d3480b88ef66b73a11333579877f38 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

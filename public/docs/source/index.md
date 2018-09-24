@@ -15,7 +15,7 @@ toc_footers:
 <!-- START_INFO -->
 # Oblyk API
 
-Welcome to the documentation of the oblyk api. Find here a set of routes allowing you to use the oblyk database
+Welcome to oblyk api documentation. Find here a set of routes allowing you to use the oblyk open database
 
 See Oblyk web site : [oblyk](https://oblyk.org)
 <!-- END_INFO -->
@@ -28,14 +28,13 @@ Routes to retrieve information on oblyk crags
 
 Get crag by oblyk Id with his information
 
-**Parameters**
-- `id` : oblyk id *(you can get it from the crag url)*
-
 > Example request:
 
 ```bash
 curl -X GET "http://oblyk-dev.org/api/v1/crags/{id}" \
--H "Accept: application/json"
+-H "Accept: application/json" \
+    -d "id"="788027437" \
+
 ```
 
 ```javascript
@@ -44,6 +43,9 @@ var settings = {
     "crossDomain": true,
     "url": "http://oblyk-dev.org/api/v1/crags/{id}",
     "method": "GET",
+    "data": {
+        "id": 788027437
+},
     "headers": {
         "accept": "application/json"
     }
@@ -86,32 +88,41 @@ $.ajax(settings).done(function (response) {
 ### HTTP Request
 `GET api/v1/crags/{id}`
 
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | Minimum: `1`
 
 <!-- END_17f4ee457977a4cbe2c4f05963016071 -->
 
-<!-- START_2e4f66b07e8bb27c0f426de215cb4abb -->
+<!-- START_502be1125bdbf3f26c76938902b4e4b4 -->
 ## GET : Crags around place
 
-Get all crags around a point with a given radius
-
-**Parameters**
-- `lat` : latitude *(example : 48.03477)*
-- `lng` : longitude *(example : 6.569101)*
-- `radius` : radius in kilometers *(example : 5)*
+Get all crags around a point with a given radius (in kilometers)
 
 > Example request:
 
 ```bash
-curl -X GET "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{rayon}" \
--H "Accept: application/json"
+curl -X GET "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{radius}" \
+-H "Accept: application/json" \
+    -d "lat"="89" \
+    -d "lng"="178" \
+    -d "radius"="99" \
+
 ```
 
 ```javascript
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{rayon}",
+    "url": "http://oblyk-dev.org/api/v1/crags/around-place/{lat}/{lng}/{radius}",
     "method": "GET",
+    "data": {
+        "lat": 89,
+        "lng": 178,
+        "radius": 99
+},
     "headers": {
         "accept": "application/json"
     }
@@ -137,35 +148,44 @@ $.ajax(settings).done(function (response) {
 ```
 
 ### HTTP Request
-`GET api/v1/crags/around-place/{lat}/{lng}/{rayon}`
+`GET api/v1/crags/around-place/{lat}/{lng}/{radius}`
 
+#### Parameters
 
-<!-- END_2e4f66b07e8bb27c0f426de215cb4abb -->
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    lat | numeric |  required  | Minimum: `-90` Maximum: `90`
+    lng | numeric |  required  | Minimum: `-180` Maximum: `180`
+    radius | integer |  required  | Minimum: `1` Maximum: `100`
+
+<!-- END_502be1125bdbf3f26c76938902b4e4b4 -->
 
 #Guidebook
 
 Routes to retrieve information on oblyk guidebook
-<!-- START_fee45cda504a9ec9684644401b95f7ba -->
+<!-- START_f1d3480b88ef66b73a11333579877f38 -->
 ## GET : Guidebook by Oblyk Id or Ean
 
-Get guidebook information : ean, author, price, crags, etc.
-
-**Parameters**
-- `idOrEan` : Oblyk id or ean *(example : 2 [oblyk id] or  9782915025910 [ean])*
+Get guidebook information : ean, author, price, crags, etc. by oblyk id or EAN
 
 > Example request:
 
 ```bash
-curl -X GET "http://oblyk-dev.org/api/v1/topos/{idOrEan}" \
--H "Accept: application/json"
+curl -X GET "http://oblyk-dev.org/api/v1/guidebooks/{idOrEan}" \
+-H "Accept: application/json" \
+    -d "idOrEan"="408533953" \
+
 ```
 
 ```javascript
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://oblyk-dev.org/api/v1/topos/{idOrEan}",
+    "url": "http://oblyk-dev.org/api/v1/guidebooks/{idOrEan}",
     "method": "GET",
+    "data": {
+        "idOrEan": 408533953
+},
     "headers": {
         "accept": "application/json"
     }
@@ -552,8 +572,13 @@ $.ajax(settings).done(function (response) {
 ```
 
 ### HTTP Request
-`GET api/v1/topos/{idOrEan}`
+`GET api/v1/guidebooks/{idOrEan}`
 
+#### Parameters
 
-<!-- END_fee45cda504a9ec9684644401b95f7ba -->
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    idOrEan | integer |  required  | Minimum: `1`
+
+<!-- END_f1d3480b88ef66b73a11333579877f38 -->
 
