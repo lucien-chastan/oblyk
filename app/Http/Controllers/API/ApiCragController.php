@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Crag;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Crag\GetCragAroundPlaceRequest;
+use App\MapTool;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\API\Crag\GetCragByIdRequest;
 
@@ -98,13 +99,23 @@ class ApiCragController extends Controller
      */
     function getCragsAroundPlace($lat, $lgn, $radius) : array
     {
+
+        // get crag id around place
         $crags = [];
         $cragsId = Crag::getCragsAroundPoint($lat, $lgn, $radius);
         foreach ($cragsId as $crag) {
             $crags[] = $crag->id;
         }
 
-        return $this->getCrags($crags);
+        // get crags information
+        $crags = $this->getCrags($crags);
+
+        // calculate distance
+        foreach ($crags as &$crag) {
+            $crag['distance'] = MapTool::getDistance($crag['lat'], $crag['lng'], $lat, $lgn);
+        }
+
+        return $crags;
     }
 
     /**
