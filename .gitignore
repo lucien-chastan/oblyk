@@ -16,4 +16,4 @@ Homestead.json
 Homestead.yaml
 .env
 send_public_folder.sh
-public/docs/collection.json
+public/docs/*
