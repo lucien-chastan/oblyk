@@ -96,6 +96,8 @@ class CragController extends Controller
         if($crag->type_via_ferrata == 1) $climbTypes .= '<span class="type-via-ferrata">' . trans('elements/climbs.climb_8') . '</span>';
         $climbTypes .= '</span>';
 
+        $photos = $crag->allPhoto();
+
         $data = [
             'crag' => $crag,
             'climbTypes' => $climbTypes,
@@ -107,6 +109,7 @@ class CragController extends Controller
             'user_follow' => $userFollow,
             'partners' => $partners,
             'nbArticle' => $nbArticle,
+            'cragPhotos' => $photos,
         ];
 
         return view('pages.crag.crag', $data);
