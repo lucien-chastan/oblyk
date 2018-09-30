@@ -13,7 +13,7 @@ return [
     'tabInformation' => "Informations",
     'tabNewsFeed' => "Fil d'actu",
     'tabSector' => "Secteurs &amp; Voies",
-    'tabMedia' => "Médias",
+    'tabMedia' => "Photos & Vidéos",
     'tabLink' => "Liens",
     'tabGuideBook' => "Topos",
     'tabMap' => "Carte",
