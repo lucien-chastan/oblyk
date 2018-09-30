@@ -10,7 +10,7 @@
         @if($dataModal['id'] == '')
             {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
             <div class="text-right">
-                <span class="grey-text">Poids maximum : 10Mo, largeur et hauteur maximum : 4000px</span>
+                <span class="grey-text">Poids maximum : {{ env('PHOTO_MAX_SIZE_TEXT') }}</span>
             </div>
         @endif
             {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>trans('modals/photo.album')]) !!}

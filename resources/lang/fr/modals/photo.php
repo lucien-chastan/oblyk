@@ -14,5 +14,5 @@ return [
     //Label
     'album' => "Album",
     'description' => "Description de la photo",
-    'max' => "Poids maximum : 10Mo, largeur et hauteur maximum : 4000px",
+    'max' => "Poids maximum : :size",
 ];

@@ -103,7 +103,7 @@ class Crag extends Model
      */
     public function hasCover() : bool
     {
-        return ($this->bandean != '/img/default-crag-bandeau.jpg');
+        return ($this->bandeau != '/img/default-crag-bandeau.jpg');
     }
 
     /**
