@@ -36,10 +36,10 @@ function galleryZoom() {
 }
 
 function galleryKeyPress(event) {
-    if (event.key === 'ArrowLeft') swipePhoto('left');
-    if (event.key === 'ArrowRight') swipePhoto('right');
-    if (event.key === 'ArrowDown' && !collectionStatus) openCollection();
-    if (event.key === 'ArrowUp' && collectionStatus) openCollection();
+    if (event.keyCode === 37) swipePhoto('left');
+    if (event.keyCode === 39) swipePhoto('right');
+    if (event.keyCode === 40 && !collectionStatus) openCollection();
+    if (event.keyCode === 38 && collectionStatus) openCollection();
     if (event.key === 'i') $('.button-collapse').first().sideNav('show');
 }
 
