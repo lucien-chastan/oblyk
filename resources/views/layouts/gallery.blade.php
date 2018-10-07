@@ -36,6 +36,7 @@
             @yield('content')
         </main>
 
+        <script src="/framework/SwipeDetect/SwipeDetect.js"></script>
         <script src="/framework/leaflet/leaflet.js"></script>
         <script src="/js/mapVariable.js"></script>
         <script type="text/javascript" src="/js/jquery.min.js"></script>

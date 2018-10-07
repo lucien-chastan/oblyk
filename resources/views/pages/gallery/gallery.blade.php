@@ -5,27 +5,61 @@
 ])
 @section('content')
 
-    <div class="image-area">
-        <img id="gallery-image" title="@lang('pages/gallery/gallery.titleImage')" alt="{{ $photo->alt }}" class="adjusted gallery-image" src="/storage/photos/crags/1300/{{ $photo->slug_label }}">
+    <div class="image-and-control" id="slider-gallery">
+        <div class="image-area">
+            <img id="gallery-image" title="@lang('pages/gallery/gallery.titleImage')" alt="{{ $photo->alt }}" class="adjusted gallery-image" src="/storage/photos/crags/1300/{{ $photo->slug_label }}">
+        </div>
+
+        @if($last)
+            <a id="previous-photo" data-photo-url="{{ route('gallery', ['photo_id' => $last]) }}{{ $queryCollection }}" class="arrow arrow-left">
+                <i class="material-icons">
+                    keyboard_arrow_left
+                </i>
+            </a>
+        @endif
+
+        @if($next)
+            <a id="next-photo" data-photo-url="{{ route('gallery', ['photo_id' => $next]) }}{{ $queryCollection }}" class="arrow arrow-right">
+                <i class="material-icons">
+                    keyboard_arrow_right
+                </i>
+            </a>
+        @endif
+
+        @if($queryCollection)
+            <div class="page-count" onclick="openCollection();">
+                {{ $current + 1 }} / {{ count($photos) }}
+            </div>
+        @endif
+
+        <i class="material-icons close-button tooltipped"
+           data-position="left"
+           data-delay="50"
+           data-tooltip="@lang('pages/gallery/gallery.toolTipClose')"
+           id="close-gallery"
+           onclick="closeGallery()"
+        >
+            clear
+        </i>
     </div>
 
-    @if($last)
-        <a id="previous-photo" data-photo-url="{{ route('gallery', ['photo_id' => $last]) }}{{ $queryCollection }}" class="arrow arrow-left">
-            <i class="material-icons">
-                keyboard_arrow_left
-            </i>
-        </a>
-    @endif
+    <div class="phototheque" id="collection-gallery">
+        @if(count($photos) > 0)
+            <div class="collection-gallery">
+                @foreach($photos as $collectionPhoto)
+                    <a class="@if($collectionPhoto->id === $photo->id) current @endif" data-photo-url="{{ route('gallery', ['image_id' => $collectionPhoto->id]) }}{{ $queryCollection }}">
+                        <img alt="{{ $collectionPhoto->alt }}" src="/storage/photos/crags/200/{{ $collectionPhoto->slug_label }}">
+                    </a>
+                @endforeach
+            </div>
+        @else
+            <p class="grey-text">
+                @lang('pages/gallery/gallery.noPhotoInCollection')
+            </p>
+        @endif
+    </div>
 
-    @if($next)
-        <a id="next-photo" data-photo-url="{{ route('gallery', ['photo_id' => $next]) }}{{ $queryCollection }}" class="arrow arrow-right">
-            <i class="material-icons">
-                keyboard_arrow_right
-            </i>
-        </a>
-    @endif
-
-    <i class="material-icons information-button button-collapse tooltipped"
+    <i class="material-icons information-button option-button button-collapse tooltipped"
        data-activates="information-slide"
        data-position="right"
        data-delay="50"
@@ -35,8 +69,9 @@
     </i>
 
     @if($queryCollection)
-        <i class="material-icons collection-button button-collapse tooltipped"
-           data-activates="collection-slide"
+        <i class="material-icons collection-button option-button tooltipped"
+           id="collection-button"
+           onclick="openCollection()"
            data-position="right"
            data-delay="50"
            data-tooltip="@lang('pages/gallery/gallery.toolTipCollection')"
@@ -45,27 +80,8 @@
         </i>
     @endif
 
-    @if($queryCollection)
-        <div class="page-count" onclick="$('.button-collapse').last().sideNav('show');">
-            {{ $current + 1 }} / {{ count($photos) }}
-        </div>
-    @endif
-
-    <i class="material-icons close-button tooltipped"
-       data-position="left"
-       data-delay="50"
-       data-tooltip="@lang('pages/gallery/gallery.toolTipClose')"
-       id="close-gallery"
-       onclick="closeGallery()"
-    >
-        clear
-    </i>
-
     {{-- INFORMATION SIDNAVE --}}
     @include('pages.gallery.partials.information-side-nav')
-
-    {{-- COLLECTION SIDNAVE --}}
-    @include('pages.gallery.partials.collection-side-nav')
 
     {{-- LOADER --}}
     <div class="preloader-wrapper small active" id="preloader-gallery">

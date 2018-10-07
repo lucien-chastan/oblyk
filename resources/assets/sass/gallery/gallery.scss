@@ -5,7 +5,7 @@ body {
 main {
   text-align: center;
 
-  .button-collapse {
+  .option-button {
     position: fixed;
     color: white;
     opacity: 0.3;
@@ -181,36 +181,30 @@ main {
   }
 }
 
-.collection-side-nav {
-  width: 150px;
+#collection-gallery {
+  display: none;
+}
 
-  p {
-    text-align: center;
+.collection-gallery {
+  margin: 10px 10px 10px 30px;
+
+  a {
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    padding: 0 1px;
+    margin: 0;
   }
 
-  .collection-gallery {
-    margin-bottom: 65px;
-
-    a {
-      background: none;
-      display: inline-block;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      &:hover {
-        background: none;
-      }
-    }
-
-    img {
-      width: 100%;
-      border-radius: 3px;
-      padding: 0;
-      transition: opacity 0.5s;
-      &:hover {
-        opacity: 0.75;
-        cursor: pointer;
-      }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 0;
+    transition: opacity 0.5s;
+    &:hover {
+      opacity: 0.75;
+      cursor: pointer;
     }
   }
 }
