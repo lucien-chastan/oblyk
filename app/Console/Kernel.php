@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\FixAltPhoto;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\FixLowerGrade;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         FixLowerGrade::class,
+        FixAltPhoto::class,
     ];
 
     /**

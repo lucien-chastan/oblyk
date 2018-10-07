@@ -10,7 +10,13 @@ function uploadPhoto(form, callback) {
 
     //ajout les autres données à passage de la form
     for(let i in inputData){
-        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+        if(typeof inputData[i].value != "undefined"){
+            if(inputData[i].getAttribute('type') === 'checkbox'){
+                data.append([inputData[i].name], inputData[i].checked);
+            }else{
+                data.append([inputData[i].name], inputData[i].value);
+            }
+        }
     }
 
     let config = {

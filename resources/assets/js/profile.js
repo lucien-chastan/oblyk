@@ -66,21 +66,6 @@ function dimDashboard() {
         let largeur_ecran = windowWidth(),
             flexDashBoxs = document.getElementById('flexDashBoxs');
 
-        let phototheque = document.getElementsByClassName('phototheque');
-
-        if(phototheque.length > 0){
-            new Phototheque('#lastPhototheque',
-                {
-                    "maxHeight" : "100px","gouttiere" : "3px",
-                    "lastRow" : "center",
-                    "visiotheque" : true,
-                    "visiotheque-option" : {
-                        "legende" : "data-legende"
-                    }
-                }
-            );
-        }
-
         if(largeur_ecran > 1000){
 
             let targetBoxs = document.getElementsByClassName('dashbox'),
@@ -152,17 +137,6 @@ function openAlbum(route) {
     let target = document.getElementById('user-content');
     axios.get(route).then(function (response) {
         target.innerHTML = response.data;
-
-        new Phototheque('#albumPhototheque',
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
     });
 }
 

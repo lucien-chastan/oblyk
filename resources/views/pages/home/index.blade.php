@@ -267,25 +267,9 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
     {{--js particulier à la page--}}
     <script type="text/javascript" src="/js/home.js"></script>
-    <script>
-        if(typeof document.getElementById('photo-home-activity') !== "undefined"){
-            new Phototheque('#photo-home-activity',
-                {
-                    "maxHeight" : "100px",
-                    "gouttiere" : "3px",
-                    "lastRow" : "center",
-                    "visiotheque" : true,
-                    "visiotheque-option" : {
-                        "legende" : "data-legende"
-                    }
-                }
-            );
-        }
-    </script>
 @endsection

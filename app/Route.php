@@ -87,6 +87,16 @@ class Route extends Model
         );
     }
 
+    /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) : string
+    {
+        $crag = Crag::find($this->crag_id);
+        return $crag->cover($size);
+    }
+
     public static function similarRoute($crag_id, $route_id , $label){
 
         $routes = Route::where([

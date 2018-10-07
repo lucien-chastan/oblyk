@@ -5,11 +5,7 @@
     @if(count($sector->photos) > 0)
 
         <div id="zone-sector-gallerie-{{$sector->id}}">
-            <div id="sectorPhototheque-{{$sector->id}}" class="phototheque">
-                @foreach($sector->photos as $photo)
-                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>\App\Crag::webUrl($sector->crag_id, $sector->label), 'elementLabel'=>$sector->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$sector->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                @endforeach
-            </div>
+            @include('includes.gallery', ['photos' => $sector->photos])
         </div>
 
         @if(Auth::check())

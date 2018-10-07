@@ -107,6 +107,19 @@ class Crag extends Model
     }
 
     /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) :string
+    {
+        if($this->bandeau !== '/img/default-crag-bandeau.jpg') {
+            return str_replace('/storage/photos/crags/1300', '/storage/photos/crags/' . $size, $this->bandeau);
+        } else {
+            return '/img/default-crag-bandeau.jpg';
+        }
+    }
+
+    /**
      * Return crags around point
      * @param $lat
      * @param $lng

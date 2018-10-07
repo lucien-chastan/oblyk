@@ -112,8 +112,12 @@ class UserController extends Controller
     function uploadBandeau(Request $request){
         $user_id = Auth::id();
 
+        $mSize = env('PHOTO_MAX_SIZE');
+        $mHeight = env('PHOTO_MAX_HEIGHT');
+        $mWidth = env('PHOTO_MAX_WIDTH');
+
         $this->validate($request, [
-            'bandeau' => 'required|image:jpeg,jpg,png|file|max:' . env('PHOTO_MAX_SIZE'),
+            'bandeau' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
         ]);
 
         if ($request->hasFile('bandeau')) {
@@ -138,8 +142,12 @@ class UserController extends Controller
     function uploadPhotoProfile(Request $request){
         $user_id = Auth::id();
 
+        $mSize = env('PHOTO_MAX_SIZE');
+        $mHeight = env('PHOTO_MAX_HEIGHT');
+        $mWidth = env('PHOTO_MAX_WIDTH');
+
         $this->validate($request, [
-            'photo' => 'required|image:jpeg,jpg,png|file|max:' . env('PHOTO_MAX_SIZE'),
+            'photo' =>"required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
         ]);
 
         if ($request->hasFile('photo')) {
