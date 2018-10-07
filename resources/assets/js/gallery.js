@@ -17,6 +17,11 @@ var collectionStatus = false;
     swipedetect(document.getElementById('slider-gallery'), function (swipedir) {
         if (swipedir === 'left') swipePhoto('right');
         if (swipedir === 'right') swipePhoto('left');
+        if (swipedir === 'up' && !collectionStatus) openCollection();
+    });
+
+    swipedetect(document.getElementById('collection-gallery'), function (swipedir) {
+        if (swipedir === 'down' && collectionStatus) openCollection();
     });
 })();
 
@@ -91,7 +96,7 @@ function galleryMap() {
 }
 
 function openCollection() {
-    var slider = document.getElementById('slider-gallery'),
+    var slider = document.getElementById('image-gallery-area'),
         collection = document.getElementById('collection-gallery'),
         button = document.getElementById('collection-button');
 
