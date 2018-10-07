@@ -10,17 +10,24 @@
         @if($dataModal['id'] == '')
             {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
             <div class="text-right">
-                <span class="grey-text">Poids maximum : {{ env('PHOTO_MAX_SIZE_TEXT') }}</span>
+                <span class="grey-text">Poids maximum : {{ env('PHOTO_MAX_SIZE_TEXT') }}, hauteur : {{ env('PHOTO_MAX_HEIGHT') }} et largeur : {{ env('PHOTO_MAX_WIDTH') }}</span>
             </div>
         @endif
-            {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>trans('modals/photo.album')]) !!}
-            {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/photo.description')]) !!}
 
-            @if($dataModal['id'] == '')
-                {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo']) !!}
-            @endif
+        {!! $Inputs::albums(['name'=>'album_id', 'value'=>$dataModal['album_id'], 'label'=>trans('modals/photo.album')]) !!}
+        {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['description'], 'label'=>trans('modals/photo.description')]) !!}
 
-            {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
+        <p>Licence de la photo</p>
+        {!! $Inputs::checkbox(['name'=>'copyright_by', 'checked'=>($dataModal['copyright_by'] == 1), 'label'=>trans('modals/photo.copyright_by')]) !!}
+        {!! $Inputs::checkbox(['name'=>'copyright_nc', 'checked'=>($dataModal['copyright_nc'] == 1), 'label'=>trans('modals/photo.copyright_nc')]) !!}
+        {!! $Inputs::checkbox(['name'=>'copyright_nd', 'checked'=>($dataModal['copyright_nd'] == 1), 'label'=>trans('modals/photo.copyright_nd')]) !!}
+        {!! $Inputs::text(['name'=>'source', 'value'=>$dataModal['source'], 'label'=>trans('modals/photo.source')]) !!}
+
+        @if($dataModal['id'] == '')
+            {!! $Inputs::progressbar(['id'=>'progressbar-upload-photo']) !!}
+        @endif
+
+        {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}

@@ -184,6 +184,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/massive/{massive_id}/liens','Vue\MassiveVueController@vueLiens')->name('vueLiensMassive');
     Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites')->name('vueSitesMassive');
 
+    // GALLERY
+    Route::get('/gallery/photo/{photo_id}', 'GalleryController@galleryPage')->name('gallery');
+
 });
 
 //INTERFACE ADMIN

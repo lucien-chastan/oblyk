@@ -44,6 +44,10 @@ class PhotoController extends Controller
                 'illustrable_type' => "App\\" . $request->input('illustrable_type'),
                 'slug_label' => $photo->slug_label,
                 'description' => $photo->description,
+                'source' => $photo->source,
+                'copyright_by' => $photo->copyright_by ?? true,
+                'copyright_nc' => $photo->copyright_nc ?? true,
+                'copyright_nd' => $photo->copyright_nd ?? true,
                 'album_id' => $photo->album_id,
                 'id' => $id_photo,
                 'submit' => $submitFunction,
@@ -86,9 +90,13 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        $mSize = env('PHOTO_MAX_SIZE');
+        $mHeight = env('PHOTO_MAX_HEIGHT');
+        $mWidth = env('PHOTO_MAX_WIDTH');
+
         //validation du formulaire
         $this->validate($request, [
-            'file' => 'required|image:jpeg,jpg,png|file|max:' . env('PHOTO_MAX_SIZE'),
+            'file' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
         ]);
 
         $photo = new Photo();
@@ -127,6 +135,10 @@ class PhotoController extends Controller
 
                 $photo->illustrable_id = $request->input('illustrable_id');
                 $photo->illustrable_type = $request->input('illustrable_type');
+                $photo->source = $request->input('source');
+                $photo->copyright_by = ($request->input('copyright_by') == 'true');
+                $photo->copyright_nc = ($request->input('copyright_nc') == 'true');
+                $photo->copyright_nd = ($request->input('copyright_nd') == 'true');
                 $photo->slug_label = 'temp.jpg';
                 $photo->user_id = Auth::id();
                 $photo->album_id = $album_id;
@@ -157,12 +169,15 @@ class PhotoController extends Controller
                     $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
 
-                //on réenregistre le slug_label de la photo
+                $img = Image::make($request->file('file'));
+
+                $photo->exif_model = $img->exif('Model');
+                $photo->exif_make = $img->exif('Make');
+
                 $photo->save();
 
                 //Image en 1300px de large
-                $img = Image::make($request->file('file'))
-                    ->orientate()
+                $img->orientate()
                     ->resize(1300, null, function ($constraint) {
                         $constraint->aspectRatio();
                     })
@@ -182,19 +197,21 @@ class PhotoController extends Controller
                 //Crop de l'image en 50 * 50
                 $img->fit(50, 50)->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
 
-            }catch (Exception $e){
-
+            } catch (Exception $e) {
                 //s'il y a un problème on supprime les images potentiellement uploadé
-                if(file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/200/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/100/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/50/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/200/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/100/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/50/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
 
                 //on supprime la photo en base de donnée
                 $photo->delete();
 
                 return response()->json($e->getMessage(), 500);
 
+            } finally {
+                // test if the upload is ok, otherwise delete the record
+                if (!file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) $photo->delete();
             }
         }
 
@@ -264,6 +281,10 @@ class PhotoController extends Controller
         if($photo->user_id == Auth::id()){
             $photo->description = $request->input('description');
             $photo->album_id = $album_id;
+            $photo->source = $request->input('source');
+            $photo->copyright_by = $request->input('copyright_by');
+            $photo->copyright_nc = $request->input('copyright_nc');
+            $photo->copyright_nd = $request->input('copyright_nd');
             $photo->save();
         }
 

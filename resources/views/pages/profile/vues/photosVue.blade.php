@@ -11,11 +11,7 @@
                 <span class="grey-text">@choice('pages/profile/photo.nbPhoto', count($album->photos))</span>
             </p>
 
-            <div id="albumPhototheque" class="phototheque">
-                @foreach($album->photos as $photo)
-                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>posté sur : <a href=''></a>" alt="{{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                @endforeach
-            </div>
+            @include('includes.gallery', ['photos' => $album->photos])
 
             <p><a class="text-cursor" onclick="reloadCurrentVue()"><i class="material-icons left">arrow_back</i> @lang('pages/profile/photo.backToAlbum')</a></p>
 

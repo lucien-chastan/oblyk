@@ -94,4 +94,24 @@ class User extends Authenticatable
             $absolute
         );
     }
+
+    /**
+     * @param int $size in [50,100,200,1000]
+     * @return string
+     */
+    public function picture($size = 50) {
+        return file_exists(storage_path('app/public/users/' . $size . '/user-' . $this->id . '.jpg')) ?
+            '/storage/users/' . $size . '/user-' . $this->id . '.jpg' :
+            '/img/icon-search-user.svg';
+    }
+
+    /**
+     * @param int $size in [500,1300]
+     * @return null|string
+     */
+    public function banner($size = 200){
+        return file_exists(storage_path('app/public/users/' . $size . '/user-' . $this->id . '.jpg')) ?
+            '/storage/users/' . $size . '/user-' . $this->id . '.jpg' :
+            null;
+    }
 }

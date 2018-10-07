@@ -12,6 +12,8 @@ class PhotoObserver
      */
     public function creating(Photo $photo) {
         $photo->description = strip_tags($photo->description);
+        $photo->source = strip_tags($photo->source);
+        $photo->alt = $photo->getAlt();
     }
 
     /**
@@ -19,6 +21,8 @@ class PhotoObserver
      */
     public function updating(Photo $photo) {
         $photo->description = strip_tags($photo->description);
+        $photo->source = strip_tags($photo->source);
+        $photo->alt = $photo->getAlt();
     }
 
     /**

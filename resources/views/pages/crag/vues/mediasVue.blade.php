@@ -10,28 +10,7 @@
 
                 @if($crag->nbPhoto != 0)
                     <div class="row row-crag-gallerie">
-                        <div id="cragPhototheque" class="phototheque">
-
-                            {{--photos de la falaise--}}
-                            @foreach($crag->photos as $photo)
-                                <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url(), 'elementLabel'=>$crag->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                            @endforeach
-
-                            {{--photos des secteurs--}}
-                            @foreach($crag->sectors as $sector)
-                                @foreach($sector->photos as $photo)
-                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url() . '#voies', 'elementLabel'=>$sector->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                                @endforeach
-                            @endforeach
-
-                            {{--photos des lignes--}}
-                            @foreach($crag->routes as $route)
-                                @foreach($route->photos as $photo)
-                                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>{{trans('modals/photo.dataLegende', ['elementUrl'=>$crag->url(), 'elementLabel'=>$route->label, 'userUrl'=>$photo->user->url(), 'userName'=>$photo->user->name])}}" alt="{{$crag->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                                @endforeach
-                            @endforeach
-
-                        </div>
+                        @include('includes.gallery', ['photos' => $cragPhotos])
                     </div>
                 @else
                     <p class="grey-text text-center">@lang('pages/crags/tabs/media.paraNoPhoto')</p>

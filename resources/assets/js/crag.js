@@ -125,7 +125,6 @@ function reloadPhotoSector(response) {
 
 function closeModalInitPhototheque() {
     closeModal();
-    initSectorPhototheque();
 }
 
 //Affiche la vues d'un onglet de secteur
@@ -143,24 +142,6 @@ function loadSectorVue(tab) {
         ajaxRouter(route, target, callback);
 
     }
-}
-
-function initSectorPhototheque() {
-
-    if(document.getElementById('sectorPhototheque-' + loadedSectorId) !== null){
-
-        new Phototheque('#sectorPhototheque-' + loadedSectorId,
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
-    }
-
 }
 
 function changeAffichageSecteur(typeAffichage) {
@@ -215,24 +196,6 @@ function getSectorChart() {
             let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),response.data);
         });
     }
-}
-
-//INITIALISE LA VISIONNEUSE PHOTOTHEQUE
-function initPhotothequeCrag() {
-
-    if(document.getElementById('cragPhototheque') !== null) {
-        cragVisionneuse = new Phototheque('#cragPhototheque',
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
-    }
-
 }
 
 function showPhotoEditor(visible) {

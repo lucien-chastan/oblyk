@@ -39,7 +39,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/crag/line.scss', 'public/css')
     .sass('resources/assets/sass/iframe/crag-iframe.scss', 'public/css/iframe')
     .sass('resources/assets/sass/iframe/iframe.scss', 'public/css/iframe')
-    .sass('resources/assets/sass/admin/admin.scss', 'public/css');
+    .sass('resources/assets/sass/admin/admin.scss', 'public/css')
+    .sass('resources/assets/sass/gallery/gallery.scss', 'public/css');
 
 //fichier Js
 mix.copy('resources/assets/js/app.js', 'public/js')
@@ -68,6 +69,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/iframe/crag-iframe.js', 'public/js/iframe')
     .copy('resources/assets/js/jquery.min.js', 'public/js')
     .copy('resources/assets/js/materialize.min.js', 'public/js')
+    .copy('resources/assets/js/gallery.js', 'public/js')
     .copy('resources/assets/js/admin.js', 'public/js');
 
 //leaflet
@@ -96,8 +98,7 @@ mix.copy('resources/assets/framework/trumbowyg/trumbowyg.js', 'public/framework/
     .copy('resources/assets/framework/trumbowyg/plugins/upload/trumbowyg.upload.js', 'public/framework/trumbowyg/plugins/trumbowyg.upload.js');
 
 //Phototheque
-mix.copy('resources/assets/framework/phototheque/phototheque.js', 'public/framework/phototheque')
-    .copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
+mix.copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
 
 //Cookiebanner
 mix.copy('resources/assets/framework/cookiebanner/cookiebanner.min.js', 'public/framework/cookiebanner');

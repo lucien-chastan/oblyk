@@ -81,19 +81,5 @@
         window.addEventListener('load', function () {
             getGraphCrag({{$crag->id}});
         });
-
-        if(typeof document.getElementById('accueilPhototheque') !== "undefined"){
-            let accueilVisionneuse = new Phototheque('#accueilPhototheque',
-                {
-                    "maxHeight" : "150px","gouttiere" : "3px",
-                    "lastRow" : "center",
-                    "visiotheque" : true,
-                    "visiotheque-option" : {
-                        "legende" : "data-legende"
-                    }
-                }
-            );
-        }
-
     </script>
 @endsection

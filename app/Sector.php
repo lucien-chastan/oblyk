@@ -96,4 +96,23 @@ class Sector extends Model
             $gapGrade->save();
         }
     }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        $crag = Crag::find($this->crag_id);
+        return $crag->webUrl($crag->id, $crag->label, $absolute);
+    }
+
+    /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) : string
+    {
+        $crag = Crag::find($this->crag_id);
+        return $crag->cover($size);
+    }
 }
