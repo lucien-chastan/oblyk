@@ -5,8 +5,8 @@
 ])
 @section('content')
 
-    <div class="image-and-control" id="slider-gallery">
-        <div class="image-area">
+    <div class="image-and-control" id="image-gallery-area">
+        <div class="image-area" id="slider-gallery">
             <img id="gallery-image" title="@lang('pages/gallery/gallery.titleImage')" alt="{{ $photo->alt }}" class="adjusted gallery-image" src="/storage/photos/crags/1300/{{ $photo->slug_label }}">
         </div>
 
