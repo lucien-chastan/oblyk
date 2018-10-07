@@ -1,3 +1,5 @@
+var collectionStatus = false;
+
 (function () {
     var body = document.getElementsByTagName('body'),
         galleryImage = document.getElementById('gallery-image'),
@@ -6,17 +8,22 @@
     body[0].addEventListener('keypress', galleryKeyPress);
     galleryImage.addEventListener('click', galleryZoom);
 
-    for(var i = 0 ; i < photoLinks.length ; i++) {
+    for (var i = 0; i < photoLinks.length; i++) {
         photoLinks[i].addEventListener('click', goToPhoto);
     }
 
     galleryMap();
+
+    swipedetect(document.getElementById('slider-gallery'), function (swipedir) {
+        if (swipedir === 'left') swipePhoto('right');
+        if (swipedir === 'right') swipePhoto('left');
+    });
 })();
 
 function galleryZoom() {
-    var image  = document.getElementById('gallery-image');
+    var image = document.getElementById('gallery-image');
 
-    if(image.classList.contains('adjusted')) {
+    if (image.classList.contains('adjusted')) {
         image.classList.remove('adjusted');
         image.classList.add('full-size');
     } else {
@@ -26,33 +33,22 @@ function galleryZoom() {
 }
 
 function galleryKeyPress(event) {
+    if (event.key === 'ArrowLeft') swipePhoto('left');
+    if (event.key === 'ArrowRight') swipePhoto('right');
+    if (event.key === 'i') $('.button-collapse').first().sideNav('show');
+    if (event.key === 'c') openCollection();
+    if (event.key === ' ') galleryZoom();
+}
+
+function swipePhoto(direction) {
     var link;
 
-    if(event.key === 'ArrowLeft') {
-        link = document.getElementById('previous-photo');
-    }
+    if (direction === 'left') link = document.getElementById('previous-photo');
+    if (direction === 'right') link = document.getElementById('next-photo');
 
-    if(event.key === 'ArrowRight') {
-        link = document.getElementById('next-photo');
-    }
-
-    if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        if(link !== 'undefined' && link !== null) {
-            loadGallery(true);
-            document.location.replace(link.getAttribute('data-photo-url'));
-        }
-    }
-
-    if(event.key === 'i') {
-        $('.button-collapse').first().sideNav('show');
-    }
-
-    if(event.key === 'c') {
-        $('.button-collapse').last().sideNav('show');
-    }
-
-    if(event.key === ' ') {
-        galleryZoom();
+    if (link !== 'undefined' && link !== null) {
+        loadGallery(true);
+        document.location.replace(link.getAttribute('data-photo-url'));
     }
 }
 
@@ -66,7 +62,7 @@ function loadGallery(load) {
     var loader = document.getElementById('preloader-gallery'),
         closeButton = document.getElementById('close-gallery');
 
-    if(load) {
+    if (load) {
         loader.style.display = 'block';
         closeButton.style.display = 'none';
     } else {
@@ -84,12 +80,30 @@ function galleryMap() {
         lng = parseFloat(document.getElementById('photo-lng').value),
         zoom = 10;
 
-    var map = L.map('gallery-map',{ zoomControl : false, center:[lat, lng], zoom : zoom, layers: [carte]});
+    var map = L.map('gallery-map', {zoomControl: false, center: [lat, lng], zoom: zoom, layers: [carte]});
     L.marker(
-        [lat,lng],
+        [lat, lng],
         {
             icon: marker_10000,
             interactive: false
         }
     ).addTo(map);
+}
+
+function openCollection() {
+    var slider = document.getElementById('slider-gallery'),
+        collection = document.getElementById('collection-gallery'),
+        button = document.getElementById('collection-button');
+
+    if (!collectionStatus) {
+        slider.style.display = 'none';
+        collection.style.display = 'block';
+        button.textContent = 'photo';
+    } else {
+        slider.style.display = 'block';
+        collection.style.display = 'none';
+        button.textContent = 'collections';
+    }
+
+    collectionStatus = !collectionStatus;
 }

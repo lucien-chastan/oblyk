@@ -11,7 +11,7 @@ const { mix } = require('laravel-mix');
  |
  */
 
-//fichier Sass
+// Sass file
 mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/materialize/materialize.scss', 'public/css')
     .sass('resources/assets/sass/home/home.scss', 'public/css')
@@ -42,7 +42,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/admin/admin.scss', 'public/css')
     .sass('resources/assets/sass/gallery/gallery.scss', 'public/css');
 
-//fichier Js
+// Js file
 mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/home.js', 'public/js')
     .copy('resources/assets/js/map.js', 'public/js')
@@ -72,7 +72,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/gallery.js', 'public/js')
     .copy('resources/assets/js/admin.js', 'public/js');
 
-//leaflet
+// Leaflet
 mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/markercluster.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/Control.Geocoder.js', 'public/framework/leaflet')
@@ -85,35 +85,38 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
     .copy('resources/assets/framework/leaflet/leaflet.measure.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
 
-//axios
+// Axios
 mix.copy('resources/assets/framework/axios/axios.min.js', 'public/framework/axios');
 
-//chartJs
+// ChartJs
 mix.copy('resources/assets/framework/chartJs/Chart.min.js', 'public/framework/chartJs');
 
-//trumbowyg
+// Trumbowyg
 mix.copy('resources/assets/framework/trumbowyg/trumbowyg.js', 'public/framework/trumbowyg/')
     .copy('resources/assets/framework/trumbowyg/langs/', 'public/framework/trumbowyg/langs/')
     .copy('resources/assets/framework/trumbowyg/ui/', 'public/framework/trumbowyg/ui/')
     .copy('resources/assets/framework/trumbowyg/plugins/upload/trumbowyg.upload.js', 'public/framework/trumbowyg/plugins/trumbowyg.upload.js');
 
-//Phototheque
+// Phototheque
 mix.copy('resources/assets/framework/phototheque/phototheque.css', 'public/framework/phototheque');
 
-//Cookiebanner
+// Cookiebanner
 mix.copy('resources/assets/framework/cookiebanner/cookiebanner.min.js', 'public/framework/cookiebanner');
 
-//marked
+// SwipeDetect
+mix.copy('resources/assets/framework/SwipeDetect/SwipeDetect.js', 'public/framework/SwipeDetect');
+
+// Marked
 mix.copy('resources/assets/framework/marked/marked.min.js', 'public/framework/marked');
 
-//nouislider
+// Nouislider
 mix.copy('resources/assets/framework/noUiSlider/nouislider.js', 'public/js')
     .copy('resources/assets/framework/noUiSlider/nouislider.css', 'public/css');
 
-//image
+// Image
 mix.copy('resources/assets/img/','public/img/');
 
-//font oblyk
+// Font oblyk
 mix.sass('resources/assets/font/oblyk/style.scss', 'public/font/oblyk');
 mix.copy('resources/assets/font/oblyk/fonts/oblyk.eot','public/font/oblyk/fonts')
     .copy('resources/assets/font/oblyk/fonts/oblyk.svg','public/font/oblyk/fonts')
