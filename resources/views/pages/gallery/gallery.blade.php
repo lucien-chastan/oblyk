@@ -41,6 +41,25 @@
         >
             clear
         </i>
+
+        <i class="material-icons information-button option-button button-collapse tooltipped"
+           data-activates="information-slide"
+           data-position="right"
+           data-delay="50"
+           data-tooltip="@lang('pages/gallery/gallery.toolTipInformation')"
+        >
+            info
+        </i>
+
+        <i class="material-icons zoom-button option-button tooltipped"
+           onclick="galleryZoom()"
+           data-position="right"
+           id="zoom-button"
+           data-delay="50"
+           data-tooltip="@lang('pages/gallery/gallery.toolTipZoom')"
+        >
+            zoom_in
+        </i>
     </div>
 
     <div class="phototheque" id="collection-gallery">
@@ -57,16 +76,16 @@
                 @lang('pages/gallery/gallery.noPhotoInCollection')
             </p>
         @endif
-    </div>
 
-    <i class="material-icons information-button option-button button-collapse tooltipped"
-       data-activates="information-slide"
-       data-position="right"
-       data-delay="50"
-       data-tooltip="@lang('pages/gallery/gallery.toolTipInformation')"
-    >
-        info
-    </i>
+            <i class="material-icons close-button tooltipped"
+               data-position="left"
+               data-delay="50"
+               data-tooltip="@lang('pages/gallery/gallery.toolTipCloseCollection')"
+               onclick="openCollection()"
+            >
+                clear
+            </i>
+    </div>
 
     @if($queryCollection)
         <i class="material-icons collection-button option-button tooltipped"

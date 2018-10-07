@@ -17,32 +17,30 @@ var collectionStatus = false;
     swipedetect(document.getElementById('slider-gallery'), function (swipedir) {
         if (swipedir === 'left') swipePhoto('right');
         if (swipedir === 'right') swipePhoto('left');
-        if (swipedir === 'up' && !collectionStatus) openCollection();
-    });
-
-    swipedetect(document.getElementById('collection-gallery'), function (swipedir) {
-        if (swipedir === 'down' && collectionStatus) openCollection();
     });
 })();
 
 function galleryZoom() {
-    var image = document.getElementById('gallery-image');
+    var image = document.getElementById('gallery-image'),
+        zoomButton = document.getElementById('zoom-button');
 
     if (image.classList.contains('adjusted')) {
         image.classList.remove('adjusted');
         image.classList.add('full-size');
+        zoomButton.textContent = 'zoom_out';
     } else {
         image.classList.remove('full-size');
         image.classList.add('adjusted');
+        zoomButton.textContent = 'zoom_in';
     }
 }
 
 function galleryKeyPress(event) {
     if (event.key === 'ArrowLeft') swipePhoto('left');
     if (event.key === 'ArrowRight') swipePhoto('right');
+    if (event.key === 'ArrowDown' && !collectionStatus) openCollection();
+    if (event.key === 'ArrowUp' && collectionStatus) openCollection();
     if (event.key === 'i') $('.button-collapse').first().sideNav('show');
-    if (event.key === 'c') openCollection();
-    if (event.key === ' ') galleryZoom();
 }
 
 function swipePhoto(direction) {
@@ -104,10 +102,12 @@ function openCollection() {
         slider.style.display = 'none';
         collection.style.display = 'block';
         button.textContent = 'photo';
+        button.style.top = '5px';
     } else {
         slider.style.display = 'block';
         collection.style.display = 'none';
         button.textContent = 'collections';
+        button.style.top = '75px';
     }
 
     collectionStatus = !collectionStatus;

@@ -2,8 +2,10 @@
 
 return [
     'toolTipInformation' => "Photo information [i]",
-    'toolTipCollection' => "See the other pictures of the collection [c]",
-    'toolTipClose' => "Close",
+    'toolTipZoom' => "Zoom in/out",
+    'toolTipCollection' => "See the other pictures of the collection [arrow down/up]",
+    'toolTipClose' => "Close gallery",
+    'toolTipCloseCollection' => "Close collection",
     'titleImage' => "Click to zoom in",
 
     // INFORMATION SIDE NAV
