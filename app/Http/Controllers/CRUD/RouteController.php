@@ -5,7 +5,6 @@ namespace App\Http\Controllers\CRUD;
 use App\Crag;
 use App\Route;
 use App\RouteSection;
-use App\oldSearch;
 use App\Sector;
 use Validator;
 use Illuminate\Http\Request;
@@ -19,15 +18,17 @@ class RouteController extends Controller
     private $subGradePattern = '/(\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c|\+|\-)/';
 
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE FALAISE
-    function routeModal(Request $request){
+    function routeModal(Request $request)
+    {
 
         $id = $request->input('id');
-        if(isset($id)){
-            $route = Route::where('id', $id)->with('routeSections')->first();
+        if (isset($id)) {
+            $route = Route::class;
+            $route = $route::where('id', $id)->with('routeSections')->first();
 
             //compose le tableau des longeurs
             $tabLongueur = [];
-            foreach ($route->routeSections as $section){
+            foreach ($route->routeSections as $section) {
                 $temTap = [
                     $section->grade . $section->sub_grade,
                     $section->anchor_id,
@@ -40,17 +41,19 @@ class RouteController extends Controller
             }
             $route->tabLongueur = implode('||', $tabLongueur);
 
-            if(count($route->routeSections) > 1 && ($route->climb_id == 4 || $route->climb_id == 5 || $route->climb_id == 6)){
+            if (count($route->routeSections) > 1 && ($route->climb_id == 4 || $route->climb_id == 5 || $route->climb_id == 6)) {
                 $route->typeCotation = true;
-            }else{
+            } else {
                 $route->typeCotation = false;
             }
 
             $callback = 'reloadRouteInformationTab';
-        }else{
+        } else {
 
             //créer une fausse section de ligne
-            $routeSections = new class{};
+            $routeSections = new class
+            {
+            };
             $routeSections->grade = '2a';
             $routeSections->sub_grade = '';
             $routeSections->section_height = 0;
@@ -72,7 +75,7 @@ class RouteController extends Controller
         }
 
         //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/routes' : '/routes/' . $id;
+        $outputRoute = ($request->input('method') == 'POST') ? '/routes' : '/routes/' . $id;
 
         $data = [
             'dataModal' => [
@@ -88,39 +91,13 @@ class RouteController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //see modal controller
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-//        $validationGrade = [
-//            'grade' = [
-//
-//            ]
-//        ];
         //validation du formulaire
         $this->validate($request, [
             'label' => 'required|String|max:255',
@@ -133,7 +110,7 @@ class RouteController extends Controller
             ]
         ]);
 
-        //information sur la falaise
+        // Route information
         $route = new Route();
         $route->label = $request->input('label');
         $route->crag_id = $request->input('crag_id');
@@ -148,18 +125,23 @@ class RouteController extends Controller
         $route->nb_longueur = $request->input('nb_longueur');
         $route->save();
 
-        if($request->input('type_cotation_longeur') == 'on' && ($request->input('climb_id') == '4' || $request->input('climb_id') == '5' || $request->input('climb_id') == '6' )){
-            //cas d'une grande-voie avec plusieur longueur
+        if (
+            $request->input('type_cotation_longeur') == 'on' && (
+                $request->input('climb_id') == '4' ||
+                $request->input('climb_id') == '5' ||
+                $request->input('climb_id') == '6')
+        ) {
+            // If is a multi-pitch route
 
             $tabLongeur = explode('||', $request->input('jsonLongueur'));
-            foreach ($tabLongeur as $key=>$longueur){
+            foreach ($tabLongeur as $key => $longueur) {
 
-                $tabInfo = explode(';',$longueur);
+                $tabInfo = explode(';', $longueur);
 
                 $myLongueur = new RouteSection();
                 $myLongueur->route_id = $route->id;
-                $myLongueur->grade = preg_replace($this->subGradePattern,'', $tabInfo[0]);
-                $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$tabInfo[0]);
+                $myLongueur->grade = preg_replace($this->subGradePattern, '', $tabInfo[0]);
+                $myLongueur->sub_grade = preg_replace($this->gradePattern, '', $tabInfo[0]);
                 $myLongueur->anchor_id = $tabInfo[1];
                 $myLongueur->point_id = $tabInfo[2];
                 $myLongueur->nb_point = $tabInfo[3];
@@ -172,13 +154,13 @@ class RouteController extends Controller
                 $myLongueur->save();
             }
 
-        }else{
+        } else {
 
             //cas d'une voie en une seul longueur
             $myLongueur = new RouteSection();
             $myLongueur->route_id = $route->id;
-            $myLongueur->grade = preg_replace($this->subGradePattern,'', $request->input('grade'));
-            $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$request->input('grade'));
+            $myLongueur->grade = preg_replace($this->subGradePattern, '', $request->input('grade'));
+            $myLongueur->sub_grade = preg_replace($this->gradePattern, '', $request->input('grade'));
             $myLongueur->grade_val = Route::gradeToVal($myLongueur->grade, $myLongueur->sub_grade);
             $myLongueur->section_height = $request->input('height');
             $myLongueur->nb_point = $request->input('nb_point');
@@ -199,32 +181,11 @@ class RouteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //see modal controller
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function update(Request $request)
     {
@@ -241,7 +202,8 @@ class RouteController extends Controller
         ]);
 
         //mise à jour des données de la falaise
-        $route = Route::where('id', $request->input('id'))->with('routeSections')->first();
+        $route = Route::class;
+        $route = $route::where('id', $request->input('id'))->with('routeSections')->first();
 
         $route->label = $request->input('label');
         $route->sector_id = $request->input('sector_id');
@@ -252,23 +214,32 @@ class RouteController extends Controller
         $route->opener = $request->input('opener');
         $route->save();
 
-        if($request->input('type_cotation_longeur') == 'on' && ($request->input('climb_id') == '4' || $request->input('climb_id') == '5' || $request->input('climb_id') == '6' )){
-            //cas d'une grande-voie avec plusieur longueur
-
+        if (
+            $request->input('type_cotation_longeur') == 'on' && (
+                $request->input('climb_id') == '4' ||
+                $request->input('climb_id') == '5' ||
+                $request->input('climb_id') == '6')
+        ) {
+            // If is a multi-pitch route
             $tabLongeur = explode('||', $request->input('jsonLongueur'));
-            foreach ($tabLongeur as $key=>$longueur){
 
-                $tabInfo = explode(';',$longueur);
+            if (count($tabLongeur) !== (int)$route->nb_longueur) {
+                throw new \Exception('Un problème est survenu dans la mise à jour des longueurs');
+            }
 
-                if(isset($route->routeSections[$key])){
+            foreach ($tabLongeur as $key => $longueur) {
+
+                $tabInfo = explode(';', $longueur);
+
+                if (isset($route->routeSections[$key])) {
                     $myLongueur = $route->routeSections[$key];
-                }else{
+                } else {
                     $myLongueur = new RouteSection();
                     $myLongueur->route_id = $route->id;
                 }
 
-                $myLongueur->grade = preg_replace($this->subGradePattern,'', $tabInfo[0]);
-                $myLongueur->sub_grade = preg_replace($this->gradePattern, '',$tabInfo[0]);
+                $myLongueur->grade = preg_replace($this->subGradePattern, '', $tabInfo[0]);
+                $myLongueur->sub_grade = preg_replace($this->gradePattern, '', $tabInfo[0]);
                 $myLongueur->anchor_id = $tabInfo[1];
                 $myLongueur->point_id = $tabInfo[2];
                 $myLongueur->nb_point = $tabInfo[3];
@@ -282,16 +253,15 @@ class RouteController extends Controller
             }
 
             //on supprime les longueurs en trop
-            if(count($tabLongeur) < count($route->routeSections)){
-                for($i = count($tabLongeur); $i < count($route->routeSections) - 1 ; $i++){
+            if (count($tabLongeur) < count($route->routeSections)) {
+                for ($i = count($tabLongeur); $i < count($route->routeSections) - 1; $i++) {
                     $route->routeSections[$i]->delete();
                 }
             }
 
-        }else{
-            //cas d'une voie en une seul longueur
-            $route->routeSections[0]->grade = preg_replace($this->subGradePattern,'', $request->input('grade'));
-            $route->routeSections[0]->sub_grade = preg_replace($this->gradePattern, '',$request->input('grade'));
+        } else {
+            $route->routeSections[0]->grade = preg_replace($this->subGradePattern, '', $request->input('grade'));
+            $route->routeSections[0]->sub_grade = preg_replace($this->gradePattern, '', $request->input('grade'));
             $route->routeSections[0]->grade_val = Route::gradeToVal($route->routeSections[0]->grade, $route->routeSections[0]->sub_grade);
             $route->routeSections[0]->section_height = $request->input('height');
             $route->routeSections[0]->nb_point = $request->input('nb_point');
@@ -303,10 +273,10 @@ class RouteController extends Controller
             $route->routeSections[0]->section_order = 1;
             $route->routeSections[0]->save();
 
-            //on supprime les éventuels longueur suplémentaire
-            if(count($route->routeSections) > 1){
-                foreach ($route->routeSections as $key => $section){
-                    if($key != 0) $section->delete();
+            // on supprime les éventuels longueur suplémentaire
+            if (count($route->routeSections) > 1) {
+                foreach ($route->routeSections as $key => $section) {
+                    if ($key != 0) $section->delete();
                 }
             }
         }
@@ -316,16 +286,5 @@ class RouteController extends Controller
         Sector::majInformation($route->sector_id);
 
         return response()->json(json_encode($route));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
     }
 }
