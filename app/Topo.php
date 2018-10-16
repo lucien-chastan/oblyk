@@ -93,12 +93,12 @@ class Topo extends Model
         $data_vc = null;
         $vc_base_url = env('VIEUX_CAMPEUR_BASE_URL');
 
-        if ($this->ean != null && $vc_base_url != null) {
+        if ($this->vc_ref != null && $vc_base_url != null) {
             try {
                 $client = new Client();
                 $reponse = $client->request(
                     'GET',
-                    $vc_base_url . $this->ean,
+                    $vc_base_url . $this->vc_ref,
                     [
                         'verify' => (bool)env('VERIFY_VIEUX_CAMPEUR_SSL_CERTIFICATE'),
                         'connect_timeout' => (int)env('REQUEST_CONNECT_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
