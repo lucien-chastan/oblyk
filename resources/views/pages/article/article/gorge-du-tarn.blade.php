@@ -8,18 +8,20 @@
 <p>
     Les gorges du Tarn sont un site naturel splendide de par leur nature.
 </p>
+
 <p>
     Ce site offre de magnifiques falaises composées de nombreux trous en dolomie calcaire avec un grand nombre
     de profils différents.
 </p>
+
 <p>
-    Cela va d'immenses parois verticales comme le secteur De que fas aqui ?
-    à des profils très déversants comme Oasif ou encore Tennessee.
+    Cela va d'immenses parois verticales comme le secteur <a href="{{ \App\Crag::webUrl(1875, 'baumes-basses') }}">De que fas aqui</a> ?
+    à des profils très déversants comme <a href="{{ \App\Crag::webUrl(165,'baumes-hautes') }}">Oasif</a> ou encore <a href="{{ \App\Crag::webUrl(1876,'cirque-des-baumes') }}">Tennessee</a>.
 </p>
 
 <p>
-    Sur ce site, il y a plus de 700 voies principalement dans les cotations allant du 6 au 8.
-    Il y a vraiment un très grand nombre de voies dans le 7ème degré avec une très grande variété.
+    Sur ce site, il y a plus de <strong>700 voies</strong> principalement dans les cotations allant du <strong class="color-grade-33">6</strong> au <strong class="color-grade-45">8</strong>.
+    Il y a vraiment un très grand nombre de voies dans le <strong class="color-grade-39">7</strong>ème degré avec une très grande variété.
 </p>
 
 {{-- SAISONS --}}
@@ -28,7 +30,6 @@
     <i class="material-icons left deep-orange-text text-darken-2">date_range</i>
     Saisons favorables
 </h2>
-
 
 <p>
     La mi-saison est la meilleure période pour ce site. Il est donc bien souvent très prisé à cette période.
@@ -53,7 +54,7 @@
 <p>
     Le dernier topo de la falaise est paru en 2012, mais de nombreuses nouvelles voies sont présentes avec
     pour certaines les cotations indiquées au pied, mais pas toujours.
-    <a href="https://oblyk.org/fr/topo-escalade/205/les-gorges-du-tarn">Topo des gorges du Tarn</a>
+    <a href="https://oblyk.org/fr/topo-escalade/205/les-gorges-du-tarn">Topo des gorges du Tarn</a><br>
     Des informations complémentaires sont disponibles ici :
     <a href="http://www.topo-tarn-jonte-dourbie.info">www.topo-tarn-jonte-dourbie.info</a>
 </p>
@@ -181,8 +182,8 @@
 
 <div class="row">
     <div class="col s12 m9">
-        <img alt="Secteur Amphithéâtre – le Tarn" title="Secteur Amphithéâtre – le Tarn" src="/storage/articles/photos/tarn/tarn-amphitheatre-riviere.jpg" class="responsive-img">
-        <p class="text-center grey-text">Secteur Amphithéâtre – le Tarn</p>
+        <img alt="Vue depuis le secteur Amphithéâtre" title="Vue depuis le secteur Amphithéâtre" src="/storage/articles/photos/tarn/tarn-amphitheatre-riviere.jpg" class="responsive-img">
+        <p class="text-center grey-text">Vue depuis le secteur Amphithéâtre</p>
     </div>
     <div class="col s12 m3">
         <img alt="Amphithéâtre – partie droite" title="Amphithéâtre – partie droite" src="/storage/articles/photos/tarn/tarn-amphitheatre-visages.jpg" class="responsive-img">
@@ -225,23 +226,23 @@
 
 <div class="row">
     <div class="col s12 m3">
-        <img alt="Amphithéâtre – partie droite" title="Amphithéâtre – partie droite" src="/storage/articles/photos/tarn/tarn-planete-causse-petit-dejeuner.jpg" class="responsive-img">
-        <p class="text-center grey-text">Amphithéâtre – partie droite</p>
+        <img alt="Petit déjeuner en bas de Planète Causse" title="Petit déjeuner en bas de Planète Causse" src="/storage/articles/photos/tarn/tarn-planete-causse-petit-dejeuner.jpg" class="responsive-img">
+        <p class="text-center grey-text">Petit déjeuner en bas de Planète Causse</p>
     </div>
     <div class="col s12 m9">
-        <img alt="Secteur Amphithéâtre – le Tarn" title="Secteur Amphithéâtre – le Tarn" src="/storage/articles/photos/tarn/tarn-planete-causse.jpg" class="responsive-img">
-        <p class="text-center grey-text">Secteur Amphithéâtre – le Tarn</p>
+        <img alt="Secteur Planète Causse" title="Secteur Planète Causse" src="/storage/articles/photos/tarn/tarn-planete-causse.jpg" class="responsive-img">
+        <p class="text-center grey-text">Secteur Planète Causse</p>
     </div>
 </div>
 
 @include('pages.article.article.partial.article-graph', ['crag_id' => '165'])
 
 <p>
-    L'escalade dans les gorges du Tarn se révèle très variée tant en profil, qu'en niveau (recommandé dans le 6 tout de même), le tout dans un cadre très agréable.
+    L'escalade dans les gorges du Tarn se révèle très variée tant en profil, qu'en niveau (surtout à partir du <strong class="color-grade-33">6</strong>), le tout dans un cadre très agréable.
 </p>
 
 <p>
-    D'autres sites sont assez proches comme le <a href="{{ \App\Crag::webUrl(902, 'le-bouffi') }}">Boffi</a> ou encore <a href="{{ \App\Crag::webUrl(138, 'cantobre') }}">Cantobre</a>. (Sites présents dans le topo <a href="{{ \App\Topo::webUrl(162, 'la-bourdie') }}">La Bourdie</a>)
+    D'autres sites sont assez proches comme le <a href="{{ \App\Crag::webUrl(902, 'le-bouffi') }}">Boffi</a> ou encore <a href="{{ \App\Crag::webUrl(138, 'cantobre') }}">Cantobre</a>. (Sites présents dans le topo <a href="{{ \App\Topo::webUrl(162, 'la-bourbie') }}">La Dourbie</a>)
 </p>
 
 <div class="row">
