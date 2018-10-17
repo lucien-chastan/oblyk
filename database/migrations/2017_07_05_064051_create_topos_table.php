@@ -22,6 +22,7 @@ class CreateToposTable extends Migration
             $table->integer('editionYear')->nullable();
             $table->decimal('price',5,2)->nullable();
             $table->string('ean',13)->nullable();
+            $table->string('vc_ref',255)->nullable();
             $table->integer('page')->nullable();
             $table->integer('weight')->nullable();
             $table->integer('views')->nullable()->default(0);
