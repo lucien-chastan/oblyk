@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Crag;
 use App\Topo;
+use App\TopoCrag;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,28 +14,36 @@ class TopoVueController extends Controller
 {
 
     function vueFilActu($id){
+        $topo = Topo::class;
         $data = [
-            'topo' => Topo::where('id',$id)->first()
+            'topo' => $topo::where('id',$id)->first()
         ];
         return view('pages.topo.vues.filActuVue', $data);
     }
 
     function vueLiens($id){
+        $topo = Topo::class;
         $data = [
-            'topo' => Topo::where('id',$id)->with('links.user')->first()
+            'topo' => $topo::where('id',$id)->with('links.user')->first()
         ];
         return view('pages.topo.vues.liensVue', $data);
     }
 
     function vueSites($id){
+        $topo = Topo::class;
         $data = [
-            'topo' => Topo::where('id',$id)->with('crags.crag.rock')->first()
+            'topo' => $topo::where('id',$id)
+                ->with('crags.crag.rock')
+                ->with('crags.crag.gapGrade')
+                ->with('crags.crag.routes')
+                ->first()
         ];
         return view('pages.topo.vues.sitesVue', $data);
     }
 
     function vueAcheter($id){
-        $topo = Topo::where('id',$id)->with('sales.user')->first();
+        $topo = Topo::class;
+        $topo = $topo::where('id',$id)->with('sales.user')->first();
 
         return view('pages.topo.vues.acheterVue', [
             'topo' => $topo,
@@ -42,9 +52,28 @@ class TopoVueController extends Controller
     }
 
     function vueMap($id){
+        $topo = Topo::class;
         $data = [
-            'topo' => Topo::where('id',$id)->first()
+            'topo' => $topo::where('id',$id)->first()
         ];
         return view('pages.topo.vues.mapVue', $data);
+    }
+
+    function vuePhoto($id){
+        $crags = [];
+        $topo = Topo::class;
+        $topo = $topo::where('id',$id)->with('crags')->with('crags.crag')->first();
+
+        foreach ($topo->crags as $crag) {
+            $cragPhotos = $crag->crag->AllPhoto();
+            if(count($cragPhotos) > 0) {
+                $crags[] = $crag->crag;
+            }
+        }
+
+        return view('pages.topo.vues.photoVue', [
+            'topo' => $topo,
+            'crags' => $crags
+        ]);
     }
 }

@@ -164,10 +164,12 @@ class Crag extends Model
     }
 
     //met à jour les informations stocké de la falaise en question
-    public static function majInformation($crag_id){
+    public static function majInformation($crag_id) {
+        $Route = Route::class;
+        $Crag = Crag::class;
 
-        $routes = Route::where('crag_id',$crag_id)->with('routeSections')->get();
-        $crag = Crag::where('id', $crag_id)->with('gapGrade')->first();
+        $routes = $Route::where('crag_id',$crag_id)->with('routeSections')->get();
+        $crag = $Crag::where('id', $crag_id)->with('gapGrade')->first();
 
         $type_bloc = 0;
         $type_voie = 0;
@@ -232,29 +234,24 @@ class Crag extends Model
     }
 
     public function AllPhoto() {
-        $photos = [];
+        $Photo = Photo::class;
 
-        $crag = Crag::where('id', $this->id)->with('photos')->first();
-        $sectors = Sector::where('crag_id', $this->id)->with('photos')->get();
-        $routes = Route::where('crag_id',$this->id)->with('photos')->get();
-
-        foreach ($sectors as $sector) {
-            foreach ($sector->photos as $photo) {
-                $photos[] = $photo;
-            }
-        }
-
-        foreach ($routes as $route) {
-            foreach ($route->photos as $photo) {
-                $photos[] = $photo;
-            }
-        }
-
-        foreach ($crag->photos as $photo) {
-            $photos[] = $photo;
-        }
-
-        return $photos;
+        return $Photo
+            ::where(
+                [
+                    ['illustrable_id', $this->id],
+                    ['illustrable_type', 'App\\Crag']
+                ]
+            )
+            ->orWhere('illustrable_type', 'App\\Sector')
+            ->whereIn('illustrable_id', function ($query) {
+                $query->select('id')->from('sectors')->where('crag_id', $this->id);
+            })
+            ->orWhere('illustrable_type', 'App\\Route')
+            ->whereIn('illustrable_id', function ($query) {
+                $query->select('id')->from('routes')->where('crag_id', $this->id);
+            })
+            ->get();
     }
 
     public function articleCrags(){

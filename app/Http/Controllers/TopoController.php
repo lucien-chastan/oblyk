@@ -13,7 +13,8 @@ class TopoController extends Controller
 {
     function topoPage($topo_id, $topo_title){
 
-        $topo = Topo::where('id', $topo_id)
+        $topo = Topo::class;
+        $topo = $topo::where('id', $topo_id)
             ->with('descriptions')
             ->withCount('links')
             ->withCount('crags')
@@ -39,7 +40,8 @@ class TopoController extends Controller
         }
 
         //on va chercher si l'utilisateur follow ce topo
-        $userFollow = Follow::where(
+        $follow = Follow::class;
+        $userFollow = $follow::where(
             [
                 ['user_id', '=', Auth::id()],
                 ['followed_type', '=', 'App\Topo'],
@@ -54,13 +56,19 @@ class TopoController extends Controller
         // Récupération des infos du vieux campeur
         $data_vc = $topo->getVieuxCampeurInformation();
 
+        // Photo
+        $photoCount = 0;
+        foreach ($topo->crags as $crag) {
+            $photoCount += count($crag->crag->AllPhoto());
+        }
         $data = [
             'topo' => $topo,
             'meta_title' => $topo['label'],
             'meta_description' => 'description de ' . $topo['label'],
             'user_follow' => $userFollow,
             'nbArticle' => $nbArticle,
-            'data_vc' => $data_vc
+            'data_vc' => $data_vc,
+            'photos_count' => $photoCount
         ];
 
         return view('pages.topo.topo', $data);
@@ -70,7 +78,8 @@ class TopoController extends Controller
     public function getToposArroundPoint($lat, $lng, $rayon, $crag_id){
 
         //on liste les topos du site pour les exclures de la recherche par la suite
-        $cragTopos = Crag::where('id',$crag_id)->with('topos')->first();
+        $crag = Crag::class;
+        $cragTopos = $crag::where('id',$crag_id)->with('topos')->first();
         $arrayTopos = [];
         foreach ($cragTopos->topos as $liaison){
             $arrayTopos[] = $liaison->topo_id;
@@ -90,16 +99,18 @@ class TopoController extends Controller
             ]
         );
 
+        $Topo = Topo::class;
         $topos = [];
         foreach ($toposInRayon as $topo) $topos[] = $topo->id;
-        $data = ['topos' => Topo::whereIn('id',$topos)->get(), 'rayon' => $rayon];
+        $data = ['topos' => $Topo::whereIn('id',$topos)->get(), 'rayon' => $rayon];
 
         return view('pages.crag.partials.liste-topos', $data);
     }
 
     public function getToposByName($crag_id, $name){
 
-        $topo_ids = Crag::where('crags.id',$crag_id)
+        $Crag = Crag::class;
+        $topo_ids = $Crag::where('crags.id',$crag_id)
             ->with('topos')
             ->get()
             ->pluck('topos')
@@ -114,7 +125,8 @@ class TopoController extends Controller
     }
 
     public function topoRedirectionPage($topo_id) {
-        $topo = Topo::find($topo_id);
+        $Topo = Topo::class;
+        $topo = $Topo::find($topo_id);
         return redirect($topo->url(),301);
     }
 }

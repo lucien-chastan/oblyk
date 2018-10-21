@@ -129,6 +129,22 @@ body{
     }
 }
 
+.guidebook-photo-list {
+    h2 {
+        font-size: 1.4em;
+        border: 1px rgb(200, 200, 200);
+        border-bottom-style: solid;
+
+        .nb-photo {
+            font-size: 0.6em;
+        }
+    }
+}
+
+.phototheque {
+    text-align: left;
+}
+
 //version smartphone
 @media screen and (max-width:600px){
 
