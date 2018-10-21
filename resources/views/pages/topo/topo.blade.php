@@ -41,6 +41,10 @@
             @include('pages.topo.tabs.fil-actu')
         </div>
 
+        <div id="photos">
+            @include('pages.topo.tabs.photos')
+        </div>
+
         <div id="acheter">
             @include('pages.topo.tabs.acheter')
         </div>
