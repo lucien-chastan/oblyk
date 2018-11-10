@@ -41,6 +41,6 @@ return [
     //Menu "Partenaire"
     'partnerMap' => 'Map of the climbers', // Carte des grimpeurs
     'howItWorks' => 'How it works ?', // Comment ça marche ?
-    'howIAm' => 'How I am ?', // Qui je suis ?
+    'howIAm' => 'Who I am ?', // Qui je suis ?
     'myPlaces' => 'My places', // Mes lieux
 ];

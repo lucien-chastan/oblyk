@@ -3,30 +3,25 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">notes</i>Caractéristiques</h2>
 
 <p>
-    Depuis les calanques de Marseille, vous pouvez voir un rocher étrange au loin, marron, orangé, avec plusieurs strates empilés… C'est <a href="{{ \App\Crag::webUrl(96,'cap-canaille') }}">Cap Canaille</a> ! Pourquoi ne pas aller le découvrir d'un peu plus près ?
+    <a href="{{ \App\Crag::webUrl(96,'cap-canaille') }}">Cap Canaille</a> est visible depuis les calanques de Marseille. C'est ce rocher stratifié tout orangé qui parait si intriguant…
 </p>
 
 <p>
-    Cette falaise offre un cadre unique avec une vue imprenable sur <strong>les calanques</strong> et une <strong>mer bleue</strong> impressionnante. Ce sont les plus hautes falaises de France avec une altitude maximale de 394 mètres.
-    L'escalade se fait sur <strong>quatre rochers</strong> au sein d'une même ascension (marnes, calcaires roux et blanc et le fameux poudingue). Elle mêle également une grande diversité de profils, passant du toit au dièdre ou aux grandes traversées sur une même ligne avec même la possibilité de visiter des grottes ! C'est vraiment un grand dépaysement de grimper à cet endroit.
+    Cette falaise de 394 mètres, se grimpe et propose <strong>quatre types de roches</strong> (marne, calcaire roux, blanc, poudingue) tellement différentes que chaque ascension semble un voyage en lui-même. <strong>La diversité</strong> ne s'arrête pas seulement aux roches, les profils mais aussi les cotations sont très variables. Il y a du choix pour tout le monde.
 </p>
 
 <p>
-    Les <strong>marches d'approches</strong> sont de manière générale assez raisonnable avec des parkings qui peuvent être très fréquentés lors des beaux jours mais qui sont à proximité des départs de voies.
+    <strong>L'accès au départ de voies</strong> sont de manière générale relativement rapides, mais gare à la sur-fréquentation tout de même.
 </p>
 
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">place</i> Localisation &amp; Topo</h2>
 
 <p>
-    Cap Canaille est situé à la Ciotat, près de Cassis et Marseille dans les Bouches du Rhône, France
+    Cap Canaille est situé à La Ciotat, près de Cassis et Marseille dans le département des Bouches du Rhône.
 </p>
 
 <p>
-    La route des Crêtes qui relie Cassis à La Ciotat permet d'accéder au bord de la falaise et de nombreux parkings. Renseignez-vous, cette route peut être fermée par grands vents.
-</p>
-
-<p>
-    Préférez arriver tôt pour trouver de la place sur les parkings de départ des grandes voies et aussi pour profiter de la fraicheur matinale (hormis en hiver).
+    Des parkings se trouvent régulièrement tout le long de la route, mais ils peuvent rapidement être complets. De plus, vérifiez que la route d'accès (route des Crêtes) est ouverte car elle peut être fermée selon la météo.
 </p>
 
 @include('pages.article.article.partial.topos-crags')
@@ -37,13 +32,17 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">date_range</i>Saisons favorables</h2>
 
 <p>
-    A privilégier en hors saison, pour la fréquentation, pour les risques incendies et la chaleur ! Cependant, Cap Canaille n'est pas comme les calanques de Marseille, l'escalade peut s'y faire toute l'année. La falaise est bien souvent à l'ombre le matin.
+    Le matin, la falaise de Cap Canaille est généralement à l'ombre. Ce qui permet d'y grimper toute l'année.
+</p>
+
+<p>
+    La fréquentation touristique et la chaleur peuvent être forte, il est donc recommandé d'y aller hors saison.
 </p>
 
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">filter_drama</i>Météorologie</h2>
 
 <p>
-    Les calanques peuvent subir fortement le vent, mais aussi les entrées maritimes ou de fortes chaleurs, il est vraiment important de bien regarder la météo avant de se lancer et de s'équiper en conséquence sinon, ça peut vite devenir bien moins marrant surtout en grande voie !
+    Le site est en bord de mer, il peut être soumis à de changements météorologiques assez brusques. Surveillez la météo avant de débuter une ascension car le vent, les entrées maritimes ou encore les fortes chaleurs, peuvent vite gâcher votre sortie.
 </p>
 
 {{-- SECTEUR OUVREUR DE BOUSE - CAP CANAILLE --}}
@@ -54,8 +53,15 @@
 </h2>
 
 <p>
-    Ce secteur est caractérisé par un rocher orangé, en states de grès légèrement déversant, et assez friable.<br>
-    Surement un des secteurs le plus fréquenté de Cap Canaille. Il est à l'ombre le matin et l'accès se fait en rappel.
+    Ce secteur est caractérisé par un rocher orangé, composé de grès en strates, assez friable. Le profil est globalement légèrement déversant.
+</p>
+
+<p>
+    Ouvreur de Bouse est un secteur très réputé qui peut en souffrir.
+</p>
+
+<p>
+    Il est à l'ombre le matin et l'accès se fait en rappel.
 </p>
 
 <div class="row">
@@ -93,8 +99,11 @@
 </h2>
 
 <p>
-    La paroi est composée de quatre strates de roches bien différentes donnant une grande variété lors des ascensions.<br>
-    La falaise est à l'ombre le matin. Une petite marche d'approche permet d'atteindre le pied de la falaise.
+    La paroi est composée de quatre strates de roches bien différentes donnant une grande variété lors des ascensions.
+</p>
+
+<p>
+    La falaise est à l'ombre le matin. Une petite marche d'approche permet d'atteindre aux voies.
 </p>
 
 <div class="row">
@@ -133,7 +142,7 @@
 
 <p>
     La falaise est à l'ombre le matin.<br>
-    Le départ des voies se fait après une petite marche d'approche et plusieurs rappels dont un donnant accès à une grotte.
+    Une petite marche d'approche et plusieurs rappels dont un donnant accès à une grotte permet d'accéder aux départs des voies.
 </p>
 
 <div class="row">
@@ -149,10 +158,9 @@
 
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1639'])
 
-
 <p>
-    De nombreuses grandes voies magnifiques sont possibles sur cette falaise de Cap Canaille, comme celles présentées ci-dessus.<br>
-    D'autres secteurs sont également présents sur ce site comme <a href="{{ \App\Crag::webUrl(1636,'belvedere') }}">Belvédère</a>, <a href="{{ \App\Crag::webUrl(1750,'le-pas-de-la-chevre') }}">Pas de la Chèvre</a>, <a href="{{ \App\Crag::webUrl(1639,'le-semaphore') }}">Sémaphore</a>
+    La falaise de Cap Canaille offre de nombreuses grandes voies, comme celles présentées ci-dessus.<br>
+    En plus des 3 secteurs cités, vous pouvez également grimper au <a href="{{ \App\Crag::webUrl(1636,'belvedere') }}">Belvédère</a>, <a href="{{ \App\Crag::webUrl(1750,'le-pas-de-la-chevre') }}">Pas de la Chèvre</a>, <a href="{{ \App\Crag::webUrl(1639,'le-semaphore') }}">Sémaphore</a>
 </p>
 <p>
     Vous pouvez découvrir l'intégralité de cet article sur le <a href="https://blog.le-yeti.net/cap-canaille-calanques/)">blog du Yéti</a>
