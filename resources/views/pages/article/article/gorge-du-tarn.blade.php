@@ -6,22 +6,15 @@
 </h2>
 
 <p>
-    Les gorges du Tarn sont un site naturel splendide de par leur nature.
+    <strong>Les gorges du Tarn</strong> renferment de nombreuses parois en dolomie calcaire avec au centre le Tarn qui y coule.
 </p>
 
 <p>
-    Ce site offre de magnifiques falaises composées de nombreux trous en dolomie calcaire avec un grand nombre
-    de profils différents.
+    Les profils et les orientations sont variés à travers les plus de 700 voies qu'offre ce site. L'escalade s'y fait dans de nombreux trous caractéristiques du Tarn.
 </p>
 
 <p>
-    Cela va d'immenses parois verticales comme le secteur <a href="{{ \App\Crag::webUrl(1875, 'baumes-basses') }}">De que fas aqui</a> ?
-    à des profils très déversants comme <a href="{{ \App\Crag::webUrl(165,'baumes-hautes') }}">Oasif</a> ou encore <a href="{{ \App\Crag::webUrl(1876,'cirque-des-baumes') }}">Tennessee</a>.
-</p>
-
-<p>
-    Sur ce site, il y a plus de <strong>700 voies</strong> principalement dans les cotations allant du <strong class="color-grade-33">6</strong> au <strong class="color-grade-45">8</strong>.
-    Il y a vraiment un très grand nombre de voies dans le <strong class="color-grade-39">7</strong>ème degré avec une très grande variété.
+    Les grimpeurs du <span class="text-bold color-grade-34">6</span> au <span class="text-bold color-grade-46">8</span> trouveront leur bonheur dans ces gorges.
 </p>
 
 {{-- SAISONS --}}
@@ -32,12 +25,7 @@
 </h2>
 
 <p>
-    La mi-saison est la meilleure période pour ce site. Il est donc bien souvent très prisé à cette période.
-</p>
-
-<p>
-    Il est tout de même possible de grimper toute l'année en jouant sur les différentes expositions
-    qu'offrent ces gorges.
+    L'escalade y est possible toute l'année en combinant les différentes expositions présentent sur ce site. Cependant, le printemps et l'automne sont généralement les meilleures saisons.
 </p>
 
 {{-- LOCALISATION ET TOPO --}}
@@ -52,10 +40,9 @@
 </p>
 
 <p>
-    Le dernier topo de la falaise est paru en 2012, mais de nombreuses nouvelles voies sont présentes avec
-    pour certaines les cotations indiquées au pied, mais pas toujours.
+    À ce jour, le dernier topo édité est de 2012. Plusieurs voies ont été équipées. Pour certaines, le nom et la cotation sont inscrites.
     <a href="https://oblyk.org/fr/topo-escalade/205/les-gorges-du-tarn">Topo des gorges du Tarn</a><br>
-    Des informations complémentaires sont disponibles ici :
+    Vous pouvez retrouver des informations complémentaires sur ce lien: :
     <a href="http://www.topo-tarn-jonte-dourbie.info">www.topo-tarn-jonte-dourbie.info</a>
 </p>
 
@@ -71,13 +58,11 @@
 </h2>
 
 <p>
-    Sur ce secteur dominé par le <strong>Roc Aiguille</strong>, où il y a quelques grandes voies,
-    j'ai pu découvrir le secteur <strong>Noir Désir</strong>.
-    Il est exposé plein est, ce qui permet d'avoir le soleil le matin sur la falaise.
+    Dès l'entrée dans les gorges, le <strong>Roc Aiguille</strong> domine. Il est possible de faire de la grande voie sur celui-ci.
 </p>
 
 <p>
-    Ce secteur comporte des voies entre 20 et 30 m allant du <strong class="color-grade-31">6a</strong> au <strong class="color-grade-39">7b</strong>.
+    <strong>Noir Désir</strong> comporte des voies allant du <span class="color-grade-31 text-bold">6a</span> au <span class="text-bold color-grade-39">7b</span> entre 20 et 30 m. Ce secteur est exposé est.
 </p>
 
 <div class="row">
@@ -98,8 +83,7 @@
 </h2>
 
 <p>
-    Ce secteur nommé <strong>Fœtus</strong> comporte des voies assez courtes et assez atypiques.
-    Le soleil y est bien présent dès la fin de matinée.
+    Ce secteur nommé <strong>Fœtus</strong> est un secteur assez court avec voies très variés. Il y a quelques voies dans le <span class="color-grade-28 text-bold">5</span>.
 </p>
 
 <div class="row">
@@ -121,8 +105,9 @@
 </h2>
 
 <p>
-    <strong>De que fas aqui ?</strong> est une immense paroi est impossible à louper !! Elle est majestueuse et en impose. J'ai été impressionnée !<br>
-    Elle est bien prisée car elle comporte de nombreuses voies allant du <strong class="color-grade-29">5c</strong> au projet sur des longueurs de voies jusqu'à 100m.
+    Depuis la route, ce secteur, <strong>De que fas aqui ?</strong> en impose.<br>
+    C'est un mur impressionnant de par sa verticalité et sa hauteur (jusqu'à 100m).<br>
+    Cette falaise est fréquentée et proposent des voies accessibles dès le <span class="color-grade-29 text-bold">5c</span>.
 </p>
 
 <div class="row">
@@ -145,6 +130,12 @@
 </h2>
 
 <p>
+    Le <span class="text-bold color-grade-43">8a</span>, <a href="{{ \App\Route::webUrl(65550,'les-ailes-du-desir') }}">"Les Ailes du désirs"</a>
+    et le <span class="text-bold color-grade-45">8b</span> <a href="{{ \App\Route::webUrl(65555,'tennessee') }}">"Tennessee"</a> sont les voies faisant la réputation de ce secteur,
+    Tennessee de haut niveau. Juste à droite, se trouve quelques voies proches de la chapelle de <strong>Saint Hilaire</strong>.
+</p>
+
+<p>
     <strong>Tennessee</strong> est un des secteurs les plus reconnus surtout avec la voie éponyme,
     <strong class="color-grade-45">8b</strong> et le fameux <strong class="color-grade-43">8a</strong>
     <a href="{{ \App\Route::webUrl(65550,'les-ailes-du-desir') }}">"Les Ailes du désirs"</a>.<br>
@@ -163,9 +154,8 @@
 </div>
 
 <p>
-    <strong>Navire</strong> est un autre secteur du cirque des Baumes. Il comporte de belles envolées sur un beau surplomb déversant avec de nombreux bacs. L'escalade y est athlétique et dynamique.<br>
-    Le secteur est assez haut et propose une belle vue encore une fois.<br>
-    Il est à l'ombre assez rapidement dans l'après-midi.
+    <strong>Navire</strong> est exposé Est.<br>
+    Le rocher résurge assez facilement. Le profil est déversant avec des voies de 20 à 35m en niveau <span class="color-grade-34 text-bold">6</span> et <span class="color-grade-40 text-bold">7</span>.
 </p>
 
 <div class="row">
@@ -176,8 +166,7 @@
 </div>
 
 <p>
-    <strong>Amphithéâtre</strong> est un secteur à gauche de Tennessee qui résurge souvent et qui comporte un petit air même en pleine chaleur.
-    Le pied des voies n'est pas toujours très facile mais les voies sont jolies. La vue depuis le secteur est vraiment magnifique.
+    <strong>Amphithéâtre</strong> se trouve sur la gauche de Tennessee. Il est séparé en plusieurs morceaux qui offrent des voies très différentes les unes des autres. Certaines parties peuvent être humides, et en été, on peut y retrouver un peu d'air. La panorama (photo couverture) depuis la falaise est splendide.
 </p>
 
 <div class="row">
@@ -195,8 +184,58 @@
     </div>
 </div>
 
+<p>
+    <strong>Calmez-vous</strong> est un autre secteur du cirque des Baumes, il se situe à droite des précédents décrits.
+    Ce secteur comporte des voies assez courtes entre 10 et 22m pour une escalade plutôt verticale particulièrement riche du <span class="text-bold color-grade-35">6c</span> au <span class="text-bold color-grade-39">7b</span>.<br>
+    Le pied des voies est ombragé.
+</p>
+
+
+<div class="row">
+    <div class="col s12 m6">
+        <img alt="XXXXXXXXXXXXXX" title="XXXXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-chapelle-tennessee.jpg" class="responsive-img">
+        <p class="text-center grey-text">XXXXXXXXXXXXXX</p>
+    </div>
+    <div class="col s12 m6">
+        <img alt="XXXXXXXXXXXXXXXXx" title="XXXXXXXXXXXXXXXXx" src="/storage/articles/photos/tarn/tarn-tennesse.jpg" class="responsive-img">
+        <p class="text-center grey-text">XXXXXXXXXXXXXXXXx</p>
+    </div>
+</div>
+
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1876'])
 
+{{-- GORGES DU TARN : ENTRE DEUX (TRÉSOR DU ZÈBRE, GÜLLICH)  --}}
+
+<h2 class="loved-king-font">
+    <i class="material-icons left deep-orange-text text-darken-2">terrain</i>
+    Gorges du Tarn : Entre deux (Trésor du Zèbre, Güllich)
+    <a class="voir-sur-oblyk" href="{{ \App\Crag::webUrl(1877,'entre-deux') }}">voir sur oblyk</a>
+</h2>
+
+<p>
+    <strong>Trésor du Zèbre</strong> est la plus grande falaise de ce secteur. Il est exposé ouest et offre des ascensions de 20 à 35m. Les cotations vont du <span class="text-bold color-grade-31">6a</span> au <span class="text-bold color-grade-45">8b</span>.
+</p>
+
+<div class="row">
+    <div class="col s12">
+        <img alt="XXXXXXXXXXXX" title="XXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-oasif.jpg" class="responsive-img">
+        <p class="text-center grey-text">XXXXXXXXXXXX</p>
+    </div>
+</div>
+
+<p>
+    <strong>Güllich</strong> est un mur atypique. Comme son nom l'indique c'est du pan Güllich, court, déversant et donc physique. Une dizaine de voies sont équipées du <span class="text-bold color-grade-36">6c+</span> au projet avec une grande majorité de <span class="text-bold color-grade-45">8</span>.<br>
+    L'exposition est sud-est.
+</p>
+
+<div class="row">
+    <div class="col s12">
+        <img alt="XXXXXXXXXXXX" title="XXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-oasif.jpg" class="responsive-img">
+        <p class="text-center grey-text">XXXXXXXXXXXX</p>
+    </div>
+</div>
+
+@include('pages.article.article.partial.article-graph', ['crag_id' => '1877'])
 
 {{-- BAUMES HAUTES - GORGES DU TARN --}}
 
@@ -207,8 +246,7 @@
 </h2>
 
 <p>
-    <strong>Oasif</strong> et <strong>Planète Causse</strong> sont deux secteurs emblématiques.<br>
-    Le premier est vraiment remarquable de par son dévers et au pied, il y avait une sorte de mini étendue d'eau lors de mon passage.
+    <strong>Oasif</strong> est composé d'un gros dévers avec au centre de l'eau stagnante.
 </p>
 
 <div class="row">
@@ -219,9 +257,7 @@
 </div>
 
 <p>
-    <strong>Planète Causse</strong> est un grand mur orangé bien travaillé proposant une escalade physique.
-    La grande majorité des voies sont dans le 7 plutôt <strong class="color-grade-39">7b</strong> et <strong class="color-grade-41">7c</strong> sur 30-35m, en légers dévers.<br>
-    Ce secteur est exposé au soleil dès la fin de la matinée.
+    <strong>Planète Causse</strong> propose une grimpe athlétique majoritairement dans le <span class="text-bold color-grade-40">7</span>, en léger dévers. Les voies font entre 30 et 38m de longueur.
 </p>
 
 <div class="row">
@@ -238,11 +274,11 @@
 @include('pages.article.article.partial.article-graph', ['crag_id' => '165'])
 
 <p>
-    L'escalade dans les gorges du Tarn se révèle très variée tant en profil, qu'en niveau (surtout à partir du <strong class="color-grade-33">6</strong>), le tout dans un cadre très agréable.
+    <strong>Les gorges du Tarn</strong> est un cadre de grimpe très agréable dès le <span class="text-bold color-grade-34">6ème</span> degré avec de belles envolées et des profils verticaux mais aussi déversants.
 </p>
 
 <p>
-    D'autres sites sont assez proches comme le <a href="{{ \App\Crag::webUrl(902, 'le-bouffi') }}">Boffi</a> ou encore <a href="{{ \App\Crag::webUrl(138, 'cantobre') }}">Cantobre</a>. (Sites présents dans le topo <a href="{{ \App\Topo::webUrl(162, 'la-bourbie') }}">La Dourbie</a>)
+    D'autres sites sont assez proches <a href="{{ \App\Crag::webUrl(902, 'le-bouffi') }}">Boffi</a> ou encore <a href="{{ \App\Crag::webUrl(138, 'cantobre') }}">Cantobre</a>. (Sites présents dans le topo <a href="{{ \App\Topo::webUrl(162, 'la-bourbie') }}">La Dourbie</a>)
 </p>
 
 <div class="row">
