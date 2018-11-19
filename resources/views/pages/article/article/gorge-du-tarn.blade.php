@@ -193,13 +193,12 @@
 
 <div class="row">
     <div class="col s12 m6">
-        <img alt="XXXXXXXXXXXXXX" title="XXXXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-chapelle-tennessee.jpg" class="responsive-img">
-        <p class="text-center grey-text">XXXXXXXXXXXXXX</p>
+        <img alt="Secteur calmez-vous" title="Secteur calmez-vous" src="/storage/articles/photos/tarn/calmez-vous-1.jpg" class="responsive-img">
     </div>
     <div class="col s12 m6">
-        <img alt="XXXXXXXXXXXXXXXXx" title="XXXXXXXXXXXXXXXXx" src="/storage/articles/photos/tarn/tarn-tennesse.jpg" class="responsive-img">
-        <p class="text-center grey-text">XXXXXXXXXXXXXXXXx</p>
+        <img alt="Secteur calmez-vous" title="Secteur calmez-vous" src="/storage/articles/photos/tarn/calmez-vous-2.jpg" class="responsive-img">
     </div>
+    <p class="text-center grey-text">Vue du secteur Calmez-vous (partie de droite et gauche)</p>
 </div>
 
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1876'])
@@ -218,8 +217,8 @@
 
 <div class="row">
     <div class="col s12">
-        <img alt="XXXXXXXXXXXX" title="XXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-oasif.jpg" class="responsive-img">
-        <p class="text-center grey-text">XXXXXXXXXXXX</p>
+        <img alt="Trésor du Zèbre" title="Trésor du Zèbre" src="/storage/articles/photos/tarn/tresor-du-zebre.jpg" class="responsive-img">
+        <p class="text-center grey-text">Vue d'une partie du Trésor du Zèbre</p>
     </div>
 </div>
 
@@ -229,9 +228,9 @@
 </p>
 
 <div class="row">
-    <div class="col s12">
-        <img alt="XXXXXXXXXXXX" title="XXXXXXXXXXXX" src="/storage/articles/photos/tarn/tarn-oasif.jpg" class="responsive-img">
-        <p class="text-center grey-text">XXXXXXXXXXXX</p>
+    <div class="col s12 text-center">
+        <img alt="Secteur Güllich" title="Secteur Güllich" src="/storage/articles/photos/tarn/gullich.jpg" class="responsive-img">
+        <p class="grey-text text-center">Secteur Güllich</p>
     </div>
 </div>
 
@@ -262,8 +261,8 @@
 
 <div class="row">
     <div class="col s12 m3">
-        <img alt="Petit déjeuner en bas de Planète Causse" title="Petit déjeuner en bas de Planète Causse" src="/storage/articles/photos/tarn/tarn-planete-causse-petit-dejeuner.jpg" class="responsive-img">
-        <p class="text-center grey-text">Petit déjeuner en bas de Planète Causse</p>
+        <img alt="Vue d'une partie du secteur Planète Causse" title="Vue d'une partie du secteur Planète Causse" src="/storage/articles/photos/tarn/partie-planete-causse.jpg" class="responsive-img">
+        <p class="text-center grey-text">Vue d'une partie du secteur Planète Causse</p>
     </div>
     <div class="col s12 m9">
         <img alt="Secteur Planète Causse" title="Secteur Planète Causse" src="/storage/articles/photos/tarn/tarn-planete-causse.jpg" class="responsive-img">
