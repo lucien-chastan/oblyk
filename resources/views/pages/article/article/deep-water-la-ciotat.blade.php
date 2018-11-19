@@ -3,11 +3,11 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">notes</i>Caractéristiques</h2>
 
 <p>
-    L'escalade au-dessus de l'eau donne une autre dimension et en été, le psychobloc dans le cadre d'une eau cristalline, sur un poudingue ocre, permet de passer de super journée estivale.
+    Figuerolles offre un super cadre pour grimper sur un poudingue foncé au-dessus d'une eau cristalline. Des ingrédients parfaits pour passer une excellente journée estivale à escalader.
 </p>
 
 <p>
-    Même sur un site comme celui-ci, tout le monde peut y trouver son compte, grimpe du niveau 5 au 8, dans une bonne ambiance et cadre magnifique.
+    Ce site permet à tous de grimper (cotation allant du <span class="color-grade-34 text-bold">5</span> ou <span class="color-grade-46 text-bold">8</span>).
 </p>
 
 {{-- SAISONS FAVORABLES --}}
@@ -15,17 +15,21 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">date_range</i>Saisons</h2>
 
 <p>
-    A privilégier lors des fortes chaleurs des journées estivales. La mer peut être agitée, pensez à regarder la météo marine.
+    Il fait trop chaud pour grimper, même en face Nord ? Pensez au psychobloc !
+</p>
+
+<p>
+    Regardez la météo marine car même s'il fait chaud, la mer peut être agitée et compliquer cette pratique.
 </p>
 
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">place</i>Localisation</h2>
 
 <p>
-    Le site se situe à La Ciotat, près de Cassis et Marseille dans les Bouches du Rhône, France.
+    Le site se situe près de Cassis et de Marseille dans les Bouches du Rhône, sur la commune de La Ciotat.
 </p>
 
 <p>
-    Préférez arriver tôt pour trouver de la place sur les emplacements au niveau de La Ciotat.
+    En été, les places de parking sont vite pris d'assauts par les baigneurs, mieux vaut y venir, pas trop tard !
 </p>
 
 @include('pages.article.article.partial.topos-crags')
@@ -33,14 +37,17 @@
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">local_library</i>Bibliographie</h2>
 
 <p>
-    Le topo qui décrit Cap Canaille avec les trois secteurs présentés ici est <a href="{{ \App\Topo::webUrl(54, 'escalade-la-ciotat') }}">"Escalade – La Ciotat"</a> datant de 2012. Il ne répertorie pas moins de 650 voies entre Cassis et La Ciotat avec beaucoup de grandes voies mais pas seulement, la preuve !
+    Ce site se trouve dans le topo <a href="{{ \App\Topo::webUrl(54, 'escalade-la-ciotat') }}">"Escalade – La Ciotat"</a>. Paru en 2012, il contient de nombreuses grandes voies entre Cassis et La Ciotat mais aussi ce secteur de psychobloc.
 </p>
 
 
 <h2 class="loved-king-font"><i class="material-icons left deep-orange-text text-darken-2">terrain</i>D'autres sites de psychoblocs :</h2>
 
 <p>
-    D'autres sites de psychoblocs proches existent également, comme dans <a href="{{ \App\Crag::webUrl(1761, 'cannier-tablettes') }}">l'Anse du Cannier – Les Tablettes</a> , à <a href="{{ \App\Crag::webUrl(1945, 'malmousque') }}">Malmousque</a>, <a href="{{ \App\Crag::webUrl(2014, 'la-piade') }}">La Piade à la Garde</a> (proche de Toulon) …
+    D'autres sites existent pour grimper au-dessus de l'eau.
+    Vous pouvez également pratiquer cette activité à <a href="{{ \App\Crag::webUrl(1945, 'malmousque') }}">Malmousque</a>,
+    dans <a href="{{ \App\Crag::webUrl(1761, 'cannier-tablettes') }}">l'Anse du Cannier – Les Tablettes</a>,
+    <a href="{{ \App\Crag::webUrl(2014, 'la-piade') }}">La Piade à la Garde</a> (proche de Toulon) …
 </p>
 
 <div class="row">
@@ -61,7 +68,7 @@
 </h2>
 
 <p>
-    Depuis la calanque de Figuerolles, la traversée se fait au-dessus de l'eau en escalade ou bien en embarcation (comme en canoë par exemple).
+    En partant de la calanque de Figuerolles, il est possible d'atteindre le site en embarcation (comme en canoë par exemple) ou bien en grimpant le long de l'eau jusqu'au Cap.
 </p>
 
 <div class="row">
@@ -76,7 +83,7 @@
 </div>
 
 <p>
-    Une fois arrivé jusqu'au Cap, on peut apercevoir le Trou du Diable qui est magnifique !
+    Une fois parvenu au Cap, on peut admirer le <strong>Trou du Diable</strong>.
 </p>
 
 {{-- TRAVERSÉE FIGUEROLLES – MUGEL --}}
@@ -87,7 +94,7 @@
 </h2>
 
 <p>
-    Une voie traverse l'ensemble de la falaise puis de nombreuses voies partent tout le long de ce mur allant du 6 au 8 en cotation sur ce super poudingue !
+    Une voie traverse l'ensemble de ce super poudingue puis de nombreuses voies verticales débutent tout le long de la paroi. Les cotations vont du <span class="text-bold color-grade-34">6</span> au <span class="text-bold color-grade-46">8</span>.
 </p>
 
 <div class="row">
@@ -108,7 +115,12 @@
 @include('pages.article.article.partial.article-graph', ['crag_id' => '1760'])
 
 <p>
-    En été, la plupart des sites d'escalade classiques sont peu praticables sous une forte chaleur. Alors le psychobloc est une variante avec l'avantage de pouvoir profiter pleinement de l'escalade tout en se baignant dans une eau magnifique, partageant de supers moments !
+    A la période estivale, la chaleur si intense rend difficile l'escalade, même à l'ombre.<br>
+    La grimpe au-dessus de l'eau ou psychobloc permet de combiner la baignade rafraichissante à l'escalade.
+</p>
+
+<p>
+    Les calanques de Figuerolles proposent un cadre magnifique avec des voies de tout niveau.
 </p>
 
 <p>

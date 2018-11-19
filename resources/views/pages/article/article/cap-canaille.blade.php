@@ -103,7 +103,7 @@
 </p>
 
 <p>
-    La falaise est à l'ombre le matin. Une petite marche d'approche permet d'atteindre aux voies.
+    La falaise est à l'ombre le matin. Une petite marche d'approche permet d'atteindre les voies.
 </p>
 
 <div class="row">
