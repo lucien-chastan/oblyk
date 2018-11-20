@@ -135,13 +135,6 @@
     Tennessee de haut niveau. Juste à droite, se trouve quelques voies proches de la chapelle de <strong>Saint Hilaire</strong>.
 </p>
 
-<p>
-    <strong>Tennessee</strong> est un des secteurs les plus reconnus surtout avec la voie éponyme,
-    <strong class="color-grade-45">8b</strong> et le fameux <strong class="color-grade-43">8a</strong>
-    <a href="{{ \App\Route::webUrl(65550,'les-ailes-du-desir') }}">"Les Ailes du désirs"</a>.<br>
-    Au niveau de ce secteur se dresse une petite chapelle de Saint Hilaire.
-</p>
-
 <div class="row">
     <div class="col s12 m6">
         <img alt="Secteur Tennessee et sa petite chapelle" title="Secteur Tennessee et sa petite chapelle" src="/storage/articles/photos/tarn/tarn-chapelle-tennessee.jpg" class="responsive-img">
