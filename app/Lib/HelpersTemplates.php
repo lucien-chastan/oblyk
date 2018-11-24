@@ -2,7 +2,6 @@
 
 namespace App\Lib;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class HelpersTemplates extends ServiceProvider
@@ -19,17 +18,18 @@ class HelpersTemplates extends ServiceProvider
      * @param int $delay - temps d'ouverture du tooltip
      * @return string
      */
-    public static function tooltip($tooltip, $position = 'top' , $delay = 50){
+    public static function tooltip($tooltip, $position = 'top' , $delay = 50)
+    {
         return 'data-position="' . $position . '" data-delay="' . $delay . '" data-tooltip="' . $tooltip . '"';
     }
 
     /**
      * @param string $route - route de la popup
-     * @param array $data - tableau des données à passer
+     * @param $datas
      * @return string
      */
-    public static function modal($route, $datas){
-
+    public static function modal($route, $datas)
+    {
         $arrayData = [];
         foreach ($datas as $key => $data) $arrayData[] = "'" . $key . "':'" . $datas[$key] . "'";
         $compilData = '{' . implode(',',$arrayData) . '}';
@@ -39,10 +39,12 @@ class HelpersTemplates extends ServiceProvider
 
 
     /**
-     * @param $string - chaîne à convertire
+     * @param $str
+     * @param string $charset
      * @return string - chaîne sans accent
      */
-    public static function withoutAccent($str, $charset='utf-8'){
+    public static function withoutAccent($str, $charset='utf-8')
+    {
         $str = htmlentities($str, ENT_NOQUOTES, $charset);
 
         $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
@@ -52,7 +54,21 @@ class HelpersTemplates extends ServiceProvider
         return $str;
     }
 
-    public static function pre($array){
+    public static function pre($array)
+    {
         return '<pre>' . json_encode($array) . '</pre>';
+    }
+
+    public static function hexToRgb($hex, $alpha = false) : array
+    {
+        $hex = str_replace('#', '', $hex);
+        $length = strlen($hex);
+        $rgb['r'] = hexdec($length == 6 ? substr($hex, 0, 2) : ($length == 3 ? str_repeat(substr($hex, 0, 1), 2) : 0));
+        $rgb['g'] = hexdec($length == 6 ? substr($hex, 2, 2) : ($length == 3 ? str_repeat(substr($hex, 1, 1), 2) : 0));
+        $rgb['b'] = hexdec($length == 6 ? substr($hex, 4, 2) : ($length == 3 ? str_repeat(substr($hex, 2, 1), 2) : 0));
+        if ($alpha) {
+            $rgb['a'] = $alpha;
+        }
+        return $rgb;
     }
 }

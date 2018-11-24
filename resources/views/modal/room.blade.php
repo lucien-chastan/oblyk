@@ -9,6 +9,7 @@
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_room']->label, 'label'=>'nom du topo', 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'order', 'value'=>$dataModal['gym_room']->order, 'label'=>"Ordre d'importance", 'type'=>'number']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_room']->description, 'label'=>'Description', 'type'=>'text']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>

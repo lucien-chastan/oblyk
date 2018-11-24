@@ -20,11 +20,13 @@ class CreateGymRoomsTable extends Migration
             $table->text('description')->nullable();
             $table->string('banner_color', 50)->nullable();
             $table->string('banner_bg_color', 50)->nullable();
+            $table->double('banner_opacity', 50)->nullable();
             $table->string('scheme_bg_color', 50)->nullable();
             $table->integer('scheme_height')->nullable();
             $table->integer('scheme_width')->nullable();
             $table->double('lat',9,6)->nullable();
             $table->double('lng',9,6)->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

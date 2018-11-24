@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Gym extends Model
 {
@@ -46,7 +45,7 @@ class Gym extends Model
         return $this->morphMany('App\Version', 'versionnable');
     }
 
-    public function administrators (){
+    public function administrators () {
         return $this->hasMany('App\GymAdministrator', 'gym_id','id');
     }
 
@@ -89,5 +88,17 @@ class Gym extends Model
             ],
             $absolute
         );
+    }
+
+    public function userIsAdministrator($userId)
+    {
+        $GymAdministrator = GymAdministrator::class;
+        return $GymAdministrator::where([['user_id', $userId], ['gym_id',$this->id]])->exists();
+    }
+
+    public function countAdministrator()
+    {
+        $GymAdministrator = GymAdministrator::class;
+        return $GymAdministrator::where('gym_id', $this->id)->count();
     }
 }

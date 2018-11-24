@@ -16,14 +16,17 @@ use Intervention\Image\Facades\Image;
 class GymAdministratorController extends Controller
 {
 
-    public function gymAddAdministratorModal($gym_id){
-        return view('modal.gym-administrator', ['gym' => Gym::find($gym_id)]);
+    public function gymAddAdministratorModal($gym_id)
+    {
+        $Gym = Gym::class;
+        return view('modal.gym-administrator', ['gym' => $Gym::find($gym_id)]);
     }
 
+    function gymSearchAdministrator($gym_id, $name)
+    {
+        $GymAdministrator = GymAdministrator::class;
 
-    function gymSearchAdministrator($gym_id, $name){
-
-        $user_ids = GymAdministrator::where('gym_id',$gym_id)->pluck('user_id');
+        $user_ids = $GymAdministrator::where('gym_id', $gym_id)->pluck('user_id');
         $users = Searchy::search('users')->fields('name', 'email')->query($name)->getQuery()->whereNotIn('id', $user_ids)->limit(20)->get();
 
         $data = ['users' => $users];
@@ -33,8 +36,11 @@ class GymAdministratorController extends Controller
 
     public function addAdministrator(Request $request)
     {
-        $user = User::find($request->input('user_id'));
-        $gym = Gym::find($request->input('gym_id'));
+        $User = User::class;
+        $Gym = Gym::class;
+
+        $user = $User::find($request->input('user_id'));
+        $gym = $Gym::find($request->input('gym_id'));
 
         $new_administrator = new GymAdministrator();
         $new_administrator->user_id = $user->id;
@@ -49,7 +55,7 @@ class GymAdministratorController extends Controller
             $gym->label,
             '/storage/gyms/100/logo-' . $gym->id . '.png',
             [
-                route('gym_admin_home', ['gym_id'=>$gym->id, 'gym_label'=>str_slug($gym->label)]),
+                route('gym_admin_home', ['gym_id' => $gym->id, 'gym_label' => str_slug($gym->label)]),
                 $gym->label
             ],
             null
@@ -60,11 +66,12 @@ class GymAdministratorController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @throws \Exception
+     * @param $id
      */
-    function destroy($id){
-        $gymAdministrator = GymAdministrator::find($id);
+    function destroy($id)
+    {
+        $GymAdministrator = GymAdministrator::class;
+        $gymAdministrator = $GymAdministrator::find($id);
         $this->checkIsAdmin($gymAdministrator->gym_id);
         $gymAdministrator->delete();
     }
@@ -73,17 +80,20 @@ class GymAdministratorController extends Controller
      * @param $gym_id
      * @return bool|\Illuminate\Http\RedirectResponse
      */
-    private function checkIsAdmin ($gym_id){
+    private function checkIsAdmin($gym_id)
+    {
+        $GymAdministrator = GymAdministrator::class;
 
-        $isAdministrator = GymAdministrator::where([['user_id', Auth::id()], ['gym_id',$gym_id]])->exists();
-        if(!$isAdministrator) {
+        $isAdministrator = $GymAdministrator::where([['user_id', Auth::id()], ['gym_id', $gym_id]])->exists();
+        if (!$isAdministrator) {
             return redirect()->route('index');
         }
         return true;
     }
 
     // UPLOAD DU BANDEAU
-    public function uploadBandeau(Request $request){
+    public function uploadBandeau(Request $request)
+    {
         $gym_id = $request->input('gym_id');
 
         $this->validate($request, [
@@ -95,21 +105,26 @@ class GymAdministratorController extends Controller
             //Image en 1300px de large
             Image::make($request->file('bandeau'))
                 ->orientate()
-                ->resize(1300, null, function ($constraint) {$constraint->aspectRatio();})
+                ->resize(1300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('jpg', 85)
                 ->save(storage_path('app/public/gyms/1300/bandeau-' . $gym_id . '.jpg'));
 
             //Image en 500px de large
             Image::make($request->file('bandeau'))
                 ->orientate()
-                ->resize(200, null, function ($constraint) {$constraint->aspectRatio();})
+                ->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('jpg', 85)
                 ->save(storage_path('app/public/gyms/200/bandeau-' . $gym_id . '.jpg'));
         }
     }
 
     // UPLOAD LOGO
-    public function uploadLogo(Request $request){
+    public function uploadLogo(Request $request)
+    {
         $gym_id = $request->input('gym_id');
 
         $this->validate($request, [
@@ -121,14 +136,18 @@ class GymAdministratorController extends Controller
             //Image en 1300px de large
             Image::make($request->file('logo'))
                 ->orientate()
-                ->resize(100, null, function ($constraint) {$constraint->aspectRatio();})
+                ->resize(100, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('png', 85)
                 ->save(storage_path('app/public/gyms/100/logo-' . $gym_id . '.png'));
 
             //Image en 500px de large
             Image::make($request->file('logo'))
                 ->orientate()
-                ->resize(50, null, function ($constraint) {$constraint->aspectRatio();})
+                ->resize(50, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->encode('png', 85)
                 ->save(storage_path('app/public/gyms/50/logo-' . $gym_id . '.png'));
         }

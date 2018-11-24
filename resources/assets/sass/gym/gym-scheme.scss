@@ -1,10 +1,46 @@
+.room-icon {
+  margin-right: 0.7em;
+}
+
+.side-nav-is-open {
+  #gym-scheme {
+    width: calc(100% - 370px);
+    left: 370px;
+  }
+}
+
+.side-nav-is-close {
+  #gym-scheme {
+    width: 100%;
+  }
+}
+
 #gym-scheme {
   height: 100%;
-  width: 100%;
   position: fixed;
 
   .leaflet-top {
     top:62px;
+  }
+
+  .sector-map-area {
+    fill: #2196f3;
+    fill-opacity: 0;
+    stroke: #1565c0;
+    stroke-opacity: 0.5;
+    stroke-width: 2px;
+    stroke-dasharray: 5px;
+    transition: all 0.3s;
+    &:hover {
+      fill-opacity: 0.3;
+      stroke-dasharray: none;
+      stroke-opacity: 1;
+      stroke-width: 3px;
+    }
+  }
+
+  #btn-add-first-scheme {
+    padding-top: calc(100vh / 2 - 10px);
   }
 }
 
@@ -46,6 +82,14 @@
   .sectors-title {
     font-size: 2em;
     margin-top: 0.4em;
+  }
+
+  .td-clickable {
+    tr {
+      transition: all 0.3s;
+      &:hover {color: #2196f3;}
+      td {cursor: pointer;}
+    }
   }
 
   .collapsible {
@@ -95,4 +139,47 @@
         cursor: pointer;}
     }
   }
+
+  .administration-area {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    button {
+      width: 100%;
+      padding-left: 6px;
+      text-align: left;
+    }
+  }
+
+  .top-border {
+    border: 1px rgb(220, 220, 220);
+    border-top-style: solid;
+  }
+
+  .title-and-return {
+    margin-bottom: 0;
+    .s12 {
+      padding-right: 0;
+      .s7 {
+        padding-right: 0;
+        button {
+          margin-top: 6px;
+        }
+      }
+    }
+  }
+
+  .smooth-radius-image {
+    border-radius: 5px;
+  }
+}
+
+.label-for-color-picker {
+  font-size: 1em;
+  color: rgb(40,40,40);
+  padding-left: 0.5em;
+}
+
+#banner_opacity {
+  width: 65px;
 }

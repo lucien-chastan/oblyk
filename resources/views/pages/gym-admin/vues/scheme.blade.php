@@ -74,7 +74,7 @@
                     </tbody>
                 </table>
             @endif
-            <p class="text-right">
+            <p class="text-right">s
                 <button {!! $Helpers::tooltip('Ajouter un Secteur') !!} {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["room_id"=>$room->id, "gym_id"=>$gym->id, "title"=>'Créer un secteur', "method"=>"POST"]) !!} class="btn-flat tooltipped btnModal">
                     <i class="material-icons left">add</i>
                     Ajouter un secteur

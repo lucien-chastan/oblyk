@@ -49,6 +49,7 @@
     @include('includes.scripts')
 
     <script src="/js/admin-gym.js"></script>
+    <script src="/js/gym-upload-scheme.js"></script>
     <script src="/js/admin-gym-router.js"></script>
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/mapVariable.js"></script>

@@ -6,6 +6,8 @@ use App\Crag;
 use App\Cross;
 use App\Follow;
 use App\Gym;
+use App\GymRoom;
+use App\GymAdministrator;
 use App\TickList;
 use App\User;
 use App\UserPlace;
@@ -15,9 +17,15 @@ use App\GymAdministrator;
 
 class GymController extends Controller
 {
-    function gymPage($gym_id, $gym_title){
+    function gymPage($gym_id, $gym_title)
+    {
+        $Gym = Gym::class;
+        $GymRoom = GymRoom::class;
+        $User = User::class;
+        $UserPlace = UserPlace::class;
+        $Follow = Follow::class;
 
-        $gym = Gym::where('id', $gym_id)
+        $gym = $Gym::where('id', $gym_id)
             ->withCount('links')
             ->withCount('photos')
             ->withCount('videos')
@@ -27,6 +35,8 @@ class GymController extends Controller
             ->with('rooms')
             ->with('descriptions.user')
             ->first();
+
+        $firstRoom = $GymRoom::where('gym_id', $gym->id)->orderBy('order')->first();
 
         // Si le label à changé alors on redirige
         if(Gym::webUrl($gym_id, $gym_title) != $gym->url()) {
@@ -38,12 +48,12 @@ class GymController extends Controller
         if($gym->type_boulder == 0 && $gym->type_route == 1) $gymType = '<span class="type-voie text-bold">' . trans('elements/climbs.climb_3') . '</span>';
         if($gym->type_boulder == 1 && $gym->type_route == 0) $gymType = '<span class="type-bloc text-bold">' . trans('elements/climbs.climb_2') . '</span>';
 
-        $partners = User::whereIn('id', UserPlace::getPartnersAroundCenter($gym->lat, $gym->lng))->get();
+        $partners = $User::whereIn('id', $UserPlace::getPartnersAroundCenter($gym->lat, $gym->lng))->get();
 
-        $user = User::where('id',Auth::id())->with('partnerSettings')->first();
+        $user = $User::where('id',Auth::id())->with('partnerSettings')->first();
 
         //on va chercher si l'utilisateur follow ce site
-        $userFollow = Follow::where(
+        $userFollow = $Follow::where(
             [
                 ['user_id', '=', Auth::id()],
                 ['followed_type', '=', 'App\Gym'],
@@ -67,19 +77,21 @@ class GymController extends Controller
         $data = [
             'gym' => $gym,
             'user' => $user,
+            'firstRoom' => $firstRoom,
             'meta_title' => $gym['label'],
             'meta_description' => 'description de ' . $gym['label'],
             'user_follow' => $userFollow,
             'partners' => $partners,
-            'is_administrator' => $isAdministrator,
-            'administrator_count' => $administrator_count,
+            'is_administrator' => $gym->userIsAdministrator(Auth::id()),
+            'administrator_count' => $gym->countAdministrator(),
         ];
 
         return view('pages.gym.gym', $data);
     }
 
     public function gymRedirectionPage($gym_id) {
-        $gym = Gym::find($gym_id);
+        $Gym = Gym::class;
+        $gym = $Gym::find($gym_id);
         return redirect($gym->url(),301);
     }
 }

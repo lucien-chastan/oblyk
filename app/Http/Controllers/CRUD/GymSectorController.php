@@ -15,25 +15,27 @@ class GymSectorController extends Controller
 {
 
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE ROOM
-    function gymSectorModal(Request $request){
+    function gymSectorModal(Request $request)
+    {
+        $GymSector = GymSector::class;
 
         $id = $request->input('id');
-        if(isset($id)){
-            $gymSector = GymSector::where('id', $id)->first();
+        if (isset($id)) {
+            $gymSector = $GymSector::where('id', $id)->first();
             $room_id = $gymSector->room_id;
-            $callback = 'reloadCurrentVue';
-        }else{
+            $callback = $request->input('callback') ?? 'reloadCurrentVue';
+        } else {
             $gymSector = new GymSector();
             $gymSector->label = $request->input('label');
             $gymSector->ref = $request->input('ref');
             $gymSector->height = $request->input('height');
             $gymSector->description = $request->input('description');
             $room_id = $request->input('room_id');
-            $callback = 'reloadCurrentVue';
+            $callback = $request->input('callback') ?? 'reloadCurrentVue';
         }
 
         //définition du chemin de sauvgarde
-        $outputRoute = ($request->input('method') == 'POST')? '/gym_sectors' : '/gym_sectors/' . $id;
+        $outputRoute = ($request->input('method') == 'POST') ? '/gym_sectors' : '/gym_sectors/' . $id;
 
         $data = [
             'dataModal' => [
@@ -53,13 +55,14 @@ class GymSectorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $GymRoom = GymRoom::class;
 
-        $this->checkIsAdmin(GymRoom::find($request->input('room_id'))->id);
+        $this->checkIsAdmin($GymRoom::find($request->input('room_id'))->id);
 
         //validation du formulaire
         $this->validate($request, ['label' => 'String|max:255']);
@@ -79,18 +82,21 @@ class GymSectorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
+        $GymSector = GymSector::class;
+        $GymRoom = GymRoom::class;
+
         //validation du formulaire
         $this->validate($request, ['label' => 'String|max:255',]);
 
         //mise à jour des données de la salle
-        $gymSector = GymSector::where('id', $request->input('id'))->first();
+        $gymSector = $GymSector::where('id', $request->input('id'))->first();
 
-        $this->checkIsAdmin(GymRoom::find($gymSector->room_id)->id);
+        $this->checkIsAdmin($GymRoom::find($gymSector->room_id)->id);
 
 
         $gymSector->label = $request->input('label');
@@ -102,6 +108,16 @@ class GymSectorController extends Controller
         return response()->json(json_encode($gymSector));
     }
 
+
+    public function saveSchemeArea($gym_id, $sector_id, Request $request)
+    {
+        $GymSector = GymSector::class;
+
+        $sector = $GymSector::find($sector_id);
+        $sector->area = $request->input('area');
+        $sector->save();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -111,10 +127,13 @@ class GymSectorController extends Controller
      */
     public function destroy($id)
     {
-        //mise à jour des données de la salle
-        $gymSector = GymSector::find($id);
+        $GymSector = GymSector::class;
+        $GymRoom = GymRoom::class;
 
-        $this->checkIsAdmin(GymRoom::find($gymSector->room_id)->id);
+        //mise à jour des données de la salle
+        $gymSector = $GymSector::find($id);
+
+        $this->checkIsAdmin($GymRoom::find($gymSector->room_id)->id);
 
         $gymSector->delete();
 
@@ -125,9 +144,12 @@ class GymSectorController extends Controller
      * @param $gym_id
      * @return bool|\Illuminate\Http\RedirectResponse
      */
-    private function checkIsAdmin ($gym_id){
-        $isAdministrator = GymAdministrator::where([['user_id', Auth::id()], ['gym_id',$gym_id]])->exists();
-        if(!$isAdministrator) {
+    private function checkIsAdmin($gym_id)
+    {
+        $GymAdministrator = GymAdministrator::class;
+
+        $isAdministrator = $GymAdministrator::where([['user_id', Auth::id()], ['gym_id', $gym_id]])->exists();
+        if (!$isAdministrator) {
             return redirect()->route('index');
         }
         return true;

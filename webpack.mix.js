@@ -55,6 +55,8 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/massive.js', 'public/js')
     .copy('resources/assets/js/gym.js', 'public/js')
     .copy('resources/assets/js/gym-scheme.js', 'public/js')
+    .copy('resources/assets/js/gym-edit-scheme.js', 'public/js')
+    .copy('resources/assets/js/gym-upload-scheme.js', 'public/js')
     .copy('resources/assets/js/admin-gym.js', 'public/js')
     .copy('resources/assets/js/admin-gym-router.js', 'public/js')
     .copy('resources/assets/js/partner.js', 'public/js')
@@ -87,6 +89,8 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
     .copy('resources/assets/framework/leaflet/leaflet.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.draw.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.draw.css', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/Leaflet.Editable.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/Leaflet.drag.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.measure.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
 

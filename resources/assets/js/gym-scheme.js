@@ -1,4 +1,4 @@
-let scheme, timeToLoad;
+let scheme, timeToLoad, sectors = [], inEdition = false, current_sector_label, current_sector_id;
 
 window.addEventListener('load', function () {
     openVoletSectors(true);
@@ -11,15 +11,15 @@ function initSchemeGymMap() {
         heightScheme = 0,
         widthScheme = 0,
         data = {
-            'room_id':mapArea.getAttribute('data-room-id'),
-            'gym_id':mapArea.getAttribute('data-gym-id'),
-            'gym_label':mapArea.getAttribute('data-gym-label'),
-            'gym_url':mapArea.getAttribute('data-gym-url'),
-            'banner_color':mapArea.getAttribute('data-banner-color'),
-            'banner_bg_color':mapArea.getAttribute('data-banner-bg-color'),
-            'scheme_bg_color':mapArea.getAttribute('data-scheme-bg-color'),
-            'scheme_height':parseInt(mapArea.getAttribute('data-scheme-height')),
-            'scheme_width':parseInt(mapArea.getAttribute('data-scheme-width')),
+            'room_id': mapArea.getAttribute('data-room-id'),
+            'gym_id': mapArea.getAttribute('data-gym-id'),
+            'gym_label': mapArea.getAttribute('data-gym-label'),
+            'gym_url': mapArea.getAttribute('data-gym-url'),
+            'banner_color': mapArea.getAttribute('data-banner-color'),
+            'banner_bg_color': mapArea.getAttribute('data-banner-bg-color'),
+            'scheme_bg_color': mapArea.getAttribute('data-scheme-bg-color'),
+            'scheme_height': parseInt(mapArea.getAttribute('data-scheme-height')),
+            'scheme_width': parseInt(mapArea.getAttribute('data-scheme-width')),
         };
 
     if (data.scheme_height > data.scheme_width) {
@@ -40,20 +40,24 @@ function initSchemeGymMap() {
     let shemeUrl = '/storage/gyms/schemes/scheme-' + data.room_id + '.png',
         mapBounds = [[0, 0], [heightScheme, widthScheme]];
 
-    scheme = L.map('gym-scheme',{ zoomControl : false});
-    L.control.zoom({position : 'topright'}).addTo(scheme);
-    L.imageOverlay (
+    scheme = L.map('gym-scheme', {zoomControl: false, editable: true});
+    L.control.zoom({position: 'topright'}).addTo(scheme);
+    L.imageOverlay(
         shemeUrl,
         mapBounds,
         {
-            alt : 'Plan de la salle ' + data.gym_label,
-            attribution : '<a href="' + data.gym_url + '">' + data.gym_label + '</a>'
+            alt: 'Plan de la salle ' + data.gym_label,
+            attribution: '<a href="' + data.gym_url + '">' + data.gym_label + '</a>'
         }
     ).addTo(scheme);
 
-    scheme.fitBounds([[0, 0],[heightScheme, widthScheme]]);
-    scheme.on('click',function (e) {
-        console.log('[' + Math.round(e['latlng']['lat'],2) + ',' + Math.round(e['latlng']['lng'],2) + ']');
+    scheme.fitBounds([[0, 0], [heightScheme, widthScheme]]);
+    scheme.on('click', function (e) {
+        console.log('[' + Math.round(e['latlng']['lat'], 2) + ',' + Math.round(e['latlng']['lng'], 2) + ']');
+    });
+
+    scheme.on('editable:created', function (e) {
+        newArea = e.layer;
     });
 
     getJsonGymSector(data.room_id);
@@ -61,10 +65,17 @@ function initSchemeGymMap() {
 
 function getJsonGymSector(room_id) {
     axios.get('/API/gyms/get-sectors/' + room_id).then(function (response) {
+        for (var i = 0; i < response.data.sectors.length; i++) {
 
-        for(var i = 0 ; i < response.data.sectors.length; i++) {
             var sector = response.data.sectors[i];
-            var polygon = L.polygon(JSON.parse(sector.area), {color: 'red'}).addTo(scheme);
+            if (sector.area !== '') {
+                var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area', attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
+                polygon.on('click', (e) => {
+                    var sectorAttribute = e.target.options.attribution;
+                    getGymSector(sectorAttribute.id, sectorAttribute.label)
+                });
+                sectors[sector.id] = polygon;
+            }
         }
     });
 }
@@ -73,49 +84,58 @@ function getJsonGymSector(room_id) {
 function openVoletSectors(open) {
     let volet = document.getElementById('side-map-gym-scheme');
 
-    if (open){
+    if (open) {
         volet.style.transform = 'translateX(0)';
-    }else{
+    } else {
         volet.style.transform = 'translateX(-100%)';
     }
 }
 
 // LOAD ROOM SECTORS
-function getSectors(room_id) {
+function getSectors() {
     var content = document.getElementById('content-side-map-gym-scheme'),
         item2 = document.getElementById('item-nav-2'),
         item3 = document.getElementById('item-nav-3');
 
     sideNavLoader(false);
 
-    axios.get('/salle-escalade/topo/sectors/' + room_id).then(function (response) {
-        sweetDisappearance(false,item2);
-        sweetDisappearance(false,item3);
+    axios.get('/salle-escalade/topo/sectors/' + GlobalRoomId).then(function (response) {
+        sweetDisappearance(false, item2);
+        sweetDisappearance(false, item3);
         content.innerHTML = response.data;
         sideNavLoader(true);
+        initOpenModal();
+        $('.tooltipped').tooltip({delay: 50});
     });
 }
 
 // LOAD SECTOR
 function getGymSector(sector_id, sector_label) {
-    var content = document.getElementById('content-side-map-gym-scheme'),
-        item2 = document.getElementById('item-nav-2'),
-        item3 = document.getElementById('item-nav-3');
+    if (!inEdition) {
+        var content = document.getElementById('content-side-map-gym-scheme'),
+            item2 = document.getElementById('item-nav-2'),
+            item3 = document.getElementById('item-nav-3');
 
-    sideNavLoader(false);
+        sideNavLoader(false);
 
-    axios.get('/salle-escalade/topo/sector/' + sector_id).then(function (response) {
-        sweetDisappearance(true,item2);
-        sweetDisappearance(false,item3);
-        sideNavLoader(true);
-        item2.textContent = sector_label;
-        content.innerHTML = response.data;
+        axios.get('/salle-escalade/topo/sector/' + sector_id).then(function (response) {
+            sweetDisappearance(true, item2);
+            sweetDisappearance(false, item3);
+            sideNavLoader(true);
+            item2.textContent = sector_label;
+            content.innerHTML = response.data;
 
-        item2.onclick = function () {
-            getGymSector(sector_id, sector_label);
-            animationLoadSideNav('l');
-        };
-    });
+            current_sector_id = sector_id;
+            current_sector_label = sector_label;
+
+            initOpenModal();
+
+            item2.onclick = function () {
+                getGymSector(sector_id, sector_label);
+                animationLoadSideNav('l');
+            };
+        });
+    }
 }
 
 // LOAD ROUTE
@@ -126,7 +146,7 @@ function getGymRoute(route_id, route_label) {
     sideNavLoader(false);
 
     axios.get('/salle-escalade/topo/route/' + route_id).then(function (response) {
-        sweetDisappearance(true,item3);
+        sweetDisappearance(true, item3);
         item3.textContent = route_label;
         content.innerHTML = response.data;
         sideNavLoader(true);
@@ -166,7 +186,7 @@ function animationLoadSideNav(direction = 'r') {
 }
 
 function rightLeftAnimation(direction, element) {
-    if(direction === 'r') {
+    if (direction === 'r') {
         element.style.transform = 'translateX(-100px)'
     } else {
         element.style.transform = 'translateX(100px)'
@@ -185,4 +205,30 @@ function sweetDisappearance(status, element) {
             element.style.display = 'none';
         }, 300);
     }
+}
+
+function reloadSectorsVue() {
+    getSectors();
+    closeModal();
+}
+
+function reloadSectorVue() {
+    getGymSector(current_sector_id, current_sector_label);
+    closeModal();
+}
+
+function reloadPage() {
+    location.reload();
+}
+
+function loadNewGymRoom() {
+    axios.get(document.getElementById('last-created-room').value).then(function (response) {
+        location.href = response.data.route;
+    });
+}
+
+function afterDeleteGotTo() {
+    axios.get(document.getElementById('first-order-room').value).then(function (response) {
+        location.href = response.data.route;
+    });
 }

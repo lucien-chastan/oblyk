@@ -2,7 +2,7 @@
 
 {!! $Inputs::popupTitle(['title'=>$dataModal['title']]) !!}
 
-<form class="submit-form" onsubmit="uploadScheme(this, reloadCurrentVue, {{ $dataModal['gym_id'] }}); return false">
+<form class="submit-form" onsubmit="uploadScheme(this, {{ $dataModal['callback'] }}, {{ $dataModal['gym_id'] }}); return false">
 
     {!! $Inputs::popupError([]) !!}
 
