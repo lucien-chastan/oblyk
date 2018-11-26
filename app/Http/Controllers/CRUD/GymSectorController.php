@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\GymAdministrator;
 use App\GymRoom;
 use App\GymSector;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ class GymSectorController extends Controller
     function gymSectorModal(Request $request)
     {
         $GymSector = GymSector::class;
+        $GymRoom = GymRoom::class;
+
+        $room = $GymRoom::find($request->input('gym_id'));
 
         $id = $request->input('id');
         if (isset($id)) {
@@ -30,6 +34,7 @@ class GymSectorController extends Controller
             $gymSector->ref = $request->input('ref');
             $gymSector->height = $request->input('height');
             $gymSector->description = $request->input('description');
+            $gymSector->preferred_type = $request->input('preferred_type') ?? $room->preferred_type;
             $room_id = $request->input('room_id');
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
         }
@@ -50,6 +55,65 @@ class GymSectorController extends Controller
         ];
 
         return view('modal.gym-sector', $data);
+    }
+
+    function uploadSectorPictureModal(Request $request, $gym_id, $sector_id)
+    {
+        $GymSector = GymSector::class;
+
+        $gymSector = $GymSector::find($sector_id);
+
+        $data = [
+            'dataModal' => [
+                'sector_id' => $gymSector->id,
+                'gym_id' => $gym_id,
+                'title' => $request->input('title'),
+                'callback' => $request->input('callback') ?? 'reloadCurrentVue'
+            ]
+        ];
+
+        return view('modal.room-sector', $data);
+    }
+
+    function uploadSectorPicture(Request $request) {
+        $GymSector = GymSector::class;
+
+        //validation du formulaire
+        $this->validate($request, ['id' => 'required|integer']);
+
+        $gymSector = $GymSector::find($request->input('id'));
+
+        if ($request->hasFile('file')) {
+
+            try {
+                //Image en 2000px
+                $scheme = Image::make($request->file('file'))
+                    ->resize(1300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->encode('jpg', 85)
+                    ->save(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'));
+
+                // 100*100 version
+                $scheme->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'));
+
+                $scheme->fit(200, 200)->save(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'));
+                $scheme->fit(50, 50)->save(storage_path('app/public/gyms/sectors/50/sector-' . $gymSector->id . '.jpg'));
+
+            } catch (Exception $e) {
+
+                //s'il y a un problème on supprime les images potentiellement uploadé
+                if (file_exists(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'));
+                if (file_exists(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'));
+                if (file_exists(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'));
+                if (file_exists(storage_path('app/public/gyms/sectors/50/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/50/sector-' . $gymSector->id . '.jpg'));
+
+            }
+        }
+
+        return response()->json(json_encode($gymSector));
     }
 
     /**
@@ -74,6 +138,7 @@ class GymSectorController extends Controller
         $gymSector->ref = $request->input('ref');
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
+        $gymSector->preferred_type = $request->input('preferred_type');
         $gymSector->save();
 
         return response()->json(json_encode($gymSector));
@@ -103,6 +168,7 @@ class GymSectorController extends Controller
         $gymSector->ref = $request->input('ref');
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
+        $gymSector->preferred_type = $request->input('preferred_type');
         $gymSector->save();
 
         return response()->json(json_encode($gymSector));

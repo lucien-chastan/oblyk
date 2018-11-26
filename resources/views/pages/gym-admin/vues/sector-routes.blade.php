@@ -58,8 +58,8 @@
                                 <td class="text-bold">{{ $route->label }}</td>
                                 <td class="text-bold"><span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}</span></td>
                                 <td>
-                                    @foreach($route->colors() as $color)
-                                        <div class="material-icons z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
+                                    @foreach($route->holdColors() as $holdColor)
+                                        <div class="material-icons z-depth-2" style="background-color: {{ $holdColor }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
                                     @endforeach
                                 </td>
                                 <td>{{ $route->type }}</td>

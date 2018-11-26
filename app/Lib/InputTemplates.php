@@ -9,6 +9,7 @@ use App\CrossHardness;
 use App\CrossMode;
 use App\CrossStatus;
 use App\ForumGeneralCategory;
+use App\GymSector;
 use App\Incline;
 use App\Point;
 use App\RainExposure;
@@ -18,7 +19,6 @@ use App\Sector;
 use App\SocialNetwork;
 use App\Start;
 use App\Sun;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,462 +30,264 @@ class InputTemplates extends ServiceProvider
         //
     }
 
-
-    //TITRE DE LA POPUP
+    // Popup title
     public static function popupTitle($options)
     {
-        $title = $options['title'];
-
-        return '
-            <div class="row">
-                <h5 class="loved-king-font text-center popup-title">' . $title . '</h5>
-            </div>
-        ';
+        return view('inputs.popup-title', [
+            'title' => $options['title']
+        ]);
     }
 
 
-    //DIV QUI AFFICHE LES ERREURS DE LA POPUP
-    public static function popupError($options)
+    // <div> for error messages
+    public static function popupError()
     {
-
-        return '
-            <div id="errorPopupText" class="error-popup-text">
-                Message d\'error
-            </div>
-        ';
+        return view('inputs.popup-error');
     }
 
 
-    //INPUT DU TYPE HIDDEN
+    // Hidden input type
     public static function Hidden($options)
     {
-        $name = $options['name'];
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-
-        return '
-            <input type="hidden" class="input-data" name="' . $name . '" id="' . $id . '" value="' . $value . '">
-        ';
+        return view('inputs.hidden', [
+            'name' => $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'value' => $options['value'] ?? '',
+        ]);
     }
 
 
-    //INPUT TYPE CHECKBOX
+    // Checkbox input
     public static function checkbox($options)
     {
-        $name = $options['name'];
-        $checked = (isset($options['checked']) && $options['checked'] == 'true') ? 'checked' : '';
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $align = (isset($options['align'])) ? 'text-' . $options['align'] : 'text-left';
-        $value = (isset($options['value'])) ? "value = " . $options['value'] : '';
-        $onchange = (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : "";
-
-        return '
-        <p class="' . $align . '">
-            <input ' . $onchange . ' ' . $value . ' class="input-data" name="' . $name . '" type="checkbox" id="' . $id . '" ' . $checked . ' />
-            <label for="' . $id . '">' . $label . '</label>
-        </p>';
+        return view('inputs.checkbox', [
+            'name' => $options['name'],
+            'checked' => (isset($options['checked']) && $options['checked'] == 'true') ? 'checked' : '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'align' => (isset($options['align'])) ? 'text-' . $options['align'] : 'text-left',
+            'value' => (isset($options['value'])) ? "value = " . $options['value'] : '',
+            'onchange' => (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : "",
+        ]);
     }
 
 
-    //INPUT ALBUMS
+    // Albums list select
     public static function albums($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 0;
+        $Album = Album::class;
         $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-
-        $Albums = Album::where('user_id', Auth::id())->get();
+        $albums = $Album::where('user_id', Auth::id())->get();
         $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
-        $optionNewAlbum = '';
+        $value = (isset($options['value'])) ? $options['value'] : 0;
+
         $trouver = false;
-        foreach ($Albums as $album) {
+        foreach ($albums as $album) {
             if ($newAlbumName == $album->label) {
                 $trouver = true;
-                if ($options['value'] == 0) $value = $album->id;
+                if ($value == 0) $value = $album->id;
             }
         }
 
-        if (!$trouver) $optionNewAlbum = '<option value="0">' . $mois[date('n') - 1] . ' ' . date('Y') . '</option>';
-
-        $html = '
-            <div class="input-field col s12">
-                <select class="input-data" name="' . $name . '">
-                ' . $optionNewAlbum . '
-                    
-        ';
-
-        foreach ($Albums as $album) {
-            $selected = ($album->id == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $album->id . '">' . ucfirst($album->label) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.albums', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => $value,
+            'albums' => $albums,
+            'mois' => $mois,
+            'newAlbum' => $trouver,
+        ]);
     }
 
-    //INPUT TYPE FILE
+    // File type input
     public static function upload($options)
     {
-        $name = $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $filter = (isset($options['filter'])) ? 'accept="' . $options['filter'] . '"' : '';
-        $onchange = (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : '';
-
-        return '
-        <div class="file-field input-field">
-            
-            <div class="btn">
-                <span>' . $label . '</span>
-                <input ' . $onchange . ' ' . $filter . ' value="' . $value . '" type="file" name="' . $name . '" id="' . $id . '">
-            </div>
-            
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-            </div>
-            
-        </div>
-        ';
+        return view('inputs.upload', [
+            'name' => $options['name'],
+            'value' => $options['value'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'filter' => (isset($options['filter'])) ? 'accept="' . $options['filter'] . '"' : '',
+            'onchange' => (isset($options['onchange'])) ? 'onchange="' . $options['onchange'] . '"' : '',
+        ]);
     }
 
+    // Progressbar
     public static function progressbar($options)
     {
-        $id = (isset($options['id'])) ? $options['id'] : 'popup-progressloader';
-        $value = (isset($options['value'])) ? $options['value'] : 0;
-
-        return '
-            <div class="progress">
-                <div class="determinate" id="' . $id . '" style="width: ' . $value . '%"></div>
-            </div>';
+        return view('inputs.progressbar', [
+            'id' => (isset($options['id'])) ? $options['id'] : 'popup-progressloader',
+            'value' => (isset($options['value'])) ? $options['value'] : 0,
+        ]);
     }
 
 
-    //INPUT DU TYPE TEXT
+    // Text type input
     public static function text($options)
     {
-        $name = $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $placeholder = (isset($options['placeholder'])) ? $options['placeholder'] : '';
-        $type = (isset($options['type'])) ? $options['type'] : 'text';
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $classLabel = ($value != '' || $placeholder != '') ? 'active' : '';
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-        $onkeyup = (isset($options['onkeyup'])) ? ' onkeyup="' . $options['onkeyup'] . '"' : '';
+        $value = $options['value'] ?? '';
+        $placeholder = $options['placeholder'] ?? '';
 
-        return '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <input ' . $onkeyup . ' placeholder="' . $placeholder . '" value="' . $value . '" id="' . $id . '" name="' . $name . '" type="' . $type . '" class="input-data">
-                <label class="' . $classLabel . '" for="' . $id . '">' . $label . '</label>
-            </div>
-        ';
+        return view('inputs.text', [
+            'name' => $options['name'],
+            'value' => $value,
+            'col' => $options['col'] ?? 's12',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $placeholder,
+            'type' => (isset($options['type'])) ? $options['type'] : 'text',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'classLabel' => ($value != '' || $placeholder != '') ? 'active' : '',
+            'icon' => $options['icon'] ?? '',
+            'onkeyup' => (isset($options['onkeyup'])) ? ' onkeyup="' . $options['onkeyup'] . '"' : ''
+        ]);
     }
 
 
-    //INPUT DE TYPE SIMPLE MARKDOWN EDITOR
+    // Simple markdown editor textarea
     public static function SimpleMde($options)
     {
-        $name = $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-
-        return '
-            <textarea name="' . $name . '" id="simplemde_id">' . $value . '</textarea>
-        ';
+        return view('inputs.simple-mode', [
+            'name' => $options['name'],
+            'value' => $options['value'] ?? '',
+        ]);
     }
 
 
-    //INPUT DU TYPE ÉDITEUR DE MARKDOWN
+    // Markdown editor textarea
     public static function mdText($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-        $placeholder = (isset($options['placeholder'])) ? $options['placeholder'] : '';
-        $classLabel = ($value != '' || $placeholder != '') ? 'active' : '';
+        $value = $options['value'] ?? '';
+        $placeholder = $options['placeholder'] ?? '';
 
-        return '
-            <div class="input-field col s12">
-                <textarea placeholder="' . $placeholder . '" name="' . $name . '" id="' . $name . '" class="materialize-textarea md-textarea input-data">' . $value . '</textarea>
-                <label class="' . $classLabel . '" for="' . $name . '">' . $label . '</label>
-            </div>
-        ';
+        return view('inputs.markdown', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => $value,
+            'placeholder' => $placeholder,
+            'classLabel' => ($value != '' || $placeholder != '') ? 'active' : '',
+        ]);
     }
 
-    //INPUT DU TYPE ÉDITEUR DE MARKDOWN
+    // Trumbowyg markdown editor
     public static function trumbowyg($options)
     {
-        $name = $options['name'];
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-        $class = (isset($options['class'])) ? $options['class'] : 'trumbowyg-editor';
-        $placeholder = (isset($options['placeholder'])) ? $options['placeholder'] : '';
-
-        return '
-            <div class="col s12 markdownZone">
-                <textarea placeholder="' . $placeholder . '" id="' . $id . '" class="input-data ' . $class . '">' . $value . '</textarea>
-            </div>
-        ';
+        return view('inputs.trumbowyg', [
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'value' => $options['value'] ??  '',
+            'class' => (isset($options['class'])) ? $options['class'] : 'trumbowyg-editor',
+            'placeholder' => $options['placeholder'] ?? '',
+        ]);
     }
 
-    //INPUT DU TYPE DATE
+    // Input type date
     public static function date($options)
     {
-        $name = $options['name'];
-        $id = (isset($options['id'])) ? $options['id'] : $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : '';
-        $class = (isset($options['class'])) ? $options['class'] : '';
-        $placeholder = (isset($options['placeholder'])) ? $options['placeholder'] : '';
-
-        return '
-            <div class="col s12">
-                <label>' . $label . '</label>
-                <input name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '" id="' . $id . '" class="input-data datepicker ' . $class . '">
-            </div>
-        ';
+        return view('inputs.date', [
+            'name' => $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => $options['value'] ?? '',
+            'class' => $options['class'] ?? '',
+            'placeholder' => $options['placeholder'] ?? '',
+        ]);
     }
 
-    //INPUT DU TYPE SUBMIT
+    // Submit button
     public static function submit($options)
     {
-        $label = (isset($options['label'])) ? $options['label'] : 'Envoyer';
-        $color = (isset($options['color'])) ? $options['color'] : 'blue';
-        $cancelable = (isset($options['cancelable'])) ? $options['cancelable'] : true;
-        $onclick = (isset($options['onclick'])) ? ' onclick="' . $options['onclick'] . '"' : '';
-
-        $cancelBtn = $cancelable ? '<button class="btn-flat waves-effect waves-light grey-text text-darken-2" onclick="closeModal();" type="button">Annuler</button>' : '';
-
-        return '
-            <div class="col s12">
-                <div class="row text-right" id="submit-btn">
-                    ' . $cancelBtn . '
-                    <button ' . $onclick . ' class="btn waves-effect ' . $color . ' waves-light" type="submit" name="action">' . $label . '
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
-                <div class="row text-right div-submit-loader" id="submit-loader">
-                    <div class="submit-loader">
-                        <div class="preloader-wrapper small active">
-                            <div class="spinner-layer spinner-' . $color . '-only">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        ';
+        return view('inputs.submit', [
+            'label' => (isset($options['label'])) ? $options['label'] : 'Envoyer',
+            'color' => (isset($options['color'])) ? $options['color'] : 'blue',
+            'cancelable' => (isset($options['cancelable'])) ? false : true,
+            'onclick' => (isset($options['onclick'])) ? ' onclick="' . $options['onclick'] . '"' : '',
+        ]);
     }
 
 
-    //SELECT DU TYPE DE ROCHE
+    // Rocks select
     public static function rocks($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 1;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-
-        $Rock = Rock::all();
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($Rock as $rock) {
-            $selected = ($rock->id == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $rock->id . '">' . trans('elements/rocks.rock_' . $rock->id) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.rocks', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => (isset($options['icon'])) ?? '',
+            'rocks' => Rock::all(),
+        ]);
     }
 
 
-    //SELECT DU TYPE DE status
+    // Gym route type select
+    public static function gymRoutesTypes($options)
+    {
+        return view('inputs.gym-route-type', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => $options['icon'] ?? '',
+        ]);
+    }
+
+    // Cross status select
     public static function crossStatuses($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 1;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-
-        $Statuses = CrossStatus::all();
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($Statuses as $status) {
-            $selected = ($status->id == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $status->id . '">' . trans('elements/statuses.status_' . $status->id) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.cross-statuses', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => $options['icon'] ?? '',
+            'statuses' => CrossStatus::all(),
+        ]);
     }
 
 
-    //SELECT DU TYPE DE DURETÉ
+    // Hardness cross select
     public static function crossHardnesses($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 1;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-
-        $Hardnesses = CrossHardness::all();
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($Hardnesses as $hardness) {
-            $selected = ($hardness->id == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $hardness->id . '">' . trans('elements/hardnesses.hardness_' . $hardness->id) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.cross-hardnesses', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => $options['icon'] ?? '',
+            'hardnesses' => CrossHardness::all(),
+        ]);
     }
 
 
-    //SELECT DU TYPE DE MODE
+    // Cross modes select
     public static function crossModes($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 1;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-
-        $Modes = CrossMode::all();
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($Modes as $mode) {
-            $selected = ($mode->id == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $mode->id . '">' . trans('elements/modes.mode_' . $mode->id) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.cross-modes', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => $options['icon'] ?? '',
+            'modes' => CrossMode::all(),
+        ]);
     }
 
 
-    //SELECT DU D'UNE CATEGORY
+    // Forum category select
     public static function categories($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 1;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-
-        $generalCategories = ForumGeneralCategory::with('categories')->with('categories')->get();;
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($generalCategories as $generalCategory) {
-
-            $html .= '<optgroup label="' . trans('elements/generalCategories.category_' . $generalCategory->id) . '">';
-
-            foreach ($generalCategory->categories as $category) {
-                $selected = ($category->id == $value) ? 'selected' : '';
-                $html .= '<option data-icon="/img/forum-' . $category->id . '.svg" class="circle left" ' . $selected . ' value="' . $category->id . '">' . trans('elements/Categories.label_' . $category->id) . '</option>';
-            }
-
-            $html .= '</optgroup>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.categories', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'icon' => $options['icon'] ?? '',
+            'generalCategories' => ForumGeneralCategory::with('categories')->with('categories')->get(),
+        ]);
     }
 
-    //SELECT DU GENRE
+    // Sex select
     public static function sex($options)
     {
-        $name = $options['name'];
-        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
-        $value = (isset($options['value'])) ? $options['value'] : 0;
-        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
-        $tabSexs = [
-            trans('elements/sex.sex_0'),
-            trans('elements/sex.sex_1'),
-            trans('elements/sex.sex_2')
-        ];
-
-        $html = '
-            <div class="input-field col s12">
-                ' . $icon . '
-                <select class="input-data" name="' . $name . '">
-        ';
-
-        foreach ($tabSexs as $key => $sex) {
-            $selected = ($key == $value) ? 'selected' : '';
-            $html .= '<option ' . $selected . ' value="' . $key . '">' . ucfirst($sex) . '</option>';
-        }
-
-        $html .= '
-                </select>
-                <label>' . $label . '</label>
-            </div>
-        ';
-
-        return $html;
+        return view('inputs.sex', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 0,
+            'icon' => $options['icon'] ?? '',
+        ]);
     }
 
 
@@ -830,6 +632,38 @@ class InputTemplates extends ServiceProvider
         return $html;
     }
 
+    // GYM SECTORS LIST
+    public static function roomSectors($options)
+    {
+        $Sector = GymSector::class;
+
+        $name = $options['name'];
+        $label = (isset($options['label'])) ? $options['label'] : $options['name'];
+        $value = (isset($options['value'])) ? $options['value'] : 1;
+        $col = (isset($options['col'])) ? $options['col'] : '';
+        $icon = (isset($options['icon'])) ? '<i class="oblyk-icon ' . $options['icon'] . ' prefix"></i>' : '';
+
+        $Sectors = $Sector::where('room_id', $options['room_id'])->get();
+
+        $html = '
+            <div class="input-field col s12 ' . $col . '">
+                ' . $icon . '
+                <select class="input-data" name="' . $name . '">
+        ';
+
+        foreach ($Sectors as $sector) {
+            $selected = ($sector->id == $value) ? 'selected' : '';
+            $html .= '<option ' . $selected . ' value="' . $sector->id . '">' . ucfirst($sector->label) . '</option>';
+        }
+
+        $html .= '
+                </select>
+                <label>' . $label . '</label>
+            </div>
+        ';
+
+        return $html;
+    }
 
     //COTATION
     public static function cotation($options)

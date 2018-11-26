@@ -10,19 +10,30 @@ class GymRoute extends Model
 
     public $fillable = ['label'];
 
-    public function sector(){
-        return $this->hasOne('App\GymSector','id', 'sector_id');
+    protected $dates = ['opener_date', 'dismounted_at'];
+
+    public function sector()
+    {
+        return $this->hasOne('App\GymSector', 'id', 'sector_id');
     }
 
     /**
      * @return array
      */
-    public function colors(){
-        $this->colors = explode(';',$this->color);
-        return $this->colors;
+    public function holdColors()
+    {
+        $this->hold_colors = explode(';', $this->hold_color);
+        return $this->hold_colors;
     }
-<<<<<<< HEAD
-=======
+
+    /**
+     * @return array
+     */
+    public function tagColors()
+    {
+        $this->tag_colors = explode(';', $this->tag_color);
+        return $this->tag_colors;
+    }
 
     public function hasPicture()
     {
@@ -49,5 +60,4 @@ class GymRoute extends Model
         $Video = Video::class;
         return ($Video::where([['viewable_id', $this->id], ['viewable_type', 'App\\GymRoute']])->count() > 0);
     }
->>>>>>> work in progress
 }

@@ -1,4 +1,6 @@
-let scheme, timeToLoad, sectors = [], inEdition = false, current_sector_label, current_sector_id;
+let scheme, timeToLoad, sectors = [], inEdition = false,
+    current_sector_label, current_sector_id,
+    current_route_label, current_route_id;
 
 window.addEventListener('load', function () {
     openVoletSectors(true);
@@ -129,6 +131,7 @@ function getGymSector(sector_id, sector_label) {
             current_sector_label = sector_label;
 
             initOpenModal();
+            $('.tooltipped').tooltip({delay: 50});
 
             item2.onclick = function () {
                 getGymSector(sector_id, sector_label);
@@ -150,6 +153,10 @@ function getGymRoute(route_id, route_label) {
         item3.textContent = route_label;
         content.innerHTML = response.data;
         sideNavLoader(true);
+        initOpenModal();
+
+        current_route_id = route_id;
+        current_route_label = route_label;
     });
 }
 
@@ -231,4 +238,13 @@ function afterDeleteGotTo() {
     axios.get(document.getElementById('first-order-room').value).then(function (response) {
         location.href = response.data.route;
     });
+}
+
+function reloadRouteVue() {
+    getGymRoute(current_route_id, current_route_label);
+    closeModal();
+}
+
+function routeAdded() {
+    Materialize.toast('Ligne ajoutée', 4000);
 }

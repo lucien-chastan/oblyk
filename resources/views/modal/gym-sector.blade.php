@@ -11,6 +11,7 @@
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_sector']->label, 'label'=>'Nom du secteur', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'ref', 'value'=>$dataModal['gym_sector']->ref, 'label'=>'Référence du secteur', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['gym_sector']->height, 'label'=>'Hauteur (en mètre)', 'type'=>'text']) !!}
+        {!! $Inputs::gymRoutesTypes(['name'=>'preferred_type', 'value'=>$dataModal['gym_sector']->preferred_type, 'label'=>'Les lignes sont principalement des : ']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_sector']->description, 'label'=>'Description', 'type'=>'text']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>

@@ -175,6 +175,8 @@ class RoomController extends Controller
         $gymRoom->description = $request->input('description');
         $gymRoom->lat = $request->input('lat');
         $gymRoom->lng = $request->input('lng');
+        $gymRoom->difficulty_by_tag = $request->input('difficulty_by_tag');
+        $gymRoom->preferred_type = $request->input('preferred_type');
         $gymRoom->save();
 
         return response()->json(json_encode($gymRoom));
@@ -203,6 +205,8 @@ class RoomController extends Controller
         $gymRoom->description = $request->input('description');
         $gymRoom->lat = $request->input('lat');
         $gymRoom->lng = $request->input('lng');
+        $gymRoom->difficulty_by_tag = $request->input('difficulty_by_tag');
+        $gymRoom->preferred_type = $request->input('preferred_type');
         $gymRoom->save();
 
         return response()->json(json_encode($gymRoom));

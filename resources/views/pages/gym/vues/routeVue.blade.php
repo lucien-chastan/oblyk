@@ -4,8 +4,8 @@
         <div class="col s5">
             <h5 class="loved-king-font">
                 <div class="left">
-                    @foreach($route->colors() as $color)
-                        <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.4em; width: 0.4em; border-radius: 50%; margin-right: 0.5em; margin-top: 2px"></div>
+                    @foreach($route->holdColors() as $holdColor)
+                        <div class="z-depth-2" style="background-color: {{ $holdColor }}; height: 0.4em; width: 0.4em; border-radius: 50%; margin-right: 0.5em; margin-top: 2px"></div>
                     @endforeach
                 </div>
                 <span class="color-grade-{{ $route->val_grade }} text-bold">{{ $route->grade }}</span>
@@ -30,7 +30,7 @@
         @endif
         @if($route->hasPicture())
             <div>
-                <img src="{{ $route->picture(200) }}" class="responsive-img">
+                <img src="{{ $route->picture(500) }}" class="responsive-img">
             </div>
         @endif
         <p class="text-center grey-text text-italic">
@@ -38,3 +38,16 @@
         </p>
     </div>
 </div>
+@if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+    <div class="row">
+        <div class="col s12 top-border">
+            <p><i class="material-icons left blue-text">settings</i><strong>Administration</strong></p>
+        </div>
+        <div class="col s12 administration-area">
+            <button {!! $Helpers::modal(route('routeUploadSchemeModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=>'Uploader une photo', "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                Uploader une photo
+                <i class="material-icons left">photo_camera</i>
+            </button>
+        </div>
+    </div>
+@endif

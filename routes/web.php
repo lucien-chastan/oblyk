@@ -279,7 +279,14 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
     Route::post('/modal/room/{gym_id}/room/{room_id}/custom-scheme', 'CRUD\RoomController@customScheme')->name('roomCustomScheme');
 
+    Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
+
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture-modal', 'CRUD\GymRouteController@uploadRoutePictureModal')->name('routeUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture', 'CRUD\GymRouteController@uploadRoutePicture')->name('routeUploadScheme');
+
     Route::post('/modal/gym-sectors/{gym_id}', 'CRUD\GymSectorController@gymSectorModal')->name('gymSectorModal');
+    Route::post('/modal/gym-routes/{gym_id}', 'CRUD\GymRouteController@gymRouteModal')->name('gymRouteModal');
 
     Route::put('/admin/{gym_id}/sector/{sector_id}/save-area', 'CRUD\GymSectorController@saveSchemeArea');
 
@@ -307,6 +314,7 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 Route::resource('rooms', 'CRUD\RoomController');
 Route::resource('gym_sectors', 'CRUD\GymSectorController');
 Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
+Route::resource('gym_routes', 'CRUD\GymRouteController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 
 

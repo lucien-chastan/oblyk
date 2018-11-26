@@ -21,12 +21,15 @@ class CreateGymRoutesTable extends Migration
             $table->string('grade',255)->nullable();
             $table->integer('val_grade')->nullable();
             $table->text('description')->nullable();
-            $table->string('color',255)->nullable();
+            $table->string('hold_color',255)->nullable();
+            $table->string('tag_color',255)->nullable();
             $table->integer('type');
             $table->integer('height')->nullable();
+            $table->boolean('favorite')->default(false);
             $table->string('opener',255)->nullable();
             $table->date('opener_date')->nullable();
-            $table->boolean('dismounted')->default(false);
+            $table->date('dismounted_at')->nullable();
+            $table->text('line')->nullable();
             $table->timestamps();
 
             //clé étrangère

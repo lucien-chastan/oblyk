@@ -2,7 +2,7 @@
 
 <div class="row title-and-return">
     <div class="col s12">
-        <p><i class="material-icons left blue-text">crop_square</i><strong>Les secteurs</strong></p>
+        <p><i class="material-icons left blue-text">filter_none</i><strong>Les secteurs</strong></p>
     </div>
 </div>
 <div class="row">

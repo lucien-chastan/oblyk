@@ -21,9 +21,8 @@
                     @foreach($sector->routes as $route)
                         <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
                             <td>
-                                @foreach($route->colors() as $color)
-                                    <div class="z-depth-2"
-                                         style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
+                                @foreach($route->holdColors() as $holdColor)
+                                    <div class="z-depth-2" style="background-color: {{ $holdColor }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
                                 @endforeach
                             </td>
                             <td><span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}</span></td>
@@ -44,12 +43,17 @@
                 </tbody>
             </table>
         </div>
+        @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+            <div class="col s12">
+                <a {!! $Helpers::tooltip('Ajouter une ligne') !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'routeAdded']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
+            </div>
+        @endif
     </div>
 @endif
 
 <div class="row title-and-return {{ ($sector->routes_count > 0) ? 'top-border' : '' }}">
     <div class="col s12">
-        <div class="col {{ ($sector->routes_count == 0) ? 's5' : 's12' }}">
+        <div class="col no-warp {{ ($sector->routes_count == 0) ? 's5' : 's12' }}">
             <p><i class="material-icons left blue-text">info</i><strong>Informations</strong></p>
         </div>
         @if($sector->routes_count == 0)
@@ -75,7 +79,7 @@
     </div>
     @if($sector->hasPicture())
         <div class="col s12">
-            <img src="{{ $sector->picture(500) }}" class="responsive-img smooth-radius-image">
+            <img src="{{ $sector->picture(500) }}" class="responsive-img smooth-radius-image" id="sector-image-{{ $sector->id }}">
         </div>
     @endif
 </div>
@@ -86,16 +90,18 @@
             <p><i class="material-icons left blue-text">settings</i><strong>Administration</strong></p>
         </div>
         <div class="col s12 administration-area">
-            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=>'Modifier ce secteur', "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
-                Ajouter une voie
-                <i class="material-icons left">add</i>
-            </button>
-            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=>'Modifier ce secteur', "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+            @if($sector->routes_count == 0)
+                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'routeAdded']) !!} class="btn btn-flat btn btnModal">
+                    Ajouter une voie
+                    <i class="material-icons left">add</i>
+                </button>
+            @endif
+            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=>'Modifier ce secteur', "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
                 Modifier le secteur
                 <i class="material-icons left">edit</i>
             </button>
-            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=>'Modifier ce secteur', "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
-                Changer la couverture
+            <button {!! $Helpers::modal(route('sectorUploadSchemeModal', ["gym_id"=>$gym->id, "sector_id"=>$sector->id]), ["id" => $sector->id, "gym_id"=>$gym->id, "title"=>'Uploader une photo', "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+                Uploader une photo
                 <i class="material-icons left">photo_camera</i>
             </button>
             @if( $sector->area == '')

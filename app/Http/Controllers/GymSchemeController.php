@@ -90,8 +90,16 @@ class GymSchemeController extends Controller
     function getGymRouteView($route_id)
     {
         $GymRoute = GymRoute::class;
+        $Gym = Gym::class;
+        $Room = GymRoom::class;
+
+        $gymRoute = $GymRoute::where('id', $route_id)->with('sector')->first();
+        $room = $Room::find($gymRoute->sector->room_id);
+        $gym = $Gym::find($room->gym_id);
+
         return view('pages.gym.vues.routeVue', [
-            'route' => $GymRoute::where('id', $route_id)->with('sector')->first()
+            'route' => $gymRoute,
+            'gym' => $gym
         ]);
     }
 

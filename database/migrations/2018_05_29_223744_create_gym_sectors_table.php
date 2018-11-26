@@ -21,6 +21,7 @@ class CreateGymSectorsTable extends Migration
             $table->text('description')->nullable();
             $table->text('area')->nullable();
             $table->integer('height')->nullable();
+            $table->integer('preferred_type')->nullable();
             $table->timestamps();
 
             //clé étrangère

@@ -27,6 +27,8 @@ class CreateGymRoomsTable extends Migration
             $table->double('lat',9,6)->nullable();
             $table->double('lng',9,6)->nullable();
             $table->integer('order')->nullable();
+            $table->boolean('difficulty_by_tag')->nullable()->default(false);
+            $table->integer('preferred_type')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
