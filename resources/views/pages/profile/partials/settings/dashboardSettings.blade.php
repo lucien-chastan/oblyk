@@ -2,7 +2,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleDashboard')</h2>
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="blue-border-zone explication-dash-option">
 

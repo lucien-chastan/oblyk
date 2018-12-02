@@ -19,6 +19,7 @@ class CreateGymRoutesTable extends Migration
             $table->text('reference')->nullable();
             $table->string('label',255)->nullable();
             $table->string('grade',255)->nullable();
+            $table->string('sub_grade',255)->nullable();
             $table->integer('val_grade')->nullable();
             $table->text('description')->nullable();
             $table->string('hold_color',255)->nullable();
@@ -32,7 +33,7 @@ class CreateGymRoutesTable extends Migration
             $table->text('line')->nullable();
             $table->timestamps();
 
-            //clé étrangère
+            // Foreign Key
             $table->foreign('sector_id')->references('id')->on('gym_sectors');
         });
     }

@@ -5,7 +5,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <p class="text-bold"><i class="material-icons left blue-text">map</i> Plan</p>

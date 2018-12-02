@@ -134,6 +134,8 @@ class GymRouteController extends Controller
         //information sur la falaise
         $gymRoute = new GymRoute();
         $gymRoute->sector_id = $request->input('sector_id');
+        $gymRoute->grade = $request->input('grade');
+        $gymRoute->sub_grade = $request->input('sub_grade');
         $gymRoute->label = $request->input('label');
         $gymRoute->reference = $request->input('reference');
         $gymRoute->height = $request->input('height');
@@ -169,6 +171,8 @@ class GymRouteController extends Controller
         $gymRoute->height = $request->input('height');
         $gymRoute->description = $request->input('description');
         $gymRoute->sector_id = $request->input('sector_id');
+        $gymRoute->grade = $request->input('grade');
+        $gymRoute->sub_grade = $request->input('sub_grade');
         $gymRoute->type = $request->input('type');
         $gymRoute->save();
 

@@ -4,7 +4,7 @@
 
 <form class="submit-form" onsubmit="uploadCouverture(this, refresh); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-couverture-topo' ,'label'=>trans('modals/guidebookCover.cover')]) !!}

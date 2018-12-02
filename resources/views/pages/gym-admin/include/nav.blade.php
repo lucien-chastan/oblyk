@@ -44,7 +44,13 @@
             <div data-route="{{ route('gym_admin_schemes_gym', ['gym_id' => $gym->id]) }}" id="item-scheme-scheme-menu" class="row truncate router-admin-gym-link">
                 <i class="left material-icons">home</i>
                 <span class="hidden-1000">
-                    Topo(s) {{--plurialisation--}}
+                    Topos
+                </span>
+            </div>
+            <div data-route="{{ route('gym_admin_grades_gym', ['gym_id' => $gym->id]) }}" id="item-grade-menu" class="row truncate router-admin-gym-link">
+                <i class="left material-icons">line_weight</i>
+                <span class="hidden-1000">
+                    Systèmes de cotation
                 </span>
             </div>
             <div data-route="{{route('gym_admin_routes_view', ['gym_id' => $gym->id])}}" id="item-scheme-routes-menu" class="row truncate router-admin-gym-link">

@@ -5,13 +5,12 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_route']->label, 'label'=>'Nom de la voie', 'type'=>'text', 'col' => 's8']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_route']->label, 'label'=>'Nom de la ligne', 'type'=>'text', 'col' => 's8']) !!}
         {!! $Inputs::text(['name'=>'reference', 'value'=>$dataModal['gym_route']->reference, 'label'=>'Référence de la ligne', 'type'=>'text', 'col' => 's4']) !!}
-    </div>
-    <div class="row">
+        {!! $Inputs::grade(['name'=>'grade', 'label'=>'Cotation', 'value'=>$dataModal['gym_route']->grade . $dataModal['gym_route']->sub_grade, 'placeholder'=>"cotation, exemple 6a+, B8, ABO, etc."]) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_route']->description, 'label'=>'Description', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['gym_route']->height, 'label'=>'Hauteur (en mètre)', 'type'=>'text']) !!}
         {!! $Inputs::roomSectors(['name'=>'sector_id', 'value'=>$dataModal['gym_route']->sector_id, 'label'=>'Secteur', 'room_id'=>$dataModal['room_id']]) !!}

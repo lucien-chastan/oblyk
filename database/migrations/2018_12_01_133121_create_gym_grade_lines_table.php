@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGymGradesTable extends Migration
+class CreateGymGradeLinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateGymGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gym_grades', function (Blueprint $table) {
+        Schema::create('gym_grade_lines', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gym_id')->unsigned();
+            $table->integer('gym_grade_id')->unsigned();
             $table->string('label', 255)->nullable();
+            $table->text('color')->nullable();
+            $table->integer('grade_val')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
 
             // Foreign key
-            $table->foreign('gym_id')->references('id')->on('gyms');
+            $table->foreign('gym_grade_id')->references('id')->on('gym_grades');
         });
     }
 
@@ -31,6 +34,6 @@ class CreateGymGradesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('gym_grades');
+        Schema::drop('gym_grade_lines');
     }
 }

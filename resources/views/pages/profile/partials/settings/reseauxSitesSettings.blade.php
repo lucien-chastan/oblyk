@@ -30,7 +30,7 @@
 
 <form class="submit-form row" data-route="/socialNetworks" onsubmit="submitData(this, reloadCurrentVue); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {!! $Inputs::social(['name'=>'social_network_id', 'value'=>'', 'label'=>trans('pages/profile/settings.labelType')]) !!}
     {!! $Inputs::text(['name'=>'label', 'value'=>'', 'label'=>trans('pages/profile/settings.labelTitle'), 'type'=>'text']) !!}

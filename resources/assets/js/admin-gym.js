@@ -42,6 +42,12 @@ function addTeamMember(user_id) {
     });
 }
 
+function goToGrades() {
+    var navItem = document.getElementById('item-grade-menu');
+    loadProfileRoute(navItem, true);
+    closeModal();
+}
+
 function uploadBandeauGym() {
     let form = document.getElementById('form-upload-photo-bandeau-setting'),
         inputData = form.getElementsByClassName('input-data'),

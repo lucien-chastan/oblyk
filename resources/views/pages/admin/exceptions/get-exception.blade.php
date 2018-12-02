@@ -3,7 +3,7 @@
 
 <form class="col s12 l8 offset-l2" id="formUpdateHelp" data-route="/exceptions/{{ $exception->id }}" onsubmit="submitData(this, helpUpdated); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {{ csrf_field() }}
     {!! $Inputs::text(['name'=>'id', 'value'=>$exception->id, 'label'=>'Id de l\'exception', 'placeholder'=>'Id de l\'exception','type'=>'text']) !!}

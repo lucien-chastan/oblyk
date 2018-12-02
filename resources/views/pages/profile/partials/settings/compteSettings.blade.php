@@ -4,7 +4,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleInformation')</h2>
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {!! $Inputs::text(['name'=>'name', 'value'=>$user->name, 'label'=>trans('pages/profile/settings.labelName'), 'type'=>'text']) !!}
     {!! $Inputs::text(['name'=>'localisation', 'value'=>$user->localisation, 'label'=>trans('pages/profile/settings.labelPlaces'), 'type'=>'text']) !!}
@@ -26,7 +26,7 @@
 
 <form id="form-upload-photo-profil-setting" class="submit-form row" onsubmit="return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="upload-settings-col-image">
@@ -42,7 +42,7 @@
 
 <form id="form-upload-photo-bandeau-setting" class="submit-form row" onsubmit="return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="upload-settings-col-image">

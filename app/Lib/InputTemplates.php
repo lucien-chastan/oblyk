@@ -503,4 +503,18 @@ class InputTemplates extends ServiceProvider
             'onkeyup' => (isset($options['onkeyup'])) ? ' onkeyup="' . $options['onkeyup'] . '"' : '',
         ]);
     }
+
+    // Gym grade <select>
+    public static function gymGrade($options)
+    {
+        return view('inputs.gym-grade', [
+            'name' => $options['name'],
+            'value' => $options['value'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $options['placeholder'] ?? '',
+            'icon' => $options['icon'] ?? '',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'classLabel' => $options['classLabel'] ?? '',
+        ]);
+    }
 }

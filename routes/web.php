@@ -250,29 +250,47 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
 });
 
-// ADMIN GYMS
+// Admin gyms
 Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
     Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
 
-    // DASHBOARD
+    // Admin interface : Dashboard
     Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
 
-    // ACTUALITY
+    // Admin interface : Actuality
     Route::get('/admin/{gym_id}/view/flux', 'GymAdminController@gymFluxView')->name('gym_admin_flux_view');
 
-    // LOGO AND BANDEAU
+    // Admin interface : Logo and bandeau
     Route::get('/admin/{gym_id}/view/upload-logo-bandeau', 'GymAdminController@uploadLogoBandeauView')->name('gym_admin_logo_bandeau_upload_view');
     Route::post('/gym-admin/{gym_id}/upload-logo', 'CRUD\GymAdministratorController@uploadLogo')->name('gym_admin_upload_logo');
     Route::post('/gym-admin/{gym_id}/upload-bandeau', 'CRUD\GymAdministratorController@uploadBandeau')->name('gym_admin_upload_bandeau');
 
-    // SCHEMES
+    // Admin interface : Community
+    Route::get('/admin/{gym_id}/view/community', 'GymAdminController@gymCommunityView')->name('gym_admin_community_view');
+
+    // Admin interface : Statistic
+    Route::get('/admin/{gym_id}/view/statistique', 'GymAdminController@gymStatisticView')->name('gym_admin_statistic_view');
+
+    // Admin interface : Gestion
+    Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
+    Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
+
+    // Admin interface : Schemes
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
     Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
     Route::get('/admin/{gym_id}/view/topo/salle/{room_id}', 'GymAdminController@gymSchemeView')->name('gym_admin_scheme_gym');
     Route::get('/admin/{gym_id}/view/topo/sector/{sector_id}', 'GymAdminController@gymSectorRoutesView')->name('gym_admin_sector_routes');
-
     Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
+
+    // View : Grades & Grade lines
+    Route::get('/admin/{gym_id}/view/grades', 'GymAdminController@gymGradesView')->name('gym_admin_grades_gym');
+    Route::get('/admin/{gym_id}/view/grade-lines/{gym_grade_id}', 'GymAdminController@gymGradeLinesView')->name('gym_admin_grade_lines_gym');
+
+    // Modal : Grades & Grade lines
+    Route::post('/modal/gym-grade/{gym_id}/gym-grade-modal', 'CRUD\GymGradeController@gymGradeModal')->name('gymGradeModal');
+    Route::post('/modal/gym-grade-line/{gym_id}/gym-grade-line-modal', 'CRUD\GymGradeLineController@gymGradeLineModal')->name('gymGradeLineModal');
+
 
     Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
     Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
@@ -295,16 +313,6 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::get('/admin/{gym_id}/room/last-created', 'GymSchemeController@getLastCreatedRoomRoute')->name('getLastCreatedRoomRoute');
     Route::get('/admin/{gym_id}/room/first-order', 'GymSchemeController@getFirstOrderRoomRoute')->name('getFirstOrderRoomRoute');
 
-    // COMMUNITY
-    Route::get('/admin/{gym_id}/view/community', 'GymAdminController@gymCommunityView')->name('gym_admin_community_view');
-
-    // STATISTIC
-    Route::get('/admin/{gym_id}/view/statistique', 'GymAdminController@gymStatisticView')->name('gym_admin_statistic_view');
-
-    // GESTION
-    Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
-    Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
-
     Route::post('/modal/gym-administrator/{gym_id}', 'CRUD\GymAdministratorController@gymAddAdministratorModal')->name('gymAddAdministratorModal');
     Route::post('/admin/administrator/add/{gym_id}/{user_id}', 'CRUD\GymAdministratorController@addAdministrator');
 
@@ -315,6 +323,8 @@ Route::resource('rooms', 'CRUD\RoomController');
 Route::resource('gym_sectors', 'CRUD\GymSectorController');
 Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
 Route::resource('gym_routes', 'CRUD\GymRouteController');
+Route::resource('gym_grades', 'CRUD\GymGradeController');
+Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 
 

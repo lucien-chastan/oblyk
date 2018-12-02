@@ -8,12 +8,11 @@
     {!! $Inputs::popupError() !!}
 
     <div class="row">
-        {!! $Inputs::mdText(['name'=>'comment', 'value'=>$dataModal['comment'], 'label'=>trans('modals/comment.comment')]) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_grade']->label, 'label'=>'Nom du système de cotation', 'type'=>'text']) !!}
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
     </div>
 
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['id']]) !!}
-    {!! $Inputs::Hidden(['name'=>'commentable_type','value'=>$dataModal['commentable_type']]) !!}
-    {!! $Inputs::Hidden(['name'=>'commentable_id','value'=>$dataModal['commentable_id']]) !!}
+    {!! $Inputs::Hidden(['name'=>'gym_id','value'=>$dataModal['gym_id']]) !!}
 </form>

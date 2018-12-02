@@ -4,7 +4,7 @@
 
 <form class="submit-form" onsubmit="uploadSectorPicture(this, {{ $dataModal['callback'] }}, {{ $dataModal['gym_id'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         {!! $Inputs::upload(['name'=>'scheme', 'filter'=>'image/*', 'id'=>'upload-input-sector-picture' ,'label'=>'Plan']) !!}

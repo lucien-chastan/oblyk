@@ -49,7 +49,7 @@
 
         <form class="submit-form" onsubmit="return false">
 
-            {!! $Inputs::popupError([]) !!}
+            {!! $Inputs::popupError() !!}
 
             <div class="row">
                 {!! $Inputs::text(['name'=>'searche-message-user', 'value'=>'', 'label'=>'Invite un grimpeur sur cette conversation', 'type'=>'text', 'onkeyup'=>'searchMessageUser()']) !!}

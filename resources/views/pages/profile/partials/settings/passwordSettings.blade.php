@@ -2,7 +2,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleEmailConnexion')</h2>
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {!! $Inputs::text(['name'=>'email', 'value'=>$user->email, 'label'=>trans('pages/profile/settings.labelMyEmail'), 'type'=>'email']) !!}
     {!! $Inputs::checkbox(['name'=>'change_mpd', 'label'=>trans('pages/profile/settings.labelChangeMyPassword'), 'checked' => false, 'align' => 'left', 'onchange'=>'showChangeMdp()']) !!}

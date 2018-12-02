@@ -16,6 +16,7 @@ class CreateGymRoomsTable extends Migration
         Schema::create('gym_rooms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('gym_id')->unsigned();
+            $table->integer('gym_grade_id')->unsigned()->nullable();
             $table->string('label',255)->nullable();
             $table->text('description')->nullable();
             $table->string('banner_color', 50)->nullable();
@@ -34,6 +35,7 @@ class CreateGymRoomsTable extends Migration
 
             //clé étrangère
             $table->foreign('gym_id')->references('id')->on('gyms');
+            $table->foreign('gym_grade_id')->references('id')->on('gym_grades');
         });
     }
 

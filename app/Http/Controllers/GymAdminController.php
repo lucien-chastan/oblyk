@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Follow;
 use App\Gym;
 use App\GymAdministrator;
+use App\GymGrade;
 use App\GymRoom;
 use App\GymSector;
 
@@ -136,5 +137,23 @@ class GymAdminController extends Controller
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.settings', ['gym' => $Gym::find($gym_id)]);
+    }
+
+    public function gymGradesView ($gym_id) {
+        $Gym = Gym::class;
+        $Grade = GymGrade::class;
+        return view('pages.gym-admin.vues.grades', [
+            'gym' => $Gym::find($gym_id),
+            'grades' => $Grade::where('gym_id', $gym_id)->with('gradeLines')->get()
+        ]);
+    }
+
+    public function gymGradeLinesView ($gym_id, $gym_grade_id) {
+        $Gym = Gym::class;
+        $Grade = GymGrade::class;
+        return view('pages.gym-admin.vues.grade-lines', [
+            'gym' => $Gym::find($gym_id),
+            'grade' => $Grade::find($gym_grade_id)->with(['gradeLines' => function ($query) { $query->orderBy('order'); }])->first()
+        ]);
     }
 }

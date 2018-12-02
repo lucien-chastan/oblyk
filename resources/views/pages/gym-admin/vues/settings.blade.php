@@ -9,7 +9,7 @@
 
                     <h2 class="loved-king-font" style="font-size: 2em;">@lang('pages/profile/settings.titleInformation')</h2>
 
-                    {!! $Inputs::popupError([]) !!}
+                    {!! $Inputs::popupError() !!}
 
                     {!! $Inputs::text(['name'=>'label', 'value'=>$gym->label, 'label'=>trans('modals/gym.name'), 'placeholder'=>trans('modals/gym.namePlaceholder'),'type'=>'text']) !!}
                     {!! $Inputs::text(['name'=>'city', 'value'=>$gym->city, 'label'=>trans('modals/gym.city'), 'placeholder'=>trans('modals/gym.cityPlaceholder'),'type'=>'text']) !!}

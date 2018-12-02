@@ -5,7 +5,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym']->label, 'label'=>trans('modals/gym.name'), 'placeholder'=>trans('modals/gym.namePlaceholder'),'type'=>'text']) !!}

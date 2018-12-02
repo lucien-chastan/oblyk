@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ route('sendManagerRequest') }}" onsubmit="submitData(this, closeManagerModal); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="col s12">

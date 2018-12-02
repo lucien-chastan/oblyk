@@ -5,7 +5,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         {!! $Inputs::social(['name'=>'social_network_id', 'value'=>$dataModal['social_network_id'], 'label'=>trans('modals/socialNetwork.linkType')]) !!}

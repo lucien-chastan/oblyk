@@ -3,7 +3,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {!! $Inputs::popupTitle(['title'=>trans('modals/headband.modalTitle')]) !!}
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'POST']) !!}

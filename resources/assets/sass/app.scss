@@ -34,6 +34,7 @@
 .no-warp {white-space: nowrap;}
 .text-hover{
     transition: opacity 0.3s;
+    cursor: pointer;
     &:hover{
         opacity: 0.65;
     }

@@ -65,7 +65,8 @@ class Route extends Model
      * @param bool $absolute
      * @return string
      */
-    public function url($absolute = true) {
+    public function url($absolute = true)
+    {
         return $this->webUrl($this->id, $this->label, $absolute);
     }
 
@@ -75,7 +76,8 @@ class Route extends Model
      * @param bool $absolute
      * @return string
      */
-    static function webUrl($id, $label, $absolute = true) {
+    static function webUrl($id, $label, $absolute = true)
+    {
         return route(
             'routePage',
             [
@@ -92,13 +94,17 @@ class Route extends Model
      */
     public function cover(int $size = 50) : string
     {
-        $crag = Crag::find($this->crag_id);
+        $Crag = Crag::class;
+
+        $crag = $Crag::find($this->crag_id);
         return $crag->cover($size);
     }
 
-    public static function similarRoute($crag_id, $route_id , $label){
+    public static function similarRoute($crag_id, $route_id , $label)
+    {
+        $Route = Route::class;
 
-        $routes = Route::where([
+        $routes = $Route::where([
             ['crag_id','=',$crag_id],
             ['id','!=',$route_id],
             ['label','like','%' . $label . '%']
@@ -118,7 +124,8 @@ class Route extends Model
     }
 
     //convertie une cotation en valeur
-    public static function gradeToVal($grade, $sub_grade){
+    public static function gradeToVal($grade, $sub_grade)
+    {
         $val = 0;
 
         //transformation de la pondération
@@ -227,47 +234,23 @@ class Route extends Model
     }
 
     //convertie une cotation en valeur
-    public static function valToGrad($val){
-        $grad = 0;
+    public static function valToGrad($val, $withBalancing = false){
+        if ($val == 0) $val = 0 ;
+        if (!$withBalancing && $val % 2 == 0) $val--;
 
-        //cotation type 1a, 6a, 8b
+        $grades = [
+            '?',
+            '1a', '1a+', '1b', '1b+', '1c', '1c+',
+            '2a', '2a+', '2b', '2b+', '2c', '2c+',
+            '3a', '3a+', '3b', '3b+', '3c', '3c+',
+            '4a', '4a+', '4b', '4b+', '4c', '4c+',
+            '5a', '5a+', '5b', '5b+', '5c', '5c+',
+            '6a', '6a+', '6b', '6b+', '6c', '6c+',
+            '7a', '7a+', '7b', '7b+', '7c', '7c+',
+            '8a', '8a+', '8b', '8b+', '8c', '8c+',
+            '9a', '9a+', '9b', '9b+', '9c', '9c+',
+        ];
 
-        if($val == 1 || $val == 2) $grad = '1a' ;
-        if($val == 3 || $val == 4) $grad = '1b' ;
-        if($val == 5 || $val == 6) $grad = '1c' ;
-
-        if($val == 7 || $val == 8) $grad = '2a' ;
-        if($val == 9 || $val == 10) $grad = '2b' ;
-        if($val == 11 || $val == 12) $grad = '2c' ;
-
-        if($val == 13 || $val == 14) $grad = '3a' ;
-        if($val == 15 || $val == 16) $grad = '3b' ;
-        if($val == 17 || $val == 18) $grad = '3c' ;
-
-        if($val == 19 || $val == 20) $grad = '4a' ;
-        if($val == 21 || $val == 22) $grad = '4b' ;
-        if($val == 23 || $val == 24) $grad = '4c' ;
-
-        if($val == 25 || $val == 26) $grad = '5a' ;
-        if($val == 27 || $val == 28) $grad = '5b' ;
-        if($val == 29 || $val == 30) $grad = '5c' ;
-
-        if($val == 31 || $val == 32) $grad = '6a' ;
-        if($val == 33 || $val == 34) $grad = '6b' ;
-        if($val == 35 || $val == 36) $grad = '6c' ;
-
-        if($val == 37 || $val == 38) $grad = '7a' ;
-        if($val == 39 || $val == 40) $grad = '7b' ;
-        if($val == 41 || $val == 42) $grad = '7c' ;
-
-        if($val == 43 || $val == 44) $grad = '8a' ;
-        if($val == 45 || $val == 46) $grad = '8b' ;
-        if($val == 47 || $val == 48) $grad = '8c' ;
-
-        if($val == 49 || $val == 50) $grad = '9a' ;
-        if($val == 51 || $val == 52) $grad = '9b' ;
-        if($val == 53 || $val == 54) $grad = '9c' ;
-
-        return $grad;
+        return $grades[$val];
     }
 }

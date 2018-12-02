@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="setJsonLongueur();submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="row">

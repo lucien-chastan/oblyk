@@ -8,7 +8,7 @@
 
                 <form id="form-upload-photo-profil-setting" class="submit-form row" onsubmit="return false">
 
-                    {!! $Inputs::popupError([]) !!}
+                    {!! $Inputs::popupError() !!}
                     {{ csrf_field() }}
 
                     <div class="row">
@@ -26,7 +26,7 @@
 
                 <form id="form-upload-photo-bandeau-setting" class="submit-form row" onsubmit="return false">
 
-                    {!! $Inputs::popupError([]) !!}
+                    {!! $Inputs::popupError() !!}
                     {{ csrf_field() }}
 
                     <div class="row">

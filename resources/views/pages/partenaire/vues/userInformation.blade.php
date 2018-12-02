@@ -26,7 +26,7 @@
                         @lang('pages/partner/partnerMap.birth')
                     </p>
                     <form class="submit-form" data-route="{{route('saveUserBirth')}}" onsubmit="submitData(this, refresh); return false">
-                        {!! $Inputs::popupError([]) !!}
+                        {!! $Inputs::popupError() !!}
 
                         {!! $Inputs::text(['name'=>'birth', 'label'=>trans('pages/partner/partnerMap.labelBirth'), 'value'=>'', 'type'=>'number']) !!}
 
