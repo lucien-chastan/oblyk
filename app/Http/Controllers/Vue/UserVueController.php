@@ -346,7 +346,7 @@ class UserVueController extends Controller
                 ->with('route.routeSections')
                 ->get();
 
-            $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = [];
+            $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = $types = [];
             $somme_metre = 0;
             $max_val = 0;
             $max_grade = '';
@@ -366,6 +366,7 @@ class UserVueController extends Controller
                 $regions[$cross->route->crag->region][] = $cross;
                 $years[$cross->release_at->format('Y')][] = $cross;
                 $somme_metre += $cross->route->height;
+                $types[$cross->route->climb_id][] = $cross;
 
                 $tempGradVal = 0;
                 foreach ($cross->crossSections as $crossSection) {
@@ -412,6 +413,7 @@ class UserVueController extends Controller
                 'max_grade' => $max_grade,
                 'max_sub_grade' => $max_sub_grade,
                 'crosses' => $crosses,
+                'types' => $types,
             ];
             return view('pages.profile.vues.croixVue', $data);
 
