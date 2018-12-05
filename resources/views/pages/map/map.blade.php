@@ -11,6 +11,8 @@
     <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
+    <link rel="stylesheet" href="/framework/leaflet/L.Control.Locate.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
     <link href="/css/nouislider.css" rel="stylesheet">
@@ -102,6 +104,7 @@
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
+    <script src="/framework/leaflet/L.Control.Locate.min.js">
     <script src="/js/nouislider.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/map.js"></script>

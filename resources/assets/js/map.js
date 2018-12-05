@@ -190,6 +190,9 @@ function loadMap() {
     //OUTIL DE MEUSURE
     L.Control.measureControl().addTo(map);
 
+    // location by user ip
+    L.control.locate().addTo(map);
+
     map.on('click', pointMarkerMap);
 
     map.on('zoomend', function () {changeDash();});
