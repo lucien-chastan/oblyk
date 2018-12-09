@@ -15,5 +15,6 @@ beta_database.sh
 Homestead.json
 Homestead.yaml
 .env
+package-lock.json
 send_public_folder.sh
 public/docs/*

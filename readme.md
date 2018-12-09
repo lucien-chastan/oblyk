@@ -80,7 +80,18 @@ Create a symbolic link in the public folder to storage
 php artisan storage:link
 ```
 
-Give write permission to folder *storage/* and *bootstrap/cache/*
+Create a storage tree
+```bash
+mkdir -p storage/app/public/articles/{1300,200,100,50}
+mkdir -p storage/app/public/authors/{200,100}
+mkdir -p storage/app/public/gyms/{1300,200,100,50}
+mkdir -p storage/app/public/photos/crags/{1300,200,100,50}
+mkdir -p storage/app/public/post-photos
+mkdir -p storage/app/public/topos/{700,200,100,50,PDF}
+mkdir -p storage/app/public/users/{1300,1000,500,200,100,50}
+```
+
+Give write permission to folder *storage/* and *bootstrap/cache/* (not necessary if you use the artisan server)
 ```bash
 chmod -R 764 storage && chmod -R 764 bootstrap/cache
 ## to adapt according to your rights management and your OS
@@ -93,6 +104,11 @@ npm run dev
 
 ## to generate and listen for changes
 npm run watch
+```
+
+Run php artisan server (the easiest, but you can also configure your local apache servers)
+```bash
+php artisan serve
 ```
 
 ## Workflow

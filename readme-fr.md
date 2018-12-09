@@ -80,7 +80,18 @@ Créer un lien symbolique dans le dossier public vers storage
 php artisan storage:link
 ```
 
-Donner les droits d'écriture au dossier *storage/* et *bootstrap/cache/*
+Créer l'arboresence de stockage
+```bash
+mkdir -p storage/app/public/articles/{1300,200,100,50}
+mkdir -p storage/app/public/authors/{200,100}
+mkdir -p storage/app/public/gyms/{1300,200,100,50}
+mkdir -p storage/app/public/photos/crags/{1300,200,100,50}
+mkdir -p storage/app/public/post-photos
+mkdir -p storage/app/public/topos/{700,200,100,50,PDF}
+mkdir -p storage/app/public/users/{1300,1000,500,200,100,50}
+```
+
+Donner les droits d'écriture au dossier *storage/* et *bootstrap/cache/* (pas nécessaire si tu utilise le serveur artisan)
 ```bash
 chmod -R 764 storage && chmod -R 764 bootstrap/cache
 ## à adapter suivant votre gestion des droits et de votre OS
@@ -93,6 +104,11 @@ npm run dev
 
 ## pour générer et avoir une écoute des modifications
 npm run watch
+```
+
+Lancer le php artisan server (option la plus simple, mais tu peux aussi utiliser un serveur apache local)
+```bash
+php artisan serve
 ```
 
 ## Workflow
