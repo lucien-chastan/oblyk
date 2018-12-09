@@ -2,6 +2,6 @@
     @if($icon != '')
         <i class="oblyk-icon {{ $icon }} prefix"></i>
     @endif
-    <input placeholder="{{ $placeholder }}" name="{{ $name }}" value="{{ $value }}" type="text" id="{{ $id }}" class="input-data">
-    <label for="{{ $id }}">{{ $label }}</label>
+    <input {{ $required ? 'required' : '' }} placeholder="{{ $placeholder }}" name="{{ $name }}" value="{{ $value }}" type="text" id="{{ $id }}" class="input-data">
+    <label class="{{ $required ? 'required' : '' }}" for="{{ $id }}">{{ $label }}</label>
 </div>

@@ -8,10 +8,11 @@
     {!! $Inputs::popupError() !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_room']->label, 'label'=>'nom du topo', 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'label', 'required'=>true, 'value'=>$dataModal['gym_room']->label, 'label'=>'Nom de la salle', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'order', 'value'=>$dataModal['gym_room']->order, 'label'=>"Ordre d'importance", 'type'=>'number']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_room']->description, 'label'=>'Description', 'type'=>'text']) !!}
         {!! $Inputs::gymRoutesTypes(['name'=>'preferred_type', 'value'=>$dataModal['gym_room']->preferred_type, 'label'=>'Principalement les lignes sont des : ']) !!}
+        {!! $Inputs::gymGradesSystem(['name'=>'grade_system', 'gym_id'=>$dataModal['gym_id'], 'value'=>$dataModal['gym_room']->grade_system, 'label'=>'Système de cotation']) !!}
         <div class="col s12">
             {!! $Inputs::checkbox(['name'=>'difficulty_by_tag', 'checked'=>($dataModal['gym_room']->difficulty_by_tag == 1), 'label'=>'La difficulté est donnée par des étiquettes']) !!}
         </div>

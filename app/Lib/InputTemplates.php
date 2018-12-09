@@ -9,6 +9,7 @@ use App\CrossHardness;
 use App\CrossMode;
 use App\CrossStatus;
 use App\ForumGeneralCategory;
+use App\GymGrade;
 use App\GymSector;
 use App\Incline;
 use App\Point;
@@ -125,6 +126,7 @@ class InputTemplates extends ServiceProvider
 
         return view('inputs.text', [
             'name' => $options['name'],
+            'required' => $options['required'] ?? false,
             'value' => $value,
             'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
@@ -410,6 +412,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.grade', [
             'name' => $options['name'],
+            'required' => $options['required'] ?? false,
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => $options['value'] ?? '',
@@ -515,6 +518,24 @@ class InputTemplates extends ServiceProvider
             'icon' => $options['icon'] ?? '',
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'classLabel' => $options['classLabel'] ?? '',
+        ]);
+    }
+
+    // List of grade system <select>
+    public static function gymGradesSystem($options) {
+        $GymGrade = GymGrade::class;
+        $grades = $GymGrade::where('gym_id', $options['gym_id'])->get();
+
+        return view('inputs.gym-grades-system', [
+            'name' => $options['name'],
+            'required' => $options['required'] ?? false,
+            'value' => $options['value'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $options['placeholder'] ?? '',
+            'icon' => $options['icon'] ?? '',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'onChange' => $options['onChange'] ?? '',
+            'grades' => $grades,
         ]);
     }
 }

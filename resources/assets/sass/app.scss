@@ -341,6 +341,16 @@ footer {
     }
 }
 
+.submit-form {
+    label.required {
+        &:before {
+            content: '*';
+            padding-right: 0.5em;
+            color: rgb(250,50,50);
+        }
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{

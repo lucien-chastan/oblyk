@@ -24,7 +24,7 @@
 
     @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
         <ul id="dropdown_administrator" class="dropdown-content dropD-auto">
-            <li><a {!! $Helpers::modal(route('roomModal', ['gym_id'=>$gym->id]), ["id"=>$room->id, "title"=>'Modifier le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Modifier les informations<i class="material-icons left">edit</i></a></li>
+            <li><a {!! $Helpers::modal(route('roomModal', ['gym_id'=>$gym->id]), ["id"=>$room->id, "title"=>'Paramétrer la salle', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Paramétrer la salle<i class="material-icons left">edit</i></a></li>
             <li><a {!! $Helpers::modal(route('roomUploadSchemeModal', ['gym_id'=>$gym->id]), ["room_id"=>$room->id, "title"=>'Telecharger un plan', "method"=>"POST", "callback"=>"reloadPage"]) !!} class="btnModal">Changer le plan<i class="material-icons left">map</i></a></li>
             <li><a {!! $Helpers::modal(route('roomCustomScheme', ['gym_id'=>$gym->id, 'room_id'=>$room->id]), ["room_id"=>$room->id, "title"=>'Personnaliser le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Personnaliser<i class="material-icons left">color_lens</i></a></li>
             <li class="divider"></li>
