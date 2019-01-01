@@ -8,7 +8,6 @@
             </div>
             <div class="col s7 text-right">
                 <button onclick="getSectors(); animationLoadSideNav('l')" class="btn btn-flat waves-effect waves-light" type="submit" name="action">
-                    Retour
                     <i class="material-icons left">keyboard_arrow_left</i>
                 </button>
             </div>
@@ -21,11 +20,16 @@
                     @foreach($sector->routes as $route)
                         <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
                             <td>
-                                @foreach($route->holdColors() as $holdColor)
-                                    <div class="z-depth-2" style="background-color: {{ $holdColor }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
+                                @if($route->hasThumbnail())
+                                    <img src="{{ $route->thumbnail() }}" class="circle left" height="35">
+                                @endif
+                            </td>
+                            <td>
+                                @foreach($route->colors() as $color)
+                                    <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
                                 @endforeach
                             </td>
-                            <td><span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}</span></td>
+                            <td><span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}{{ $route->sub_grade }}</span></td>
                             <td>{{ $route->label }}</td>
                             <td class="grey-text">
                                 @if($route->isFavorite())
@@ -45,7 +49,7 @@
         </div>
         @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
             <div class="col s12">
-                <a {!! $Helpers::tooltip('Ajouter une ligne') !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'routeAdded']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
+                <a {!! $Helpers::tooltip('Ajouter une ligne') !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
             </div>
         @endif
     </div>
@@ -59,7 +63,6 @@
         @if($sector->routes_count == 0)
             <div class="col s7 text-right">
                 <button onclick="getSectors(); animationLoadSideNav('l')" class="btn btn-flat waves-effect waves-light" type="submit" name="action">
-                    Retour
                     <i class="material-icons left">keyboard_arrow_left</i>
                 </button>
             </div>
@@ -91,7 +94,7 @@
         </div>
         <div class="col s12 administration-area">
             @if($sector->routes_count == 0)
-                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'routeAdded']) !!} class="btn btn-flat btn btnModal">
+                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=>'Ajouter une voie', "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
                     Ajouter une voie
                     <i class="material-icons left">add</i>
                 </button>

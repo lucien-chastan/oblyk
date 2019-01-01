@@ -31,6 +31,7 @@ class RoomController extends Controller
             $gymRoom->description = $request->input('description');
             $gymRoom->lat = $request->input('lat');
             $gymRoom->lng = $request->input('lng');
+            $gymRoom->gym_grade_id = $request->input('gym_grade_id');
             $gym_id = $request->input('gym_id');
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
         }
@@ -175,8 +176,8 @@ class RoomController extends Controller
         $gymRoom->description = $request->input('description');
         $gymRoom->lat = $request->input('lat');
         $gymRoom->lng = $request->input('lng');
-        $gymRoom->difficulty_by_tag = $request->input('difficulty_by_tag');
         $gymRoom->preferred_type = $request->input('preferred_type');
+        $gymRoom->gym_grade_id = $request->input('gym_grade_id');
         $gymRoom->save();
 
         return response()->json(json_encode($gymRoom));
@@ -205,8 +206,8 @@ class RoomController extends Controller
         $gymRoom->description = $request->input('description');
         $gymRoom->lat = $request->input('lat');
         $gymRoom->lng = $request->input('lng');
-        $gymRoom->difficulty_by_tag = $request->input('difficulty_by_tag');
         $gymRoom->preferred_type = $request->input('preferred_type');
+        $gymRoom->gym_grade_id = $request->input('gym_grade_id');
         $gymRoom->save();
 
         return response()->json(json_encode($gymRoom));

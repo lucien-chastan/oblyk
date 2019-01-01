@@ -167,6 +167,12 @@
         }
       }
     }
+    .thumbnail-route {
+      height: 35px;
+      margin-right: 10px;
+      margin-top: -4px;
+      margin-left: -13px;
+    }
   }
 
   .smooth-radius-image {
@@ -182,4 +188,23 @@
 
 #banner_opacity {
   width: 65px;
+}
+
+.sectors-and-routes-tabs {
+  .material-icons {
+    font-size: 1.2em;
+    margin-right: 0.7em;
+    vertical-align: middle;
+  }
+}
+
+.tr-open-at {
+  font-size: 0.8em;
+  td {
+    padding-bottom: 0;
+    cursor: default !important;
+  }
+  &:hover {
+    background-color: white !important;
+  }
 }

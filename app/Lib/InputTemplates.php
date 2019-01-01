@@ -10,6 +10,7 @@ use App\CrossMode;
 use App\CrossStatus;
 use App\ForumGeneralCategory;
 use App\GymGrade;
+use App\GymGradeLine;
 use App\GymSector;
 use App\Incline;
 use App\Point;
@@ -183,6 +184,7 @@ class InputTemplates extends ServiceProvider
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => $options['value'] ?? '',
             'class' => $options['class'] ?? '',
+            'col' => $options['col'] ?? 's12',
             'placeholder' => $options['placeholder'] ?? '',
         ]);
     }
@@ -416,6 +418,7 @@ class InputTemplates extends ServiceProvider
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => $options['value'] ?? '',
+            'classLabel' => ($options['value'] != '' || $options['placeholder'] != '') ? 'active' : '',
             'icon' => $options['icon'] ?? '',
             'placeholder' => $options['placeholder'] ?? '',
         ]);
@@ -536,6 +539,24 @@ class InputTemplates extends ServiceProvider
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'onChange' => $options['onChange'] ?? '',
             'grades' => $grades,
+        ]);
+    }
+
+    // List of level in grade system <select>
+    public static function gymLevelGrade($options) {
+        $GymGradeLine = GymGradeLine::class;
+        $gradeLines = $GymGradeLine::where('gym_grade_id', $options['gym_grade_id'])->get();
+
+        return view('inputs.gym-grade-lines', [
+            'name' => $options['name'],
+            'required' => $options['required'] ?? false,
+            'value' => $options['value'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $options['placeholder'] ?? '',
+            'icon' => $options['icon'] ?? '',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'onChange' => $options['onChange'] ?? '',
+            'gradeLines' => $gradeLines,
         ]);
     }
 }

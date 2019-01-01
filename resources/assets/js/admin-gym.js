@@ -157,3 +157,28 @@ function uploadLogoGym() {
         }
     );
 }
+
+
+function dismountRoute(routeId) {
+    axios.put('/gym/dismount-route/' + routeId).then(function (response) {
+        var data = JSON.parse(response.data);
+        if (data.dismounted_at !== null) {
+            Materialize.toast('Ligne démontée', 4000);
+        } else {
+            Materialize.toast('Ligne remontée', 4000);
+        }
+        loadProfileRoute(document.getElementById('item-scheme-routes-menu'), true);
+    });
+}
+
+function favoriteRoute(routeId) {
+    axios.put('/gym/favorite-route/' + routeId).then(function (response) {
+        var data = JSON.parse(response.data);
+        if (data.favorite) {
+            Materialize.toast('Ligne favoris', 4000);
+        } else {
+            Materialize.toast('Favoris retiré', 4000);
+        }
+        loadProfileRoute(document.getElementById('item-scheme-routes-menu'), true);
+    });
+}

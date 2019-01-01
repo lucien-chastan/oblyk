@@ -97,14 +97,14 @@
 @section('script')
     <script src="/framework/leaflet/leaflet.js"></script>
     <script src="/js/gym-scheme.js"></script>
+    <script>
+        var GlobalGymId = {{ $gym->id }},
+            GlobalRoomId = {{ $room->id }}
+    </script>
     @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
         <script src="/framework/leaflet/Leaflet.Editable.js"></script>
         <script src="/js/gym-edit-scheme.js"></script>
         <script src="/js/gym-upload-scheme.js"></script>
-        <script>
-            var GlobalGymId = {{ $gym->id }},
-                GlobalRoomId = {{ $room->id }}
-        </script>
     @endif
     @if($room->hasScheme())
         <script>

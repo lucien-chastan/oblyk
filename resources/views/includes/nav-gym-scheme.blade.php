@@ -17,7 +17,7 @@
             @endforeach
             @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
                 <li class="divider"></li>
-                <li><a {!! $Helpers::tooltip('Ajouter un topo') !!} {!! $Helpers::modal(route('roomModal', ['gym_id'=>$gym->id]), ["gym_id"=>$gym->id, "title"=>'Créer un topo', "method"=>"POST", "callback"=>"loadNewGymRoom"]) !!} id="scheme-btn-modal" class="tooltipped btnModal">Ajouter un topo<i class="material-icons left">add</i></a></li>
+                <li><a {!! $Helpers::tooltip('Ajouter un espace') !!} {!! $Helpers::modal(route('roomModal', ['gym_id'=>$gym->id]), ["gym_id"=>$gym->id, "title"=>'Créer un topo', "method"=>"POST", "callback"=>"loadNewGymRoom"]) !!} id="scheme-btn-modal" class="tooltipped btnModal">Ajouter un espace<i class="material-icons left">add</i></a></li>
             @endif
         </ul>
     @endif
@@ -27,6 +27,7 @@
             <li><a {!! $Helpers::modal(route('roomModal', ['gym_id'=>$gym->id]), ["id"=>$room->id, "title"=>'Paramétrer la salle', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Paramétrer la salle<i class="material-icons left">edit</i></a></li>
             <li><a {!! $Helpers::modal(route('roomUploadSchemeModal', ['gym_id'=>$gym->id]), ["room_id"=>$room->id, "title"=>'Telecharger un plan', "method"=>"POST", "callback"=>"reloadPage"]) !!} class="btnModal">Changer le plan<i class="material-icons left">map</i></a></li>
             <li><a {!! $Helpers::modal(route('roomCustomScheme', ['gym_id'=>$gym->id, 'room_id'=>$room->id]), ["room_id"=>$room->id, "title"=>'Personnaliser le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Personnaliser<i class="material-icons left">color_lens</i></a></li>
+            <li><a href="{{ route('gym_admin_home', ['gym_id' => $gym->id, 'gym_label'=> str_slug($gym->label)]) }}">Dashboard<i class="material-icons left">dashboard</i></a></li>
             <li class="divider"></li>
             <li><a {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/rooms/" . $room->id, "callback" => "afterDeleteGotTo"]) !!} class="btnModal">Supprimer ce topo<i class="material-icons left red-text">delete</i></a></li>
         </ul>

@@ -55,16 +55,27 @@ class GymSchemeController extends Controller
         $GymSector = GymSector::class;
         $Gym = Gym::class;
         $Room = GymRoom::class;
+        $GymRoute = GymRoute::class;
 
         $room = $Room::find($room_id);
         $gym = $Gym::find($room->gym_id);
+        $routes = $GymRoute::whereIn(
+            'sector_id',
+            $GymSector::where('room_id', $room_id)->select('id')->get()->toArray())
+            ->where('dismounted_at', null)
+            ->with('sector')
+            ->orderBy('opener_date', 'desc')
+            ->get();
+
+        $gymSectors = $GymSector::where('room_id', $room_id)
+            ->withCount(['routes' => function ($query) {$query->where('dismounted_at', null);}])
+            ->get();
 
         return view('pages.gym.vues.sectorsVue', [
-            'sectors' => $GymSector::where('room_id', $room_id)
-                ->withCount('routes')
-                ->get(),
+            'sectors' => $gymSectors,
             'gym' => $gym,
-            'room' => $room
+            'room' => $room,
+            'routes' => $routes
         ]);
     }
 
@@ -72,12 +83,18 @@ class GymSchemeController extends Controller
     {
         $GymSector = GymSector::class;
         $Gym = Gym::class;
+        $GymRoute = GymRoute::class;
 
         $gymSector = $GymSector::where('id', $sector_id)
-            ->withCount('routes')
-            ->with('routes')
             ->with('room')
             ->first();
+
+        $gymRoutes = $GymRoute::where([['sector_id', $gymSector->id], ['dismounted_at', null]])
+            ->orderBy('opener_date')
+            ->get();
+
+        $gymSector->routes = $gymRoutes;
+        $gymSector->routes_count = count($gymRoutes);
 
         $gym = $Gym::find($gymSector->room->gym_id);
 
@@ -99,7 +116,8 @@ class GymSchemeController extends Controller
 
         return view('pages.gym.vues.routeVue', [
             'route' => $gymRoute,
-            'gym' => $gym
+            'gym' => $gym,
+            'room' => $room,
         ]);
     }
 

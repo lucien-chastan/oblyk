@@ -86,7 +86,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');
     Route::get('/index', 'ToolPagesController@indexPage')->name('indexes');
     Route::get('/sites', 'ToolPagesController@cragsPage')->name('cragsIndex');
-    Route::get('/salles', 'ToolPagesController@gymsPage')->name('gymsIndex');
+    Route::get('/salles', 'ToolPagesController@RousPage')->name('gymsIndex');
     Route::get('/grimpeurs', 'ToolPagesController@usersPage')->name('usersIndex');
     Route::get('/topos', 'ToolPagesController@guidebooksPage')->name('guidebooksIndex');
     Route::get('/groupes', 'ToolPagesController@groupsPage')->name('groupsIndex');
@@ -279,8 +279,6 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     // Admin interface : Schemes
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
     Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
-    Route::get('/admin/{gym_id}/view/topo/salle/{room_id}', 'GymAdminController@gymSchemeView')->name('gym_admin_scheme_gym');
-    Route::get('/admin/{gym_id}/view/topo/sector/{sector_id}', 'GymAdminController@gymSectorRoutesView')->name('gym_admin_sector_routes');
     Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
 
     // View : Grades & Grade lines
@@ -299,6 +297,9 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
+
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail-modal', 'CRUD\GymRouteController@uploadRouteThumbnailModal')->name('routeUploadThumbnailModal');
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail', 'CRUD\GymRouteController@uploadRouteThumbnail')->name('routeUploadThumbnail');
 
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture-modal', 'CRUD\GymRouteController@uploadRoutePictureModal')->name('routeUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture', 'CRUD\GymRouteController@uploadRoutePicture')->name('routeUploadScheme');
@@ -326,6 +327,8 @@ Route::resource('gym_routes', 'CRUD\GymRouteController');
 Route::resource('gym_grades', 'CRUD\GymGradeController');
 Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
+Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
+Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
 
 
 //IFRAME

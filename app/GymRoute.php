@@ -20,19 +20,10 @@ class GymRoute extends Model
     /**
      * @return array
      */
-    public function holdColors()
+    public function colors()
     {
-        $this->hold_colors = explode(';', $this->hold_color);
-        return $this->hold_colors;
-    }
-
-    /**
-     * @return array
-     */
-    public function tagColors()
-    {
-        $this->tag_colors = explode(';', $this->tag_color);
-        return $this->tag_colors;
+        $this->colors = explode(';', $this->color);
+        return $this->colors;
     }
 
     public function hasPicture()
@@ -44,6 +35,17 @@ class GymRoute extends Model
     {
         return $this->hasPicture() ? '/storage/gyms/routes/' . $size . '/route-' . $this->id . '.jpg' : '';
     }
+
+    public function hasThumbnail()
+    {
+        return file_exists(storage_path('app/public/gyms/routes/100/thumbnail-' . $this->id . '.jpg'));
+    }
+
+    public function thumbnail()
+    {
+        return $this->hasThumbnail() ? '/storage/gyms/routes/100/thumbnail-' . $this->id . '.jpg' : '';
+    }
+
 
     public function isFavorite()
     {
@@ -59,5 +61,22 @@ class GymRoute extends Model
     {
         $Video = Video::class;
         return ($Video::where([['viewable_id', $this->id], ['viewable_type', 'App\\GymRoute']])->count() > 0);
+    }
+
+    public function estimateGradeLevel($gymGradeId) {
+        $GymGradeLine = GymGradeLine::class;
+        $gymGradeLines = $GymGradeLine::where('gym_grade_id', $gymGradeId)->orderBy('order')->get();
+        $minScore = 100;
+        $gradeLineId = 0;
+
+        foreach ($gymGradeLines as $gymGradeLine) {
+            $valGradDiff = abs($gymGradeLine->grade_val - $this->val_grade);
+            if ($valGradDiff < $minScore) {
+                $minScore = $valGradDiff;
+                $gradeLineId = $gymGradeLine->id;
+            }
+        }
+
+        return $gradeLineId;
     }
 }

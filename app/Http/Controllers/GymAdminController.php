@@ -7,6 +7,7 @@ use App\Gym;
 use App\GymAdministrator;
 use App\GymGrade;
 use App\GymRoom;
+use App\GymRoute;
 use App\GymSector;
 
 class GymAdminController extends Controller
@@ -52,42 +53,24 @@ class GymAdminController extends Controller
         return view('pages.gym-admin.vues.schemes', ['gym' => $gym]);
     }
 
-    public function gymSchemeView($gym_id, $room_id)
-    {
-        $Gym = Gym::class;
-        $GymRoom = GymRoom::class;
-
-        return view('pages.gym-admin.vues.scheme',
-            [
-                'gym' => $Gym::find($gym_id),
-                'room' => $GymRoom::where('id',$room_id)
-                    ->withCount('sectors')
-                    ->with('sectors')
-                    ->first(),
-            ]
-        );
-    }
-
-    public function gymSectorRoutesView($gym_id, $sector_id)
-    {
-        $Gym = Gym::class;
-        $GymSector = GymSector::class;
-
-        return view('pages.gym-admin.vues.sector-routes',
-            [
-                'gym' => $Gym::find($gym_id),
-                'sector' => $GymSector::where('id',$sector_id)
-                    ->withCount('routes')
-                    ->with('routes')
-                    ->first(),
-            ]
-        );
-    }
-
     public function gymRoutesView ($gym_id)
     {
         $Gym = Gym::class;
-        return view('pages.gym-admin.vues.routes', ['gym' => $Gym::find($gym_id)]);
+        $Route = GymRoute::class;
+        $Room = GymRoom::class;
+        $Sector = GymSector::class;
+
+        $roomsArray = $Room::where('gym_id', $gym_id)->select('id')->get()->toArray();
+        $routes = $Route::whereIn('sector_id', $Sector::whereIn('room_id', $roomsArray)->select('id')->get()->toArray())
+            ->with('sector')
+            ->with('sector.room')
+            ->orderBy('opener_date', 'desc')
+            ->get();
+
+        return view('pages.gym-admin.vues.routes', [
+            'gym' => $Gym::find($gym_id),
+            'routes' => $routes
+        ]);
     }
 
     public function gymFluxView ($gym_id)
