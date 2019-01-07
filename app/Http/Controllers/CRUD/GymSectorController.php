@@ -35,6 +35,7 @@ class GymSectorController extends Controller
             $gymSector->height = $request->input('height');
             $gymSector->description = $request->input('description');
             $gymSector->preferred_type = $request->input('preferred_type') ?? $room->preferred_type;
+            $gymSector->gym_grade_id = $room->gym_grade_id;
             $room_id = $request->input('room_id');
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
         }
@@ -139,6 +140,7 @@ class GymSectorController extends Controller
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
         $gymSector->preferred_type = $request->input('preferred_type');
+        $gymSector->gym_grade_id = $request->input('gym_grade_id');
         $gymSector->save();
 
         return response()->json(json_encode($gymSector));
@@ -169,6 +171,7 @@ class GymSectorController extends Controller
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
         $gymSector->preferred_type = $request->input('preferred_type');
+        $gymSector->gym_grade_id = $request->input('gym_grade_id');
         $gymSector->save();
 
         return response()->json(json_encode($gymSector));

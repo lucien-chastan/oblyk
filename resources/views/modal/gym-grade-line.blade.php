@@ -16,13 +16,13 @@
             <div class="col s12">
                 <div class="col s6">
                     <p class="text-underline">Couleur</p>
-                    {!! $Inputs::color(['name'=>'color_first', 'label'=>'Première couleur', 'value'=>$dataModal['colors'][0] ?? '#ffffff', 'placeholder'=>"Première couleur"]) !!}
+                    {!! $Inputs::colorList(['name'=>'color_first', 'label'=>'Première couleur', 'value'=>$dataModal['colors'][0] ?? '#f2f2f2', 'placeholder'=>"Première couleur"]) !!}
                 </div>
                 <div class="col s6">
                     <p class="text-underline">
                         {!! $Inputs::checkbox(['name'=>'use_second_color', 'checked'=>($dataModal['use_second_color'] == 1), 'label' => 'Utiliser une seconde couleur']) !!}
                     </p>
-                    {!! $Inputs::color(['name'=>'color_second', 'label'=>'Second couleur', 'value'=>$dataModal['colors'][1] ?? '#ffffff', 'placeholder'=>"Seconde couleur"]) !!}
+                    {!! $Inputs::colorList(['name'=>'color_second', 'label'=>'Second couleur', 'value'=>$dataModal['colors'][1] ?? '#f2f2f2', 'placeholder'=>"Seconde couleur"]) !!}
                 </div>
             </div>
         </div>

@@ -73,3 +73,44 @@ function relaodSectors() {
     sectors = [];
     getJsonGymSector(GlobalRoomId);
 }
+
+function getDefaultRouteGrade(element) {
+    var firstColorGymRoute = document.getElementById('firstColorGymRoute'),
+        secondColorGymRoute = document.getElementById('secondColorGymRoute'),
+        gymRouteGradeText = document.getElementById('gymRouteGradeText'),
+        useSecondColorGymRoute = document.getElementById('useSecondColorGymRoute');
+
+    axios.get('/api/v1/gym-grade-line/' + element.value).then(function (response) {
+        var gradeLine  = response.data.data;
+
+        gymRouteGradeText.value = gradeLine.grade;
+        firstColorGymRoute.value = gradeLine.colors[0];
+        useSecondColorGymRoute.checked = gradeLine.useSecondColor;
+
+        if (gradeLine.useSecondColor) secondColorGymRoute.value = gradeLine.colors[1];
+    });
+}
+
+function dismountRoute(routeId) {
+    axios.put('/gym/dismount-route/' + routeId).then(function (response) {
+        var data = JSON.parse(response.data);
+        if (data.dismounted_at !== null) {
+            Materialize.toast('Ligne démontée', 4000);
+        } else {
+            Materialize.toast('Ligne remontée', 4000);
+        }
+        reloadRouteVue();
+    });
+}
+
+function favoriteRoute(routeId) {
+    axios.put('/gym/favorite-route/' + routeId).then(function (response) {
+        var data = JSON.parse(response.data);
+        if (data.favorite) {
+            Materialize.toast('Ligne favoris', 4000);
+        } else {
+            Materialize.toast('Favoris retiré', 4000);
+        }
+        reloadRouteVue();
+    });
+}

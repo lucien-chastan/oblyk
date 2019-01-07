@@ -55,6 +55,9 @@ function initSchemeGymMap() {
 
     scheme.fitBounds([[0, 0], [heightScheme, widthScheme]]);
     scheme.on('click', function (e) {
+        if(window.windowWidth() < 780) {
+            console.log('on ferme')
+        }
         console.log('[' + Math.round(e['latlng']['lat'], 2) + ',' + Math.round(e['latlng']['lng'], 2) + ']');
     });
 
@@ -246,43 +249,14 @@ function reloadRouteVue() {
     closeModal();
 }
 
-function getDefaultRouteGrade(element) {
-    var firstColorGymRoute = document.getElementById('firstColorGymRoute'),
-        secondColorGymRoute = document.getElementById('secondColorGymRoute'),
-        gymRouteGradeText = document.getElementById('gymRouteGradeText'),
-        useSecondColorGymRoute = document.getElementById('useSecondColorGymRoute');
+function closeGymSchemeSideNave() {
+    var bodyMap = document.getElementById('body-map');
 
-    axios.get('/api/v1/gym-grade-line/' + element.value).then(function (response) {
-        var gradeLine  = response.data.data;
+    console.log(bodyMap.className);
 
-        gymRouteGradeText.value = gradeLine.grade;
-        firstColorGymRoute.value = gradeLine.colors[0];
-        useSecondColorGymRoute.checked = gradeLine.useSecondColor;
-
-        if (gradeLine.useSecondColor) secondColorGymRoute.value = gradeLine.colors[1];
-    });
-}
-
-function dismountRoute(routeId) {
-    axios.put('/gym/dismount-route/' + routeId).then(function (response) {
-        var data = JSON.parse(response.data);
-        if (data.dismounted_at !== null) {
-            Materialize.toast('Ligne démontée', 4000);
-        } else {
-            Materialize.toast('Ligne remontée', 4000);
-        }
-        reloadRouteVue();
-    });
-}
-
-function favoriteRoute(routeId) {
-    axios.put('/gym/favorite-route/' + routeId).then(function (response) {
-        var data = JSON.parse(response.data);
-        if (data.favorite) {
-            Materialize.toast('Ligne favoris', 4000);
-        } else {
-            Materialize.toast('Favoris retiré', 4000);
-        }
-        reloadRouteVue();
-    });
+    if (bodyMap.className === 'side-nav-is-open') {
+        bodyMap.className = 'side-nav-is-close';
+    } else {
+        bodyMap.className = 'side-nav-is-open';
+    }
 }

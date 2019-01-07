@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Crag;
-use App\Cross;
-use App\Follow;
 use App\Gym;
 use App\GymRoom;
 use App\GymRoute;
 use App\GymSector;
-use App\TickList;
-use App\User;
-use App\UserPlace;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\IndoorCross;
 use App\Lib\HelpersTemplates;
+use Illuminate\Support\Facades\Auth;
 
 class GymSchemeController extends Controller
 {
@@ -84,12 +78,14 @@ class GymSchemeController extends Controller
         $GymSector = GymSector::class;
         $Gym = Gym::class;
         $GymRoute = GymRoute::class;
+        $Cross = IndoorCross::class;
 
         $gymSector = $GymSector::where('id', $sector_id)
             ->with('room')
             ->first();
 
         $gymRoutes = $GymRoute::where([['sector_id', $gymSector->id], ['dismounted_at', null]])
+            ->with(['crosses' => function($query) {$query->where('user_id', Auth::id());}])
             ->orderBy('opener_date')
             ->get();
 
@@ -109,13 +105,17 @@ class GymSchemeController extends Controller
         $GymRoute = GymRoute::class;
         $Gym = Gym::class;
         $Room = GymRoom::class;
+        $Cross = IndoorCross::class;
 
         $gymRoute = $GymRoute::where('id', $route_id)->with('sector')->first();
         $room = $Room::find($gymRoute->sector->room_id);
         $gym = $Gym::find($room->gym_id);
 
+        $user_crosses = $Cross::where([['user_id', '=', Auth::id()], ['route_id', '=', $route_id]])->get();
+
         return view('pages.gym.vues.routeVue', [
             'route' => $gymRoute,
+            'user_crosses' => $user_crosses,
             'gym' => $gym,
             'room' => $room,
         ]);

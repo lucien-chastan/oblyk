@@ -217,6 +217,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.gym-route-type', [
             'name' => $options['name'],
+            'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
             'icon' => $options['icon'] ?? '',
@@ -228,6 +229,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.cross-statuses', [
             'name' => $options['name'],
+            'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
             'icon' => $options['icon'] ?? '',
@@ -252,6 +254,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.cross-modes', [
             'name' => $options['name'],
+            'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
             'icon' => $options['icon'] ?? '',
@@ -414,6 +417,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.grade', [
             'name' => $options['name'],
+            'col' => $options['col'] ?? 's12',
             'required' => $options['required'] ?? false,
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
@@ -507,6 +511,26 @@ class InputTemplates extends ServiceProvider
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'classLabel' => $options['classLabel'] ?? '',
             'onkeyup' => (isset($options['onkeyup'])) ? ' onkeyup="' . $options['onkeyup'] . '"' : '',
+        ]);
+    }
+
+    // Color list <select>
+    public static function colorList($options)
+    {
+        $Color = new Color();
+
+        return view('inputs.color-list', [
+            'name' => $options['name'],
+            'value' => $options['value'] ?? '',
+            'required' => $options['required'] ?? false,
+            'icon' => $options['icon'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $options['placeholder'] ?? '',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'classLabel' => $options['classLabel'] ?? '',
+            'onChange' => $options['onChange'] ?? '',
+            'colors' => $Color->holdColors,
+            'col' => $options['col'] ?? 's12',
         ]);
     }
 

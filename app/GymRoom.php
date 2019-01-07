@@ -16,6 +16,11 @@ class GymRoom extends Model
         return $this->hasMany('App\GymSector', 'room_id', 'id');
     }
 
+    public function crosses()
+    {
+        return $this->hasMany('App\IndoorCross', 'room_id', 'id');
+    }
+
     /**
      * @param bool $absolute
      * @return string
@@ -49,5 +54,14 @@ class GymRoom extends Model
     public function hasScheme()
     {
         return (file_exists(storage_path('app/public/gyms/schemes/scheme-' . $this->id . '.png')));
+    }
+
+    public function scheme()
+    {
+        if ($this->hasScheme()) {
+            return storage_path('app/public/gyms/schemes/scheme-' . $this->id . '.png');
+        } else {
+            return false;
+        }
     }
 }

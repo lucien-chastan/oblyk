@@ -1,9 +1,9 @@
 @inject('Helpers','App\Lib\HelpersTemplates')
 
 @extends('layouts.map-gym',[
-    'meta_title'=> 'Plan de la salle de laennec',
-    'meta_description'=>'Description du plan de la salle de lanenec',
-    'meta_img'=>'https://oblyk.org/img/map_meta.jpg',
+    'meta_title' => trans('meta/gym-scheme.title', ['gym_label' => $gym->label, 'room_label' => $room->label]),
+    'meta_description' => trans('meta/gym-scheme.description', ['gym_label' => $gym->label, 'room_label' => $room->label, 'city' => $gym->city, 'postal_code' => $gym->postal_code]),
+    'meta_img'=> $room->hasScheme() ? $room->scheme() : $gym->bandeau(),
     'gym' => $gym,
     'room' => $room,
     'rooms' => $rooms,
@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-    <div class="side-nav-is-open">
+    <div class="side-nav-is-open" id="body-map">
         <div id="gym-scheme"
              data-room-id="{{ $room->id }}"
              data-gym-id="{{ $room->gym_id }}"
@@ -33,22 +33,30 @@
         >
             @if(!$room->hasScheme() && (Auth::check() && $gym->userIsAdministrator(Auth::id())))
                 <div class="text-center" id="btn-add-first-scheme">
-                    <button {!! $Helpers::modal(route('roomUploadSchemeModal', ['gym_id'=>$gym->id]), ["room_id"=>$room->id, "title"=>'Telecharger un plan', "method"=>"POST", "callback"=>"reloadPage"]) !!}  class="btn-flat btnModal">
+                    <button {!! $Helpers::modal(route('roomUploadSchemeModal', ['gym_id'=>$gym->id]), ["room_id"=>$room->id, "title"=> trans('pages/gym-schemes/global.uploadAScheme'), "method"=>"POST", "callback"=>"reloadPage"]) !!}  class="btn-flat btnModal">
                         <i class="material-icons left blue-text">wallpaper</i>
-                        Uploader le plan de mon topo
+                        @lang('pages/gym-schemes/global.uploadFirstSchemeImage')
                     </button>
                 </div>
             @endif
         </div>
 
-        {{--SECTOR AND ROUTE SIDENAV--}}
+        {{-- Close side nav buton --}}
+        <div class="open-close-btn" id="open-close-btn" onclick="closeGymSchemeSideNave()" style="color: {{ $colors['bannerColor'] }}; background-color: {{ $colors['bannerBgColor'] }}">
+            <div class="waves-effect">
+                <i class="material-icons">keyboard_arrow_left</i>
+            </div>
+        </div>
+
+        {{-- Sector and route sidenav --}}
         <div id="side-map-gym-scheme" class="side-map-gym-scheme">
+
             <div class="sector-banner grey darken-1" style="background-image: url('/storage/gyms/1300/bandeau-{{ $gym->id }}.jpg')">
                 <div class="bottom-information">
                     <nav>
                         <div class="nav-wrapper loved-king-font">
                             <div class="col s12">
-                                <a class="breadcrumb" id="item-nav-1" onclick="getSectors();animationLoadSideNav('l')">Les secteurs</a>
+                                <a class="breadcrumb" id="item-nav-1" onclick="getSectors();animationLoadSideNav('l')">@lang('pages/gym-schemes/global.breadcrumbSector')</a>
                                 <a class="breadcrumb" id="item-nav-2">Second</a>
                                 <a class="breadcrumb" id="item-nav-3">Third</a>
                             </div>
@@ -114,7 +122,7 @@
     <script>
         getSectors();
 
-        //passage de la barre de navigation en noir
+        // Change nav bar color
         var nav_barre = document.getElementById('nav_barre');
         nav_barre.setAttribute('class', nav_barre.className.replace('nav-white','nav-black'));
     </script>

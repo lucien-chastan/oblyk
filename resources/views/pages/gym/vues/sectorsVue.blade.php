@@ -6,13 +6,13 @@
             <li class="tab col s6">
                 <a class="active" href="#sectors-tab">
                     <i class="material-icons blue-text">filter_none</i>
-                    Secteurs
+                    @lang('pages/gym-schemes/global.tadSectors')
                 </a>
             </li>
             <li class="tab col s6">
                 <a href="#routes-tab">
                     <i class="material-icons blue-text">show_chart</i>
-                    Ouvertures
+                    @lang('pages/gym-schemes/global.tadNewRoutes')
                 </a>
             </li>
         </ul>
@@ -37,18 +37,18 @@
                 </tbody>
             </table>
         @else
-            <p class="text-italic grey-text text-center">Les secteurs non pas encore été créés</p>
+            <p class="text-italic grey-text text-center">@lang('pages/gym-schemes/global.noSectors')</p>
         @endif
     </div>
 
     @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
         <div class="row">
             <div class="col s12 top-border">
-                <p><i class="material-icons left blue-text">settings</i><strong>Administration</strong></p>
+                <p><i class="material-icons left blue-text">settings</i><strong>@lang('pages/gym-schemes/global.administrationTitle')</strong></p>
             </div>
             <div class="col s12 administration-area">
-                <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["room_id"=>$room->id, "gym_id"=>$gym->id, "title"=>'Créer un secteur', "method"=>"POST", 'callback'=>'reloadSectorsVue']) !!} class="btn btn-flat btn btnModal">
-                    Ajouter un secteur
+                <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id,]), ["room_id"=>$room->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.createSector'), "method"=>"POST", 'callback'=>'reloadSectorsVue']) !!} class="btn btn-flat btn btnModal">
+                    @lang('pages/gym-schemes/global.createSector')
                     <i class="material-icons left">add</i>
                 </button>
             </div>

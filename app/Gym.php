@@ -49,6 +49,11 @@ class Gym extends Model
         return $this->hasMany('App\GymAdministrator', 'gym_id','id');
     }
 
+    public function crosses()
+    {
+        return $this->hasMany('App\IndoorCross', 'gym_id', 'id');
+    }
+
     /**
      * @param int $size [50, 100]
      * @return string

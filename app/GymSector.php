@@ -21,6 +21,11 @@ class GymSector extends Model
         return $this->hasOne('App\GymRoom','id', 'room_id');
     }
 
+    public function crosses()
+    {
+        return $this->hasMany('App\IndoorCross', 'sector_id', 'id');
+    }
+
     public function hasPicture()
     {
         return file_exists(storage_path('app/public/gyms/sectors/1300/sector-' . $this->id . '.jpg'));

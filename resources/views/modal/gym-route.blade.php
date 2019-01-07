@@ -9,19 +9,19 @@
     <div class="row">
         {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_route']->label, 'label'=>'Nom de la ligne', 'type'=>'text', 'col' => 's8']) !!}
         {!! $Inputs::text(['name'=>'reference', 'value'=>$dataModal['gym_route']->reference, 'label'=>'Référence de la ligne', 'type'=>'text', 'col' => 's4']) !!}
-        {!! $Inputs::gymLevelGrade(['name'=>'gradeLine', 'gym_grade_id'=>$dataModal['room']->gym_grade_id, 'label'=>'Niveau', 'value'=>$dataModal['estimateGradeLevel'], 'placeholder'=>"Niveau de cotation", "onChange" => "getDefaultRouteGrade(this)"]) !!}
+        {!! $Inputs::gymLevelGrade(['name'=>'gradeLine', 'gym_grade_id'=>$dataModal['sector']->gym_grade_id ?? $dataModal['room']->gym_grade_id, 'label'=>'Niveau', 'value'=>$dataModal['estimateGradeLevel'], 'placeholder'=>"Niveau de cotation", "onChange" => "getDefaultRouteGrade(this)"]) !!}
         {!! $Inputs::grade(['name'=>'grade', 'id'=>'gymRouteGradeText', 'required'=>true, 'label'=>'Cotation', 'value'=>$dataModal['gym_route']->grade . $dataModal['gym_route']->sub_grade, 'placeholder'=>"cotation, exemple 6a+, 5c, 7b/+, etc."]) !!}
         <div class="row">
             <div class="col s12">
                 <div class="col s6">
                     <p class="text-underline">Couleur</p>
-                    {!! $Inputs::color(['name'=>'color_first', 'id'=>'firstColorGymRoute', 'label'=>'Première couleur', 'value'=>$dataModal['colors'][0] ?? '#ffffff', 'placeholder'=>"Première couleur"]) !!}
+                    {!! $Inputs::colorList(['name'=>'color_first', 'id'=>'firstColorGymRoute', 'label'=>'Première couleur', 'value'=>$dataModal['colors'][0] ?? '#f2f2f2', 'placeholder'=>"Première couleur"]) !!}
                 </div>
                 <div class="col s6">
                     <p class="text-underline">
                         {!! $Inputs::checkbox(['name'=>'use_second_color', 'id'=>'useSecondColorGymRoute', 'checked'=>($dataModal['use_second_color'] == 1), 'label' => 'Utiliser une seconde couleur']) !!}
                     </p>
-                    {!! $Inputs::color(['name'=>'color_second', 'id'=>'secondColorGymRoute', 'label'=>'Second couleur', 'value'=>$dataModal['colors'][1] ?? '#ffffff', 'placeholder'=>"Seconde couleur"]) !!}
+                    {!! $Inputs::colorList(['name'=>'color_second', 'id'=>'secondColorGymRoute', 'label'=>'Second couleur', 'value'=>$dataModal['colors'][1] ?? '#f2f2f2', 'placeholder'=>"Seconde couleur"]) !!}
                 </div>
             </div>
         </div>

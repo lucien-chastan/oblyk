@@ -17,6 +17,11 @@ class GymRoute extends Model
         return $this->hasOne('App\GymSector', 'id', 'sector_id');
     }
 
+    public function crosses()
+    {
+        return $this->hasMany('App\IndoorCross', 'route_id', 'id');
+    }
+
     /**
      * @return array
      */
@@ -45,7 +50,6 @@ class GymRoute extends Model
     {
         return $this->hasThumbnail() ? '/storage/gyms/routes/100/thumbnail-' . $this->id . '.jpg' : '';
     }
-
 
     public function isFavorite()
     {

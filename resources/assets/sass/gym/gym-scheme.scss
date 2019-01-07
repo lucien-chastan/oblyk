@@ -1,5 +1,21 @@
 .room-icon {
   margin-right: 0.7em;
+  &.room-icon-side-nav {
+    margin-top: 10px;
+    opacity: 0.5;
+  }
+}
+
+.open-close-btn {
+  position: absolute;
+  bottom: 8px;
+  transition: all 0.3s;
+  width: 32px;
+  line-height: 14px;
+  .material-icons {
+    font-size: 30px;
+    transition: all 0.3s;
+  }
 }
 
 .side-nav-is-open {
@@ -7,11 +23,39 @@
     width: calc(100% - 370px);
     left: 370px;
   }
+  .open-close-btn {
+    left: 370px;
+  }
 }
 
 .side-nav-is-close {
   #gym-scheme {
     width: 100%;
+  }
+  #side-map-gym-scheme {
+    transform: translateX(-100%) !important;
+  }
+  .open-close-btn{
+    left: 0;
+    .material-icons {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .side-nav-is-open {
+    .open-close-btn {
+      left: calc(100vw - 40px);
+    }
+  }
+}
+
+.side-nav {
+  .gym-label {
+    img {
+      vertical-align: bottom;
+    }
   }
 }
 

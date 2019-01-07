@@ -1,4 +1,4 @@
-<div class="input-field col s12">
+<div class="input-field col {{ $col }}">
     @if($icon != '')
         <i class="oblyk-icon {{ $icon }} prefix"></i>
     @endif

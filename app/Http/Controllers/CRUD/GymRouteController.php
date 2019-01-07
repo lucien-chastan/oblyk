@@ -30,7 +30,7 @@ class GymRouteController extends Controller
 
         $sector = $GymSector::find($request->input('sector_id'));
         $room = $GymRoom::find($sector->room_id);
-        $gradeSystem = $GymGrade::where('id',$room->gym_grade_id)->with('gradeLines')->first();
+        $gradeSystem = $GymGrade::where('id', $sector->gym_grade_id ?? $room->gym_grade_id)->with('gradeLines')->first();
 
         $id = $request->input('id');
         if (isset($id)) {
@@ -69,10 +69,11 @@ class GymRouteController extends Controller
                 'method' => $request->input('method'),
                 'route' => $outputRoute,
                 'room' => $room,
+                'sector' => $sector,
                 'callback' => $callback,
                 'colors' => $colors,
                 'use_second_color' => $secondColor,
-                'estimateGradeLevel' => $estimateGradeLevel,
+                'estimateGradeLevel' => $estimateGradeLevel
             ]
         ];
 

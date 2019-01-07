@@ -30,49 +30,81 @@
                 {{ $route->description }}
             </p>
         @endif
+
+        {{-- Cross --}}
+        @if(Auth::check())
+            @if(count($user_crosses) > 0)
+                <div class="blue-border-zone">
+                    @foreach($user_crosses as $cross)
+                        <div class="blue-border-div">
+                            <p>
+                                @lang('elements/statuses.status_' . $cross->status_id) le {{ $cross->release_at->format('d/m/Y') }}, fait en @lang('elements/modes.mode_' . $cross->mode_id)
+                                <i {!! $Helpers::modal(route('indoorCrossModal'), ["id" => $cross->id, "route_id"=>$route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=> trans('pages/gym-schemes/global.editCross'), "method"=>"PUT", 'callback'=>'reloadRouteVue']) !!} style="font-size: 1.1em" class="material-icons right btnModal">edit</i>
+                                <i style="font-size: 1.1em" class="material-icons right red-text">delete</i>
+                            </p>
+                            @if($cross->description != null)
+                                <div class="markdownZone">
+                                    @markdown($cross->description)
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            <div class="text-center">
+                <button {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>$route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=> trans('pages/gym-schemes/global.addCross'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                    @if(count($user_crosses) == 0)
+                        @lang('pages/gym-schemes/global.addCross')
+                    @else
+                        @lang('pages/gym-schemes/global.addRepetitionCross')
+                    @endif
+                    <i class="material-icons left">done</i>
+                </button>
+            </div>
+        @endif
         @if($route->hasPicture())
             <div>
                 <img src="{{ $route->picture(500) }}" class="responsive-img">
             </div>
         @endif
         <p class="text-center grey-text text-italic">
-            Ouvert par {{ $route->opener }} le {{ $route->opener_date->format('d/m/Y') }}
+            @lang('pages/gym-schemes/global.openBy', ['opener' => $route->opener, 'open_date' => $route->opener_date->format('d/m/Y')])
         </p>
     </div>
 </div>
 @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
     <div class="row">
         <div class="col s12 top-border">
-            <p><i class="material-icons left blue-text">settings</i><strong>Administration</strong></p>
+            <p><i class="material-icons left blue-text">settings</i><strong>@lang('pages/gym-schemes/global.administrationTitle')</strong></p>
         </div>
         <div class="col s12 administration-area">
-            <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => $route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=>'Modifier la voie', "method"=>"PUT", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
-                Modifier la voie
+            <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => $route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=> trans('pages/gym-schemes/global.editRoute'), "method"=>"PUT", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                @lang('pages/gym-schemes/global.editRoute')
                 <i class="material-icons left">edit</i>
             </button>
-            <button {!! $Helpers::modal(route('routeUploadSchemeModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=>'Uploader une photo', "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
-                Uploader une photo
+            <button {!! $Helpers::modal(route('routeUploadSchemeModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                @lang('pages/gym-schemes/global.uploadPicture')
                 <i class="material-icons left">photo_camera</i>
             </button>
-            <button {!! $Helpers::modal(route('routeUploadThumbnailModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=>'Uploader une miniature', "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
-                Uploader une miniature
+            <button {!! $Helpers::modal(route('routeUploadThumbnailModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadThumbnail'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                @lang('pages/gym-schemes/global.uploadThumbnail')
                 <i class="material-icons left">crop_original</i>
             </button>
             <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
                 @if($route->dismounted_at == null)
-                    Démonter la voie
+                    @lang('pages/gym-schemes/global.dismountRoute')
                     <i class="material-icons left">reply</i>
                 @else
-                    Remonter la voie
+                    @lang('pages/gym-schemes/global.riseUpRoute')
                     <i class="material-icons left">keyboard_capslock</i>
                 @endif
             </button>
             <button class="btn btn-flat btn" onclick="favoriteRoute({{ $route->id }})">
                 @if($route->favorite)
-                    Ligne favoris
+                    @lang('pages/gym-schemes/global.favoriteRoute')
                     <i class="material-icons left red-text">favorite</i>
                 @else
-                    Mettre en favoris
+                    @lang('pages/gym-schemes/global.upToFavoriteRoute')
                     <i class="material-icons left">favorite_border</i>
                 @endif
             </button>
