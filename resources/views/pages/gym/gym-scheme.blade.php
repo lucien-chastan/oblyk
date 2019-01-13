@@ -94,6 +94,13 @@
                 </a>
             </div>
         @endif
+
+        <div class="crosses-vue">
+            <a onclick="showCrosses(false)" class="btn-floating btn-small waves-effect waves-light btn-flat right close-crosses-bnt"><i class="material-icons grey-text text-darken-3">close</i></a>
+            <div id="crosses-vue">
+                {{-- load with ajax --}}
+            </div>
+        </div>
     </div>
 
     @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
@@ -109,11 +116,16 @@
         var GlobalGymId = {{ $gym->id }},
             GlobalRoomId = {{ $room->id }}
     </script>
-    @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
-        <script src="/framework/leaflet/Leaflet.Editable.js"></script>
-        <script src="/js/gym-edit-scheme.js"></script>
-        <script src="/js/gym-upload-scheme.js"></script>
+    @if(Auth::check())
+        <script src="/js/indoor-crosses-chart.js"></script>
+        <script src="/framework/chartJs/Chart.min.js"></script>
+        @if($gym->userIsAdministrator(Auth::id()))
+            <script src="/framework/leaflet/Leaflet.Editable.js"></script>
+            <script src="/js/gym-edit-scheme.js"></script>
+            <script src="/js/gym-upload-scheme.js"></script>
+        @endif
     @endif
+
     @if($room->hasScheme())
         <script>
             initSchemeGymMap();

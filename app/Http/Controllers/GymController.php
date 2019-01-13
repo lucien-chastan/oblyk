@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Crag;
-use App\Cross;
 use App\Follow;
 use App\Gym;
 use App\GymRoom;
-use App\GymAdministrator;
-use App\TickList;
+use App\IndoorCross;
 use App\User;
 use App\UserPlace;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\GymAdministrator;
 
 class GymController extends Controller
 {
@@ -24,6 +19,7 @@ class GymController extends Controller
         $User = User::class;
         $UserPlace = UserPlace::class;
         $Follow = Follow::class;
+        $Cross = IndoorCross::class;
 
         $gym = $Gym::where('id', $gym_id)
             ->withCount('links')
@@ -32,7 +28,6 @@ class GymController extends Controller
             ->withCount('posts')
             ->withCount('rooms')
             ->with('photos')
-            ->with('rooms')
             ->with('descriptions.user')
             ->first();
 
@@ -70,12 +65,17 @@ class GymController extends Controller
         $gym->logo = file_exists(storage_path('app/public/gyms/100/logo-' . $gym->id . '.png')) ? '/storage/gyms/100/logo-' . $gym->id . '.png' : '/img/icon-gym.svg';
         $gym->type = $gymType;
 
-        // Administrator
-        $isAdministrator = GymAdministrator::where([['user_id', Auth::id()], ['gym_id',$gym_id]])->exists();
-        $administrator_count = GymAdministrator::where('gym_id', $gym_id)->count();
+        $crosses = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id]])->get();
+        if (count($crosses) > 0) {
+            $crossesHeight = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id]])->sum('height');
+            $crossesMaxGrade = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id]])->max('grade_val');
+        }
 
         $data = [
             'gym' => $gym,
+            'crosses' => $crosses,
+            'crossesHeight' => $crossesHeight ?? 0,
+            'crossesMaxGrade' => $crossesMaxGrade ?? 0,
             'user' => $user,
             'firstRoom' => $firstRoom,
             'meta_title' => $gym['label'],

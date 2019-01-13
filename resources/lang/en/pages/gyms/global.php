@@ -15,5 +15,8 @@ return [
     'tabInformation' => "Information",
     'tabNewsFeed' => "News feed",
     'tabMap' => "Map",
+    'myCrosses' => "My crosses",
+    'guideBook' => "Guidebook",
+    'administer' => "Administer",
 
 ];

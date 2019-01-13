@@ -26,6 +26,10 @@
   .open-close-btn {
     left: 370px;
   }
+  .crosses-vue {
+    width: calc(100% - 370px);
+    left: 370px;
+  }
 }
 
 .side-nav-is-close {
@@ -41,6 +45,9 @@
       transform: rotate(180deg);
     }
   }
+  .crosses-vue {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 410px) {
@@ -51,11 +58,30 @@
   }
 }
 
+.cross-alert {
+  border-radius: 5px;
+  margin-bottom: 1em;
+  padding: 1px 10px 10px 10px;
+}
+
 .side-nav {
   .gym-label {
     img {
       vertical-align: bottom;
     }
+  }
+}
+
+.crosses-vue {
+  display: none;
+  padding-top: 70px;
+  height: calc(100vh);
+  overflow-y: auto;
+  position: fixed;
+  background-color: white;
+  .close-crosses-bnt {
+    right: 5px;
+    position: absolute;
   }
 }
 

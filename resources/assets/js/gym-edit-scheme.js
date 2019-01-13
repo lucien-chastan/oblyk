@@ -74,23 +74,6 @@ function relaodSectors() {
     getJsonGymSector(GlobalRoomId);
 }
 
-function getDefaultRouteGrade(element) {
-    var firstColorGymRoute = document.getElementById('firstColorGymRoute'),
-        secondColorGymRoute = document.getElementById('secondColorGymRoute'),
-        gymRouteGradeText = document.getElementById('gymRouteGradeText'),
-        useSecondColorGymRoute = document.getElementById('useSecondColorGymRoute');
-
-    axios.get('/api/v1/gym-grade-line/' + element.value).then(function (response) {
-        var gradeLine  = response.data.data;
-
-        gymRouteGradeText.value = gradeLine.grade;
-        firstColorGymRoute.value = gradeLine.colors[0];
-        useSecondColorGymRoute.checked = gradeLine.useSecondColor;
-
-        if (gradeLine.useSecondColor) secondColorGymRoute.value = gradeLine.colors[1];
-    });
-}
-
 function dismountRoute(routeId) {
     axios.put('/gym/dismount-route/' + routeId).then(function (response) {
         var data = JSON.parse(response.data);

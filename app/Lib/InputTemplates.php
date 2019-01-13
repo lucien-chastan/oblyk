@@ -129,6 +129,7 @@ class InputTemplates extends ServiceProvider
             'name' => $options['name'],
             'required' => $options['required'] ?? false,
             'value' => $value,
+            'class' => (isset($options['class'])) ? $options['class'] : '',
             'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'placeholder' => $placeholder,
@@ -217,6 +218,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.gym-route-type', [
             'name' => $options['name'],
+            'class' => (isset($options['class'])) ? $options['class'] : '',
             'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
@@ -254,6 +256,7 @@ class InputTemplates extends ServiceProvider
     {
         return view('inputs.cross-modes', [
             'name' => $options['name'],
+            'class' => (isset($options['class'])) ? $options['class'] : '',
             'col' => $options['col'] ?? 's12',
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
@@ -423,6 +426,7 @@ class InputTemplates extends ServiceProvider
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => $options['value'] ?? '',
             'classLabel' => ($options['value'] != '' || $options['placeholder'] != '') ? 'active' : '',
+            'class' => (isset($options['class'])) ? $options['class'] : '',
             'icon' => $options['icon'] ?? '',
             'placeholder' => $options['placeholder'] ?? '',
         ]);
@@ -581,6 +585,8 @@ class InputTemplates extends ServiceProvider
             'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
             'onChange' => $options['onChange'] ?? '',
             'gradeLines' => $gradeLines,
+            'col' => (isset($options['col'])) ? $options['col'] : 's12',
+            'class' => (isset($options['class'])) ? $options['class'] : ''
         ]);
     }
 }

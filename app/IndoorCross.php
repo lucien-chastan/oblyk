@@ -39,6 +39,15 @@ class IndoorCross extends Model
         return $this->hasOne('App\CrossMode','id', 'mode_id');
     }
 
+    /**
+     * @return array
+     */
+    public function colors()
+    {
+        $this->colors = explode(';', $this->color);
+        return $this->colors;
+    }
+
     public function hasRoom()
     {
         return ($this->room_id);
@@ -54,4 +63,8 @@ class IndoorCross extends Model
         return ($this->route_id);
     }
 
+    public function hasGym()
+    {
+        return ($this->gym_id);
+    }
 }

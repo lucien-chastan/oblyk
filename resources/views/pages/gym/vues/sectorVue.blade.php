@@ -49,16 +49,29 @@
                                     <i style="font-size: 1em" class="material-icons right">reorder</i>
                                 @endif
                             </td>
-                        </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+        @if(Auth::check())
             <div class="col s12">
-                <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.createRoute')) !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
+                @if($gym->userIsAdministrator(Auth::id()))
+                    <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.createRoute')) !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
+                @endif
+                <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.addCrossSector')) !!} {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>null, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.addCrossSector'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">done</i></a>
             </div>
         @endif
+    </div>
+@endif
+
+@if(Auth::check() && count($sector->crosses) > 0)
+    <div class="row top-border" style="margin-bottom: 0">
+        <div class="col s12 grey-text text-bold text-center">
+            <p onclick="getGymCrosses()">
+                @lang('pages/gym-schemes/global.myCrossInThisSector', ['count' => count($sector->crosses)])
+            </p>
+        </div>
     </div>
 @endif
 

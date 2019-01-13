@@ -30,7 +30,7 @@
             @if($administrator_count == 0)
                 <div class="text-center">
                     <button {!! $Helpers::modal(route('managerModal'), ['gym_id'=>$gym->id]) !!} class="btn-flat btnModal">
-                        Je suis gérant de cette salle
+                        @lang('pages/gyms/tabs/information.IAmAAdministrator')
                     </button>
                 </div>
             @endif
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    {{--PETITE INFORMATION SUR LA SALLE--}}
+    {{-- Information --}}
     <div class="col s12 m5">
         <div class="card-panel">
             <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.titleAbout')</h2>
@@ -73,13 +73,20 @@
     </div>
 </div>
 
+@if(Auth::check())
+    <div class="row">
+        {{-- Crosses --}}
+        @include('pages.gym.partials.gym-crosses')
+    </div>
+@endif
+
 <div class="row">
-    {{--DESCRIPTION--}}
+    {{-- Description --}}
     @include('pages.gym.partials.description')
 </div>
 
 <div class="row">
-    {{--DESCRIPTION--}}
+    {{-- Partner --}}
     @include('pages.gym.partials.partner')
 </div>
 

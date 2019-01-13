@@ -77,6 +77,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
     Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
     Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
+    Route::get('/salle-escalade/topo/crosses/{gym_id}', 'GymSchemeController@getGymCrossesView')->name('getGymCrossesView');
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
@@ -177,6 +178,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     //VUE GYM
     Route::get('/vue/gym/{gym_id}/map', 'Vue\GymVueController@vueMap')->name('vueMapGym');
     Route::get('/vue/gym/{gym_id}/fil-actu', 'Vue\GymVueController@vueFilActu')->name('vueFilActuGym');
+    Route::get('/vue/gym/{gym_id}/cross-list', 'Vue\GymVueController@vueGymCrossList')->name('vueGymCrossList');
 
     //VUE TOPO
     Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');
@@ -539,6 +541,10 @@ Route::post('/chart/analytiks/maps', 'Chart\Crosses\environmentChartsController@
 Route::post('/chart/analytiks/years', 'Chart\Crosses\timeChartsController@years')->name('yearsAnalytiksChart');
 Route::post('/chart/analytiks/months', 'Chart\Crosses\timeChartsController@months')->name('monthsAnalytiksChart');
 Route::post('/chart/analytiks/time-lines', 'Chart\Crosses\timeChartsController@timeLines')->name('timeLinesAnalytiksChart');
+
+// Indoor Chart
+Route::post('/chart/indoor/grades', 'Chart\IndoorChartController@grades')->name('indoorGradesChart');
+Route::post('/chart/indoor/time', 'Chart\IndoorChartController@time')->name('indoorTimeChart');
 
 //SIMILAR
 Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');

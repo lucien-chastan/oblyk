@@ -5,10 +5,7 @@ let paintedCharts = [],
 
 //VA CHERCHER LE GRAPHE DES TYPES DES GRIMPES D'UN USER
 function getChartMyCross() {
-
     let user_id = document.getElementById('user-id-climb-type').value;
-
-    console.log(user_id);
 
     axios.post('/chart/cross/climb-type', {user_id : user_id}).then(function (response) {
         let chart = new Chart(
@@ -60,7 +57,7 @@ function submitFilter() {
 }
 
 
-//Parcours les canvas et va cherche le datas du graphique
+// Loop on graphic canvas
 function getAnalytiksCharts(canvasClass = 'route-analytiks-canvas') {
     let analytkisCanvas = document.getElementsByClassName(canvasClass);
 
@@ -82,7 +79,7 @@ function getAnalytiksCharts(canvasClass = 'route-analytiks-canvas') {
 }
 
 
-//Va chercher et dessine le graphique ciblé
+// Get graphics
 function paintChart(route, element) {
     axios.post(route).then(function (response) {
 
@@ -103,13 +100,13 @@ function initAnalytiksMap() {
 
     analytiksMap = L.map('analytiks-map',{ zoomControl : true, center:[46.5, 4.5], zoom : 5, layers: [carte]});
 
-    //ajout du controleur de tuile
+    // Add zoom controller
     L.control.layers(baseMaps).addTo(analytiksMap);
 
     axios.post('/chart/analytiks/maps').then(function (response) {
         let crags = response.data;
 
-        //ajoute les markeurs à la carte
+        // Add marker on map
         for(let i in crags){
 
             let markerIcon = styleIcon(crags[i].type_voie + '' + crags[i].type_grande_voie + '' + crags[i].type_bloc + '' + crags[i].type_deep_water + '' + crags[i].type_via_ferrata);

@@ -77,6 +77,7 @@ mix.copy('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/jquery.min.js', 'public/js')
     .copy('resources/assets/js/materialize.min.js', 'public/js')
     .copy('resources/assets/js/gallery.js', 'public/js')
+    .copy('resources/assets/js/indoor-crosses-chart.js', 'public/js')
     .copy('resources/assets/js/admin.js', 'public/js');
 
 // Leaflet

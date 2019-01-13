@@ -16,10 +16,30 @@ return [
     'tadSectors' => "Sectors",
     'tadNewRoutes' => "New routes",
     'noSectors' => "Sectors not yet created",
+    'addCrossSector' => "Add a cross on this sector",
+    'addCrossRoom' => "Add a cross on this room",
+    'addCrossGym' => "Add a cross on this gym",
+    'myCrossInThisRoom' => "I have :count crosses in this room",
 
     // Sector
     'routesTitle' => "Routes",
     'informationTitle' => "Information",
+    'myCrossInThisSector' => "I have :count crosses in this sector",
+
+    // Crosses
+    'chartNumberTitle' => "Numbers",
+    'chartGradeTitle' => "Grades",
+    'chartTimeTitle' => "Crosses in the time",
+    'chartHeight' => "Height",
+    'chartCrossesCount' => "Crosses count",
+    'chartMaxGrade' => "Max grade",
+    'tableGrade' => "Grade",
+    'tableHeight' => "Height",
+    'tableMode' => "Mode",
+    'tableType' => "Type",
+    'tableLine' => "Line",
+    'tabTitleCrossList' => "My crosses",
+    'tabTitleGraphic' => "Graphics",
 
     // Administration
     'administrationTitle' => "Administration",

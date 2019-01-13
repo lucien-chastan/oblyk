@@ -28,7 +28,7 @@ class GymRoom extends Model
     public function url($absolute = true)
     {
         $Gym = Gym::class;
-        $gym = $Gym::find($this->gym_id)->select('label')->first();
+        $gym = $Gym::find($this->gym_id);
         return $this->webUrl($this->id, $this->gym_id, $gym->label, $absolute);
     }
 

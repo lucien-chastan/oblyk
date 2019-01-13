@@ -34,13 +34,14 @@
         {{-- Cross --}}
         @if(Auth::check())
             @if(count($user_crosses) > 0)
+                <p class="grey-text text-underline">Mon carnet sur cette voie</p>
                 <div class="blue-border-zone">
                     @foreach($user_crosses as $cross)
                         <div class="blue-border-div">
                             <p>
                                 @lang('elements/statuses.status_' . $cross->status_id) le {{ $cross->release_at->format('d/m/Y') }}, fait en @lang('elements/modes.mode_' . $cross->mode_id)
                                 <i {!! $Helpers::modal(route('indoorCrossModal'), ["id" => $cross->id, "route_id"=>$route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=> trans('pages/gym-schemes/global.editCross'), "method"=>"PUT", 'callback'=>'reloadRouteVue']) !!} style="font-size: 1.1em" class="material-icons right btnModal">edit</i>
-                                <i style="font-size: 1.1em" class="material-icons right red-text">delete</i>
+                                <i {!! $Helpers::modal(route('deleteModal'), ["route" => "/indoor_crosses/".$cross->id, 'callback'=>'reloadRouteVue']) !!} style="font-size: 1.1em" class="material-icons right btnModal red-text">delete</i>
                             </p>
                             @if($cross->description != null)
                                 <div class="markdownZone">

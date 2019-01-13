@@ -1,4 +1,4 @@
-let scheme, timeToLoad, sectors = [], inEdition = false,
+let scheme, timeToLoad, sectors = [], inEdition = false, crossesIsLoaded = false,
     current_sector_label, current_sector_id,
     current_route_label, current_route_id;
 
@@ -252,11 +252,61 @@ function reloadRouteVue() {
 function closeGymSchemeSideNave() {
     var bodyMap = document.getElementById('body-map');
 
-    console.log(bodyMap.className);
-
     if (bodyMap.className === 'side-nav-is-open') {
         bodyMap.className = 'side-nav-is-close';
     } else {
         bodyMap.className = 'side-nav-is-open';
     }
+}
+
+function getDefaultRouteGrade(element) {
+    var firstColorGymRoute = document.getElementById('firstColorGymRoute'),
+        secondColorGymRoute = document.getElementById('secondColorGymRoute'),
+        gymRouteGradeText = document.getElementById('gymRouteGradeText'),
+        useSecondColorGymRoute = document.getElementById('useSecondColorGymRoute');
+
+    axios.get('/api/v1/gym-grade-line/' + element.value).then(function (response) {
+        var gradeLine  = response.data.data;
+
+        gymRouteGradeText.value = gradeLine.grade;
+        firstColorGymRoute.value = gradeLine.colors[0];
+        useSecondColorGymRoute.checked = gradeLine.useSecondColor;
+        $('#firstColorGymRoute').material_select('update');
+
+        if (gradeLine.useSecondColor) {
+            secondColorGymRoute.value = gradeLine.colors[1];
+            $('#secondColorGymRoute').material_select('update');
+        }
+    });
+}
+
+function getGymCrosses(force = false) {
+    var content = document.getElementById('crosses-vue');
+
+    if (crossesIsLoaded === false || force) {
+        axios.get('/salle-escalade/topo/crosses/' + GlobalGymId).then(function (response) {
+            content.innerHTML = response.data;
+            showCrosses(true);
+            crossesIsLoaded = true;
+            initOpenModal();
+            $('.tooltipped').tooltip({delay: 50});
+            $('ul.tabs').tabs();
+        });
+    } else {
+        showCrosses(true);
+    }
+}
+
+function showCrosses(show) {
+    if (show) {
+        document.getElementsByClassName('crosses-vue')[0].style.display = 'block';
+    } else {
+        document.getElementsByClassName('crosses-vue')[0].style.display = 'none';
+    }
+}
+
+function reloadCrossesVue() {
+    indoorPaintedCharts = [];
+    getGymCrosses(true);
+    closeModal();
 }

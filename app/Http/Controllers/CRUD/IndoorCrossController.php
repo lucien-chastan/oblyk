@@ -46,10 +46,22 @@ class IndoorCrossController extends Controller
             $height = $room->height;
         }
 
-        // Get colors
-        $colors = [];
-        if (isset($route_id)) {
-            $colors = $route->colors();
+        // Get line type
+        if (isset($route_id) && $route->type != null) {
+            $type = $route->type;
+        } elseif (isset($sector_id) && $sector->preferred_type != null) {
+            $type = $sector->preferred_type;
+        } elseif (isset($room_id) && $room->preferred_type != null) {
+            $type = $room->preferred_type;
+        }
+
+        // Get grade system
+        if (isset($sector_id) && $sector->gym_grade_id != null) {
+            $gym_grade_id = $sector->gym_grade_id;
+        } elseif (isset($room_id) && $room->gym_grade_id != null) {
+            $gym_grade_id = $room->gym_grade_id;
+        } else {
+            $gym_grade_id = null;
         }
 
         // Save or edit
@@ -59,15 +71,32 @@ class IndoorCrossController extends Controller
             $cross = new IndoorCross();
             $cross->release_at = Carbon::now()->format('Y-m-d');
             $cross->grade = (isset($route_id)) ? $route->grade . $route->sub_grade : null;
-            $cross->type = (isset($route_id)) ? $route->type : null;
+            $cross->type = (isset($type)) ? $type : null;
             $cross->height = $height ?? null;
+        }
+
+        // Get colors
+        $colors = [];
+        if (isset($id_cross)) {
+            $colors = $cross->colors();
+        } elseif (isset($route_id)) {
+            $colors = $route->colors();
         }
 
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
 
         // Save or edit path
-        $outputRoute = ($request->input('method') == 'POST')? '/indoor_crosses' : '/indoor_crosses/' . $id_cross;
+        $methode = $request->input('method');
+        $outputRoute = ($methode == 'POST')? '/indoor_crosses' : '/indoor_crosses/' . $id_cross;
+
+        $hide_color = ($methode == 'POST' && isset($route_id));
+        $hide_height = ($methode == 'POST' && $cross->height !== null);
+        $hide_grade = ($methode == 'POST' && $cross->grade !== null);
+        $hide_type = ($methode == 'POST' && $cross->type !== null);
+        $hide_mode = ($cross->type != 2);
+        $show_grade_system = ($methode == 'POST' && !isset($route_id));
+        $show_alert = ($methode == 'POST' && !isset($route_id));
 
         $data = [
             'dataModal' => [
@@ -78,11 +107,19 @@ class IndoorCrossController extends Controller
                 'route_id' => $request->input('route_id'),
                 'cross' => $cross,
                 'title' => $request->input('title'),
-                'method' => $request->input('method'),
+                'method' => $methode,
                 'route' => $outputRoute,
                 'callback' => $callback,
                 'colors' => $colors,
-                'use_second_color' => (count($colors) > 1) ? 1 : 0
+                'use_second_color' => (count($colors) > 1) ? 1 : 0,
+                'gym_grade_id' => $gym_grade_id,
+                'hide_color' => $hide_color,
+                'hide_height' => $hide_height,
+                'hide_grade' => $hide_grade,
+                'hide_type' => $hide_type,
+                'hide_mode' => $hide_mode,
+                'show_grade_system' => $show_grade_system,
+                'show_alert' => $show_alert,
             ]
         ];
 
@@ -201,7 +238,9 @@ class IndoorCrossController extends Controller
      */
     public function destroy($id)
     {
-        $cross = Cross::where('id', $id)->first();
+        $Cross = IndoorCross::class;
+
+        $cross = $Cross::where('id', $id)->first();
         $oldCross = $cross;
         if($cross->user_id == Auth::id()){
 

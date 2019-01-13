@@ -17,7 +17,7 @@ class GymSchemeController extends Controller
         $Gym = Gym::class;
         $GymRoom = GymRoom::class;
 
-        $gym = $Gym::find($gym_id)->with('rooms')->withCount('rooms')->first();
+        $gym = $Gym::where('id', $gym_id)->with('rooms')->withCount('rooms')->first();
         $room = $GymRoom::find($room_id);
         $rooms = $GymRoom::where('gym_id', $gym_id)->orderBy('order')->get();
 
@@ -51,7 +51,10 @@ class GymSchemeController extends Controller
         $Room = GymRoom::class;
         $GymRoute = GymRoute::class;
 
-        $room = $Room::find($room_id);
+        $room = $Room::where('id',$room_id)
+            ->with(['crosses' => function($query) use ($room_id) {$query->where([['user_id', Auth::id()],['room_id', $room_id]]);}])
+            ->first();
+
         $gym = $Gym::find($room->gym_id);
         $routes = $GymRoute::whereIn(
             'sector_id',
@@ -78,14 +81,13 @@ class GymSchemeController extends Controller
         $GymSector = GymSector::class;
         $Gym = Gym::class;
         $GymRoute = GymRoute::class;
-        $Cross = IndoorCross::class;
 
         $gymSector = $GymSector::where('id', $sector_id)
             ->with('room')
             ->first();
 
         $gymRoutes = $GymRoute::where([['sector_id', $gymSector->id], ['dismounted_at', null]])
-            ->with(['crosses' => function($query) {$query->where('user_id', Auth::id());}])
+            ->with(['crosses' => function($query) use ($gymSector) {$query->where([['user_id', Auth::id()],['sector_id', $gymSector->id]]);}])
             ->orderBy('opener_date')
             ->get();
 
@@ -118,6 +120,34 @@ class GymSchemeController extends Controller
             'user_crosses' => $user_crosses,
             'gym' => $gym,
             'room' => $room,
+        ]);
+    }
+
+    function getGymCrossesView($gymId) {
+        $Gym = Gym::class;
+        $Cross = IndoorCross::class;
+
+        $gym = $Gym::find($gymId);
+        $crosses = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id]])
+            ->with('gym')
+            ->with('room')
+            ->with('room.gym')
+            ->with('sector')
+            ->with('route')
+            ->orderBy('release_at', 'DESC')
+            ->get();
+
+        $sumCrossesHeight = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id]])
+            ->sum('height');
+
+        $maxGradCrosse = $Cross::where([['user_id', Auth::id()], ['gym_id', $gym->id], ['status_id', '!=', 1]])
+            ->max('grade_val');
+
+        return view('pages.gym.vues.crossesVue', [
+            'crosses' => $crosses,
+            'sum_height' => $sumCrossesHeight,
+            'max_grad' => $maxGradCrosse,
+            'gym' => $gym,
         ]);
     }
 

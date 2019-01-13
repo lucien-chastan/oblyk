@@ -46,6 +46,10 @@
             @include('pages.gym.tabs.fil-actu')
         </div>
 
+        <div id="liste-croix">
+            @include('pages.gym.tabs.cross-list')
+        </div>
+
         <div id="map">
             @include('pages.gym.tabs.map')
         </div>
