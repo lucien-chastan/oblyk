@@ -35,22 +35,22 @@
             </span>
         </div>
         <div class="collapsible-body">
-            <div data-route="{{ route('gym_admin_scheme_how', ['gym_id' => $gym->id]) }}" id="item-scheme-how-menu" class="row truncate router-admin-gym-link">
-                <i class="left material-icons">school</i>
+            {{--<div data-route="{{ route('gym_admin_scheme_how', ['gym_id' => $gym->id]) }}" id="item-scheme-how-menu" class="row truncate router-admin-gym-link">--}}
+                {{--<i class="left material-icons">school</i>--}}
+                {{--<span class="hidden-1000">--}}
+                    {{--Comment ça marche ?--}}
+                {{--</span>--}}
+            {{--</div>--}}
+            <div data-route="{{ route('gym_admin_grades_gym', ['gym_id' => $gym->id]) }}" id="item-grade-menu" class="row truncate router-admin-gym-link">
+                <i class="left material-icons">line_weight</i>
                 <span class="hidden-1000">
-                    Comment ça marche ?
+                    Systèmes de cotation
                 </span>
             </div>
             <div data-route="{{ route('gym_admin_schemes_gym', ['gym_id' => $gym->id]) }}" id="item-scheme-scheme-menu" class="row truncate router-admin-gym-link">
                 <i class="left material-icons">home</i>
                 <span class="hidden-1000">
                     Les espaces
-                </span>
-            </div>
-            <div data-route="{{ route('gym_admin_grades_gym', ['gym_id' => $gym->id]) }}" id="item-grade-menu" class="row truncate router-admin-gym-link">
-                <i class="left material-icons">line_weight</i>
-                <span class="hidden-1000">
-                    Systèmes de cotation
                 </span>
             </div>
             <div data-route="{{route('gym_admin_routes_view', ['gym_id' => $gym->id])}}" id="item-scheme-routes-menu" class="row truncate router-admin-gym-link">
@@ -71,12 +71,12 @@
     </li>
 
     {{-- STATISTIQUE--}}
-    <li>
-        <div data-route="{{route('gym_admin_statistic_view', ['gym_id' => $gym->id])}}" id="item-statistique-menu" class="collapsible-header truncate router-admin-gym-link">
-            <i class="material-icons">equalizer</i>
-            <span class="hidden-1000">Statistiques</span>
-        </div>
-    </li>
+    {{--<li>--}}
+        {{--<div data-route="{{route('gym_admin_statistic_view', ['gym_id' => $gym->id])}}" id="item-statistique-menu" class="collapsible-header truncate router-admin-gym-link">--}}
+            {{--<i class="material-icons">equalizer</i>--}}
+            {{--<span class="hidden-1000">Statistiques</span>--}}
+        {{--</div>--}}
+    {{--</li>--}}
 
     <li>
         <div class="collapsible-header truncate">

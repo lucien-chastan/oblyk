@@ -100,6 +100,11 @@
             </div>
         @endif
     </div>
+    <div class="col s12">
+        @if(Auth::check() && $sector->routes_count == 0)
+            <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.addCrossSector')) !!} {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>null, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.addCrossSector'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">done</i></a>
+        @endif
+    </div>
     @if($sector->hasPicture())
         <div class="col s12">
             <img src="{{ $sector->picture(500) }}" class="responsive-img smooth-radius-image" id="sector-image-{{ $sector->id }}">

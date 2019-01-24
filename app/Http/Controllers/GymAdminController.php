@@ -47,6 +47,7 @@ class GymAdminController extends Controller
 
         $gym = $Gym::where('id',$gym_id)
             ->withCount('rooms')
+            ->with('grades')
             ->with('rooms')
             ->first();
 

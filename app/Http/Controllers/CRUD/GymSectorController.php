@@ -21,7 +21,7 @@ class GymSectorController extends Controller
         $GymSector = GymSector::class;
         $GymRoom = GymRoom::class;
 
-        $room = $GymRoom::find($request->input('gym_id'));
+        $room = $GymRoom::find($request->input('room_id'));
 
         $id = $request->input('id');
         if (isset($id)) {

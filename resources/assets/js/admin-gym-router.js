@@ -103,10 +103,10 @@ function afterLoad() {
         creatInputMap();
     }
 
-    //charge les boxes du dashboard
+    //Liste les actus
     try {
-        //loadDashBoxs();
-    } catch (e){}
+        getPosts('Gym',document.getElementById('id-gym-actualite').value, document.getElementById('insert-posts-zone'));
+    }catch (e){}
 
     //Intialise l'opener de route
     try {

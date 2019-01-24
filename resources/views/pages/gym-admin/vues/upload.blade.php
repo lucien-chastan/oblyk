@@ -17,7 +17,12 @@
                         </div>
                         <div class="upload-settings-col-input">
                             {!! $Inputs::Hidden(['name'=>'gym_id','value'=>$gym->id]) !!}
-                            {!! $Inputs::upload(['name'=>'logo', 'filter'=>'image/*', 'id'=>'upload-logo-gym' ,'label'=>'Changer le logo', 'onchange'=>'uploadLogoGym()']) !!}
+                            <div class="col s8">
+                                {!! $Inputs::upload(['name'=>'logo', 'filter'=>'image/*', 'id'=>'upload-logo-gym' ,'label'=>'Parcourir', 'col' => 's6']) !!}
+                            </div>
+                            <div class="col s4">
+                                <button class="btn" style="width: 100%; margin-top: 1.2em" onclick="uploadLogoGym()">Télécharger le logo</button>
+                            </div>
                             {!! $Inputs::progressbar(['id'=>'progressbar-upload-logo-gym']) !!}
                         </div>
                     </div>
@@ -37,7 +42,12 @@
                         </div>
                         <div class="upload-settings-col-input">
                             {!! $Inputs::Hidden(['name'=>'gym_id','value'=>$gym->id]) !!}
-                            {!! $Inputs::upload(['name'=>'bandeau', 'filter'=>'image/*', 'id'=>'upload-bandeau-gym' ,'label'=>'Changer le bandeau', 'onchange'=>'uploadBandeauGym()']) !!}
+                            <div class="col s8">
+                                {!! $Inputs::upload(['name'=>'bandeau', 'filter'=>'image/*', 'id'=>'upload-bandeau-gym' ,'label'=>'Parcourir']) !!}
+                            </div>
+                            <div class="col s4">
+                                <button class="btn" style="width: 100%; margin-top: 1.2em" onclick="uploadBandeauGym()">Télécharger le bandeau</button>
+                            </div>
                             {!! $Inputs::progressbar(['id'=>'progressbar-upload-bandeau-gym']) !!}
                         </div>
                     </div>

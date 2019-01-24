@@ -12,7 +12,9 @@
                                 <tr>
                                     <th colspan="3">
                                         {{ $grade->label }}
-                                        <i {!! $Helpers::tooltip('Voir sur une page séparée') !!} data-route="{{ route('gym_admin_grade_lines_gym', ['gym_id' => $gym->id, 'gym_grade_id'=>$grade->id]) }}" onclick="loadProfileRoute(this)" class="material-icons tooltipped left text-hover blue-text">launch</i>
+                                        <i {!! $Helpers::tooltip('Voir sur une page séparée') !!} data-route="{{ route('gym_admin_grade_lines_gym', ['gym_id' => $gym->id, 'gym_grade_id'=>$grade->id]) }}"
+                                           onclick="loadProfileRoute(this)"
+                                           class="material-icons tooltipped left text-hover blue-text">launch</i>
                                     </th>
                                     <th>
                                         <i {!! $Helpers::tooltip('Supprimer ce système') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_grades/".$grade->id, "callback" => 'goToGrades']) !!} class="material-icons right tooltipped btnModal text-hover red-text text-lighten-3">delete</i>
@@ -29,7 +31,9 @@
                                 </tr>
                                 @foreach($grade->gradeLines as $gradeLine)
                                     <tr>
-                                        <td><span class="grey-text">{{ $gradeLine->order }} -</span> {{ $gradeLine->label }}</td>
+                                        <td>
+                                            <span class="grey-text">{{ $gradeLine->order }} -</span> {{ $gradeLine->label }}
+                                        </td>
                                         <td class="color-grade-{{ $gradeLine->grade_val }} text-bold">{{ \App\Route::valToGrad($gradeLine->grade_val, true) }}</td>
                                         <td>
                                             @foreach($gradeLine->colors() as $color)
@@ -57,6 +61,14 @@
         @else
             <p class="text-center grey-text text-italic">
                 Vous n'avez pas encore défini de système de cotation
+            </p>
+            <p class="text-center">
+                Les systèmes de cotation sont les échelles de difficultés que vous utilisez.<br>
+                Vous pourriez par exemple avoir des étiquettes ou des couleurs de prise qui représentent la difficulté
+                de la voie.<br>
+            </p>
+            <p class="text-center">
+                Renseigner vos systèmes de cotation vous permet de créer vos voies plus rapidement par la suite.
             </p>
             <p class="text-center">
                 <button {!! $Helpers::modal(route('gymGradeModal', ['gym_id'=>$gym->id]), ["gym_id"=>$gym->id, "title"=>'Créer un système de cotation', "method"=>"POST"]) !!} class="btn-flat btnModal">

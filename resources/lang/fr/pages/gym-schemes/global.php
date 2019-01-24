@@ -53,6 +53,6 @@ return [
     'createSector' => "Ajouter un secteur",
     'createRoute' => "Ajouter une ligne",
     'editSector' => "Modifier le secteur",
-    'createSectorArea' => "Créer la zone sur le plan",
+    'createSectorArea' => "Dessiner la zone sur le plan",
     'editSectorArea' => "Éditer la zone sur le plan",
 ];

@@ -20,8 +20,11 @@ class GymVueController extends Controller
     function vueFilActu($id)
     {
         $Gym = Gym::class;
+        $gym = $Gym::where('id', $id)->with('administrators')->first();
+
         $data = [
-            'gym' => $Gym::where('id', $id)->first()
+            'gym' => $gym,
+            'is_administrator' => $gym->userIsAdministrator(Auth::id())
         ];
         return view('pages.gym.vues.filActuVue',$data);
     }
