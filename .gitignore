@@ -18,3 +18,4 @@ Homestead.yaml
 package-lock.json
 send_public_folder.sh
 public/docs/*
+public/mix.js
