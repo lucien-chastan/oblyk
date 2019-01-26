@@ -13,7 +13,7 @@
     @if($gym->rooms_count != 0 || (Auth::check() && $gym->userIsAdministrator(Auth::id())))
         <ul id="dropdown_rooms" class="dropdown-content dropD-auto">
             @foreach($rooms as $list_room)
-                <li><a href="{{ $list_room->url() }}"><img alt="logo d'une salle" src="/img/room-logo.svg" class="left room-icon" height="20">{{ $list_room->label }}</a></li>
+                <li><a href="{{ $list_room->url() }}"><img alt="logo d'une salle" src="/img/icon-tab-gym.svg" class="left room-icon" height="20">{{ $list_room->label }}</a></li>
             @endforeach
             @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
                 <li class="divider"></li>
