@@ -99,9 +99,6 @@ class RoomController extends Controller
                 $gymRoom->scheme_width = $scheme->width();
                 $gymRoom->save();
 
-                // 100*100 version
-                $scheme->fit(100, 100)->save(storage_path('app/public/gyms/schemes/100/scheme-' . $gymRoom->id . '.png'));
-
             } catch (Exception $e) {
 
                 //s'il y a un problème on supprime les images potentiellement uploadé
