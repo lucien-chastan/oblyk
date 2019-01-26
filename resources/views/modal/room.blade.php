@@ -8,7 +8,7 @@
     {!! $Inputs::popupError() !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'required'=>true, 'value'=>$dataModal['gym_room']->label, 'label'=>'Nom de la salle', 'type'=>'text']) !!}
+        {!! $Inputs::text(['name'=>'label', 'required'=>true, 'value'=>$dataModal['gym_room']->label, 'label'=>'Nom de l\'espace', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'order', 'value'=>$dataModal['gym_room']->order, 'label'=>"Ordre d'importance", 'type'=>'number']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_room']->description, 'label'=>'Description', 'type'=>'text']) !!}
         {!! $Inputs::gymRoutesTypes(['name'=>'preferred_type', 'value'=>$dataModal['gym_room']->preferred_type, 'label'=>'Principalement les lignes sont des : ']) !!}
