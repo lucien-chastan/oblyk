@@ -93,6 +93,8 @@ mix.copy('resources/assets/framework/leaflet/markercluster.css', 'public/framewo
     .copy('resources/assets/framework/leaflet/Leaflet.Editable.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/Leaflet.drag.js', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/leaflet.measure.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/L.Control.Locate.min.js', 'public/framework/leaflet')
+    .copy('resources/assets/framework/leaflet/L.Control.Locate.min.css', 'public/framework/leaflet')
     .copy('resources/assets/framework/leaflet/images/', 'public/framework/leaflet/images');
 
 // Axios
