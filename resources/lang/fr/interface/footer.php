@@ -5,5 +5,5 @@ return [
     'moreAboutOblyk' => 'Plus sur oblyk',
     'reportAProblem' => 'Signaler un problème',
     'titleFollow' => "Nous suivre",
-    'newsletter' => "Recevoir la news letter",
+    'newsletter' => "News letter",
 ];
