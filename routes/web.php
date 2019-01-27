@@ -72,7 +72,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
     Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
 
-// INDOOR SCHEME
+    // INDOOR SCHEME
     Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
     Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
     Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
@@ -87,7 +87,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');
     Route::get('/index', 'ToolPagesController@indexPage')->name('indexes');
     Route::get('/sites', 'ToolPagesController@cragsPage')->name('cragsIndex');
-    Route::get('/salles', 'ToolPagesController@RousPage')->name('gymsIndex');
+    Route::get('/salles', 'ToolPagesController@gymsPage')->name('gymsIndex');
     Route::get('/grimpeurs', 'ToolPagesController@usersPage')->name('usersIndex');
     Route::get('/topos', 'ToolPagesController@guidebooksPage')->name('guidebooksIndex');
     Route::get('/groupes', 'ToolPagesController@groupsPage')->name('groupsIndex');
