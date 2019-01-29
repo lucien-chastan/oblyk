@@ -16,6 +16,10 @@
 
     <div class="row">
 
+        @if($dataModal['show_pitches'])
+            {!! $Inputs::pitchesVariant(['name'=>'pitch','pitches'=>$dataModal['pitches'], 'label'=>'Quelle variante avez-vous fait', 'value'=> 0, 'col' => 's12']) !!}
+        @endif
+
         {!! $Inputs::crossStatuses(['name'=>'status_id','label'=>trans('modals/cross.status'), 'value'=> $dataModal['cross']->status_id, 'col' => ($dataModal['hide_mode'] ? 's12' : 's6')]) !!}
         {!! $Inputs::crossModes(['name'=>'mode_id','label'=>trans('modals/cross.mode'), 'value'=> $dataModal['cross']->mode_id, 'col' => 's6', 'class' => ($dataModal['hide_mode'] ? 'hide' : '')]) !!}
         {!! $Inputs::date(['name'=>'release_at', 'label'=>trans('modals/cross.crossDate'), 'placeholder'=>trans('modals/cross.crossDate'), 'value'=> $dataModal['cross']->release_at->format('Y-m-d')]) !!}

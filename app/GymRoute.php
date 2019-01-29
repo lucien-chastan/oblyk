@@ -67,6 +67,57 @@ class GymRoute extends Model
         return ($Video::where([['viewable_id', $this->id], ['viewable_type', 'App\\GymRoute']])->count() > 0);
     }
 
+    public function grades($format = 'array', $class = '') {
+        $firstGrades = explode(';', $this->grade);
+        $subGrades = explode(';', $this->sub_grade);
+        $valGrades = explode(';', $this->val_grade);
+        $grades = [];
+
+        for ($i = 0 ; $i < count($firstGrades); $i++) {
+            if ($format === 'html') {
+                $grades[] = '<span class="color-grade-' . $valGrades[$i] . ' ' . $class . '">' . $firstGrades[$i] . $subGrades[$i] . '</span>';
+            } else {
+                $grades[] = $firstGrades[$i] . $subGrades[$i];
+            }
+        }
+
+        if ($format === 'text') {
+            return implode(';', $grades);
+        } elseif ($format === 'html') {
+            return implode(' · ', $grades);
+        } else {
+            return $grades;
+        }
+    }
+
+    public function isMultiPitch()
+    {
+        return (count(explode(';', $this->grade)) > 1);
+    }
+
+    public function pitches()
+    {
+        if ($this->isMultiPitch()) {
+            $pitches = [];
+            $grades = explode(';', $this->grade);
+            $subGrades = explode(';', $this->sub_grade);
+            $valGrades = explode(';', $this->val_grade);
+            $heights = explode(';', $this->val_grade);
+            for ($i = 0; $i < count($grades); $i++) {
+                $pitches[] = [
+                    'grade' => $grades[$i] . $subGrades[$i],
+                    'first_grade' => $grades[$i],
+                    'sub_grade' => $subGrades[$i],
+                    'val_grade' => $valGrades[$i],
+                    'height' => $heights[$i]
+                ];
+            }
+            return $pitches;
+        } else {
+            return [];
+        }
+    }
+
     public function estimateGradeLevel($gymGradeId) {
         $GymGradeLine = GymGradeLine::class;
         $gymGradeLines = $GymGradeLine::where('gym_grade_id', $gymGradeId)->orderBy('order')->get();
@@ -74,7 +125,7 @@ class GymRoute extends Model
         $gradeLineId = 0;
 
         foreach ($gymGradeLines as $gymGradeLine) {
-            $valGradDiff = abs($gymGradeLine->grade_val - $this->val_grade);
+            $valGradDiff = abs($gymGradeLine->grade_val - explode(';', $this->val_grade)[0]);
             if ($valGradDiff < $minScore) {
                 $minScore = $valGradDiff;
                 $gradeLineId = $gymGradeLine->id;

@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 class GymSectorController extends Controller
 {
 
-    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE ROOM
+    // Display Create / Update modal
     function gymSectorModal(Request $request)
     {
         $GymSector = GymSector::class;
@@ -40,7 +40,7 @@ class GymSectorController extends Controller
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
         }
 
-        //définition du chemin de sauvgarde
+        // Output method
         $outputRoute = ($request->input('method') == 'POST') ? '/gym_sectors' : '/gym_sectors/' . $id;
 
         $data = [
@@ -76,10 +76,10 @@ class GymSectorController extends Controller
         return view('modal.room-sector', $data);
     }
 
-    function uploadSectorPicture(Request $request) {
+    function uploadSectorPicture(Request $request)
+    {
         $GymSector = GymSector::class;
 
-        //validation du formulaire
         $this->validate($request, ['id' => 'required|integer']);
 
         $gymSector = $GymSector::find($request->input('id'));
@@ -87,7 +87,7 @@ class GymSectorController extends Controller
         if ($request->hasFile('file')) {
 
             try {
-                //Image en 2000px
+                // 2000px version
                 $scheme = Image::make($request->file('file'))
                     ->resize(1300, null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -95,7 +95,7 @@ class GymSectorController extends Controller
                     ->encode('jpg', 85)
                     ->save(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'));
 
-                // 100*100 version
+                // 100px * 100px version
                 $scheme->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'));
@@ -103,9 +103,9 @@ class GymSectorController extends Controller
                 $scheme->fit(200, 200)->save(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'));
                 $scheme->fit(50, 50)->save(storage_path('app/public/gyms/sectors/50/sector-' . $gymSector->id . '.jpg'));
 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
 
-                //s'il y a un problème on supprime les images potentiellement uploadé
+                // If there is a problem, we delete the downloaded images
                 if (file_exists(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/1300/sector-' . $gymSector->id . '.jpg'));
                 if (file_exists(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/500/sector-' . $gymSector->id . '.jpg'));
                 if (file_exists(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/200/sector-' . $gymSector->id . '.jpg'));
@@ -129,10 +129,9 @@ class GymSectorController extends Controller
 
         $this->checkIsAdmin($GymRoom::find($request->input('room_id'))->id);
 
-        //validation du formulaire
+        // Valid form
         $this->validate($request, ['label' => 'String|max:255']);
 
-        //information sur la falaise
         $gymSector = new GymSector();
         $gymSector->room_id = $request->input('room_id');
         $gymSector->label = $request->input('label');
@@ -157,14 +156,12 @@ class GymSectorController extends Controller
         $GymSector = GymSector::class;
         $GymRoom = GymRoom::class;
 
-        //validation du formulaire
+        // Valid form
         $this->validate($request, ['label' => 'String|max:255',]);
 
-        //mise à jour des données de la salle
         $gymSector = $GymSector::where('id', $request->input('id'))->first();
 
         $this->checkIsAdmin($GymRoom::find($gymSector->room_id)->id);
-
 
         $gymSector->label = $request->input('label');
         $gymSector->ref = $request->input('ref');
@@ -199,7 +196,6 @@ class GymSectorController extends Controller
         $GymSector = GymSector::class;
         $GymRoom = GymRoom::class;
 
-        //mise à jour des données de la salle
         $gymSector = $GymSector::find($id);
 
         $this->checkIsAdmin($GymRoom::find($gymSector->room_id)->id);

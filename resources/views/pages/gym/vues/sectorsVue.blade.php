@@ -88,7 +88,7 @@
                             <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
                         @endforeach
                     </td>
-                    <td><span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}{{ $route->sub_grade }}</span></td>
+                    <td>{!! $route->grades('html') !!}</td>
                     <td>{{ $route->label }}</td>
                     <td>{{ $route->sector->label }}</td>
                     <td class="grey-text">

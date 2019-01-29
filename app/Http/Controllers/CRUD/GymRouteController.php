@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\GymAdministrator;
 use App\GymGrade;
+use App\Lib\Grade;
 use App\Route;
 use App\GymRoom;
 use App\GymRoute;
@@ -20,7 +21,7 @@ class GymRouteController extends Controller
     private $gradePattern = '/(([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))/';
     private $subGradePattern = '/(\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c|\+|\-)/';
 
-    // Display modal for add or edit gym route
+    // Display Create / Update modal
     function gymRouteModal(Request $request)
     {
         $GymRoute = GymRoute::class;
@@ -56,7 +57,7 @@ class GymRouteController extends Controller
 
         $secondColor = (count($colors) > 1);
 
-        //définition du chemin de sauvgarde
+        // Output method
         $outputRoute = ($request->input('method') == 'POST') ? '/gym_routes' : '/gym_routes/' . $id;
 
         $data = [
@@ -116,10 +117,11 @@ class GymRouteController extends Controller
         return view('modal.room-route-thumbnail', $data);
     }
 
-    function uploadRoutePicture(Request $request) {
+    function uploadRoutePicture(Request $request)
+    {
         $GymRoute = GymRoute::class;
 
-        //validation du formulaire
+        // Valid form
         $this->validate($request, ['id' => 'required|integer']);
 
         $gymRoute = $GymRoute::find($request->input('id'));
@@ -127,7 +129,7 @@ class GymRouteController extends Controller
         if ($request->hasFile('file')) {
 
             try {
-                //Image en 2000px
+                // 1300px version
                 $scheme = Image::make($request->file('file'))
                     ->resize(1300, null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -135,7 +137,7 @@ class GymRouteController extends Controller
                     ->encode('jpg', 85)
                     ->save(storage_path('app/public/gyms/routes/1300/route-' . $gymRoute->id . '.jpg'));
 
-                // 100*100 version
+                // 100px * 100px version
                 $scheme->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save(storage_path('app/public/gyms/routes/500/route-' . $gymRoute->id . '.jpg'));
@@ -143,9 +145,9 @@ class GymRouteController extends Controller
                 $scheme->fit(200, 200)->save(storage_path('app/public/gyms/routes/200/route-' . $gymRoute->id . '.jpg'));
                 $scheme->fit(50, 50)->save(storage_path('app/public/gyms/routes/50/route-' . $gymRoute->id . '.jpg'));
 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
 
-                //s'il y a un problème on supprime les images potentiellement uploadé
+                // If there is a problem, we delete the downloaded images
                 if (file_exists(storage_path('app/public/gyms/routes/1300/route-' . $gymRoute->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/1300/route-' . $gymRoute->id . '.jpg'));
                 if (file_exists(storage_path('app/public/gyms/routes/500/route-' . $gymRoute->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/500/route-' . $gymRoute->id . '.jpg'));
                 if (file_exists(storage_path('app/public/gyms/routes/200/route-' . $gymRoute->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/200/route-' . $gymRoute->id . '.jpg'));
@@ -157,10 +159,11 @@ class GymRouteController extends Controller
         return response()->json(json_encode($gymRoute));
     }
 
-    function uploadRouteThumbnail(Request $request) {
+    function uploadRouteThumbnail(Request $request)
+    {
         $GymRoute = GymRoute::class;
 
-        //validation du formulaire
+        // Valid form
         $this->validate($request, ['id' => 'required|integer']);
 
         $gymRoute = $GymRoute::find($request->input('id'));
@@ -172,9 +175,9 @@ class GymRouteController extends Controller
                     ->fit(50, 50)
                     ->save(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'));
 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
 
-                //s'il y a un problème on supprime les images potentiellement uploadé
+                // If there is a problem, we delete the downloaded images
                 if (file_exists(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'));
 
             }
@@ -197,17 +200,26 @@ class GymRouteController extends Controller
         $this->validate($request,
             [
                 'opener_date' => 'required',
-                'grade' => [
-                    'required',
-                    'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
-                ]
+                'grade' => ['required']
             ]
         );
 
         // Extract grade and sub grade from grade
-        $grade = $request->input('grade');
-        $routeGrade = preg_replace($this->subGradePattern, '', $grade);
-        $routeSubGrade = preg_replace($this->gradePattern, '', $grade);
+        $grades = explode(';', $request->input('grade'));
+        foreach ($grades as $grade) {
+            if (!Grade::isGrade($grade)) {
+                return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
+            }
+            $firstGrade = preg_replace($this->subGradePattern, '', $grade);
+            $subGrade = preg_replace($this->gradePattern, '', $grade);
+            $routeGrades[] = $firstGrade;
+            $routeSubGrades[] = $subGrade;
+            $routeValGrades[] = Route::gradeToVal($firstGrade, $subGrade);
+        }
+
+        if (count($grades) != count(explode(';', $request->input('height')))) {
+            return response()->json(['error' => "Le nombre de longueur n'est pas égale au nombre de cotation"], 422);
+        }
 
         // Concat colors
         $colors[] = $request->input('color_first');
@@ -220,9 +232,9 @@ class GymRouteController extends Controller
         $gymRoute->sector_id = $request->input('sector_id');
         $gymRoute->reference = $request->input('reference');
         $gymRoute->label = $request->input('label');
-        $gymRoute->grade = $routeGrade;
-        $gymRoute->sub_grade = $routeSubGrade;
-        $gymRoute->val_grade = Route::gradeToVal($routeGrade, $routeSubGrade);
+        $gymRoute->grade = implode(';', $routeGrades);
+        $gymRoute->sub_grade = implode(';', $routeSubGrades);
+        $gymRoute->val_grade = implode(';', $routeValGrades);
         $gymRoute->description = $request->input('description');
         $gymRoute->type = $request->input('type');
         $gymRoute->height = $request->input('height');
@@ -249,17 +261,26 @@ class GymRouteController extends Controller
         $this->validate($request,
             [
                 'opener_date' => 'required',
-                'grade' => [
-                    'required',
-                    'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
-                ]
+                'grade' => ['required']
             ]
         );
 
         // Extract grade and sub grade from grade
-        $grade = $request->input('grade');
-        $routeGrade = preg_replace($this->subGradePattern, '', $grade);
-        $routeSubGrade = preg_replace($this->gradePattern, '', $grade);
+        $grades = explode(';', $request->input('grade'));
+        foreach ($grades as $grade) {
+            if (!Grade::isGrade($grade)) {
+                return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
+            }
+            $firstGrade = preg_replace($this->subGradePattern, '', $grade);
+            $subGrade = preg_replace($this->gradePattern, '', $grade);
+            $routeGrades[] = $firstGrade;
+            $routeSubGrades[] = $subGrade;
+            $routeValGrades[] = Route::gradeToVal($firstGrade, $subGrade);
+        }
+
+        if (count($grades) != count(explode(';', $request->input('height')))) {
+            return response()->json(['error' => "Le nombre de longueur n'est pas égale au nombre de cotation"], 422);
+        }
 
         // Concat colors
         $colors[] = $request->input('color_first');
@@ -272,9 +293,9 @@ class GymRouteController extends Controller
         $gymRoute->sector_id = $request->input('sector_id');
         $gymRoute->reference = $request->input('reference');
         $gymRoute->label = $request->input('label');
-        $gymRoute->grade = $routeGrade;
-        $gymRoute->sub_grade = $routeSubGrade;
-        $gymRoute->val_grade = Route::gradeToVal($routeGrade, $routeSubGrade);
+        $gymRoute->grade = implode(';', $routeGrades);
+        $gymRoute->sub_grade = implode(';', $routeSubGrades);
+        $gymRoute->val_grade = implode(';', $routeValGrades);
         $gymRoute->description = $request->input('description');
         $gymRoute->type = $request->input('type');
         $gymRoute->height = $request->input('height');
@@ -298,7 +319,6 @@ class GymRouteController extends Controller
         $GymRoute = GymRoute::class;
         $GymRoom = GymRoom::class;
 
-        //mise à jour des données de la salle
         $gymRoute = $GymRoute::find($id);
 
         $this->checkIsAdmin($GymRoom::find($gymRoute->room_id)->id);
@@ -311,6 +331,7 @@ class GymRouteController extends Controller
     /**
      * @param $route_id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function dismountRoute($route_id)
     {

@@ -20,7 +20,7 @@ class CreateGymSectorsTable extends Migration
             $table->string('ref',255)->nullable();
             $table->text('description')->nullable();
             $table->text('area')->nullable();
-            $table->integer('height')->nullable();
+            $table->string('height', 255)->nullable();
             $table->integer('preferred_type')->nullable();
             $table->integer('gym_grade_id')->unsigned()->nullable();
             $table->timestamps();

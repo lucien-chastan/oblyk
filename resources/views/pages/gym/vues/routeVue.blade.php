@@ -11,7 +11,7 @@
                         <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.4em; width: 0.4em; border-radius: 50%; margin-right: 0.5em; margin-top: 2px"></div>
                     @endforeach
                 </div>
-                <span class="color-grade-{{ $route->val_grade }} text-bold">{{ $route->grade }}{{ $route->sub_grade }}</span>
+                {!! $route->grades('html', 'text-bold') !!}
                 {{ $route->label }}
             </h5>
         </div>

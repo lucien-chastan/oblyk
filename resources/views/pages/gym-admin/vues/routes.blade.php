@@ -35,7 +35,7 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <span class="color-grade-{{ $route->val_grade }}">{{ $route->grade }}{{ $route->sub_grade }}</span>
+                                        {!! $route->grades('html') !!}
                                     </td>
                                     <td>{{ $route->label }}</td>
                                     <td>{{ $route->sector->label }}</td>

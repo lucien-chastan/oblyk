@@ -589,4 +589,19 @@ class InputTemplates extends ServiceProvider
             'class' => (isset($options['class'])) ? $options['class'] : ''
         ]);
     }
+
+    // List of grade system <select>
+    public static function pitchesVariant($options) {
+        return view('inputs.pitches-variant', [
+            'name' => $options['name'],
+            'required' => $options['required'] ?? false,
+            'value' => $options['value'] ?? '',
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'placeholder' => $options['placeholder'] ?? '',
+            'icon' => $options['icon'] ?? '',
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'onChange' => $options['onChange'] ?? '',
+            'pitches' => $options['pitches'],
+        ]);
+    }
 }

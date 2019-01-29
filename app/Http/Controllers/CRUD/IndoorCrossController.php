@@ -9,6 +9,7 @@ use App\GymRoom;
 use App\GymRoute;
 use App\GymSector;
 use App\IndoorCross;
+use App\Lib\Grade;
 use App\Route;
 use Carbon\Carbon;
 use Validator;
@@ -36,6 +37,12 @@ class IndoorCrossController extends Controller
         if (isset($route_id)) $route = $GymRoute::find($route_id);
         if (isset($sector_id)) $sector = $GymSector::find($sector_id);
         if (isset($room_id)) $room = $GymRoom::find($room_id);
+        $pitches = [];
+
+        // Get pitches
+        if (isset($route_id) && $route->isMultiPitch()) {
+            $pitches = $route->pitches();
+        }
 
         // Get first !null height
         if (isset($route_id) && $route->height != null) {
@@ -97,6 +104,7 @@ class IndoorCrossController extends Controller
         $hide_mode = ($cross->type != 2);
         $show_grade_system = ($methode == 'POST' && !isset($route_id));
         $show_alert = ($methode == 'POST' && !isset($route_id));
+        $show_pitches = ($methode == 'POST' && count($pitches) > 0);
 
         $data = [
             'dataModal' => [
@@ -109,6 +117,7 @@ class IndoorCrossController extends Controller
                 'title' => $request->input('title'),
                 'method' => $methode,
                 'route' => $outputRoute,
+                'pitches' => $pitches,
                 'callback' => $callback,
                 'colors' => $colors,
                 'use_second_color' => (count($colors) > 1) ? 1 : 0,
@@ -120,6 +129,7 @@ class IndoorCrossController extends Controller
                 'hide_mode' => $hide_mode,
                 'show_grade_system' => $show_grade_system,
                 'show_alert' => $show_alert,
+                'show_pitches' => $show_pitches,
             ]
         ];
 
@@ -138,16 +148,30 @@ class IndoorCrossController extends Controller
         $this->validate($request, [
             'release_at' => 'required|date_format:Y-m-d',
             'attempt' => 'min:0',
-            'grade' => [
-                'required',
-                'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
-            ]
         ]);
 
-        // Extract grade and sub grade from grade
-        $grade = $request->input('grade');
-        $routeGrade = preg_replace($this->subGradePattern, '', $grade);
-        $routeSubGrade = preg_replace($this->gradePattern, '', $grade);
+        $route_id = $request->input('route_id');
+        $pitch = $request->input('pitch');
+
+        // If is a multi-pitch route
+        if(isset($route_id) && isset($pitch)) {
+            $route = GymRoute::find($route_id);
+            $pitches = $route->pitches();
+            $routeGrade = $pitches[$pitch]['first_grade'];
+            $routeSubGrade = $pitches[$pitch]['sub_grade'];
+            $height = $pitches[$pitch]['height'];
+        } else {
+
+            // Extract grade and sub grade from grade
+            $grade = $request->input('grade');
+            if (!Grade::isGrade($grade)) {
+                return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
+            }
+
+            $routeGrade = preg_replace($this->subGradePattern, '', $grade);
+            $routeSubGrade = preg_replace($this->gradePattern, '', $grade);
+            $height = $request->input('height');
+        }
 
         // Concat colors
         $colors[] = $request->input('color_first');
@@ -168,7 +192,7 @@ class IndoorCrossController extends Controller
         $cross->grade = $routeGrade;
         $cross->sub_grade = $routeSubGrade;
         $cross->grade_val = Route::gradeToVal($routeGrade, $routeSubGrade);
-        $cross->height = $request->input('height');
+        $cross->height = $height;
         $cross->description = $request->input('description');
         $cross->release_at = $request->input('release_at');
         $cross->color = join(';', $colors);
@@ -248,7 +272,7 @@ class IndoorCrossController extends Controller
             $cross->delete();
         }
 
-        return response()->json($oldCross);
+        return response()->json(json_encode($oldCross));
     }
 
 }
