@@ -21,14 +21,22 @@
     </div>
 </div>
 
+@php($current_group = null)
+
 <div class="row" id="sectors-tab">
     <div class="col s12">
         @if (count($sectors) > 0)
             <table class="highlight td-clickable">
                 <tbody>
                     @foreach($sectors as $sector)
+                        @if(($current_group == null || $current_group != $sector->group_sector) && $sector->group_sector != '')
+                            @php($current_group = $sector->group_sector)
+                            <tr class="group-sector-row">
+                                <td colspan="2" class="text-bold">{{ $sector->group_sector }}</td>
+                            </tr>
+                        @endif
                         <tr onclick="getGymSector({{ $sector->id }}, '{{ $sector->label }}'); animationLoadSideNav()">
-                            <td><strong>{{ $sector->label }}</strong></td>
+                            <td class="{{ $sector->group_sector != '' ? 'indent' : '' }}"><strong>{{ $sector->label }}</strong></td>
                             <td>
                                 @if($sector->routes_count > 0)
                                     <span {!! $Helpers::tooltip('Nombre de ligne') !!} class="badge tooltipped">{{ $sector->routes_count }}</span>

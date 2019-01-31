@@ -278,3 +278,25 @@
     background-color: white !important;
   }
 }
+
+#sectors-tab {
+  .indent {
+    padding-left: 15px;
+  }
+
+  .group-sector-row {
+    color: rgb(100,100,100);
+    td {
+      border-bottom-style: solid;
+      border-width: 1px;
+      border-color: rgb(230,230,230);
+      font-size: 0.8em;
+      padding-bottom: 0;
+      cursor: default;
+      &:hover {
+        color: rgb(100,100,100) !important;
+        background-color: white !important;
+      }
+    }
+  }
+}

@@ -31,7 +31,7 @@ class GymSectorController extends Controller
         } else {
             $gymSector = new GymSector();
             $gymSector->label = $request->input('label');
-            $gymSector->ref = $request->input('ref');
+            $gymSector->group_sector = $request->input('group_sector');
             $gymSector->height = $request->input('height');
             $gymSector->description = $request->input('description');
             $gymSector->preferred_type = $request->input('preferred_type') ?? $room->preferred_type;
@@ -135,7 +135,7 @@ class GymSectorController extends Controller
         $gymSector = new GymSector();
         $gymSector->room_id = $request->input('room_id');
         $gymSector->label = $request->input('label');
-        $gymSector->ref = $request->input('ref');
+        $gymSector->group_sector = $request->input('group_sector');
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
         $gymSector->preferred_type = $request->input('preferred_type');
@@ -164,7 +164,7 @@ class GymSectorController extends Controller
         $this->checkIsAdmin($GymRoom::find($gymSector->room_id)->id);
 
         $gymSector->label = $request->input('label');
-        $gymSector->ref = $request->input('ref');
+        $gymSector->group_sector = $request->input('group_sector');
         $gymSector->height = $request->input('height');
         $gymSector->description = $request->input('description');
         $gymSector->preferred_type = $request->input('preferred_type');

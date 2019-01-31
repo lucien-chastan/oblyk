@@ -66,6 +66,8 @@ class GymSchemeController extends Controller
 
         $gymSectors = $GymSector::where('room_id', $room_id)
             ->withCount(['routes' => function ($query) {$query->where('dismounted_at', null);}])
+            ->orderBy('group_sector', 'ASC')
+            ->orderBy('label', 'ASC')
             ->get();
 
         return view('pages.gym.vues.sectorsVue', [

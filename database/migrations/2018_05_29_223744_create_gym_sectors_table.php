@@ -17,7 +17,7 @@ class CreateGymSectorsTable extends Migration
             $table->increments('id');
             $table->integer('room_id')->unsigned();
             $table->string('label',255)->nullable();
-            $table->string('ref',255)->nullable();
+            $table->string('group_sector',255)->nullable();
             $table->text('description')->nullable();
             $table->text('area')->nullable();
             $table->string('height', 255)->nullable();
