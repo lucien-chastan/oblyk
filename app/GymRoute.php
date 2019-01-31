@@ -102,7 +102,7 @@ class GymRoute extends Model
             $grades = explode(';', $this->grade);
             $subGrades = explode(';', $this->sub_grade);
             $valGrades = explode(';', $this->val_grade);
-            $heights = explode(';', $this->val_grade);
+            $heights = explode(';', $this->height);
             for ($i = 0; $i < count($grades); $i++) {
                 $pitches[] = [
                     'grade' => $grades[$i] . $subGrades[$i],
