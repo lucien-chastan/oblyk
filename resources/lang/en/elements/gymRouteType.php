@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'type_1' => 'Boulder',
-    'type_2' => 'Sport climbing',
-    'type_3' => 'Traverse',
+    'type_0' => 'Sport climbing',
+    'type_1' => 'Traverse',
+    'type_2' => 'Boulder',
 ];
 
 

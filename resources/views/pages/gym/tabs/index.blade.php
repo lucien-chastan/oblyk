@@ -9,7 +9,7 @@
                     'pages/gyms/tabs/information.description',
                      [
                         'name'=>$gym->label,
-                        'type'=>$gym->type,
+                        'type'=>$gym->type('html', 'text-bold'),
                         'city'=>$gym->city,
                         'class'=>'grey-text',
                         'url'=>route('map') . '#' . $gym->lat . '/' . $gym->lng . '/15',

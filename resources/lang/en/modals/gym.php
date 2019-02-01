@@ -26,6 +26,7 @@ return [
     'countyPlaceholder' => "Gym county",
     'boulder' => "This climbing gym has a boulder section",
     'route' => "This climbing gym has a route section",
+    'pan' => "This climbing gym has a pan section",
     'phoneNumber' => "Phone number",
     'phoneNumberPlaceholder' => "Gym phone number",
     'email' => "Email",

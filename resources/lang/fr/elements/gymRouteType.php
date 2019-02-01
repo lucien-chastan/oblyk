@@ -1,9 +1,7 @@
 <?php
 
 return [
-    'type_1' => 'Bloc',
-    'type_2' => 'Voie',
-    'type_3' => 'Traverser',
+    'type_0' => 'Voie',
+    'type_1' => 'Traverser',
+    'type_2' => 'Bloc',
 ];
-
-

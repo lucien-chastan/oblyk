@@ -171,6 +171,7 @@ class GymController extends Controller
         $gym->description = $request->input('description');
         $gym->type_boulder = $request->input('type_boulder');
         $gym->type_route = $request->input('type_route');
+        $gym->type_pan = $request->input('type_pan');
         $gym->free = 1;
         $gym->address = $request->input('address');
         $gym->postal_code = $request->input('postal_code');
@@ -217,6 +218,7 @@ class GymController extends Controller
         $gym->description = $request->input('description');
         $gym->type_boulder = $request->input('type_boulder');
         $gym->type_route = $request->input('type_route');
+        $gym->type_pan = $request->input('type_pan');
         $gym->address = $request->input('address');
         $gym->postal_code = $request->input('postal_code');
         $gym->city = $request->input('city');

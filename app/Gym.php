@@ -111,4 +111,20 @@ class Gym extends Model
         $GymAdministrator = GymAdministrator::class;
         return $GymAdministrator::where('gym_id', $this->id)->count();
     }
+
+    public function type($format = 'html', $class = '')
+    {
+        $type = [];
+
+        if ($format == 'html') {
+            if($this->type_route == 1) { $type[] = '<span class="type-gym-route ' . $class . '">' . trans('elements/climbs.climb_3') . '</span>'; }
+            if($this->type_pan == 1) { $type[] = '<span class="type-gym-pan ' . $class . '">' . trans('elements/climbs.climb_pan') . '</span>'; }
+            if($this->type_boulder == 1) { $type[] = '<span class="type-gym-boulder ' . $class . '">' . trans('elements/climbs.climb_2') . '</span>'; }
+        } else {
+            if($this->type_route == 1) { $type[] = trans('elements/climbs.climb_3'); }
+            if($this->type_pan == 1) { $type[] = trans('elements/climbs.climb_pan'); }
+            if($this->type_boulder == 1) { $type[] = trans('elements/climbs.climb_2'); }
+        }
+        return implode(', ', $type);
+    }
 }

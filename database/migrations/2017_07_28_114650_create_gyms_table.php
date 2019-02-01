@@ -20,6 +20,7 @@ class CreateGymsTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('type_boulder');
             $table->boolean('type_route');
+            $table->boolean('type_pan');
             $table->boolean('free')->default(1);
             $table->integer('views')->nullable()->default(0);
             $table->string('address',255);

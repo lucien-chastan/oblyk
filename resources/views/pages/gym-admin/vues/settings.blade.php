@@ -19,6 +19,7 @@
                     {!! $Inputs::text(['name'=>'region', 'value'=>$gym->region, 'label'=>trans('modals/gym.county'), 'placeholder'=>trans('modals/gym.countyPlaceholder'),'type'=>'text']) !!}
                     {!! $Inputs::checkbox(['name'=>'type_boulder', 'checked'=>($gym->type_boulder == 1), 'label'=>trans('modals/gym.boulder')]) !!}
                     {!! $Inputs::checkbox(['name'=>'type_route', 'checked'=>($gym->type_route == 1), 'label'=>trans('modals/gym.route')]) !!}
+                    {!! $Inputs::checkbox(['name'=>'type_pan', 'checked'=>($gym->type_pan == 1), 'label'=>trans('modals/gym.pan')]) !!}
                     {!! $Inputs::text(['name'=>'phone_number', 'value'=>$gym->phone_number, 'label'=>trans('modals/gym.phoneNumber'), 'placeholder'=>trans('modals/gym.phoneNumberPlaceholder'),'type'=>'tel']) !!}
                     {!! $Inputs::text(['name'=>'email', 'value'=>$gym->email, 'label'=>trans('modals/gym.email'), 'placeholder'=>trans('modals/gym.emailPlaceholder'),'type'=>'email']) !!}
                     {!! $Inputs::text(['name'=>'web_site', 'value'=>$gym->web_site, 'label'=>trans('modals/gym.website'), 'placeholder'=>trans('modals/gym.websitePlaceholder'),'type'=>'url']) !!}
