@@ -68,9 +68,9 @@
                         <tr>
                             <td>Type de grimpe : </td>
                             <td class="type-grimpe">
-                                @if($gym['type_voie'] == 1)<span class="gym-route">voie</span>@endif
-                                @if($gym['type_boulder'] == 1)<span class="gym-boulder">bloc</span>@endif
+                                @if($gym['type_route'] == 1)<span class="gym-route">voie</span>@endif
                                 @if($gym['type_pan'] == 1)<span class="gym-pan">pan</span>@endif
+                                @if($gym['type_boulder'] == 1)<span class="gym-boulder">bloc</span>@endif
                         </td>
                     </tr>
                     <tr>
