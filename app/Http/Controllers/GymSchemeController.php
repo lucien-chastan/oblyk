@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class GymSchemeController extends Controller
 {
-    function schemePage($gym_id, $room_id)
+    function schemePage($gym_id, $room_id, $gym_label)
     {
         $Gym = Gym::class;
         $GymRoom = GymRoom::class;
@@ -22,6 +22,11 @@ class GymSchemeController extends Controller
         $rooms = $GymRoom::where('gym_id', $gym_id)->orderBy('order')->get();
 
         if ($gym->id != $room->gym_id) return redirect($gym->url());
+
+        // If gym room name is not a good name, then redirection
+        if(GymRoom::webUrl($room_id, $gym_id, $gym_label) != $room->url()) {
+            return $this->gymRoomRedirectionPage($room_id);
+        }
 
         $bannerRGBA = HelpersTemplates::hexToRgb(
             $room->banner_bg_color ?? env('ROOM_BANNER_BG_COLOR'),
@@ -174,5 +179,11 @@ class GymSchemeController extends Controller
         $room = $GymRoom::where('gym_id', $gym_id)->orderBy('order')->first();
 
         return response()->json(['route' => $room->url()]);
+    }
+
+    public function gymRoomRedirectionPage($room_id) {
+        $Room = GymRoom::class;
+        $room = $Room::find($room_id);
+        return redirect($room->url(),301);
     }
 }

@@ -33,7 +33,7 @@ class GymController extends Controller
 
         $firstRoom = $GymRoom::where('gym_id', $gym->id)->orderBy('order')->first();
 
-        // Si le label à changé alors on redirige
+        // If gym name is not a good name, then redirection
         if(Gym::webUrl($gym_id, $gym_title) != $gym->url()) {
             return $this->gymRedirectionPage($gym_id);
         }
