@@ -1,11 +1,11 @@
 <div class="navbar-fixed oblyk-navbar">
 
-    {{--DROPDOWN DE LA CONNEXION--}}
+    {{-- Connesion dropdown --}}
     <ul id="dropdown_connexion" class="dropdown-content dropD-180">
         @include('includes.nav-user')
     </ul>
 
-    {{--DROPDOWN DU PROJET--}}
+    {{-- Project dropdown --}}
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
         <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
@@ -16,7 +16,7 @@
         <li><a href="{{ route('developer') }}"><i class="material-icons left">code</i>@lang('interface/nav.developerAndApi')</a></li>
     </ul>
 
-    {{--DROPDOWN DES OUTILS--}}
+    {{-- Tool dropdown --}}
     <ul id="dropdown_outils" class="dropdown-content dropD-210">
         <li><a href="{{ route('map') }}"><i class="material-icons left">map</i>@lang('interface/nav.cragMap')</a></li>
         <li><a href="{{ route('mapGym') }}"><i class="material-icons left">location_city</i>@lang('interface/nav.gymMap')</a></li>
@@ -26,12 +26,12 @@
         <li><a href="{{ route('indexes') }}"><i class="material-icons left">storage</i>@lang('interface/nav.dataBase')</a></li>
     </ul>
 
-    {{--DROPDOWN DES LANGUES--}}
+    {{-- Langagues dropdown --}}
     <ul id="dropdown_language" class="dropdown-content dropD-auto">
         @include('includes.nav-localization')
     </ul>
 
-    {{--DROPDOWN DU PARTENAIRE--}}
+    {{-- Partner dropdown --}}
     <ul id="dropdown_partenaire" class="dropdown-content dropD-220">
         <li><a href="{{ route('partnerMapPage') }}"><i class="material-icons left">person_pin_circle</i>@lang('interface/nav.partnerMap')</a></li>
         <li><a href="{{ route('partnerHowPage') }}"><i class="material-icons left">school</i>@lang('interface/nav.howItWorks')</a></li>
@@ -42,11 +42,11 @@
         @endif
     </ul>
 
-    {{--MENU--}}
+    {{-- Menu --}}
     <nav>
         <div class="nav-wrapper nav-white" id="nav_barre">
 
-            {{--logo de oblyk--}}
+            {{-- Oblyk logo --}}
             <a href="{{ route('index') }}" class="brand-logo">
                 <svg version="1.1" viewBox="0 0 117.2832 76.144533" class="logo-de-oblyk" height="35px" width="60px">
                     <g transform="translate(-332.73828,-314.61719)">
@@ -56,10 +56,10 @@
                 Oblyk{{ env('APP_ENV') == 'beta' ? '- Beta' :'' }}
             </a>
 
-            {{--icone de menu quand on est sur smartphone--}}
+            {{-- Smartphone icon --}}
             <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i> <span>Menu</span></a>
 
-            {{--menu type desktop--}}
+            {{-- Desktop menu --}}
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_language">{{ LaravelLocalization::getCurrentLocale() }} <i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_partenaire">@lang('interface/nav.partner') <i class="material-icons right">arrow_drop_down</i></a></li>
@@ -81,7 +81,7 @@
 
 
 
-            {{--MENU POUR LES SMARTPHONE--}}
+            {{-- Smartphone menu --}}
             <div class="side-nav" id="side-nav">
                 <p class="center loved-king-font titre-nav-mobile"><a href="/">Oblyk</a></p>
                 <ul class="collapsible" data-collapsible="accordion">

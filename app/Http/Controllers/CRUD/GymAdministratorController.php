@@ -41,6 +41,7 @@ class GymAdministratorController extends Controller
 
         $user = $User::find($request->input('user_id'));
         $gym = $Gym::find($request->input('gym_id'));
+        $format = $request->input('format');
 
         $new_administrator = new GymAdministrator();
         $new_administrator->user_id = $user->id;
@@ -62,7 +63,11 @@ class GymAdministratorController extends Controller
         );
         $notification->save();
 
-        return response()->json(json_encode($new_administrator));
+        if(isset($format) && $format == 'html') {
+            return redirect(route('add_gym_admin'));
+        } else {
+            return response()->json(json_encode($new_administrator));
+        }
     }
 
     /**

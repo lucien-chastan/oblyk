@@ -198,22 +198,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
 });
 
-//INTERFACE ADMIN
-
+// Admin interface
 Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
+    // Home
     Route::get('/admin/home', 'AdminController@homePage')->name('admin_home');
 
-    //SAE
+    // Climbing gym
     Route::get('/admin/upload-sae', 'AdminController@uploadSaePage')->name('admin_sae_upload');
+    Route::get('/admin/add-admin', 'AdminController@addGymAdminPage')->name('add_gym_admin');
     Route::post('/admin/upload', 'CRUD\GymController@uploadLogoBandeau')->name('uploadLogoBandeauSae');
+    Route::post('/admin/admin/add', 'CRUD\GymAdministratorController@addAdministrator')->name('addGymAdmin');
 
-    //ROUTE
+    // Route
     Route::get('/admin/route-information', 'AdminController@routeInformationPage')->name('admin_route_information');
     Route::get('/get/route/{route_id}/information', 'AdminController@getRouteInformation');
     Route::get('/delete/route/{route_id}', 'AdminCRUD\RouteCRUDController@deleteRoute')->name('delete_route');
 
-    //ARTICLE
+    // Article
     Route::get('/admin/article/upload-page', 'AdminController@uploadArticleBandeauPage')->name('uploadBandeauArticlePage');
     Route::get('/admin/article/create', 'AdminController@createArticlePage')->name('createArticlePage');
     Route::get('/admin/article/update', 'AdminController@updateArticlePage')->name('updateArticlePage');
@@ -221,34 +223,31 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
-    //NEWSLETTER
+    // Newsletter
     Route::get('/admin/newsletter/create', 'AdminController@createNewsletterPage')->name('createNewsletterPage');
     Route::get('/admin/newsletter/update', 'AdminController@updateNewsletterPage')->name('updateNewsletterPage');
     Route::get('/get/newsletter/{newsletter_ref}/information', 'AdminController@getNewsletterInformation');
     Route::resource('newsletters', 'CRUD\NewsletterController');
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
-    //AIDES
+    // Helps
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
     Route::get('/admin/aide/update', 'AdminController@updateHelpPage')->name('updateHelpPage');
     Route::get('/admin/aide/delete', 'AdminController@deleteHelpPage')->name('deleteHelpPage');
     Route::get('/get/aide/{help_id}/information', 'AdminController@getHelpInformation');
 
-    //LES EXCEPTIONS
+    // Exception
     Route::resource('exceptions', 'CRUD\ExceptionController');
     Route::get('/admin/exception/create', 'AdminController@createExceptionPage')->name('createExceptionPage');
     Route::get('/admin/exception/update', 'AdminController@updateExceptionPage')->name('updateExceptionPage');
     Route::get('/admin/exception/delete', 'AdminController@deleteExceptionPage')->name('deleteExceptionPage');
     Route::get('/get/exception/{exception_id}/information', 'AdminController@getExceptionInformation');
 
-
-    //SECTOR
+    // Sector
     Route::get('/admin/sector-information', 'AdminController@sectorInformationPage')->name('admin_sector_information');
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
-
-     // NEWS LETTER
-    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
 });
 
