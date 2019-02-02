@@ -96,6 +96,7 @@
                             <li class="tab col s2"><a href="#tab-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
                             <li class="tab col s2"><a href="#tab-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
                             <li class="tab col s2"><a href="#tab-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
+                            <li class="tab col s2"><a href="#tab-type"><i class="material-icons ic-tab-parametre-profile">change_history</i> @lang('pages/profile/crosses.typeTab')</a></li>
                         </ul>
                     </div>
                     <div id="tab-site" class="col s12">
@@ -112,6 +113,9 @@
                     </div>
                     <div id="tab-annee" class="col s12">
                         @include('pages.profile.partials.croix.tabs.yearsTab')
+                    </div>
+                    <div id="tab-type" class="col s12">
+                        @include('pages.profile.partials.croix.tabs.typeTab')
                     </div>
                 </div>
             </div>

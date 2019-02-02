@@ -15,7 +15,6 @@ use App\ForumTopic;
 use App\Gym;
 use App\Notification;
 use App\Photo;
-use App\Post;
 use App\Route;
 use App\Subscriber;
 use App\TickList;
@@ -24,7 +23,6 @@ use App\User;
 use App\UserConversation;
 use App\UserPlace;
 use App\Video;
-use DebugBar;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
@@ -33,9 +31,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserVueController extends Controller
 {
-
-
-    //VUE : LES SUIVIS
+    // Follow
     function vueFollow($user_id){
 
         if(Auth::id() == $user_id){
@@ -50,7 +46,7 @@ class UserVueController extends Controller
 
                     $catTitre = '';
 
-                    //FALAISE
+                    // Crags
                     if($follow->followed_type == 'App\Crag'){
                         $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
@@ -59,7 +55,7 @@ class UserVueController extends Controller
                         $catTitre = 'sites';
                     }
 
-                    //MASSIF
+                    // Massive
                     if($follow->followed_type == 'App\Massive'){
                         $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
@@ -68,7 +64,7 @@ class UserVueController extends Controller
                         $catTitre = 'regroupements';
                     }
 
-                    //FORUM
+                    // Forum
                     if($follow->followed_type == 'App\ForumTopic'){
                         $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
@@ -77,7 +73,7 @@ class UserVueController extends Controller
                         $catTitre = 'topics';
                     }
 
-                    //SALLE DE GRIMPE
+                    // Climbing gym
                     if($follow->followed_type == 'App\Gym'){
                         $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
@@ -105,7 +101,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LA TOPOTHÈQUE
+    // Guidebooks library
     function vueTopotheque($user_id){
 
         $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
@@ -141,7 +137,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LES AMIS
+    // Friends
     function vueFriend($user_id){
 
         $user = User::where('id',$user_id)->with('follows.followed')->with('settings')->first();
@@ -185,7 +181,7 @@ class UserVueController extends Controller
         }
     }
 
-    //VUE : LE DASHBOARD
+    // Dashboard
     function vueDashboard($user_id){
 
         if(Auth::id() == $user_id){
@@ -201,7 +197,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : A PROPOS
+    // About
     function vueAPropos($user_id){
 
         $user = User::where('id',$user_id)
@@ -246,7 +242,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : FIL D'ACTUALITÉ
+    // News feed
     function vueFilActu($user_id){
 
         $user = User::where('id', $user_id)->with('settings')->first();
@@ -268,7 +264,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LES ALBUMS
+    // Pictures collection
     function vueAlbums($user_id){
 
         $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
@@ -287,7 +283,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LES PHOTOS
+    // Pictures
     function vuePhotos($user_id, $album_id){
 
         $user = User::where('id',$user_id)->with('albums')->with('albums.photos')->with('settings')->first();
@@ -311,7 +307,7 @@ class UserVueController extends Controller
     }
 
 
-    // VUE : LES VIDÉOS
+    // Videos
     function vueVideos($user_id){
 
         $user = User::where('id',$user_id)->with('videos')->with('videos.viewable')->with('settings')->first();
@@ -330,7 +326,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LES CROIX
+    // Crosses
     function vueCroix($user_id){
 
         $user = User::where('id',$user_id)->with('settings')->first();
@@ -346,7 +342,7 @@ class UserVueController extends Controller
                 ->with('route.routeSections')
                 ->get();
 
-            $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = [];
+            $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = $types = [];
             $somme_metre = 0;
             $max_val = 0;
             $max_grade = '';
@@ -366,6 +362,7 @@ class UserVueController extends Controller
                 $regions[$cross->route->crag->region][] = $cross;
                 $years[$cross->release_at->format('Y')][] = $cross;
                 $somme_metre += $cross->route->height;
+                $types[$cross->route->climb_id][] = $cross;
 
                 $tempGradVal = 0;
                 foreach ($cross->crossSections as $crossSection) {
@@ -412,6 +409,7 @@ class UserVueController extends Controller
                 'max_grade' => $max_grade,
                 'max_sub_grade' => $max_sub_grade,
                 'crosses' => $crosses,
+                'types' => $types,
             ];
             return view('pages.profile.vues.croixVue', $data);
 
@@ -423,7 +421,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LA TICK LIST
+    // Tick list
     function vueTickList($user_id){
 
         if(Auth::id() == $user_id){
@@ -450,7 +448,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : PROJET
+    // Project
     function vueProjet($user_id){
 
         if(Auth::id() == $user_id){
@@ -474,7 +472,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE ANALYTIKS
+    // Analytics
     function vueAnalytiks($user_id){
 
         if(Auth::id() == $user_id){
@@ -541,7 +539,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : MESSAGERIE
+    // Messenger
     function vueMessagerie($user_id){
 
         if(Auth::id() == $user_id){
@@ -579,7 +577,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : RECHERCHE DE PARTENAIRE : QUI JE SUIS
+    // Partner : Who I am
     function vuePartenaireParametres($user_id){
 
         if(Auth::id() == $user_id){
@@ -596,7 +594,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : LES NOTIFICATIONS
+    // Notification
     function vueNotifications($user_id){
 
         if(Auth::id() == $user_id){
@@ -626,7 +624,7 @@ class UserVueController extends Controller
     }
 
 
-    //VUE : PARAMETRES
+    // Settings
     function vueSettings($user_id){
 
         if(Auth::id() == $user_id){
@@ -656,12 +654,12 @@ class UserVueController extends Controller
 
     //**************************
 
-    //LES SOUS VUES DU DASHBOARD
+    // Dashboard views
 
     //**************************
 
 
-    // BOX : BIENVENUE
+    // Welcome
     function subVueWelcome($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user,];
@@ -669,7 +667,7 @@ class UserVueController extends Controller
     }
 
 
-    // BOX : LES CROIX DES POTES
+    // Friends crosses
     function subVueCroixPote($user_id){
         $user = User::where('id',$user_id)->first();
 
@@ -700,7 +698,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.croixPote', $data);
     }
 
-    // BOX : MES CROIX À MOI
+    // My crosses
     function subVueMesCroix($user_id){
 
         $user = User::where('id',$user_id)->first();
@@ -783,7 +781,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.mesCroix', $data);
     }
 
-    // BOX : LES DERNIERS SUJET DU FORUM
+    // Forum topic
     function subVueForumLast($user_id){
         $user = User::where('id',$user_id)->first();
         $topics = ForumTopic::where('nb_post','>',0)->orWhere('user_id',$user->id)->with('category')->with('user')->orderBy('last_post', 'desc')->skip(0)->take(10)->get();
@@ -794,7 +792,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.forum-last', $data);
     }
 
-    // BOX : MES CONTRIBUTIONS
+    // Contributions
     function subVueContribution($user_id){
 
         $user = User::where('id',$user_id)
@@ -820,7 +818,7 @@ class UserVueController extends Controller
     }
 
 
-    // BOX : LES DERNIÈRES NEWS
+    // Oblyk news
     function subVueNewsOblyk($user_id){
         $user = User::where('id',$user_id)->first();
         $articles = Article::where([['id','>','0'],['publish','=',1]])->withCount('descriptions')->orderBy('created_at','desc')->skip(0)->take(3)->get();
@@ -833,7 +831,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.news-oblyk', $data);
     }
 
-    // BOX : LES DERNIÈRES PHOTOS
+    // Last pictures
     function subVuephotosLast($user_id){
         $user = User::where('id',$user_id)->first();
         $photos = Photo::where('illustrable_type', '!=', 'App\User')
@@ -852,7 +850,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.photos-last', $data);
     }
 
-    // BOX : LES DERNIÈRES VIDÉOS
+    // Last videos
     function subVueVideosLast($user_id){
         $user = User::where('id',$user_id)->first();
 
@@ -871,7 +869,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.videos-last', $data);
     }
 
-    // BOX : LES DERNIERS COMMENTAIRES
+    // Last comments
     function subVueCommentsLast($user_id){
         $user = User::where('id',$user_id)->first();
 
@@ -890,7 +888,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.comments-last', $data);
     }
 
-    // BOX : LES DERNIÈRES LIGNES
+    // Last routes
     function subVueRoutesLast($user_id){
 
         $user = User::where('id',$user_id)->first();
@@ -910,7 +908,7 @@ class UserVueController extends Controller
 
     }
 
-    // BOX : LES DERNIÈRES FALAISES
+    // Last crags
     function subVueCragsLast($user_id){
         $user = User::where('id',$user_id)->first();
         $crags = Crag::with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
@@ -921,7 +919,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.crags-last', $data);
     }
 
-    // BOX : LES DERNIERS TOPOS
+    // Last guidebooks
     function subVueToposLast($user_id){
         $user = User::where('id',$user_id)->first();
         $topos = Topo::with('user')->orderBy('created_at','desc')->skip(0)->take(5)->get();
@@ -932,7 +930,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.topos-last', $data);
     }
 
-    // BOX : LES DERNIERS GRIMPEURS
+    // Last climbers
     function subVueUsersLast($user_id){
 
         $profile = User::where('id',$user_id)->first();
@@ -951,7 +949,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.users-last', $data);
     }
 
-    // BOX : LES DERNIÈRES SAE
+    // Last climbing gym
     function subVueSaeLast($user_id){
         $user = User::where('id',$user_id)->first();
         $gyms = Gym::orderBy('created_at','desc')->skip(0)->take(5)->get();
@@ -962,14 +960,14 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.sae-last', $data);
     }
 
-    // BOX : LA LISTE DES SITE ET SALLE D'ESCALADE
+    // Tree of climbing gym and crags
     function subVueListCragSae($user_id){
         $user = User::where('id',$user_id)->first();
         $data = ['user' => $user];
         return view('pages.profile.vues.dashboardBox.boxVues.list-crag-sae', $data);
     }
 
-    // BOX : RÉSUMÉ DE LA RECHERCHE DE PARTENAIRE
+    // Partner search
     function subVuePartenaire($user_id){
 
         $user = User::where('id',$user_id)
@@ -987,7 +985,7 @@ class UserVueController extends Controller
         return view('pages.profile.vues.dashboardBox.boxVues.partenaire', $data);
     }
 
-    // BOX : UN MOT AU HASARD
+    // Shuffle word
     function subVueRandomWord($user_id){
         $user = User::where('id',$user_id)->first();
         $word = DB::table('words')->inRandomOrder()->first();
@@ -1000,7 +998,7 @@ class UserVueController extends Controller
 
     //********************
 
-    //VUE DE LA MESSAGERIE
+    // Messenger
 
     //********************
 
@@ -1037,5 +1035,4 @@ class UserVueController extends Controller
         ];
         return view('pages.profile.vues.messagerie.messages', $data);
     }
-
 }

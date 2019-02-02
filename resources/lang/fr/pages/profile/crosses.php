@@ -20,6 +20,7 @@ return [
     'countryTab' => "Pays",
     'regionTab' => "Regions",
     'yearTab' => "Années",
+    'typeTab' => "Type",
     'gradeTab' => "Cotation",
 
     //autre
