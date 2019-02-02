@@ -26,11 +26,13 @@ class CreateRoutesTable extends Migration
             $table->integer('note')->nullable();
             $table->integer('nb_note')->nullable();
             $table->integer('nb_longueur')->nullable();
+            $table->integer('min_grade_val')->nullable();
+            $table->integer('max_grade_val')->nullable();
             $table->integer('views')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();
 
-            //clé étrangère
+            // Foreign key
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('crag_id')->references('id')->on('crags');
             $table->foreign('sector_id')->references('id')->on('sectors');

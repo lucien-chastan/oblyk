@@ -340,6 +340,7 @@ class UserVueController extends Controller
                 ->with('crossSections.routeSection')
                 ->with('route.crag')
                 ->with('route.routeSections')
+                ->orderBy('max_grade_val', 'DESC')
                 ->get();
 
             $crags = $pays = $regions = $years = $grades = $gradeTrad = $crossSectionIds = $types = [];
