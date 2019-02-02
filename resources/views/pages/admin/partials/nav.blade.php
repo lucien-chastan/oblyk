@@ -30,7 +30,7 @@
             </a>
             <a href="{{ route('add_gym_admin') }}">
                 <div class="row truncate">
-                    <i class="left material-icons">collections</i>
+                    <i class="left material-icons">perm_identity</i>
                     <span class="hidden-1000">
                         Ajouter un admin
                     </span>
