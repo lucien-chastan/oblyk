@@ -1,6 +1,6 @@
 <div class="row">
 
-    {{--COTATION--}}
+    {{-- Grade --}}
     <div class="col s12">
         <div class="card-panel">
             <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesGraderGraphTitle')</h2>
@@ -14,7 +14,7 @@
 
 <div class="row">
 
-    {{--TYPE DE GRIMPE--}}
+    {{-- Climbing type --}}
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesClimbGraphTitle')</h2>
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    {{--ENCHAINEMENT--}}
+    {{-- Status --}}
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">@lang('pages/profile/analytiks.crossesModeGraphTitle')</h2>
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    {{--PAR MODE--}}
+    {{-- Mode --}}
     <div class="col s12 l4">
         <div class="card-panel">
             <h2 class="loved-king-font">Croix / Mode de grimpe</h2>

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class IndoorCross extends Model
@@ -66,5 +67,51 @@ class IndoorCross extends Model
     public function hasGym()
     {
         return ($this->gym_id);
+    }
+
+    public static function getCrossWithFilter($user)
+    {
+        // Filter by status
+        $statuses_id = [];
+        $filter_statuses = json_decode($user->settings->filter_status);
+        foreach ($filter_statuses as $key => $filter_status) {
+            if ($filter_status == true) {
+                $statuses_id[] = $key;
+            }
+        }
+
+        // Filter by climbing type
+        $climbs_id = [];
+        $filter_climbs = json_decode($user->settings->filter_indoor_climb);
+        foreach ($filter_climbs as $key => $filter_climb) {
+            if ($filter_climb == true) {
+                $climbs_id[] = $key;
+            }
+        }
+
+        // Filter by period
+        $periods = json_decode($user->settings->filter_period);
+        $filter_periods = [];
+        foreach ($periods as $key => $period) $filter_periods[$key] = $period;
+
+        if ($filter_periods['start'] != 'first' && $filter_periods['end'] != 'now') {
+            // custom
+            $start = $filter_periods['start'];
+            $end = $filter_periods['end'];
+        } else {
+            $firstCross = IndoorCross::where('user_id', $user->id)->orderBy('release_at')->first();
+            $start = $firstCross->release_at;
+            $end = Carbon::now();
+        }
+
+        $crosses = IndoorCross::where('user_id', $user->id)
+            ->whereBetween('release_at', [$start, $end])
+            ->whereIn('status_id', $statuses_id)
+            ->whereIn('type', $climbs_id)
+            ->with('gym')
+            ->orderBy('release_at')
+            ->get();
+
+        return $crosses;
     }
 }

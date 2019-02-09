@@ -104,7 +104,7 @@ class Cross extends Model
             }
         }
 
-        //Filtre sur le type de grimpe
+        // Filter by climbing type
         $climbs_id = [];
         $filter_climbs = json_decode($user->settings->filter_climb);
         foreach ($filter_climbs as $key => $filter_climb) {
@@ -143,6 +143,5 @@ class Cross extends Model
             ->get();
 
         return $crosses;
-
     }
 }

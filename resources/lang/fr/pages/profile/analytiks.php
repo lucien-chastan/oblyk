@@ -27,7 +27,8 @@ return [
 
     //Filtre
     'filterTitle' => "Filtrer mon analytiks",
-    'filterOnClimbType' => "Filtre sur les types de grimpe",
+    'filterOnClimbType' => "Filtre sur les types de grimpe outdoor",
+    'filterOnClimbTypeIndoor' => "Filtre sur les types de grimpe indoor",
     'filterOnStatusType' => "Filtre sur les types d'enchainement :",
     'filterPeriod' => "Afficher mes croix uniquement entre deux dates :",
     'allDone' => "Tout cocher",

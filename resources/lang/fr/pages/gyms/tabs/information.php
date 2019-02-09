@@ -27,6 +27,7 @@ return [
     'goGuideBook' => "Aller au topo",
     'addCross' => "Ajouter une croix",
     'seeAnalyticks' => "Voir mon analytiks",
+    'myCrosses' => 'Mes croix',
 
     // Administrator
     'IAmAAdministrator' => 'Je suis gérant de cette salle',

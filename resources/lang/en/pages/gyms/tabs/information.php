@@ -27,6 +27,7 @@ return [
     'goGuideBook' => "Go guidebook",
     'addCross' => "Add cross",
     'seeAnalyticks' => "See my analytiks",
+    'myCrosses' => 'My crosses',
 
     // Administrator
     'IAmAAdministrator' => 'I am the manager of this gym',

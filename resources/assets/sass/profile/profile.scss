@@ -121,6 +121,21 @@
     }
 }
 
+.crosses-legend-table {
+    .header {
+        td {
+            padding-bottom: 0;
+        }
+    }
+}
+
+.indoor-and-outdoor-crosses-tabs {
+    margin-bottom: 0;
+    .indicator {
+        visibility: hidden;
+    }
+}
+
 #content-user-zone{
     overflow-y: auto;
     overflow-x: hidden;

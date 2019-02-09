@@ -1,6 +1,6 @@
 <div class="col s12">
     <div class="card-panel">
-        <h2 class="loved-king-font">Mes croix</h2>
+        <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.myCrosses')</h2>
 
         @if(count($crosses) > 0)
             <p>
@@ -19,7 +19,7 @@
                 <i class="material-icons left">done</i>@lang('pages/gyms/tabs/information.addCross')
             </button>
             @if(count($crosses) > 0)
-                <a class="waves-effect waves-light btn-flat"><i class="material-icons left">equalizer</i>@lang('pages/gyms/tabs/information.seeAnalyticks')</a>
+                <a href="{{ Auth::user()->url() }}#analytiks" class="waves-effect waves-light btn-flat"><i class="material-icons left">equalizer</i>@lang('pages/gyms/tabs/information.seeAnalyticks')</a>
             @endif
         </div>
     </div>

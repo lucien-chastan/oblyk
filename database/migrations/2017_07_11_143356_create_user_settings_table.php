@@ -38,6 +38,7 @@ class CreateUserSettingsTable extends Migration
             $table->boolean('dash_random_word')->nullable()->default(1);
             $table->boolean('dash_contribution')->nullable()->default(1);
             $table->text('filter_climb')->nullable();
+            $table->text('filter_indoor_climb')->nullable();
             $table->text('filter_status')->nullable();
             $table->text('filter_period')->nullable();
             $table->timestamps();

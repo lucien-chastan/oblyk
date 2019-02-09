@@ -11,7 +11,9 @@
             <th>@lang('pages/gym-schemes/global.tableLine')</th>
             <th class="text-right">
                 @if($gymIntegration)
-                    <a class="waves-effect waves-light btn-flat blue-text"><i class="material-icons left">equalizer</i>Analytiks</a>
+                    <a href="{{ Auth::user()->url() }}#analytiks" class="waves-effect waves-light btn-flat blue-text">
+                        <i class="material-icons left">equalizer</i>Analytiks
+                    </a>
                     <button class="waves-effect waves-light btn-flat btnModal blue-text" {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>null, "room_id"=>null, "gym_id"=>$gym->id, "sector_id"=>null, "title"=> trans('pages/gym-schemes/global.addCrossGym'), "method"=>"POST"]) !!}>
                         <i class="material-icons left">done</i>@lang('pages/gyms/tabs/information.addCross')
                     </button>

@@ -5,7 +5,7 @@
 
             <div class="row">
 
-                <div class="col s12 l6">
+                <div class="col s12 l4">
                     <p class="text-underline">@lang('pages/profile/analytiks.filterOnClimbType')</p>
                     <p class="no-margin grey-text bt-action-filter">
                         <span onclick="cocheFiltre(true,'climbsFilter')">
@@ -20,7 +20,22 @@
                     @endforeach
                 </div>
 
-                <div class="col s12 l6">
+                <div class="col s12 l4">
+                    <p class="text-underline">@lang('pages/profile/analytiks.filterOnClimbTypeIndoor')</p>
+                    <p class="no-margin grey-text bt-action-filter">
+                        <span onclick="cocheFiltre(true,'indoorClimbsFilter')">
+                            <i class="material-icons">done_all</i> @lang('pages/profile/analytiks.allDone')
+                        </span>
+                        <span onclick="cocheFiltre(false,'indoorClimbsFilter')">
+                            <i class="material-icons">crop_square</i> @lang('pages/profile/analytiks.allUndone')
+                        </span>
+                    </p>
+                    @foreach($indoorClimbs as $climb)
+                        {!! $Inputs::checkbox(['name'=>'indoorClimbsFilter', 'value' => $climb, 'id'=> 'indoor-climb-filter-' . $climb, 'label'=>trans('elements/climb-gyms.climb_' .$climb), 'checked' => ($filter_indoor_climb[$climb] == true) ? true : false, 'align' => 'left']) !!}
+                    @endforeach
+                </div>
+
+                <div class="col s12 l4">
                     <p class="text-underline">@lang('pages/profile/analytiks.filterOnStatusType')</p>
                     <p class="no-margin grey-text bt-action-filter">
                         <span onclick="cocheFiltre(true,'statusesFilter')">
