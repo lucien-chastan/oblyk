@@ -100,7 +100,7 @@ class IndoorCross extends Model
             $end = $filter_periods['end'];
         } else {
             $firstCross = IndoorCross::where('user_id', $user->id)->orderBy('release_at')->first();
-            $start = $firstCross->release_at;
+            $start =  ($firstCross) ? $firstCross->release_at : Carbon::now();
             $end = Carbon::now();
         }
 

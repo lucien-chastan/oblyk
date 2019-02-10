@@ -20,7 +20,7 @@
                     @endforeach
                 </div>
 
-                <div class="col s12 l4">
+                <div class="col s12 l4" @if($countIndoorCrosses == 0) style="display: none" @endif>
                     <p class="text-underline">@lang('pages/profile/analytiks.filterOnClimbTypeIndoor')</p>
                     <p class="no-margin grey-text bt-action-filter">
                         <span onclick="cocheFiltre(true,'indoorClimbsFilter')">

@@ -473,6 +473,7 @@ class UserVueController extends Controller
         if (Auth::id() == $user_id) {
 
             $user = User::where('id', Auth::id())->with('settings')->first();
+            $countIndoorCrosses = IndoorCross::where('user_id', Auth::id())->count();
 
             $filter_climb = $filter_status = $filter_period = [];
 
@@ -533,6 +534,7 @@ class UserVueController extends Controller
                 'statuses' => CrossStatus::all(),
                 'climbs' => Climb::all(),
                 'indoorClimbs' => [0,1,2],
+                'countIndoorCrosses' => $countIndoorCrosses
             ];
 
             return view('pages.profile.vues.analytiksVue', $data);
