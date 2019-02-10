@@ -3,7 +3,7 @@
         @if($cancelable)
             <button class="btn-flat waves-effect waves-light grey-text text-darken-2" onclick="closeModal();" type="button">Annuler</button>
         @endif
-        <button {{ $onclick }} class="btn waves-effect {{ $color }} waves-light" type="submit" name="action">
+        <button {!! $onclick !!} class="btn waves-effect {{ $color }} waves-light" type="submit" name="action">
             {{ $label }}
             <i class="material-icons right">send</i>
         </button>
