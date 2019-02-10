@@ -158,14 +158,16 @@
     </div>
 
 
-    <div class="row indoor-and-outdoor-crosses-tabs">
-        <div class="col s12">
-            <ul class="tabs no-scroll-x">
-                <li class="tab col s2"><a href="#tab-outdoor" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> Outdoor</a></li>
-                <li class="tab col s2"><a href="#tab-indoor"><i class="material-icons ic-tab-parametre-profile">home</i> Indoor</a></li>
-            </ul>
+    @if(count($indoor['crosses']) > 0)
+        <div class="row indoor-and-outdoor-crosses-tabs">
+            <div class="col s12">
+                <ul class="tabs no-scroll-x">
+                    <li class="tab col s2"><a href="#tab-outdoor" class="active"><i class="material-icons ic-tab-parametre-profile">terrain</i> Outdoor</a></li>
+                    <li class="tab col s2"><a href="#tab-indoor"><i class="material-icons ic-tab-parametre-profile">home</i> Indoor</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+    @endif
     <div class="row" id="tab-outdoor">
         <div class="col s12">
             <div class="card-panel blue-card-panel">
@@ -202,42 +204,44 @@
             </div>
         </div>
     </div>
-    <div class="row" id="tab-indoor">
-        <div class="col s12">
-            <div class="card-panel blue-card-panel">
-                <div class="row">
-                    <div class="col s12">
-                        <ul class="tabs no-scroll-x">
-                            <li class="tab col s2"><a href="#tab-gym-gym" class="active"><i class="material-icons ic-tab-parametre-profile">home</i> @lang('pages/profile/crosses.gymTab')</a></li>
-                            <li class="tab col s2"><a href="#tab-gym-grade"><i class="material-icons ic-tab-parametre-profile">swap_vert</i> @lang('pages/profile/crosses.gradeTab')</a></li>
-                            <li class="tab col s2"><a href="#tab-gym-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
-                            <li class="tab col s2"><a href="#tab-gym-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
-                            <li class="tab col s2"><a href="#tab-gym-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
-                            <li class="tab col s2"><a href="#tab-gym-type"><i class="material-icons ic-tab-parametre-profile">change_history</i> @lang('pages/profile/crosses.typeTab')</a></li>
-                        </ul>
-                    </div>
-                    <div id="tab-gym-gym" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.gymsTab')
-                    </div>
-                    <div id="tab-gym-grade" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.gradeTab')
-                    </div>
-                    <div id="tab-gym-pays" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.paysTab')
-                    </div>
-                    <div id="tab-gym-regions" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.regionsTab')
-                    </div>
-                    <div id="tab-gym-annee" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.yearsTab')
-                    </div>
-                    <div id="tab-gym-type" class="col s12">
-                        @include('pages.profile.partials.croix.indoor-tabs.typeTab')
+    @if(count($indoor['crosses']) > 0)
+        <div class="row" id="tab-indoor">
+            <div class="col s12">
+                <div class="card-panel blue-card-panel">
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs no-scroll-x">
+                                <li class="tab col s2"><a href="#tab-gym-gym" class="active"><i class="material-icons ic-tab-parametre-profile">home</i> @lang('pages/profile/crosses.gymTab')</a></li>
+                                <li class="tab col s2"><a href="#tab-gym-grade"><i class="material-icons ic-tab-parametre-profile">swap_vert</i> @lang('pages/profile/crosses.gradeTab')</a></li>
+                                <li class="tab col s2"><a href="#tab-gym-pays"><i class="material-icons ic-tab-parametre-profile">public</i> @lang('pages/profile/crosses.countryTab')</a></li>
+                                <li class="tab col s2"><a href="#tab-gym-regions"><i class="material-icons ic-tab-parametre-profile">nature</i> @lang('pages/profile/crosses.regionTab')</a></li>
+                                <li class="tab col s2"><a href="#tab-gym-annee"><i class="material-icons ic-tab-parametre-profile">today</i> @lang('pages/profile/crosses.yearTab')</a></li>
+                                <li class="tab col s2"><a href="#tab-gym-type"><i class="material-icons ic-tab-parametre-profile">change_history</i> @lang('pages/profile/crosses.typeTab')</a></li>
+                            </ul>
+                        </div>
+                        <div id="tab-gym-gym" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.gymsTab')
+                        </div>
+                        <div id="tab-gym-grade" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.gradeTab')
+                        </div>
+                        <div id="tab-gym-pays" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.paysTab')
+                        </div>
+                        <div id="tab-gym-regions" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.regionsTab')
+                        </div>
+                        <div id="tab-gym-annee" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.yearsTab')
+                        </div>
+                        <div id="tab-gym-type" class="col s12">
+                            @include('pages.profile.partials.croix.indoor-tabs.typeTab')
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 @else
 
     @if(Auth::id() == $user->id)
