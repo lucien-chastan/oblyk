@@ -7,10 +7,16 @@ return [
     'breadcrumbSector' => "Sectors",
 
     // Route
-    'openBy' => "open by :opener, on :open_date",
     'addCross' => "Add in my cross list",
     'editCross' => "Edit cross",
     'addRepetitionCross' => "Add a repetition",
+    'openedAt' => "Opened at",
+    'openedBy' => "Opened by",
+    'type' => "Type",
+    'height' => "Height",
+    'crossesTitle' => 'My crosses-book on this line',
+    'ascent' => 'Ascent',
+    'number_ascent' => ':count ascent||:count ascents',
 
     // Sectors
     'tadSectors' => "Sectors",

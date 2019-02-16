@@ -7,10 +7,16 @@ return [
     'breadcrumbSector' => "Les secteurs",
 
     // Route
-    'openBy' => "ouvert par :opener, le :open_date",
     'addCross' => "Ajouter à mon carnet",
     'editCross' => "Modifier la croix",
     'addRepetitionCross' => "Ajouter une répétions",
+    'openedAt' => "Ouvert le",
+    'openedBy' => "Ouvert par",
+    'type' => "Type",
+    'height' => "Hauteur",
+    'crossesTitle' => 'Mon carnet sur cette voie',
+    'ascent' => 'Ascension',
+    'number_ascent' => ':count ascension||:count ascensions',
 
     // Sectors
     'tadSectors' => "Secteurs",

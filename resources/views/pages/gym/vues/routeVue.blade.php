@@ -29,12 +29,44 @@
                 <i class="material-icons left" style="font-size: 1.4em">reorder</i>
                 {{ $route->description }}
             </p>
+            <table class="information-route-tab">
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.type') :</th>
+                    <td>{!! $route->formatted_type('text-bold') !!}</td>
+                </tr>
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.height') :</th>
+                    <td>
+                        @foreach($route->heights() as $height)
+                            {{ $height }}m
+                        @endforeach
+                    </td>
+                </tr>
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.ascent') :</th>
+                    <td>@choice('pages/gym-schemes/global.number_ascent', $route->number_of_ascents())</td>
+                </tr>
+                @if($route->opener)
+                    <tr>
+                        <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.openedBy') :</th>
+                        <td>
+                            {{ $route->opener }}
+                        </td>
+                    </tr>
+                @endif
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.openedAt') :</th>
+                    <td>
+                        {{ $route->opener_date->format('d/m/Y') }}
+                    </td>
+                </tr>
+            </table>
         @endif
 
         {{-- Cross --}}
         @if(Auth::check())
             @if(count($user_crosses) > 0)
-                <p class="grey-text text-underline">Mon carnet sur cette voie</p>
+                <p class="grey-text text-underline">@lang('pages/gym-schemes/global.crossesTitle')</p>
                 <div class="blue-border-zone">
                     @foreach($user_crosses as $cross)
                         <div class="blue-border-div">
@@ -68,9 +100,6 @@
                 <img src="{{ $route->picture(500) }}" class="responsive-img">
             </div>
         @endif
-        <p class="text-center grey-text text-italic">
-            @lang('pages/gym-schemes/global.openBy', ['opener' => $route->opener, 'open_date' => $route->opener_date->format('d/m/Y')])
-        </p>
     </div>
 </div>
 @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))

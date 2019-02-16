@@ -14,7 +14,7 @@
 
 .loved-king-font{font-family: 'Loved by the King', cursive;}
 
-//alignement des text
+// Text helpers
 .text-right{text-align: right;}
 .text-center{text-align: center;}
 .text-justify{text-align: justify;}
@@ -357,3 +357,8 @@ footer {
         flex-direction: column;
     }
 }
+
+// Common color
+.type-gym-route, .type-gym-0 { color: #672178 }
+.type-gym-boulder, .type-gym-2 { color: #ddafe9 }
+.type-gym-pan, .type-gym-1 { color: #a268b0 }

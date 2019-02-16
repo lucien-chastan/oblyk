@@ -18,6 +18,13 @@
   }
 }
 
+.information-route-tab {
+  td, th {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+}
+
 .side-nav-is-open {
   #gym-scheme {
     width: calc(100% - 370px);

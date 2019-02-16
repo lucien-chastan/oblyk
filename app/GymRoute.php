@@ -118,6 +118,23 @@ class GymRoute extends Model
         }
     }
 
+    public function heights()
+    {
+        return explode(';', $this->height);
+    }
+
+    public function formatted_type($class = '')
+    {
+        $type = trans('elements/climb-gyms.climb_' . $this->type);
+        return "<span class='type-gym-$this->type $class'>$type</span>";
+    }
+
+    public function number_of_ascents()
+    {
+        $Crosses = IndoorCross::class;
+        return $Crosses::where([['route_id', $this->id], ['status_id', '!=' , 6], ['status_id', '!=' , 1]])->count();
+    }
+
     public function estimateGradeLevel($gymGradeId) {
         $GymGradeLine = GymGradeLine::class;
         $gymGradeLines = $GymGradeLine::where('gym_grade_id', $gymGradeId)->orderBy('order')->get();
