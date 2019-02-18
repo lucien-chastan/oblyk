@@ -3,7 +3,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titlePrivacy')</h2>
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {!! $Inputs::checkbox(['name'=>'public', 'label'=>trans('pages/profile/settings.labelPublic'), 'checked' => ($user->settings->public == 1) ? true : false, 'align' => 'left']) !!}
 

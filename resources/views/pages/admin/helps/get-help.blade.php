@@ -3,7 +3,7 @@
 
 <form class="col s12 l8 offset-l2" id="formUpdateHelp" data-route="/helps/{{ $help->id }}" onsubmit="submitData(this, helpUpdated); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {{ csrf_field() }}
     {!! $Inputs::text(['name'=>'id', 'value'=>$help->id, 'label'=>'Id de l\'aide', 'placeholder'=>'Id de l\'aide','type'=>'text']) !!}

@@ -39,6 +39,7 @@ class Version extends Model
         'route_sections',
         'article_topos',
         'article_crags',
+        'rooms',
     ];
 
     /**

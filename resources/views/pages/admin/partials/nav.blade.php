@@ -1,7 +1,7 @@
 
 <ul class="collapsible" data-collapsible="accordion">
 
-    {{--DASHBOARD--}}
+    {{-- Dashboard --}}
     <li>
         <a href="{{ route('admin_home') }}">
             <div class="collapsible-header truncate">
@@ -11,7 +11,7 @@
         </a>
     </li>
 
-    {{--SALLE D'ESCALADE--}}
+    {{-- Climbing gym --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">account_balance</i>
@@ -28,6 +28,14 @@
                     </span>
                 </div>
             </a>
+            <a href="{{ route('add_gym_admin') }}">
+                <div class="row truncate">
+                    <i class="left material-icons">perm_identity</i>
+                    <span class="hidden-1000">
+                        Ajouter un admin
+                    </span>
+                </div>
+            </a>
             <div class="row truncate">
                 <i class="left material-icons">delete</i>
                 <span class="hidden-1000">
@@ -37,7 +45,7 @@
         </div>
     </li>
 
-    {{--LES VOIES--}}
+    {{-- Routes --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">timeline</i>
@@ -57,7 +65,7 @@
         </div>
     </li>
 
-    {{--LES SECTEURS--}}
+    {{-- Sectors --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">perm_media</i>
@@ -77,7 +85,7 @@
         </div>
     </li>
 
-    {{--LES ARTICLES--}}
+    {{-- Articles --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">art_track</i>
@@ -113,7 +121,7 @@
         </div>
     </li>
 
-    {{--LES AIDES--}}
+    {{-- Helps --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">school</i>
@@ -150,7 +158,7 @@
     </li>
 
 
-    {{--LES EXCEPTIONS--}}
+    {{-- Exceptions --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">report_problem</i>
@@ -186,7 +194,7 @@
         </div>
     </li>
 
-    {{--NEWS LETTER--}}
+    {{-- Newsletter --}}
     <li>
         <div class="collapsible-header truncate">
             <i class="material-icons">mail</i>

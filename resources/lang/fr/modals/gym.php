@@ -25,6 +25,7 @@ return [
     'countyPlaceholder' => "Département de la salle",
     'boulder' => "Cette salle a une partie bloc",
     'route' => "Cette salle a une partie voie",
+    'pan' => "Cette salle a une partie pan",
     'phoneNumber' => "Numéro de téléphone",
     'phoneNumberPlaceholder' => "Numéro de téléphone de la salle",
     'email' => "Email",

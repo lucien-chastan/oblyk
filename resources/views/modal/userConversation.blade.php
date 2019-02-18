@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         {!! $Inputs::text(['name'=>'searche-message-user', 'value'=>'', 'label'=>trans('modals/conversation.searchUser'), 'type'=>'text', 'onkeyup'=>'searchMessageUser()']) !!}

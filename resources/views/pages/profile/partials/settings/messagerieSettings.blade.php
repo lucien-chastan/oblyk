@@ -2,7 +2,7 @@
 
     <h2 class="loved-king-font titre-profile-boite-vue">@lang('pages/profile/settings.titleMessenger')</h2>
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <p>@lang('pages/profile/settings.subTitleMailWhen')</p>
 

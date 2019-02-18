@@ -9,6 +9,7 @@ return [
     'climb_6' => 'Aid climbing',
     'climb_7' => 'Deep water',
     'climb_8' => 'Via ferrata',
+    'climb_pan' => 'Pan',
 ];
 
 

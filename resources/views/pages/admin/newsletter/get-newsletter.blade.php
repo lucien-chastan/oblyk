@@ -3,7 +3,7 @@
 
 <form class="col s12 l8 offset-l2" id="formUpdateNewsletter" data-route="/newsletters/{{ $newsletter->ref }}" onsubmit="submitData(this, newsletterUpdated); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     {{ csrf_field() }}
     {!! $Inputs::text(['name'=>'ref', 'value'=>$newsletter->ref, 'label'=>'Référence de la newsletter', 'placeholder'=>'Référence de la newsletter','type'=>'text']) !!}

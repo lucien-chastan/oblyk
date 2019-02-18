@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="setJsonLongueur();submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="row">
@@ -42,10 +42,10 @@
                         <td>
                             {!! $Inputs::grade(['name'=>'grade_pitch', 'value'=>'2a', 'label'=>'']) !!}
                         </td>
-                        <td>{!! $Inputs::relais(['name'=>'relais_longueur', 'value'=>'1', 'label'=>'']) !!}</td>
+                        <td>{!! $Inputs::anchors(['name'=>'relais_longueur', 'value'=>'1', 'label'=>'']) !!}</td>
                         <td>{!! $Inputs::point(['name'=>'point_longueur', 'value'=>'1', 'label'=>'']) !!}</td>
                         <td>{!! $Inputs::text(['name'=>'nb_point_longueur', 'value'=>0, 'label'=>'', 'placeholder'=>trans('modals/route.openYearPlaceholder'),'type'=>'number']) !!}</td>
-                        <td>{!! $Inputs::inclinaison(['name'=>'incline_id_longeur', 'value'=>1, 'label'=>'']) !!}</td>
+                        <td>{!! $Inputs::inclines(['name'=>'incline_id_longeur', 'value'=>1, 'label'=>'']) !!}</td>
                         <td>{!! $Inputs::text(['name'=>'height_longueur', 'value'=>0, 'label'=>'', 'placeholder'=>trans('modals/route.heightPlaceholder'),'type'=>'number']) !!}</td>
                     </tr>
                 </tbody>
@@ -54,13 +54,13 @@
 
         <div id="popup-route-cotation-incline">
             {!! $Inputs::grade(['name'=>'grade', 'label'=>'Cotation', 'value'=>$dataModal['ligne']->routeSections[0]->grade . $dataModal['ligne']->routeSections[0]->sub_grade, 'icon'=>'icon-grade', 'placeholder'=>"cotation, exemple 6a+, B8, ABO, etc."]) !!}
-            {!! $Inputs::inclinaison(['name'=>'incline_id', 'value'=>$dataModal['ligne']->routeSections[0]->incline_id, 'label'=>trans('modals/route.incline'), 'icon'=>'icon-inclinaison']) !!}
+            {!! $Inputs::inclines(['name'=>'incline_id', 'value'=>$dataModal['ligne']->routeSections[0]->incline_id, 'label'=>trans('modals/route.incline'), 'icon'=>'icon-inclinaison']) !!}
         </div>
 
         <div id="popup-route-equipement-zone">
             {!! $Inputs::text(['name'=>'nb_point', 'value'=>$dataModal['ligne']->routeSections[0]->nb_point, 'label'=>trans('modals/route.drawNumber'), 'icon'=>'icon-nb_point','type'=>'number']) !!}
             {!! $Inputs::point(['name'=>'point_id', 'value'=>$dataModal['ligne']->routeSections[0]->point_id, 'label'=>trans('modals/route.pointType'), 'icon'=>'icon-point']) !!}
-            {!! $Inputs::relais(['name'=>'anchor_id', 'value'=>$dataModal['ligne']->routeSections[0]->anchor_id, 'label'=>trans('modals/route.anchorType'), 'icon'=>'icon-type_anchor']) !!}
+            {!! $Inputs::anchors(['name'=>'anchor_id', 'value'=>$dataModal['ligne']->routeSections[0]->anchor_id, 'label'=>trans('modals/route.anchorType'), 'icon'=>'icon-type_anchor']) !!}
         </div>
 
         <div id="popup-route-bloc-zone">

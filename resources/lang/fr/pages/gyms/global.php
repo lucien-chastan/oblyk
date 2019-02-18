@@ -15,5 +15,8 @@ return [
     'tabInformation' => "Informations",
     'tabNewsFeed' => "Fil d'actu",
     'tabMap' => "Carte",
+    'myCrosses' => "Mes croix",
+    'guideBook' => "Topo",
+    'administer' => "Administrer",
 
 ];

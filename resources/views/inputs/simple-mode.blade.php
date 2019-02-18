@@ -1,0 +1,1 @@
+<textarea name="{{ $name }}" id="simplemde_id">{{ $value }}</textarea>

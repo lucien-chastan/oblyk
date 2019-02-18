@@ -17,7 +17,7 @@ class RouteController extends Controller
     private $gradePattern = '/(([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))/';
     private $subGradePattern = '/(\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c|\+|\-)/';
 
-    //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UNE FALAISE
+    // Display modal for update or create route
     function routeModal(Request $request)
     {
 
@@ -26,7 +26,7 @@ class RouteController extends Controller
             $route = Route::class;
             $route = $route::where('id', $id)->with('routeSections')->first();
 
-            //compose le tableau des longeurs
+            // Pitch array
             $tabLongueur = [];
             foreach ($route->routeSections as $section) {
                 $temTap = [
@@ -50,10 +50,8 @@ class RouteController extends Controller
             $callback = 'reloadRouteInformationTab';
         } else {
 
-            //créer une fausse section de ligne
-            $routeSections = new class
-            {
-            };
+            // Create fake route section
+            $routeSections = new class{};
             $routeSections->grade = '2a';
             $routeSections->sub_grade = '';
             $routeSections->section_height = 0;
@@ -74,7 +72,7 @@ class RouteController extends Controller
             $callback = 'prepareNewLine';
         }
 
-        //définition du chemin de sauvgarde
+        // Save or update path
         $outputRoute = ($request->input('method') == 'POST') ? '/routes' : '/routes/' . $id;
 
         $data = [
@@ -98,7 +96,7 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        //validation du formulaire
+        // Valid form
         $this->validate($request, [
             'label' => 'required|String|max:255',
             'height' => 'nullable|Integer|min:0',
@@ -156,7 +154,7 @@ class RouteController extends Controller
 
         } else {
 
-            //cas d'une voie en une seul longueur
+            // One pitch route
             $myLongueur = new RouteSection();
             $myLongueur->route_id = $route->id;
             $myLongueur->grade = preg_replace($this->subGradePattern, '', $request->input('grade'));
@@ -173,9 +171,14 @@ class RouteController extends Controller
             $myLongueur->save();
         }
 
-        //mise à jour des informations de la falaise (type de voie, grande-voie,etc.)
+        // Update crag and sector information
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
+
+        // Save min and max grade
+        $route->min_grade_val = $route->minGrade();
+        $route->max_grade_val = $route->maxGrade();
+        $route->save();
 
         return response()->json(json_encode($route));
     }
@@ -189,7 +192,7 @@ class RouteController extends Controller
      */
     public function update(Request $request)
     {
-        //validation du formulaire
+        // Valid form
         $this->validate($request, [
             'label' => 'required|String|max:255',
             'height' => 'nullable|Integer|min:0',
@@ -201,7 +204,6 @@ class RouteController extends Controller
             ]
         ]);
 
-        //mise à jour des données de la falaise
         $route = Route::class;
         $route = $route::where('id', $request->input('id'))->with('routeSections')->first();
 
@@ -252,7 +254,7 @@ class RouteController extends Controller
                 $myLongueur->save();
             }
 
-            //on supprime les longueurs en trop
+            // Removal of excess pitches
             if (count($tabLongeur) < count($route->routeSections)) {
                 for ($i = count($tabLongeur); $i < count($route->routeSections) - 1; $i++) {
                     $route->routeSections[$i]->delete();
@@ -273,7 +275,7 @@ class RouteController extends Controller
             $route->routeSections[0]->section_order = 1;
             $route->routeSections[0]->save();
 
-            // on supprime les éventuels longueur suplémentaire
+            // Removal of excess pitches
             if (count($route->routeSections) > 1) {
                 foreach ($route->routeSections as $key => $section) {
                     if ($key != 0) $section->delete();
@@ -281,9 +283,14 @@ class RouteController extends Controller
             }
         }
 
-        //mise à jour des informations de la falaise (type de voie, grande-voie,etc.)
+        // Update crag and sector information
         Crag::majInformation($route->crag_id);
         Sector::majInformation($route->sector_id);
+
+        // Save min and max grade
+        $route->min_grade_val = $route->minGrade();
+        $route->max_grade_val = $route->maxGrade();
+        $route->save();
 
         return response()->json(json_encode($route));
     }

@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class RouteVueController extends Controller
 {
-    function vueRoute($id){
-
-        $route = Route::where('id',$id)
+    function vueRoute($id)
+    {
+        $route = Route::where('id', $id)
             ->with('routeSections')
             ->withCount('photos')
             ->withCount('videos')
@@ -21,27 +21,24 @@ class RouteVueController extends Controller
             ->with('sector')
             ->first();
 
-        //route dans la ticklist du connecté
-        $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
+        // get user tick list
+        $tickList = TickList::where([['route_id', $route->id], ['user_id', Auth::id()]])->first();
 
-        $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])->get();
+        $crosses = Cross::where([['route_id', $route->id], ['user_id', Auth::id()]])->get();
 
         $count_carnet = count($crosses);
-        if(isset($tickList)) $count_carnet++;
+        if (isset($tickList)) $count_carnet++;
 
-        $route->views++;
-        $route->save();
-
-        //calcul de la durté de la cotation
+        // Calculate hardness of route
         $easy = $just = $hard = $sum = 0;
-        $crosses = Cross::where('route_id',$route->id)
-            ->where('hardness_id','!=',1)
+        $crosses = Cross::where('route_id', $route->id)
+            ->where('hardness_id', '!=', 1)
             ->get();
 
-        foreach ($crosses as $cross){
-            if($cross->hardness_id == 2) $easy++;
-            if($cross->hardness_id == 3) $just++;
-            if($cross->hardness_id == 4) $hard++;
+        foreach ($crosses as $cross) {
+            if ($cross->hardness_id == 2) $easy++;
+            if ($cross->hardness_id == 3) $just++;
+            if ($cross->hardness_id == 4) $hard++;
             $sum += $cross->hardness_id;
         }
 
@@ -49,13 +46,13 @@ class RouteVueController extends Controller
             'easy' => (count($crosses) > 0) ? round($easy / count($crosses) * 100, 1) : 0,
             'just' => (count($crosses) > 0) ? round($just / count($crosses) * 100, 1) : 0,
             'hard' => (count($crosses) > 0) ? round($hard / count($crosses) * 100, 1) : 0,
-            'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
+            'trend' => (count($crosses) > 0) ? round($sum / count($crosses), 0) : 0,
             'nbVote' => count($crosses),
         ];
 
         $data = [
             'route' => $route,
-            'hardness'=> $hardness,
+            'hardness' => $hardness,
             'ticklist' => $tickList,
             'count_carnet' => $count_carnet
         ];
@@ -64,10 +61,13 @@ class RouteVueController extends Controller
     }
 
 
-    function vueInformation($id){
+    function vueInformation($id)
+    {
 
-        $route = Route::where('id',$id)
-            ->with(['descriptions' =>function ($query) {$query->where('description','!=','');}])
+        $route = Route::where('id', $id)
+            ->with(['descriptions' => function ($query) {
+                $query->where('description', '!=', '');
+            }])
             ->with('tags')
             ->with('descriptions.user')
             ->with('routeSections')
@@ -78,16 +78,16 @@ class RouteVueController extends Controller
             ->with('routeSections.start')
             ->first();
 
-        //calcul de la durté de la cotation
+        // Calculate hardness of crosses
         $easy = $just = $hard = $sum = 0;
-        $crosses = Cross::where('route_id',$route->id)
-            ->where('hardness_id','!=',1)
+        $crosses = Cross::where('route_id', $route->id)
+            ->where('hardness_id', '!=', 1)
             ->get();
 
-        foreach ($crosses as $cross){
-            if($cross->hardness_id == 2) $easy++;
-            if($cross->hardness_id == 3) $just++;
-            if($cross->hardness_id == 4) $hard++;
+        foreach ($crosses as $cross) {
+            if ($cross->hardness_id == 2) $easy++;
+            if ($cross->hardness_id == 3) $just++;
+            if ($cross->hardness_id == 4) $hard++;
             $sum += $cross->hardness_id;
         }
 
@@ -95,38 +95,42 @@ class RouteVueController extends Controller
             'easy' => (count($crosses) > 0) ? round($easy / count($crosses) * 100, 1) : 0,
             'just' => (count($crosses) > 0) ? round($just / count($crosses) * 100, 1) : 0,
             'hard' => (count($crosses) > 0) ? round($hard / count($crosses) * 100, 1) : 0,
-            'trend' => (count($crosses) > 0) ? round($sum / count($crosses),0) : 0,
+            'trend' => (count($crosses) > 0) ? round($sum / count($crosses), 0) : 0,
             'nbVote' => count($crosses),
         ];
 
         $data = [
             'route' => $route,
-            'hardness'=> $hardness,
+            'hardness' => $hardness,
         ];
 
         return view('pages.route.vues.informationVue', $data);
     }
 
-    function vueComments($id){
-        $data = ['route' => Route::where('id',$id)->first()];
+    function vueComments($id)
+    {
+        $data = ['route' => Route::where('id', $id)->first()];
         return view('pages.route.vues.commentsVue', $data);
     }
 
-    function vuePhotos($id){
-        $data = ['route' => Route::where('id',$id)->with('photos')->first()];
+    function vuePhotos($id)
+    {
+        $data = ['route' => Route::where('id', $id)->with('photos')->first()];
         return view('pages.route.vues.photosVue', $data);
     }
 
-    function vueVideos($id){
-        $data = ['route' => Route::where('id',$id)->with('videos')->first()];
+    function vueVideos($id)
+    {
+        $data = ['route' => Route::where('id', $id)->with('videos')->first()];
         return view('pages.route.vues.videosVue', $data);
     }
 
-    function vueCarnet($id){
+    function vueCarnet($id)
+    {
 
-        $route = Route::where('id',$id)->withCount('routeSections')->first();
-        $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
-        $crosses = Cross::where([['route_id',$route->id],['user_id', Auth::id()]])
+        $route = Route::where('id', $id)->withCount('routeSections')->first();
+        $tickList = TickList::where([['route_id', $route->id], ['user_id', Auth::id()]])->first();
+        $crosses = Cross::where([['route_id', $route->id], ['user_id', Auth::id()]])
             ->with('crossSections')
             ->with('crossSections.routeSection')
             ->with('crossUsers.user')
@@ -139,8 +143,8 @@ class RouteVueController extends Controller
 
         $data = [
             'route' => $route,
-            'ticklist'=>$tickList,
-            'crosses'=>$crosses
+            'ticklist' => $tickList,
+            'crosses' => $crosses
         ];
 
         return view('pages.route.vues.carnetVue', $data);

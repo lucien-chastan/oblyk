@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ $dataModal['route'] }}" onsubmit="submitData(this, {{ $dataModal['callback'] }}); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
     <div class="row">
         <div class="input-field col s12">
             <input placeholder="@lang('modals/tag.searchTagPlaceholder')" id="search_tags" type="text" onkeyup="searchTags()">

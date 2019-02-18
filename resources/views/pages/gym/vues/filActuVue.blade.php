@@ -33,7 +33,7 @@
 </div>
 
 {{--BOUTON POUR AJOUTER UN POST AU FIL D'ACTUALITÉ--}}
-@if(Auth::check())
+@if(Auth::check() && ($is_administrator || count($gym->administrators) == 0))
     <div class="fixed-action-btn horizontal">
         <a {!! $Helpers::tooltip(trans('modals/post.addTooltip')) !!} {!! $Helpers::modal(route('postModal'), ["postable_id"=>$gym->id, "postable_type"=>"Gym", "post_id"=>"", "title"=>trans('modals/post.modalAddTitle'), "method"=>"POST" ]) !!} class="btn-floating btn-large red waves-effect waves-light tooltipped btnModal">
             <i class="large material-icons">add</i>

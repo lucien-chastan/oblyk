@@ -14,7 +14,7 @@
 
 .loved-king-font{font-family: 'Loved by the King', cursive;}
 
-//alignement des text
+// Text helpers
 .text-right{text-align: right;}
 .text-center{text-align: center;}
 .text-justify{text-align: justify;}
@@ -34,6 +34,7 @@
 .no-warp {white-space: nowrap;}
 .text-hover{
     transition: opacity 0.3s;
+    cursor: pointer;
     &:hover{
         opacity: 0.65;
     }
@@ -340,9 +341,24 @@ footer {
     }
 }
 
+.submit-form {
+    label.required {
+        &:before {
+            content: '*';
+            padding-right: 0.5em;
+            color: rgb(250,50,50);
+        }
+    }
+}
+
 //version smartphone
 @media screen and (max-width:600px){
     .stretchCol{
         flex-direction: column;
     }
 }
+
+// Common color
+.type-gym-route, .type-gym-0 { color: #672178 }
+.type-gym-boulder, .type-gym-2 { color: #ddafe9 }
+.type-gym-pan, .type-gym-1 { color: #a268b0 }

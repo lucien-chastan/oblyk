@@ -20,11 +20,13 @@ class PhotoController extends Controller
 {
 
     //AFFICHE LA POPUP POUR AJOUTER / MODIFIER UN lien
-    function photoModal(Request $request){
+    function photoModal(Request $request)
+    {
+        $Photo = Photo::class;
 
         //construction de la définition (vide ou avec des infos)
         $id_photo = $request->input('photo_id');
-        $photo = isset($id_photo) ? Photo::where('id', $id_photo)->first() : new Photo();
+        $photo = isset($id_photo) ? $Photo::where('id', $id_photo)->first() : new Photo();
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
 
@@ -62,26 +64,6 @@ class PhotoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //see modal controller
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -90,6 +72,12 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        $Album = Album::class;
+        $Crag = Crag::class;
+        $Sector = Sector::class;
+        $Route = Route::class;
+        $User = User::class;
+
         $mSize = env('PHOTO_MAX_SIZE');
         $mHeight = env('PHOTO_MAX_HEIGHT');
         $mWidth = env('PHOTO_MAX_WIDTH');
@@ -111,7 +99,7 @@ class PhotoController extends Controller
                 if ($request->input('album_id') != 0) {
                     $album_id = $request->input('album_id');
                 } else {
-                    $Albums = Album::where('user_id', Auth::id())->get();
+                    $Albums = $Album::where('user_id', Auth::id())->get();
                     $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
                     $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
                     $trouver = false;
@@ -147,25 +135,25 @@ class PhotoController extends Controller
 
                 //Photo d'une falaise
                 if ($photo->illustrable_type == 'App\Crag') {
-                    $type = Crag::where('id', $photo->illustrable_id)->first();
+                    $type = $Crag::where('id', $photo->illustrable_id)->first();
                     $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
 
                 //Photo d'un secteur
                 if ($photo->illustrable_type == 'App\Sector') {
-                    $type = Sector::where('id', $photo->illustrable_id)->first();
+                    $type = $Sector::where('id', $photo->illustrable_id)->first();
                     $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
 
                 //Photo d'un secteur
                 if ($photo->illustrable_type == 'App\Route') {
-                    $type = Route::where('id', $photo->illustrable_id)->first();
+                    $type = $Route::where('id', $photo->illustrable_id)->first();
                     $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
 
                 //Photo d'un user
                 if ($photo->illustrable_type == 'App\User') {
-                    $type = User::where('id', Auth::id())->first();
+                    $type = $User::where('id', Auth::id())->first();
                     $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
 
@@ -219,28 +207,6 @@ class PhotoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //see modal controller
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -248,15 +214,18 @@ class PhotoController extends Controller
      */
     public function update(Request $request)
     {
+        $Photo = Photo::class;
+        $Album = Album::class;
+
         //enregistrement des données
-        $photo = Photo::where('id', $request->input('id'))->first();
+        $photo = $Photo::where('id', $request->input('id'))->first();
 
         //on va chercher l'album
         $album_id = 0;
         if ($request->input('album_id') != 0) {
             $album_id = $request->input('album_id');
         } else {
-            $Albums = Album::where('user_id', Auth::id())->get();
+            $Albums = $Album::where('user_id', Auth::id())->get();
             $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
             $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
             $trouver = false;
@@ -294,19 +263,22 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
+        $Photo = Photo::class;
+        $Crag = Crag::class;
 
-        $photo = Photo::where('id', $id)->first();
+        $photo = $Photo::where('id', $id)->first();
         $savePhoto = $photo;
 
         if($photo->user_id == Auth::id()){
 
             //si c'était la photo par défaut du site, on remet à null
-            $crags = Crag::where('photo_id',$photo->id)->get();
+            $crags = $Crag::where('photo_id',$photo->id)->get();
             foreach ($crags as $crag){
                 $crag->photo_id = null;
                 $crag->save();

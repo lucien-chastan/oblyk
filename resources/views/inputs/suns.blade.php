@@ -1,0 +1,12 @@
+<div class="input-field col s12">
+    @if($icon != '')
+        <i class="oblyk-icon {{ $icon }} prefix"></i>
+    @endif
+    <select class="input-data" name="{{ $name }}">
+        @foreach ($suns as $sun)
+            @php($selected = ($sun->id == $value) ? 'selected' : '')
+            <option {{ $selected }} value="{{ $sun->id }}">{{ ucfirst($sun->label) }}</option>
+        @endforeach
+    </select>
+    <label>{{ $label }}</label>
+</div>

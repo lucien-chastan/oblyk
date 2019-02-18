@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2"
+   width="230"
+   height="230"
+   viewBox="0 0 230 230"
+   sodipodi:docname="test new logo.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <inkscape:path-effect
+       effect="sketch"
+       id="path-effect996"
+       is_visible="true"
+       nbiter_approxstrokes="5"
+       strokelength="100"
+       strokelength_rdm="0.3;1"
+       strokeoverlap="0.3"
+       strokeoverlap_rdm="0.3;1"
+       ends_tolerance="0.1;1"
+       parallel_offset="5;1"
+       tremble_size="5;1"
+       tremble_frequency="1"
+       nbtangents="5"
+       tgt_places_rdmness="1;1"
+       tgtscale="10"
+       tgtlength="100"
+       tgtlength_rdm="0.3;1" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter991"
+       x="-0.031406857"
+       width="1.0628137"
+       y="-0.042166739"
+       height="1.0843335">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.0022244"
+         id="feGaussianBlur993" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
+     id="namedview4"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     inkscape:snap-text-baseline="true"
+     inkscape:zoom="0.97608695"
+     inkscape:cx="124.53187"
+     inkscape:cy="128.87893"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4558"
+     inkscape:snap-midpoints="true">
+    <sodipodi:guide
+       position="230,115"
+       orientation="0,1"
+       id="guide158"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <g
+     id="g4558"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(0,178)">
+    <path
+       style="opacity:1;fill:#ec4728;fill-opacity:1;stroke:none;stroke-width:17.1073761;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0,-178 H 230 V 52 H 0 Z"
+       id="rect154" />
+    <text
+       id="text164"
+       y="-30.990738"
+       x="35.791821"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:94.41379547px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36034489;opacity:0.531;filter:url(#filter991)"
+       xml:space="preserve"><tspan
+         dx="0 0 0 9.0310326"
+         style="fill:#000000;stroke-width:2.36034489;"
+         y="-30.990738"
+         x="35.791821"
+         id="tspan162"
+         sodipodi:role="line">Ob<tspan
+   id="tspan160"
+   style="font-style:italic;fill:#000000;stroke-width:2.36034489;">l</tspan>yk</tspan></text>
+    <path
+       sodipodi:nodetypes="cccccccc"
+       inkscape:connector-curvature="0"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.13471699px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -206.05775,-44.992158 35.78403,49.075776 -22.77526,31.23533 -13.00084,18.73005 -13.0167,-18.73005 -6.16985,-8.462709 -16.5922,-22.7858432 z"
+       id="path65" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.13471699px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -156.98462,-4.3790935 22.77526,31.2353305 h -45.55033 z"
+       id="path89" />
+    <text
+       id="text117"
+       y="-108.04404"
+       x="-265.30707"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+       xml:space="preserve"><tspan
+         dx="0 0 -1.4488602 -2.1732905"
+         style="stroke-width:1"
+         y="-108.04404"
+         x="-265.30707"
+         id="tspan115"
+         sodipodi:role="line">Ob/yk</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.87484741px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.27187121"
+       x="-176.40213"
+       y="-3.8799114"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         x="-176.40213"
+         y="-3.8799114"
+         style="stroke-width:1.27187121">Oblyk</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:94.41379547px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.36034489;"
+       x="36.516254"
+       y="-31.715168"
+       id="text12-6"><tspan
+         sodipodi:role="line"
+         id="tspan10-7"
+         x="36.516254"
+         y="-31.715168"
+         style="stroke-width:2.36034489;fill:#ffffff;"
+         dx="0 0 0 9.0310326">Ob<tspan
+   style="font-style:italic;stroke-width:2.36034489;fill:#ffffff;"
+   id="tspan137">l</tspan>yk</tspan></text>
+    <image
+       y="6.4475651"
+       x="410.34958"
+       id="image151"
+       xlink:href="data:image/png;base64,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
+"
+       preserveAspectRatio="none"
+       height="52.173912"
+       width="52.173912" />
+  </g>
+</svg>

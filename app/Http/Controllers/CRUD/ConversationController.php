@@ -47,27 +47,6 @@ class ConversationController extends Controller
         return view('modal.conversation', $data);
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //see modal controller
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -118,28 +97,6 @@ class ConversationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //see modal controller
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -159,8 +116,8 @@ class ConversationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @throws \Exception
      */
     public function destroy($id)
     {
@@ -176,7 +133,6 @@ class ConversationController extends Controller
         foreach ($messages  as $message){
             $message->delete();
         }
-
 
         //suppression de la conversation
         $conversation = Conversation::where('id', $id)->first();

@@ -5,7 +5,7 @@
 
 <form class="submit-form">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div id="zone-topo-est-il-present">

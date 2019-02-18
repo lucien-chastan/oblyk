@@ -9,7 +9,7 @@
                     'pages/gyms/tabs/information.description',
                      [
                         'name'=>$gym->label,
-                        'type'=>$gym->type,
+                        'type'=>$gym->type('html', 'text-bold'),
                         'city'=>$gym->city,
                         'class'=>'grey-text',
                         'url'=>route('map') . '#' . $gym->lat . '/' . $gym->lng . '/15',
@@ -21,15 +21,24 @@
 
             @markdown($gym->description)
 
-            @if(Auth::check() && $gym->free == 1)
+            @if(Auth::check() && $administrator_count == 0)
                 <div class="text-right ligne-btn">
                     <i {!! $Helpers::tooltip(trans('modals/gym.editTooltip')) !!} {!! $Helpers::modal(route('gymModal'), ["id"=>$gym->id, "title"=>trans('modals/gym.modalEditeTitle'), "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
                 </div>
             @endif
+
+            @if($administrator_count == 0)
+                <div class="text-center">
+                    <button {!! $Helpers::modal(route('managerModal'), ['gym_id'=>$gym->id]) !!} class="btn-flat btnModal">
+                        @lang('pages/gyms/tabs/information.IAmAAdministrator')
+                    </button>
+                </div>
+            @endif
+
         </div>
     </div>
 
-    {{--PETITE INFORMATION SUR LA SALLE--}}
+    {{-- Information --}}
     <div class="col s12 m5">
         <div class="card-panel">
             <h2 class="loved-king-font">@lang('pages/gyms/tabs/information.titleAbout')</h2>
@@ -64,13 +73,20 @@
     </div>
 </div>
 
+@if(Auth::check() && ($is_administrator || env('ACTIVE_INDOOR')))
+    <div class="row">
+        {{-- Crosses --}}
+        @include('pages.gym.partials.gym-crosses')
+    </div>
+@endif
+
 <div class="row">
-    {{--DESCRIPTION--}}
+    {{-- Description --}}
     @include('pages.gym.partials.description')
 </div>
 
 <div class="row">
-    {{--DESCRIPTION--}}
+    {{-- Partner --}}
     @include('pages.gym.partials.partner')
 </div>
 

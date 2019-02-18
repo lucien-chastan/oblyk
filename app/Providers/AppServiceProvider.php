@@ -12,6 +12,9 @@ use App\Description;
 use App\Exception;
 use App\ForumTopic;
 use App\Gym;
+use App\GymGrade;
+use App\GymGradeLine;
+use App\GymRoom;
 use App\Help;
 use App\Link;
 use App\Massive;
@@ -25,6 +28,8 @@ use App\Observers\CrossObserver;
 use App\Observers\DescriptionObserver;
 use App\Observers\ExceptionObserver;
 use App\Observers\ForumTopicObserver;
+use App\Observers\GymGradeLineObserver;
+use App\Observers\GymGradeObserver;
 use App\Observers\GymObserver;
 use App\Observers\HelpObserver;
 use App\Observers\LinkObserver;
@@ -34,6 +39,7 @@ use App\Observers\ParkingObserver;
 use App\Observers\PhotoObserver;
 use App\Observers\PostObserver;
 use App\Observers\PostPhotoObserver;
+use App\Observers\RoomObserver;
 use App\Observers\RouteObserver;
 use App\Observers\RouteSectionObserver;
 use App\Observers\SectorObserver;
@@ -93,7 +99,8 @@ class AppServiceProvider extends ServiceProvider
         Route::observe(RouteObserver::class);
         RouteSection::observe(RouteSectionObserver::class);
         Topo::observe(TopoObserver::class);
-        Message::observe(MessageObserver::class);
+        GymRoom::observe(RoomObserver::class);
+	    Message::observe(MessageObserver::class);
         Album::observe(AlbumObserver::class);
         Approach::observe(ApproachObserver::class);
         Description::observe(DescriptionObserver::class);
@@ -111,6 +118,8 @@ class AppServiceProvider extends ServiceProvider
         UserSocialNetwork::observe(UserSocialNetworkObserver::class);
         User::observe(UserObserver::class);
         Video::observe(VideoObserver::class);
+        GymGrade::observe(GymGradeObserver::class);
+        GymGradeLine::observe(GymGradeLineObserver::class);
     }
 
     /**

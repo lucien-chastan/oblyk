@@ -11,20 +11,19 @@
 |
 */
 
-
 //******************************************************************
-//ROUTE VISIBLE PAR L'UTILISATEUR, DONC PRÉFIXÉ AVEC LA LOCALISATION
+// Prefixed route with localization (fr/ or en/
 //******************************************************************
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function() {
 
-    //Connexion, réinitialiser mot de passe, etc...
+    // Auth route (connexion, login, etc)
     Auth::routes();
 
-    //PAGE D'ACCUEIL
+    // Home
     Route::get('/', 'HomeController@indexPage')->name('index');
 
-    //PAGE LIÉES AU POJET
+    // Project page
     Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
     Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
     Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
@@ -33,50 +32,56 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/merci', 'ProjectPagesController@thanksPage')->name('thanks');
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
-    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
 
-    //NEXS LETTER
+    // Newsletter
     Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
     Route::get('/news-letter/unsubscribe', 'SubscribeController@unsubscribePage')->name('unsubscribe');
     Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
 
-
-    // ARTICLES
+    // Articles
     Route::get('/les-articles', 'ArticleController@articlesPage')->name('articlesPage');
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
     Route::get('/article/{article_id}', 'ArticleController@articleRedirectionPage')->name('articleRedirectionPage');
 
-    //LE LEXIQUE
+    // Glossary
     Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
-    //LE POFIL
+    // Profile
     Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
     Route::get('/grimpeur/{user_id}', 'UserController@userRedirectionPage')->name('userRedirectionPage');
     Route::get('/supprimer-mon-compte', 'Auth\DeleteController@deleteUserPage')->name('deleteUserPage');
     Route::post('/delete-connected-user', 'Auth\DeleteController@deleteConnectedUser')->name('deleteConnectedUser');
     Route::get('/compte-supprime', 'Auth\DeleteController@userDeletedPage')->name('userDeletedPage');
 
-    //OUTDOOR
+    // Outdoor
     Route::get('/site-escalade/{crag_id}/{crag_label}', 'CragController@cragPage')->name('cragPage');
     Route::get('/topo-escalade/{topo_id}/{topo_label}', 'TopoController@topoPage')->name('topoPage');
     Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
     Route::get('/voie-escalade/{route_id}/{route_label}', 'RouteController@routePage')->name('routePage');
 
-    // OUTDOOR REDIRECTION
+    // Outdoor redirection
     Route::get('/site-escalade/{crag_id}', 'CragController@cragRedirectionPage')->name('cragRedirectionPage');
     Route::get('/topo-escalade/{topo_id}', 'TopoController@topoRedirectionPage')->name('topoRedirectionPage');
     Route::get('/voie-escalade/{route_id}', 'RouteController@routeRedirectionPage')->name('routeRedirectionPage');
     Route::get('/sites-escalade/{massive_id}', 'MassiveController@massiveRedirectionPage')->name('massiveRedirectionPage');
 
-    //LES SALLES D'ESCALADE
+    // Climbing gym
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
+    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
 
-    //LA CARTE
+    // Indoor scheme
+    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+    Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
+    Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
+    Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
+    Route::get('/salle-escalade/topo/crosses/{gym_id}', 'GymSchemeController@getGymCrossesView')->name('getGymCrossesView');
+
+    // Map (crag and gym)
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
     Route::get('/carte-des-salles', 'MapController@gymPage')->name('mapGym');
 
-    //LES PAGES OUTILS
+    // Tools pages
     Route::get('/cotations', 'ToolPagesController@gradePage')->name('grade');
     Route::get('/index', 'ToolPagesController@indexPage')->name('indexes');
     Route::get('/sites', 'ToolPagesController@cragsPage')->name('cragsIndex');
@@ -86,7 +91,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/groupes', 'ToolPagesController@groupsPage')->name('groupsIndex');
     Route::get('/voies', 'ToolPagesController@routesPage')->name('routesIndex');
 
-    //FORUM
+    // Forum
     Route::get('/forum-escalade/creer-un-sujet/{category_id}', 'ForumController@createdPage')->name('createTopics');
     Route::get('/forum-escalade/accueil', 'ForumController@forumPage')->name('forum');
     Route::get('/forum-escalade/les-categories', 'ForumController@categoryPage')->name('forumCategories');
@@ -94,20 +99,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/forum-escalade/les-regles', 'ForumController@rulesPage')->name('forumRules');
     Route::get('/forum-escalade/{topic_id}/{topic_label}', 'ForumController@topicPage')->name('topicPage');
 
-    // PARTENAIRE
+    // Partner
     Route::get('/partenaire-escalade/carte-des-grimpeurs', 'PartnerController@mapPage')->name('partnerMapPage');
     Route::get('/partenaire-escalade/comment-ca-marche', 'PartnerController@howPage')->name('partnerHowPage');
 
-
-    //*******************************************************************
-    //PAS BESOIN DE PRÉFIX MAIS DOIT PROFITER DU MIDDELWAR ET DES COOKIES
-    //*******************************************************************
-
-    //LA RECHERCHE
+    // Search
     Route::get('/API/search/{limit}/{offset}/{type}/{search}', 'searchController@search')->name('globalSearch');
 
-
-    //VUE DU PROFIL
+    // Profile views
     Route::get('/vue/profile/{profile_id}/follow', 'Vue\UserVueController@vueFollow')->name('vueFollowUser');
     Route::get('/vue/profile/{profile_id}/friend', 'Vue\UserVueController@vueFriend')->name('vueFriendUser');
     Route::get('/vue/profile/{profile_id}/topotheque', 'Vue\UserVueController@vueTopotheque')->name('vueTopothequeUser');
@@ -117,7 +116,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/profile/{profile_id}/albums', 'Vue\UserVueController@vueAlbums')->name('vueAlbumsUser');
     Route::get('/vue/profile/{profile_id}/{album_id}/photos', 'Vue\UserVueController@vuePhotos')->name('vuePhotosUser');
     Route::get('/vue/profile/{profile_id}/videos', 'Vue\UserVueController@vueVideos')->name('vueVideosUser');
-    Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCroix')->name('vueCroixUser');
+    Route::get('/vue/profile/{profile_id}/croix', 'Vue\UserVueController@vueCrosses')->name('vueCroixUser');
     Route::get('/vue/profile/{profile_id}/tick-list', 'Vue\UserVueController@vueTickList')->name('vueTickListUser');
     Route::get('/vue/profile/{profile_id}/projet', 'Vue\UserVueController@vueProjet')->name('vueProjetUser');
     Route::get('/vue/profile/{profile_id}/analytiks', 'Vue\UserVueController@vueAnalytiks')->name('vueAnalytiksUser');
@@ -127,7 +126,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/profile/{profile_id}/notifications', 'Vue\UserVueController@vueNotifications')->name('vueNotificationsUser');
     Route::get('/vue/profile/{profile_id}/parametres', 'Vue\UserVueController@vueSettings')->name('vueEditSettingsUser');
 
-    //SOUS VUE DES BOÎTES DU DASHBORD
+    // Dashboard box views
     Route::get('/vue/dashboard/{profile_id}/welcome', 'Vue\UserVueController@subVueWelcome')->name('subVueWelcomeUser');
     Route::get('/vue/dashboard/{profile_id}/croix-pote', 'Vue\UserVueController@subVueCroixPote')->name('subVueCroixPoteUser');
     Route::get('/vue/dashboard/{profile_id}/mes-croix', 'Vue\UserVueController@subVueMesCroix')->name('subVueMesCroixUser');
@@ -146,8 +145,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/dashboard/{profile_id}/random-word', 'Vue\UserVueController@subVueRandomWord')->name('subVueRandomWordUser');
     Route::get('/vue/dashboard/{profile_id}/contribution', 'Vue\UserVueController@subVueContribution')->name('subVueContributionUser');
 
-
-    //VUE CRAG
+    // Crag views
     Route::get('/vue/crag/{crag_id}/map', 'Vue\CragVueController@vueMap')->name('vueMapCrag');
     Route::get('/vue/crag/{crag_id}/fil-actu', 'Vue\CragVueController@vueFilActu')->name('vueFilActuCrag');
     Route::get('/vue/crag/{crag_id}/medias', 'Vue\CragVueController@vueMedias')->name('vueMediasCrag');
@@ -155,12 +153,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/crag/{crag_id}/topos', 'Vue\CragVueController@vueTopos')->name('vueToposCrag');
     Route::get('/vue/crag/{crag_id}/secteur', 'Vue\CragVueController@vueSecteur')->name('vueSecteurCrag');
 
-    //VUE SECTEUR
+    // Sector views
     Route::get('/vue/sector/{sector_id}/lines', 'Vue\SectorVueController@vueRoutes')->name('vueRoutesSector');
     Route::get('/vue/sector/{sector_id}/descriptions', 'Vue\SectorVueController@vueDescriptions')->name('vueDescriptionsSector');
     Route::get('/vue/sector/{sector_id}/photos', 'Vue\SectorVueController@vuePhotos')->name('vuePhotosSector');
 
-    //VUE ROUTE
+    // Route views
     Route::get('/vue/route/{route_id}/route','Vue\RouteVueController@vueRoute')->name('vueRouteRoute');
     Route::get('/vue/route/{route_id}/information','Vue\RouteVueController@vueInformation')->name('vueInformationRoute');
     Route::get('/vue/route/{route_id}/comments','Vue\RouteVueController@vueComments')->name('vueCommentsRoute');
@@ -168,11 +166,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/route/{route_id}/videos','Vue\RouteVueController@vueVideos')->name('vueVideosRoute');
     Route::get('/vue/route/{route_id}/carnet','Vue\RouteVueController@vueCarnet')->name('vueCarnetRoute');
 
-    //VUE GYM
+    // Gym views
     Route::get('/vue/gym/{gym_id}/map', 'Vue\GymVueController@vueMap')->name('vueMapGym');
     Route::get('/vue/gym/{gym_id}/fil-actu', 'Vue\GymVueController@vueFilActu')->name('vueFilActuGym');
+    Route::get('/vue/gym/{gym_id}/cross-list', 'Vue\GymVueController@vueGymCrossList')->name('vueGymCrossList');
 
-    //VUE TOPO
+    // Guide book views
     Route::get('/vue/topo/{topo_id}/fil-actu','Vue\TopoVueController@vueFilActu')->name('vueFilActuTopo');
     Route::get('/vue/topo/{topo_id}/liens','Vue\TopoVueController@vueLiens')->name('vueLiensTopo');
     Route::get('/vue/topo/{topo_id}/sites','Vue\TopoVueController@vueSites')->name('vueSitesTopo');
@@ -180,32 +179,33 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/topo/{topo_id}/map','Vue\TopoVueController@vueMap')->name('vueMapTopo');
     Route::get('/vue/topo/{topo_id}/photo','Vue\TopoVueController@vuePhoto')->name('vuePhotosTopo');
 
-    //VUE MASSIVE
+    // Massive views
     Route::get('/vue/massive/{massive_id}/fil-actu','Vue\MassiveVueController@vueFilActu')->name('vueFilActuMassive');
     Route::get('/vue/massive/{massive_id}/liens','Vue\MassiveVueController@vueLiens')->name('vueLiensMassive');
     Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites')->name('vueSitesMassive');
 
-    // GALLERY
+    // Gallery
     Route::get('/gallery/photo/{photo_id}', 'GalleryController@galleryPage')->name('gallery');
-
 });
 
-//INTERFACE ADMIN
-
+// Admin interface
 Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 
+    // Home
     Route::get('/admin/home', 'AdminController@homePage')->name('admin_home');
 
-    //SAE
+    // Climbing gym
     Route::get('/admin/upload-sae', 'AdminController@uploadSaePage')->name('admin_sae_upload');
+    Route::get('/admin/add-admin', 'AdminController@addGymAdminPage')->name('add_gym_admin');
     Route::post('/admin/upload', 'CRUD\GymController@uploadLogoBandeau')->name('uploadLogoBandeauSae');
+    Route::post('/admin/admin/add', 'CRUD\GymAdministratorController@addAdministrator')->name('addGymAdmin');
 
-    //ROUTE
+    // Route
     Route::get('/admin/route-information', 'AdminController@routeInformationPage')->name('admin_route_information');
     Route::get('/get/route/{route_id}/information', 'AdminController@getRouteInformation');
     Route::get('/delete/route/{route_id}', 'AdminCRUD\RouteCRUDController@deleteRoute')->name('delete_route');
 
-    //ARTICLE
+    // Article
     Route::get('/admin/article/upload-page', 'AdminController@uploadArticleBandeauPage')->name('uploadBandeauArticlePage');
     Route::get('/admin/article/create', 'AdminController@createArticlePage')->name('createArticlePage');
     Route::get('/admin/article/update', 'AdminController@updateArticlePage')->name('updateArticlePage');
@@ -213,42 +213,115 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
-    //NEWSLETTER
+    // Newsletter
     Route::get('/admin/newsletter/create', 'AdminController@createNewsletterPage')->name('createNewsletterPage');
     Route::get('/admin/newsletter/update', 'AdminController@updateNewsletterPage')->name('updateNewsletterPage');
     Route::get('/get/newsletter/{newsletter_ref}/information', 'AdminController@getNewsletterInformation');
     Route::resource('newsletters', 'CRUD\NewsletterController');
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
-    //AIDES
+    // Helps
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
     Route::get('/admin/aide/update', 'AdminController@updateHelpPage')->name('updateHelpPage');
     Route::get('/admin/aide/delete', 'AdminController@deleteHelpPage')->name('deleteHelpPage');
     Route::get('/get/aide/{help_id}/information', 'AdminController@getHelpInformation');
 
-    //LES EXCEPTIONS
+    // Exception
     Route::resource('exceptions', 'CRUD\ExceptionController');
     Route::get('/admin/exception/create', 'AdminController@createExceptionPage')->name('createExceptionPage');
     Route::get('/admin/exception/update', 'AdminController@updateExceptionPage')->name('updateExceptionPage');
     Route::get('/admin/exception/delete', 'AdminController@deleteExceptionPage')->name('deleteExceptionPage');
     Route::get('/get/exception/{exception_id}/information', 'AdminController@getExceptionInformation');
 
-
-    //SECTOR
+    // Sector
     Route::get('/admin/sector-information', 'AdminController@sectorInformationPage')->name('admin_sector_information');
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
-
-    // NEWS LETTER
-    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
-
 });
 
-//IFRAME
+// Admin gyms
+Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
+
+    Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
+
+    // Admin interface : Dashboard
+    Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
+
+    // Admin interface : Actuality
+    Route::get('/admin/{gym_id}/view/flux', 'GymAdminController@gymFluxView')->name('gym_admin_flux_view');
+
+    // Admin interface : Logo and bandeau
+    Route::get('/admin/{gym_id}/view/upload-logo-bandeau', 'GymAdminController@uploadLogoBandeauView')->name('gym_admin_logo_bandeau_upload_view');
+    Route::post('/gym-admin/{gym_id}/upload-logo', 'CRUD\GymAdministratorController@uploadLogo')->name('gym_admin_upload_logo');
+    Route::post('/gym-admin/{gym_id}/upload-bandeau', 'CRUD\GymAdministratorController@uploadBandeau')->name('gym_admin_upload_bandeau');
+
+    // Admin interface : Community
+    Route::get('/admin/{gym_id}/view/community', 'GymAdminController@gymCommunityView')->name('gym_admin_community_view');
+
+    // Admin interface : Statistic
+    Route::get('/admin/{gym_id}/view/statistique', 'GymAdminController@gymStatisticView')->name('gym_admin_statistic_view');
+
+    // Admin interface : Gestion
+    Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
+    Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
+
+    // Admin interface : Schemes
+    Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
+    Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
+    Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
+
+    // View : Grades & Grade lines
+    Route::get('/admin/{gym_id}/view/grades', 'GymAdminController@gymGradesView')->name('gym_admin_grades_gym');
+    Route::get('/admin/{gym_id}/view/grade-lines/{gym_grade_id}', 'GymAdminController@gymGradeLinesView')->name('gym_admin_grade_lines_gym');
+
+    // Modal : Grades & Grade lines
+    Route::post('/modal/gym-grade/{gym_id}/gym-grade-modal', 'CRUD\GymGradeController@gymGradeModal')->name('gymGradeModal');
+    Route::post('/modal/gym-grade-line/{gym_id}/gym-grade-line-modal', 'CRUD\GymGradeLineController@gymGradeLineModal')->name('gymGradeLineModal');
+
+    Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
+    Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
+    Route::post('/modal/room/{gym_id}/room/{room_id}/custom-scheme', 'CRUD\RoomController@customScheme')->name('roomCustomScheme');
+
+    Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
+
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail-modal', 'CRUD\GymRouteController@uploadRouteThumbnailModal')->name('routeUploadThumbnailModal');
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail', 'CRUD\GymRouteController@uploadRouteThumbnail')->name('routeUploadThumbnail');
+
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture-modal', 'CRUD\GymRouteController@uploadRoutePictureModal')->name('routeUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture', 'CRUD\GymRouteController@uploadRoutePicture')->name('routeUploadScheme');
+
+    Route::post('/modal/gym-sectors/{gym_id}', 'CRUD\GymSectorController@gymSectorModal')->name('gymSectorModal');
+    Route::post('/modal/gym-routes/{gym_id}', 'CRUD\GymRouteController@gymRouteModal')->name('gymRouteModal');
+
+    Route::put('/admin/{gym_id}/sector/{sector_id}/save-area', 'CRUD\GymSectorController@saveSchemeArea');
+
+    Route::put('/admin/{gym_id}/room/{room_id}/save-custom-scheme', 'CRUD\RoomController@saveCustomScheme')->name('saveCustomScheme');
+
+    Route::get('/admin/{gym_id}/room/last-created', 'GymSchemeController@getLastCreatedRoomRoute')->name('getLastCreatedRoomRoute');
+    Route::get('/admin/{gym_id}/room/first-order', 'GymSchemeController@getFirstOrderRoomRoute')->name('getFirstOrderRoomRoute');
+
+    Route::post('/modal/gym-administrator/{gym_id}', 'CRUD\GymAdministratorController@gymAddAdministratorModal')->name('gymAddAdministratorModal');
+    Route::post('/admin/administrator/add/{gym_id}/{user_id}', 'CRUD\GymAdministratorController@addAdministrator');
+});
+
+// Admin climbing gym, resource views
+Route::resource('rooms', 'CRUD\RoomController');
+Route::resource('gym_sectors', 'CRUD\GymSectorController');
+Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
+Route::resource('gym_routes', 'CRUD\GymRouteController');
+Route::resource('gym_grades', 'CRUD\GymGradeController');
+Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
+Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
+Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
+Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
+
+// Iframe
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
 
-
-// SITE MAP
+// Site map : general
 Route::get('/sitemap.xml','SitemapController@sitemapIndex')->name('sitemap');
 Route::get('/sitemap/common.xml','SitemapController@sitemapCommon')->name('sitemapCommon');
 Route::get('/sitemap/climbers.xml','SitemapController@sitemapClimbers')->name('sitemapClimbers');
@@ -256,12 +329,11 @@ Route::get('/sitemap/topos.xml','SitemapController@sitemapTopos')->name('sitemap
 Route::get('/sitemap/gyms.xml','SitemapController@sitemapGyms')->name('sitemapGyms');
 Route::get('/sitemap/topics.xml','SitemapController@sitemapTopics')->name('sitemapTopics');
 
-// SITE MAP CRAGS AND ROUTES
+// Site map : crag and route
 Route::get('/sitemap-crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
 Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
 
-
-//LE FIL D'ACTUALITÉ
+// News feed
 Route::post('/post/getVue', 'PostController@postsVue')->name('postsVue');
 Route::post('/post/getOne', 'PostController@getOnePost')->name('getOnePost');
 Route::post('/user/actuality', 'PostController@userActuality')->name('userActuality');
@@ -269,7 +341,7 @@ Route::post('/post/upload', 'CRUD\PostController@uploadPostImage')->name('upload
 Route::post('/post/vueOnePost', 'PostController@vueOnePost')->name('vueOnePost');
 Route::post('/like/add', 'LikeController@addLike')->name('addLike');
 
-//VUES DE LA MESSAGERIE
+// Messenger views
 Route::post('/messagerie/conversations', 'Vue\UserVueController@vueConversations')->name('vueConversations');
 Route::post('/messagerie/messages', 'Vue\UserVueController@vueMessages')->name('vueMessages');
 Route::get('/messagerie/userSearch/{conversation_id}/{search}', 'CRUD\UserConversationController@userSearch')->name('userSearchConversation');
@@ -277,13 +349,11 @@ Route::post('/messagerie/addUser', 'CRUD\UserConversationController@addUser')->n
 Route::post('/messagerie/newInConversation', 'CRUD\UserConversationController@newInConversation')->name('newInConversation');
 Route::post('/message/new', 'CRUD\UserConversationController@newMessage')->name('newMessage');
 
-
-//NOUVEAU MESSAGE ET NOTIFICATION
+// Notifications
 Route::post('/new/notifications-and-messages', 'UserController@getNewNotificationAndMessage')->name('getNewNotificationAndMessage');
 Route::post('/notification/read', 'CRUD\NotificationController@notificationAsRead')->name('notificationAsRead');
 
-
-//OUTDOOD
+// Outdoor API (TODO : transfer to API)
 Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAroundPoint')->name('APIMarkerMap');
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
@@ -291,28 +361,30 @@ Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo'
 Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
 Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
-// PARTENAIRE
+// Indoor API
+Route::get('/API/gyms/get-sectors/{room_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
+
+// Partner
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
 
-
-//TOPO (VERS LES SCRIPTS DE LIAISON)
+// Guidebook
 Route::get('/API/topos/by-name/{crag_id}/{name}', 'TopoController@getToposByName')->name('APIToposByName');
 Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
 Route::post('/topo/create-liaison', 'CRUD\TopoCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/topo/delete-liaison', 'CRUD\TopoCragController@deleteLiaison')->name('ScriptDeleteLiaison');
 
-//MASSIVE (VERS LES SCRIPTS DE LIAISON)
+// Massive
 Route::get('/API/massives/{lat}/{lng}/{rayon}/{crag_id}', 'MassiveController@getMassivesArroundPoint')->name('APIMassivesArroundPoint');
 Route::post('/massive/create-liaison', 'CRUD\MassiveCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/massive/delete-liaison', 'CRUD\MassiveCragController@deleteLiaison')->name('ScriptDeleteLiaison');
 
-// ARTILCE API
+// Article API
 Route::get('/api/article/crags/{article_id}','ArticleController@getArticleCrags')->name('ApiArticleCrags');
 
-//UPLOAD
+// Upload
 Route::post('/upload/topoCouverture', 'CRUD\TopoController@uploadCouvertureTopo')->name('uploadCouvertureTopo');
 
-//MODAL
+// Modal
 Route::post('/modal/crag', 'CRUD\CragController@cragModal')->name('cragModal');
 Route::post('/modal/gym', 'CRUD\GymController@gymModal')->name('gymModal');
 Route::post('/modal/description', 'CRUD\DescriptionController@descriptionModal')->name('descriptionModal');
@@ -343,15 +415,16 @@ Route::post('/modal/post', 'CRUD\PostController@postModal')->name('postModal');
 Route::post('/modal/like', 'LikeController@likeModal')->name('likeModal');
 Route::post('/modal/topic', 'CRUD\TopicController@topicModal')->name('topicModal');
 Route::post('/modal/cross', 'CRUD\CrossController@crossModal')->name('crossModal');
+Route::post('/modal/indoor-cross', 'CRUD\IndoorCrossController@indoorCrossModal')->name('indoorCrossModal');
 Route::post('/modal/crossUser', 'CRUD\CrossController@crossUserModal')->name('crossUserModal');
 Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('partnerModal');
 Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
 Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
 Route::post('/modal/version', 'VersionController@versionModal')->name('versionModal');
+Route::post('/modal/gym-manager', 'CRUD\GymController@managerModal')->name('managerModal');
 
-
-//CRUD AJAX
+// Ajax CRUD
 Route::resource('descriptions', 'CRUD\DescriptionController');
 Route::resource('comments', 'CRUD\CommentController');
 Route::resource('links', 'CRUD\LinkController');
@@ -382,12 +455,13 @@ Route::resource('posts', 'CRUD\PostController');
 Route::resource('notifications', 'CRUD\NotificationController');
 Route::resource('topics', 'CRUD\TopicController');
 Route::resource('crosses', 'CRUD\CrossController');
+Route::resource('indoor_crosses', 'CRUD\IndoorCrossController');
 Route::post('/cross/users', 'CRUD\CrossController@crossUsers')->name('crossUsersScript');
 Route::resource('partners', 'CRUD\PartnerController');
 Route::resource('approaches', 'CRUD\ApproachController');
 Route::resource('tags', 'CRUD\TagController');
 
-//CRUD USER
+// User CRUD
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');
 Route::post('/user/settings/messagerie', 'CRUD\UserController@saveUserMessagerieSettings')->name('saveUserMessagerieSettings');
 Route::post('/user/settings/confidentialite', 'CRUD\UserController@saveUserConfidentialiteSettings')->name('saveUserConfidentialiteSettings');
@@ -396,16 +470,15 @@ Route::post('/user/settings/filter', 'CRUD\UserController@saveFilterSettings')->
 Route::post('/upload/userBandeau', 'CRUD\UserController@uploadBandeau')->name('uploadBandeau');
 Route::post('/upload/userPhotoProfile', 'CRUD\UserController@uploadPhotoProfile')->name('uploadPhotoProfile');
 
-//FOLLOW (DELETE)
+// Follow
 Route::post('/follow/delete', 'CRUD\FollowController@deleteFollow')->name('deleteFollow');
 Route::post('/user/relation', 'CRUD\FollowController@userRelation')->name('userRelation');
 
-//TICK LISTS (DELETE)
+// Tick list
 Route::post('/tick-list/delete', 'CRUD\TickListController@deleteTickList')->name('deleteTickList');
 Route::post('/tick-list/add', 'CRUD\TickListController@addTickList')->name('addTickList');
 
-
-// CRUD PARTNER
+// Partner CRUD
 Route::post('/partner/active', 'CRUD\PartnerController@activePartner')->name('activePartnerScript');
 Route::post('/partner/place/active', 'CRUD\PartnerController@activePlace')->name('activePlaceScript');
 Route::post('/partner/setting-map', 'CRUD\PartnerController@mapPlaces')->name('mapPlacesScript');
@@ -414,21 +487,22 @@ Route::post('/partner/getPartnerPoints', 'PartnerController@getPartnerPoints')->
 Route::post('/partner/getUserInformation', 'PartnerController@getUserInformation')->name('getUserInformation');
 Route::post('/partner/getMyPlaces', 'PartnerController@getMyPlaces')->name('getMyPlaces');
 
-
-//PROBLEM
+// Problem
 Route::post('/send/problem', 'CRUD\ProblemController@sendProblem')->name('sendProblem');
 
-//BANDEAU
+// Header
 Route::post('/bandeau/define', 'CRUD\CragController@defineBandeau')->name('defineBandeau');
 
+// Manager request
+Route::post('/send/manager-request', 'CRUD\GymController@sendManagerRequest')->name('sendManagerRequest');
 
-//CHART
+// Chart
 Route::get('/chart/crag/{crag_id}/grade', 'Chart\CragChartController@gradeChart')->name('gradeCragChart');
 Route::get('/chart/crag/{crag_id}/climb', 'Chart\CragChartController@climbChart')->name('climbCragChart');
 Route::get('/chart/sector/{sector_id}/grade', 'Chart\SectorChartController@gradeChart')->name('gradeSectorChart');
 Route::post('/chart/cross/climb-type', 'Chart\Crosses\UserCrossesTypeClimbController@climbChart')->name('climbUserCrossesChart');
 
-//CHART - ANALYTIKS
+// Chart - Analytiks
 // -> tab : route
 Route::post('/chart/analytiks/grades', 'Chart\Crosses\routeChartsController@grades')->name('gradeAnalytiksChart');
 Route::post('/chart/analytiks/climbs', 'Chart\Crosses\routeChartsController@climbs')->name('climbsAnalytiksChart');
@@ -442,13 +516,17 @@ Route::post('/chart/analytiks/regions', 'Chart\Crosses\environmentChartsControll
 Route::post('/chart/analytiks/pays', 'Chart\Crosses\environmentChartsController@pays')->name('paysAnalytiksChart');
 Route::post('/chart/analytiks/maps', 'Chart\Crosses\environmentChartsController@maps')->name('mapsAnalytiksChart');
 
-// -> tab : période
+// -> tab : period
 Route::post('/chart/analytiks/years', 'Chart\Crosses\timeChartsController@years')->name('yearsAnalytiksChart');
 Route::post('/chart/analytiks/months', 'Chart\Crosses\timeChartsController@months')->name('monthsAnalytiksChart');
 Route::post('/chart/analytiks/time-lines', 'Chart\Crosses\timeChartsController@timeLines')->name('timeLinesAnalytiksChart');
 
-//SIMILAR
+// Indoor Chart
+Route::post('/chart/indoor/grades', 'Chart\IndoorChartController@grades')->name('indoorGradesChart');
+Route::post('/chart/indoor/time', 'Chart\IndoorChartController@time')->name('indoorTimeChart');
+
+// Similar
 Route::post('/similar/route', 'RouteController@similarRoute')->name('similarRoute');
 
-//FOLLOW
+// Follow
 Route::post('/follow/user','FollowController@getUserFollows')->name('followUser');

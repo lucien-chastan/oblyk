@@ -19,7 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(array('prefix' => 'v1', 'middleware' => []), function () {
+
+    // Guidebooks
     Route::get('guidebooks/{idOrEan}', 'API\ApiTopoController@getTopoResponse')->name('apiGetTopo');
+
+    // Gym Grade
+    Route::get('gym-grade-line/{id}', 'API\ApiGymGradeController@getGradeLineResponse')->name('apiGetGymGradeLine');
+
+    // Crag
     Route::get('crags/{id}', 'API\ApiCragController@getCragResponse')->name('apiGetCrag');
     Route::get('crags/around-place/{lat}/{lng}/{radius}', 'API\ApiCragController@getCragsAroundPlaceResponse')->name('apiGetCragsAroundPlace');
 });

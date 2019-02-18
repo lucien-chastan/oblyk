@@ -26,9 +26,6 @@ class RouteObserver
     {
         $route->label = strip_tags($route->label);
         $route->opener = strip_tags($route->opener);
-
-        $version = new Version();
-        $version->saveVersion(Route::find($route->id), $route, 'App\Route');
     }
 
     /**

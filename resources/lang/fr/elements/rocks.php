@@ -19,6 +19,7 @@ return [
     'rock_16' => 'Andésite',
     'rock_17' => 'Schiste',
     'rock_18' => 'Phonolithe',
+    'resin' => 'Résine',
 ];
 
 

@@ -4,40 +4,50 @@ namespace App\Http\Controllers\Chart\Crosses;
 
 use App\Cross;
 use App\Http\Controllers\Controller;
+use App\IndoorCross;
 use App\Rock;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class environmentChartsController extends Controller
 {
 
 
-    //GRAPHIQUE DES SITES D'ESCALADES
-    function crags(){
-
+    // Crags and gyms graph
+    function crags()
+    {
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
+        $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
         $cragsData = [];
         $cragsLabel = [];
 
-        foreach ($crosses as $cross){
+        foreach ($crosses as $cross) {
             $cragsLabel[$cross->route->crag->id] = $cross->route->crag->label;
-            if(isset($cragsData[$cross->route->crag->id])){
+            if (isset($cragsData[$cross->route->crag->id])) {
                 $cragsData[$cross->route->crag->id]++;
-            }else{
+            } else {
                 $cragsData[$cross->route->crag->id] = 1;
             }
         }
 
-        //réindex à partir de zéro
+        foreach ($indoorCrosses as $cross) {
+            $cragsLabel[$cross->gym->id] = $cross->gym->label;
+            if (isset($cragsData[$cross->gym->id])) {
+                $cragsData[$cross->gym->id]++;
+            } else {
+                $cragsData[$cross->gym->id] = 1;
+            }
+        }
+
+        // re-index
         $cragsLabel = array_values($cragsLabel);
         $cragsData = array_values($cragsData);
 
         $data = [
-            'type'=>'bar',
-            'data'=> [
+            'type' => 'bar',
+            'data' => [
                 'labels' => $cragsLabel,
                 'datasets' => [
                     [
@@ -55,7 +65,7 @@ class environmentChartsController extends Controller
                     'yAxes' => [
                         [
                             'ticks' => [
-                                'suggestedMin'=> 0,
+                                'suggestedMin' => 0,
                                 'stepSize' => 1
                             ],
                             'display' => false
@@ -72,31 +82,40 @@ class environmentChartsController extends Controller
     }
 
 
-
-    function regions(){
-
+    function regions()
+    {
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
+        $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
         $datas = [];
         $labels = [];
 
-        foreach ($crosses as $cross){
+        foreach ($crosses as $cross) {
             $labels[$cross->route->crag->region] = $cross->route->crag->region;
-            if(isset($datas[$cross->route->crag->region])){
+            if (isset($datas[$cross->route->crag->region])) {
                 $datas[$cross->route->crag->region]++;
-            }else{
+            } else {
                 $datas[$cross->route->crag->region] = 1;
             }
         }
 
-        //réindex à partir de zéro
+        foreach ($indoorCrosses as $cross) {
+            $labels[$cross->gym->region] = $cross->gym->region;
+            if (isset($datas[$cross->gym->region])) {
+                $datas[$cross->gym->region]++;
+            } else {
+                $datas[$cross->gym->region] = 1;
+            }
+        }
+
+        // re-index
         $labels = array_values($labels);
         $datas = array_values($datas);
 
         $data = [
-            'type'=>'bar',
-            'data'=> [
+            'type' => 'bar',
+            'data' => [
                 'labels' => $labels,
                 'datasets' => [
                     [
@@ -114,7 +133,7 @@ class environmentChartsController extends Controller
                     'yAxes' => [
                         [
                             'ticks' => [
-                                'suggestedMin'=> 0,
+                                'suggestedMin' => 0,
                                 'stepSize' => 1
                             ],
                             'display' => false
@@ -131,20 +150,30 @@ class environmentChartsController extends Controller
     }
 
 
-    function pays(){
-
+    function pays()
+    {
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
+        $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
         $datas = [];
         $labels = [];
 
-        foreach ($crosses as $cross){
+        foreach ($crosses as $cross) {
             $labels[$cross->route->crag->code_country] = $cross->route->crag->code_country;
-            if(isset($datas[$cross->route->crag->code_country])){
+            if (isset($datas[$cross->route->crag->code_country])) {
                 $datas[$cross->route->crag->code_country]++;
-            }else{
+            } else {
                 $datas[$cross->route->crag->code_country] = 1;
+            }
+        }
+
+        foreach ($indoorCrosses as $cross) {
+            $labels[$cross->gym->code_country] = $cross->gym->code_country;
+            if (isset($datas[$cross->gym->code_country])) {
+                $datas[$cross->gym->code_country]++;
+            } else {
+                $datas[$cross->gym->code_country] = 1;
             }
         }
 
@@ -153,8 +182,8 @@ class environmentChartsController extends Controller
         $datas = array_values($datas);
 
         $data = [
-            'type'=>'bar',
-            'data'=> [
+            'type' => 'bar',
+            'data' => [
                 'labels' => $labels,
                 'datasets' => [
                     [
@@ -172,7 +201,7 @@ class environmentChartsController extends Controller
                     'yAxes' => [
                         [
                             'ticks' => [
-                                'suggestedMin'=> 0,
+                                'suggestedMin' => 0,
                                 'stepSize' => 1
                             ],
                             'display' => false
@@ -189,28 +218,34 @@ class environmentChartsController extends Controller
     }
 
 
-    //GRAPHIQUE DES TYPES DE GRIMPE
-    function rocks(){
-
+    // Graph by rocks
+    function rocks()
+    {
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
+        $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
         $rocksData = [];
         $rocksLabel = [];
         $rocks = Rock::all();
 
-        // Liste des labels (le -1 et pour que l'index commence à 0)
-        foreach ($rocks as $rock){
+        // Label list
+        foreach ($rocks as $rock) {
             $rocksLabel[$rock->id - 1] = trans('elements/rocks.rock_' . $rock->id);
             $rocksData[$rock->id - 1] = 0;
         }
 
-        // Croix par roche
+        // Cross by rocks
         foreach ($crosses as $cross) $rocksData[$cross->route->crag->rock_id - 1]++;
 
+        if(count($indoorCrosses) > 0) {
+            $rocksLabel[] = trans('elements/rocks.resin');
+            $rocksData[] = count($indoorCrosses);
+        }
+
         $data = [
-            'type'=>'radar',
-            'data'=> [
+            'type' => 'radar',
+            'data' => [
                 'labels' => $rocksLabel,
                 'datasets' => [
                     [
@@ -227,7 +262,7 @@ class environmentChartsController extends Controller
                     'yAxes' => [
                         [
                             'ticks' => [
-                                'suggestedMin'=> 0,
+                                'suggestedMin' => 0,
                                 'stepSize' => 1
                             ]
                         ]
@@ -243,19 +278,28 @@ class environmentChartsController extends Controller
     }
 
 
-    //GRAPHIQUE DES TYPES DE GRIMPE
-    function maps(){
-
+    // Map
+    function maps()
+    {
         $user = User::where('id', Auth::id())->with('settings')->first();
         $crosses = Cross::getCrossWithFilter($user);
+        $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
         $crags = [];
+        $gyms = [];
 
-        foreach ($crosses as $cross){
-            if(!isset($crags[$cross->route->crag->id])) $crags[$cross->route->crag->id] = $cross->route->crag;
+        foreach ($crosses as $cross) {
+            if (!isset($crags[$cross->route->crag->id])) $crags[$cross->route->crag->id] = $cross->route->crag;
         }
 
-        $data = array_values($crags);
+        foreach ($indoorCrosses as $cross) {
+            if (!isset($gyms[$cross->gym->id])) $gyms[$cross->gym->id] = $cross->gym;
+        }
+
+        $data = [
+            'crags' => array_values($crags),
+            'gyms' => array_values($gyms),
+        ];
 
         return response()->json($data);
     }

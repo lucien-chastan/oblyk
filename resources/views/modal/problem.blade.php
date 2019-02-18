@@ -4,7 +4,7 @@
 
 <form class="submit-form" data-route="{{ route('sendProblem') }}" onsubmit="submitData(this, closeProblemModal); return false">
 
-    {!! $Inputs::popupError([]) !!}
+    {!! $Inputs::popupError() !!}
 
     <div class="row">
         <div class="col s12">

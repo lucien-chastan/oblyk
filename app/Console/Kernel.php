@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\FixAltPhoto;
+use App\Console\Commands\UpdateMinAndMaxGradeCross;
+use App\Console\Commands\UpdateMinAndMaxGradeRoute;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\FixLowerGrade;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -17,6 +19,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         FixLowerGrade::class,
         FixAltPhoto::class,
+        UpdateMinAndMaxGradeRoute::class,
+        UpdateMinAndMaxGradeCross::class,
     ];
 
     /**

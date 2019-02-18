@@ -1,4 +1,4 @@
-//Marker simple
+// Marker simple
 let marker_00000 = L.icon({iconUrl: '/img/marker-00000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_10000 = L.icon({iconUrl: '/img/marker-10000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01000 = L.icon({iconUrl: '/img/marker-01000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -6,7 +6,7 @@ let marker_00100 = L.icon({iconUrl: '/img/marker-00100.svg', iconSize: [24, 32],
 let marker_00010 = L.icon({iconUrl: '/img/marker-00010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00001 = L.icon({iconUrl: '/img/marker-00001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//Marker double
+// Marker double
 let marker_11000 = L.icon({iconUrl: '/img/marker-11000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01100 = L.icon({iconUrl: '/img/marker-01100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00110 = L.icon({iconUrl: '/img/marker-00110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -18,7 +18,7 @@ let marker_01010 = L.icon({iconUrl: '/img/marker-01010.svg', iconSize: [24, 32],
 let marker_01001 = L.icon({iconUrl: '/img/marker-01001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00101 = L.icon({iconUrl: '/img/marker-00101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//marker triple
+// Marker triple
 let marker_11100 = L.icon({iconUrl: '/img/marker-11100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01110 = L.icon({iconUrl: '/img/marker-01110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_00111 = L.icon({iconUrl: '/img/marker-00111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
@@ -30,30 +30,34 @@ let marker_10101 = L.icon({iconUrl: '/img/marker-10101.svg', iconSize: [24, 32],
 let marker_01101 = L.icon({iconUrl: '/img/marker-01101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01011 = L.icon({iconUrl: '/img/marker-01011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//marker quadruple
+// Marker quadruple
 let marker_11110 = L.icon({iconUrl: '/img/marker-11110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_11101 = L.icon({iconUrl: '/img/marker-11101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_11011 = L.icon({iconUrl: '/img/marker-11011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_10111 = L.icon({iconUrl: '/img/marker-10111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_01111 = L.icon({iconUrl: '/img/marker-01111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//le cintuple
+// Le cintuple
 let marker_11111 = L.icon({iconUrl: '/img/marker-11111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//marker de parking
+// Marker de parking
 let marker_parking = L.icon({iconUrl: '/img/marker-parking.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 let marker_sale = L.icon({iconUrl: '/img/marker-sale.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//marker des secteurs
+// Marker des secteurs
 let marker_sector = L.icon({iconUrl: '/img/marker-sector.svg', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -14]});
 
-//Marker des salles d'escalade
-let marker_gym_00 = L.icon({iconUrl: '/img/marker-sae-00.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_gym_01 = L.icon({iconUrl: '/img/marker-sae-01.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_gym_10 = L.icon({iconUrl: '/img/marker-sae-10.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
-let marker_gym_11 = L.icon({iconUrl: '/img/marker-sae-11.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+// Marker des salles d'escalade
+let marker_gym_000 = L.icon({iconUrl: '/img/marker-sae-000.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_100 = L.icon({iconUrl: '/img/marker-sae-100.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_010 = L.icon({iconUrl: '/img/marker-sae-010.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_001 = L.icon({iconUrl: '/img/marker-sae-001.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_110 = L.icon({iconUrl: '/img/marker-sae-110.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_101 = L.icon({iconUrl: '/img/marker-sae-101.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_011 = L.icon({iconUrl: '/img/marker-sae-011.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
+let marker_gym_111 = L.icon({iconUrl: '/img/marker-sae-111.svg', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -29]});
 
-//définition des différents style de tuile
+// Définition des différents style de tuile
 let mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
     relief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors - Tiles &copy; <a href="http://www.esrifrance.fr" title="Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community">Esri</a>\''}),
     carte = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
@@ -127,8 +131,9 @@ function buildPopup(crag) {
 function buildGymPopup(gym) {
 
     var type_escalade = '';
-    if(gym.type_voie == 1) type_escalade += '<span class="voie">voie</span>';
-    if(gym.type_boulder == 1) type_escalade += '<span class="bloc">bloc</span>';
+    if(gym.type_voie == 1) type_escalade += '<span class="gym-route">voie</span>';
+    if(gym.type_boulder == 1) type_escalade += '<span class="gym-boulder">bloc</span>';
+    if(gym.type_pan == 1) type_escalade += '<span class="gym-pan">pan</span>';
 
     let html = `
         <img class="photo-couve-site-leaflet" src="${gym.bandeau}" alt="photo de couverture de ${gym.label}">
@@ -202,9 +207,13 @@ function styleIcon(type) {
 
 function styleGymIcon(type) {
     let point;
-    if(type === '00') point = marker_gym_00;
-    if(type === '01') point = marker_gym_01;
-    if(type === '10') point = marker_gym_10;
-    if(type === '11') point = marker_gym_11;
+    if(type === '000') point = marker_gym_000;
+    if(type === '100') point = marker_gym_100;
+    if(type === '010') point = marker_gym_010;
+    if(type === '001') point = marker_gym_001;
+    if(type === '110') point = marker_gym_110;
+    if(type === '101') point = marker_gym_101;
+    if(type === '011') point = marker_gym_011;
+    if(type === '111') point = marker_gym_111;
     return point;
 }

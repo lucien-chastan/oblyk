@@ -33,7 +33,7 @@
 
                 <form class="submit-form" data-route="/topics" onsubmit="submitData(this, gotToNewTopics); return false">
 
-                    {!! $Inputs::popupError([]) !!}
+                    {!! $Inputs::popupError() !!}
 
                     <div class="row">
                         {!! $Inputs::text(['name'=>'label', 'id'=>'label-new-sujet' , 'value'=>'', 'label'=>trans('pages/forums/create.labelTitle'), 'type'=>'text']) !!}

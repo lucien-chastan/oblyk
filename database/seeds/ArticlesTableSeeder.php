@@ -46,6 +46,7 @@ Contrairement aux idées reçues, cette boisson si prisée des grimpeurs s’av�
 Par contre, l’un de ses composés, la levure de bière, est idéal pour bénéficier des bienfaits de la vitamine B, sans les inconvénients cités précédemment… Je vous l’accorde, c’est moins fun. En résumé, rien n’empêche bien sûr de savourer une bonne bière après grimper. Mais avec modération, on est bien d’accord, et en ayant conscience de sa réputation très surfaite en matière de récupération
             ',
             'author' => 'La Fabrique Verticale',
+            'file_view' => '',
             'publish' => 1,
             'created_at' => '2016-10-13 12:23:55',
         ]);
@@ -67,6 +68,7 @@ Un fonctionnement wikipédiste qui rend hélas la tâche plus longue et complexe
 
             ',
             'author' => 'Kairn',
+            'file_view' => '',
             'publish' => 1,
             'created_at' => '2015-10-14 10:19:21',
         ]);
@@ -101,6 +103,7 @@ En bref, les blocs de la Payre, c\'est un site convivial, avec un caillou atypiq
 
             ',
             'author' => 'Fabio Oblyk',
+            'file_view' => '',
             'publish' => 1,
             'created_at' => '2015-10-15 16:30:00',
         ]);

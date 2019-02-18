@@ -17,12 +17,16 @@ class AdminController extends Controller
     }
 
 
-    //SAE
+    // Climbing gym
     public function uploadSaePage(){
         return view('pages.admin.sae.upload');
     }
 
-    //ROUTE
+    public function addGymAdminPage(){
+        return view('pages.admin.sae.administrator');
+    }
+
+    // Route
     public function routeInformationPage(){
         return view('pages.admin.route.information');
     }
@@ -50,7 +54,6 @@ class AdminController extends Controller
 
     }
 
-    //ROUTE
     public function sectorInformationPage(){
         return view('pages.admin.sector.information');
     }
@@ -73,7 +76,7 @@ class AdminController extends Controller
 
     }
 
-    //ARTICLE
+    // Article
     public function uploadArticleBandeauPage(){
         return view('pages.admin.article.upload');
     }
@@ -99,7 +102,7 @@ class AdminController extends Controller
     }
 
 
-    //LES AIDES
+    // Tools
     public function createHelpPage(){
         return view('pages.admin.helps.create-help');
     }
@@ -124,7 +127,7 @@ class AdminController extends Controller
 
     }
 
-    //LES EXCEPTIONS
+    // Exception
     public function createExceptionPage(){
         return view('pages.admin.exceptions.create-exception');
     }
@@ -149,7 +152,7 @@ class AdminController extends Controller
 
     }
 
-    // NEWS LETTER
+    // Newsletter
     public function createNewsletterPage(){
         return view('pages.admin.newsletter.create-newsletter');
     }

@@ -15,7 +15,7 @@
 
             <form id="form-partner-setting" class="submit-form" data-route="{{route('saveUserPartnerSettings')}}" onsubmit="submitData(this, majPartnerSettings); return false">
 
-                {!! $Inputs::popupError([]) !!}
+                {!! $Inputs::popupError() !!}
 
                 <div class="blue-border-zone">
 

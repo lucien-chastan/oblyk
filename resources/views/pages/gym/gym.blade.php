@@ -46,6 +46,12 @@
             @include('pages.gym.tabs.fil-actu')
         </div>
 
+        @if(Auth::check() && ($is_administrator || env('ACTIVE_INDOOR')))
+            <div id="liste-croix">
+                @include('pages.gym.tabs.cross-list')
+            </div>
+        @endif
+
         <div id="map">
             @include('pages.gym.tabs.map')
         </div>

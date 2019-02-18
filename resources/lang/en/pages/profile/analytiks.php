@@ -27,7 +27,8 @@ return [
 
     //Filtre
     'filterTitle' => "Filter my analytiks",
-    'filterOnClimbType' => "Filter on climbing types",
+    'filterOnClimbType' => "Filter on outdoor climbing types",
+    'filterOnClimbTypeIndoor' => "Filter on indoor climbing types",
     'filterOnStatusType' => "Filter sur les types d'enchainement :",
     'filterPeriod' => "Display my crosses only between two dates :",
     'allDone' => "Check all",

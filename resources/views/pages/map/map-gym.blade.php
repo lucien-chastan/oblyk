@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link href="/framework/leaflet/markercluster.css" rel="stylesheet">
+    <link rel="stylesheet" href="/framework/leaflet/L.Control.Locate.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/popupMapStyle.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
 @endsection
@@ -37,43 +39,44 @@
     <script src="/framework/leaflet/Control.Geocoder.js"></script>
     <script src="/framework/leaflet/leaflet.draw.js"></script>
     <script src="/framework/leaflet/leaflet.measure.js"></script>
+    <script src="/framework/leaflet/L.Control.Locate.min.js"></script>
     <script src="/js/mapVariable.js"></script>
     <script src="/js/map.js"></script>
     <script>
 
-        //chargement de la map
         loadMap();
 
-        //boucle sur les salles pour ajouter les marqueurs sur la carte
+        // Loop on climbing gyms
         @foreach($gyms as $gym)
 
         var point = L.marker(
-            [{{$gym['lat']}},{{$gym['lng']}}],
-            {icon: marker_gym_{{$gym['type_boulder']}}{{$gym['type_route']}}}
+            [{{ $gym['lat'] }},{{ $gym['lng'] }}],
+            {icon: marker_gym_{{ $gym['type_route'] }}{{ $gym['type_pan'] }}{{ $gym['type_boulder'] }}}
             )
                 .bindPopup(
                     `
-                <img class="photo-couve-site-leaflet" src="{{ (file_exists(storage_path('app/public/gyms/200/bandeau-' . $gym['id'] . '.jpg'))) ? '/storage/gyms/200/bandeau-' . $gym['id'] . '.jpg' : '/img/default-gym-bandeau.jpg'}}" alt="photo de couverture de {{$gym['label']}}">
+                <img class="photo-couve-site-leaflet" src="{{ (file_exists(storage_path('app/public/gyms/200/bandeau-' . $gym['id'] . '.jpg'))) ? '/storage/gyms/200/bandeau-' . $gym['id'] . '.jpg' : '/img/default-gym-bandeau.jpg' }}" alt="photo de couverture de {{ $gym['label'] }}">
                 <div class="crag-leaflet-info">
                     <h2 class="loved-king-font titre-crag-leaflet">
-                        <a href="/salle-escalade/{{$gym['id']}}/{{str_slug($gym['label'])}}">{{$gym['label']}}</a>
+                        <a href="/salle-escalade/{{ $gym['id'] }}/{{ str_slug($gym['label']) }}">{{$gym['label']}}</a>
                     </h2>
                     <table>
                         <tr>
                             <td>Localisation : </td>
-                            <td>{{$gym['big_city']}}, {{$gym['region']}} ({{$gym['code_country']}})</td>
+                            <td>{{ $gym['big_city'] }}, {{ $gym['region'] }} ({{ $gym['code_country'] }})</td>
                         </tr>
                         <tr>
                             <td>Type de grimpe : </td>
                             <td class="type-grimpe">
-                                @if($gym['type_voie'] == 1)<span class="voie">voie</span>@endif
-                            @if($gym['type_boulder'] == 1)<span class="bloc">bloc</span>@endif
+                                @if($gym['type_route'] == 1)<span class="gym-route">voie</span>@endif
+                                @if($gym['type_pan'] == 1)<span class="gym-pan">pan</span>@endif
+                                @if($gym['type_boulder'] == 1)<span class="gym-boulder">bloc</span>@endif
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td class="btn-vers-crags">
-                            <a href="/salle-escalade/{{$gym['id']}}/{{str_slug($gym['label'])}}" class="waves-effect waves-light btn">voir la salle</a>
+                            <a href="/salle-escalade/{{ $gym['id'] }}/{{ str_slug($gym['label']) }}" class="waves-effect waves-light btn">voir la salle</a>
                             </td>
                         </tr>
                     </table>
@@ -85,7 +88,7 @@
 
         map.addLayer(markers);
 
-        //passage de la barre de navigation en noir
+        // Change nav bar color
         var animationScroll = false;
         var nav_barre = document.getElementById('nav_barre');
         nav_barre.setAttribute('class', nav_barre.className.replace('nav-white','nav-black'));
