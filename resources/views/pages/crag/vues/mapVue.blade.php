@@ -19,7 +19,7 @@
                         <i class="material-icons blue-text left">local_parking</i> <a class="tooltipped lien-parking" {!! $Helpers::tooltip('Cliquer pour afficher sur la carte', 'right') !!} onclick="cragMap.setView([{{$parking->lat}}, {{$parking->lng}}], 18)">{{$parking->lat}}, {{$parking->lng}}</a>
                         <div class="markdownZone">{{ $parking->description }}</div>
                         <p class="info-user grey-text">
-                            ajouté par <a href="{{ route('userPage', ['user_id'=>$parking->user->id, 'user_label'=>str_slug($parking->user->name)]) }}">{{$parking->user->name}}</a> le {{$parking->created_at->format('d M Y')}}
+                            ajouté par <a href="{{ $parking->user->url() }}">{{$parking->user->name}}</a> le {{$parking->created_at->format('d M Y')}}
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$parking->id, "model"=>"Parking"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
@@ -47,7 +47,7 @@
                         <div class="markdownZone">{{ $approach->description }}</div>
                         <p class="no-margin"><strong>Longueur :</strong> {{ $approach->length }} mètres <span class="grey-text">(environs {{ round($approach->length / 1000 * 60 / 3, 0) }} minutes de marche à 3 Km/h)</span></p>
                         <p class="info-user grey-text">
-                            ajouté par <a href="{{ route('userPage', ['user_id'=>$approach->user->id, 'user_label'=>str_slug($approach->user->name)]) }}">{{$approach->user->name}}</a> le {{$approach->created_at->format('d M Y')}}
+                            ajouté par <a href="{{ $approach->user->url() }}">{{$approach->user->name}}</a> le {{$approach->created_at->format('d M Y')}}
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$approach->id, "model"=>"Approach"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>

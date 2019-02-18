@@ -5,15 +5,18 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0",
         "andreasindal/laravel-markdown": "^1.1",
         "barryvdh/laravel-debugbar": "^2.3",
         "caouecs/laravel-lang": "~3.0",
-        "tom-lingham/searchy" : "2.*",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "mcamara/laravel-localization": "^1.2"
+        "mcamara/laravel-localization": "^1.2",
+        "mews/purifier": "^2.1",
+        "mpociot/laravel-apidoc-generator": "^2.1",
+        "tom-lingham/searchy": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

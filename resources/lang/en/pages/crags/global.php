@@ -12,7 +12,7 @@ return [
     'tabInformation' => "Information",
     'tabNewsFeed' => "News Feed",
     'tabSector' => "Sectors &amp; routes",
-    'tabMedia' => "Medias",
+    'tabMedia' => "Photos & Videos",
     'tabLink' => "Links",
     'tabGuideBook' => "Guidebooks",
     'tabMap' => "Map",

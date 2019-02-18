@@ -42,7 +42,6 @@ class Video extends Model
             }
         }
 
-
         // VIEMO : Si nous somme sur une vidéo de viméo
         if(preg_match('/vimeo.com/', $url) == 1){
             $arrayUrl = parse_url($url, PHP_URL_PATH);
@@ -66,6 +65,31 @@ class Video extends Model
         }
 
         return $good_url;
+    }
+
+    public function getTargetLink (){
+        $link = '';
+        $name = '';
+
+        if ($this->viewable_type == 'App\Crag') {
+            $name = Crag::find($this->viewable_id)->label;
+            $link = Crag::webUrl($this->viewable_id, $name);
+        }
+
+        if ($this->viewable_type == 'App\Route') {
+            $name = Route::find($this->viewable_id)->label;
+            $link = Route::webUrl($this->viewable_id, $name);
+        }
+
+        if ($this->viewable_type == 'App\Gym') {
+            $name = Gym::find($this->viewable_id)->label;
+            $link = Gym::webUrl($this->viewable_id,$name);
+        }
+
+        return [
+            'name' => $name,
+            'link' => $link,
+        ];
     }
 
 }

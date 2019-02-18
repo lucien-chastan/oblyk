@@ -12,7 +12,7 @@
         <tbody>
         <tr>
             <td class="property-column">Nom : </td>
-            <td><a href="{{ route('routePage', ['route_id'=>$route->id,'route_label'=>str_slug($route->label)]) }}">{{ $route->label }}</a></td>
+            <td><a href="{{ $route->url() }}">{{ $route->label }}</a></td>
         </tr>
         <tr>
             <td class="property-column">Id : </td>
@@ -22,7 +22,7 @@
             <td class="property-column">Site : </td>
             <td>
                 id : {{ $route->crag_id }}<br>
-                nom : <a href="{{ route('cragPage', ['crag_id'=>$route->crag_id, 'crag_label'=>str_slug($route->crag->label)]) }}">{{ $route->crag->label }}</a>
+                nom : <a href="{{ $route->crag->url() }}">{{ $route->crag->label }}</a>
             </td>
         </tr>
         <tr>
@@ -36,7 +36,7 @@
             <td class="property-column">Grimpeur : </td>
             <td>
                 id : {{ $route->user_id }}<br>
-                nom : <a href="{{ route('userPage', ['user_id'=>$route->user_id, 'user_label'=>str_slug($route->user->name)]) }}">{{ $route->user->name }}</a>
+                nom : <a href="{{ $route->user->url() }}">{{ $route->user->name }}</a>
             </td>
         </tr>
         <tr>
@@ -100,7 +100,7 @@
             <td class="property-column">Tags : </td>
             <td>
                 @foreach($route->tags as $tag)
-                    <span>#@lang('elements/tags.tag_' . $tag->tag_id) (<a href="{{ route('userPage', ['user_id'=>$tag->user->id, 'user_label'=>str_slug($tag->user->name)]) }}"><i class="material-icons tiny">account_circle</i></a>)</span>
+                    <span>#@lang('elements/tags.tag_' . $tag->tag_id) (<a href="{{ $tag->user->url() }}"><i class="material-icons tiny">account_circle</i></a>)</span>
                 @endforeach
             </td>
         </tr>
@@ -137,7 +137,7 @@
 <h5 onclick="collapseArea('route-crosses-area', this)"><span>-</span> Croix liées</h5>
 <div id="route-crosses-area">
     @foreach($route->crosses as $cross)
-        <p>croix : {{ $cross->created_at }} par <a href="{{ route('userPage', ['user_id'=>$cross->user->id, 'user_label'=>str_slug($cross->user->name)]) }}">{{ $cross->user->name }}</a></p>
+        <p>croix : {{ $cross->created_at }} par <a href="{{ $cross->user->url() }}">{{ $cross->user->name }}</a></p>
     @endforeach
 </div>
 
@@ -145,7 +145,7 @@
 <h5 onclick="collapseArea('route-tickList-area', this)"><span>-</span> Ticks liés</h5>
 <div id="route-tickList-area">
     @foreach($route->tickLists as $tick)
-        <p>tick : {{ $tick->created_at }} par <a href="{{ route('userPage', ['user_id'=>$tick->user->id, 'user_label'=>str_slug($tick->user->name)]) }}">{{ $tick->user->name }}</a> (supprimer)</p>
+        <p>tick : {{ $tick->created_at }} par <a href="{{ $tick->user->url() }}">{{ $tick->user->name }}</a> (supprimer)</p>
     @endforeach
 </div>
 
@@ -155,7 +155,7 @@
     @foreach($route->descriptions as $description)
         <p>
             {{ $description->description }}<br>
-            par : <a href="{{ route('userPage', ['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]) }}">{{ $description->user->name }}</a>
+            par : <a href="{{ $description->user->url() }}">{{ $description->user->name }}</a>
         </p>
     @endforeach
 </div>
@@ -166,7 +166,7 @@
     @foreach($route->videos as $video)
         <p>
             <a href="{{ $video->iframe }}">{{ $video->iframe }}</a><br>
-            par : <a href="{{ route('userPage', ['user_id'=>$video->user->id, 'user_label'=>str_slug($video->user->name)]) }}">{{ $video->user->name }}</a>
+            par : <a href="{{ $video->user->url() }}">{{ $video->user->name }}</a>
         </p>
     @endforeach
 </div>
@@ -177,7 +177,7 @@
     @foreach($route->photos as $photo)
         <p>
             <a href="/storage/photos/crags/1300/{{ $photo->slug_label }}">{{ $photo->slug_label }}</a><br>
-            par : <a href="{{ route('userPage', ['user_id'=>$photo->user->id, 'user_label'=>str_slug($photo->user->name)]) }}">{{ $photo->user->name }}</a>
+            par : <a href="{{ $photo->user->url() }}">{{ $photo->user->name }}</a>
         </p>
     @endforeach
 </div>

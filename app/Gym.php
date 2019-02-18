@@ -38,4 +38,32 @@ class Gym extends Model
         return $this->morphMany('App\Follow', 'followed');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'gymPage',
+            [
+                'gym_id' => $id,
+                'gym_label' => (str_slug($label) != '') ? str_slug($label) : 'salle'
+            ],
+            $absolute
+        );
+    }
 }

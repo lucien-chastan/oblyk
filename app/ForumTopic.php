@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class ForumTopic extends Model
 {
+    public $searchable_type;
+
     protected $dates = [
         'last_post'
     ];
@@ -29,4 +31,28 @@ class ForumTopic extends Model
         return $this->morphMany('App\Post', 'postable');
     }
 
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'topicPage',
+            [
+                'topic_id' => $id,
+                'topic_label' => (str_slug($label) != '') ? str_slug($label) : 'sujet'
+            ],
+            $absolute
+        );
+    }
 }

@@ -27,6 +27,128 @@ iframe {
     margin-bottom: 2em;
 }
 
+.author-resume {
+    margin-top: 2em;
+    background-color: rgb(235,235,235);
+    padding: 1em;
+    border-radius: 5px;
+    .author-picture {
+        height: 150px;
+        border-radius: 5px;
+        margin-left: 1em;
+    }
+}
+
+.article-graph {
+    margin-bottom: 5em;
+    .graph{
+        position: relative;
+        height: 250px;
+    }
+}
+
+.author-title {
+    margin-top: 0;
+}
+
+.enriched-article-area {
+    #article-map {
+        height: 400px;
+        max-height: calc(100vh - 120px);
+    }
+
+    .guide-book-cover {
+        height: 360px;
+        max-height: calc(100vh - 160px);
+        max-width: 100%;
+    }
+
+    .topos-and-crags-title {
+        font-size: 1.6em;
+    }
+
+    .col {
+        margin-bottom: 2em;
+    }
+
+    .article-topo-link {
+        font-size: 1.5em;
+        text-align: center;
+    }
+}
+
+.article-markdown {
+    h2 {
+        &.loved-king-font {
+            font-size: 2em;
+        }
+
+        .voir-sur-oblyk {
+            font-family: Roboto, sans-serif;
+            font-size: 0.45em;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+}
+
+.articles-container {
+    margin-top: 64px;
+
+    .col-next-article {
+        margin-top: 1.3em;
+    }
+    a {
+        display: block;
+        transition: opacity 0.3s;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .article-footer {
+        color: rgb(255,255,255);
+        text-shadow: 0 2px 2px rgba(0,0,0,0.6);
+        position: absolute;
+        margin: 0;
+        bottom: 0;
+        padding: 0.5em;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+        width: 100%;
+
+        h1, h2 {
+            margin: 0.5em 0 0 0;
+        }
+    }
+
+    .first-article {
+        height: 70vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        h1 {
+            font-size: 2.5em;
+        }
+    }
+
+    .next-article {
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        h2 {
+            font-size: 1.8em;
+        }
+        p {
+            margin: 0.2em 0;
+        }
+    }
+}
+
 @media screen and (max-width:600px){
     .article-parallax {
         h1 {

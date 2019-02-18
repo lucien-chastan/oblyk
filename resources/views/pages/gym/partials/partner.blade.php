@@ -10,9 +10,9 @@
 
             <div class="blue-border-div">
                 <p class="no-margin">
-                    <a href="{{ route('userPage',['user_id'=>$partner->id,'user_label'=>str_slug($partner->name)]) }}"><i class="material-icons left">person_pin_circle</i> {{ $partner->name }}</a>
+                    <a href="{{ $partner->url() }}"><i class="material-icons left">person_pin_circle</i> {{ $partner->name }}</a>
                     <span class="grey-text">
-                        @lang('elements/sex.sex_' . $partner->sex)
+                        @lang('elements/sex.sex_' . ($partner->sex ?? 0))
                         @if($partner->birth == 0) {{ trans_choice('elements/old.old', 0) }} @endif
                         @if($partner->birth != 0) {{ trans_choice('elements/old.old', date('Y') - $partner->birth) }} @endif
                     </span>
@@ -28,7 +28,7 @@
     @if(Auth::check() && $ImThere == false)
         @if($user->partnerSettings->partner == 0)
             <p class="text-center">
-                <a href="{{ route('userPage',['user_id'=>$user->id,'user_label'=>str_slug($user->name)]) }}#partenaire-parametres" class="btn-flat blue-text"><i class="material-icons left">person_pin</i> @lang('pages/gyms/tabs/information.activePartner')</a>
+                <a href="{{ $user->url() }}#partenaire-parametres" class="btn-flat blue-text"><i class="material-icons left">person_pin</i> @lang('pages/gyms/tabs/information.activePartner')</a>
             </p>
         @else
             <p class="text-center">

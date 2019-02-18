@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
+    public $searchable_type;
 
     public $fillable = ['label'];
 
@@ -55,6 +56,45 @@ class Route extends Model
 
     public function follows(){
         return $this->morphMany('App\Follow', 'followed');
+    }
+
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'routePage',
+            [
+                'route_id' => $id,
+                'route_label' => (str_slug($label) != '') ? str_slug($label) : 'ligne'
+            ],
+            $absolute
+        );
+    }
+
+    /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) : string
+    {
+        $crag = Crag::find($this->crag_id);
+        return $crag->cover($size);
     }
 
     public static function similarRoute($crag_id, $route_id , $label){

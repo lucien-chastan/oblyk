@@ -71,9 +71,24 @@ return [
         Buying a guidebook, it is helping passionate climbers who give a lot to maintain, develop, clean climbing spots where you will climb for free.
     ",
 
+    //Activité de la communauté
+    'title-community-activity' => 'Community activity since yesterday',
+    'new-crag' => 'One new crag|:count new crags',
+    'new-climber' => 'A new climber has arrived|:count new climbers have arrived',
+    'new-route' => 'One new route|:count new routes',
+    'new-topo' => 'One new guidebook|:count new guidebooks',
+    'new-topo-web-pdf' => 'One new PDF/Web guidebook|:count new PDF/Web guidebooks',
+    'new-photo' => 'Une new picture|:count new pictures',
+    'communityAddOn' => 'added on',
+    'new-video' => 'One new video|:count new videos',
+    'new-link' => 'One new link|:count new links',
+    'communityPostOn' => 'Posted on',
+    'new-gym' => 'One new climbing gym|:count new climbing gyms',
+    'new-word' => 'One new definition|:count new definitions',
 
     //Quoi de neuf
     'titleWhatUp' => 'What\'s up ?',
+    'seeArticles' => 'See all articles',
 
     //Les articles
     'readMore' => 'Read more',

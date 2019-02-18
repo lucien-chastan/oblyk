@@ -21,6 +21,7 @@ return [
     'labelEmail' => 'E-mail address',
     'labelPassword' => 'Password',
     'labelRemember' => 'Remember me',
+    'labelNewsletter' => 'Receive the news letter (one per month)',
     'btnForgotPassword' => 'Password forgotten ?',
     'btnConnect' => 'Log in',
     'btnCreateAccount' => 'Create an account',

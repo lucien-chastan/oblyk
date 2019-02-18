@@ -10,10 +10,25 @@ class CommentObserver
 {
 
     /**
+     * @param Comment $comment
+     */
+    public function creating(Comment $comment) {
+        $comment->comment = clean($comment->comment);
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function updating(Comment $comment) {
+        $comment->comment = clean($comment->comment);
+    }
+
+    /**
      * Listen to the Comment deleting event.
      *
-     * @param  Comment  $comment
+     * @param  Comment $comment
      * @return void
+     * @throws \Exception
      */
     public function deleting(Comment $comment)
     {

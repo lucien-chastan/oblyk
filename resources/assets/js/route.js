@@ -140,27 +140,9 @@ function initCarnetRouteTab() {
 }
 
 function initRoutePhototheque() {
-
-    if(document.getElementById('routePhototheque') !== null){
-
-        new Phototheque('#routePhototheque',
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
-    }
-
     initOpenModal();
-
     setTimeout(function () {$('ul.tabs').tabs('select_tab', 'route-tab-photos');},200);
-
 }
-
 
 function optimisePopupRoute() {
     let climbSelect = document.getElementById('select-climbs-popup-route'),

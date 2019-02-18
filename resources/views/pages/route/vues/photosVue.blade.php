@@ -4,14 +4,9 @@
 
     <div id="zone-route-gallerie">
         <div class="row row-crag-gallerie">
-            <div id="routePhototheque" class="phototheque">
-                @foreach($route->photos as $photo)
-                    <img data-full="/storage/photos/crags/1300/{{$photo->slug_label}}" data-legende="{{$photo->description}}<br>posté sur : <a href='/site-escalade/{{$route->crag_id}}/{{str_slug($route->label)}}'>{{$route->label}}</a> par <a>{{$photo->user_id}}</a>" alt="{{$route->label}} - {{$photo->description}}" src="/storage/photos/crags/200/{{$photo->slug_label}}">
-                @endforeach
-            </div>
+            @include('includes.gallery', ['photos' => $route->photos])
         </div>
     </div>
-
 
     @if(Auth::check())
 

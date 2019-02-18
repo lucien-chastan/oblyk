@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(array('prefix' => 'v1', 'middleware' => []), function () {
+    Route::get('guidebooks/{idOrEan}', 'API\ApiTopoController@getTopoResponse')->name('apiGetTopo');
+    Route::get('crags/{id}', 'API\ApiCragController@getCragResponse')->name('apiGetCrag');
+    Route::get('crags/around-place/{lat}/{lng}/{radius}', 'API\ApiCragController@getCragsAroundPlaceResponse')->name('apiGetCragsAroundPlace');
+});

@@ -13,10 +13,25 @@ class PostObserver
 {
 
     /**
+     * @param Post $post
+     */
+    public function creating(Post $post) {
+        $post->content = clean($post->content);
+    }
+
+    /**
+     * @param Post $post
+     */
+    public function updating(Post $post) {
+        $post->content = clean($post->content);
+    }
+
+    /**
      * Listen to the Comment deleting event.
      *
-     * @param  Post  $post
+     * @param  Post $post
      * @return void
+     * @throws \Exception
      */
     public function deleting(Post $post)
     {

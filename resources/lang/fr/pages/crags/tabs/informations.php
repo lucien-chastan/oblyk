@@ -59,4 +59,6 @@ return [
     'routeTypeTitle'=>'Type de lignes',
     'gradeTitle'=>'Nombre de ligne par cotations',
 
+    // Boite article
+    'relatedArticles' => 'Articles liés à ce site'
 ];

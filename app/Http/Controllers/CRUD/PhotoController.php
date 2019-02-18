@@ -44,6 +44,10 @@ class PhotoController extends Controller
                 'illustrable_type' => "App\\" . $request->input('illustrable_type'),
                 'slug_label' => $photo->slug_label,
                 'description' => $photo->description,
+                'source' => $photo->source,
+                'copyright_by' => $photo->copyright_by ?? true,
+                'copyright_nc' => $photo->copyright_nc ?? true,
+                'copyright_nd' => $photo->copyright_nd ?? true,
                 'album_id' => $photo->album_id,
                 'id' => $id_photo,
                 'submit' => $submitFunction,
@@ -80,86 +84,100 @@ class PhotoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function store(Request $request)
     {
+        $mSize = env('PHOTO_MAX_SIZE');
+        $mHeight = env('PHOTO_MAX_HEIGHT');
+        $mWidth = env('PHOTO_MAX_WIDTH');
+
         //validation du formulaire
         $this->validate($request, [
-            'file' => 'required|image:jpeg,jpg,png|file|max:10240|dimensions:max_width=4000,max_height=4000',
+            'file' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
         ]);
+
+        $photo = new Photo();
 
         //si nous avons un fichier image
         if ($request->hasFile('file')) {
+            try {
 
-            //on va chercher l'album
-            $album_id = 0;
-            if ($request->input('album_id') != 0) {
-                $album_id = $request->input('album_id');
-            } else {
-                $Albums = Album::where('user_id', Auth::id())->get();
-                $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-                $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
-                $trouver = false;
+                //on va chercher l'album
+                $album_id = 0;
 
-                foreach ($Albums as $album) {
-                    if ($newAlbumName == $album->label) {
-                        $trouver = true;
+                if ($request->input('album_id') != 0) {
+                    $album_id = $request->input('album_id');
+                } else {
+                    $Albums = Album::where('user_id', Auth::id())->get();
+                    $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+                    $newAlbumName = $mois[date('n') - 1] . ' ' . date('Y');
+                    $trouver = false;
+
+                    foreach ($Albums as $album) {
+                        if ($newAlbumName == $album->label) {
+                            $trouver = true;
+                            $album_id = $album->id;
+                        }
+                    }
+
+                    if (!$trouver) {
+                        $album = new Album();
+                        $album->label = $newAlbumName;
+                        $album->description = '';
+                        $album->user_id = Auth::id();
+                        $album->save();
                         $album_id = $album->id;
                     }
                 }
 
-                if (!$trouver) {
-                    $album = new Album();
-                    $album->label = $newAlbumName;
-                    $album->description = '';
-                    $album->user_id = Auth::id();
-                    $album->save();
-                    $album_id = $album->id;
+                $photo->illustrable_id = $request->input('illustrable_id');
+                $photo->illustrable_type = $request->input('illustrable_type');
+                $photo->source = $request->input('source');
+                $photo->copyright_by = ($request->input('copyright_by') == 'true');
+                $photo->copyright_nc = ($request->input('copyright_nc') == 'true');
+                $photo->copyright_nd = ($request->input('copyright_nd') == 'true');
+                $photo->slug_label = 'temp.jpg';
+                $photo->user_id = Auth::id();
+                $photo->album_id = $album_id;
+                $photo->description = $request->input('description');
+                $photo->save();
+
+                //Photo d'une falaise
+                if ($photo->illustrable_type == 'App\Crag') {
+                    $type = Crag::where('id', $photo->illustrable_id)->first();
+                    $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
                 }
-            }
 
-            $photo = new Photo();
-            $photo->illustrable_id = $request->input('illustrable_id');
-            $photo->illustrable_type = $request->input('illustrable_type');
-            $photo->slug_label = 'temp.jpg';
-            $photo->user_id = Auth::id();
-            $photo->album_id = $album_id;
-            $photo->description = $request->input('description');
-            $photo->save();
+                //Photo d'un secteur
+                if ($photo->illustrable_type == 'App\Sector') {
+                    $type = Sector::where('id', $photo->illustrable_id)->first();
+                    $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
+                }
 
-            //Photo d'une falaise
-            if ($photo->illustrable_type == 'App\Crag') {
-                $type = Crag::where('id', $photo->illustrable_id)->first();
-                $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
-            }
+                //Photo d'un secteur
+                if ($photo->illustrable_type == 'App\Route') {
+                    $type = Route::where('id', $photo->illustrable_id)->first();
+                    $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
+                }
 
-            //Photo d'un secteur
-            if ($photo->illustrable_type == 'App\Sector') {
-                $type = Sector::where('id', $photo->illustrable_id)->first();
-                $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
-            }
+                //Photo d'un user
+                if ($photo->illustrable_type == 'App\User') {
+                    $type = User::where('id', Auth::id())->first();
+                    $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
+                }
 
-            //Photo d'un secteur
-            if ($photo->illustrable_type == 'App\Route') {
-                $type = Route::where('id', $photo->illustrable_id)->first();
-                $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
-            }
+                $img = Image::make($request->file('file'));
 
-            //Photo d'un user
-            if ($photo->illustrable_type == 'App\User') {
-                $type = User::where('id', Auth::id())->first();
-                $photo->slug_label = str_slug($type->label) . '-' . $photo->id . '.jpg';
-            }
+                $photo->exif_model = $img->exif('Model');
+                $photo->exif_make = $img->exif('Make');
 
-            //on réenregistre le slug_label de la photo
-            $photo->save();
+                $photo->save();
 
-            try {
                 //Image en 1300px de large
-                $img = Image::make($request->file('file'))
-                    ->orientate()
+                $img->orientate()
                     ->resize(1300, null, function ($constraint) {
                         $constraint->aspectRatio();
                     })
@@ -179,23 +197,25 @@ class PhotoController extends Controller
                 //Crop de l'image en 50 * 50
                 $img->fit(50, 50)->save(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
 
-                return response()->json(json_encode($photo));
-
-            }catch (Exception $e){
-
+            } catch (Exception $e) {
                 //s'il y a un problème on supprime les images potentiellement uploadé
-                if(file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/200/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/100/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
-                if(file_exists(storage_path('app/public/photos/crags/50/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/1300/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/200/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/200/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/100/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/100/' . $photo->slug_label));
+                if (file_exists(storage_path('app/public/photos/crags/50/' . $photo->slug_label))) unlink(storage_path('app/public/photos/crags/50/' . $photo->slug_label));
 
                 //on supprime la photo en base de donnée
                 $photo->delete();
 
-                return response()->json($e, 400);
+                return response()->json($e->getMessage(), 500);
 
+            } finally {
+                // test if the upload is ok, otherwise delete the record
+                if (!file_exists(storage_path('app/public/photos/crags/1300/' . $photo->slug_label))) $photo->delete();
             }
         }
+
+        return response()->json(json_encode($photo));
     }
 
     /**
@@ -261,6 +281,10 @@ class PhotoController extends Controller
         if($photo->user_id == Auth::id()){
             $photo->description = $request->input('description');
             $photo->album_id = $album_id;
+            $photo->source = $request->input('source');
+            $photo->copyright_by = $request->input('copyright_by');
+            $photo->copyright_nc = $request->input('copyright_nc');
+            $photo->copyright_nd = $request->input('copyright_nd');
             $photo->save();
         }
 

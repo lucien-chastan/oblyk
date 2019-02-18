@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Cross;
 use App\Route;
+use App\RouteSection;
 use App\TickList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Cache;
 
 class RouteController extends Controller
 {
@@ -15,6 +17,17 @@ class RouteController extends Controller
         $similarLabel = Route::similarRoute($request->input('crag_id'), $request->input('route_id') , $request->input('label'));
 
         return response()->json(json_encode($similarLabel));
+    }
+
+    public function routeGrades(){
+        $grades_calc = Cache::remember('grades_transformer', 66666, function() {
+            $grades_calc = [];
+            for($i=1; $i<=54; $i++) {
+                array_push($grades_calc, ['grade' => Route::valToGrad($i), 'grade_val' => $i]);
+            }
+            return $grades_calc;
+        });
+        return response()->json($grades_calc);
     }
 
     public function routePage($route_id, $route_label){
@@ -31,7 +44,13 @@ class RouteController extends Controller
             ->with('routeSections.start')
             ->withCount('photos')
             ->withCount('videos')
+            ->withCount('versions')
             ->first();
+
+        // Si le label à changé alors on redirige
+        if(Route::webUrl($route_id, $route_label) != $route->url()) {
+            return $this->routeRedirectionPage($route_id);
+        }
 
         //route dans la ticklist du connecté
         $tickList = TickList::where([['route_id', $route->id],['user_id',Auth::id()]])->first();
@@ -73,5 +92,10 @@ class RouteController extends Controller
         ];
 
         return view('pages.route.line', $data);
+    }
+
+    public function routeRedirectionPage($route_id) {
+        $route = Route::find($route_id);
+        return redirect($route->url(),301);
     }
 }

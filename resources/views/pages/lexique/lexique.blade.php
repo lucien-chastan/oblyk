@@ -44,13 +44,16 @@
                                 <p class="text-bold">{{$word->label}}</p>
                                 <div class="markdownZone">{{$word->definition}}</div>
                                 <p class="info-user grey-text">
-                                    @lang('modals/word.postByDate', ['name'=>$word->user->name, 'url'=>route('userPage',['user_id'=>$word->user->id, 'user_label'=>str_slug($word->user->name)]), 'date'=>$word->created_at->format('d M Y')])
+                                    @lang('modals/word.postByDate', ['name'=>$word->user->name, 'url'=>$word->user->url(), 'date'=>$word->created_at->format('d M Y')])
 
                                     @if(Auth::check())
                                         <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>
                                         @if($word->user_id == Auth::id())
                                             <i {!! $Helpers::tooltip(trans('modals/word.editTooltip')) !!} {!! $Helpers::modal(route('wordModal'), ["word_id"=>$word->id, "title"=>trans('modals/word.modalEditeTitle'), "method"=>"PUT"]) !!} class="material-icons tiny-btn right tooltipped btnModal">edit</i>
                                             <i {!! $Helpers::tooltip(trans('modals/word.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/words/" . $word->id ]) !!} class="material-icons tiny-btn right tooltipped btnModal">delete</i>
+                                            @if($word->versions_count > 0)
+                                                <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$word->id, "model"=>"Word"]) !!} class="material-icons tiny-btn right tooltipped btnModal">history</i>
+                                            @endif
                                         @endif
                                     @endif
                                 </p>

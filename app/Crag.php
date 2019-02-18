@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class Crag extends Model
 {
@@ -89,9 +90,43 @@ class Crag extends Model
     public function routes(){
         return $this->hasMany('App\Route','crag_id', 'id');
     }
+    public function routeSections(){
+        return $this->hasManyThrough('App\RouteSection', 'App\Route');
+    }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCover() : bool
+    {
+        return ($this->bandeau != '/img/default-crag-bandeau.jpg');
+    }
+
+    /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) :string
+    {
+        if($this->bandeau !== '/img/default-crag-bandeau.jpg') {
+            return str_replace('/storage/photos/crags/1300', '/storage/photos/crags/' . $size, $this->bandeau);
+        } else {
+            return '/img/default-crag-bandeau.jpg';
+        }
+    }
+
+    /**
+     * Return crags around point
+     * @param $lat
+     * @param $lng
+     * @param $rayon
+     * @return mixed
+     */
     public static function getCragsAroundPoint($lat, $lng, $rayon){
-        //retourne les falaises dans un certain rayon
         $cragsInRayon = DB::select(
             'SELECT id FROM crags WHERE getRange(lat, lng, :lat, :lng) <= :rayon',
             [
@@ -100,16 +135,41 @@ class Crag extends Model
                 'rayon' => $rayon * 1000
             ]
         );
-
         return $cragsInRayon;
     }
 
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'cragPage',
+            [
+                'crag_id' => $id,
+                'crag_label' => (str_slug($label) != '') ? str_slug($label) : 'falaise'
+            ],
+            $absolute
+        );
+    }
 
     //met à jour les informations stocké de la falaise en question
-    public static function majInformation($crag_id){
+    public static function majInformation($crag_id) {
+        $Route = Route::class;
+        $Crag = Crag::class;
 
-        $routes = Route::where('crag_id',$crag_id)->with('routeSections')->get();
-        $crag = Crag::where('id', $crag_id)->with('gapGrade')->first();
+        $routes = $Route::where('crag_id',$crag_id)->with('routeSections')->get();
+        $crag = $Crag::where('id', $crag_id)->with('gapGrade')->first();
 
         $type_bloc = 0;
         $type_voie = 0;
@@ -119,9 +179,9 @@ class Crag extends Model
 
         //min et max
         $min_grade_val = 100;
-        $min_grade_text = '';
+        $min_grade_text = '?';
         $max_grade_val = 0;
-        $max_grade_text = '';
+        $max_grade_text = '?';
 
         foreach ($routes as $route){
 
@@ -133,7 +193,7 @@ class Crag extends Model
             if($route->climb_id == 8) $via_ferrata = 1;
 
             foreach ($route->routeSections as $section){
-                if($section->grade_val < $min_grade_val){
+                if($section->grade_val < $min_grade_val && $section->grade_val > 0){
                     $min_grade_val = $section->grade_val;
                     $min_grade_text = $section->grade . $section->sub_grade;
                 }
@@ -142,6 +202,7 @@ class Crag extends Model
                     $max_grade_text = $section->grade . $section->sub_grade;
                 }
             }
+            $min_grade_val = ($min_grade_val == 100) ? 0 : $min_grade_val; // if no min value - set it as 0/? since there is no other grades
         }
 
         //MISE À JOUR DU TYPE DE VOIE
@@ -170,5 +231,30 @@ class Crag extends Model
             $gapGrade->max_grade_text = $max_grade_text;
             $gapGrade->save();
         }
+    }
+
+    public function AllPhoto() {
+        $Photo = Photo::class;
+
+        return $Photo
+            ::where(
+                [
+                    ['illustrable_id', $this->id],
+                    ['illustrable_type', 'App\\Crag']
+                ]
+            )
+            ->orWhere('illustrable_type', 'App\\Sector')
+            ->whereIn('illustrable_id', function ($query) {
+                $query->select('id')->from('sectors')->where('crag_id', $this->id);
+            })
+            ->orWhere('illustrable_type', 'App\\Route')
+            ->whereIn('illustrable_id', function ($query) {
+                $query->select('id')->from('routes')->where('crag_id', $this->id);
+            })
+            ->get();
+    }
+
+    public function articleCrags(){
+        return $this->hasMany('App\ArticleCrag','crag_id','id');
     }
 }

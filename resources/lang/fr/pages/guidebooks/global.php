@@ -5,6 +5,7 @@ return [
     //Tabs
     'informationTab' => 'Informations',
     'newsFeedTab' => "Fil d'actu",
+    'photosTab' => "Photos",
     'buyTab' => 'Acheter',
     'linksTab' => 'Liens',
     'cragsTab' => 'Sites',

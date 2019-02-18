@@ -10,6 +10,9 @@
             @if(Auth::check())
                 <div class="text-right ligne-btn">
                     <i {!! $Helpers::tooltip('Modifier les informations') !!} {!! $Helpers::modal(route('massiveModal'), ["massive_id"=>$massive->id, "title"=>"Modifier ce regroupement", "method" => "PUT"]) !!} class="material-icons tooltipped btnModal">edit</i>
+                    @if($massive->versions_count > 0)
+                        <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$massive->id, "model"=>"Massive"]) !!} class="material-icons tooltipped btnModal">history</i>
+                    @endif
                 </div>
             @endif
 
@@ -20,7 +23,7 @@
                     <div class="blue-border-div">
                         <div class="markdownZone">{{ $description->description }}</div>
                         <p class="info-user grey-text">
-                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>route('userPage',['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]), 'date'=>$description->created_at->format('d M Y')])
+                            @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>$description->user->url(), 'date'=>$description->created_at->format('d M Y')])
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>

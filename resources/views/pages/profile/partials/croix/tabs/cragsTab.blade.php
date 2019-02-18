@@ -8,7 +8,7 @@
                     <img class="img-tick-list circle left" src="{{ str_replace_last('1300','50',$crosses[0]->route->crag->bandeau) }}">
                 @endif
                 <p class="no-margin">
-                    <a class="text-bold" href="{{ route('cragPage',['crag_id'=>$crosses[0]->route->crag->id,'crag_label'=>str_slug($crosses[0]->route->crag->label)]) }}">{{ $crosses[0]->route->crag->label }}</a><br>
+                    <a class="text-bold" href="{{ $crosses[0]->route->crag->url() }}">{{ $crosses[0]->route->crag->label }}</a><br>
                     <span class="grey-text">@choice('pages/profile/crosses.crossesFigures', count($crosses))</span>
                 </p>
             </div>

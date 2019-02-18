@@ -73,8 +73,25 @@ return [
         Acheter un topo, c'est soutenir des passionnés qui donnent énormément pour maintenir, développer, nettoyer les sites d'escalade sur lesquels vous allez grimper gratuitement.
     ",
 
+
+    //Activité de la communauté
+    'title-community-activity' => 'Activité de la communauté depuis hier',
+    'new-crag' => 'Une nouvelle falaise|:count nouvelles falaises',
+    'new-climber' => 'Un nouveau grimpeur est arrivé|:count nouveaux grimpeurs sont arrivés',
+    'new-route' => 'Une nouvelle voie|:count nouvelles voies',
+    'new-topo' => 'Un nouveau topo|:count nouveaux topos',
+    'new-topo-web-pdf' => 'Un nouveau topo PDF / Web|:count nouveaux topos PDF / Web',
+    'new-photo' => 'Une nouvelle photo|:count nouvelles photos',
+    'communityAddOn' => 'ajouté sur',
+    'new-video' => 'Une nouvelle vidéo|:count nouvelles vidéos',
+    'new-link' => 'Un nouveau lien|:count nouveaux liens',
+    'communityPostOn' => 'Posté sur',
+    'new-gym' => 'Une nouvelle salle|:count nouvelles salles',
+    'new-word' => 'Une nouvelle définition|:count nouvelles définitions',
+
     //Quoi de neuf
     'titleWhatUp' => 'Quoi de neuf ?',
+    'seeArticles' => 'Voir tous les articles',
 
     //Les articles
     'readMore' => 'Lire la suite',

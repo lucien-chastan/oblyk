@@ -3,7 +3,7 @@
 <div class="row">
 
     @if(isset($ticklist))
-        <p class="text-center">{{$route->label}} @lang('pages/routes/tabs/cross.inMyTickList') <a href="{{route('userPage',['user_id'=>Auth::id(),'user_label'=>str_slug(Auth::user()->name)])}}#tick-list">tick list</a></p>
+        <p class="text-center">{{$route->label}} @lang('pages/routes/tabs/cross.inMyTickList') <a href="{{ Auth::user()->url() }}#tick-list">tick list</a></p>
         <p class="text-center"><a {!! $Helpers::tooltip(trans('pages/routes/tabs/cross.tooltipDeleteTick')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/tickLists/" . $ticklist->id, "callback"=>"reloadRouteCarnetTab"]) !!} class="i-cursor tooltipped btnModal" onclick="$('#modal').modal('open');"><i class="material-icons">delete</i></a></p>
     @else
         @if(Auth::check() && count($crosses) == 0)
@@ -67,7 +67,7 @@
                         <strong>@lang('pages/routes/tabs/cross.IClimbWith')</strong>
                         <span class="virgule">
                             @foreach($cross->crossUsers as $user)
-                                <span><a href="{{ route('userPage', ['user_id'=>$user->user->id, 'user_label'=>str_slug($user->user->name)]) }}">{{ $user->user->name }}</a></span>
+                                <span><a href="{{ $user->user->url() }}">{{ $user->user->name }}</a></span>
                             @endforeach
                             <i {!! $Helpers::tooltip(trans('pages/routes/tabs/cross.editFriendsList')) !!} {!! $Helpers::modal(route('crossUserModal'), ["route"=>"/cross/users", "cross_id"=>$cross->id, "title"=>trans('pages/routes/tabs/cross.editFriendsList'), "method"=>"POST", "callback"=>"reloadRouteCarnetTab"]) !!} onclick="$('#modal').modal('open');" class="material-icons grey-text bt-add-grimpeur-on-cross tooltipped btnModal">group_add</i>
                         </span>

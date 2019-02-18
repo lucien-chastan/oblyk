@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Exception;
 use App\Help;
+use App\Newsletter;
 use App\Route;
 use App\Sector;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -146,6 +146,27 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.exceptions.get-exception', $data);
+
+    }
+
+    // NEWS LETTER
+    public function createNewsletterPage(){
+        return view('pages.admin.newsletter.create-newsletter');
+    }
+
+    public function updateNewsletterPage(){
+        return view('pages.admin.newsletter.update-newsletter');
+    }
+
+    public function getNewsletterInformation($newsletter_ref){
+
+        $newsletter = Newsletter::where('ref', $newsletter_ref)->first();
+
+        $data = [
+            'newsletter' => $newsletter,
+        ];
+
+        return view('pages.admin.newsletter.get-newsletter', $data);
 
     }
 }

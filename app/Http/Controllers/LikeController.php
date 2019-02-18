@@ -73,7 +73,7 @@ class LikeController extends Controller
                     $type,
                     [$userAuth->name, $post->postable->label],
                     '/img/icon-fil-actu.svg',
-                    [route('userPage',['user_id'=>$userAuth->id,'user_label'=>str_slug($userAuth->name)]), $userAuth->name],
+                    [$userAuth->url(), $userAuth->name],
                     [$post->id]
                 );
                 $notification->save();

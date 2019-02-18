@@ -49,7 +49,7 @@
                 <p>@lang('pages/partner/partnerHowToUser.description_step_1')</p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#partenaire-parametres"><i class="material-icons left">accessibility</i>@lang('pages/partner/partnerHowToUser.action_step_1')</a>
+                        <a class="btn-flat blue-text" href="{{ Auth::user()->url() }}#partenaire-parametres"><i class="material-icons left">accessibility</i>@lang('pages/partner/partnerHowToUser.action_step_1')</a>
                     </p>
                 @endif
             </div>
@@ -65,7 +65,7 @@
                 </p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#mes-lieux"><i class="material-icons left">location_on</i>@lang('pages/partner/partnerHowToUser.action_step_2')</a>
+                        <a class="btn-flat blue-text" href="{{ Auth::user()->url() }}#mes-lieux"><i class="material-icons left">location_on</i>@lang('pages/partner/partnerHowToUser.action_step_2')</a>
                     </p>
                 @endif
             </div>
@@ -102,7 +102,7 @@
                 </p>
                 @if(Auth::check())
                     <p class="text-right">
-                        <a class="btn-flat blue-text" href="{{ route('userPage',['user_id'=>Auth::id(), 'user_label'=>str_slug(Auth::user()->name)]) }}#messagerie"><i class="material-icons left">email</i> @lang('pages/partner/partnerHowToUser.action_step_4')</a>
+                        <a class="btn-flat blue-text" href="{{ Auth::user()->url() }}#messagerie"><i class="material-icons left">email</i> @lang('pages/partner/partnerHowToUser.action_step_4')</a>
                     </p>
                 @endif
             </div>

@@ -125,7 +125,6 @@ function reloadPhotoSector(response) {
 
 function closeModalInitPhototheque() {
     closeModal();
-    initSectorPhototheque();
 }
 
 //Affiche la vues d'un onglet de secteur
@@ -143,24 +142,6 @@ function loadSectorVue(tab) {
         ajaxRouter(route, target, callback);
 
     }
-}
-
-function initSectorPhototheque() {
-
-    if(document.getElementById('sectorPhototheque-' + loadedSectorId) !== null){
-
-        new Phototheque('#sectorPhototheque-' + loadedSectorId,
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
-    }
-
 }
 
 function changeAffichageSecteur(typeAffichage) {
@@ -196,12 +177,12 @@ function getGraphCrag(crag_id) {
 
     //Graphique des cotations
     axios.get('/chart/crag/' + crag_id + '/grade').then(function (response) {
-        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("gradeGraph").getContext('2d'),response.data);
     });
 
     //Graphique des type de grimpe
     axios.get('/chart/crag/' + crag_id + '/climb').then(function (response) {
-        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),JSON.parse(response.data));
+        let chart = new Chart(document.getElementById("climbGraph").getContext('2d'),response.data);
     });
 }
 
@@ -212,27 +193,9 @@ function getSectorChart() {
     for(let i = 0 ; i < sectors.length ; i++){
         let sectorId = sectors[i].getAttribute('data-sector-id');
         axios.get('/chart/sector/' + sectorId + '/grade').then(function (response) {
-            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),JSON.parse(response.data));
+            let chart = new Chart(document.getElementById("gradeSectorGraph-" + sectorId).getContext('2d'),response.data);
         });
     }
-}
-
-//INITIALISE LA VISIONNEUSE PHOTOTHEQUE
-function initPhotothequeCrag() {
-
-    if(document.getElementById('cragPhototheque') !== null) {
-        cragVisionneuse = new Phototheque('#cragPhototheque',
-            {
-                "maxHeight" : "150px","gouttiere" : "3px",
-                "lastRow" : "center",
-                "visiotheque" : true,
-                "visiotheque-option" : {
-                    "legende" : "data-legende"
-                }
-            }
-        );
-    }
-
 }
 
 function showPhotoEditor(visible) {
@@ -292,6 +255,45 @@ function getTopoArround() {
 }
 
 
+var delay = (function(){
+    // https://stackoverflow.com/a/1909508
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+function getTopoByName(){
+    delay(function(){
+        getTopoByName_();
+    }, 500 );
+}
+function getTopoByName_() {
+
+    let name = document.getElementById('name-search-topo'),
+        id = document.getElementById('id-search-topo'),
+        zoneCreerTopo = document.getElementById('zone-creer-un-nouveau-topo'),
+        zoneListe = document.getElementById('zone-topo-est-il-present-byname'),
+        zoneLoader = document.getElementById('loader-liste-topo'),
+        liste = document.getElementById('liste-topo-proche-byname');
+
+    if (name.value.length <= 2)
+        return;
+
+    liste.innerHTML = '';
+    liste.style.display = "none";
+    zoneCreerTopo.style.display = "block";
+    zoneListe.style.display = "block";
+    zoneLoader.style.display = "block";
+
+    axios.get('/API/topos/by-name/' + id.value + '/' + name.value).then(function (response) {
+
+        liste.innerHTML = response.data;
+
+        liste.style.display = "block";
+        zoneLoader.style.display = "none";
+    });
+}
 function getMassiveArround() {
     let lat = document.getElementById('lat-search-massive'),
         lng = document.getElementById('lng-search-massive'),
@@ -330,12 +332,15 @@ function selectTopo(topo_id) {
         rayon = document.getElementById('rayon-search-topo'),
         versTopo = document.getElementById('lien-vers-topo'),
         idLiaison = document.getElementById('id-new-liaison'),
-        nomTopo = document.getElementById('nom-topo-liaison');
+        nomTopo = document.getElementById('nom-topo-liaison'),
+        zoneListeBName = document.getElementById('zone-topo-est-il-present-byname');
+
 
     zoneListe.style.display = 'none';
     zoneLoader.style.display = 'block';
     zoneCreerTopo.style.display = 'none';
     zoneValidation.style.display = 'none';
+    zoneListeBName.style.display = 'none';
 
     axios.post('/topo/create-liaison',{topo_id : topo_id, crag_id : document.getElementById('id-search-topo').value}).then(function (response) {
 

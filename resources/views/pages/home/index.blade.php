@@ -160,6 +160,21 @@
             </div>
         </div>
 
+        {{--ACTIVITÉ DE LA COMMUNAUTÉ--}}
+
+        @if($countActivity > 0)
+            <div class="row">
+                <div class="s12 m12 l12">
+                    <h2 class="center">@lang('home.title-community-activity')</h2>
+                </div>
+            </div>
+
+            <div class="activity-part-oblyk">
+                <div class="row">
+                     @include('pages.home.partials.community-activity')
+                </div>
+            </div>
+        @endif
 
         {{--PARTIE ACTUALITÉ D'OBLYK--}}
 
@@ -188,11 +203,14 @@
                             </p>
                         </div>
                         <div class="card-action text-right">
-                            <a href="{{route('articlePage',['article_id'=>$article->id, 'article_label' => str_slug($article->label)])}}">@lang('home.readMore')</a>
+                            <a href="{{ $article->url() }}">@lang('home.readMore')</a>
                         </div>
                     </div>
                 </div>
             @endforeach
+            <div class="text-right">
+                <a class="btn-flat" href="{{ route('articlesPage') }}">@lang('home.seeArticles')</a>
+            </div>
         </div>
 
         {{--PARTIE CHIFFRE D'OBLYK--}}
@@ -249,7 +267,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')

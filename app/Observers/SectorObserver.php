@@ -9,25 +9,36 @@ use App\Photo;
 use App\Route;
 use App\Season;
 use App\Sector;
+use App\Version;
 
 class SectorObserver
 {
+
     /**
-     * Listen to the Sector created event.
+     * @param Sector $sector
+     */
+    public function creating(Sector $sector) {
+        $sector->label = strip_tags($sector->label);
+    }
+
+    /**
+     * Listen to the Sector updating event.
      *
-     * @param  Sector  $sector
+     * @param Sector $sector
      * @return void
      */
-    public function created(Sector $sector)
+    public function updating(Sector $sector)
     {
-        //
+        $version = new Version();
+        $version->saveVersion(Sector::find($sector->id), $sector, 'App\Sector');
     }
 
     /**
      * Listen to the Sector deleting event.
      *
-     * @param  Sector  $sector
+     * @param  Sector $sector
      * @return void
+     * @throws \Exception
      */
     public function deleting(Sector $sector)
     {
@@ -56,5 +67,11 @@ class SectorObserver
         $routes = Route::where('sector_id', $sector->id)->get();
         foreach ($routes as $route) $route->delete();
 
+        try {
+            Version::where([
+                ['versionnable_id', '=', $sector->id],
+                ['versionnable_type', '=', 'App\Sector']
+            ])->delete();
+        } catch (\Exception $e) {}
     }
 }

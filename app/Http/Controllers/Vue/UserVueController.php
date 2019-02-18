@@ -17,6 +17,7 @@ use App\Notification;
 use App\Photo;
 use App\Post;
 use App\Route;
+use App\Subscriber;
 use App\TickList;
 use App\Topo;
 use App\User;
@@ -51,7 +52,7 @@ class UserVueController extends Controller
 
                     //FALAISE
                     if($follow->followed_type == 'App\Crag'){
-                        $follow->followUrl = route('cragPage', ['crag_id'=>$follow->followed_id, 'crag_label'=>str_slug($follow->followed->label)]);
+                        $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
                         $follow->followIcon = ($follow->followed->bandeau == "/img/default-crag-bandeau.jpg") ? "/img/icon-search-crag.svg" : str_replace("1300", "50", $follow->followed->bandeau);
                         $follow->followInformation = $follow->followed->region . ', ' . ($follow->followed->code_country);
@@ -60,7 +61,7 @@ class UserVueController extends Controller
 
                     //MASSIF
                     if($follow->followed_type == 'App\Massive'){
-                        $follow->followUrl = route('massivePage', ['massive_id'=>$follow->followed_id, 'massive_label'=>str_slug($follow->followed->label)]);
+                        $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
                         $follow->followIcon = '/img/icon-search-massive.svg';
                         $follow->followInformation = 'regroupement de site';
@@ -69,7 +70,7 @@ class UserVueController extends Controller
 
                     //FORUM
                     if($follow->followed_type == 'App\ForumTopic'){
-                        $follow->followUrl = route('topicPage', ['topic_id'=>$follow->followed_id, 'topic_label'=>str_slug($follow->followed->label)]);
+                        $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
                         $follow->followIcon = '/img/forum-' . $follow->followed->category_id . '.svg';
                         $follow->followInformation = 'sujet sur le forum';
@@ -78,7 +79,7 @@ class UserVueController extends Controller
 
                     //SALLE DE GRIMPE
                     if($follow->followed_type == 'App\Gym'){
-                        $follow->followUrl = route('gymPage', ['gym_id'=>$follow->followed_id, 'gym_label'=>str_slug($follow->followed->label)]);
+                        $follow->followUrl = $follow->followed->url();
                         $follow->followName = $follow->followed->label;
                         $follow->followIcon = file_exists(storage_path('app/public/gyms/100/logo-' . $follow->followed_id . '.png')) ? '/storage/gyms/100/logo-' . $follow->followed_id . '.png' : '/img/icon-search-gym.svg';
                         $follow->followInformation = $follow->followed->big_city . ' (' . $follow->followed->code_country . ')';
@@ -116,7 +117,7 @@ class UserVueController extends Controller
 
             foreach ($user->follows as $follow){
                 if($follow->followed_type == 'App\Topo'){
-                    $follow->followUrl = route('topoPage', ['topo_id'=>$follow->followed_id, 'topo_label'=>str_slug($follow->followed->label)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->label;
                     $follow->followIcon = (file_exists(storage_path('app/public/topos/200/topo-' . $follow->followed->id . '.jpg'))) ? '/storage/topos/200/topo-' . $follow->followed->id . '.jpg' : '/img/default-topo-couverture.svg';
                     $follow->followInformation = $follow->followed->editor . ', ' . $follow->followed->editionYear;
@@ -162,7 +163,7 @@ class UserVueController extends Controller
 
                     $image = file_exists(storage_path('app/public/users/100/user-' . $follow->followed->id . '.jpg')) ? '/storage/users/100/user-' . $follow->followed->id . '.jpg' : '/img/icon-search-user.svg';
 
-                    $follow->followUrl = route('userPage', ['user_id'=>$follow->followed_id, 'user_label'=>str_slug($follow->followed->name)]);
+                    $follow->followUrl = $follow->followed->url();
                     $follow->followName = $follow->followed->name;
                     $follow->followIcon = $image;
                     $follow->followInformation = $genre . ', ' . $age . ' ans';
@@ -635,8 +636,13 @@ class UserVueController extends Controller
             $user->image = file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg';
             $user->bandeau = file_exists(storage_path('app/public/users/1300/bandeau-' . $user->id . '.jpg')) ? '/storage/users/1300/bandeau-' . $user->id . '.jpg?cache=' . date('Ymdhis') : '';
 
-            $data = ['user' => $user,];
-            return view('pages.profile.vues.settingsVue', $data);
+            // News Letter subscribe
+            $newsletter = Subscriber::where('email',$user->email)->exists();
+
+            return view('pages.profile.vues.settingsVue', [
+                'user' => $user,
+                'newsletter' => $newsletter,
+            ]);
 
         }else{
 

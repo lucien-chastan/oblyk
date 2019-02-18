@@ -6,5 +6,6 @@ return [
     'intro_2' => 'On encourage vivement l\'achat directement chez l\'éditeur, où dans les points de vente proches des sites qui y figurent.',
     'noPointOfSale' => 'Il n\'y a pas encore de point de vente posté sur ce topo',
 
+    'byAtVieuxCampeur' => 'Retrouver aussi ce topo Au Vieux Campeur',
 
 ];

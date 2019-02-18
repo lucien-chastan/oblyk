@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\sendWelcome;
 use App\oldSearch;
+use App\Subscriber;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserPartnerSettings;
 use App\UserSettings;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -60,8 +63,9 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
+     * @throws \Exception
      */
     protected function create(array $data)
     {
@@ -73,6 +77,13 @@ class RegisterController extends Controller
         $user->password = bcrypt($data['password']);
         $user->save();
 
+        if (isset($data['newsletter'])) {
+            Subscriber::firstOrCreate(['email' => $user->email]);
+        } else {
+            // the new user was perhaps already registered but no longer wishes to receive the news letter
+            Subscriber::where('email', $user->email)->delete();
+        }
+
         //On créer la table des paramètres pour cet utilisateur
         $setting = New UserSettings();
         $setting->user_id = $user->id;
@@ -81,6 +92,9 @@ class RegisterController extends Controller
         $partner = New UserPartnerSettings();
         $partner->user_id = $user->id;
         $partner->save();
+
+        // welcome email
+        Mail::to($user->email)->send(new sendWelcome(['user' => $user]));
 
         return $user;
     }

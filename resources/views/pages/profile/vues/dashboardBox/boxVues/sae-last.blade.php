@@ -7,7 +7,7 @@
             @else
                 <img src="/img/icon-search-gym.svg" class="left circle circle-40" alt="">
             @endif
-            <div class="text-bold"><a href="{{route('gymPage',['gym_id'=>$gym->id,'gym_label'=>str_slug($gym->label)])}}">{{$gym->label}}</a></div>
+            <div class="text-bold"><a href="{{ $gym->url() }}">{{$gym->label}}</a></div>
             <p class="info-user grey-text">
                 {{$gym->city}}, {{($gym->city != $gym->big_city) ? $gym->big_city : '' }} ajouté le {{$gym->created_at->format('d M Y')}}
             </p>

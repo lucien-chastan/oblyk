@@ -32,10 +32,10 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Léna',
-            'email' => 'lena@gmail.com',
-            'password' => bcrypt('mdpLéna'),
-            'birth' => 1991,
+            'name' => 'Martine',
+            'email' => 'martine@mail.com',
+            'password' => bcrypt('mdpMartine'),
+            'birth' => 1842,
             'sex' => 1,
             'last_fil_read' => date('Y-m-d H:m:s'),
             'created_at' => date('Y-m-d H:m:s'),

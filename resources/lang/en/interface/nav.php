@@ -6,6 +6,7 @@ return [
     'partner' => 'Partner', // Partenaire
     'mapAndTool' => 'Map &amp; Tools', // Carte et Outils
     'theProject' => 'The project', // Le projet
+    'actuality' => 'Actuality', // Le projet
     'connect' => 'Log in', // Connexion
     'joinUs' => 'Join us', // Créer un compte
     'logOut' => 'Log out', // Déconnexion
@@ -40,6 +41,6 @@ return [
     //Menu "Partenaire"
     'partnerMap' => 'Map of the climbers', // Carte des grimpeurs
     'howItWorks' => 'How it works ?', // Comment ça marche ?
-    'howIAm' => 'How I am ?', // Qui je suis ?
+    'howIAm' => 'Who I am ?', // Qui je suis ?
     'myPlaces' => 'My places', // Mes lieux
 ];

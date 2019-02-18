@@ -45,7 +45,13 @@ class Sector extends Model
     public function routes(){
         return $this->hasMany('App\Route','sector_id','id');
     }
+    public function routeSections(){
+        return $this->hasManyThrough('App\RouteSection', 'App\Route');
+    }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
 
     //MET À JOUR LES INFORMATIONS STOCKÉES DU SECTEUR (ÉCART DE COTATION)
     public static function majInformation($sector_id){
@@ -54,13 +60,13 @@ class Sector extends Model
 
         //min et max
         $min_grade_val = 100;
-        $min_grade_text = '';
+        $min_grade_text = '?';
         $max_grade_val = 0;
-        $max_grade_text = '';
+        $max_grade_text = '?';
 
         foreach ($routes as $route){
             foreach ($route->routeSections as $section){
-                if($section->grade_val < $min_grade_val){
+                if($section->grade_val < $min_grade_val && $section->grade_val > 0){
                     $min_grade_val = $section->grade_val;
                     $min_grade_text = $section->grade . $section->sub_grade;
                 }
@@ -70,6 +76,7 @@ class Sector extends Model
                 }
             }
         }
+        $min_grade_val = ($min_grade_val == 100) ? 0 : $min_grade_val; // if no min value - set it as 0/? since there is no other grades
 
         //MISE À JOUR DE L'ÉCART DE COTATION
         if(isset($sector->gapGrade)){
@@ -88,5 +95,24 @@ class Sector extends Model
             $gapGrade->max_grade_text = $max_grade_text;
             $gapGrade->save();
         }
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        $crag = Crag::find($this->crag_id);
+        return $crag->webUrl($crag->id, $crag->label, $absolute);
+    }
+
+    /**
+     * @param int $size in [50, 100, 200, 1300]
+     * @return string
+     */
+    public function cover(int $size = 50) : string
+    {
+        $crag = Crag::find($this->crag_id);
+        return $crag->cover($size);
     }
 }

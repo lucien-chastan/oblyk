@@ -34,6 +34,10 @@ class Massive extends Model
         return $this->hasMany('App\MassiveCrag','massive_id', 'id');
     }
 
+    public function versions() {
+        return $this->morphMany('App\Version', 'versionnable');
+    }
+
     public static function distincRegions($massive_id){
         $regions = DB::select('
             SELECT DISTINCT crags.region AS region FROM crags 
@@ -46,5 +50,30 @@ class Massive extends Model
         );
 
         return $regions;
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true) {
+        return $this->webUrl($this->id, $this->label, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $label, $absolute = true) {
+        return route(
+            'massivePage',
+            [
+                'massive_id' => $id,
+                'massive_label' => (str_slug($label) != '') ? str_slug($label) : 'regroupement'
+            ],
+            $absolute
+        );
     }
 }

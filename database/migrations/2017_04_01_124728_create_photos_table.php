@@ -21,6 +21,13 @@ class CreatePhotosTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('album_id')->unsigned();
             $table->text('description')->nullable();
+            $table->string('exif_model', 255)->nullable();
+            $table->string('exif_make', 255)->nullable();
+            $table->string('source', 255)->nullable();
+            $table->string('alt', 255)->nullable();
+            $table->boolean('copyright_by')->nullable();
+            $table->boolean('copyright_nc')->nullable();
+            $table->boolean('copyright_nd')->nullable();
             $table->timestamps();
 
             //clé étrangère

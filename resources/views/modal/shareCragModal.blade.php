@@ -13,5 +13,5 @@
 
 <div>
     <h5 class=""><i class="material-icons left">link</i> @lang('modals/shareCrag.linkTitle') </h5>
-    {!! $Inputs::text(['name'=>'lien', 'value'=> route('cragPage', ['crag_id' => $dataModal['crag']->id, 'crag_label' => str_slug($dataModal['crag']->label)]), 'label'=>'', 'type'=>'text']) !!}
+    {!! $Inputs::text(['name'=>'lien', 'value'=> \App\Crag::webUrl($dataModal['crag']->id, $dataModal['crag']->label), 'label'=>'', 'type'=>'text']) !!}
 </div>

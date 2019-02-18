@@ -55,10 +55,10 @@ let marker_gym_11 = L.icon({iconUrl: '/img/marker-sae-11.svg', iconSize: [24, 32
 
 //définition des différents style de tuile
 let mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
-    relief = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors - Tiles &copy; <a href="http://www.esrifrance.fr" title="Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community">Esri</a>\''}),
-    carte = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
+    relief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors - Tiles &copy; <a href="http://www.esrifrance.fr" title="Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community">Esri</a>\''}),
+    carte = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
     satelliteMapBox   = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2JseWsiLCJhIjoiY2oxMGl1MDJvMDAzbzJycGd1MWl6NDBpYyJ9.CXlzqHwoaZ0LlxWjuaj7ag', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}),
-    satellite   = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors - Tiles &copy; <a href="http://www.esrifrance.fr" title="Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community">Esri</a>'});
+    satellite   = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors - Tiles &copy; <a href="http://www.esrifrance.fr" title="Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community">Esri</a>'});
 
 //création du controlleur de tuile
 let baseMaps = {
@@ -69,6 +69,18 @@ let baseMaps = {
 
 //créer la popup html avec les données d'une falaise
 function buildPopup(crag) {
+    var minGradeVal, maxGradeVal, minGradeText, maxGradeText;
+
+    if (typeof crag.gapGrade !== 'undefined') {
+        minGradeVal = crag.gapGrade.min_grade_val;
+        maxGradeVal = crag.gapGrade.max_grade_val;
+        minGradeText = crag.gapGrade.min_grade_text;
+        maxGradeText = crag.gapGrade.max_grade_text;
+    } else {
+        minGradeVal = maxGradeVal = null;
+        minGradeText = maxGradeText = '?';
+    }
+
     let html = `
         <img class="photo-couve-site-leaflet" src="${crag.bandeau}" alt="photo de couverture de ${crag.label}">
         <div class="crag-leaflet-info">
@@ -95,12 +107,50 @@ function buildPopup(crag) {
                 </tr>
                 <tr>
                     <td>Lignes &amp; Cotations : </td>
-                    <td>${crag.routes_count} lignes, de <span class="color-grade-${crag.gap_grade.min_grade_val}">${crag.gap_grade.min_grade_text}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${crag.gap_grade.max_grade_val}">${crag.gap_grade.max_grade_text}</span></td>
+                    <td>${crag.routes_count} lignes, de <span class="color-grade-${minGradeVal}">${minGradeText}</span> <i class="material-icons tiny">arrow_forward</i> <span class="color-grade-${maxGradeVal}">${maxGradeText}</span></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td class="btn-vers-crags">
                         <a href="/site-escalade/${crag.id}/${string_to_slug(crag.label)}" class="waves-effect waves-light btn">voir le site</a>
+                    </td>
+                </tr>
+            </table>
+         </div>
+    `;
+
+    return html;
+}
+
+
+//créer la popup html avec les données d'une salle
+function buildGymPopup(gym) {
+
+    var type_escalade = '';
+    if(gym.type_voie == 1) type_escalade += '<span class="voie">voie</span>';
+    if(gym.type_boulder == 1) type_escalade += '<span class="bloc">bloc</span>';
+
+    let html = `
+        <img class="photo-couve-site-leaflet" src="${gym.bandeau}" alt="photo de couverture de ${gym.label}">
+        <div class="crag-leaflet-info">
+            <h2 class="loved-king-font titre-crag-leaflet">
+                <a href="/salle-escalade/${gym.id}/${string_to_slug(gym.label)}">${gym.label}</a>
+            </h2>
+            <table>
+                <tr>
+                    <td>Localisation : </td>
+                    <td>${gym.big_city}, ${gym.region} (${gym.code_country})</td>
+                </tr>
+                <tr>
+                    <td>Type de grimpe : </td>
+                    <td class="type-grimpe">
+                        ${type_escalade}
+                    </td>
+                </tr>
+            <tr>
+                <td></td>
+                <td class="btn-vers-crags">
+                    <a href="/salle-escalade/${gym.id}/${string_to_slug(gym.label)}" class="waves-effect waves-light btn">voir la salle</a>
                     </td>
                 </tr>
             </table>
@@ -147,5 +197,14 @@ function styleIcon(type) {
     if(type === '01111') point = marker_01111;
     if(type === '11111') point = marker_11111;
 
+    return point;
+}
+
+function styleGymIcon(type) {
+    let point;
+    if(type === '00') point = marker_gym_00;
+    if(type === '01') point = marker_gym_01;
+    if(type === '10') point = marker_gym_10;
+    if(type === '11') point = marker_gym_11;
     return point;
 }

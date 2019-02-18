@@ -191,10 +191,15 @@
 
     {{--BOUTON POUR LA MODIFICATION--}}
     <div class="ligne-bt-route">
-        <p class="text-right">
-            <i {!! $Helpers::tooltip(trans('modals/route.editTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>trans('modals/route.modalEditeTitle'),'method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
-            <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
-        </p>
+        @if(Auth::check())
+            <p class="text-right">
+                <i {!! $Helpers::tooltip(trans('modals/route.editTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['id' => $route->id ,'title'=>trans('modals/route.modalEditeTitle'),'method'=>'PUT']) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">edit</i>
+                <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!}} {!! $Helpers::modal(route('problemModal'), ["id" => $route->id , "model"=> "Route"]) !!} class="tooltipped material-icons btnModal" onclick="$('#modal').modal('open');">flag</i>
+                @if($route->versions_count > 0)
+                    <i {!! $Helpers::tooltip(trans('modals/version.tooltip')) !!} {!! $Helpers::modal(route('versionModal'), ["id"=>$route->id, "model"=>"Route"]) !!} class="material-icons tooltipped btnModal" onclick="$('#modal').modal('open');">history</i>
+                @endif
+            </p>
+        @endif
     </div>
 
 
@@ -245,7 +250,7 @@
                 @foreach ($route->descriptions as $description)
                     <div class="blue-border-div">
                         @if($description->private == 1)
-                            @if($description->user_id == Auth::user()->id)
+                            @if(Auth::check() && $description->user_id == Auth::user()->id)
                                 <i {!! $Helpers::tooltip(trans('modals/cross.private_comment')) !!} class="material-icons left grey-text text-lighten-1 tooltipped">vpn_key</i>
                                 <div class="markdownZone">{{ $description->description }}</div>
                             @else
@@ -258,7 +263,7 @@
                             @if($description->note != 0)
                                 <img class="note-description" src="/img/note_{{$description->note}}.png" alt="">
                             @endif
-                                @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>route('userPage',['user_id'=>$description->user->id, 'user_label'=>str_slug($description->user->name)]), 'date'=>$description->created_at->format('d M Y')])
+                                @lang('modals/description.postByDate', ['name'=>$description->user->name, 'url'=>$description->user->url(), 'date'=>$description->created_at->format('d M Y')])
 
                             @if(Auth::check())
                                 <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id" => $description->id , "model"=> "Description"]) !!} class="material-icons tiny-btn right tooltipped btnModal" onclick="$('#modal').modal('open');">flag</i>

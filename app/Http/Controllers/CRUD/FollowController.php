@@ -38,7 +38,7 @@ class FollowController extends Controller
                     'demande_amis',
                     [$userAuth->name],
                     $userAuth->image,
-                    [route('userPage',['user_id'=>$userAuth->id,'user_label'=>str_slug($userAuth->name)]),$userAuth->name],
+                    [$userAuth->url(), $userAuth->name],
                     [$userAuth->id]
                 );
                 $notification->save();
@@ -52,7 +52,7 @@ class FollowController extends Controller
                     'accepte_demande_amis',
                     [$userAuth->name],
                     $userAuth->image,
-                    [route('userPage',['user_id'=>$userAuth->id,'user_label'=>str_slug($userAuth->name)]),$userAuth->name],
+                    [$userAuth->url(), $userAuth->name],
                     [$userAuth->id]
                 );
                 $notification->save();

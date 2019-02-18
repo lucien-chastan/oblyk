@@ -15,6 +15,7 @@
                         <th>@lang('pages/guidebooks/tabs/crags.countryColumn')</th>
                         <th>@lang('pages/guidebooks/tabs/crags.regionsColumn')</th>
                         <th>@lang('pages/guidebooks/tabs/crags.cityColumn')</th>
+                        <th>Lignes</th>
                         <th>@lang('pages/guidebooks/tabs/crags.rockColumn')</th>
                         <th></th>
                     </tr>
@@ -22,12 +23,18 @@
                 <tbody>
                     @foreach($topo->crags as $liaison)
                         <tr>
-                            <td class="text-center"><img src="/img/point-{{$liaison->crag->type_voie . $liaison->crag->type_grande_voie . $liaison->crag->type_bloc . $liaison->crag->type_deep_water . $liaison->crag->type_via_ferrata }}.svg" height="15" alt=""></td>
-                            <td><a href="{{route('cragPage',['crag_id' => $liaison->crag->id, 'crag_label' => str_slug($liaison->crag->label)])}}">{{$liaison->crag->label}}</a></td>
-                            <td>{{$liaison->crag->code_country}}</td>
-                            <td>{{$liaison->crag->region}}</td>
-                            <td>{{$liaison->crag->city}}</td>
-                            <td>{{ucfirst($liaison->crag->rock->label)}}</td>
+                            <td class="text-center"><img src="/img/point-{{ $liaison->crag->type_voie . $liaison->crag->type_grande_voie . $liaison->crag->type_bloc . $liaison->crag->type_deep_water . $liaison->crag->type_via_ferrata }}.svg" height="15" alt=""></td>
+                            <td><a href="{{ $liaison->crag->url() }}">{{ $liaison->crag->label }}</a></td>
+                            <td>{{ $liaison->crag->code_country }}</td>
+                            <td>{{ $liaison->crag->region }}</td>
+                            <td>{{ $liaison->crag->city }}</td>
+                            <td>
+                                <span title="nombre de ligne">{{ count($liaison->crag->routes) }}</span> (
+                                <span class="color-grade-{{ $liaison->crag->gapGrade->min_grade_val }}">{{ $liaison->crag->gapGrade->min_grade_text }}</span> &rarr;
+                                <span class="color-grade-{{ $liaison->crag->gapGrade->max_grade_val }}">{{ $liaison->crag->gapGrade->max_grade_text }}</span>
+                                )
+                            </td>
+                            <td>{{ ucfirst($liaison->crag->rock->label) }}</td>
                             <td class="ligne-btn">
                                 @if(Auth::check())
                                     <i {!! $Helpers::tooltip(trans('pages/guidebooks/tabs/crags.removeCrag')) !!} {!! $Helpers::modal(route('deleteModal'), ["route"=>"/topoCrags/" . $liaison->id ]) !!} class="tooltipped btnModal material-icons tiny-btn">delete</i>

@@ -26,7 +26,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //PAGE LIÉES AU POJET
     Route::get('/le-projet', 'ProjectPagesController@projectPage')->name('project');
-    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
     Route::get('/contact', 'ProjectPagesController@contactPage')->name('contact');
     Route::get('/a-propos', 'ProjectPagesController@aboutPage')->name('about');
     Route::get('/aides', 'ProjectPagesController@helpPage')->name('help');
@@ -34,16 +33,25 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/merci', 'ProjectPagesController@thanksPage')->name('thanks');
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+    Route::get('/qui-sommes-nous', 'ProjectPagesController@whoPage')->name('who');
+
+    //NEXS LETTER
+    Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
+    Route::get('/news-letter/unsubscribe', 'SubscribeController@unsubscribePage')->name('unsubscribe');
+    Route::get('/news-letter/{ref}', 'NewsletterController@newsletterPage')->name('newsletter');
 
 
-    //UN ARTICLE
+    // ARTICLES
+    Route::get('/les-articles', 'ArticleController@articlesPage')->name('articlesPage');
     Route::get('/article/{article_id}/{article_label}', 'ArticleController@articlePage')->name('articlePage');
+    Route::get('/article/{article_id}', 'ArticleController@articleRedirectionPage')->name('articleRedirectionPage');
 
     //LE LEXIQUE
     Route::get('/lexique-escalade', 'LexiqueController@lexiquePage')->name('lexique');
 
     //LE POFIL
     Route::get('/grimpeur/{user_id}/{user_label}', 'UserController@userPage')->name('userPage');
+    Route::get('/grimpeur/{user_id}', 'UserController@userRedirectionPage')->name('userRedirectionPage');
     Route::get('/supprimer-mon-compte', 'Auth\DeleteController@deleteUserPage')->name('deleteUserPage');
     Route::post('/delete-connected-user', 'Auth\DeleteController@deleteConnectedUser')->name('deleteConnectedUser');
     Route::get('/compte-supprime', 'Auth\DeleteController@userDeletedPage')->name('userDeletedPage');
@@ -54,8 +62,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/sites-escalade/{massive_id}/{massive_label}', 'MassiveController@massivePage')->name('massivePage');
     Route::get('/voie-escalade/{route_id}/{route_label}', 'RouteController@routePage')->name('routePage');
 
+    // OUTDOOR REDIRECTION
+    Route::get('/site-escalade/{crag_id}', 'CragController@cragRedirectionPage')->name('cragRedirectionPage');
+    Route::get('/topo-escalade/{topo_id}', 'TopoController@topoRedirectionPage')->name('topoRedirectionPage');
+    Route::get('/voie-escalade/{route_id}', 'RouteController@routeRedirectionPage')->name('routeRedirectionPage');
+    Route::get('/sites-escalade/{massive_id}', 'MassiveController@massiveRedirectionPage')->name('massiveRedirectionPage');
+
     //LES SALLES D'ESCALADE
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
+    Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
@@ -163,11 +178,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/vue/topo/{topo_id}/sites','Vue\TopoVueController@vueSites')->name('vueSitesTopo');
     Route::get('/vue/topo/{topo_id}/acheter','Vue\TopoVueController@vueAcheter')->name('vueAcheterTopo');
     Route::get('/vue/topo/{topo_id}/map','Vue\TopoVueController@vueMap')->name('vueMapTopo');
+    Route::get('/vue/topo/{topo_id}/photo','Vue\TopoVueController@vuePhoto')->name('vuePhotosTopo');
 
     //VUE MASSIVE
     Route::get('/vue/massive/{massive_id}/fil-actu','Vue\MassiveVueController@vueFilActu')->name('vueFilActuMassive');
     Route::get('/vue/massive/{massive_id}/liens','Vue\MassiveVueController@vueLiens')->name('vueLiensMassive');
     Route::get('/vue/massive/{massive_id}/sites','Vue\MassiveVueController@vueSites')->name('vueSitesMassive');
+
+    // GALLERY
+    Route::get('/gallery/photo/{photo_id}', 'GalleryController@galleryPage')->name('gallery');
 
 });
 
@@ -194,6 +213,12 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::post('/admin/article/upload', 'CRUD\ArticleController@uploadBandeauArticle')->name('uploadBandeauArticle');
     Route::resource('articles', 'CRUD\ArticleController');
 
+    //NEWSLETTER
+    Route::get('/admin/newsletter/create', 'AdminController@createNewsletterPage')->name('createNewsletterPage');
+    Route::get('/admin/newsletter/update', 'AdminController@updateNewsletterPage')->name('updateNewsletterPage');
+    Route::get('/get/newsletter/{newsletter_ref}/information', 'AdminController@getNewsletterInformation');
+    Route::resource('newsletters', 'CRUD\NewsletterController');
+
     //AIDES
     Route::resource('helps', 'CRUD\HelpController');
     Route::get('/admin/aide/create', 'AdminController@createHelpPage')->name('createHelpPage');
@@ -214,11 +239,26 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
+    // NEWS LETTER
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
 
 });
 
 //IFRAME
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
+
+
+// SITE MAP
+Route::get('/sitemap.xml','SitemapController@sitemapIndex')->name('sitemap');
+Route::get('/sitemap/common.xml','SitemapController@sitemapCommon')->name('sitemapCommon');
+Route::get('/sitemap/climbers.xml','SitemapController@sitemapClimbers')->name('sitemapClimbers');
+Route::get('/sitemap/topos.xml','SitemapController@sitemapTopos')->name('sitemapTopos');
+Route::get('/sitemap/gyms.xml','SitemapController@sitemapGyms')->name('sitemapGyms');
+Route::get('/sitemap/topics.xml','SitemapController@sitemapTopics')->name('sitemapTopics');
+
+// SITE MAP CRAGS AND ROUTES
+Route::get('/sitemap-crags.xml','SitemapController@sitemapCrags')->name('sitemapCrags');
+Route::get('/sitemap/{crag_id}/crag-routes.xml','SitemapController@sitemapCragRoutes')->name('sitemapCragRoutes');
 
 
 //LE FIL D'ACTUALITÉ
@@ -248,13 +288,15 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
-
+Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
+Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 // PARTENAIRE
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
 
 
 //TOPO (VERS LES SCRIPTS DE LIAISON)
+Route::get('/API/topos/by-name/{crag_id}/{name}', 'TopoController@getToposByName')->name('APIToposByName');
 Route::get('/API/topos/{lat}/{lng}/{rayon}/{crag_id}', 'TopoController@getToposArroundPoint')->name('APIToposArroundPoint');
 Route::post('/topo/create-liaison', 'CRUD\TopoCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/topo/delete-liaison', 'CRUD\TopoCragController@deleteLiaison')->name('ScriptDeleteLiaison');
@@ -264,6 +306,8 @@ Route::get('/API/massives/{lat}/{lng}/{rayon}/{crag_id}', 'MassiveController@get
 Route::post('/massive/create-liaison', 'CRUD\MassiveCragController@createLiaison')->name('ScriptCreateLiaison');
 Route::post('/massive/delete-liaison', 'CRUD\MassiveCragController@deleteLiaison')->name('ScriptDeleteLiaison');
 
+// ARTILCE API
+Route::get('/api/article/crags/{article_id}','ArticleController@getArticleCrags')->name('ApiArticleCrags');
 
 //UPLOAD
 Route::post('/upload/topoCouverture', 'CRUD\TopoController@uploadCouvertureTopo')->name('uploadCouvertureTopo');
@@ -304,6 +348,7 @@ Route::post('/modal/userPlace', 'CRUD\PartnerController@partnerModal')->name('pa
 Route::post('/modal/approach', 'CRUD\ApproachController@approachModal')->name('approachModal');
 Route::post('/modal/tag', 'CRUD\TagController@tagModal')->name('tagModal');
 Route::post('/modal/share-crag', 'CRUD\ShareCragController@shareModal')->name('shareCragModal');
+Route::post('/modal/version', 'VersionController@versionModal')->name('versionModal');
 
 
 //CRUD AJAX

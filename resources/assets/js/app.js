@@ -10,12 +10,15 @@ $('.modal').modal(
 
 //on blanchie la barre de navigation au scroll
 let backgroundNav = function () {
-    var nav_barre = document.getElementById('nav_barre');
+    var nav_barre = document.getElementById('nav_barre'),
+        noAnimationScroll = (typeof animationScroll !== 'undefined');
 
-    if(window.pageYOffset > 0){
-        nav_barre.setAttribute('class', nav_barre.className.replace('nav-white','nav-black'));
-    }else{
-        nav_barre.setAttribute('class', nav_barre.className.replace('nav-black','nav-white'));
+    if (!noAnimationScroll) {
+        if (window.pageYOffset > 0){
+            nav_barre.setAttribute('class', nav_barre.className.replace('nav-white','nav-black'));
+        } else {
+            nav_barre.setAttribute('class', nav_barre.className.replace('nav-black','nav-white'));
+        }
     }
 };
 

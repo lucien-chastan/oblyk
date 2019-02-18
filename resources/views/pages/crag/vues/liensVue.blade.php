@@ -11,7 +11,7 @@
                     <a target="_blank" href="{{$link->link}}">{{$link->link}}</a>
                     <div class="markdownZone">{{ $link->description }}</div>
                     <p class="info-user grey-text">
-                        @lang('modals/link.postByDate',['url'=>route('userPage',['user_id'=>$link->user->id, 'user_name'=>str_slug($link->user->name)]),'name'=>$link->user->name, 'date'=>$link->created_at->format('d M Y')])
+                        @lang('modals/link.postByDate',['url'=>$link->user->url(),'name'=>$link->user->name, 'date'=>$link->created_at->format('d M Y')])
 
                         @if(Auth::check())
                             <i {!! $Helpers::tooltip(trans('modals/problem.tooltip')) !!} {!! $Helpers::modal(route('problemModal'), ["id"=>$link->id, "model"=>"Link"]) !!} class="material-icons tiny-btn right tooltipped btnModal">flag</i>

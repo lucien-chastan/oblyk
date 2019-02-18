@@ -57,7 +57,7 @@ class UserConversationController extends Controller
             ->orderBy('name', 'asc')->get();
 
         foreach ($findUsers as $user){
-            $user->url = route('userPage', ['user_id'=>$user->id,'user_label'=>str_slug($user->name)]);
+            $user->url = $user->url();
 
             if($user->sex == 0) $user->genre = "Indéfini";
             if($user->sex == 1) $user->genre = "Femme";
@@ -187,7 +187,7 @@ class UserConversationController extends Controller
         }
 
         $data = [
-            'url' => route('userPage',['user_id'=> $authUser->id, 'user_label'=>str_slug($authUser->name)])
+            'url' => $authUser->url()
         ];
 
         return response()->json($data);

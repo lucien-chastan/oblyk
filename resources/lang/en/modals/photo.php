@@ -13,6 +13,6 @@ return [
     //Label
     'album' => "Album",
     'description' => "Photo description",
-    'max' => "Maximum size : 10Mo, maximum width and height : 4000px",
+    'max' => "Maximum size : :size",
 
 ];

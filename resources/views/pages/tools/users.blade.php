@@ -95,7 +95,7 @@
                         <tr>
                             <td><img src="{{ (file_exists(storage_path('app/public/users/100/user-' . $user->id . '.jpg')) ? '/storage/users/100/user-' . $user->id . '.jpg' : '/img/icon-search-user.svg') }}" class="circle max-min-img"></td>
                             <td class="text-bold">
-                                <a href="{{ route('userPage', ['user_id'=>$user->id, 'user_label'=>str_slug($user->name)]) }}">
+                                <a href="{{ $user->url() }}">
                                     {{ $user->name }}
                                 </a>
                             </td>

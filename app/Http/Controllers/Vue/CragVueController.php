@@ -42,6 +42,8 @@ class CragVueController extends Controller
             ->with('videos.user')
             ->first();
 
+        $photos = $crag->allPhoto();
+
         $nbPhoto = count($crag->photos);
         foreach ($crag->sectors as $sector) $nbPhoto += count($sector->photos);
         foreach ($crag->routes as $route) $nbPhoto += count($route->photos);
@@ -49,7 +51,8 @@ class CragVueController extends Controller
         $crag->nbPhoto = $nbPhoto;
 
         $data = [
-            'crag' => $crag
+            'crag' => $crag,
+            'cragPhotos' => $photos
         ];
 
         return view('pages.crag.vues.mediasVue', $data);
@@ -78,6 +81,7 @@ class CragVueController extends Controller
                 ->withCount('routes')
                 ->withCount('descriptions')
                 ->withCount('photos')
+                ->withCount('versions')
                 ->with('gapGrade')
                 ->with('season')
                 ->orderBy('label')
