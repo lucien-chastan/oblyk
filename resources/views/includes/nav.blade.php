@@ -9,6 +9,9 @@
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
         <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
+        @if(env('ACTIVE_INDOOR'))
+            <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
+        @endif
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
         <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
         <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
@@ -79,8 +82,6 @@
             </ul>
 
 
-
-
             {{-- Smartphone menu --}}
             <div class="side-nav" id="side-nav">
                 <p class="center loved-king-font titre-nav-mobile"><a href="/">Oblyk</a></p>
@@ -127,6 +128,10 @@
                             <ul>
                                 <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
+                                <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
+                                @if(env('ACTIVE_INDOOR'))
+                                    <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
+                                @endif
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
                                 <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
                                 <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>@lang('interface/nav.supportUs')</a></li>

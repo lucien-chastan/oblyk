@@ -2,31 +2,18 @@
 
 return [
 
-    'slogan' => 'Site communautaire dédié à l\'escalade',
-
-    //****************************
-    //Check les infos des falaises
-    //****************************
+    'slogan' => "Outdoor & Indoor climbing community",
 
     'titleCheckCragInformation' => 'Check les infos des falaises',
-    'descriptionCheckCragInformation' => 'Oblyk est une grande base de donnée des falaises d\'escalade de France et du monde constamment enrichie par la communauté, tu peux consulter celle-ci en utilisant le recherche ou en naviguant sur la carte des falaises.',
+    'descriptionCheckCragInformation' => 'Oblyk est une grande base de donnée des falaises d\'escalade de France et du monde constamment enrichie par la communauté, tu peux consulter celle-ci en utilisant la recherche ou en naviguant sur la carte des falaises.',
     'actionCheckCragInformation' => 'La carte des falaises',
-
-
-    //************************
-    //Tiens un carnet de croix
-    //************************
 
     'titleCrossBook' => 'Tiens un carnet de croix',
     'descriptionCrossBook' => '
         Bon pour la mémoire, la progression et la motivation, tenir un carnet de croix à beaucoup d\'avantages.<br>
-        Oblyk te permet de le faire facilement, tu pourras ensuite visualiser ta progression grâce à de nombreuses façons d\'analyser et d\'afficher ton carnet de croix
+        Oblyk te permet de le faire facilement, tu pourras ensuite visualiser ta progression grâce à de nombreuses façons d\'analyser et d\'afficher ton carnet de croix.
     ',
-
-
-    //******************************
-    //Trouve un partenaire de grimpe
-    //******************************
+    'new-indoor' => 'Tu peux désormais mettre tes croix indoor, rend-toi sur la page de ta salle pour noter tes croix.',
 
     'titlePartner' => 'Trouve un partenaire de grimpe',
     'descriptionPartner' => '
@@ -35,22 +22,12 @@ return [
     ',
     'actionPartner' => 'En savoir plus',
 
-
-    //****************
-    //Reste au courant
-    //****************
-
     'titleNewsFeed' => 'Reste au courant',
     'descriptionNewsFeed' => '
         Oblyk intègre un système de fil d\'actualité simple qui te permet d\'être au courant de l\'activité des falaises autour de chez toi.<br>
         Par exemple s\'il y a une mission "Nettoyage Printanier", l\'organisateur post dans le flux de la falaise et hop !
         tous les intéressés sont au courant et peuvent venir aider.
     ',
-
-
-    //****************
-    //Rejoins-nous !
-    //****************
 
     'titleAccount' => 'Rejoins-nous !',
     'descriptionAccount' => '
@@ -60,11 +37,6 @@ return [
     ',
     'actionAccount' => 'Créer un compte',
 
-
-    //****************
-    // Les topos
-    //****************
-
     'titleGuidebook' => 'Oblyk et les topos',
     'descriptionGuidebook' => "
         Vous pourriez vous demander si Oblyk peut remplacer les topos papier et par extension nuire au développement des sites d'escalade ?<br>
@@ -73,8 +45,13 @@ return [
         Acheter un topo, c'est soutenir des passionnés qui donnent énormément pour maintenir, développer, nettoyer les sites d'escalade sur lesquels vous allez grimper gratuitement.
     ",
 
+    'titleIndoor' => 'La boîte à outils de votre salle',
+    'descriptionIndoor' => "
+        Oblyk ce n'est pas que des topos, des falaises et une recherche de partenaire de grimpe ! C'est aussi tout un ensemble d'outil dédiés au monde de l'indoor.<br>
+        Pour ne citer que les principaux outils, Oblyk vous permets de créer un <strong>topo interactif</strong> de votre salle, <strong>d'organiser des contests</strong>, de <strong>gérer vos EPI</strong>, etc.
+    ",
 
-    //Activité de la communauté
+    // Community activity
     'title-community-activity' => 'Activité de la communauté depuis hier',
     'new-crag' => 'Une nouvelle falaise|:count nouvelles falaises',
     'new-climber' => 'Un nouveau grimpeur est arrivé|:count nouveaux grimpeurs sont arrivés',
@@ -89,14 +66,14 @@ return [
     'new-gym' => 'Une nouvelle salle|:count nouvelles salles',
     'new-word' => 'Une nouvelle définition|:count nouvelles définitions',
 
-    //Quoi de neuf
+    // What's up
     'titleWhatUp' => 'Quoi de neuf ?',
     'seeArticles' => 'Voir tous les articles',
 
-    //Les articles
+    // Articles
     'readMore' => 'Lire la suite',
 
-    //Oblyk en chiffre
+    // Oblyk in figures
     'titleInFigures'=>'Oblyk en quelques chiffres',
     'figuresCrags' => 'Falaises',
     'figuresClimbers' => 'Grimpeurs',
@@ -108,7 +85,7 @@ return [
     'figuresComments' => 'Commentaires',
     'figuresVideos' => 'Vidéos',
 
-    //Message du nombre d'ajout par jour
+    // Count today
     'crag_today'=>'Une falaise a été ajoutée aujourd\'hui|:count falaises ont été ajoutées aujourd\'hui ',
     'user_today'=>'Un nouveau grimpeur est arrivé aujourd\'hui|:count grimpeurs sont arrivés aujourd\'hui ',
     'gym_today'=>'Une nouvelle salle a été ajoutée aujourd\'hui|:count salles ont été ajoutées aujourd\'hui ',

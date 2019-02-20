@@ -7,6 +7,7 @@ use App\Crag;
 use App\Cross;
 use App\Description;
 use App\Gym;
+use App\IndoorCross;
 use App\Link;
 use App\Photo;
 use App\Route;
@@ -20,16 +21,6 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -81,6 +72,8 @@ class HomeController extends Controller
             'nb_topos_pdf_today' => TopoPdf::where('created_at','>=',date('Y-m-d'))->count(),
             'nb_descriptions' => Description::count(),
             'nb_descriptions_today' => Description::where('created_at','>=',date('Y-m-d'))->count(),
+            'nb_indoor_crosses' => IndoorCross::count(),
+            'nb_indoor_crosses_today' => IndoorCross::where('created_at','>=',date('Y-m-d'))->count(),
             'articles' => $articles,
             'activity' => $activity,
             'countActivity' => $activityCount,
