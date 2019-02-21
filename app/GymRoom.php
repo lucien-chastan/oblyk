@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class GymRoom extends Model
 {
+    protected $dates = [
+        'published_at'
+    ];
+
     public function gym()
     {
         return $this->hasOne('App\Gym', 'id', 'gym_id');
@@ -19,6 +23,23 @@ class GymRoom extends Model
     public function crosses()
     {
         return $this->hasMany('App\IndoorCross', 'room_id', 'id');
+    }
+
+    public function isPublished ()
+    {
+        return ($this->published_at != null);
+    }
+
+    public function publish()
+    {
+        $this->published_at = date("Y-m-d H:i:s");
+        $this->save();
+    }
+
+    public function unpublished()
+    {
+        $this->published_at = null;
+        $this->save();
     }
 
     /**

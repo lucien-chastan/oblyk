@@ -280,10 +280,12 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/gym-grade/{gym_id}/gym-grade-modal', 'CRUD\GymGradeController@gymGradeModal')->name('gymGradeModal');
     Route::post('/modal/gym-grade-line/{gym_id}/gym-grade-line-modal', 'CRUD\GymGradeLineController@gymGradeLineModal')->name('gymGradeLineModal');
 
+    // Modal : room
     Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
     Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
     Route::post('/modal/room/{gym_id}/room/{room_id}/custom-scheme', 'CRUD\RoomController@customScheme')->name('roomCustomScheme');
+    Route::post('/modal/room/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishModal')->name('roomPublishModal');
 
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
@@ -300,6 +302,7 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::put('/admin/{gym_id}/sector/{sector_id}/save-area', 'CRUD\GymSectorController@saveSchemeArea');
 
     Route::put('/admin/{gym_id}/room/{room_id}/save-custom-scheme', 'CRUD\RoomController@saveCustomScheme')->name('saveCustomScheme');
+    Route::put('/admin/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishRoom')->name('publishRoom');
 
     Route::get('/admin/{gym_id}/room/last-created', 'GymSchemeController@getLastCreatedRoomRoute')->name('getLastCreatedRoomRoute');
     Route::get('/admin/{gym_id}/room/first-order', 'GymSchemeController@getFirstOrderRoomRoute')->name('getFirstOrderRoomRoute');
