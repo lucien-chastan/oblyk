@@ -35,6 +35,9 @@ class CreateGymsTable extends Migration
             $table->string('email',255)->nullable();
             $table->string('phone_number',20)->nullable();
             $table->string('web_site',255)->nullable();
+            $table->integer('option_level')->nullable()->default(0);
+            $table->dateTime('option_start_date')->nullable();
+            $table->dateTime('option_end_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

@@ -2,12 +2,18 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Gym extends Model
 {
-
+    public $option_label = ['Standard', 'Premium', 'Pro'];
     public $fillable = ['label', 'address', 'postal_code', 'country', 'city', 'big_city', 'region', 'lat', 'lng'];
+
+    protected $dates = [
+        'option_start_date',
+        'option_end_date'
+    ];
 
     public function user(){
         return $this->hasOne('App\User','id', 'user_id');
@@ -57,6 +63,20 @@ class Gym extends Model
     public function grades()
     {
         return $this->hasMany('App\GymGrade', 'gym_id', 'id');
+    }
+
+    public function level()
+    {
+        if ($this->option_start_date <= Carbon::now() && (Carbon::now() < $this->option_end_date || $this->option_end_date == null )) {
+            return $this->option_level;
+        } else {
+            return 0;
+        }
+    }
+
+    public function level_label ()
+    {
+        return $this->option_label[$this->level()];
     }
 
     /**
