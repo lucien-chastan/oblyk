@@ -15,7 +15,10 @@ use App\Gym;
 use App\GymGrade;
 use App\GymGradeLine;
 use App\GymRoom;
+use App\GymRoute;
+use App\GymSector;
 use App\Help;
+use App\IndoorCross;
 use App\Link;
 use App\Massive;
 use App\Message;
@@ -31,7 +34,11 @@ use App\Observers\ForumTopicObserver;
 use App\Observers\GymGradeLineObserver;
 use App\Observers\GymGradeObserver;
 use App\Observers\GymObserver;
+use App\Observers\GymRoomObserver;
+use App\Observers\GymRouteObserver;
+use App\Observers\GymSectorObserver;
 use App\Observers\HelpObserver;
+use App\Observers\IndoorCrossObserver;
 use App\Observers\LinkObserver;
 use App\Observers\MassiveObserver;
 use App\Observers\MessageObserver;
@@ -120,6 +127,10 @@ class AppServiceProvider extends ServiceProvider
         Video::observe(VideoObserver::class);
         GymGrade::observe(GymGradeObserver::class);
         GymGradeLine::observe(GymGradeLineObserver::class);
+        GymRoom::observe(GymRoomObserver::class);
+        GymRoute::observe(GymRouteObserver::class);
+        GymSector::observe(GymSectorObserver::class);
+        IndoorCross::observe(IndoorCrossObserver::class);
     }
 
     /**
