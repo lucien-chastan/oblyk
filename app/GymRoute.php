@@ -36,6 +36,12 @@ class GymRoute extends Model
         return file_exists(storage_path('app/public/gyms/routes/1300/route-' . $this->id . '.jpg'));
     }
 
+    public function hasDescription()
+    {
+        return ($this->description != '');
+    }
+
+
     public function picture($size = 200)
     {
         return $this->hasPicture() ? '/storage/gyms/routes/' . $size . '/route-' . $this->id . '.jpg' : '';
@@ -88,6 +94,11 @@ class GymRoute extends Model
         } else {
             return $grades;
         }
+    }
+
+    public function name ()
+    {
+        return ($this->label != '' ) ? $this->label : 'Sans nom';
     }
 
     public function isMultiPitch()
@@ -150,5 +161,34 @@ class GymRoute extends Model
         }
 
         return $gradeLineId;
+    }
+
+    /**
+     * @param bool $absolute
+     * @return string
+     */
+    public function url($absolute = true)
+    {
+        $sector = GymSector::find($this->sector_id);
+        $room = GymRoom::find($sector->room_id);
+        return $this->webUrl($this->id, $room->gym_id, $absolute);
+    }
+
+    /**
+     * @param $id
+     * @param $gym_id
+     * @param bool $absolute
+     * @return string
+     */
+    static function webUrl($id, $gym_id, $absolute = true)
+    {
+        return route(
+            'gymRoutePage',
+            [
+                'gym_id' => $gym_id,
+                'route_id' => $id,
+            ],
+            $absolute
+        );
     }
 }

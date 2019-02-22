@@ -18,8 +18,7 @@
                                 @if($current_opener_date == null || $current_opener_date != $route->opener_date->format('d/m/Y'))
                                     @php($current_opener_date = $route->opener_date->format('d/m/Y'))
                                     <tr class="tr-open-at" title="{{ $route->opener_date->format('d/m/Y') }}">
-                                        <td colspan="6"
-                                            class="grey-text">{{ $route->opener_date->diffForHumans() }}</td>
+                                        <td colspan="6" class="grey-text">{{ $route->opener_date->diffForHumans() }} ({{ $route->opener_date->format('d/m/Y') }})</td>
                                     </tr>
                                 @endif
                                 <tr class="{{ $route->dismounted_at != null ? 'grey-text' : '' }}">
@@ -54,30 +53,35 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <span title="Favoris : oui/non">
-                                        @if($route->isFavorite())
-                                            <i style="font-size: 1em"
-                                               class="material-icons right {{ $route->dismounted_at == null ? 'red-text' : '' }}">favorite</i>
-                                        @else
-                                            <i style="font-size: 1em" class="material-icons right">favorite_border</i>
-                                        @endif
-                                    </span>
+                                        <span title="Favoris : oui/non">
+                                            @if($route->isFavorite())
+                                                <i style="font-size: 1em"
+                                                   class="material-icons right {{ $route->dismounted_at == null ? 'red-text' : '' }}">favorite</i>
+                                            @else
+                                                <i style="font-size: 1em" class="material-icons right">favorite_border</i>
+                                            @endif
+                                        </span>
                                     </td>
                                     <td>
-                                    <span title="Démonter ou remonter la ligne"
-                                          onclick="dismountRoute({{ $route->id }})">
-                                        @if($route->dismounted_at == null)
-                                            <i style="font-size: 1em" class="material-icons right">keyboard_capslock</i>
-                                        @else
-                                            <i style="font-size: 1em"
-                                               class="material-icons right">keyboard_arrow_down</i>
-                                        @endif
-                                    </span>
+                                        <span title="Démonter ou remonter la ligne"
+                                              onclick="dismountRoute({{ $route->id }})">
+                                            @if($route->dismounted_at == null)
+                                                <i style="font-size: 1em" class="material-icons right">keyboard_capslock</i>
+                                            @else
+                                                <i style="font-size: 1em"
+                                                   class="material-icons right">keyboard_arrow_down</i>
+                                            @endif
+                                        </span>
                                     </td>
                                     <td class="grey-text">
-                                    <span {!! $Helpers::tooltip('Modifier la voie') !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$route->sector->room->gym_id]), ["id" => $route->id, "room_id"=>$route->sector->room->id, "gym_id"=>$route->sector->room->gym_id, "sector_id"=>$route->sector_id, "title"=>'Modifier la voie', "method"=>"PUT", 'callback'=>'reloadCurrentVue']) !!} class="tooltipped btnModal">
-                                        <i style="font-size: 1em" class="material-icons right">edit</i>
-                                    </span>
+                                        <span {!! $Helpers::tooltip('Modifier la voie') !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$route->sector->room->gym_id]), ["id" => $route->id, "room_id"=>$route->sector->room->id, "gym_id"=>$route->sector->room->gym_id, "sector_id"=>$route->sector_id, "title"=>'Modifier la voie', "method"=>"PUT", 'callback'=>'reloadCurrentVue']) !!} class="tooltipped btnModal">
+                                            <i style="font-size: 1em" class="material-icons right">edit</i>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ $route->url() }}" target="_blank">
+                                            <i class="material-icons  right">launch</i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

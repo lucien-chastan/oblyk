@@ -17,6 +17,9 @@ return [
     'crossesTitle' => 'My crosses-book on this line',
     'ascent' => 'Ascent',
     'number_ascent' => ':count ascent||:count ascents',
+    'link' => 'Link',
+    'see_separately' => 'See on another page',
+    'dismounted_at' => 'Dismounted at',
 
     // Sectors
     'tadSectors' => "Sectors",

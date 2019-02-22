@@ -17,6 +17,9 @@ return [
     'crossesTitle' => 'Mon carnet sur cette voie',
     'ascent' => 'Ascension',
     'number_ascent' => ':count ascension||:count ascensions',
+    'link' => 'Lien',
+    'see_separately' => 'Voir sur une autre page',
+    'dismounted_at' => 'Démonté le',
 
     // Sectors
     'tadSectors' => "Secteurs",

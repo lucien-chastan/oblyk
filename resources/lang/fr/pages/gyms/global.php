@@ -19,4 +19,8 @@ return [
     'guideBook' => "Topo",
     'administer' => "Administrer",
 
+    'gym' => 'Salle',
+    'sector' => 'secteur',
+
+    'has_no_photo' => "Cette ligne n'a pas de photo",
 ];

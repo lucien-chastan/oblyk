@@ -19,4 +19,8 @@ return [
     'guideBook' => "Guidebook",
     'administer' => "Administer",
 
+    'gym' => 'Climbing gym',
+    'sector' => 'sector',
+
+    'has_no_photo' => 'This line has no photo',
 ];

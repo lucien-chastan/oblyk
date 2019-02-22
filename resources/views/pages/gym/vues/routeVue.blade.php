@@ -60,6 +60,12 @@
                         {{ $route->opener_date->format('d/m/Y') }}
                     </td>
                 </tr>
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.link') :</th>
+                    <td>
+                        <a href="{{ $route->url()}}" target="_blank">@lang('pages/gym-schemes/global.see_separately')</a>
+                    </td>
+                </tr>
             </table>
         @endif
 
