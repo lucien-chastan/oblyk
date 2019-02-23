@@ -95,6 +95,7 @@ class GymSchemeController extends Controller
 
         $gymRoutes = $GymRoute::where([['sector_id', $gymSector->id], ['dismounted_at', null]])
             ->with(['crosses' => function($query) use ($gymSector) {$query->where([['user_id', Auth::id()],['sector_id', $gymSector->id]]);}])
+            ->withCount('descriptions')
             ->orderBy('opener_date')
             ->get();
 
@@ -116,7 +117,11 @@ class GymSchemeController extends Controller
         $Room = GymRoom::class;
         $Cross = IndoorCross::class;
 
-        $gymRoute = $GymRoute::where('id', $route_id)->with('sector')->first();
+        $gymRoute = $GymRoute::where('id', $route_id)
+            ->with('sector')
+            ->with('descriptions')
+            ->first();
+
         $room = $Room::find($gymRoute->sector->room_id);
         $gym = $Gym::find($room->gym_id);
 

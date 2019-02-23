@@ -16,7 +16,11 @@ class GymRouteController extends Controller
         $Cross = IndoorCross::class;
 
         $gym = $Gym::find($gym_id);
-        $route = $GymRoute::where('id', $route_id)->with('sector')->with('sector.room')->first();
+        $route = $GymRoute::where('id', $route_id)
+            ->with('sector')
+            ->with('descriptions')
+            ->with('sector.room')
+            ->first();
 
         $crosses = $Cross::where([['user_id', Auth::id()], ['route_id', $route->id]])->get();
 

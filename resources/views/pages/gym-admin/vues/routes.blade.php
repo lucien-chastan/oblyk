@@ -51,6 +51,9 @@
                                         @if($route->description != '')
                                             <i style="font-size: 1em" class="material-icons right">reorder</i>
                                         @endif
+                                        @if($route->descriptions_count > 0)
+                                            <i style="font-size: 1em" class="material-icons right">comment</i>
+                                        @endif
                                     </td>
                                     <td>
                                         <span title="Favoris : oui/non">

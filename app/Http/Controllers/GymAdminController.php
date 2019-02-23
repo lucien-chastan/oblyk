@@ -65,6 +65,7 @@ class GymAdminController extends Controller
         $routes = $Route::whereIn('sector_id', $Sector::whereIn('room_id', $roomsArray)->select('id')->get()->toArray())
             ->with('sector')
             ->with('sector.room')
+            ->withCount('descriptions')
             ->orderBy('opener_date', 'desc')
             ->get();
 

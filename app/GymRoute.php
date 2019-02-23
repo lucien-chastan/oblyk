@@ -22,6 +22,11 @@ class GymRoute extends Model
         return $this->hasMany('App\IndoorCross', 'route_id', 'id');
     }
 
+    public function descriptions()
+    {
+        return $this->morphMany('App\Description', 'descriptive');
+    }
+
     /**
      * @return array
      */
@@ -73,13 +78,14 @@ class GymRoute extends Model
         return ($Video::where([['viewable_id', $this->id], ['viewable_type', 'App\\GymRoute']])->count() > 0);
     }
 
-    public function grades($format = 'array', $class = '') {
+    public function grades($format = 'array', $class = '')
+    {
         $firstGrades = explode(';', $this->grade);
         $subGrades = explode(';', $this->sub_grade);
         $valGrades = explode(';', $this->val_grade);
         $grades = [];
 
-        for ($i = 0 ; $i < count($firstGrades); $i++) {
+        for ($i = 0; $i < count($firstGrades); $i++) {
             if ($format === 'html') {
                 $grades[] = '<span class="color-grade-' . $valGrades[$i] . ' ' . $class . '">' . $firstGrades[$i] . $subGrades[$i] . '</span>';
             } else {
@@ -96,9 +102,9 @@ class GymRoute extends Model
         }
     }
 
-    public function name ()
+    public function name()
     {
-        return ($this->label != '' ) ? $this->label : 'Sans nom';
+        return ($this->label != '') ? $this->label : 'Sans nom';
     }
 
     public function isMultiPitch()
@@ -143,10 +149,11 @@ class GymRoute extends Model
     public function number_of_ascents()
     {
         $Crosses = IndoorCross::class;
-        return $Crosses::where([['route_id', $this->id], ['status_id', '!=' , 6], ['status_id', '!=' , 1]])->count();
+        return $Crosses::where([['route_id', $this->id], ['status_id', '!=', 6], ['status_id', '!=', 1]])->count();
     }
 
-    public function estimateGradeLevel($gymGradeId) {
+    public function estimateGradeLevel($gymGradeId)
+    {
         $GymGradeLine = GymGradeLine::class;
         $gymGradeLines = $GymGradeLine::where('gym_grade_id', $gymGradeId)->orderBy('order')->get();
         $minScore = 100;
