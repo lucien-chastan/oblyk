@@ -55,6 +55,7 @@ return [
     'editRoute' => "Edit route",
     'uploadPicture' => "Uploade a picture",
     'uploadThumbnail' => "Uploade a thumbnail",
+    'cropThumbnail' => "Get a thumbnail",
     'dismountRoute' => "Dismount route",
     'riseUpRoute' => "Rise up route",
     'favoriteRoute' => "Favorite route",

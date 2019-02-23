@@ -88,7 +88,7 @@
                 <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
                     <td>
                         @if($route->hasThumbnail())
-                            <img src="{{ $route->thumbnail() }}" class="circle left" height="35">
+                            <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
                         @endif
                     </td>
                     <td>

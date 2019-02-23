@@ -26,9 +26,9 @@
                                     @endif
                                 </td>
                             @endif
-                            <td>
+                            <td width="10">
                                 @if($route->hasThumbnail())
-                                    <img src="{{ $route->thumbnail() }}" class="circle left" height="35">
+                                    <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
                                 @endif
                             </td>
                             <td>

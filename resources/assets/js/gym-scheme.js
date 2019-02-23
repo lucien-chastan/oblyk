@@ -85,7 +85,7 @@ function getJsonGymSector(room_id) {
     });
 }
 
-// OUVRE OU FERME LE VOLET LATÉRAL
+// Open or close side nav
 function openVoletSectors(open) {
     let volet = document.getElementById('side-map-gym-scheme');
 
@@ -96,7 +96,7 @@ function openVoletSectors(open) {
     }
 }
 
-// LOAD ROOM SECTORS
+// Load room sectors
 function getSectors() {
     var content = document.getElementById('content-side-map-gym-scheme'),
         item2 = document.getElementById('item-nav-2'),
@@ -115,7 +115,7 @@ function getSectors() {
     });
 }
 
-// LOAD SECTOR
+// Load sector
 function getGymSector(sector_id, sector_label) {
     if (!inEdition) {
         var content = document.getElementById('content-side-map-gym-scheme'),
@@ -145,7 +145,7 @@ function getGymSector(sector_id, sector_label) {
     }
 }
 
-// LOAD ROUTE
+// Load route
 function getGymRoute(route_id, route_label) {
     var content = document.getElementById('content-side-map-gym-scheme'),
         item3 = document.getElementById('item-nav-3');

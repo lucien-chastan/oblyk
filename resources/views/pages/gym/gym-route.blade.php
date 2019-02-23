@@ -8,6 +8,9 @@
 
 @section('css')
     <link href="/css/gym.css" rel="stylesheet">
+    @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.css">
+    @endif
 @endsection
 
 @section('content')
@@ -24,10 +27,13 @@
             <div class="card-panel">
                 <div class="row">
                     <div class="col s12 m6 l7">
-                        <table>
+                        <table class="information-gym-route-table">
                             <tr>
                                 <th colspan="2">
                                     <h1 class="loved-king-font title-gym-route">
+                                        @if($route->hasThumbnail())
+                                            <img class="circle left thumbnail-route-page" src="{{ $route->thumbnail() }}" alt="miniature de la ligne {{ $route->name() }}">
+                                        @endif
                                         <div class="left" style="margin-right: 0.5em">
                                             @foreach($route->colors() as $color)
                                                 <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.8em; width: 0.8em; border-radius: 50%; margin-top: 2px; display: inline-block;"></div>
@@ -206,6 +212,12 @@
                             @lang('pages/gym-schemes/global.uploadThumbnail')
                             <i class="material-icons left">crop_original</i>
                         </button>
+                        @if($route->hasPicture())
+                            <button {!! $Helpers::modal(route('cropGymRouteModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.cropThumbnail'), "method"=>"POST", 'callback'=>'location.reload()']) !!} class="btn btn-flat btn btnModal">
+                                @lang('pages/gym-schemes/global.cropThumbnail')
+                                <i class="material-icons left">crop</i>
+                            </button>
+                        @endif
                         <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
                             @if($route->dismounted_at == null)
                                 @lang('pages/gym-schemes/global.dismountRoute')
@@ -239,6 +251,7 @@
     @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
         <script src="/js/gym-edit-scheme.js"></script>
         <script src="/js/gym-upload-scheme.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.js"></script>
         <script>
             var current_route_id = {{ $route->id }}
         </script>

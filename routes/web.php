@@ -290,6 +290,10 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/room/{gym_id}/room/{room_id}/custom-scheme', 'CRUD\RoomController@customScheme')->name('roomCustomScheme');
     Route::post('/modal/room/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishModal')->name('roomPublishModal');
 
+    // Modal : room : crop thumbnail
+    Route::post('/modal/room/{gym_id}/route/{route_id}/crop', 'CRUD\GymRouteController@cropGymRouteModal')->name('cropGymRouteModal');
+    Route::post('/gym/{gym_id}/route/{route_id}/upload-crop-thumbnail', 'CRUD\GymRouteController@uploadCropThumbnail')->name('uploadCropThumbnail');
+
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
 

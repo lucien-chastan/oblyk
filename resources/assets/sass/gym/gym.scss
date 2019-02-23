@@ -124,5 +124,15 @@ body{
     display: block;
     line-height: 22px;
     padding: 14px 16px;
+}
 
+.information-gym-route-table {
+    .thumbnail-route-page {
+        margin-right: 0.7em;
+        margin-top: -0.3em;
+    }
+    th, td {
+        padding-bottom: 0.5em;
+        padding-top: 0.5em;
+    }
 }

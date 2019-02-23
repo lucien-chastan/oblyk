@@ -55,6 +55,7 @@ return [
     'editRoute' => "Modifier la ligne",
     'uploadPicture' => "Uploader une photo",
     'uploadThumbnail' => "Uploader une miniature",
+    'cropThumbnail' => "Récupérer la miniature",
     'dismountRoute' => "Démonter la ligne",
     'riseUpRoute' => "Remonter la ligne",
     'favoriteRoute' => "Ligne favoris",

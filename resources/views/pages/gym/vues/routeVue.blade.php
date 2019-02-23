@@ -154,6 +154,12 @@
                 @lang('pages/gym-schemes/global.uploadThumbnail')
                 <i class="material-icons left">crop_original</i>
             </button>
+            @if($route->hasPicture())
+                <button {!! $Helpers::modal(route('cropGymRouteModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.cropThumbnail'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
+                    @lang('pages/gym-schemes/global.cropThumbnail')
+                    <i class="material-icons left">crop</i>
+                </button>
+            @endif
             <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
                 @if($route->dismounted_at == null)
                     @lang('pages/gym-schemes/global.dismountRoute')

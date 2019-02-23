@@ -2,7 +2,8 @@ let inputMap = null,
     inputMapApproach = null,
     markerInputMap = null,
     polylineApproach = null,
-    circleRayon = null;
+    circleRayon = null,
+    cropper = null;
 
 
 //FONCTION D'OUVERUTRE DES MODALES PERMETTANTS L'ÉDITION DU CONTENUE DES TABLES
@@ -141,6 +142,17 @@ function specialAction(data) {
 
     if(data['MapReverseGeoCoding'] === true){
         MapReverseGeoCoding();
+    }
+
+    // Init crop image
+    if (typeof document.getElementById('original-picture-for-crop') == "object") {
+        try {
+            cropper = $('#original-picture-for-crop').croppie({
+                customClass: 'crop-picture-class',
+                showZoomer: false,
+                viewport: {type: 'circle'}
+            });
+        } catch (e) {}
     }
 }
 

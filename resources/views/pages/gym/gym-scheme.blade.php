@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link rel="stylesheet" href="/css/gym-scheme.css">
+    @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.css">
+    @endif
 @endsection
 
 @section('content')
@@ -123,6 +126,7 @@
             <script src="/framework/leaflet/Leaflet.Editable.js"></script>
             <script src="/js/gym-edit-scheme.js"></script>
             <script src="/js/gym-upload-scheme.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.js"></script>
         @endif
     @endif
 

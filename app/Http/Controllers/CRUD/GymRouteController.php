@@ -99,6 +99,44 @@ class GymRouteController extends Controller
         return view('modal.room-route', $data);
     }
 
+    function cropGymRouteModal(Request $request, $gym_id, $route_id)
+    {
+        $GymRoute = GymRoute::class;
+        $gymRoute = $GymRoute::find($route_id);
+
+        $data = [
+            'dataModal' => [
+                'route' => $gymRoute,
+                'route_id' => $gymRoute->id,
+                'gym_id' => $gym_id,
+                'method' => $request->input('method'),
+                'title' => $request->input('title'),
+                'callback' => $request->input('callback') ?? 'reloadCurrentVue'
+            ]
+        ];
+
+        return view('modal.crop-gym-route', $data);
+    }
+
+    function uploadCropThumbnail(Request $request, $gym_id, $route_id)
+    {
+        $GymRoute = GymRoute::class;
+        $gymRoute = $GymRoute::find($route_id);
+
+        if ($request->input('base64')) {
+            try {
+                Image::make($request->input('base64'))
+                    ->fit(50, 50)
+                    ->save(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'));
+            } catch (\Exception $e) {
+                // If there is a problem, we delete the downloaded images
+                if (file_exists(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/100/thumbnail-' . $gymRoute->id . '.jpg'));
+            }
+        }
+
+        return response()->json(json_encode($gymRoute));
+    }
+
     function uploadRouteThumbnailModal(Request $request, $gym_id, $route_id)
     {
         $GymRoute = GymRoute::class;
