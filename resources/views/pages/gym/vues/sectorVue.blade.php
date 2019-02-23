@@ -18,7 +18,7 @@
             <table class="highlight td-clickable">
                 <tbody>
                     @foreach($sector->routes as $route)
-                        <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
+                        <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
                             @if(Auth::check())
                                 <td>
                                     @if(count($route->crosses) > 0)
@@ -149,3 +149,5 @@
         </div>
     @endif
 </div>
+
+<input type="hidden" id="sector-name-for-ajax" value="{{ $sector->label }}">

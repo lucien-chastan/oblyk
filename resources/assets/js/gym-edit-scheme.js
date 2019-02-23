@@ -150,7 +150,7 @@ function reloadRoutes() {
         route.remove();
     });
     routes = [];
-    // getJsonGymSector(GlobalRoomId);
+    getJsonGymRoute(GlobalRoomId);
 }
 
 // Other function for dismount or add on favorite

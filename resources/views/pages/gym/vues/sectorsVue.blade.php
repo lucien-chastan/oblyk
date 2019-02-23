@@ -35,7 +35,7 @@
                                 <td colspan="2" class="text-bold">{{ $sector->group_sector }}</td>
                             </tr>
                         @endif
-                        <tr onmouseover="overMapSector({{ $sector->id }})" onmouseleave="leaveMapSector({{ $sector->id }})" onclick="getGymSector({{ $sector->id }}, '{{ $sector->label }}'); animationLoadSideNav()">
+                        <tr onmouseover="overMapSector({{ $sector->id }})" onmouseleave="leaveMapSector({{ $sector->id }})" onclick="getGymSector({{ $sector->id }}); animationLoadSideNav()">
                             <td class="{{ $sector->group_sector != '' ? 'indent' : '' }}"><strong>{{ $sector->label }}</strong></td>
                             <td>
                                 @if($sector->routes_count > 0)
@@ -87,7 +87,7 @@
                         <td colspan="6" class="grey-text">{{ $route->opener_date->diffForHumans() }}</td>
                     </tr>
                 @endif
-                <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
+                <tr onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
                     <td>
                         @if($route->hasThumbnail())
                             <img src="{{ $route->thumbnail() }}" class="circle left" height="45">

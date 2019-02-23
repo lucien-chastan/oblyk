@@ -6,6 +6,20 @@ window.addEventListener('load', function () {
     openVoletSectors(true);
 });
 
+function initGetElement() {
+    var hash = location.hash,
+        sectorRegExp = /^#sector-\d+$/,
+        lineRegExp = /^#line-\d+$/;
+
+    if (sectorRegExp.test(hash)) {
+        getGymSector(hash.split('-')[1]);
+    } else if (lineRegExp.test(hash)) {
+        getGymRoute(hash.split('-')[1]);
+    } else {
+        getSectors();
+    }
+}
+
 function initSchemeGymMap() {
     let mapArea = document.getElementById('gym-scheme'),
         nav_barre = document.getElementById('nav_barre'),
@@ -78,7 +92,7 @@ function getJsonGymSector(room_id) {
                 var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area map-class-sector-' + sector.id, attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
                 polygon.on('click', (e) => {
                     var sectorAttribute = e.target.options.attribution;
-                    getGymSector(sectorAttribute.id, sectorAttribute.label)
+                    getGymSector(sectorAttribute.id)
                 });
                 sectors[sector.id] = polygon;
             }
@@ -95,7 +109,7 @@ function getJsonGymRoute(room_id) {
                 var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line map-class-line-' + route.id, attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
                 polyline.on('click', (e) => {
                     var routeAttribute = e.target.options.attribution;
-                    getGymRoute(routeAttribute.id, routeAttribute.label)
+                    getGymRoute(routeAttribute.id)
                 });
                 routeLines[route.id] = polyline;
             }
@@ -132,11 +146,12 @@ function getSectors() {
         $('ul.tabs').tabs();
         unActiveAllMapSector();
         unActiveAllMapLine();
+        location.hash = '';
     });
 }
 
 // Load sector
-function getGymSector(sector_id, sector_label) {
+function getGymSector(sector_id) {
     if (!inEdition) {
         var content = document.getElementById('content-side-map-gym-scheme'),
             item2 = document.getElementById('item-nav-2'),
@@ -148,8 +163,9 @@ function getGymSector(sector_id, sector_label) {
             sweetDisappearance(true, item2);
             sweetDisappearance(false, item3);
             sideNavLoader(true);
-            item2.textContent = sector_label;
             content.innerHTML = response.data;
+            var sector_label = document.getElementById('sector-name-for-ajax').value;
+            item2.textContent = sector_label;
 
             current_sector_id = sector_id;
             current_sector_label = sector_label;
@@ -158,9 +174,9 @@ function getGymSector(sector_id, sector_label) {
             $('.tooltipped').tooltip({delay: 50});
             activeMapSector(current_sector_id);
             unActiveAllMapLine();
-
+            location.hash = '#sector-' + current_sector_id;
             item2.onclick = function () {
-                getGymSector(sector_id, sector_label);
+                getGymSector(sector_id);
                 animationLoadSideNav('l');
             };
         });
@@ -168,7 +184,7 @@ function getGymSector(sector_id, sector_label) {
 }
 
 // Load route
-function getGymRoute(route_id, route_label) {
+function getGymRoute(route_id) {
     var content = document.getElementById('content-side-map-gym-scheme'),
         item3 = document.getElementById('item-nav-3');
 
@@ -176,8 +192,9 @@ function getGymRoute(route_id, route_label) {
 
     axios.get('/salle-escalade/topo/route/' + route_id).then(function (response) {
         sweetDisappearance(true, item3);
-        item3.textContent = route_label;
         content.innerHTML = response.data;
+        var route_label = document.getElementById('route-name-for-ajax').value;
+        item3.textContent = route_label;
         sideNavLoader(true);
         initOpenModal();
         unActiveAllMapSector();
@@ -185,7 +202,7 @@ function getGymRoute(route_id, route_label) {
         current_route_id = route_id;
         current_route_label = route_label;
         activeMapLine(current_route_id);
-
+        location.hash = '#line-' + current_route_id;
     });
 }
 
@@ -251,7 +268,7 @@ function reloadSectorsVue() {
 }
 
 function reloadSectorVue() {
-    getGymSector(current_sector_id, current_sector_label);
+    getGymSector(current_sector_id);
     closeModal();
 }
 
@@ -272,7 +289,7 @@ function afterDeleteGotTo() {
 }
 
 function reloadRouteVue() {
-    getGymRoute(current_route_id, current_route_label);
+    getGymRoute(current_route_id);
     closeModal();
 }
 

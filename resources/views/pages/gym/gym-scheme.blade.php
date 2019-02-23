@@ -136,7 +136,8 @@
         </script>
     @endif
     <script>
-        getSectors();
+
+        initGetElement();
 
         // Change nav bar color
         var nav_barre = document.getElementById('nav_barre');

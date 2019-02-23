@@ -26,7 +26,6 @@ function uploadScheme(form, callback, gym_id) {
         }
     ).catch(
         function (err) {
-            console.log(err.message);
             showSubmitLoader(false);
         }
     );

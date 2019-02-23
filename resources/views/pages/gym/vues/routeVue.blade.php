@@ -206,3 +206,5 @@
         </div>
     </div>
 @endif
+
+<input type="hidden" id="route-name-for-ajax" value="{{ $route->name() }}">
