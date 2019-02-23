@@ -25,6 +25,9 @@
 
 <div class="row" id="sectors-tab">
     <div class="col s12">
+        @if($room->description != '')
+            <div class="markdownZone">@markdown($room->description)</div>
+        @endif
         @if (count($sectors) > 0)
             <table class="highlight td-clickable">
                 <tbody>
