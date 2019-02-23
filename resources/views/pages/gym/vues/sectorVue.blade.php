@@ -18,7 +18,7 @@
             <table class="highlight td-clickable">
                 <tbody>
                     @foreach($sector->routes as $route)
-                        <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
+                        <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
                             @if(Auth::check())
                                 <td>
                                     @if(count($route->crosses) > 0)

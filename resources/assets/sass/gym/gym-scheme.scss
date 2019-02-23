@@ -108,7 +108,15 @@
     stroke-width: 2px;
     stroke-dasharray: 5px;
     transition: all 0.3s;
-    &:hover {
+    &:hover, &.hovered-sector {
+      fill-opacity: 0.3;
+      stroke-dasharray: none;
+      stroke-opacity: 1;
+      stroke-width: 3px;
+    }
+    &.active-sector {
+      fill: #4caf50;
+      stroke: #388e3c;
       fill-opacity: 0.3;
       stroke-dasharray: none;
       stroke-opacity: 1;
@@ -118,9 +126,11 @@
 
   .route-map-line {
     transition: all 0.3s;
-    stroke-width: 3px;
-    &:hover {
+    stroke-opacity: 0.6;
+    stroke-width: 2px;
+    &:hover, &.hovered-line, &.active-line {
       stroke-width: 5px;
+      stroke-opacity: 1;
     }
   }
 

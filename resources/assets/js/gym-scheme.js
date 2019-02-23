@@ -75,7 +75,7 @@ function getJsonGymSector(room_id) {
 
             var sector = response.data.sectors[i];
             if (sector.area !== '') {
-                var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area', attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
+                var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area map-class-sector-' + sector.id, attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
                 polygon.on('click', (e) => {
                     var sectorAttribute = e.target.options.attribution;
                     getGymSector(sectorAttribute.id, sectorAttribute.label)
@@ -92,7 +92,7 @@ function getJsonGymRoute(room_id) {
 
             var route = response.data.routes[i];
             if (route.line !== '') {
-                var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line', attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
+                var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line map-class-line-' + route.id, attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
                 polyline.on('click', (e) => {
                     var routeAttribute = e.target.options.attribution;
                     getGymRoute(routeAttribute.id, routeAttribute.label)
@@ -130,6 +130,8 @@ function getSectors() {
         initOpenModal();
         $('.tooltipped').tooltip({delay: 50});
         $('ul.tabs').tabs();
+        unActiveAllMapSector();
+        unActiveAllMapLine();
     });
 }
 
@@ -154,6 +156,8 @@ function getGymSector(sector_id, sector_label) {
 
             initOpenModal();
             $('.tooltipped').tooltip({delay: 50});
+            activeMapSector(current_sector_id);
+            unActiveAllMapLine();
 
             item2.onclick = function () {
                 getGymSector(sector_id, sector_label);
@@ -176,9 +180,12 @@ function getGymRoute(route_id, route_label) {
         content.innerHTML = response.data;
         sideNavLoader(true);
         initOpenModal();
+        unActiveAllMapSector();
 
         current_route_id = route_id;
         current_route_label = route_label;
+        activeMapLine(current_route_id);
+
     });
 }
 
@@ -210,6 +217,8 @@ function animationLoadSideNav(direction = 'r') {
         setTimeout(function () {
             animationDiv.style.transform = 'translateX(0)';
             animationDiv.style.opacity = '1';
+            leaveAllMapSectors();
+            leaveAllMapLines();
         }, 100);
     }, 100);
 }
@@ -327,4 +336,80 @@ function reloadCrossesVue() {
     indoorPaintedCharts = [];
     getGymCrosses(true);
     closeModal();
+}
+
+
+// Over and leave mouse on map sector object
+function overMapSector(sectorId) {
+    var sector = document.getElementsByClassName('map-class-sector-' + sectorId);
+    if (sector.length > 0) {
+        sector[0].classList.add('hovered-sector');
+    }
+}
+
+function leaveMapSector(sectorId) {
+    var sector = document.getElementsByClassName('map-class-sector-' + sectorId);
+    if (sector.length > 0) {
+        sector[0].classList.remove('hovered-sector');
+    }
+}
+
+function leaveAllMapSectors() {
+    var mapSectors = document.getElementsByClassName('sector-map-area');
+    for (var mapSector of mapSectors) {
+        mapSector.classList.remove('hovered-sector');
+    }
+}
+
+function activeMapSector(sectorId) {
+    var sector = document.getElementsByClassName('map-class-sector-' + sectorId);
+    unActiveAllMapSector();
+    if (sector.length > 0) {
+        sector[0].classList.add('active-sector');
+    }
+}
+
+function unActiveAllMapSector() {
+    var mapSectors = document.getElementsByClassName('sector-map-area');
+    for (var mapSector of mapSectors) {
+        mapSector.classList.remove('active-sector');
+    }
+}
+
+// Over and leave mouse on map line object
+function overMapLine(routeId) {
+    var route = document.getElementsByClassName('map-class-line-' + routeId);
+    if (route.length > 0) {
+        route[0].classList.add('hovered-line');
+    }
+}
+
+function leaveMapLine(routeId) {
+    var route = document.getElementsByClassName('map-class-line-' + routeId);
+    if (route.length > 0) {
+        route[0].classList.remove('hovered-line');
+    }
+}
+
+function leaveAllMapLines() {
+    var mapLines = document.getElementsByClassName('route-map-line');
+    for (var mapLine of mapLines) {
+        mapLine.classList.remove('hovered-line');
+    }
+}
+
+
+function activeMapLine(lineId) {
+    var line = document.getElementsByClassName('map-class-line-' + lineId);
+    unActiveAllMapLine();
+    if (line.length > 0) {
+        line[0].classList.add('active-line');
+    }
+}
+
+function unActiveAllMapLine() {
+    var mapLines = document.getElementsByClassName('route-map-line');
+    for (var mapLine of mapLines) {
+        mapLine.classList.remove('active-line');
+    }
 }

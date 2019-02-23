@@ -35,7 +35,7 @@
                                 <td colspan="2" class="text-bold">{{ $sector->group_sector }}</td>
                             </tr>
                         @endif
-                        <tr onclick="getGymSector({{ $sector->id }}, '{{ $sector->label }}'); animationLoadSideNav()">
+                        <tr onmouseover="overMapSector({{ $sector->id }})" onmouseleave="leaveMapSector({{ $sector->id }})" onclick="getGymSector({{ $sector->id }}, '{{ $sector->label }}'); animationLoadSideNav()">
                             <td class="{{ $sector->group_sector != '' ? 'indent' : '' }}"><strong>{{ $sector->label }}</strong></td>
                             <td>
                                 @if($sector->routes_count > 0)
