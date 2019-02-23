@@ -135,7 +135,7 @@
                 @lang('pages/gym-schemes/global.uploadPicture')
                 <i class="material-icons left">photo_camera</i>
             </button>
-            @if( $sector->area == '')
+            @if($sector->area == '')
                 <button class="btn btn-flat start-edition-btn" onclick="startNewSector({{ $sector->id }})">
                     @lang('pages/gym-schemes/global.createSectorArea')
                     <i class="material-icons left">crop_free</i>

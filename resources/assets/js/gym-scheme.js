@@ -1,4 +1,4 @@
-let scheme, timeToLoad, sectors = [], inEdition = false, crossesIsLoaded = false,
+let scheme, timeToLoad, sectors = [], routeLines = [], inEdition = false, crossesIsLoaded = false,
     current_sector_label, current_sector_id,
     current_route_label, current_route_id;
 
@@ -56,16 +56,17 @@ function initSchemeGymMap() {
     scheme.fitBounds([[0, 0], [heightScheme, widthScheme]]);
     scheme.on('click', function (e) {
         if(window.windowWidth() < 780) {
-            console.log('on ferme')
+            console.log('on ferme');
         }
-        console.log('[' + Math.round(e['latlng']['lat'], 2) + ',' + Math.round(e['latlng']['lng'], 2) + ']');
     });
 
     scheme.on('editable:created', function (e) {
         newArea = e.layer;
+        newRouteLine = e.layer;
     });
 
     getJsonGymSector(data.room_id);
+    getJsonGymRoute(data.room_id);
 }
 
 function getJsonGymSector(room_id) {
@@ -80,6 +81,23 @@ function getJsonGymSector(room_id) {
                     getGymSector(sectorAttribute.id, sectorAttribute.label)
                 });
                 sectors[sector.id] = polygon;
+            }
+        }
+    });
+}
+
+function getJsonGymRoute(room_id) {
+    axios.get('/API/gyms/get-routes/' + room_id).then(function (response) {
+        for (var i = 0; i < response.data.routes.length; i++) {
+
+            var route = response.data.routes[i];
+            if (route.line !== '') {
+                var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line', attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
+                polyline.on('click', (e) => {
+                    var routeAttribute = e.target.options.attribution;
+                    getGymRoute(routeAttribute.id, routeAttribute.label)
+                });
+                routeLines[route.id] = polyline;
             }
         }
     });

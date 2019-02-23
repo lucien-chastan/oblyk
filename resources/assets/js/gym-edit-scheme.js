@@ -1,18 +1,50 @@
-var editionSectorId = null, newArea = null;
+var editionSectorId = null, newArea = null, editionRouteId = null, newRouteLine = null;
 
-function startNewSector(sectorId) {
+function showSaveBtn(status = true, editionType = 'sector') {
+    var btnArea = document.getElementById('edit-btn-sector'),
+        startBtns = document.getElementsByClassName('start-edition-btn'),
+        btnSave = document.getElementById('btn-save-edition-scheme'),
+        btnCancel = document.getElementById('btn-cancel-edition-scheme');
+
+    if (editionType === 'sector') {
+        btnSave.removeEventListener('click', endEditRouteLine);
+        btnSave.addEventListener('click', endEditSector);
+        btnCancel.removeEventListener('click', reloadRoutes);
+        btnCancel.addEventListener('click', reloadSectors);
+    } else {
+        btnSave.removeEventListener('click', endEditSector);
+        btnSave.addEventListener('click', endEditRouteLine);
+        btnCancel.removeEventListener('click', reloadSectors);
+        btnCancel.addEventListener('click', reloadRoutes);
+    }
+
+    if (status) {
+        btnArea.classList.remove('hide');
+        for (let btn of startBtns) {
+            btn.classList.add('hide');
+        }
+    } else {
+        btnArea.classList.add('hide');
+        for (let btn of startBtns) {
+            btn.classList.remove('hide');
+        }
+    }
+}
+
+// Draw sector area
+function startNewSector() {
     inEdition = true;
-    editionSectorId = sectorId;
+    editionSectorId = current_sector_id;
     scheme.editTools.startPolygon();
     showSaveBtn();
 }
 
-function startEditSector(sectorId) {
+function startEditSector() {
     if (!inEdition) {
-        var sector = sectors[sectorId];
+        var sector = sectors[current_sector_id];
         sector.enableEdit();
         inEdition = true;
-        editionSectorId = sectorId;
+        editionSectorId = current_sector_id;
         showSaveBtn();
     } else if (editionSectorId !== null) {
         endEditSector();
@@ -42,30 +74,68 @@ function endEditSector(save = true) {
 }
 
 function saveSectorArea(sectorId, area, reload = false) {
-    axios.put(`/admin/${GlobalGymId}/sector/${sectorId}/save-area`, {area : area}).then(function () {
+    axios.put(`/admin/${GlobalGymId}/sector/${sectorId}/save-area`, {area: area}).then(function () {
         Materialize.toast('Zone enregistrée');
         if (reload) location.reload();
     });
 }
 
-function showSaveBtn(status = true) {
-    var btnArea = document.getElementById('edit-btn-sector'),
-        startBtns = document.getElementsByClassName('start-edition-btn');
+// Draw route line
+function startNewRouteLine() {
+    inEdition = true;
+    editionRouteId = current_route_id;
+    scheme.editTools.startPolyline();
+    showSaveBtn(true, 'route');
+}
 
-    if(status) {
-        btnArea.classList.remove('hide');
-        for (let btn of startBtns ) {
-            btn.classList.add('hide');
-        }
-    } else {
-        btnArea.classList.add('hide');
-        for (let btn of startBtns ) {
-            btn.classList.remove('hide');
-        }
+function startEditRoute() {
+    if (!inEdition) {
+        var route = routeLines[current_route_id];
+        route.enableEdit();
+        inEdition = true;
+        editionRouteId = current_route_id;
+        showSaveBtn(true, 'route');
+    } else if (editionRouteId !== null) {
+        endEditRouteLine();
     }
 }
 
-function relaodSectors() {
+function endEditRouteLine(save = true) {
+    var latLngs = [],
+        reloadAfterEdit = false;
+
+    if (newRouteLine != null) {
+        routeLines[editionRouteId] = newRouteLine;
+        newRouteLine = null;
+        reloadAfterEdit = true;
+    }
+
+    var route = routeLines[editionRouteId];
+
+    console.log('routeLine : ' + routeLines);
+    console.log('editionRouteId : ' + editionRouteId);
+    console.log('newRouteLine : ' +  newRouteLine);
+    console.log(route.getLatLngs());
+
+    route.disableEdit();
+    for (var latLng of route.getLatLngs()) {
+        latLngs.push(`[${latLng.lat},${latLng.lng}]`);
+    }
+    if (save) saveRouteLine(editionRouteId, `[${latLngs.join(',')}]`, reloadAfterEdit);
+    inEdition = false;
+    editionRouteId = null;
+    showSaveBtn(false);
+}
+
+function saveRouteLine(routeId, line, reload = false) {
+    axios.put(`/admin/${GlobalGymId}/route/${routeId}/save-line`, {line: line}).then(function () {
+        Materialize.toast('Ligne enregistrée');
+        if (reload) location.reload();
+    });
+}
+
+// Reload functions after edition
+function reloadSectors() {
     endEditSector(false);
     sectors.forEach(function (sector) {
         sector.remove();
@@ -74,6 +144,16 @@ function relaodSectors() {
     getJsonGymSector(GlobalRoomId);
 }
 
+function reloadRoutes() {
+    endEditRouteLine(false);
+    routes.forEach(function (route) {
+        route.remove();
+    });
+    routes = [];
+    // getJsonGymSector(GlobalRoomId);
+}
+
+// Other function for dismount or add on favorite
 function dismountRoute(routeId) {
     axios.put('/gym/dismount-route/' + routeId).then(function (response) {
         var data = JSON.parse(response.data);

@@ -20,6 +20,8 @@ return [
     'link' => 'Link',
     'see_separately' => 'See on another page',
     'dismounted_at' => 'Dismounted at',
+    'createRouteLine' => 'Draw on the plan',
+    'editRouteLine' => 'Edit trace',
 
     // Sectors
     'tadSectors' => "Sectors",
@@ -29,6 +31,7 @@ return [
     'addCrossRoom' => "Add a cross on this room",
     'addCrossGym' => "Add a cross on this gym",
     'myCrossInThisRoom' => "I have :count crosses in this room",
+    'number_line' => "1 line|:count lines",
 
     // Sector
     'routesTitle' => "Routes",

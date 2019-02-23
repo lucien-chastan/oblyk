@@ -116,6 +116,14 @@
     }
   }
 
+  .route-map-line {
+    transition: all 0.3s;
+    stroke-width: 3px;
+    &:hover {
+      stroke-width: 5px;
+    }
+  }
+
   #btn-add-first-scheme {
     padding-top: calc(100vh / 2 - 10px);
   }

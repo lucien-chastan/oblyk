@@ -142,24 +142,47 @@
             <p><i class="material-icons left blue-text">settings</i><strong>@lang('pages/gym-schemes/global.administrationTitle')</strong></p>
         </div>
         <div class="col s12 administration-area">
+
+            {{-- Edit route --}}
             <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => $route->id, "room_id"=>$room->id, "gym_id"=>$gym->id, "sector_id"=>$route->sector_id, "title"=> trans('pages/gym-schemes/global.editRoute'), "method"=>"PUT", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
                 @lang('pages/gym-schemes/global.editRoute')
                 <i class="material-icons left">edit</i>
             </button>
+
+            {{-- Upload picture --}}
             <button {!! $Helpers::modal(route('routeUploadSchemeModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
                 @lang('pages/gym-schemes/global.uploadPicture')
                 <i class="material-icons left">photo_camera</i>
             </button>
+
+            {{-- Upload thumbnail --}}
             <button {!! $Helpers::modal(route('routeUploadThumbnailModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadThumbnail'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
                 @lang('pages/gym-schemes/global.uploadThumbnail')
                 <i class="material-icons left">crop_original</i>
             </button>
+
+            {{-- Crop thumbnail --}}
             @if($route->hasPicture())
                 <button {!! $Helpers::modal(route('cropGymRouteModal', ["gym_id"=>$gym->id, "route_id"=>$route->id]), ["id" => $route->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.cropThumbnail'), "method"=>"POST", 'callback'=>'reloadRouteVue']) !!} class="btn btn-flat btn btnModal">
                     @lang('pages/gym-schemes/global.cropThumbnail')
                     <i class="material-icons left">crop</i>
                 </button>
             @endif
+
+            {{-- Trace line --}}
+            @if($route->line == '')
+                <button class="btn btn-flat start-edition-btn" onclick="startNewRouteLine({{ $route->id }})">
+                    @lang('pages/gym-schemes/global.createRouteLine')
+                    <i class="material-icons left">show_chart</i>
+                </button>
+            @else
+                <button class="btn btn-flat start-edition-btn" onclick="startEditRoute({{ $route->id }})">
+                    @lang('pages/gym-schemes/global.editRouteLine')
+                    <i class="material-icons left">show_chart</i>
+                </button>
+            @endif
+
+            {{-- Dismonte route --}}
             <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
                 @if($route->dismounted_at == null)
                     @lang('pages/gym-schemes/global.dismountRoute')
@@ -169,6 +192,8 @@
                     <i class="material-icons left">keyboard_capslock</i>
                 @endif
             </button>
+
+            {{-- Favorite --}}
             <button class="btn btn-flat btn" onclick="favoriteRoute({{ $route->id }})">
                 @if($route->favorite)
                     @lang('pages/gym-schemes/global.favoriteRoute')

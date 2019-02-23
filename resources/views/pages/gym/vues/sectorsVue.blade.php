@@ -39,7 +39,9 @@
                             <td class="{{ $sector->group_sector != '' ? 'indent' : '' }}"><strong>{{ $sector->label }}</strong></td>
                             <td>
                                 @if($sector->routes_count > 0)
-                                    <span {!! $Helpers::tooltip('Nombre de ligne') !!} class="badge tooltipped">{{ $sector->routes_count }}</span>
+                                    <span title="Nombre de ligne" class="badge">
+                                        @choice('pages/gym-schemes/global.number_line', $sector->routes_count)
+                                    </span>
                                 @endif
                             </td>
                         </tr>

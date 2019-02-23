@@ -89,10 +89,10 @@
 
         @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
             <div class="fixed-action-btn hide" id="edit-btn-sector">
-                <a class="btn-floating btn-small grey" onclick="relaodSectors({{ $room->id }})">
+                <a class="btn-floating btn-small grey" id="btn-cancel-edition-scheme">
                     <i class="large material-icons">clear</i>
                 </a>
-                <a class="btn-floating btn-large red" onclick="endEditSector()">
+                <a class="btn-floating btn-large red" id="btn-save-edition-scheme">
                     <i class="large material-icons">save</i>
                 </a>
             </div>

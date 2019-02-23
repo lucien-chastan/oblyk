@@ -165,9 +165,27 @@ class GymSchemeController extends Controller
 
     function getGymSectors($room_id)
     {
-        $GymSector = GymSector::class;
-        $sectors = $GymSector::where([['room_id', '=', $room_id], ['area', '!=', null]])->get();
+        $sectors = GymSector::where([['room_id', '=', $room_id], ['area', '!=', null]])->get();
         return response()->json(['sectors' => $sectors]);
+    }
+
+    function getGymRoutes($room_id)
+    {
+        $routes = [];
+        $sectors = GymSector::where('room_id', '=', $room_id)
+            ->with('routes')
+            ->get();
+
+        foreach ($sectors as $sector) {
+            foreach ($sector->routes as $route) {
+                if($route->line != '') {
+                    $route->line_color = $route->colors()[0];
+                    $routes[] = $route;
+                }
+            }
+        }
+
+        return response()->json(['routes' => $routes]);
     }
 
     function getLastCreatedRoomRoute($gym_id)

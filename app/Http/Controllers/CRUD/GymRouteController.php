@@ -407,6 +407,15 @@ class GymRouteController extends Controller
         return response()->json(json_encode($gymRoute));
     }
 
+    public function saveSchemeLine($gym_id, $route_id, Request $request)
+    {
+        $GymRoute = GymRoute::class;
+
+        $route = $GymRoute::find($route_id);
+        $route->line = $request->input('line');
+        $route->save();
+    }
+
     /**
      * @param $gym_id
      * @return bool|\Illuminate\Http\RedirectResponse
