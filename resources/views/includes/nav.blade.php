@@ -1,6 +1,6 @@
 <div class="navbar-fixed oblyk-navbar">
 
-    {{-- Connesion dropdown --}}
+    {{-- Connection dropdown --}}
     <ul id="dropdown_connexion" class="dropdown-content dropD-180">
         @include('includes.nav-user')
     </ul>
@@ -45,6 +45,22 @@
         @endif
     </ul>
 
+    {{-- My Gyms dropdown --}}
+    @if(Auth::check())
+        @if(count(Auth::user()->myAdminGyms()) > 0)
+            <ul id="dropdown_my_gyms" class="dropdown-content dropD-220">
+                @foreach(Auth::user()->myAdminGyms() as $adminGym)
+                    <li>
+                        <a href="{{ $adminGym->gym->adminUrl() }}">
+                            <img src="{{ $adminGym->gym->logo() }}" alt="logo de la salle {{ $adminGym->gym->label }}" height="22" style="margin-right: 10px" class="left">
+                            {{ $adminGym->gym->label }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    @endif
+
     {{-- Menu --}}
     <nav>
         <div class="nav-wrapper nav-white" id="nav_barre">
@@ -68,6 +84,11 @@
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_partenaire">@lang('interface/nav.partner') <i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_outils">@lang('interface/nav.mapAndTool') <i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_projet">@lang('interface/nav.theProject') <i class="material-icons right">arrow_drop_down</i></a></li>
+                @if(Auth::check())
+                    @if(count(Auth::user()->myAdminGyms()) > 0)
+                        <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_my_gyms">@lang('interface/nav.myGyms') <i class="material-icons right">arrow_drop_down</i></a></li>
+                    @endif
+                @endif
                 <li>
                     <a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_connexion">
                         @if (Auth::guest())
@@ -89,6 +110,25 @@
                     <li>
                         @include('includes.nav-user-side-nav')
                     </li>
+                    @if(Auth::check())
+                        @if(count(Auth::user()->myAdminGyms()) > 0)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">home</i>@lang('interface/nav.myGyms')</div>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @foreach(Auth::user()->myAdminGyms() as $adminGym)
+                                        <li>
+                                            <a href="{{ $adminGym->gym->adminUrl() }}">
+                                                <img src="{{ $adminGym->gym->logo() }}" alt="logo de la salle {{ $adminGym->gym->label }}" style="margin-bottom: -6px; margin-right: 10px" height="22">
+                                                {{ $adminGym->gym->label }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        @endif
+                    @endif
                     <li>
                         <div data-activates="global-search" class="collapsible-header button-open-global-search">
                             <i class="material-icons">search</i>

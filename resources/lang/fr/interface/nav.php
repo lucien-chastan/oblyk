@@ -4,6 +4,7 @@ return [
     'partner' => 'Partenaire',
     'mapAndTool' => 'Carte &amp; Outils',
     'theProject' => 'Le projet',
+    'myGyms' => 'Mes salles',
     'actuality' => 'Actualités',
     'indoor' => 'Indoor',
     'connect' => 'Connexion',

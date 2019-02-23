@@ -5,6 +5,7 @@ return [
     'partner' => 'Partner',
     'mapAndTool' => 'Map &amp; Tools',
     'theProject' => 'The project',
+    'myGyms' => 'My gyms',
     'actuality' => 'Actuality',
     'indoor' => 'Indoor',
     'connect' => 'Log in',
