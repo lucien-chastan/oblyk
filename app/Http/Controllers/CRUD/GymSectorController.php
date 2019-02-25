@@ -184,6 +184,15 @@ class GymSectorController extends Controller
         $sector->save();
     }
 
+    public function deleteSchemeArea($gym_id, $sector_id, Request $request)
+    {
+        $GymSector = GymSector::class;
+
+        $sector = $GymSector::find($sector_id);
+        $sector->area = null;
+        $sector->save();
+    }
+
     /**
      * Remove the specified resource from storage.
      *

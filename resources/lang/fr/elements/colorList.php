@@ -38,8 +38,9 @@ return [
     '#ffeeaa' => 'Jaune pastel',
     '#ffcc00' => 'Jaune',
 
-    // brown
-    '#a05a2c' => 'Marron'
+    // Brown & Beige
+    '#a05a2c' => 'Marron',
+    '#f5f5dc' => 'Beige',
 ];
 
 

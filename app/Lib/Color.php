@@ -42,7 +42,8 @@ class Color
         '#ffeeaa', // pastel yellow
         '#ffcc00', // yellow
 
-        // brown
+        // brown && Beige
         '#a05a2c', // Brown
+        '#f5f5dc', // Beige
     ];
 }

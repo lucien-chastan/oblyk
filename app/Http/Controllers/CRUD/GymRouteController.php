@@ -416,6 +416,15 @@ class GymRouteController extends Controller
         $route->save();
     }
 
+    public function deleteSchemeLine($gym_id, $route_id, Request $request)
+    {
+        $GymRoute = GymRoute::class;
+
+        $route = $GymRoute::find($route_id);
+        $route->line = null;
+        $route->save();
+    }
+
     /**
      * @param $gym_id
      * @return bool|\Illuminate\Http\RedirectResponse

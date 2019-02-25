@@ -17,6 +17,7 @@ return [
     'tabMap' => "Carte",
     'myCrosses' => "Mes croix",
     'guideBook' => "Topo",
+    'seeOnGuideBook' => "Voir sur le topo",
     'administer' => "Administrer",
 
     'gym' => 'Salle',

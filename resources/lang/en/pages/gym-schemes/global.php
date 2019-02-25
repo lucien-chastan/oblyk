@@ -14,6 +14,7 @@ return [
     'openedBy' => "Opened by",
     'type' => "Type",
     'height' => "Height",
+    'ref' => "Reference",
     'crossesTitle' => 'My crosses-book on this line',
     'ascent' => 'Ascent',
     'number_ascent' => ':count ascent||:count ascents',
@@ -22,6 +23,12 @@ return [
     'dismounted_at' => 'Dismounted at',
     'createRouteLine' => 'Draw on the plan',
     'editRouteLine' => 'Edit trace',
+    'isFavorite' => 'Favorite line',
+    'hasDescription' => 'line with description',
+    'hasPicture' => 'line with picture',
+    'hasComment' => 'line with comment',
+    'isDone' => 'I climbed this line.',
+    'sector' => 'Sector',
 
     // Sectors
     'tadSectors' => "Sectors",
@@ -38,6 +45,7 @@ return [
     'informationTitle' => "Information",
     'myCrossInThisSector' => "I have :count crosses in this sector",
     'deleteSector' => "Delete this sector",
+    'deleteArea' => "Delete sector area",
 
     // Crosses
     'chartNumberTitle' => "Numbers",

@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="479.37428"
-     inkscape:cy="711.59951"
+     inkscape:zoom="1.979899"
+     inkscape:cx="484.67699"
+     inkscape:cy="564.51892"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="741"
-     inkscape:window-x="0"
-     inkscape:window-y="483"
+     inkscape:window-width="1853"
+     inkscape:window-height="1053"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -533,5 +533,26 @@
          x="119.10409"
          id="tspan949"
          sodipodi:role="line">Jaune</tspan></text>
+    <rect
+       inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-f5f5dc.png"
+       inkscape:export-ydpi="47.349197"
+       inkscape:export-xdpi="47.349197"
+       y="164.17928"
+       x="97.564659"
+       height="16"
+       width="16"
+       id="rect76"
+       style="opacity:1;vector-effect:none;fill:#f5f5dc;fill-opacity:1;stroke:none;stroke-width:0.29360607;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
+       x="119.10409"
+       y="172.54115"
+       id="text80"><tspan
+         sodipodi:role="line"
+         id="tspan78"
+         x="119.10409"
+         y="172.54115"
+         style="stroke-width:0.23281482">Beige</tspan></text>
   </g>
 </svg>

@@ -38,8 +38,9 @@ return [
     '#ffeeaa' => 'Pastel yellow',
     '#ffcc00' => 'Yellow',
 
-    // brown
-    '#a05a2c' => 'Brown'
+    // Brown & Beige
+    '#a05a2c' => 'Brown',
+    '#f5f5dc' => 'Beige',
 ];
 
 

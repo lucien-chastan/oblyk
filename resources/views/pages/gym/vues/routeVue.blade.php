@@ -6,9 +6,9 @@
                 @if($route->hasThumbnail())
                     <img src="{{ $route->thumbnail() }}" class="circle left thumbnail-route">
                 @endif
-                <div class="left">
+                <div class="left" style="margin-right: 0.5em; margin-top: 2px">
                     @foreach($route->colors() as $color)
-                        <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.4em; width: 0.4em; border-radius: 50%; margin-right: 0.5em; margin-top: 2px"></div>
+                        <span class="z-depth-2 hold-tag-color" style="background-color: {{ $color }}; display: inline-block;"></span>
                     @endforeach
                 </div>
                 {!! $route->grades('html', 'text-bold') !!}
@@ -47,6 +47,14 @@
                     @endforeach
                 </td>
             </tr>
+            @if($route->reference != '')
+                <tr>
+                    <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.ref') :</th>
+                    <td>
+                        {{ $route->reference }}
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.ascent') :</th>
                 <td>@choice('pages/gym-schemes/global.number_ascent', $route->number_of_ascents())</td>
@@ -63,6 +71,12 @@
                 <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.openedAt') :</th>
                 <td>
                     {{ $route->opener_date->format('d/m/Y') }}
+                </td>
+            </tr>
+            <tr>
+                <th width="10" class="no-warp text-right">@lang('pages/gym-schemes/global.sector') :</th>
+                <td>
+                    <a onclick="getGymSector({{ $route->sector->id }}); animationLoadSideNav()">{{ $route->sector->label }}</a>
                 </td>
             </tr>
             <tr>

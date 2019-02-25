@@ -19,38 +19,41 @@
                 <tbody>
                     @foreach($sector->routes as $route)
                         <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
-                            @if(Auth::check())
-                                <td>
-                                    @if(count($route->crosses) > 0)
-                                        <i class="material-icons">done</i>
-                                    @endif
-                                </td>
-                            @endif
                             <td width="10">
                                 @if($route->hasThumbnail())
                                     <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
                                 @endif
                             </td>
-                            <td>
+                            <td width="1">
                                 @foreach($route->colors() as $color)
-                                    <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
+                                    <div class="z-depth-2 hold-tag-color" style="background-color: {{ $color }};"></div>
                                 @endforeach
                             </td>
-                            <td>{!! $route->grades('html') !!}</td>
-                            <td>{{ $route->label }}</td>
-                            <td class="grey-text">
-                                @if($route->isFavorite())
-                                    <i style="font-size: 1em" class="material-icons right red-text">favorite</i>
-                                @endif
-                                @if($route->hasPicture())
-                                    <i style="font-size: 1em" class="material-icons right">photo_camera</i>
-                                @endif
-                                @if($route->description != '')
-                                    <i style="font-size: 1em" class="material-icons right">reorder</i>
-                                @endif
-                                @if($route->descriptions_count > 0)
-                                    <i style="font-size: 1em" class="material-icons right">comment</i>
-                                @endif
+                            <td>
+                                <span class="no-warp truncate">
+                                    @if(Auth::check() && count($route->crosses) > 0)
+                                        <i title="@lang('pages/gym-schemes/global.isDone')" class="material-icons this-route-is-done">done</i>
+                                    @endif
+                                    {!! $route->grades('html', 'text-bold') !!}
+                                    {{ ($route->label != '') ? $route->label : $route->reference }}
+                                </span>
+                                <p class="grey-text no-margin">
+                                    @if($route->label != '')
+                                        <span class="small grey-text">{{ $route->reference }}</span>
+                                    @endif
+                                    @if($route->isFavorite())
+                                        <i title="@lang('pages/gym-schemes/global.isFavorite')" class="material-icons red-text gym-route-mini-icon">favorite</i>
+                                    @endif
+                                    @if($route->hasPicture())
+                                        <i title="@lang('pages/gym-schemes/global.hasPicture')" class="material-icons gym-route-mini-icon">photo_camera</i>
+                                    @endif
+                                    @if($route->description != '')
+                                        <i title="@lang('pages/gym-schemes/global.hasDescription')" class="material-icons gym-route-mini-icon">reorder</i>
+                                    @endif
+                                    @if($route->descriptions_count > 0)
+                                        <i title="@lang('pages/gym-schemes/global.hasComment')" class="material-icons gym-route-mini-icon">comment</i>
+                                    @endif
+                                </p>
                             </td>
                         </tr>
                     @endforeach
@@ -58,10 +61,16 @@
             </table>
         </div>
         @if(Auth::check())
+            @if($gym->userIsAdministrator(Auth::id()))
+                <div class="col s12 text-right">
+                    <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
+                        @lang('pages/gym-schemes/global.createRoute')
+                        <i class="material-icons left">add</i>
+                    </button>
+                </div>
+            @endif
+
             <div class="col s12">
-                @if($gym->userIsAdministrator(Auth::id()))
-                    <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.createRoute')) !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
-                @endif
                 <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.addCrossSector')) !!} {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>null, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.addCrossSector'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">done</i></a>
             </div>
         @endif
@@ -146,7 +155,10 @@
                     <i class="material-icons left">crop_free</i>
                 </button>
             @endif
-            <button {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_sectors/" . $sector->id, "callback" => "afterDeleteSector"]) !!} class="btnModal btn btn-flat">@lang('pages/gym-schemes/global.deleteSector')<i class="material-icons left red-text">delete</i></button>
+            <button {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_sectors/" . $sector->id, "callback" => "afterDeleteSector"]) !!} class="btnModal btn btn-flat">
+                @lang('pages/gym-schemes/global.deleteSector')
+                <i class="material-icons left red-text">delete</i>
+            </button>
         </div>
     @endif
 </div>

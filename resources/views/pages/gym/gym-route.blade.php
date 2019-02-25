@@ -100,7 +100,15 @@
                                     <a href="{{ $route->sector->room->url() }}">
                                         {{ $route->sector->room->label }}
                                     </a>
-                                    , @lang('pages/gyms/global.sector') : {{ $route->sector->label }}
+                                    , @lang('pages/gyms/global.sector') : <a href="{{ $route->sector->room->url() }}#sector-{{ $route->sector->id }}">{{ $route->sector->label }}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10" class="no-warp text-right">@lang('pages/gyms/global.seeOnGuideBook') :</th>
+                                <td>
+                                    <a href="{{ $route->sector->room->url() }}#line-{{ $route->id }}">
+                                        @lang('pages/gyms/global.guideBook')
+                                    </a>
                                 </td>
                             </tr>
                             @if($route->isDismounted())

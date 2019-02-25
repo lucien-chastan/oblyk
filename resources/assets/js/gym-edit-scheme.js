@@ -4,18 +4,23 @@ function showSaveBtn(status = true, editionType = 'sector') {
     var btnArea = document.getElementById('edit-btn-sector'),
         startBtns = document.getElementsByClassName('start-edition-btn'),
         btnSave = document.getElementById('btn-save-edition-scheme'),
-        btnCancel = document.getElementById('btn-cancel-edition-scheme');
+        btnCancel = document.getElementById('btn-cancel-edition-scheme'),
+        btnDelete = document.getElementById('btn-delete-edition-scheme');
 
     if (editionType === 'sector') {
         btnSave.removeEventListener('click', endEditRouteLine);
         btnSave.addEventListener('click', endEditSector);
         btnCancel.removeEventListener('click', reloadRoutes);
         btnCancel.addEventListener('click', reloadSectors);
+        btnDelete.removeEventListener('click', deleteRouteLine);
+        btnDelete.addEventListener('click', deleteSectorArea);
     } else {
         btnSave.removeEventListener('click', endEditSector);
         btnSave.addEventListener('click', endEditRouteLine);
         btnCancel.removeEventListener('click', reloadSectors);
         btnCancel.addEventListener('click', reloadRoutes);
+        btnDelete.removeEventListener('click', deleteSectorArea);
+        btnDelete.addEventListener('click', deleteRouteLine);
     }
 
     if (status) {
@@ -80,6 +85,13 @@ function saveSectorArea(sectorId, area, reload = false) {
     });
 }
 
+function deleteSectorArea() {
+    axios.put(`/admin/${GlobalGymId}/sector/${current_sector_id}/delete-area`).then(function () {
+        Materialize.toast('Tracé de la zone supprimé');
+        location.reload();
+    });
+}
+
 // Draw route line
 function startNewRouteLine() {
     inEdition = true;
@@ -133,6 +145,14 @@ function saveRouteLine(routeId, line, reload = false) {
         if (reload) location.reload();
     });
 }
+
+function deleteRouteLine() {
+    axios.put(`/admin/${GlobalGymId}/route/${current_route_id}/delete-line`).then(function () {
+        Materialize.toast('Tracé de la ligne supprimé');
+        location.reload();
+    });
+}
+
 
 // Reload functions after edition
 function reloadSectors() {

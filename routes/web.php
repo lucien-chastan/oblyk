@@ -306,9 +306,11 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/gym-sectors/{gym_id}', 'CRUD\GymSectorController@gymSectorModal')->name('gymSectorModal');
     Route::post('/modal/gym-routes/{gym_id}', 'CRUD\GymRouteController@gymRouteModal')->name('gymRouteModal');
 
-    // Save area ou line on scheme map
+    // Save and Delete area or line on scheme map
     Route::put('/admin/{gym_id}/sector/{sector_id}/save-area', 'CRUD\GymSectorController@saveSchemeArea');
     Route::put('/admin/{gym_id}/route/{route_id}/save-line', 'CRUD\GymRouteController@saveSchemeLine');
+    Route::put('/admin/{gym_id}/sector/{sector_id}/delete-area', 'CRUD\GymSectorController@deleteSchemeArea');
+    Route::put('/admin/{gym_id}/route/{route_id}/delete-line', 'CRUD\GymRouteController@deleteSchemeLine');
 
     Route::put('/admin/{gym_id}/room/{room_id}/save-custom-scheme', 'CRUD\RoomController@saveCustomScheme')->name('saveCustomScheme');
     Route::put('/admin/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishRoom')->name('publishRoom');

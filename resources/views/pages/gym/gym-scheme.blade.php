@@ -89,10 +89,13 @@
 
         @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
             <div class="fixed-action-btn hide" id="edit-btn-sector">
-                <a class="btn-floating btn-small grey" id="btn-cancel-edition-scheme">
+                <a title="annuler l'édition" class="btn-floating btn-small grey" id="btn-cancel-edition-scheme">
                     <i class="large material-icons">clear</i>
                 </a>
-                <a class="btn-floating btn-large red" id="btn-save-edition-scheme">
+                <a title="supprimer le tracé" class="btn-floating btn-small grey" id="btn-delete-edition-scheme">
+                    <i class="large material-icons">delete</i>
+                </a>
+                <a title="sauvegarder le tracé" class="btn-floating btn-large red" id="btn-save-edition-scheme">
                     <i class="large material-icons">save</i>
                 </a>
             </div>

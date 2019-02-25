@@ -17,6 +17,7 @@ return [
     'tabMap' => "Map",
     'myCrosses' => "My crosses",
     'guideBook' => "Guidebook",
+    'seeOnGuideBook' => "See on guidebook",
     'administer' => "Administer",
 
     'gym' => 'Climbing gym',
