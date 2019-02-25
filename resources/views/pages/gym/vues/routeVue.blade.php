@@ -182,17 +182,6 @@
                 </button>
             @endif
 
-            {{-- Dismonte route --}}
-            <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
-                @if($route->dismounted_at == null)
-                    @lang('pages/gym-schemes/global.dismountRoute')
-                    <i class="material-icons left">reply</i>
-                @else
-                    @lang('pages/gym-schemes/global.riseUpRoute')
-                    <i class="material-icons left">keyboard_capslock</i>
-                @endif
-            </button>
-
             {{-- Favorite --}}
             <button class="btn btn-flat btn" onclick="favoriteRoute({{ $route->id }})">
                 @if($route->favorite)
@@ -201,6 +190,17 @@
                 @else
                     @lang('pages/gym-schemes/global.upToFavoriteRoute')
                     <i class="material-icons left">favorite_border</i>
+                @endif
+            </button>
+
+            {{-- Dismonte route --}}
+            <button class="btn btn-flat btn" onclick="dismountRoute({{ $route->id }})">
+                @if($route->dismounted_at == null)
+                    @lang('pages/gym-schemes/global.dismountRoute')
+                    <i class="material-icons left red-text">reply</i>
+                @else
+                    @lang('pages/gym-schemes/global.riseUpRoute')
+                    <i class="material-icons left">keyboard_capslock</i>
                 @endif
             </button>
         </div>

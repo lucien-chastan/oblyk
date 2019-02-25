@@ -37,6 +37,7 @@ return [
     'routesTitle' => "Les lignes",
     'informationTitle' => "Information",
     'myCrossInThisSector' => "J'ai :count croix dans ce secteur",
+    'deleteSector' => "Supprimer ce secteur",
 
     // Crosses
     'chartNumberTitle' => "Des chiffres",

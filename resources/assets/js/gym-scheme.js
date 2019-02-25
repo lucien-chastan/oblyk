@@ -293,6 +293,12 @@ function reloadRouteVue() {
     closeModal();
 }
 
+function afterDeleteSector() {
+    Materialize.toast('Secteur supprimé', 4000);
+    getSectors();
+    closeModal();
+}
+
 function closeGymSchemeSideNave() {
     var bodyMap = document.getElementById('body-map');
 

@@ -122,16 +122,16 @@
         </div>
         <div class="col s12 administration-area">
             @if($sector->routes_count == 0)
-                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                     @lang('pages/gym-schemes/global.createRoute')
                     <i class="material-icons left">add</i>
                 </button>
             @endif
-            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.editSector'), "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.editSector'), "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                 @lang('pages/gym-schemes/global.editSector')
                 <i class="material-icons left">edit</i>
             </button>
-            <button {!! $Helpers::modal(route('sectorUploadSchemeModal', ["gym_id"=>$gym->id, "sector_id"=>$sector->id]), ["id" => $sector->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+            <button {!! $Helpers::modal(route('sectorUploadSchemeModal', ["gym_id"=>$gym->id, "sector_id"=>$sector->id]), ["id" => $sector->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                 @lang('pages/gym-schemes/global.uploadPicture')
                 <i class="material-icons left">photo_camera</i>
             </button>
@@ -146,6 +146,7 @@
                     <i class="material-icons left">crop_free</i>
                 </button>
             @endif
+            <button {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_sectors/" . $sector->id, "callback" => "afterDeleteSector"]) !!} class="btnModal btn btn-flat">@lang('pages/gym-schemes/global.deleteSector')<i class="material-icons left red-text">delete</i></button>
         </div>
     @endif
 </div>
