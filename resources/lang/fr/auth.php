@@ -34,9 +34,12 @@ return [
     //Page créer un compte
     'titleCreateAccount' => 'Créer un compte',
     'labelUsername' => 'Nom d\'utilisateur',
+    'labelFirstName' => 'Prénom (optionnel)',
+    'labelLastName' => 'Nom de famille (optionnel)',
     'labelConfirmPassword' => 'Confirmer votre mot de passe',
     'btnCreateMyAccount' => 'Créer mon compte',
     'btnIHaveAAccount' => 'J\'ai déjà un compte !',
+    'optional' => 'Optionnel',
 
     //Page mon mail pour nouveau mot de passe
     'titleResetPassword' => 'Mot de passe oublié',

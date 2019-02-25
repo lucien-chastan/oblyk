@@ -22,12 +22,12 @@
     &:hover {
       color: lighten(#757575, 20%);
       padding-left: 19px;
-      border-left: 1px solid $primary-color;
+      border-left: 1px solid #2196f3;
     }
     &.active {
       font-weight: 500;
       padding-left: 18px;
-      border-left: 2px solid $primary-color;
+      border-left: 2px solid #2196f3;
     }
   }
 }

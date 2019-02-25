@@ -252,3 +252,30 @@
         font-size: 20px;
     }
 }
+
+.admin-contest-table {
+    th {
+        text-align: right;
+        width: 10px;
+        white-space: nowrap;
+        vertical-align: baseline;
+    }
+    th, td {
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    ul {
+        margin-top: 0;
+        .material-icons {
+            font-size: 1.4em;
+        }
+    }
+}
+
+.action-contest-row {
+    border-top: solid;
+    border-color: rgb(220,220,220);
+    border-width: 1px;
+    margin-bottom: -21px;
+}

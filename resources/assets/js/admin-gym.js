@@ -182,3 +182,37 @@ function favoriteRoute(routeId) {
         loadProfileRoute(document.getElementById('item-scheme-routes-menu'), true);
     });
 }
+
+
+function uploadContestCover(form, callback, gym_id, contest_id) {
+    let inputData = form.getElementsByClassName('input-data'),
+        data = new FormData();
+
+    showSubmitLoader(true);
+
+    data.append('foo', 'bar');
+    data.append('file', document.getElementById('upload-input-contest-cover').files[0]);
+
+    // Add form data
+    for(let i in inputData){
+        if(typeof inputData[i].value !== "undefined") data.append([inputData[i].name], inputData[i].value);
+    }
+
+    let config = {
+        onUploadProgress: function(progressEvent) {
+            let percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            document.getElementById('progressbar-upload-contest-cover').style.width = percentCompleted + '%';
+        }
+    };
+
+    axios.post('/gym/' + gym_id + '/contest/' + contest_id + '/upload-contest-picture', data, config).then(
+        function (response) {
+            closeModal();
+            callback(response);
+        }
+    ).catch(
+        function () {
+            showSubmitLoader(false);
+        }
+    );
+}

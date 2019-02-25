@@ -32,6 +32,28 @@
                             @endif
                         </div>
 
+                        <div class="input-field col s12{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                            <input id="first_name" type="text" name="first_name" value="{{ old('first_name') }}">
+                            <label for="first_name">@lang('auth.labelFirstName')</label>
+
+                            @if ($errors->has('first_name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="input-field col s12{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                            <input id="last_name" type="text" name="last_name" value="{{ old('last_name') }}">
+                            <label for="last_name">@lang('auth.labelLastName')</label>
+
+                            @if ($errors->has('last_name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
                         <div class="input-field col s12{{ $errors->has('email') ? ' has-error' : '' }}">
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required>
                             <label for="email">@lang('auth.labelEmail')</label>

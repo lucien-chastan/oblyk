@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contest;
 use App\Follow;
 use App\Gym;
 use App\GymAdministrator;
@@ -13,28 +14,28 @@ use App\GymSector;
 class GymAdminController extends Controller
 {
 
-    // LAYOUT
+    // Layout
     public function layoutPage($gym_id)
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.home', ['gym' => $Gym::find($gym_id)]);
     }
 
-    // VIEW
+    // View
     public function dashboardView($gym_id)
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.dashboard', ['gym' => $Gym::find($gym_id)]);
     }
 
-    // LOGO AND BANDEAU
+    // Logo and bandeau
     public function uploadLogoBandeauView($gym_id)
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.upload', ['gym' => $Gym::find($gym_id)]);
     }
 
-    // SCHEMES
+    // Schemes
     public function howSchemeView($gym_id)
     {
         $Gym = Gym::class;
@@ -75,12 +76,42 @@ class GymAdminController extends Controller
         ]);
     }
 
+    public function gymGradesView ($gym_id) {
+        $Gym = Gym::class;
+        $Grade = GymGrade::class;
+        return view('pages.gym-admin.vues.grades', [
+            'gym' => $Gym::find($gym_id),
+            'grades' => $Grade::where('gym_id', $gym_id)->with('gradeLines')->get()
+        ]);
+    }
+
+    public function gymGradeLinesView ($gym_id, $gym_grade_id) {
+        $Gym = Gym::class;
+        $Grade = GymGrade::class;
+        return view('pages.gym-admin.vues.grade-lines', [
+            'gym' => $Gym::find($gym_id),
+            'grade' => $Grade::find($gym_grade_id)->with(['gradeLines' => function ($query) { $query->orderBy('order'); }])->first()
+        ]);
+    }
+
+    // Contest
+    public function contestsView ($gym_id)
+    {
+        $Gym = Gym::class;
+        return view('pages.gym-admin.vues.contests', [
+            'gym' => $Gym::find($gym_id),
+            'contests' => Contest::where('gym_id', $gym_id)->get()
+        ]);
+    }
+
+    // Flux
     public function gymFluxView ($gym_id)
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.flux', ['gym' => $Gym::find($gym_id)]);
     }
 
+    // Community
     public function gymCommunityView ($gym_id)
     {
         $Gym = Gym::class;
@@ -96,13 +127,14 @@ class GymAdminController extends Controller
         ]);
     }
 
+    // Statistics
     public function gymStatisticView ($gym_id)
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.statistic', ['gym' => $Gym::find($gym_id)]);
     }
 
-    // GESTION
+    // Manage
     public function gymTeamView ($gym_id)
     {
         $Gym = Gym::class;
@@ -122,23 +154,5 @@ class GymAdminController extends Controller
     {
         $Gym = Gym::class;
         return view('pages.gym-admin.vues.settings', ['gym' => $Gym::find($gym_id)]);
-    }
-
-    public function gymGradesView ($gym_id) {
-        $Gym = Gym::class;
-        $Grade = GymGrade::class;
-        return view('pages.gym-admin.vues.grades', [
-            'gym' => $Gym::find($gym_id),
-            'grades' => $Grade::where('gym_id', $gym_id)->with('gradeLines')->get()
-        ]);
-    }
-
-    public function gymGradeLinesView ($gym_id, $gym_grade_id) {
-        $Gym = Gym::class;
-        $Grade = GymGrade::class;
-        return view('pages.gym-admin.vues.grade-lines', [
-            'gym' => $Gym::find($gym_id),
-            'grade' => $Grade::find($gym_grade_id)->with(['gradeLines' => function ($query) { $query->orderBy('order'); }])->first()
-        ]);
     }
 }

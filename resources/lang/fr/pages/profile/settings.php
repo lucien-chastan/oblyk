@@ -12,7 +12,9 @@ return [
 
     // ONGLET : COMPTE
     'titleInformation' => "Mes informations",
-    'labelName' => "Mon nom",
+    'labelName' => "Nom d'utilisateur",
+    'labelFirstName' => "Prénom",
+    'labelLastName' => "Nom de fammille",
     'labelPlaces' => "La où je grimpe",
     'labelBirthYear' => "Année de ma naissance",
     'labelSex' => "Je suis",

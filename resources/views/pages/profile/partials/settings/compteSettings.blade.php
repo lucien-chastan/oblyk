@@ -7,6 +7,8 @@
     {!! $Inputs::popupError() !!}
 
     {!! $Inputs::text(['name'=>'name', 'value'=>$user->name, 'label'=>trans('pages/profile/settings.labelName'), 'type'=>'text']) !!}
+    {!! $Inputs::text(['name'=>'first_name', 'value'=>$user->first_name, 'label'=>trans('pages/profile/settings.labelFirstName'), 'type'=>'text']) !!}
+    {!! $Inputs::text(['name'=>'last_name', 'value'=>$user->last_name, 'label'=>trans('pages/profile/settings.labelLastName'), 'type'=>'text']) !!}
     {!! $Inputs::text(['name'=>'localisation', 'value'=>$user->localisation, 'label'=>trans('pages/profile/settings.labelPlaces'), 'type'=>'text']) !!}
     {!! $Inputs::text(['name'=>'birth', 'value'=>$user->birth, 'label'=>trans('pages/profile/settings.labelBirthYear'), 'type'=>'number']) !!}
     {!! $Inputs::sex(['name'=>'sex', 'value'=>$user->sex, 'label'=>trans('pages/profile/settings.labelSex')]) !!}

@@ -34,9 +34,12 @@ return [
     //Page créer un compte
     'titleCreateAccount' => 'Join us',
     'labelUsername' => 'User name',
+    'labelFirstName' => 'First name (optional)',
+    'labelLastName' => 'Last name (optional)',
     'labelConfirmPassword' => 'Confirm password',
     'btnCreateMyAccount' => 'Join us',
     'btnIHaveAAccount' => 'Connect',
+    'optional' => 'Optional',
 
     //Page mon mail pour nouveau mot de passe
     'titleResetPassword' => 'Reset password',

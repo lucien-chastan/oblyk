@@ -7,57 +7,59 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
 
-    public function user(){
-        return $this->hasOne('App\User','id', 'user_id');
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 
-    public function viewable(){
+    public function viewable()
+    {
         return $this->morphTo();
     }
 
-    public static function convertUrl($url){
-
+    public static function convertUrl($url)
+    {
         $good_url = $url;
 
-        //EPIC TV : Si nous somme sur une vidéo du type Épic TV
-        if(preg_match('/epictv.com/', $url) == 1){
+        // Epic TV
+        if (preg_match('/epictv.com/', $url) == 1) {
             $arrayUrl = parse_url($url, PHP_URL_PATH);
-            $splitUrl = explode('/',$arrayUrl);
+            $splitUrl = explode('/', $arrayUrl);
             $good_url = 'https://www.epictv.com/player/embed-player/' . end($splitUrl);
         }
 
-        //YOUTUBE : Si nous somme sur une vidéo de youtube de type lien court
-        if(preg_match('/youtu.be/', $url) == 1){
+        // Youtube : short url
+        if (preg_match('/youtu.be/', $url) == 1) {
             $arrayUrl = parse_url($url, PHP_URL_PATH);
-            $splitUrl = explode('/',$arrayUrl);
+            $splitUrl = explode('/', $arrayUrl);
             $good_url = 'https://www.youtube.com/embed/' . end($splitUrl);
         }
 
-        //YOUTUBE : Si nous somme sur une vidéo de youtube de type lien long
-        if(preg_match('/youtube.com/', $url) == 1){
-            if(preg_match('/embed/', $url) != 1){
+        // Youtube : long url
+        if (preg_match('/youtube.com/', $url) == 1) {
+            if (preg_match('/embed/', $url) != 1) {
                 $arrayUrl = parse_url($url, PHP_URL_QUERY);
-                $splitUrl = explode('=',$arrayUrl);
+                $splitUrl = explode('=', $arrayUrl);
                 $good_url = 'https://www.youtube.com/embed/' . $splitUrl[1];
             }
         }
 
-        // VIEMO : Si nous somme sur une vidéo de viméo
-        if(preg_match('/vimeo.com/', $url) == 1){
+        // Viemo
+        if (preg_match('/vimeo.com/', $url) == 1) {
             $arrayUrl = parse_url($url, PHP_URL_PATH);
-            $splitUrl = explode('/',$arrayUrl);
+            $splitUrl = explode('/', $arrayUrl);
             $good_url = 'https://player.vimeo.com/video/' . end($splitUrl);
         }
 
-        //DAILYMOTION : Si nous somme sur une vidéo dailymotion court
-        if(preg_match('/dai.ly/', $url) == 1){
+        // Dailymotion : short url
+        if (preg_match('/dai.ly/', $url) == 1) {
             $arrayUrl = parse_url($url, PHP_URL_PATH);
-            $splitUrl = explode('/',$arrayUrl);
+            $splitUrl = explode('/', $arrayUrl);
             $good_url = '//www.dailymotion.com/embed/video/' . end($splitUrl);
         }
 
-        // DAILYMOTION : Si nous somme sur une vidéo dailymotion long
-        if(preg_match('/dailymotion.com/', $url) == 1){
+        // Dailymotion : long url
+        if (preg_match('/dailymotion.com/', $url) == 1) {
             $arrayUrl = parse_url($url, PHP_URL_PATH);
             $splitUrl = explode('/', $arrayUrl);
             $splitUrl = explode('_', end($splitUrl));
@@ -67,7 +69,8 @@ class Video extends Model
         return $good_url;
     }
 
-    public function getTargetLink (){
+    public function getTargetLink()
+    {
         $link = '';
         $name = '';
 
@@ -83,7 +86,7 @@ class Video extends Model
 
         if ($this->viewable_type == 'App\Gym') {
             $name = Gym::find($this->viewable_id)->label;
-            $link = Gym::webUrl($this->viewable_id,$name);
+            $link = Gym::webUrl($this->viewable_id, $name);
         }
 
         return [
@@ -92,4 +95,12 @@ class Video extends Model
         ];
     }
 
+    public function htmlIframe($height = 480, $width = 853, $withContainer = true)
+    {
+        if ($withContainer) {
+            return '<div class="video-container"><iframe width="'. $width . '" height="'. $height . '" src="' . $this->iframe . '" allowfullscreen frameborder="0"></iframe></div>';
+        } else {
+            return '<iframe width="'. $width . '" height="'. $height . '" src="' . $this->iframe . '" allowfullscreen frameborder="0"></iframe>';
+        }
+    }
 }

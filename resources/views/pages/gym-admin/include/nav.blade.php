@@ -64,6 +64,15 @@
         </div>
     </li>
 
+    <li>
+    <li>
+        <div data-route="{{route('gym_admin_contests', ['gym_id' => $gym->id])}}" id="item-contest-menu" class="collapsible-header truncate router-admin-gym-link">
+            <i class="material-icons">star</i>
+            <span class="hidden-1000">Contest</span>
+        </div>
+    </li>
+    </li>
+
     {{-- Community --}}
     <li>
         <div data-route="{{route('gym_admin_community_view', ['gym_id' => $gym->id])}}" id="item-community-menu" class="collapsible-header truncate router-admin-gym-link">

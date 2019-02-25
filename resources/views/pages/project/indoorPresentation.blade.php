@@ -132,8 +132,8 @@
                 <tr>
                     <th></th>
                     <th class="text-center">@lang('pages/projects/indoor.option_free')</th>
-                    <th class="text-center">15 €/@lang('pages/projects/indoor.option_by_month')</th>
-                    <th class="text-center">35 €/@lang('pages/projects/indoor.option_by_month')</th>
+                    <th class="text-center">14 €/@lang('pages/projects/indoor.option_by_month')</th>
+                    <th class="text-center">28 €/@lang('pages/projects/indoor.option_by_month')</th>
                 </tr>
                 <tr>
                     <td></td>

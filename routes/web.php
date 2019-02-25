@@ -66,11 +66,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/voie-escalade/{route_id}', 'RouteController@routeRedirectionPage')->name('routeRedirectionPage');
     Route::get('/sites-escalade/{massive_id}', 'MassiveController@massiveRedirectionPage')->name('massiveRedirectionPage');
 
-    // Climbing gym
+    // Inddor
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
     Route::get('/salle-escalade/{gym_id}/topo/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
-
+    Route::get('/contest/{contest_id}/{contest_label}', 'ContestController@contestPage')->name('contestPage');
+    
     // Indoor route
     Route::get('/salle-escalade/{gym_id}/ligne/{route_id}', 'GymRouteController@gymRoutePage')->name('gymRoutePage');
 
@@ -265,7 +266,7 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     // Admin interface : Statistic
     Route::get('/admin/{gym_id}/view/statistique', 'GymAdminController@gymStatisticView')->name('gym_admin_statistic_view');
 
-    // Admin interface : Gestion
+    // Admin interface : Manage
     Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
     Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
 
@@ -273,6 +274,9 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
     Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
     Route::get('/admin/{gym_id}/view/topo/lignes', 'GymAdminController@gymRoutesView')->name('gym_admin_routes_view');
+
+    // Admin interface : Contest
+    Route::get('/admin/{gym_id}/view/contests', 'GymAdminController@contestsView')->name('gym_admin_contests');
 
     // View : Grades & Grade lines
     Route::get('/admin/{gym_id}/view/grades', 'GymAdminController@gymGradesView')->name('gym_admin_grades_gym');
@@ -293,12 +297,22 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/room/{gym_id}/route/{route_id}/crop', 'CRUD\GymRouteController@cropGymRouteModal')->name('cropGymRouteModal');
     Route::post('/gym/{gym_id}/route/{route_id}/upload-crop-thumbnail', 'CRUD\GymRouteController@uploadCropThumbnail')->name('uploadCropThumbnail');
 
+    // Modal : contest
+    Route::post('/modal/contest/{gym_id}', 'CRUD\ContestController@contestModal')->name('contestModal');
+
+    // Modal : upload sector picture
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
 
+    // Modal : upload contest cover
+    Route::post('/modal/gym/{gym_id}/contest/{contest_id}/upload-contest-cover-modal', 'CRUD\ContestController@uploadContestCoverModal')->name('contestUploadContestCoverModal');
+    Route::post('/gym/{gym_id}/contest/{contest_id}/upload-contest-picture', 'CRUD\ContestController@uploadContestCover')->name('uploadContestCover');
+
+    // Modal : upload line thumbnail
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail-modal', 'CRUD\GymRouteController@uploadRouteThumbnailModal')->name('routeUploadThumbnailModal');
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-thumbnail', 'CRUD\GymRouteController@uploadRouteThumbnail')->name('routeUploadThumbnail');
 
+    // Modal : upload line picture
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture-modal', 'CRUD\GymRouteController@uploadRoutePictureModal')->name('routeUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/route/{route_id}/upload-route-picture', 'CRUD\GymRouteController@uploadRoutePicture')->name('routeUploadScheme');
 
@@ -328,11 +342,15 @@ Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
 Route::resource('gym_routes', 'CRUD\GymRouteController');
 Route::resource('gym_grades', 'CRUD\GymGradeController');
 Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
+Route::resource('contests', 'CRUD\ContestController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
 Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
 Route::delete('/gym/route/{route_id}/photo-delete', 'CRUD\GymRouteController@deletePhoto');
 Route::delete('/gym/sector/{sector_id}/photo-delete', 'CRUD\GymSectorController@deletePhoto');
+
+// Contest Modal
+Route::post('/modal/contest/{contest_id}/user/{user_id}', 'CRUD\ContestUserController@contestUserModal')->name('contestUserModal');
 
 // Iframe
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
@@ -477,6 +495,7 @@ Route::post('/cross/users', 'CRUD\CrossController@crossUsers')->name('crossUsers
 Route::resource('partners', 'CRUD\PartnerController');
 Route::resource('approaches', 'CRUD\ApproachController');
 Route::resource('tags', 'CRUD\TagController');
+Route::resource('contestUsers', 'CRUD\ContestUserController');
 
 // User CRUD
 Route::post('/user/settings/save', 'CRUD\UserController@saveSettings')->name('saveUserSettings');

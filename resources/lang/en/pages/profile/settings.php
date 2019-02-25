@@ -13,6 +13,8 @@ return [
     // ONGLET : COMPTE
     'titleInformation' => "Information",
     'labelName' => "Name",
+    'labelFirstName' => "First name",
+    'labelLastName' => "Last name",
     'labelPlaces' => "Where I climb",
     'labelBirthYear' => "Birth year",
     'labelSex' => "I am",

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\sendWelcome;
-use App\oldSearch;
 use App\Subscriber;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -70,10 +69,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        //Création du user
+        // Create user
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
         $user->password = bcrypt($data['password']);
         $user->save();
 
@@ -84,7 +85,7 @@ class RegisterController extends Controller
             Subscriber::where('email', $user->email)->delete();
         }
 
-        //On créer la table des paramètres pour cet utilisateur
+        // Create user setting row
         $setting = New UserSettings();
         $setting->user_id = $user->id;
         $setting->save();

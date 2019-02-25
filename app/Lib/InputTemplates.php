@@ -190,6 +190,34 @@ class InputTemplates extends ServiceProvider
         ]);
     }
 
+    // Hour <select>
+    public static function hour($options)
+    {
+        return view('inputs.hour', [
+            'name' => $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => $options['value'] ?? '',
+            'class' => $options['class'] ?? '',
+            'col' => $options['col'] ?? 's12',
+            'placeholder' => $options['placeholder'] ?? '',
+        ]);
+    }
+
+    // Minute <select>
+    public static function minute($options)
+    {
+        return view('inputs.minute', [
+            'name' => $options['name'],
+            'id' => (isset($options['id'])) ? $options['id'] : $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => $options['value'] ?? '',
+            'class' => $options['class'] ?? '',
+            'col' => $options['col'] ?? 's12',
+            'placeholder' => $options['placeholder'] ?? '',
+        ]);
+    }
+
     // Submit button
     public static function submit($options)
     {

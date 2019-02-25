@@ -8,16 +8,18 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
 
-    //AFFICHE LA POPUP POUR SUPPRIMER UN ÉLÉMENT
-    function deleteModal(Request $request){
-
+    // Display generic delete modal
+    function deleteModal(Request $request)
+    {
         $callback = $request->input('callback');
         $callback = isset($callback) ? $callback : 'refresh';
+        $resource = explode('/', $request->input('route'));
 
         $data = [
             'dataModal' => [
                 'id' => $request->input('id'),
                 'route' => $request->input('route'),
+                'resource' => $resource[1] ?? null,
                 'callback' => $callback
             ]
         ];

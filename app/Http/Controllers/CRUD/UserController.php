@@ -237,6 +237,8 @@ class UserController extends Controller
         ]);
 
         $user->name = $request->input('name');
+        $user->last_name = $request->input('last_name');
+        $user->first_name = $request->input('first_name');
         $user->localisation = $request->input('localisation');
         $user->birth = $request->input('birth');
         $user->sex = $request->input('sex');

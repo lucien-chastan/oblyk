@@ -9,13 +9,23 @@
     {!! $Inputs::Hidden(['name'=>'_method','value'=>'DELETE']) !!}
 
     <div class="row">
-        <p class="text-center">
-            @lang('modals/delete.deleteQuestion')<br>
-            <span class="grey-text">(@lang('modals/delete.noReturn')</span>
-        </p>
+        @if($dataModal['resource'] == 'contestUsers')
+            <p class="text-center">
+                @lang('modals/delete.unsubscribeQuestion')
+            </p>
+        @else
+            <p class="text-center">
+                @lang('modals/delete.deleteQuestion')<br>
+                <span class="grey-text">(@lang('modals/delete.noReturn')</span>
+            </p>
+        @endif
     </div>
 
     <div class="row">
-        {!! $Inputs::Submit(['label'=>trans('modals/delete.delete'), 'color'=>'red']) !!}
+        @if($dataModal['resource'] == 'contestUsers')
+            {!! $Inputs::Submit(['label'=>trans('modals/delete.unsubscribe'), 'color'=>'red']) !!}
+        @else
+            {!! $Inputs::Submit(['label'=>trans('modals/delete.delete'), 'color'=>'red']) !!}
+        @endif
     </div>
 </form>

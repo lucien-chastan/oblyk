@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\MailResetPasswordToken;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -165,6 +166,11 @@ class User extends Authenticatable
         return $this->hasMany('App\TopoPdf', 'user_id', 'id');
     }
 
+    public function contestUsers()
+    {
+        return $this->hasMany('App\ContestUser', 'user_id', 'id');
+    }
+
     public function tickLists()
     {
         return $this->hasMany('App\TickList', 'user_id', 'id');
@@ -202,6 +208,37 @@ class User extends Authenticatable
     public function url($absolute = true)
     {
         return $this->webUrl($this->id, $this->name, $absolute);
+    }
+
+    public function age(): int
+    {
+        return Carbon::now()->year - ($this->birth ?? 0);
+    }
+
+    public function hasLastName(): bool
+    {
+        return ($this->last_name != '' && $this->last_name != null);
+    }
+
+    public function hasFirstName(): bool
+    {
+        return ($this->first_name != '' && $this->first_name != null);
+    }
+
+    public function sexIsDefined(): bool
+    {
+        return ($this->sex != 0);
+    }
+
+    public function hasCoherentAge(): bool
+    {
+        return ($this->age() > 4 && $this->age() < 120);
+    }
+
+    public function registeredOnContest($contest_id): bool
+    {
+        $contestUser = ContestUser::where([['user_id', $this->id], ['contest_id', $contest_id]])->count();
+        return ($contestUser > 0);
     }
 
     /**

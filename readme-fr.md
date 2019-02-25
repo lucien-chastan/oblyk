@@ -87,6 +87,7 @@ mkdir -p storage/app/public/authors/{200,100}
 mkdir -p storage/app/public/gyms/{1300,200,100,50,schemes}
 mkdir -p storage/app/public/gyms/routes/{1300,500,200,100,50}
 mkdir -p storage/app/public/gyms/sectors/{1300,500,200,50}
+mkdir -p storage/app/public/contests/{1300,500,200,50}
 mkdir -p storage/app/public/photos/crags/{1300,200,100,50}
 mkdir -p storage/app/public/post-photos
 mkdir -p storage/app/public/topos/{700,200,100,50,PDF}
