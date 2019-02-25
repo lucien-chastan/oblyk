@@ -52,7 +52,18 @@ function specialAction(data) {
     $('.md-textarea').trigger('autoresize');
 
     // Init select input
-    $('select').material_select();
+    if (windowWidth() > 480) {
+        $('select').material_select();
+    } else {
+        var selectForms = $('#modal-content select');
+        for (let i = 0; i < selectForms.length; i++) {
+            selectForms[i].classList.add('browser-default');
+            try {
+                let label = selectForms[i].parentElement.getElementsByTagName('label')[0];
+                label.classList.add('active');
+            } catch (e) {}
+        }
+    }
 
     // Init materialize tab
     setTimeout(function () {
