@@ -1,9 +1,10 @@
 let scheme, timeToLoad, sectors = [], routeLines = [], inEdition = false, crossesIsLoaded = false,
     current_sector_label, current_sector_id,
-    current_route_label, current_route_id;
+    current_route_label, current_route_id,
+    side_nav_is_open = true;
 
 window.addEventListener('load', function () {
-    openVoletSectors(true);
+    openSideNav(true);
 });
 
 function initGetElement() {
@@ -69,8 +70,8 @@ function initSchemeGymMap() {
 
     scheme.fitBounds([[0, 0], [heightScheme, widthScheme]]);
     scheme.on('click', function (e) {
-        if(window.windowWidth() < 780) {
-            console.log('on ferme');
+        if(window.windowWidth() < 780 && side_nav_is_open === true) {
+            closeGymSchemeSideNave();
         }
     });
 
@@ -92,7 +93,7 @@ function getJsonGymSector(room_id) {
                 var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area map-class-sector-' + sector.id, attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
                 polygon.on('click', (e) => {
                     var sectorAttribute = e.target.options.attribution;
-                    getGymSector(sectorAttribute.id)
+                    getGymSector(sectorAttribute.id, 'map');
                 });
                 sectors[sector.id] = polygon;
             }
@@ -109,7 +110,7 @@ function getJsonGymRoute(room_id) {
                 var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line map-class-line-' + route.id, attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
                 polyline.on('click', (e) => {
                     var routeAttribute = e.target.options.attribution;
-                    getGymRoute(routeAttribute.id)
+                    getGymRoute(routeAttribute.id, 'map');
                 });
                 routeLines[route.id] = polyline;
             }
@@ -118,7 +119,7 @@ function getJsonGymRoute(room_id) {
 }
 
 // Open or close side nav
-function openVoletSectors(open) {
+function openSideNav(open) {
     let volet = document.getElementById('side-map-gym-scheme');
 
     if (open) {
@@ -151,13 +152,19 @@ function getSectors() {
 }
 
 // Load sector
-function getGymSector(sector_id) {
+function getGymSector(sector_id, origin = null) {
     if (!inEdition) {
         var content = document.getElementById('content-side-map-gym-scheme'),
             item2 = document.getElementById('item-nav-2'),
             item3 = document.getElementById('item-nav-3');
 
         sideNavLoader(false);
+
+        if (origin === 'map' && window.windowWidth() < 780 && side_nav_is_open === false) {
+            setTimeout(function () {
+                closeGymSchemeSideNave();
+            }, 50);
+        }
 
         axios.get('/salle-escalade/topo/sector/' + sector_id).then(function (response) {
             sweetDisappearance(true, item2);
@@ -184,11 +191,17 @@ function getGymSector(sector_id) {
 }
 
 // Load route
-function getGymRoute(route_id) {
+function getGymRoute(route_id, origin = null) {
     var content = document.getElementById('content-side-map-gym-scheme'),
         item3 = document.getElementById('item-nav-3');
 
     sideNavLoader(false);
+
+    if (origin === 'map' && window.windowWidth() < 780 && side_nav_is_open === false) {
+        setTimeout(function () {
+            closeGymSchemeSideNave();
+        }, 50);
+    }
 
     axios.get('/salle-escalade/topo/route/' + route_id).then(function (response) {
         sweetDisappearance(true, item3);
@@ -304,8 +317,10 @@ function closeGymSchemeSideNave() {
 
     if (bodyMap.className === 'side-nav-is-open') {
         bodyMap.className = 'side-nav-is-close';
+        side_nav_is_open = false;
     } else {
         bodyMap.className = 'side-nav-is-open';
+        side_nav_is_open = true;
     }
 }
 

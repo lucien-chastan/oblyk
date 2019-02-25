@@ -65,6 +65,15 @@
   }
 }
 
+@media screen and (max-width: 780px) {
+  .side-nav-is-open {
+    #gym-scheme {
+      width: 100%;
+      left: 0;
+    }
+  }
+}
+
 .cross-alert {
   border-radius: 5px;
   margin-bottom: 1em;

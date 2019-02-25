@@ -7,17 +7,17 @@
     {!! $Inputs::popupError() !!}
 
     <div class="row">
-        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_route']->label, 'label'=>'Nom de la ligne', 'type'=>'text', 'col' => 's8']) !!}
-        {!! $Inputs::text(['name'=>'reference', 'value'=>$dataModal['gym_route']->reference, 'label'=>'Référence de la ligne', 'type'=>'text', 'col' => 's4']) !!}
+        {!! $Inputs::text(['name'=>'label', 'value'=>$dataModal['gym_route']->label, 'label'=>'Nom de la ligne', 'type'=>'text', 'col' => 's12 l8']) !!}
+        {!! $Inputs::text(['name'=>'reference', 'value'=>$dataModal['gym_route']->reference, 'label'=>'Référence de la ligne', 'type'=>'text', 'col' => 's12 l4']) !!}
         {!! $Inputs::gymLevelGrade(['name'=>'gradeLine', 'gym_grade_id'=>$dataModal['sector']->gym_grade_id ?? $dataModal['room']->gym_grade_id, 'label'=>'Niveau', 'value'=>$dataModal['estimateGradeLevel'], 'placeholder'=>"Niveau de cotation", "onChange" => "getDefaultRouteGrade(this)"]) !!}
         {!! $Inputs::grade(['name'=>'grade', 'id'=>'gymRouteGradeText', 'required'=>true, 'label'=>'Cotation (voir note pour les multi-longueurs)', 'value'=>$dataModal['gym_route']->grades('text'), 'placeholder'=>"cotation, exemple 6a+, 5c, 7b/+, etc."]) !!}
         <div class="row">
             <div class="col s12">
-                <div class="col s6">
+                <div class="col s12 l6">
                     <p class="text-underline">Couleur</p>
                     {!! $Inputs::colorList(['name'=>'color_first', 'id'=>'firstColorGymRoute', 'label'=>'Première couleur', 'value'=>$dataModal['colors'][0] ?? '#f2f2f2', 'placeholder'=>"Première couleur"]) !!}
                 </div>
-                <div class="col s6">
+                <div class="col s12 l6">
                     <p class="text-underline">
                         {!! $Inputs::checkbox(['name'=>'use_second_color', 'id'=>'useSecondColorGymRoute', 'checked'=>($dataModal['use_second_color'] == 1), 'label' => 'Utiliser une seconde couleur']) !!}
                     </p>
@@ -26,8 +26,8 @@
             </div>
         </div>
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_route']->description, 'label'=>'Description', 'type'=>'text']) !!}
-        {!! $Inputs::text(['name'=>'opener', 'value'=>$dataModal['gym_route']->opener, 'label'=>'Ouvreur(s)', 'type'=>'text', 'col' => 's6']) !!}
-        {!! $Inputs::text(['name'=>'opener_date','required'=>true, 'value'=>$dataModal['gym_route']->opener_date->format('Y-m-d'), 'label'=>'Date d\'ouverture','type'=>'date', 'col' => 's6', 'placeholder'=>'Date d\'ouverture']) !!}
+        {!! $Inputs::text(['name'=>'opener', 'value'=>$dataModal['gym_route']->opener, 'label'=>'Ouvreur(s)', 'type'=>'text', 'col' => 's12 l6']) !!}
+        {!! $Inputs::text(['name'=>'opener_date','required'=>true, 'value'=>$dataModal['gym_route']->opener_date->format('Y-m-d'), 'label'=>'Date d\'ouverture','type'=>'date', 'col' => 's12 l6', 'placeholder'=>'Date d\'ouverture']) !!}
         <p class="text-underline">Réglage par défaut (au niveau du secteur)</p>
         {!! $Inputs::text(['name'=>'height', 'required'=>true, 'value'=>$dataModal['gym_route']->height, 'label'=>'Hauteur en mètre (voir note pour les multi-longueurs)', 'type'=>'text']) !!}
         {!! $Inputs::roomSectors(['name'=>'sector_id', 'value'=>$dataModal['gym_route']->sector_id, 'label'=>'Secteur', 'room_id'=>$dataModal['room_id']]) !!}
