@@ -246,7 +246,7 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 // Admin gyms
 Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
-    Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
+    Route::get('/salle-escalade/{gym_id}/admin/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
 
     // Admin interface : Dashboard
     Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
