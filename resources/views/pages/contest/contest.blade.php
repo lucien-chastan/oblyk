@@ -95,7 +95,15 @@
 
                 {{-- lines --}}
                 <div id="lines" class="section scrollspy">
-                    <p>Content </p>
+                    <h2 class="loved-king-font">Les lignes à faire</h2>
+
+                    @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+                        <button {!! $Helpers::modal(route('contestRouteModal', ["contest_id"=>$contest->id]), ["gym_id"=>$gym->id, "contest_id"=>$contest->id, "title"=>'Ajouter des lignes au contest', "method"=>"POST", 'callback'=>'refresh']) !!} class="btn btn-flat btn btnModal">
+                            Séléctionner les lignes
+                            <i class="material-icons left">add</i>
+                        </button>
+                    @endif
+
                 </div>
 
                 {{-- Participants --}}
@@ -121,9 +129,10 @@
 @endsection
 
 @section('script')
-<script>
-    $(document).ready(function(){
-        $('.scrollspy').scrollSpy({scrollOffset: 200});
-    });
-</script>
+    <script src="/js/contest.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.scrollspy').scrollSpy({scrollOffset: 200});
+        });
+    </script>
 @endsection

@@ -343,6 +343,7 @@ Route::resource('gym_routes', 'CRUD\GymRouteController');
 Route::resource('gym_grades', 'CRUD\GymGradeController');
 Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
 Route::resource('contests', 'CRUD\ContestController');
+Route::resource('contestRoutes', 'CRUD\ContestRouteController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
 Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
@@ -351,6 +352,7 @@ Route::delete('/gym/sector/{sector_id}/photo-delete', 'CRUD\GymSectorController@
 
 // Contest Modal
 Route::post('/modal/contest/{contest_id}/user/{user_id}', 'CRUD\ContestUserController@contestUserModal')->name('contestUserModal');
+Route::post('/modal/contest/{contest_id}/routes', 'CRUD\ContestRouteController@contestRouteModal')->name('contestRouteModal');
 
 // Iframe
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');

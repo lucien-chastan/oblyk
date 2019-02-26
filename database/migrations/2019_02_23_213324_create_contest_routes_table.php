@@ -20,7 +20,7 @@ class CreateContestRoutesTable extends Migration
             $table->timestamps();
 
             // Foreign key
-            $table->foreign('route_id')->references('id')->on('routes');
+            $table->foreign('route_id')->references('id')->on('gym_routes');
             $table->foreign('contest_id')->references('id')->on('contests');
         });
     }
