@@ -69,13 +69,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     // Climbing gym
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
-    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+    Route::get('/salle-escalade/{gym_id}/topo/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
 
     // Indoor route
     Route::get('/salle-escalade/{gym_id}/ligne/{route_id}', 'GymRouteController@gymRoutePage')->name('gymRoutePage');
 
     // Indoor scheme
-    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
     Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
     Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
     Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
