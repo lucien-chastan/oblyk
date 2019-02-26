@@ -11,7 +11,6 @@ use App\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Mockery\Exception;
-use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -83,7 +82,7 @@ class PhotoController extends Controller
         $mWidth = env('PHOTO_MAX_WIDTH');
 
         //validation du formulaire
-        $this->validate($request, [
+        $request->validate([
             'file' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
         ]);
 
