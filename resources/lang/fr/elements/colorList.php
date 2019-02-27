@@ -23,7 +23,9 @@ return [
     '#e9afdd' => 'Violet pastel',
     '#ab37c8' => 'Violet',
     '#440055' => 'Violet profond',
-    '#ff2ad4' => 'Violet fluo',
+
+    // Pink
+    '#ff2ad4' => 'Rose fluo',
 
     // Red
     '#ffaaaa' => 'Rouge pastel',
@@ -37,6 +39,7 @@ return [
     // Yellow
     '#ffeeaa' => 'Jaune pastel',
     '#ffcc00' => 'Jaune',
+    '#eaff09' => 'Jaune fluo',
 
     // Brown & Beige
     '#a05a2c' => 'Marron',

@@ -23,7 +23,9 @@ return [
     '#e9afdd' => 'Pastel purple',
     '#ab37c8' => 'Purple',
     '#440055' => 'Dark purple',
-    '#ff2ad4' => 'Fluorescent purple',
+
+    // Pink
+    '#ff2ad4' => 'Fluorescent pink',
 
     // Red
     '#ffaaaa' => 'Pastel red',
@@ -37,6 +39,7 @@ return [
     // Yellow
     '#ffeeaa' => 'Pastel yellow',
     '#ffcc00' => 'Yellow',
+    '#eaff09' => 'Fluorescent yellow',
 
     // Brown & Beige
     '#a05a2c' => 'Brown',
