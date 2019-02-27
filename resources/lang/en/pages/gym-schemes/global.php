@@ -69,6 +69,7 @@ return [
     'uploadThumbnail' => "Uploade a thumbnail",
     'cropThumbnail' => "Get a thumbnail",
     'dismountRoute' => "Dismount route",
+    'deletePhoto' => "Delete photo",
     'riseUpRoute' => "Rise up route",
     'favoriteRoute' => "Favorite route",
     'upToFavoriteRoute' => "Up to favorite",

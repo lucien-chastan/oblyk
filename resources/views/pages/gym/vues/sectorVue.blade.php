@@ -159,6 +159,14 @@
                 @lang('pages/gym-schemes/global.deleteSector')
                 <i class="material-icons left red-text">delete</i>
             </button>
+
+            {{-- Delete photo --}}
+            @if($sector->hasPicture())
+                <button class="btn btn-flat btn" onclick="deleteSectorPicture({{ $sector->id }})">
+                    @lang('pages/gym-schemes/global.deletePhoto')
+                    <i class="material-icons left red-text">photo_camera</i>
+                </button>
+            @endif
         </div>
     @endif
 </div>

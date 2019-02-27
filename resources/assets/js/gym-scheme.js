@@ -306,6 +306,11 @@ function reloadRouteVue() {
     closeModal();
 }
 
+function reloadSectorVue() {
+    getGymSector(current_sector_id);
+    closeModal();
+}
+
 function afterDeleteSector() {
     Materialize.toast('Secteur supprimé', 4000);
     getSectors();

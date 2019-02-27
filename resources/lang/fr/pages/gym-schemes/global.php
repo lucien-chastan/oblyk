@@ -68,6 +68,7 @@ return [
     'uploadThumbnail' => "Uploader une miniature",
     'cropThumbnail' => "Récupérer la miniature",
     'dismountRoute' => "Démonter la ligne",
+    'deletePhoto' => "Supprimer la photo",
     'riseUpRoute' => "Remonter la ligne",
     'favoriteRoute' => "Ligne favoris",
     'upToFavoriteRoute' => "Mettre en favoris",

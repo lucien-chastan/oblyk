@@ -331,6 +331,8 @@ Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
 Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
+Route::delete('/gym/route/{route_id}/photo-delete', 'CRUD\GymRouteController@deletePhoto');
+Route::delete('/gym/sector/{sector_id}/photo-delete', 'CRUD\GymSectorController@deletePhoto');
 
 // Iframe
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');

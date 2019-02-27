@@ -217,6 +217,14 @@
                     <i class="material-icons left">keyboard_capslock</i>
                 @endif
             </button>
+
+            {{-- Delete photo --}}
+            @if($route->hasPicture())
+                <button class="btn btn-flat btn" onclick="deleteRoutePicture({{ $route->id }})">
+                    @lang('pages/gym-schemes/global.deletePhoto')
+                    <i class="material-icons left red-text">photo_camera</i>
+                </button>
+            @endif
         </div>
     </div>
 @endif

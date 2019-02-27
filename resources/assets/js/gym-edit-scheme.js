@@ -197,3 +197,21 @@ function favoriteRoute(routeId) {
         reloadRouteVue();
     });
 }
+
+function deleteRoutePicture(routeId) {
+    if(confirm('Êtes-vous sûr de supprimer la photo de cette ligne ?')) {
+        axios.delete('/gym/route/' + routeId + '/photo-delete').then(function () {
+            Materialize.toast('Photo supprimée', 4000);
+            reloadRouteVue();
+        });
+    }
+}
+
+function deleteSectorPicture(sectorId) {
+    if(confirm('Êtes-vous sûr de supprimer la photo de ce secteur ?')) {
+        axios.delete('/gym/sector/' + sectorId + '/photo-delete').then(function () {
+            Materialize.toast('Photo supprimée', 4000);
+            reloadSectorVue();
+        });
+    }
+}

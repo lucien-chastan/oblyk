@@ -425,6 +425,18 @@ class GymRouteController extends Controller
         $route->save();
     }
 
+    public function deletePhoto($route_id)
+    {
+        $route = GymRoute::where('id', $route_id)->with('sector.room')->first();
+        $this->checkIsAdmin($route->sector->room->gym_id);
+
+        if (file_exists(storage_path('app/public/gyms/routes/1300/route-' . $route->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/1300/route-' . $route->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/routes/500/route-' . $route->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/500/route-' . $route->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/routes/200/route-' . $route->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/200/route-' . $route->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/routes/100/route-' . $route->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/100/route-' . $route->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/routes/50/route-' . $route->id . '.jpg'))) unlink(storage_path('app/public/gyms/routes/50/route-' . $route->id . '.jpg'));
+    }
+
     /**
      * @param $gym_id
      * @return bool|\Illuminate\Http\RedirectResponse
