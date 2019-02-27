@@ -81,10 +81,11 @@ class PhotoController extends Controller
         $mHeight = env('PHOTO_MAX_HEIGHT');
         $mWidth = env('PHOTO_MAX_WIDTH');
 
-        //validation du formulaire
-        $request->validate([
-            'file' => "required|image|mimes:jpeg,png,jpg|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
-        ]);
+        // Valid form
+        $this->validate(
+            $request,
+            ['file' => "required|image|mimes:jpeg,png,jpg,gif,svg|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight"]
+        );
 
         $photo = new Photo();
 
