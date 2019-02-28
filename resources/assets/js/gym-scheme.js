@@ -1,7 +1,7 @@
 let scheme, timeToLoad, sectors = [], routeLines = [], inEdition = false, crossesIsLoaded = false,
     current_sector_label, current_sector_id,
     current_route_label, current_route_id,
-    side_nav_is_open = true;
+    side_nav_is_open = true, sector_area_layer = null, route_line_layer = null;
 
 window.addEventListener('load', function () {
     openSideNav(true);
@@ -57,20 +57,36 @@ function initSchemeGymMap() {
     let shemeUrl = '/storage/gyms/schemes/scheme-' + data.room_id + '.png',
         mapBounds = [[0, 0], [heightScheme, widthScheme]];
 
-    scheme = L.map('gym-scheme', {zoomControl: false, editable: true});
-    L.control.zoom({position: 'topright'}).addTo(scheme);
-    L.imageOverlay(
+    sector_area_layer = L.layerGroup();
+    route_line_layer = L.layerGroup();
+    var backGroundMap = L.imageOverlay(
         shemeUrl,
         mapBounds,
         {
             alt: 'Plan de la salle ' + data.gym_label,
             attribution: '<a href="' + data.gym_url + '">' + data.gym_label + '</a>'
         }
-    ).addTo(scheme);
+    );
+
+    scheme = L.map('gym-scheme', {
+        zoomControl: false,
+        editable: true,
+        layers: [sector_area_layer, route_line_layer, backGroundMap]
+    });
+
+    L.control.zoom({position: 'bottomright'}).addTo(scheme);
+
+    var schemeLayer = {
+        'Plan de la structure': backGroundMap,
+        "Secteurs": sector_area_layer,
+        "Lignes": route_line_layer
+    };
+
+    L.control.layers(null, schemeLayer).addTo(scheme);
 
     scheme.fitBounds([[0, 0], [heightScheme, widthScheme]]);
     scheme.on('click', function (e) {
-        if(window.windowWidth() < 780 && side_nav_is_open === true) {
+        if (window.windowWidth() < 780 && side_nav_is_open === true) {
             closeGymSchemeSideNave();
         }
     });
@@ -80,23 +96,30 @@ function initSchemeGymMap() {
         newRouteLine = e.layer;
     });
 
-    getJsonGymSector(data.room_id);
-    getJsonGymRoute(data.room_id);
+    getJsonGymSector(data.room_id, true);
 }
 
-function getJsonGymSector(room_id) {
+function getJsonGymSector(room_id, runGetJsonRoute = false) {
     axios.get('/API/gyms/get-sectors/' + room_id).then(function (response) {
         for (var i = 0; i < response.data.sectors.length; i++) {
 
             var sector = response.data.sectors[i];
             if (sector.area !== '') {
-                var polygon = L.polygon(JSON.parse(sector.area), {color: 'red', className: 'sector-map-area map-class-sector-' + sector.id, attribution: {'id': sector.id, 'label': sector.label}}).addTo(scheme);
+                var polygon = L.polygon(JSON.parse(sector.area), {
+                    color: 'red',
+                    className: 'sector-map-area map-class-sector-' + sector.id,
+                    attribution: {'id': sector.id, 'label': sector.label}
+                }).addTo(scheme);
                 polygon.on('click', (e) => {
                     var sectorAttribute = e.target.options.attribution;
                     getGymSector(sectorAttribute.id, 'map');
                 });
+                polygon.addTo(sector_area_layer);
                 sectors[sector.id] = polygon;
             }
+        }
+        if (runGetJsonRoute) {
+            getJsonGymRoute(room_id)
         }
     });
 }
@@ -107,11 +130,16 @@ function getJsonGymRoute(room_id) {
 
             var route = response.data.routes[i];
             if (route.line !== '') {
-                var polyline = L.polyline(JSON.parse(route.line), {color: route.line_color, className: 'route-map-line map-class-line-' + route.id, attribution: {'id': route.id, 'label': route.label}}).addTo(scheme);
+                var polyline = L.polyline(JSON.parse(route.line), {
+                    color: route.line_color,
+                    className: 'route-map-line map-class-line-' + route.id,
+                    attribution: {'id': route.id, 'label': route.label}
+                }).addTo(scheme);
                 polyline.on('click', (e) => {
                     var routeAttribute = e.target.options.attribution;
                     getGymRoute(routeAttribute.id, 'map');
                 });
+                polyline.addTo(route_line_layer);
                 routeLines[route.id] = polyline;
             }
         }
@@ -280,7 +308,7 @@ function reloadSectorsVue() {
     closeModal();
 }
 
-function reloadSectorVue() {
+function reloadGymSectorVue() {
     getGymSector(current_sector_id);
     closeModal();
 }
@@ -336,7 +364,7 @@ function getDefaultRouteGrade(element) {
         useSecondColorGymRoute = document.getElementById('useSecondColorGymRoute');
 
     axios.get('/api/v1/gym-grade-line/' + element.value).then(function (response) {
-        var gradeLine  = response.data.data;
+        var gradeLine = response.data.data;
 
         gymRouteGradeText.value = gradeLine.grade;
         firstColorGymRoute.value = gradeLine.colors[0];

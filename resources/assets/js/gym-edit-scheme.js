@@ -211,7 +211,7 @@ function deleteSectorPicture(sectorId) {
     if(confirm('Êtes-vous sûr de supprimer la photo de ce secteur ?')) {
         axios.delete('/gym/sector/' + sectorId + '/photo-delete').then(function () {
             Materialize.toast('Photo supprimée', 4000);
-            reloadSectorVue();
+            reloadGymSectorVue();
         });
     }
 }

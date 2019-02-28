@@ -29,6 +29,18 @@
   #gym-scheme {
     width: calc(100% - 370px);
     left: 370px;
+
+    [type="radio"]:checked, [type="radio"]:not(:checked) {
+      position: relative;
+      left: inherit;
+      opacity: 1;
+    }
+    [type="checkbox"]:checked, [type="checkbox"]:not(:checked) {
+      position: relative;
+      left: inherit;
+      opacity: 1;
+    }
+
   }
   .open-close-btn {
     left: 370px;
