@@ -136,9 +136,9 @@
       stroke-width: 3px;
     }
     &.active-sector {
-      fill: #4caf50;
-      stroke: #388e3c;
-      fill-opacity: 0.3;
+      fill: #ffffff;
+      stroke: #ffffff;
+      fill-opacity: 0.7;
       stroke-dasharray: none;
       stroke-opacity: 1;
       stroke-width: 3px;
@@ -148,7 +148,11 @@
   .route-map-line {
     transition: all 0.3s;
     stroke-opacity: 0.6;
-    stroke-width: 2px;
+    stroke-width: 3px;
+    visibility: hidden;
+    &.visible-line {
+      visibility: visible;
+    }
     &:hover, &.hovered-line, &.active-line {
       stroke-width: 5px;
       stroke-opacity: 1;

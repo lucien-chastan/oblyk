@@ -80,14 +80,14 @@ function endEditSector(save = true) {
 
 function saveSectorArea(sectorId, area, reload = false) {
     axios.put(`/admin/${GlobalGymId}/sector/${sectorId}/save-area`, {area: area}).then(function () {
-        Materialize.toast('Zone enregistrée');
+        Materialize.toast('Zone enregistrée', 4000);
         if (reload) location.reload();
     });
 }
 
 function deleteSectorArea() {
     axios.put(`/admin/${GlobalGymId}/sector/${current_sector_id}/delete-area`).then(function () {
-        Materialize.toast('Tracé de la zone supprimé');
+        Materialize.toast('Tracé de la zone supprimé', 4000);
         location.reload();
     });
 }
@@ -141,14 +141,14 @@ function endEditRouteLine(save = true) {
 
 function saveRouteLine(routeId, line, reload = false) {
     axios.put(`/admin/${GlobalGymId}/route/${routeId}/save-line`, {line: line}).then(function () {
-        Materialize.toast('Ligne enregistrée');
+        Materialize.toast('Ligne enregistrée', 4000);
         if (reload) location.reload();
     });
 }
 
 function deleteRouteLine() {
     axios.put(`/admin/${GlobalGymId}/route/${current_route_id}/delete-line`).then(function () {
-        Materialize.toast('Tracé de la ligne supprimé');
+        Materialize.toast('Tracé de la ligne supprimé', 4000);
         location.reload();
     });
 }

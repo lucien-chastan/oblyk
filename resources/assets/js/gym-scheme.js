@@ -58,7 +58,6 @@ function initSchemeGymMap() {
         mapBounds = [[0, 0], [heightScheme, widthScheme]];
 
     sector_area_layer = L.layerGroup();
-    route_line_layer = L.layerGroup();
     var backGroundMap = L.imageOverlay(
         shemeUrl,
         mapBounds,
@@ -71,15 +70,14 @@ function initSchemeGymMap() {
     scheme = L.map('gym-scheme', {
         zoomControl: false,
         editable: true,
-        layers: [sector_area_layer, route_line_layer, backGroundMap]
+        layers: [sector_area_layer, backGroundMap]
     });
 
     L.control.zoom({position: 'bottomright'}).addTo(scheme);
 
     var schemeLayer = {
         'Plan de la structure': backGroundMap,
-        "Secteurs": sector_area_layer,
-        "Lignes": route_line_layer
+        "Secteurs": sector_area_layer
     };
 
     L.control.layers(null, schemeLayer).addTo(scheme);
@@ -132,14 +130,14 @@ function getJsonGymRoute(room_id) {
             if (route.line !== '') {
                 var polyline = L.polyline(JSON.parse(route.line), {
                     color: route.line_color,
-                    className: 'route-map-line map-class-line-' + route.id,
-                    attribution: {'id': route.id, 'label': route.label}
+                    className: 'route-map-line line-in-sector-' + route.sector_id + ' map-class-line-' + route.id,
+                    attribution: {'id': route.id, 'label': route.label, 'sector_id': route.sector_id}
                 }).addTo(scheme);
                 polyline.on('click', (e) => {
                     var routeAttribute = e.target.options.attribution;
                     getGymRoute(routeAttribute.id, 'map');
+                    activeMapSector(routeAttribute.sector_id, 'map');
                 });
-                polyline.addTo(route_line_layer);
                 routeLines[route.id] = polyline;
             }
         }
@@ -175,6 +173,7 @@ function getSectors() {
         $('ul.tabs').tabs();
         unActiveAllMapSector();
         unActiveAllMapLine();
+        hiddenAllLines();
         location.hash = '';
     });
 }
@@ -194,6 +193,8 @@ function getGymSector(sector_id, origin = null) {
             }, 50);
         }
 
+        hiddenAllLines();
+
         axios.get('/salle-escalade/topo/sector/' + sector_id).then(function (response) {
             sweetDisappearance(true, item2);
             sweetDisappearance(false, item3);
@@ -208,8 +209,9 @@ function getGymSector(sector_id, origin = null) {
             initOpenModal();
             $('.tooltipped').tooltip({delay: 50});
             activeMapSector(current_sector_id);
+            showMapSectorLines(current_sector_id);
             unActiveAllMapLine();
-            location.hash = '#sector-' + current_sector_id;
+            location.replace('#sector-' + current_sector_id);
             item2.onclick = function () {
                 getGymSector(sector_id);
                 animationLoadSideNav('l');
@@ -238,12 +240,12 @@ function getGymRoute(route_id, origin = null) {
         item3.textContent = route_label;
         sideNavLoader(true);
         initOpenModal();
-        unActiveAllMapSector();
 
         current_route_id = route_id;
         current_route_label = route_label;
         activeMapLine(current_route_id);
-        location.hash = '#line-' + current_route_id;
+        showMapLine(current_route_id);
+        location.replace('#line-' + current_route_id);
     });
 }
 
@@ -452,6 +454,19 @@ function overMapLine(routeId) {
     var route = document.getElementsByClassName('map-class-line-' + routeId);
     if (route.length > 0) {
         route[0].classList.add('hovered-line');
+        route[0].classList.add('visible-line');
+    }
+}
+
+function overMapLineInOpenerTeb(routeId) {
+    var lines = document.getElementsByClassName('route-map-line');
+    for(var line of lines) {
+        if (line.classList.contains('map-class-line-' + routeId)) {
+            line.classList.add('hovered-line');
+            line.classList.add('visible-line');
+        } else {
+            line.classList.remove('visible-line');
+        }
     }
 }
 
@@ -482,5 +497,33 @@ function unActiveAllMapLine() {
     var mapLines = document.getElementsByClassName('route-map-line');
     for (var mapLine of mapLines) {
         mapLine.classList.remove('active-line');
+    }
+}
+
+function showMapSectorLines(sectorId) {
+    var sectorLines = document.getElementsByClassName('line-in-sector-' + sectorId);
+    for (var route of sectorLines) {
+        route.classList.add('visible-line');
+    }
+}
+
+function showMapLine(lineId) {
+    var route = document.getElementsByClassName('map-class-line-' + lineId);
+    if (route.length > 0) {
+        route[0].classList.add('visible-line');
+    }
+}
+
+function hiddenMapLine(lineId) {
+    var route = document.getElementsByClassName('map-class-line-' + lineId);
+    if (route.length > 0) {
+        route[0].classList.remove('visible-line');
+    }
+}
+
+function hiddenAllLines() {
+    var mapLines = document.getElementsByClassName('route-map-line');
+    for (var mapLine of mapLines) {
+        mapLine.classList.remove('visible-line');
     }
 }

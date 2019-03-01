@@ -90,7 +90,7 @@
                         <td colspan="6" class="grey-text">{{ $route->opener_date->diffForHumans() }}</td>
                     </tr>
                 @endif
-                <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
+                <tr onmouseover="overMapLineInOpenerTeb({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
                     <td>
                         @if($route->hasThumbnail())
                             <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
