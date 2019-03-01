@@ -61,6 +61,8 @@ class GymGradeController extends Controller
         $grade = new GymGrade();
         $grade->gym_id = $request->input('gym_id');
         $grade->label = $request->input('label');
+        $grade->difficulty_is_given_by_labels = $request->input('difficulty_is_given_by_labels');
+        $grade->hold_and_label_have_same_color = $request->input('hold_and_label_have_same_color');
         $grade->save();
 
         return response()->json(json_encode($grade));
@@ -84,6 +86,8 @@ class GymGradeController extends Controller
         $this->checkIsAdmin($request->input('gym_id'));
 
         $grade->label = $request->input('label');
+        $grade->difficulty_is_given_by_labels = $request->input('difficulty_is_given_by_labels');
+        $grade->hold_and_label_have_same_color = $request->input('hold_and_label_have_same_color');
         $grade->save();
 
         return response()->json(json_encode($grade));
