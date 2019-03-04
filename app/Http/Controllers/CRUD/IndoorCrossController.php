@@ -85,52 +85,50 @@ class IndoorCrossController extends Controller
         // Get colors
         $colors = [];
         if (isset($id_cross)) {
-            $colors = $cross->colors();
+            $colors = $cross->hold_colors();
         } elseif (isset($route_id)) {
-            $colors = $route->colors();
+            $colors = $route->hold_colors();
         }
 
         $callback = $request->input('callback');
         $callback = isset($callback) ? $request->input('callback') : 'refresh';
 
         // Save or edit path
-        $methode = $request->input('method');
-        $outputRoute = ($methode == 'POST')? '/indoor_crosses' : '/indoor_crosses/' . $id_cross;
+        $method = $request->input('method');
+        $outputRoute = ($method == 'POST')? '/indoor_crosses' : '/indoor_crosses/' . $id_cross;
 
-        $hide_color = ($methode == 'POST' && isset($route_id));
-        $hide_height = ($methode == 'POST' && $cross->height !== null);
-        $hide_grade = ($methode == 'POST' && $cross->grade !== null);
-        $hide_type = ($methode == 'POST' && $cross->type !== null);
-        $hide_mode = ($cross->type != 2);
-        $show_grade_system = ($methode == 'POST' && !isset($route_id));
-        $show_alert = ($methode == 'POST' && !isset($route_id));
-        $show_pitches = ($methode == 'POST' && count($pitches) > 0);
+        $hide_color = ($method == 'POST' && isset($route_id));
+        $hide_height = ($method == 'POST' && $cross->height !== null);
+        $hide_grade = ($method == 'POST' && $cross->grade !== null);
+        $hide_type = ($method == 'POST' && $cross->type !== null);
+        $hide_mode = ($cross->type != 1);
+        $show_grade_system = ($method == 'POST' && !isset($route_id));
+        $show_alert = ($method == 'POST' && !isset($route_id));
+        $show_pitches = ($method == 'POST' && count($pitches) > 0);
 
         $data = [
-            'dataModal' => [
-                'id' => $request->input('id'),
-                'gym_id' => $request->input('gym_id'),
-                'room_id' => $request->input('room_id'),
-                'sector_id' => $request->input('sector_id'),
-                'route_id' => $request->input('route_id'),
-                'cross' => $cross,
-                'title' => $request->input('title'),
-                'method' => $methode,
-                'route' => $outputRoute,
-                'pitches' => $pitches,
-                'callback' => $callback,
-                'colors' => $colors,
-                'use_second_color' => (count($colors) > 1) ? 1 : 0,
-                'gym_grade_id' => $gym_grade_id,
-                'hide_color' => $hide_color,
-                'hide_height' => $hide_height,
-                'hide_grade' => $hide_grade,
-                'hide_type' => $hide_type,
-                'hide_mode' => $hide_mode,
-                'show_grade_system' => $show_grade_system,
-                'show_alert' => $show_alert,
-                'show_pitches' => $show_pitches,
-            ]
+            'id' => $request->input('id'),
+            'gym_id' => $request->input('gym_id'),
+            'room_id' => $request->input('room_id'),
+            'sector_id' => $request->input('sector_id'),
+            'route_id' => $request->input('route_id'),
+            'cross' => $cross,
+            'title' => $request->input('title'),
+            'method' => $method,
+            'route' => $outputRoute,
+            'pitches' => $pitches,
+            'callback' => $callback,
+            'colors' => $colors,
+            'use_second_color' => (count($colors) > 1) ? 1 : 0,
+            'gym_grade_id' => $gym_grade_id,
+            'hide_color' => $hide_color,
+            'hide_height' => $hide_height,
+            'hide_grade' => $hide_grade,
+            'hide_type' => $hide_type,
+            'hide_mode' => $hide_mode,
+            'show_grade_system' => $show_grade_system,
+            'show_alert' => $show_alert,
+            'show_pitches' => $show_pitches,
         ];
 
         return view('modal.indoor-cross', $data);
@@ -139,8 +137,9 @@ class IndoorCrossController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -164,7 +163,7 @@ class IndoorCrossController extends Controller
 
             // Extract grade and sub grade from grade
             $grade = $request->input('grade');
-            if (!Grade::isGrade($grade)) {
+            if (!Grade::isGrade($grade) && $grade != '') {
                 return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
             }
 
@@ -174,9 +173,16 @@ class IndoorCrossController extends Controller
         }
 
         // Concat colors
-        $colors[] = $request->input('color_first');
+        $colors = [];
+        $color_first = $request->input('color_first');
+        $color_second = $request->input('color_second');
+        if($color_first != '#00000000') {
+            $colors[] = $color_first;
+        }
         if ($request->input('use_second_color')) {
-            $colors[] = $request->input('color_second');
+            if($color_second != '#00000000') {
+                $colors[] = $color_second;
+            }
         }
 
         // Save indoor cross
@@ -205,8 +211,9 @@ class IndoorCrossController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request)
     {
@@ -216,21 +223,29 @@ class IndoorCrossController extends Controller
         $this->validate($request, [
             'release_at' => 'required|date_format:Y-m-d',
             'attempt' => 'min:0',
-            'grade' => [
-                'required',
-                'regex:/^((([1-9][abc]?)|(B[0-9]|B1[0-6])|(E[0-9]|E1[0-1])|(PD|AD|D|TD|ED|ABO)|([I]{1,3}|IV|V[III]{0,3}|IX|X[III]{0,3})|(M|D|VD|S|HS|VS|HVS)|(VB|V[0-9]|V1[0-9]|V20)|(A[0-6])|(5\.[0-9]|5\.1[0-5][abcd]))(\+|\-|\/\-|\/\+|\?|\+\/\?|\-\/\?|\+\/b|\+\/c)?|\?)$/'
-            ]
         ]);
 
         // Extract grade and sub grade from grade
+
         $grade = $request->input('grade');
+        if (!Grade::isGrade($grade) && $grade != '') {
+            return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
+        }
+
         $routeGrade = preg_replace($this->subGradePattern, '', $grade);
         $routeSubGrade = preg_replace($this->gradePattern, '', $grade);
 
         // Concat colors
-        $colors[] = $request->input('color_first');
+        $colors = [];
+        $color_first = $request->input('color_first');
+        $color_second = $request->input('color_second');
+        if($color_first != '#00000000') {
+            $colors[] = $color_first;
+        }
         if ($request->input('use_second_color')) {
-            $colors[] = $request->input('color_second');
+            if($color_second != '#00000000') {
+                $colors[] = $color_second;
+            }
         }
 
         // Save indoor cross

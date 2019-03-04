@@ -233,6 +233,10 @@ function submitData(form, callback) {
             if (typeof inputData[i].value != "undefined") {
                 if (inputData[i].getAttribute('type') === 'checkbox') {
                     data[inputData[i].name] = inputData[i].checked;
+                } else if(inputData[i].getAttribute('type') === 'radio') {
+                    if (inputData[i].checked) {
+                        data[inputData[i].name] = inputData[i].value;
+                    }
                 } else {
                     data[inputData[i].name] = inputData[i].value;
                 }

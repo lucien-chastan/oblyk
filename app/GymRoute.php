@@ -30,10 +30,19 @@ class GymRoute extends Model
     /**
      * @return array
      */
-    public function colors()
+    public function hold_colors()
     {
-        $this->colors = explode(';', $this->color);
-        return $this->colors;
+        $this->hold_colors = explode(';', $this->color_hold);
+        return $this->hold_colors;
+    }
+
+    /**
+     * @return array
+     */
+    public function tag_colors()
+    {
+        $this->tag_colors = explode(';', $this->color_tag);
+        return $this->tag_colors;
     }
 
     public function hasPicture()
@@ -168,6 +177,46 @@ class GymRoute extends Model
         }
 
         return $gradeLineId;
+    }
+
+    public function display_hold_color(): bool
+    {
+        return ($this->color_hold != '');
+    }
+
+    public function display_tag_color(): bool
+    {
+        return ($this->color_tag != '' && ($this->color_hold != $this->color_tag));
+    }
+
+    public function hold_color_style()
+    {
+        if(count($this->hold_colors()) > 1) {
+            $forGradientColor = [];
+            foreach ($this->hold_colors() as $color) {
+                for ($i = 0; $i <= 3; $i++) {
+                    $forGradientColor[] = $color;
+                }
+            }
+            return 'background-image: linear-gradient(to right, ' . implode(',', $forGradientColor) . '); color:transparent; background-clip: text;';
+        } else {
+            return 'color: ' . $this->hold_colors()[0];
+        }
+    }
+
+    public function tag_color_style()
+    {
+        if(count($this->tag_colors()) > 1) {
+            $forGradientColor = [];
+            foreach ($this->tag_colors() as $color) {
+                for ($i = 0; $i <= 2; $i++) {
+                    $forGradientColor[] = $color;
+                }
+            }
+            return 'background-image: linear-gradient(to right, ' . implode(',', $forGradientColor) . '); color:transparent; background-clip: text;';
+        } else {
+            return 'color: ' . $this->tag_colors()[0];
+        }
     }
 
     /**

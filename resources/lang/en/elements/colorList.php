@@ -2,6 +2,9 @@
 
 return [
 
+    // nothing
+    '#00000000' => 'No color',
+
     // Black, gray and with
     '#f2f2f2' => 'With',
     '#999999' => 'Gray',

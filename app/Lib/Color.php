@@ -6,6 +6,9 @@ class Color
 {
     public $holdColors = [
 
+        // Nothing
+        '#00000000',
+
         // Black, gray and with
         '#f2f2f2', // with
         '#999999', // gray

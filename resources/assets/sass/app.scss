@@ -368,3 +368,16 @@ footer {
         height: 80vh !important;
     }
 }
+
+.custom-collapse {
+    cursor: pointer;
+    i {
+        transition: transform 0.2s;
+    }
+    &[data-expanded=false] {
+        i {transform: rotate(0deg);}
+    }
+    &[data-expanded=true] {
+        i {transform: rotate(90deg);}
+    }
+}

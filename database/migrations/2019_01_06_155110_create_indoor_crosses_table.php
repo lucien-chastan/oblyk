@@ -26,7 +26,7 @@ class CreateIndoorCrossesTable extends Migration
             $table->integer('type')->nullable(); // Sport climbing, boulder, etc.
             $table->string('grade', 255)->nullable(); // 7a
             $table->string('sub_grade', 255)->nullable(); // + / -
-            $table->string('color', 255)->nullable(); // hold or tag color
+            $table->string('color', 255)->nullable(); // hold color
             $table->integer('grade_val')->nullable(); // difficulty level
             $table->text('description')->nullable();
             $table->dateTime('release_at');

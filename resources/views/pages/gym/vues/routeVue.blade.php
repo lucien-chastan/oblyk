@@ -7,16 +7,19 @@
                     <img src="{{ $route->thumbnail() }}" class="circle left thumbnail-route">
                 @endif
                 <div class="left" style="margin-right: 0.5em; margin-top: 2px">
-                    @foreach($route->colors() as $color)
-                        <span class="z-depth-2 hold-tag-color" style="background-color: {{ $color }}; display: inline-block;"></span>
-                    @endforeach
+                    @if($route->display_tag_color())
+                        <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                    @endif
+                    @if($route->display_hold_color())
+                        <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
+                    @endif
                 </div>
                 {!! $route->grades('html', 'text-bold') !!}
                 {{ $route->label }}
             </h5>
         </div>
         <div class="col s7 text-right">
-            <button onclick="getGymSector({{ $route->sector->id }}, '{{ $route->sector->label }}'); animationLoadSideNav('l')" class="btn btn-flat waves-effect waves-light" type="submit" name="action">
+            <button onclick="getGymSector({{ $route->sector->id }}); animationLoadSideNav('l')" class="btn btn-flat waves-effect waves-light" type="submit" name="action">
                 <i class="material-icons left">keyboard_arrow_left</i>
             </button>
         </div>

@@ -12,9 +12,9 @@
                                 <tr>
                                     <th colspan="3">
                                         {{ $grade->label }}
-                                        <i {!! $Helpers::tooltip('Voir sur une page séparée') !!} data-route="{{ route('gym_admin_grade_lines_gym', ['gym_id' => $gym->id, 'gym_grade_id'=>$grade->id]) }}"
+                                        <i title="Voir sur une page séparée" data-route="{{ route('gym_admin_grade_lines_gym', ['gym_id' => $gym->id, 'gym_grade_id'=>$grade->id]) }}"
                                            onclick="loadProfileRoute(this)"
-                                           class="material-icons tooltipped left text-hover blue-text">launch</i>
+                                           class="material-icons left text-hover blue-text">launch</i>
                                     </th>
                                     <th>
                                         <i {!! $Helpers::tooltip('Supprimer ce système') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_grades/".$grade->id, "callback" => 'goToGrades']) !!} class="material-icons right tooltipped btnModal text-hover red-text text-lighten-3">delete</i>
@@ -22,39 +22,50 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Cotation moyenne</th>
-                                    <th>Couleurs</th>
-                                    <th></th>
-                                </tr>
-                                @foreach($grade->gradeLines as $gradeLine)
+                            @if($grade->system_can_have_levels())
+                                <tbody>
                                     <tr>
-                                        <td>
-                                            <span class="grey-text">{{ $gradeLine->order }} -</span> {{ $gradeLine->label }}
-                                        </td>
-                                        <td class="color-grade-{{ $gradeLine->grade_val }} text-bold">{{ \App\Route::valToGrad($gradeLine->grade_val, true) }}</td>
-                                        <td>
-                                            @foreach($gradeLine->colors() as $color)
-                                                <i class="material-icons left" style="color: {{ $color }}">bookmark</i>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            <i {!! $Helpers::tooltip('Supprimer ce niveau') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_grade_lines/{$gradeLine->id}", "callback"=>"reloadCurrentVue"]) !!} class="material-icons red-text right tooltipped text-hover text-lighten-3 btnModal">delete</i>
-                                            <i {!! $Helpers::tooltip('Modifier ce niveau') !!} {!! $Helpers::modal(route('gymGradeLineModal', ['gym_id' => $gym->id]), ["id" => $gradeLine->id ,"gym_id"=>$gym->id, "gym_grade_id"=>$grade->id, "title"=>'Modifier ce niveau', "method"=>"PUT"]) !!} class="material-icons right grey-text text-hover tooltipped btnModal">edit</i>
-                                        </td>
+                                        <th>Nom</th>
+                                        <th>Cotation moyenne</th>
+                                        <th>Couleurs</th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
-                            </tbody>
+                                    @foreach($grade->gradeLines as $gradeLine)
+                                        <tr>
+                                            <td>
+                                                <span class="grey-text">{{ $gradeLine->order }} -</span> {{ $gradeLine->label }}
+                                            </td>
+                                            <td class="color-grade-{{ $gradeLine->grade_val }} text-bold">
+                                                @if($gradeLine->grade_val != 0)
+                                                    {{ \App\Route::valToGrad($gradeLine->grade_val, true) }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @foreach($gradeLine->colors() as $color)
+                                                    <i class="material-icons left" style="color: {{ $color }}">bookmark</i>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <i {!! $Helpers::tooltip('Supprimer ce niveau') !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_grade_lines/{$gradeLine->id}", "callback"=>"reloadCurrentVue"]) !!} class="material-icons red-text right tooltipped text-hover text-lighten-3 btnModal">delete</i>
+                                                <i {!! $Helpers::tooltip('Modifier ce niveau') !!} {!! $Helpers::modal(route('gymGradeLineModal', ['gym_id' => $gym->id]), ["id" => $gradeLine->id ,"gym_id"=>$gym->id, "gym_grade_id"=>$grade->id, "title"=>'Modifier ce niveau', "method"=>"PUT"]) !!} class="material-icons right grey-text text-hover tooltipped btnModal">edit</i>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            @endif
                         </table>
-                        <div class="text-right">
-                            <button {!! $Helpers::modal(route('gymGradeLineModal', ['gym_id' => $gym->id]), ["gym_id"=>$gym->id, "gym_grade_id"=>$grade->id, "title"=>'Ajouter un niveau de difficulté', "method"=>"POST"]) !!} class="btn-flat btnModal">
-                                <i class="material-icons left">add</i>
-                                Ajouter un niveau de difficulté
-                            </button>
-                        </div>
+                        <p>@lang('elements/difficulty-system.system_' . $grade->difficulty_system)</p>
 
+                        @if($grade->system_can_have_levels())
+                            <div class="text-right">
+                                <button {!! $Helpers::modal(route('gymGradeLineModal', ['gym_id' => $gym->id]), ["gym_id"=>$gym->id, "gym_grade_id"=>$grade->id, "title"=>'Ajouter un niveau de difficulté', "method"=>"POST"]) !!} class="btn-flat btnModal">
+                                    <i class="material-icons left">add</i>
+                                    Ajouter un niveau de difficulté
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @endforeach

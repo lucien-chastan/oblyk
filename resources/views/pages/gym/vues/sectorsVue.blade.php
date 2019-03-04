@@ -97,9 +97,12 @@
                         @endif
                     </td>
                     <td width="1">
-                        @foreach($route->colors() as $color)
-                            <div class="z-depth-2 hold-tag-color" style="background-color: {{ $color }};"></div>
-                        @endforeach
+                        @if($route->display_tag_color())
+                            <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                        @endif
+                        @if($route->display_hold_color())
+                            <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
+                        @endif
                     </td>
                     <td>
                         <span class="no-warp truncate">

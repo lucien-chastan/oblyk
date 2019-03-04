@@ -129,7 +129,7 @@ class GymAdminController extends Controller
         $Grade = GymGrade::class;
         return view('pages.gym-admin.vues.grades', [
             'gym' => $Gym::find($gym_id),
-            'grades' => $Grade::where('gym_id', $gym_id)->with('gradeLines')->get()
+            'grades' => $Grade::where('gym_id', $gym_id)->with(['gradeLines' => function ($query) { $query->orderBy('order'); }])->get()
         ]);
     }
 

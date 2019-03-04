@@ -4,9 +4,7 @@
         @if($cross->status_id != 1)
             <p class="no-margin">
                 <img alt="" src="/img/gym-type-{{ $cross->type }}.png" height="10">
-                @foreach($cross->colors() as $color)
-                    <span class="z-depth-2" style="background-color: {{ $color }}; height: 10px; width: 10px; border-radius: 50%; display: inline-block"></span>
-                @endforeach
+                <i title="Prises" class="material-icons" style="{{ $cross->color_style() }}; margin-right: 0; vertical-align: bottom;">bubble_chart</i>
                 <strong>
                     <span class="color-grade-{{ $cross->grade_val }}">{{ $cross->grade }}{{ $cross->sub_grade }}</span>
                     {{ $cross->label }}
@@ -24,6 +22,7 @@
             @foreach($indoor['crosses'] as $cross)
                 <p class="no-margin">
                     <img alt="" src="/img/gym-type-{{ $cross->type }}.png" height="10">
+                    <i title="Prises" class="material-icons" style="{{ $cross->color_style() }}; margin-right: 0; vertical-align: bottom;">bubble_chart</i>
                     <strong>
                         <span class="color-grade-{{ $cross->grade_val }}">{{ $cross->grade }}{{ $cross->sub_grade }}</span>
                     </strong>

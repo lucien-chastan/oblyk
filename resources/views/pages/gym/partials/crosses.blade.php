@@ -31,9 +31,7 @@
         @endif
         <tr>
             <td>
-                @foreach($cross->colors() as $color)
-                    <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
-                @endforeach
+                <i title="Prises" class="material-icons left" style="{{ $cross->color_style() }}; margin-right: 0">bubble_chart</i>
             </td>
             <td><span class="color-grade-{{ $cross->grade_val }}">{{ $cross->grade }}{{ $cross->sub_grade }}</span></td>
             <td>{{ $cross->height }}m</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CRUD;
 
 use App\GymAdministrator;
 use App\GymGrade;
+use App\GymGradeLine;
 use App\Lib\Grade;
 use App\Route;
 use App\GymRoom;
@@ -37,9 +38,10 @@ class GymRouteController extends Controller
         if (isset($id)) {
             $gymRoute = $GymRoute::where('id', $id)->first();
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
-            $colors = $gymRoute->colors();
+            $colors = $gymRoute->hold_colors();
             $estimateGradeLevel = $gymRoute->estimateGradeLevel($gradeSystem->id);
         } else {
+            $firstGrade = (count($gradeSystem->gradeLines) > 0) ? $gradeSystem->gradeLines[0]->grade_val : 0;
             $gymRoute = new GymRoute();
             $gymRoute->label = $request->input('label');
             $gymRoute->sector_id = $request->input('sector_id');
@@ -49,10 +51,12 @@ class GymRouteController extends Controller
             $gymRoute->sector_id = $request->input('sector_id') ?? $sector->id;
             $gymRoute->type = $request->input('type') ?? $sector->preferred_type;
             $gymRoute->opener_date = new \DateTime();
+            $gymRoute->gym_grade_id = $gradeSystem->id;
+            $gymRoute->gym_grade_line_id = (count($gradeSystem->gradeLines) > 0) ? $gradeSystem->gradeLines[0]->id : 0;
             $callback = $request->input('callback') ?? 'reloadCurrentVue';
-            $colors = $gradeSystem->gradeLines[0]->colors();
-            $gymRoute->grade = Route::valToGrad($gradeSystem->gradeLines[0]->grade_val, true);
-            $estimateGradeLevel = $gradeSystem->gradeLines[0]->id;
+            $colors = (count($gradeSystem->gradeLines) > 0 && $gradeSystem->difficulty_system != 3) ? $gradeSystem->gradeLines[0]->colors() : [];
+            $gymRoute->grade = ($firstGrade != 0) ? Route::valToGrad($gradeSystem->gradeLines[0]->grade_val, true) : '';
+            $estimateGradeLevel = (count($gradeSystem->gradeLines) > 0) ? $gradeSystem->gradeLines[0]->id : 0;
         }
 
         $secondColor = (count($colors) > 1);
@@ -61,21 +65,20 @@ class GymRouteController extends Controller
         $outputRoute = ($request->input('method') == 'POST') ? '/gym_routes' : '/gym_routes/' . $id;
 
         $data = [
-            'dataModal' => [
-                'gym_route' => $gymRoute,
-                'room_id' => $sector->room_id,
-                'gym_id' => $request->input('gym_id'),
-                'sector_id' => $request->input('sector_id'),
-                'title' => $request->input('title'),
-                'method' => $request->input('method'),
-                'route' => $outputRoute,
-                'room' => $room,
-                'sector' => $sector,
-                'callback' => $callback,
-                'colors' => $colors,
-                'use_second_color' => $secondColor,
-                'estimateGradeLevel' => $estimateGradeLevel
-            ]
+            'gym_route' => $gymRoute,
+            'room_id' => $sector->room_id,
+            'gym_id' => $request->input('gym_id'),
+            'sector_id' => $request->input('sector_id'),
+            'title' => $request->input('title'),
+            'method' => $request->input('method'),
+            'route' => $outputRoute,
+            'room' => $room,
+            'sector' => $sector,
+            'callback' => $callback,
+            'colors' => $colors,
+            'use_second_color' => $secondColor,
+            'estimateGradeLevel' => $estimateGradeLevel,
+            'gradeSystem' => $gradeSystem
         ];
 
         return view('modal.gym-route', $data);
@@ -238,15 +241,14 @@ class GymRouteController extends Controller
         // Valid form
         $this->validate($request,
             [
-                'opener_date' => 'required',
-                'grade' => ['required']
+                'opener_date' => 'required'
             ]
         );
 
         // Extract grade and sub grade from grade
         $grades = explode(';', $request->input('grade'));
         foreach ($grades as $grade) {
-            if (!Grade::isGrade($grade)) {
+            if (!Grade::isGrade($grade, true)) {
                 return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
             }
             $firstGrade = preg_replace($this->subGradePattern, '', $grade);
@@ -261,10 +263,19 @@ class GymRouteController extends Controller
         }
 
         // Concat colors
-        $colors[] = $request->input('color_first');
-        if ($request->input('use_second_color')) {
-            $colors[] = $request->input('color_second');
+        $colors = [];
+        $color_first = $request->input('color_first');
+        $color_second = $request->input('color_second');
+        if($color_first != '#00000000') {
+            $colors[] = $color_first;
         }
+        if ($request->input('use_second_color')) {
+            if($color_second != '#00000000') {
+                $colors[] = $color_second;
+            }
+        }
+
+        $gradeLine = GymGradeLine::find($request->input('gym_grade_line_id'));
 
         // Create and save new route
         $gymRoute = new GymRoute();
@@ -279,7 +290,10 @@ class GymRouteController extends Controller
         $gymRoute->height = $request->input('height');
         $gymRoute->opener = $request->input('opener');
         $gymRoute->opener_date = $request->input('opener_date');
-        $gymRoute->color = join(';', $colors);
+        $gymRoute->color_hold = join(';', $colors);
+        $gymRoute->color_tag = isset($gradeLine) ? $gradeLine->color : null;
+        $gymRoute->gym_grade_id = isset($gradeLine) ? $gradeLine->gym_grade_id : null;
+        $gymRoute->gym_grade_line_id = isset($gradeLine) ? $gradeLine->id : null;
         $gymRoute->save();
 
         return response()->json(json_encode($gymRoute));
@@ -300,15 +314,14 @@ class GymRouteController extends Controller
         // Valid form
         $this->validate($request,
             [
-                'opener_date' => 'required',
-                'grade' => ['required']
+                'opener_date' => 'required'
             ]
         );
 
         // Extract grade and sub grade from grade
         $grades = explode(';', $request->input('grade'));
         foreach ($grades as $grade) {
-            if (!Grade::isGrade($grade)) {
+            if (!Grade::isGrade($grade, true)) {
                 return response()->json(['error' => "Le format de cotation n'est pas reconnu"], 422);
             }
             $firstGrade = preg_replace($this->subGradePattern, '', $grade);
@@ -323,10 +336,19 @@ class GymRouteController extends Controller
         }
 
         // Concat colors
-        $colors[] = $request->input('color_first');
-        if ($request->input('use_second_color')) {
-            $colors[] = $request->input('color_second');
+        $colors = [];
+        $color_first = $request->input('color_first');
+        $color_second = $request->input('color_second');
+        if($color_first != '#00000000') {
+            $colors[] = $color_first;
         }
+        if ($request->input('use_second_color')) {
+            if($color_second != '#00000000') {
+                $colors[] = $color_second;
+            }
+        }
+
+        $gradeLine = GymGradeLine::find($request->input('gym_grade_line_id'));
 
         // Create and save new route
         $gymRoute = $GymRoute::find($request->input('id'));
@@ -341,7 +363,10 @@ class GymRouteController extends Controller
         $gymRoute->height = $request->input('height');
         $gymRoute->opener = $request->input('opener');
         $gymRoute->opener_date = $request->input('opener_date');
-        $gymRoute->color = join(';', $colors);
+        $gymRoute->color_hold = join(';', $colors);
+        $gymRoute->color_tag = isset($gradeLine) ? $gradeLine->color : null;
+        $gymRoute->gym_grade_id = isset($gradeLine) ? $gradeLine->gym_grade_id : null;
+        $gymRoute->gym_grade_line_id = isset($gradeLine) ? $gradeLine->id : null;
         $gymRoute->save();
 
         return response()->json(json_encode($gymRoute));

@@ -28,10 +28,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @foreach($route->colors() as $color)
-                                            <div class="z-depth-2"
-                                                 style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
-                                        @endforeach
+                                        @if($route->display_tag_color())
+                                            <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                                        @endif
+                                        @if($route->display_hold_color())
+                                            <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
+                                        @endif
                                     </td>
                                     <td>
                                         {!! $route->grades('html') !!}

@@ -34,14 +34,18 @@ class routeChartsController extends Controller
 
         foreach ($crosses as $cross) {
             foreach ($cross->crossSections as $crossSection) {
-                if ($crossSection->routeSection->grade_val % 2 == 0) $crossSection->routeSection->grade_val--;
-                $gradeArray[$crossSection->routeSection->grade_val]++;
+                if (isset($crossSection->routeSection)) {
+                    if ($crossSection->routeSection->grade_val % 2 == 0) $crossSection->routeSection->grade_val--;
+                    $gradeArray[$crossSection->routeSection->grade_val]++;
+                }
             }
         }
 
         foreach ($indoorCrosses as $cross) {
-            if ($cross->grade_val % 2 == 0) $cross->grade_val--;
-            $gradeArray[$cross->grade_val]++;
+            if ($cross->grade_val != 0) {
+                if ($cross->grade_val % 2 == 0) $cross->grade_val--;
+                $gradeArray[$cross->grade_val]++;
+            }
         }
 
         $data = [
@@ -143,7 +147,7 @@ class routeChartsController extends Controller
             'data' => [
                 'labels' => [
                     trans('elements/climbs.climb_2'), trans('elements/climbs.climb_3'), trans('elements/climbs.climb_4'), trans('elements/climbs.climb_5'), trans('elements/climbs.climb_6'), trans('elements/climbs.climb_7'), trans('elements/climbs.climb_8'),
-                    trans('elements/climbs.climb_3'), trans('elements/climbs.climb_pan'), trans('elements/climbs.climb_2'),
+                    'SAE ' . trans('elements/climbs.climb_3'), 'SAE ' . trans('elements/climbs.climb_pan'), 'SAE ' . trans('elements/climbs.climb_2'),
 
                 ],
                 'datasets' => [

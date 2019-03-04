@@ -369,13 +369,16 @@ function getDefaultRouteGrade(element) {
         var gradeLine = response.data.data;
 
         gymRouteGradeText.value = gradeLine.grade;
-        firstColorGymRoute.value = gradeLine.colors[0];
-        useSecondColorGymRoute.checked = gradeLine.useSecondColor;
-        $('#firstColorGymRoute').material_select('update');
 
-        if (gradeLine.useSecondColor) {
-            secondColorGymRoute.value = gradeLine.colors[1];
-            $('#secondColorGymRoute').material_select('update');
+        if(gradeLine.changeHoldColor) {
+            firstColorGymRoute.value = gradeLine.colors[0];
+            useSecondColorGymRoute.checked = gradeLine.useSecondColor;
+            $('#firstColorGymRoute').material_select('update');
+
+            if (gradeLine.useSecondColor) {
+                secondColorGymRoute.value = gradeLine.colors[1];
+                $('#secondColorGymRoute').material_select('update');
+            }
         }
     });
 }

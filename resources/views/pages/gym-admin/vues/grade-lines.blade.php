@@ -8,7 +8,7 @@
                 <table>
                     <tr>
                         <td>
-                            <h5><i {!! $Helpers::tooltip('Retour') !!} data-route="{{ route('gym_admin_grades_gym', ['gym_id' => $gym->id]) }}" onclick="loadProfileRoute(this)" class="material-icons left text-hover tooltipped grey-text">keyboard_arrow_left</i> {{ $grade->label }}</h5>
+                            <h5><i title="Retour" data-route="{{ route('gym_admin_grades_gym', ['gym_id' => $gym->id]) }}" onclick="loadProfileRoute(this)" class="material-icons left text-hover grey-text">keyboard_arrow_left</i> {{ $grade->label }}</h5>
                         </td>
                         <td>
                             <i {!! $Helpers::tooltip('Modifier ce système') !!} {!! $Helpers::modal(route('gymGradeModal', ['gym_id'=>$gym->id]), ["id" => $grade->id ,"gym_id"=>$gym->id, "title"=>'Modifier système de cotation', "method"=>"PUT"]) !!} class="material-icons grey-text right tooltipped text-hover btnModal">edit</i>
@@ -23,7 +23,7 @@
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Cotation moyenne</th>
+                                <th>Cotation moyenne ?</th>
                                 <th>Représenté par la couleur</th>
                                 <th>Ordre</th>
                                 <th></th>
@@ -33,7 +33,13 @@
                             @foreach($grade->gradeLines as $gradeLine)
                                 <tr>
                                     <td>{{ $gradeLine->label }}</td>
-                                    <td class="color-grade-{{ $gradeLine->grade_val }} text-bold">{{ \App\Route::valToGrad($gradeLine->grade_val, true) }}</td>
+                                    <td class="color-grade-{{ $gradeLine->grade_val }} text-bold">
+                                        @if($gradeLine->grade_val != 0)
+                                            {{ \App\Route::valToGrad($gradeLine->grade_val, true) }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                     <td>
                                         @foreach($gradeLine->colors() as $color)
                                             <i class="material-icons left" style="color: {{ $color }}">bookmark</i>

@@ -12,9 +12,19 @@
         {!! $Inputs::text(['name'=>'group_sector', 'value'=>$dataModal['gym_sector']->group_sector, 'label'=>'Groupe¹', 'type'=>'text']) !!}
         {!! $Inputs::text(['name'=>'height', 'value'=>$dataModal['gym_sector']->height, 'label'=>"Hauteur(s) en mètre (voir note² si plusieurs longueurs)", 'type'=>'text']) !!}
         {!! $Inputs::mdText(['name'=>'description', 'value'=>$dataModal['gym_sector']->description, 'label'=>'Description', 'type'=>'text']) !!}
-        <p class="text-underline">Réglage par défaut (au niveau de la salle)</p>
-        {!! $Inputs::gymGradesSystem(['name'=>'gym_grade_id', 'gym_id'=>$dataModal['gym_id'], 'value'=>$dataModal['gym_sector']->gym_grade_id, 'label'=>'Système de cotation']) !!}
-        {!! $Inputs::gymRoutesTypes(['name'=>'preferred_type', 'value'=>$dataModal['gym_sector']->preferred_type, 'label'=>'Les lignes sont principalement des : ']) !!}
+
+        <div class="row">
+            <div class="col s12">
+                <p class="text-underline custom-collapse" onclick="collapseElement(this)" data-target="advanced-options-of-gym-sector" data-expanded="false">
+                    <i class="material-icons left">arrow_right</i>Options avancées
+                </p>
+                <div id="advanced-options-of-gym-sector" class="hide">
+                    {!! $Inputs::gymGradesSystem(['name'=>'gym_grade_id', 'gym_id'=>$dataModal['gym_id'], 'value'=>$dataModal['gym_sector']->gym_grade_id, 'label'=>'Système de cotation']) !!}
+                    {!! $Inputs::gymRoutesTypes(['name'=>'preferred_type', 'value'=>$dataModal['gym_sector']->preferred_type, 'label'=>'Les lignes sont principalement des : ']) !!}
+                </div>
+            </div>
+        </div>
+
         {!! $Inputs::Submit(['label'=>trans('modals/globalLabel.submit')]) !!}
         <p class="text-underline">Note ¹ :</p>
         <p class="grey-text text-italic">

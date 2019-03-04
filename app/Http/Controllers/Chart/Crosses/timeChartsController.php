@@ -31,28 +31,35 @@ class timeChartsController extends Controller
             $end = Carbon::now();
         }
 
-        $firstCrosse = Cross::where([['user_id', Auth::id()], ['release_at', '>=', $start]])->orderBy('release_at')->first();
-        $lastCrosse = Cross::where([['user_id', Auth::id()], ['release_at', '<=', $end]])->orderBy('release_at', 'DESC')->first();
+        $firstOutdoorCross = Cross::where([['user_id', Auth::id()], ['release_at', '>=', $start]])->orderBy('release_at')->first();
+        $lastOutdoorCross = Cross::where([['user_id', Auth::id()], ['release_at', '<=', $end]])->orderBy('release_at', 'DESC')->first();
+        $firstOutdoorTime = $firstOutdoorCross->release_at->format('Ym');
+        $lastOutdoorTime = $lastOutdoorCross->release_at->format('Ym');
 
-        $firstTime = $firstCrosse->release_at->format('Ym');
-        $lastTime = $lastCrosse->release_at->format('Ym');
+        $firstIndoorCross = IndoorCross::where([['user_id', Auth::id()], ['release_at', '>=', $start]])->orderBy('release_at')->first();
+        $lastIndoorCross = IndoorCross::where([['user_id', Auth::id()], ['release_at', '<=', $end]])->orderBy('release_at', 'DESC')->first();
+        $firstIndoorTime = $firstIndoorCross->release_at->format('Ym');
+        $lastIndoorTime = $lastIndoorCross->release_at->format('Ym');
+
+        $firstTime = ($firstOutdoorTime > $firstIndoorTime) ? $firstIndoorTime : $firstOutdoorTime;
+        $lastTime = ($lastOutdoorTime > $lastIndoorTime) ? $lastOutdoorTime : $lastIndoorTime;
 
         $labels = [];
-        $datas = [];
+        $data = [];
         $months = ['01' => 'Jan', '02' => 'Fév', '03' => 'Mar', '04' => 'Avr', '05' => 'Mai', '06' => 'Jui', '07' => 'Jul', '08' => 'Aou', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Déc'];
 
         while ($firstTime <= $lastTime) {
-            $datas[$firstTime] = 0;
+            $data[$firstTime] = 0;
             $labels[$firstTime] = $months[substr($firstTime, -2)] . ' ' . substr($firstTime, 0, 4);
             $firstTime = substr($firstTime, -2) != 12 ? $firstTime + 1 : substr($firstTime, 0, 4) + 1 . '01';
         }
 
-        foreach ($crosses as $cross) $datas[$cross->release_at->format('Ym')]++;
-        foreach ($indoorCrosses as $cross) $datas[$cross->release_at->format('Ym')]++;
+        foreach ($crosses as $cross) $data[$cross->release_at->format('Ym')]++;
+        foreach ($indoorCrosses as $cross) $data[$cross->release_at->format('Ym')]++;
 
         // Reindex
         $labels = array_values($labels);
-        $datas = array_values($datas);
+        $data = array_values($data);
 
         $data = [
             'type' => 'line',
@@ -61,7 +68,7 @@ class timeChartsController extends Controller
                 'datasets' => [
                     [
                         'label' => '',
-                        'data' => $datas,
+                        'data' => $data,
                         'borderColor' => '#2196F3',
                         'backgroundColor' => 'rgba(255,255,255,0)'
                     ]
@@ -97,30 +104,30 @@ class timeChartsController extends Controller
         $crosses = Cross::getCrossWithFilter($user);
         $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
-        $datas = [];
+        $data = [];
         $labels = [];
 
         foreach ($crosses as $cross) {
             $labels[$cross->release_at->format('Y')] = $cross->release_at->format('Y');
-            if (isset($datas[$cross->release_at->format('Y')])) {
-                $datas[$cross->release_at->format('Y')]++;
+            if (isset($data[$cross->release_at->format('Y')])) {
+                $data[$cross->release_at->format('Y')]++;
             } else {
-                $datas[$cross->release_at->format('Y')] = 1;
+                $data[$cross->release_at->format('Y')] = 1;
             }
         }
 
         foreach ($indoorCrosses as $cross) {
             $labels[$cross->release_at->format('Y')] = $cross->release_at->format('Y');
-            if (isset($datas[$cross->release_at->format('Y')])) {
-                $datas[$cross->release_at->format('Y')]++;
+            if (isset($data[$cross->release_at->format('Y')])) {
+                $data[$cross->release_at->format('Y')]++;
             } else {
-                $datas[$cross->release_at->format('Y')] = 1;
+                $data[$cross->release_at->format('Y')] = 1;
             }
         }
 
         // Re-index
         $labels = array_values($labels);
-        $datas = array_values($datas);
+        $data = array_values($data);
 
         $data = [
             'type' => 'bar',
@@ -129,7 +136,7 @@ class timeChartsController extends Controller
                 'datasets' => [
                     [
                         'label' => '',
-                        'data' => $datas,
+                        'data' => $data,
                         'borderColor' => '#2196F3',
                         'backgroundColor' => '#2196F3'
                     ]
@@ -165,15 +172,15 @@ class timeChartsController extends Controller
         $crosses = Cross::getCrossWithFilter($user);
         $indoorCrosses = IndoorCross::getCrossWithFilter($user);
 
-        $datas = ['1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0, '6' => 0, '7' => 0, '8' => 0, '9' => 0, '10' => 0, '11' => 0, '12' => 0];
+        $data = ['1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0, '6' => 0, '7' => 0, '8' => 0, '9' => 0, '10' => 0, '11' => 0, '12' => 0];
         $labels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'];
 
-        foreach ($crosses as $cross) $datas[$cross->release_at->format('n')]++;
-        foreach ($indoorCrosses as $cross) $datas[$cross->release_at->format('n')]++;
+        foreach ($crosses as $cross) $data[$cross->release_at->format('n')]++;
+        foreach ($indoorCrosses as $cross) $data[$cross->release_at->format('n')]++;
 
         // re index
         $labels = array_values($labels);
-        $datas = array_values($datas);
+        $data = array_values($data);
 
         $data = [
             'type' => 'bar',
@@ -182,7 +189,7 @@ class timeChartsController extends Controller
                 'datasets' => [
                     [
                         'label' => '',
-                        'data' => $datas,
+                        'data' => $data,
                         'borderColor' => '#2196F3',
                         'backgroundColor' => '#2196F3'
                     ]

@@ -22,7 +22,10 @@ class CreateGymRoutesTable extends Migration
             $table->string('sub_grade',255)->nullable();
             $table->string('val_grade', 255)->nullable();
             $table->text('description')->nullable();
-            $table->string('color',255)->nullable();
+            $table->string('color_hold',255)->nullable();
+            $table->string('color_tag',255)->nullable();
+            $table->integer('gym_grade_id')->nullable();
+            $table->integer('gym_grade_line_id')->nullable();
             $table->integer('type');
             $table->string('height', 255)->nullable();
             $table->boolean('favorite')->default(false);
