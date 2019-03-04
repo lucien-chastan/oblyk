@@ -403,15 +403,13 @@ class InputTemplates extends ServiceProvider
     // Gym room sectors <select>
     public static function roomSectors($options)
     {
-        $Sector = GymSector::class;
-
         return view('inputs.room-sectors', [
             'name' => $options['name'],
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
-            'col' => $options['col'] ?? '',
+            'col' => $options['col'] ?? 's12',
             'icon' => $options['icon'] ?? '',
-            'sectors' => $Sector::where('room_id', $options['room_id'])->get(),
+            'sectors' => GymSector::where('room_id', $options['room_id'])->get(),
         ]);
     }
 

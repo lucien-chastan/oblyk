@@ -46,5 +46,4 @@
     {!! $Inputs::Hidden(['name'=>'id','value'=>$dataModal['gym_route']->id]) !!}
     {!! $Inputs::Hidden(['name'=>'_method','value'=>$dataModal['method']]) !!}
     {!! $Inputs::Hidden(['name'=>'gym_id','value'=>$dataModal['gym_id']]) !!}
-    {!! $Inputs::Hidden(['name'=>'sector_id','value'=>$dataModal['sector_id']]) !!}
 </form>
