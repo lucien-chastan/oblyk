@@ -77,9 +77,9 @@ class PhotoController extends Controller
         $Route = Route::class;
         $User = User::class;
 
-        $mSize = env('PHOTO_MAX_SIZE');
-        $mHeight = env('PHOTO_MAX_HEIGHT');
-        $mWidth = env('PHOTO_MAX_WIDTH');
+        $mSize = config('app.photo_max_size');
+        $mHeight = config('app.photo_max_height');
+        $mWidth = config('app.photo_max_width');
 
         // Valid form
         $this->validate(

@@ -64,7 +64,7 @@
                 <div class="col s12 m6 l6 order-2">
                     <h2>@lang('home.titleCrossBook')</h2>
                     <p class="explication-oblyk">@lang('home.descriptionCrossBook')</p>
-                    @if(env('ACTIVE_INDOOR'))
+                    @if(config('app.active_indoor'))
                         <p>
                             <span class="badge-new-in-home">New!</span> @lang('home.new-indoor')
                         </p>
@@ -158,7 +158,7 @@
             </div>
 
             {{-- Indoor --}}
-            @if(env('ACTIVE_INDOOR'))
+            @if(config('app.active_indoor'))
                 <div class="row">
                     <div class="col s12 m6 l6">
                         <h2>@lang('home.titleIndoor')</h2>

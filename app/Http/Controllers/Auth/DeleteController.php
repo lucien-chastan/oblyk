@@ -52,7 +52,7 @@ class DeleteController extends Controller
         $user = Auth::user();
         Auth::logout();
 
-        $oblyk_id = env('OBLYK_ID');
+        $oblyk_id = config('app.oblyk_id');
 
         //Ce qui est transferé
         Album::where('user_id', $user->id)->update(['user_id' => $oblyk_id]);

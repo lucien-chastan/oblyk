@@ -73,7 +73,7 @@
     </div>
 </div>
 
-@if(Auth::check() && ($is_administrator || env('ACTIVE_INDOOR')))
+@if(Auth::check() && ($is_administrator || config('app.active_indoor')))
     <div class="row">
         {{-- Crosses --}}
         @include('pages.gym.partials.gym-crosses')

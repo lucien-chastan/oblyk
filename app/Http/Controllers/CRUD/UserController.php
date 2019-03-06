@@ -115,9 +115,9 @@ class UserController extends Controller
     {
         $user_id = Auth::id();
 
-        $mSize = env('PHOTO_MAX_SIZE');
-        $mHeight = env('PHOTO_MAX_HEIGHT');
-        $mWidth = env('PHOTO_MAX_WIDTH');
+        $mSize = config('app.photo_max_size');
+        $mHeight = config('app.photo_max_height');
+        $mWidth = config('app.photo_max_width');
 
         $this->validate($request, [
             'bandeau' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",
@@ -150,9 +150,9 @@ class UserController extends Controller
     {
         $user_id = Auth::id();
 
-        $mSize = env('PHOTO_MAX_SIZE');
-        $mHeight = env('PHOTO_MAX_HEIGHT');
-        $mWidth = env('PHOTO_MAX_WIDTH');
+        $mSize = config('app.photo_max_size');
+        $mHeight = config('app.photo_max_height');
+        $mWidth = config('app.photo_max_width');
 
         $this->validate($request, [
             'photo' => "required|image:jpeg,jpg,png|file|max:$mSize|dimensions:max_width=$mWidth,max_height=$mHeight",

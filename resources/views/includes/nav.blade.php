@@ -9,7 +9,7 @@
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
         <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
-        @if(env('ACTIVE_INDOOR'))
+        @if(config('app.active_indoor'))
             <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
         @endif
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
@@ -72,7 +72,7 @@
                         <path id="path-logo" d="m 396.05664,314.61719 -28.34332,41.7539 33.28263,34.39055 9.65078,-13.23636 12.80994,13.23636 9.65086,-13.23635 16.91395,1e-4 z M 379.44727,377.52539 352.80859,350 332.73828,377.52539 Z" style="fill-opacity:1;fill-rule:evenodd;stroke:none;" />
                     </g>
                 </svg>
-                Oblyk{{ env('APP_ENV') == 'beta' ? '- Beta' :'' }}
+                Oblyk{{ config('app.app_env') == 'beta' ? '- Beta' :'' }}
             </a>
 
             {{-- Smartphone icon --}}
@@ -169,7 +169,7 @@
                                 <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
                                 <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
-                                @if(env('ACTIVE_INDOOR'))
+                                @if(config('app.active_indoor'))
                                     <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
                                 @endif
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
