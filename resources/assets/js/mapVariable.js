@@ -75,11 +75,11 @@ let baseMaps = {
 function buildPopup(crag) {
     var minGradeVal, maxGradeVal, minGradeText, maxGradeText;
 
-    if (typeof crag.gapGrade !== 'undefined') {
-        minGradeVal = crag.gapGrade.min_grade_val;
-        maxGradeVal = crag.gapGrade.max_grade_val;
-        minGradeText = crag.gapGrade.min_grade_text;
-        maxGradeText = crag.gapGrade.max_grade_text;
+    if (typeof crag.gap_grade !== 'undefined') {
+        minGradeVal = crag.gap_grade.min_grade_val;
+        maxGradeVal = crag.gap_grade.max_grade_val;
+        minGradeText = crag.gap_grade.min_grade_text;
+        maxGradeText = crag.gap_grade.max_grade_text;
     } else {
         minGradeVal = maxGradeVal = null;
         minGradeText = maxGradeText = '?';
