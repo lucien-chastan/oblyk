@@ -506,7 +506,7 @@
                             <td class="bg-color-grade-38 text-bold">38</td> {{-- numero --}}
                             <td>7a+</td> {{-- française --}}
                             <td>E5</td> {{-- anglaise --}}
-                            <td>5.10a</td> {{-- USA voie --}}
+                            <td>5.12a</td> {{-- USA voie --}}
                             <td>V7</td> {{-- USA bloc --}}
                             <td>IX-</td> {{-- Allemande --}}
                             <td>B8</td> {{-- Annot --}}
