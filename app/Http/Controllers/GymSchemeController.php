@@ -179,7 +179,7 @@ class GymSchemeController extends Controller
         foreach ($sectors as $sector) {
             foreach ($sector->routes as $route) {
                 if($route->line != '') {
-                    $route->line_color = $route->colors()[0];
+                    $route->line_color = $route->hold_colors()[0];
                     $routes[] = $route;
                 }
             }
