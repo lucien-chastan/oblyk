@@ -35,9 +35,12 @@
                                             <img class="circle left thumbnail-route-page" src="{{ $route->thumbnail() }}" alt="miniature de la ligne {{ $route->name() }}">
                                         @endif
                                         <div class="left" style="margin-right: 0.5em">
-                                            @foreach($route->colors() as $color)
-                                                <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.8em; width: 0.8em; border-radius: 50%; margin-top: 2px; display: inline-block;"></div>
-                                            @endforeach
+                                            @if($route->display_tag_color())
+                                                <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                                            @endif
+                                            @if($route->display_hold_color())
+                                                <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
+                                            @endif
                                         </div>
                                         {!! $route->grades('html', 'text-bold') !!}
                                         {{ $route->name() }}

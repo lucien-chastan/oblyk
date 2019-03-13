@@ -173,15 +173,13 @@ class GymSchemeController extends Controller
     {
         $routes = [];
         $sectors = GymSector::where('room_id', '=', $room_id)
-            ->with('routes')
+            ->with(['routes' => function($query) {$query->where([['line', '!=', ''],['dismounted_at', null]]);}])
             ->get();
 
         foreach ($sectors as $sector) {
             foreach ($sector->routes as $route) {
-                if($route->line != '') {
-                    $route->line_color = $route->hold_colors()[0];
-                    $routes[] = $route;
-                }
+                $route->line_color = $route->hold_colors()[0];
+                $routes[] = $route;
             }
         }
 
