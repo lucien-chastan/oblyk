@@ -4,6 +4,7 @@ return [
 
     'editTooltip' => 'Modifier cette ligne',
     'addTooltip' => 'Ajouter une ligne',
+    'addCSVTooltip' => 'Ajouter voies par CSV',
     'deleteTooltip' => 'Supprimer cette ligne',
     'modalEditeTitle' => 'Modifier la ligne',
     'modalAddTitle' => 'Ajouter une ligne',
@@ -31,4 +32,12 @@ return [
     'startType' => "Type de départ",
     'openerName' => "Nom des ouvreurs",
     'openerNamePlaceholder' => "Nom des ouvreurs de la ligne",
+    'csvSpecification' => "Selected file has to contains following fields (<strong>bold</strong> - required) in the following order: <ol>
+        <li><strong>sector name</strong></li>
+        <li><strong>route name</strong></li>
+        <li><strong>type of route</strong> (one of: bouldering, sport climbing, multi pitch, trad climbing, aid climbing, deep water, via ferrata)</li> 
+        <li><strong>grade</strong> (separated by a | if there are several pitches)</li>
+        <li>height (separated by a | if there are several pitches</i>)</li>
+        <li>opener</li>
+        <li>opening date</li></ol>",
 ];

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sector extends Model
 {
+    protected $fillable = ['label', 'crag_id', 'user_id', 'rain_id', 'sun_id', 'lat', 'lng'];
+
     public function user(){
         return $this->hasOne('App\User','id', 'user_id');
     }

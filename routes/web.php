@@ -411,6 +411,7 @@ Route::post('/modal/parking', 'CRUD\ParkingController@parkingModal')->name('park
 Route::post('/modal/delete', 'CRUD\DeleteController@deleteModal')->name('deleteModal');
 Route::post('/modal/problem', 'CRUD\ProblemController@problemModal')->name('problemModal');
 Route::post('/modal/sector', 'CRUD\SectorController@sectorModal')->name('sectorModal');
+Route::post('/modal/routes_import', 'CRUD\SectorController@routecsvModal')->name('routecsvModal');
 Route::post('/modal/route', 'CRUD\RouteController@routeModal')->name('routeModal');
 Route::post('/modal/photo', 'CRUD\PhotoController@photoModal')->name('photoModal');
 Route::post('/modal/video', 'CRUD\VideoController@videoModal')->name('videoModal');

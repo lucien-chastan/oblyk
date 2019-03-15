@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
-    public $fillable = ['label'];
+    public $fillable = ['label', 'crag_id', 'user_id', 'sector_id', 'opener', 'open_year', 'note', 'nb_note', 'nb_longueur', 'height', 'climb_id'];
 
     public function user()
     {

@@ -70,6 +70,7 @@
             @if(count($sectors) > 0)
                 <li><a {!! $Helpers::tooltip(trans('modals/route.addTooltip')) !!}} {!! $Helpers::modal(route('routeModal'),['sector_id' => 0, 'crag_id' => $crag->id ,'title'=>trans('modals/route.modalAddTitle'),'method'=>'POST']) !!}  class="tooltipped btn-floating blue btnModal"><i class="material-icons">timeline</i></a></li>
             @endif
+            <li><a {!! $Helpers::tooltip(trans('modals/route.addCSVTooltip')) !!}} {!! $Helpers::modal(route('routecsvModal'),['crag_id' => $crag->id , 'sector_id' => $crag->sector_id, 'title'=>trans('modals/route.addCSVTooltip'),'method'=>'POST']) !!} class="tooltipped btn-floating blue btnModal"><i class="material-icons">list_alt</i></a></li>
         </ul>
     </div>
 @endif
