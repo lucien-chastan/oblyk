@@ -213,7 +213,6 @@ return [
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         TomLingham\Searchy\SearchyServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class,
     ],
 
     /*
