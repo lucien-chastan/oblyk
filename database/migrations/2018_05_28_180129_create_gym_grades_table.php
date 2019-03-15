@@ -17,6 +17,10 @@ class CreateGymGradesTable extends Migration
             $table->increments('id');
             $table->integer('gym_id')->unsigned();
             $table->string('label', 255)->nullable();
+            $table->boolean('difficulty_is_tag_color')->default(true);
+            $table->boolean('difficulty_is_hold_color')->default(false);
+            $table->boolean('has_hold_color')->default(true);
+            $table->integer('difficulty_system')->default(0);
             $table->timestamps();
 
             // Foreign key

@@ -64,6 +64,15 @@
     }
 }
 
+.badge-new-in-home {
+    display: inline-block;
+    background-color: #0c7cd5;
+    padding: 1px 7px 1px 7px;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+}
+
 .svg-container{
     margin-top: 35px;
     display: inline-block;
@@ -81,7 +90,7 @@
     }
 }
 
-//PARTIE ACTUALITÉ
+// News part
 .card-image{
     img {
         height: 30vh;
@@ -90,8 +99,7 @@
     }
 }
 
-//PARTIE CHIFFRE D'OBLYK
-
+// Numbers part
 .partie-chiffre-oblyk{
     margin-bottom: 10vh;
 
@@ -115,7 +123,6 @@
 
 
 .activity-part-oblyk {
-
     .collapsible {
         box-shadow: none;
         border : none;
@@ -156,9 +163,9 @@
     }
 }
 
-//ANIMATION SVG
+// Svg animation
 
-// info des falaises
+// Crag information
 #nuage_1{animation: animation_nuage 14s infinite linear;}
 #nuage_2{animation: animation_nuage 14s infinite linear;}
 
@@ -174,7 +181,7 @@
 }
 
 
-//tien un carnet de croix
+// Crosses
 #croix_1{animation : animation_croix_1 2.5s infinite;}
 #croix_2{animation : animation_croix_2 2.5s infinite;}
 #croix_3{animation : animation_croix_3 2.5s infinite;}
@@ -183,14 +190,14 @@
 @keyframes animation_croix_3 {0% {fill-opacity: 0;} 55% {fill-opacity: 0;} 90% {fill-opacity: 1;} 100% {fill-opacity: 0;}}
 
 
-//tien toi au courant de ce qui se passe
+// News
 #text_fermeture{animation: animation_fermeture 10s infinite;}
 #text_nettoyage{animation: animation_nettoyage 10s infinite;}
 @keyframes animation_fermeture {0% {opacity: 0;} 20%{opacity: 1;} 40% {opacity: 1;} 50% {opacity: 0;} 60% {opacity: 0;} 80% {opacity: 0;} 100%{opacity: 0;}}
 @keyframes animation_nettoyage {0% {opacity: 0;} 20%{opacity: 0;} 40% {opacity: 0;} 50% {opacity: 0;} 60% {opacity: 1;} 80% {opacity: 1;} 100% {opacity: 0;}}
 
 
-//rejoins nous
+// Join us
 #bras_gauche{animation : animation_bras_gauche 0.3s infinite;}
 @keyframes animation_bras_gauche {
     0% {transform: translate(0px,0px);}

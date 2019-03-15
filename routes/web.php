@@ -32,6 +32,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/merci', 'ProjectPagesController@thanksPage')->name('thanks');
     Route::get('/developpeur', 'ProjectPagesController@developerPage')->name('developer');
     Route::get('/conditions-utilisation', 'ProjectPagesController@termsOfUsePage')->name('termsOfUse');
+    Route::get('/indoor', 'ProjectPagesController@indoorPage')->name('indoorPresentation');
 
     // Newsletter
     Route::get('/news-letter/subscribe', 'SubscribeController@subscribePage')->name('subscribe');
@@ -68,10 +69,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     // Climbing gym
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
     Route::get('/salle-escalade/{gym_id}', 'GymController@gymRedirectionPage')->name('gymRedirectionPage');
-    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+    Route::get('/salle-escalade/{gym_id}/topo/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+
+    // Indoor route
+    Route::get('/salle-escalade/{gym_id}/ligne/{route_id}', 'GymRouteController@gymRoutePage')->name('gymRoutePage');
 
     // Indoor scheme
-    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
     Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
     Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
     Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
@@ -243,7 +246,7 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
 // Admin gyms
 Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
 
-    Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
+    Route::get('/admin-indoor/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
 
     // Admin interface : Dashboard
     Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
@@ -279,10 +282,16 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/gym-grade/{gym_id}/gym-grade-modal', 'CRUD\GymGradeController@gymGradeModal')->name('gymGradeModal');
     Route::post('/modal/gym-grade-line/{gym_id}/gym-grade-line-modal', 'CRUD\GymGradeLineController@gymGradeLineModal')->name('gymGradeLineModal');
 
+    // Modal : room
     Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
     Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
     Route::post('/modal/room/{gym_id}/room/{room_id}/custom-scheme', 'CRUD\RoomController@customScheme')->name('roomCustomScheme');
+    Route::post('/modal/room/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishModal')->name('roomPublishModal');
+
+    // Modal : room : crop thumbnail
+    Route::post('/modal/room/{gym_id}/route/{route_id}/crop', 'CRUD\GymRouteController@cropGymRouteModal')->name('cropGymRouteModal');
+    Route::post('/gym/{gym_id}/route/{route_id}/upload-crop-thumbnail', 'CRUD\GymRouteController@uploadCropThumbnail')->name('uploadCropThumbnail');
 
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture-modal', 'CRUD\GymSectorController@uploadSectorPictureModal')->name('sectorUploadSchemeModal');
     Route::post('/modal/room/{gym_id}/sector/{sector_id}/upload-sector-picture', 'CRUD\GymSectorController@uploadSectorPicture')->name('sectorUploadScheme');
@@ -296,9 +305,14 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::post('/modal/gym-sectors/{gym_id}', 'CRUD\GymSectorController@gymSectorModal')->name('gymSectorModal');
     Route::post('/modal/gym-routes/{gym_id}', 'CRUD\GymRouteController@gymRouteModal')->name('gymRouteModal');
 
+    // Save and Delete area or line on scheme map
     Route::put('/admin/{gym_id}/sector/{sector_id}/save-area', 'CRUD\GymSectorController@saveSchemeArea');
+    Route::put('/admin/{gym_id}/route/{route_id}/save-line', 'CRUD\GymRouteController@saveSchemeLine');
+    Route::put('/admin/{gym_id}/sector/{sector_id}/delete-area', 'CRUD\GymSectorController@deleteSchemeArea');
+    Route::put('/admin/{gym_id}/route/{route_id}/delete-line', 'CRUD\GymRouteController@deleteSchemeLine');
 
     Route::put('/admin/{gym_id}/room/{room_id}/save-custom-scheme', 'CRUD\RoomController@saveCustomScheme')->name('saveCustomScheme');
+    Route::put('/admin/{gym_id}/room/{room_id}/publish', 'CRUD\RoomController@publishRoom')->name('publishRoom');
 
     Route::get('/admin/{gym_id}/room/last-created', 'GymSchemeController@getLastCreatedRoomRoute')->name('getLastCreatedRoomRoute');
     Route::get('/admin/{gym_id}/room/first-order', 'GymSchemeController@getFirstOrderRoomRoute')->name('getFirstOrderRoomRoute');
@@ -317,6 +331,8 @@ Route::resource('gym_grade_lines', 'CRUD\GymGradeLineController');
 Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 Route::put('/gym/dismount-route/{route_id}', 'CRUD\GymRouteController@dismountRoute')->name('gymDismountRoute');
 Route::put('/gym/favorite-route/{route_id}', 'CRUD\GymRouteController@favoriteRoute')->name('gymFavoriteRoute');
+Route::delete('/gym/route/{route_id}/photo-delete', 'CRUD\GymRouteController@deletePhoto');
+Route::delete('/gym/sector/{sector_id}/photo-delete', 'CRUD\GymSectorController@deletePhoto');
 
 // Iframe
 Route::get('/iframe/crag/{crag_id}','IframeController@cragIframe')->name('cragIframe');
@@ -363,6 +379,7 @@ Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrade
 
 // Indoor API
 Route::get('/API/gyms/get-sectors/{room_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
+Route::get('/API/gyms/get-routes/{room_id}', 'GymSchemeController@getGymRoutes')->name('APIGetGymRoutes');
 
 // Partner
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');

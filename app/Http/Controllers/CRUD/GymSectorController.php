@@ -184,6 +184,29 @@ class GymSectorController extends Controller
         $sector->save();
     }
 
+    public function deleteSchemeArea($gym_id, $sector_id, Request $request)
+    {
+        $GymSector = GymSector::class;
+
+        $sector = $GymSector::find($sector_id);
+        $sector->area = null;
+        $sector->save();
+    }
+
+    public function deletePhoto($sector_id)
+    {
+        $sector = GymSector::where('id', $sector_id)->with('room')->first();
+        $this->checkIsAdmin($sector->room->gym_id);
+
+        echo 'test ' . $sector->id;
+
+        if (file_exists(storage_path('app/public/gyms/sectors/1300/sector-' . $sector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/1300/sector-' . $sector->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/sectors/500/sector-' . $sector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/500/sector-' . $sector->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/sectors/200/sector-' . $sector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/200/sector-' . $sector->id . '.jpg'));
+        if (file_exists(storage_path('app/public/gyms/sectors/50/sector-' . $sector->id . '.jpg'))) unlink(storage_path('app/public/gyms/sectors/50/sector-' . $sector->id . '.jpg'));
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

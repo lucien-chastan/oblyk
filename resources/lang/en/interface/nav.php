@@ -2,34 +2,32 @@
 
 return [
 
-    //Level 1
-    'partner' => 'Partner', // Partenaire
-    'mapAndTool' => 'Map &amp; Tools', // Carte et Outils
-    'theProject' => 'The project', // Le projet
-    'actuality' => 'Actuality', // Le projet
-    'connect' => 'Log in', // Connexion
-    'joinUs' => 'Join us', // Créer un compte
-    'logOut' => 'Log out', // Déconnexion
-    'search' => 'Search', // Chercher
+    'partner' => 'Partner',
+    'mapAndTool' => 'Map &amp; Tools',
+    'theProject' => 'The project',
+    'myGyms' => 'My gyms',
+    'actuality' => 'Actuality',
+    'indoor' => 'Indoor',
+    'connect' => 'Log in',
+    'joinUs' => 'Join us',
+    'logOut' => 'Log out',
+    'search' => 'Search',
 
-    //Menu "Mon profil"
-    'myProfile' => 'My profile', //Mon profil
-    'newsFeed' => 'News feed', // Fil d'actu
-    'myCross' => 'My cross', // Mes croix
-    'messenger' => 'Messenger', // Messagerie
-    'notifications' => 'Notifications', // Notifications
-    'settings' => 'Settings', // Paramètres
+    'myProfile' => 'My profile',
+    'newsFeed' => 'News feed',
+    'myCross' => 'My cross',
+    'messenger' => 'Messenger',
+    'notifications' => 'Notifications',
+    'settings' => 'Settings',
 
-    //Menu "Le projet"
-    'whoAreWe' => 'Who are we ?', // Qui somme nous ?
-    'contact' => 'Contact', // Contact
-    'aboutUs' => 'About us', // À propos
-    'helps' => 'Helps', // À propos
-    'supportUs' => 'Support us', // Nous soutenir
-    'developerAndApi' => 'Developer &amp; API', // Développeur et API
-    'TermsOfService ' => 'Terms of service', // Mentions légale
+    'whoAreWe' => 'Who are we ?',
+    'contact' => 'Contact',
+    'aboutUs' => 'About us',
+    'helps' => 'Helps',
+    'supportUs' => 'Support us',
+    'developerAndApi' => 'Developer &amp; API',
+    'TermsOfService ' => 'Terms of service',
 
-    //Menu "Carte et Outils"
     'cragMap' => 'Map of the crags',
     'gymMap' => 'Map of the Gyms',
     'forum' => 'Forum',
@@ -37,10 +35,8 @@ return [
     'grade' => 'The Climbing Grades',
     'dataBase' => 'Data bases',
 
-
-    //Menu "Partenaire"
-    'partnerMap' => 'Map of the climbers', // Carte des grimpeurs
-    'howItWorks' => 'How it works ?', // Comment ça marche ?
-    'howIAm' => 'Who I am ?', // Qui je suis ?
-    'myPlaces' => 'My places', // Mes lieux
+    'partnerMap' => 'Map of the climbers',
+    'howItWorks' => 'How it works ?',
+    'howIAm' => 'Who I am ?',
+    'myPlaces' => 'My places',
 ];

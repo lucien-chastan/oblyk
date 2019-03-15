@@ -14,9 +14,21 @@ return [
     'openedBy' => "Opened by",
     'type' => "Type",
     'height' => "Height",
+    'ref' => "Reference",
     'crossesTitle' => 'My crosses-book on this line',
     'ascent' => 'Ascent',
     'number_ascent' => ':count ascent||:count ascents',
+    'link' => 'Link',
+    'see_separately' => 'See on another page',
+    'dismounted_at' => 'Dismounted at',
+    'createRouteLine' => 'Draw on the plan',
+    'editRouteLine' => 'Edit trace',
+    'isFavorite' => 'Favorite line',
+    'hasDescription' => 'line with description',
+    'hasPicture' => 'line with picture',
+    'hasComment' => 'line with comment',
+    'isDone' => 'I climbed this line.',
+    'sector' => 'Sector',
 
     // Sectors
     'tadSectors' => "Sectors",
@@ -26,11 +38,14 @@ return [
     'addCrossRoom' => "Add a cross on this room",
     'addCrossGym' => "Add a cross on this gym",
     'myCrossInThisRoom' => "I have :count crosses in this room",
+    'number_line' => "1 line|:count lines",
 
     // Sector
     'routesTitle' => "Routes",
     'informationTitle' => "Information",
     'myCrossInThisSector' => "I have :count crosses in this sector",
+    'deleteSector' => "Delete this sector",
+    'deleteArea' => "Delete sector area",
 
     // Crosses
     'chartNumberTitle' => "Numbers",
@@ -52,7 +67,9 @@ return [
     'editRoute' => "Edit route",
     'uploadPicture' => "Uploade a picture",
     'uploadThumbnail' => "Uploade a thumbnail",
+    'cropThumbnail' => "Get a thumbnail",
     'dismountRoute' => "Dismount route",
+    'deletePhoto' => "Delete photo",
     'riseUpRoute' => "Rise up route",
     'favoriteRoute' => "Favorite route",
     'upToFavoriteRoute' => "Up to favorite",

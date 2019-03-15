@@ -1,6 +1,6 @@
 <div class="navbar-fixed oblyk-navbar">
 
-    {{-- Connesion dropdown --}}
+    {{-- Connection dropdown --}}
     <ul id="dropdown_connexion" class="dropdown-content dropD-180">
         @include('includes.nav-user')
     </ul>
@@ -9,6 +9,9 @@
     <ul id="dropdown_projet" class="dropdown-content dropD-auto">
         <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
         <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
+        @if(config('app.active_indoor'))
+            <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
+        @endif
         <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
         <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
         <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
@@ -42,6 +45,22 @@
         @endif
     </ul>
 
+    {{-- My Gyms dropdown --}}
+    @if(Auth::check())
+        @if(count(Auth::user()->myAdminGyms()) > 0)
+            <ul id="dropdown_my_gyms" class="dropdown-content dropD-220">
+                @foreach(Auth::user()->myAdminGyms() as $adminGym)
+                    <li>
+                        <a href="{{ $adminGym->gym->adminUrl() }}">
+                            <img src="{{ $adminGym->gym->logo() }}" alt="logo de la salle {{ $adminGym->gym->label }}" height="22" style="margin-right: 10px" class="left">
+                            {{ $adminGym->gym->label }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    @endif
+
     {{-- Menu --}}
     <nav>
         <div class="nav-wrapper nav-white" id="nav_barre">
@@ -53,7 +72,7 @@
                         <path id="path-logo" d="m 396.05664,314.61719 -28.34332,41.7539 33.28263,34.39055 9.65078,-13.23636 12.80994,13.23636 9.65086,-13.23635 16.91395,1e-4 z M 379.44727,377.52539 352.80859,350 332.73828,377.52539 Z" style="fill-opacity:1;fill-rule:evenodd;stroke:none;" />
                     </g>
                 </svg>
-                Oblyk{{ env('APP_ENV') == 'beta' ? '- Beta' :'' }}
+                Oblyk{{ config('app.app_env') == 'beta' ? '- Beta' :'' }}
             </a>
 
             {{-- Smartphone icon --}}
@@ -65,6 +84,11 @@
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_partenaire">@lang('interface/nav.partner') <i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_outils">@lang('interface/nav.mapAndTool') <i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_projet">@lang('interface/nav.theProject') <i class="material-icons right">arrow_drop_down</i></a></li>
+                @if(Auth::check())
+                    @if(count(Auth::user()->myAdminGyms()) > 0)
+                        <li><a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_my_gyms">@lang('interface/nav.myGyms') <i class="material-icons right">arrow_drop_down</i></a></li>
+                    @endif
+                @endif
                 <li>
                     <a class="dropdown-button nav-dropdown" href="#!" data-activates="dropdown_connexion">
                         @if (Auth::guest())
@@ -79,8 +103,6 @@
             </ul>
 
 
-
-
             {{-- Smartphone menu --}}
             <div class="side-nav" id="side-nav">
                 <p class="center loved-king-font titre-nav-mobile"><a href="/">Oblyk</a></p>
@@ -88,6 +110,25 @@
                     <li>
                         @include('includes.nav-user-side-nav')
                     </li>
+                    @if(Auth::check())
+                        @if(count(Auth::user()->myAdminGyms()) > 0)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">home</i>@lang('interface/nav.myGyms')</div>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @foreach(Auth::user()->myAdminGyms() as $adminGym)
+                                        <li>
+                                            <a href="{{ $adminGym->gym->adminUrl() }}">
+                                                <img src="{{ $adminGym->gym->logo() }}" alt="logo de la salle {{ $adminGym->gym->label }}" style="margin-bottom: -6px; margin-right: 10px" height="22">
+                                                {{ $adminGym->gym->label }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        @endif
+                    @endif
                     <li>
                         <div data-activates="global-search" class="collapsible-header button-open-global-search">
                             <i class="material-icons">search</i>
@@ -127,6 +168,10 @@
                             <ul>
                                 <li><a href="{{ route('project') }}"><i class="material-icons left">landscape</i>@lang('interface/nav.theProject')</a></li>
                                 <li><a href="{{ route('contact') }}"><i class="material-icons left">email</i>@lang('interface/nav.contact')</a></li>
+                                <li><a href="{{ route('articlesPage') }}"><i class="material-icons left">photo_album</i>@lang('interface/nav.actuality')</a></li>
+                                @if(config('app.active_indoor'))
+                                    <li><a href="{{ route('indoorPresentation') }}"><i class="material-icons left">home</i>@lang('interface/nav.indoor')</a></li>
+                                @endif
                                 <li><a href="{{ route('about') }}"><i class="material-icons left">donut_small</i>@lang('interface/nav.aboutUs')</a></li>
                                 <li><a href="{{ route('help') }}"><i class="material-icons left">school</i>@lang('interface/nav.helps')</a></li>
                                 <li><a href="{{ route('supportUs') }}"><i class="material-icons left red-text">favorite</i>@lang('interface/nav.supportUs')</a></li>

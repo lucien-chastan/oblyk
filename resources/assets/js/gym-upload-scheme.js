@@ -26,7 +26,6 @@ function uploadScheme(form, callback, gym_id) {
         }
     ).catch(
         function (err) {
-            console.log(err.message);
             showSubmitLoader(false);
         }
     );
@@ -133,4 +132,16 @@ function uploadRouteThumbnail(form, callback, gym_id) {
             showSubmitLoader(false);
         }
     );
+}
+
+function uploadRouteCrop(form, callback, gym_id) {
+    cropper.croppie('result', 'base64').then(function(base64) {
+        axios.post('/gym/' + gym_id + '/route/' + current_route_id + '/upload-crop-thumbnail', {
+            base64: base64
+        }).then(function (response) {
+            closeModal();
+            callback(response);
+        });
+        console.log(base64);
+    });
 }

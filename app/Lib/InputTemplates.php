@@ -336,7 +336,6 @@ class InputTemplates extends ServiceProvider
         ]);
     }
 
-
     // Orientations compass
     public static function orientations($options)
     {
@@ -384,7 +383,6 @@ class InputTemplates extends ServiceProvider
         ]);
     }
 
-
     // Crag sectors <select>
     public static function sectors($options)
     {
@@ -403,15 +401,25 @@ class InputTemplates extends ServiceProvider
     // Gym room sectors <select>
     public static function roomSectors($options)
     {
-        $Sector = GymSector::class;
-
         return view('inputs.room-sectors', [
             'name' => $options['name'],
             'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
             'value' => (isset($options['value'])) ? $options['value'] : 1,
-            'col' => $options['col'] ?? '',
+            'col' => $options['col'] ?? 's12',
             'icon' => $options['icon'] ?? '',
-            'sectors' => $Sector::where('room_id', $options['room_id'])->get(),
+            'sectors' => GymSector::where('room_id', $options['room_id'])->get(),
+        ]);
+    }
+
+    // Gym difficulty system <select>
+    public static function difficultySystems($options)
+    {
+        return view('inputs.difficulty-systems', [
+            'name' => $options['name'],
+            'label' => (isset($options['label'])) ? $options['label'] : $options['name'],
+            'value' => (isset($options['value'])) ? $options['value'] : 1,
+            'col' => $options['col'] ?? 's12',
+            'icon' => $options['icon'] ?? '',
         ]);
     }
 
@@ -573,7 +581,7 @@ class InputTemplates extends ServiceProvider
     // List of level in grade system <select>
     public static function gymLevelGrade($options) {
         $GymGradeLine = GymGradeLine::class;
-        $gradeLines = $GymGradeLine::where('gym_grade_id', $options['gym_grade_id'])->get();
+        $gradeLines = $GymGradeLine::where('gym_grade_id', $options['gym_grade_id'])->orderBy('order')->get();
 
         return view('inputs.gym-grade-lines', [
             'name' => $options['name'],

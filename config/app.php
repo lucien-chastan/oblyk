@@ -125,6 +125,33 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom env variables
+    |--------------------------------------------------------------------------
+    */
+    'oblyk_id' => env('OBLYK_ID', null),
+
+    'vieux_campeur_base_url' => env('VIEUX_CAMPEUR_BASE_URL', null),
+    'verify_vieux_campeur_ssl_certificate' => env('VERIFY_VIEUX_CAMPEUR_SSL_CERTIFICATE', null),
+    'request_connect_timeout_vieux_campeur_request' => env('REQUEST_CONNECT_TIMEOUT_VIEUX_CAMPEUR_REQUEST', null),
+
+    'photo_max_size' => env('PHOTO_MAX_SIZE', null),
+    'photo_max_height' => env('PHOTO_MAX_HEIGHT', null),
+    'photo_max_width' => env('PHOTO_MAX_WIDTH', null),
+    'photo_max_size_text' => env('PHOTO_MAX_SIZE_TEXT', null),
+
+    'room_scheme_bg_color' => env('ROOM_SCHEME_BG_COLOR', null),
+    'room_banner_bg_color' => env('ROOM_BANNER_BG_COLOR', null),
+    'room_banner_color' => env('ROOM_BANNER_COLOR', null),
+    'room_banner_opacity' => env('ROOM_BANNER_OPACITY', null),
+
+    'analytics_script' => env('ANALYTICS_SCRIPT', null),
+    'get_user_notifications' => env('GET_USER_NOTIFICATIONS', null),
+
+    'active_indoor' => env('ACTIVE_INDOOR', null),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -163,10 +190,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -235,7 +262,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'DebugBar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Markdown' => Indal\Markdown\Facade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,

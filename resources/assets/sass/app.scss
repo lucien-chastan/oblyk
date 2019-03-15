@@ -362,3 +362,22 @@ footer {
 .type-gym-route, .type-gym-0 { color: #672178 }
 .type-gym-boulder, .type-gym-2 { color: #ddafe9 }
 .type-gym-pan, .type-gym-1 { color: #a268b0 }
+
+.crop-picture-class {
+    .cr-boundary {
+        height: 80vh !important;
+    }
+}
+
+.custom-collapse {
+    cursor: pointer;
+    i {
+        transition: transform 0.2s;
+    }
+    &[data-expanded=false] {
+        i {transform: rotate(0deg);}
+    }
+    &[data-expanded=true] {
+        i {transform: rotate(90deg);}
+    }
+}

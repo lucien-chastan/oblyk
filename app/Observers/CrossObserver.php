@@ -16,6 +16,7 @@ class CrossObserver
      *
      * @param Cross $cross
      * @return void
+     * @throws \Exception
      */
     public function deleting(Cross $cross)
     {

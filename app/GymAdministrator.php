@@ -8,11 +8,13 @@ class GymAdministrator extends Model
 {
     public $fillable = ['label'];
 
-    public function gym() {
-        return $this->hasOne('App\Gym','id', 'gym_id');
+    public function gym()
+    {
+        return $this->hasOne('App\Gym', 'id', 'gym_id');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
 }

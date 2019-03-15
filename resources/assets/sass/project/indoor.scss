@@ -1,0 +1,27 @@
+.titre-1-indoor {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.div-svg-indoor {
+    img {
+        width: 100%;
+    }
+}
+
+.row-how-indoor {
+    margin-bottom: 12em;
+}
+
+.badge-price {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 2px;
+    &.over-head {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        vertical-align: top;
+        line-height: 18px;
+    }
+}

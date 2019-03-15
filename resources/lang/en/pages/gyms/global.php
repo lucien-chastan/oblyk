@@ -17,6 +17,11 @@ return [
     'tabMap' => "Map",
     'myCrosses' => "My crosses",
     'guideBook' => "Guidebook",
+    'seeOnGuideBook' => "See on guidebook",
     'administer' => "Administer",
 
+    'gym' => 'Climbing gym',
+    'sector' => 'sector',
+
+    'has_no_photo' => 'This line has no photo',
 ];

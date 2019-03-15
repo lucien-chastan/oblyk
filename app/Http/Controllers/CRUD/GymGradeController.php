@@ -50,6 +50,7 @@ class GymGradeController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -61,7 +62,10 @@ class GymGradeController extends Controller
         $grade = new GymGrade();
         $grade->gym_id = $request->input('gym_id');
         $grade->label = $request->input('label');
+        $grade->difficulty_system = $request->input('difficulty_system');
+        $grade->updateDifficultySystem();
         $grade->save();
+
 
         return response()->json(json_encode($grade));
     }
@@ -71,6 +75,7 @@ class GymGradeController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request)
     {
@@ -84,7 +89,10 @@ class GymGradeController extends Controller
         $this->checkIsAdmin($request->input('gym_id'));
 
         $grade->label = $request->input('label');
+        $grade->difficulty_system = $request->input('difficulty_system');
+        $grade->updateDifficultySystem();
         $grade->save();
+
 
         return response()->json(json_encode($grade));
     }

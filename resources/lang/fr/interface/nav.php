@@ -1,18 +1,17 @@
 <?php
 
 return [
-
-    //Level 1
     'partner' => 'Partenaire',
     'mapAndTool' => 'Carte &amp; Outils',
     'theProject' => 'Le projet',
-    'actuality' => 'Actualités', // Le projet
+    'myGyms' => 'Mes salles',
+    'actuality' => 'Actualités',
+    'indoor' => 'Indoor',
     'connect' => 'Connexion',
     'joinUs' => 'Créer un compte',
     'logOut' => 'Déconnexion',
     'search' => 'Chercher',
 
-    //Menu "Mon profil"
     'myProfile' => 'Mon profil',
     'newsFeed' => 'Fil d\'actu',
     'myCross' => 'Mes croix',
@@ -20,7 +19,6 @@ return [
     'notifications' => 'Notifications',
     'settings' => 'Paramètres',
 
-    //Menu "Le projet"
     'whoAreWe' => 'Qui sommes-nous ?',
     'contact' => 'Contact',
     'aboutUs' => 'À propos',
@@ -29,7 +27,6 @@ return [
     'developerAndApi' => 'Développeur &amp; API',
     'TermsOfService ' => 'Mentions légales',
 
-    //Menu "Carte et Outils"
     'cragMap' => 'Carte des falaises',
     'gymMap' => 'Carte des salles',
     'forum' => 'Forum',
@@ -37,11 +34,8 @@ return [
     'grade' => 'Les cotations',
     'dataBase' => 'Base de données',
 
-    //Menu "Partenaire"
     'partnerMap' => 'Carte des grimpeurs',
     'howItWorks' => 'Comment ça marche ?',
     'howIAm' => 'Qui je suis ?',
     'myPlaces' => 'Mes lieux',
-
-
 ];

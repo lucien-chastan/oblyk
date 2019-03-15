@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="479.37428"
-     inkscape:cy="711.59951"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="201.32939"
+     inkscape:cy="398.80177"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="741"
-     inkscape:window-x="0"
-     inkscape:window-y="483"
+     inkscape:window-width="1853"
+     inkscape:window-height="1053"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -78,7 +78,7 @@
        width="16"
        height="16"
        x="97.564659"
-       y="121.77388"
+       y="122.18969"
        inkscape:export-xdpi="47.349197"
        inkscape:export-ydpi="47.349197"
        inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-ffcc00.png" />
@@ -181,7 +181,7 @@
        inkscape:export-ydpi="47.349197"
        inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-e9afdd.png" />
     <rect
-       y="105.14429"
+       y="105.56009"
        x="97.564659"
        height="16"
        width="16"
@@ -382,7 +382,7 @@
          y="276.80911"
          x="43.20647"
          id="tspan901"
-         sodipodi:role="line">Violet fluo</tspan></text>
+         sodipodi:role="line">Rose fluo</tspan></text>
     <rect
        style="opacity:1;vector-effect:none;fill:#165016;fill-opacity:1;stroke:none;stroke-width:0.29360607;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect905"
@@ -496,18 +496,18 @@
        width="16"
        height="16"
        x="97.564659"
-       y="145.1293"
+       y="163.00766"
        inkscape:export-xdpi="47.349197"
        inkscape:export-ydpi="47.349197"
        inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-a05a2c.png" />
     <text
        id="text943"
-       y="153.49118"
+       y="171.36954"
        x="119.10409"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
        xml:space="preserve"><tspan
          style="stroke-width:0.23281482"
-         y="153.49118"
+         y="171.36954"
          x="119.10409"
          id="tspan941"
          sodipodi:role="line">Maron</tspan></text>
@@ -515,23 +515,65 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
        x="119.10409"
-       y="115.16913"
+       y="115.58495"
        id="text947"><tspan
          sodipodi:role="line"
          id="tspan945"
          x="119.10409"
-         y="115.16913"
+         y="115.58495"
          style="stroke-width:0.23281482">Jaune pastel</tspan></text>
     <text
        id="text951"
-       y="131.79874"
+       y="132.21458"
        x="119.10409"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
        xml:space="preserve"><tspan
          style="stroke-width:0.23281482"
-         y="131.79874"
+         y="132.21458"
          x="119.10409"
          id="tspan949"
          sodipodi:role="line">Jaune</tspan></text>
+    <rect
+       inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-f5f5dc.png"
+       inkscape:export-ydpi="47.349197"
+       inkscape:export-xdpi="47.349197"
+       y="179.94099"
+       x="97.564659"
+       height="16"
+       width="16"
+       id="rect76"
+       style="opacity:1;vector-effect:none;fill:#f5f5dc;fill-opacity:1;stroke:none;stroke-width:0.29360607;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
+       x="119.10409"
+       y="188.30287"
+       id="text80"><tspan
+         sodipodi:role="line"
+         id="tspan78"
+         x="119.10409"
+         y="188.30287"
+         style="stroke-width:0.23281482">Beige</tspan></text>
+    <rect
+       inkscape:export-filename="/home/lucien/www/oblyk/resources/assets/img/color-list/color-eaff09.png"
+       inkscape:export-ydpi="47.349197"
+       inkscape:export-xdpi="47.349197"
+       y="139.12305"
+       x="97.564659"
+       height="16"
+       width="16"
+       id="rect884"
+       style="opacity:1;vector-effect:none;fill:#eaff09;fill-opacity:1;stroke:none;stroke-width:0.29360607;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.31259251px;line-height:1.25;font-family:'Loved by the King';-inkscape-font-specification:'Loved by the King';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23281482"
+       x="119.10409"
+       y="149.14792"
+       id="text888"><tspan
+         sodipodi:role="line"
+         id="tspan886"
+         x="119.10409"
+         y="149.14792"
+         style="stroke-width:0.23281482">Jaune Fluo</tspan></text>
   </g>
 </svg>

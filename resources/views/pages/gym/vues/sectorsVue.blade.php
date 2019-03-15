@@ -25,6 +25,9 @@
 
 <div class="row" id="sectors-tab">
     <div class="col s12">
+        @if($room->description != '')
+            <div class="markdownZone">@markdown($room->description)</div>
+        @endif
         @if (count($sectors) > 0)
             <table class="highlight td-clickable">
                 <tbody>
@@ -35,11 +38,13 @@
                                 <td colspan="2" class="text-bold">{{ $sector->group_sector }}</td>
                             </tr>
                         @endif
-                        <tr onclick="getGymSector({{ $sector->id }}, '{{ $sector->label }}'); animationLoadSideNav()">
+                        <tr onmouseover="overMapSector({{ $sector->id }})" onmouseleave="leaveMapSector({{ $sector->id }})" onclick="getGymSector({{ $sector->id }}); animationLoadSideNav()">
                             <td class="{{ $sector->group_sector != '' ? 'indent' : '' }}"><strong>{{ $sector->label }}</strong></td>
                             <td>
                                 @if($sector->routes_count > 0)
-                                    <span {!! $Helpers::tooltip('Nombre de ligne') !!} class="badge tooltipped">{{ $sector->routes_count }}</span>
+                                    <span title="Nombre de ligne" class="badge">
+                                        @choice('pages/gym-schemes/global.number_line', $sector->routes_count)
+                                    </span>
                                 @endif
                             </td>
                         </tr>
@@ -85,30 +90,45 @@
                         <td colspan="6" class="grey-text">{{ $route->opener_date->diffForHumans() }}</td>
                     </tr>
                 @endif
-                <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
+                <tr onmouseover="overMapLineInOpenerTeb({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
                     <td>
                         @if($route->hasThumbnail())
-                            <img src="{{ $route->thumbnail() }}" class="circle left" height="35">
+                            <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
+                        @endif
+                    </td>
+                    <td width="1">
+                        @if($route->display_tag_color())
+                            <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                        @endif
+                        @if($route->display_hold_color())
+                            <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
                         @endif
                     </td>
                     <td>
-                        @foreach($route->colors() as $color)
-                            <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
-                        @endforeach
-                    </td>
-                    <td>{!! $route->grades('html') !!}</td>
-                    <td>{{ $route->label }}</td>
-                    <td>{{ $route->sector->label }}</td>
-                    <td class="grey-text">
-                        @if($route->isFavorite())
-                            <i style="font-size: 1em" class="material-icons right red-text">favorite</i>
-                        @endif
-                        @if($route->hasPicture())
-                            <i style="font-size: 1em" class="material-icons right">photo_camera</i>
-                        @endif
-                        @if($route->description != '')
-                            <i style="font-size: 1em" class="material-icons right">reorder</i>
-                        @endif
+                        <span class="no-warp truncate">
+                            @if(Auth::check() && count($route->crosses) > 0)
+                                <i title="@lang('pages/gym-schemes/global.isDone')" class="material-icons this-route-is-done">done</i>
+                            @endif
+                            {!! $route->grades('html', 'text-bold') !!}
+                            {{ ($route->label != '') ? $route->label : $route->reference }}
+                        </span>
+                        <p class="grey-text no-margin">
+                            @if($route->label != '')
+                                <span class="small grey-text">{{ $route->reference }}</span>
+                            @endif
+                            @if($route->isFavorite())
+                                <i title="@lang('pages/gym-schemes/global.isFavorite')" class="material-icons red-text gym-route-mini-icon">favorite</i>
+                            @endif
+                            @if($route->hasPicture())
+                                <i title="@lang('pages/gym-schemes/global.hasPicture')" class="material-icons gym-route-mini-icon">photo_camera</i>
+                            @endif
+                            @if($route->description != '')
+                                <i title="@lang('pages/gym-schemes/global.hasDescription')" class="material-icons gym-route-mini-icon">reorder</i>
+                            @endif
+                            @if($route->descriptions_count > 0)
+                                <i title="@lang('pages/gym-schemes/global.hasComment')" class="material-icons gym-route-mini-icon">comment</i>
+                            @endif
+                        </p>
                     </td>
                 </tr>
             @endforeach

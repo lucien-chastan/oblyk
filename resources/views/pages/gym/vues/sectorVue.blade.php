@@ -18,36 +18,45 @@
             <table class="highlight td-clickable">
                 <tbody>
                     @foreach($sector->routes as $route)
-                        <tr onclick="getGymRoute({{ $route->id }}, '{{ $route->label }}'); animationLoadSideNav('r')">
-                            @if(Auth::check())
-                                <td>
-                                    @if(count($route->crosses) > 0)
-                                        <i class="material-icons">done</i>
-                                    @endif
-                                </td>
-                            @endif
-                            <td>
+                        <tr onmouseover="overMapLine({{ $route->id }})" onmouseleave="leaveMapLine({{ $route->id }})" onclick="getGymRoute({{ $route->id }}); animationLoadSideNav('r')">
+                            <td width="10">
                                 @if($route->hasThumbnail())
-                                    <img src="{{ $route->thumbnail() }}" class="circle left" height="35">
+                                    <img src="{{ $route->thumbnail() }}" class="circle left" height="45">
+                                @endif
+                            </td>
+                            <td width="1">
+                                @if($route->display_tag_color())
+                                    <i title="Étiquettes" class="material-icons left" style="{{ $route->tag_color_style() }}; margin-right: 0">turned_in</i>
+                                @endif
+                                @if($route->display_hold_color())
+                                    <i title="Prises" class="material-icons left" style="{{ $route->hold_color_style() }}; margin-right: 0">bubble_chart</i>
                                 @endif
                             </td>
                             <td>
-                                @foreach($route->colors() as $color)
-                                    <div class="z-depth-2" style="background-color: {{ $color }}; height: 0.6em; width: 0.6em; border-radius: 50%"></div>
-                                @endforeach
-                            </td>
-                            <td>{!! $route->grades('html') !!}</td>
-                            <td>{{ $route->label }}</td>
-                            <td class="grey-text">
-                                @if($route->isFavorite())
-                                    <i style="font-size: 1em" class="material-icons right red-text">favorite</i>
-                                @endif
-                                @if($route->hasPicture())
-                                    <i style="font-size: 1em" class="material-icons right">photo_camera</i>
-                                @endif
-                                @if($route->description != '')
-                                    <i style="font-size: 1em" class="material-icons right">reorder</i>
-                                @endif
+                                <span class="no-warp truncate">
+                                    @if(Auth::check() && count($route->crosses) > 0)
+                                        <i title="@lang('pages/gym-schemes/global.isDone')" class="material-icons this-route-is-done">done</i>
+                                    @endif
+                                    {!! $route->grades('html', 'text-bold') !!}
+                                    {{ ($route->label != '') ? $route->label : $route->reference }}
+                                </span>
+                                <p class="grey-text no-margin">
+                                    @if($route->label != '')
+                                        <span class="small grey-text">{{ $route->reference }}</span>
+                                    @endif
+                                    @if($route->isFavorite())
+                                        <i title="@lang('pages/gym-schemes/global.isFavorite')" class="material-icons red-text gym-route-mini-icon">favorite</i>
+                                    @endif
+                                    @if($route->hasPicture())
+                                        <i title="@lang('pages/gym-schemes/global.hasPicture')" class="material-icons gym-route-mini-icon">photo_camera</i>
+                                    @endif
+                                    @if($route->description != '')
+                                        <i title="@lang('pages/gym-schemes/global.hasDescription')" class="material-icons gym-route-mini-icon">reorder</i>
+                                    @endif
+                                    @if($route->descriptions_count > 0)
+                                        <i title="@lang('pages/gym-schemes/global.hasComment')" class="material-icons gym-route-mini-icon">comment</i>
+                                    @endif
+                                </p>
                             </td>
                         </tr>
                     @endforeach
@@ -55,10 +64,16 @@
             </table>
         </div>
         @if(Auth::check())
+            @if($gym->userIsAdministrator(Auth::id()))
+                <div class="col s12 text-right">
+                    <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
+                        @lang('pages/gym-schemes/global.createRoute')
+                        <i class="material-icons left">add</i>
+                    </button>
+                </div>
+            @endif
+
             <div class="col s12">
-                @if($gym->userIsAdministrator(Auth::id()))
-                    <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.createRoute')) !!} {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">add</i></a>
-                @endif
                 <a {!! $Helpers::tooltip(trans('pages/gym-schemes/global.addCrossSector')) !!} {!! $Helpers::modal(route('indoorCrossModal'), ["id" => "", "route_id"=>null, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.addCrossSector'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn-floating waves-effect waves-light blue btnModal right tooltipped"><i class="material-icons">done</i></a>
             </div>
         @endif
@@ -118,21 +133,29 @@
             <p><i class="material-icons left blue-text">settings</i><strong>Administration</strong></p>
         </div>
         <div class="col s12 administration-area">
+
+            {{-- Add route --}}
             @if($sector->routes_count == 0)
-                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+                <button {!! $Helpers::modal(route('gymRouteModal', ["gym_id"=>$gym->id]), ["id" => "", "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "sector_id"=>$sector->id, "title"=> trans('pages/gym-schemes/global.createRoute'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                     @lang('pages/gym-schemes/global.createRoute')
                     <i class="material-icons left">add</i>
                 </button>
             @endif
-            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.editSector'), "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+
+            {{-- Edit sector --}}
+            <button {!! $Helpers::modal(route('gymSectorModal', ["gym_id"=>$gym->id]), ["id" => $sector->id, "room_id"=>$sector->room_id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.editSector'), "method"=>"PUT", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                 @lang('pages/gym-schemes/global.editSector')
                 <i class="material-icons left">edit</i>
             </button>
-            <button {!! $Helpers::modal(route('sectorUploadSchemeModal', ["gym_id"=>$gym->id, "sector_id"=>$sector->id]), ["id" => $sector->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btn btnModal">
+
+            {{-- Upload photo --}}
+            <button {!! $Helpers::modal(route('sectorUploadSchemeModal', ["gym_id"=>$gym->id, "sector_id"=>$sector->id]), ["id" => $sector->id, "gym_id"=>$gym->id, "title"=> trans('pages/gym-schemes/global.uploadPicture'), "method"=>"POST", 'callback'=>'reloadSectorVue']) !!} class="btn btn-flat btnModal">
                 @lang('pages/gym-schemes/global.uploadPicture')
                 <i class="material-icons left">photo_camera</i>
             </button>
-            @if( $sector->area == '')
+
+            {{-- Draw area --}}
+            @if($sector->area == '')
                 <button class="btn btn-flat start-edition-btn" onclick="startNewSector({{ $sector->id }})">
                     @lang('pages/gym-schemes/global.createSectorArea')
                     <i class="material-icons left">crop_free</i>
@@ -143,6 +166,22 @@
                     <i class="material-icons left">crop_free</i>
                 </button>
             @endif
+
+            {{-- Delete sector --}}
+            <button {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/gym_sectors/" . $sector->id, "callback" => "afterDeleteSector"]) !!} class="btnModal btn btn-flat">
+                @lang('pages/gym-schemes/global.deleteSector')
+                <i class="material-icons left red-text">delete</i>
+            </button>
+
+            {{-- Delete photo --}}
+            @if($sector->hasPicture())
+                <button class="btn btn-flat btn" onclick="deleteSectorPicture({{ $sector->id }})">
+                    @lang('pages/gym-schemes/global.deletePhoto')
+                    <i class="material-icons left red-text">photo_camera</i>
+                </button>
+            @endif
         </div>
     @endif
 </div>
+
+<input type="hidden" id="sector-name-for-ajax" value="{{ $sector->label }}">

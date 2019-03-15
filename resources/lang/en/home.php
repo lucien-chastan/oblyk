@@ -1,32 +1,17 @@
 <?php
 
 return [
-
-    'slogan' => 'Climbing community website', // Site communautaire dédié à l'escalade
-
-    //****************************
-    //Check les infos des falaises
-    //****************************
-
+    'slogan' => 'Outdoor & Indoor climbing community',
     'titleCheckCragInformation' => 'Check crags information',
     'descriptionCheckCragInformation' => 'Oblyk is a big climbing spots database from France and the world, always updated by the community. You can see it using the search or using the crags map.',
     'actionCheckCragInformation' => 'Map of the crags',
 
-
-    //************************
-    //Tiens un carnet de croix
-    //************************
-
     'titleCrossBook' => 'Hold a sendlist',
     'descriptionCrossBook' => '
         Good for memory, progression and motivation, holding a sendlist has many good points.<br>
-        Oblyk helps you doing that an easy way, you can see your improvement many ways to analyse and display your sendlist
+        Oblyk helps you doing that an easy way, you can see your improvement many ways to analyse and display your sendlist.
     ',
-
-
-    //******************************
-    //Trouve un partenaire de grimpe
-    //******************************
+    'new-indoor' => 'You can now put your crosses in indoor, go to the page of your climbing gym to note them down your crosses.',
 
     'titlePartner' => 'Find a climbing partner',
     'descriptionPartner' => '
@@ -35,21 +20,11 @@ return [
     ',
     'actionPartner' => 'Read more',
 
-
-    //****************
-    //Reste au courant
-    //****************
-
     'titleNewsFeed' => 'Stay tuned',
     'descriptionNewsFeed' => '
         Oblyk has a news feed allowing you to stay informed about crags news around you and others.<br>
         For example, a  spring cleaning, the planner post into the crags news, and then it is, everyone interested will stay informed and may come help.
     ',
-
-
-    //****************
-    //Rejoins-nous !
-    //****************
 
     'titleAccount' => 'Join us !',
     'descriptionAccount' => '
@@ -57,11 +32,6 @@ return [
         You will also to able to contribute in building a big climbing spots database !
     ',
     'actionAccount' => 'Create an account',
-
-
-    //****************
-    // Les topos
-    //****************
 
     'titleGuidebook' => 'Oblyk and the climbing guidebook',
     'descriptionGuidebook' => "
@@ -71,7 +41,13 @@ return [
         Buying a guidebook, it is helping passionate climbers who give a lot to maintain, develop, clean climbing spots where you will climb for free.
     ",
 
-    //Activité de la communauté
+    'titleIndoor' => 'The toolbox of your climbing gym',
+    'descriptionIndoor' => "
+        Oblyk is not just about guidebook, crags and a search for a climbing partner ! It is also a whole set of tools dedicated to the world of indoor.<br>
+        To name only the main ones, Oblyk allows you to create an <strong>interactive guidebook</strong> for yours climbing gym, <strong>to organize contests</strong>, to <strong>manage your PPE</strong>, etc.
+    ",
+
+    // Community activity
     'title-community-activity' => 'Community activity since yesterday',
     'new-crag' => 'One new crag|:count new crags',
     'new-climber' => 'A new climber has arrived|:count new climbers have arrived',
@@ -86,14 +62,14 @@ return [
     'new-gym' => 'One new climbing gym|:count new climbing gyms',
     'new-word' => 'One new definition|:count new definitions',
 
-    //Quoi de neuf
+    // What's up
     'titleWhatUp' => 'What\'s up ?',
     'seeArticles' => 'See all articles',
 
-    //Les articles
+    // Articles
     'readMore' => 'Read more',
 
-    //Oblyk en chiffre
+    // Oblyk in figures
     'titleInFigures'=>'Oblyk in figures',
     'figuresCrags' => 'Crags',
     'figuresClimbers' => 'Climbers',
@@ -105,7 +81,7 @@ return [
     'figuresComments' => 'Comments',
     'figuresVideos' => 'Videos',
 
-    //Message du nombre d'ajout par jour
+    // Count today
     'crag_today'=>'A crag has been added today|:count crags added today ',
     'user_today'=>'A new climber joined us today|:count climbers joined today ',
     'gym_today'=>'A new gym has been added today |:count gyms added today ',

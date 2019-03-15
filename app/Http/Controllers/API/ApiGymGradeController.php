@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\GymGrade;
 use App\GymGradeLine;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\GymGrade\GetGradeLineByIdRequest;
@@ -31,14 +32,18 @@ class ApiGymGradeController extends Controller
     private function getGradeLine($id) : GymGradeLine
     {
         $GymGradeLine = GymGradeLine::class;
+        $GymGrade = GymGrade::class;
 
         $gymGradeLine = $GymGradeLine::where('id', $id)
             ->select($this->gradeLineDbAttributes)
             ->first();
 
-        $gymGradeLine->grade = Route::valToGrad($gymGradeLine->grade_val, true);
+        $gymGrade = $GymGrade::find($gymGradeLine->gym_grade_id);
+
+        $gymGradeLine->grade = ($gymGradeLine->grade_val != 0) ? Route::valToGrad($gymGradeLine->grade_val, true) : '';
         $gymGradeLine->colors();
         $gymGradeLine->useSecondColor = (count($gymGradeLine->colors) > 1);
+        $gymGradeLine->changeHoldColor = !$gymGrade->needs_to_define_holds_color() && $gymGrade->difficulty_system != 3;
 
         return $gymGradeLine;
     }

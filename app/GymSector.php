@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GymSector extends Model
 {
-
     public $fillable = ['label'];
 
     public function gym() {

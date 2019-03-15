@@ -2,6 +2,9 @@
 
 return [
 
+    // nothing
+    '#00000000' => 'No color',
+
     // Black, gray and with
     '#f2f2f2' => 'With',
     '#999999' => 'Gray',
@@ -23,7 +26,9 @@ return [
     '#e9afdd' => 'Pastel purple',
     '#ab37c8' => 'Purple',
     '#440055' => 'Dark purple',
-    '#ff2ad4' => 'Fluorescent purple',
+
+    // Pink
+    '#ff2ad4' => 'Fluorescent pink',
 
     // Red
     '#ffaaaa' => 'Pastel red',
@@ -37,9 +42,11 @@ return [
     // Yellow
     '#ffeeaa' => 'Pastel yellow',
     '#ffcc00' => 'Yellow',
+    '#eaff09' => 'Fluorescent yellow',
 
-    // brown
-    '#a05a2c' => 'Brown'
+    // Brown & Beige
+    '#a05a2c' => 'Brown',
+    '#f5f5dc' => 'Beige',
 ];
 
 

@@ -1,13 +1,12 @@
 <?php
 
 return [
-
-    //Évaluation de la difficulté
+    // Hardness
     'nbVote' => ':count vote|:count votes',
     'hardnessTool' => 'Facile : :easy %<br>Juste : :just %<br>Dur : :hard %',
     'noEvaluation' => "Pas d'évaluation de la difficulté",
 
-    //information sur la ligne
+    // Line information
     'noIncline' => "inclinaison non-renseignée",
     'nbLongueur' => ":count longueur|:count longueurs",
     'noReception' => "réception non-renseignée",
@@ -20,16 +19,14 @@ return [
     'noRouteOpener' => "ouvreur non-renseigné",
     'noOpenYear' => "année non-renseignée",
 
-    //Les longueurs
+    // Pitches
     'pitchTitle' => "Les longueurs",
     'gradeColumn' => "Côte",
     'anchorColumn' => "Relais",
     'pointColumn' => "Point",
     'heightColumn' => "Hauteur",
 
-    //description
+    // Description
     'descriptionTitle' => "Description des grimpeurs",
-    'noDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as grimpé cette ligne pas à la décrire",
-
-
+    'noDescription' => "Il n'y a aucune description postée par des grimpeurs, si tu as grimpé cette ligne n'hésite pas à la décrire",
 ];

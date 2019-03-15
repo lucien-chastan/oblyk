@@ -10,7 +10,7 @@
         @if($dataModal['id'] == '')
             {!! $Inputs::upload(['name'=>'file', 'filter'=>'image/*', 'id'=>'upload-input-photo' ,'label'=>'Photo']) !!}
             <div class="text-right">
-                <span class="grey-text">Poids maximum : {{ env('PHOTO_MAX_SIZE_TEXT') }}, hauteur : {{ env('PHOTO_MAX_HEIGHT') }} et largeur : {{ env('PHOTO_MAX_WIDTH') }}</span>
+                <span class="grey-text">Poids maximum : {{ config('app.photo_max_size_text') }}, hauteur : {{ config('app.photo_max_height') }} et largeur : {{ config('app.photo_max_width') }}</span>
             </div>
         @endif
 

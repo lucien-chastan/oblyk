@@ -2,6 +2,9 @@
 
 return [
 
+    // nothing
+    '#00000000' => 'Pas de couleur',
+
     // Black, gray and with
     '#f2f2f2' => 'Blanc',
     '#999999' => 'Gris',
@@ -23,7 +26,9 @@ return [
     '#e9afdd' => 'Violet pastel',
     '#ab37c8' => 'Violet',
     '#440055' => 'Violet profond',
-    '#ff2ad4' => 'Violet fluo',
+
+    // Pink
+    '#ff2ad4' => 'Rose fluo',
 
     // Red
     '#ffaaaa' => 'Rouge pastel',
@@ -37,9 +42,11 @@ return [
     // Yellow
     '#ffeeaa' => 'Jaune pastel',
     '#ffcc00' => 'Jaune',
+    '#eaff09' => 'Jaune fluo',
 
-    // brown
-    '#a05a2c' => 'Marron'
+    // Brown & Beige
+    '#a05a2c' => 'Marron',
+    '#f5f5dc' => 'Beige',
 ];
 
 

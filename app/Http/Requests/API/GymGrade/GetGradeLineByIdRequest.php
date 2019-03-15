@@ -32,9 +32,10 @@ class GetGradeLineByIdRequest extends FormRequest
     /**
      * Add parameters to be validated
      *
+     * @param null $keys
      * @return array
      */
-    public function all()
+    public function all($keys = null)
     {
         return array_replace_recursive(
             parent::all(),

@@ -235,3 +235,20 @@
         padding: 0 5px;
     }
 }
+
+.badge-level {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 2px;
+    color: black;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    &.level-0 { background-color: #80cbc4; }
+    &.level-1 { background-color: #fbc02d; }
+    &.level-2 { background-color: #b39ddb; }
+    i {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+}

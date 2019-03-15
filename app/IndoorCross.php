@@ -69,6 +69,21 @@ class IndoorCross extends Model
         return ($this->gym_id);
     }
 
+    public function color_style()
+    {
+        if(count($this->colors()) > 1) {
+            $forGradientColor = [];
+            foreach ($this->colors() as $color) {
+                for ($i = 0; $i <= 3; $i++) {
+                    $forGradientColor[] = $color;
+                }
+            }
+            return 'background-image: linear-gradient(to right, ' . implode(',', $forGradientColor) . '); color:transparent; background-clip: text;';
+        } else {
+            return 'color: ' . $this->colors()[0];
+        }
+    }
+
     public static function getCrossWithFilter($user)
     {
         // Filter by status

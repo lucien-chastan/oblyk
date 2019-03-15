@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="/framework/leaflet/Control.Geocoder.css">
     <link rel="stylesheet" href="/framework/leaflet/leaflet.draw.css">
     <link rel="stylesheet" href="/css/gym-scheme.css">
+    @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.css">
+    @endif
 @endsection
 
 @section('content')
@@ -86,10 +89,13 @@
 
         @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
             <div class="fixed-action-btn hide" id="edit-btn-sector">
-                <a class="btn-floating btn-small grey" onclick="relaodSectors({{ $room->id }})">
+                <a title="annuler l'édition" class="btn-floating btn-small grey" id="btn-cancel-edition-scheme">
                     <i class="large material-icons">clear</i>
                 </a>
-                <a class="btn-floating btn-large red" onclick="endEditSector()">
+                <a title="supprimer le tracé" class="btn-floating btn-small grey" id="btn-delete-edition-scheme">
+                    <i class="large material-icons">delete</i>
+                </a>
+                <a title="sauvegarder le tracé" class="btn-floating btn-large red" id="btn-save-edition-scheme">
                     <i class="large material-icons">save</i>
                 </a>
             </div>
@@ -123,6 +129,7 @@
             <script src="/framework/leaflet/Leaflet.Editable.js"></script>
             <script src="/js/gym-edit-scheme.js"></script>
             <script src="/js/gym-upload-scheme.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.min.js"></script>
         @endif
     @endif
 
@@ -132,7 +139,8 @@
         </script>
     @endif
     <script>
-        getSectors();
+
+        initGetElement();
 
         // Change nav bar color
         var nav_barre = document.getElementById('nav_barre');

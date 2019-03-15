@@ -6,6 +6,9 @@ class Color
 {
     public $holdColors = [
 
+        // Nothing
+        '#00000000',
+
         // Black, gray and with
         '#f2f2f2', // with
         '#999999', // gray
@@ -27,7 +30,8 @@ class Color
         '#e9afdd', // pastel purple
         '#ab37c8', // purple
         '#440055', // dark purple
-        '#ff2ad4', // fluorescent purple
+
+        '#ff2ad4', // fluorescent pink
 
         // Red
         '#ffaaaa', // pastel red
@@ -41,8 +45,10 @@ class Color
         // Yellow
         '#ffeeaa', // pastel yellow
         '#ffcc00', // yellow
+        '#eaff09', // fluorescent yellow
 
-        // brown
+        // brown && Beige
         '#a05a2c', // Brown
+        '#f5f5dc', // Beige
     ];
 }

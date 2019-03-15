@@ -36,7 +36,7 @@
         });
     });
 
-    @if(Auth::check() && env('GET_USER_NOTIFICATIONS'))
+    @if(Auth::check() && config('app.get_user_notifications'))
         //check s'il y a de nouveau message et notification
         getNewNotificationAndMessage();
 
@@ -52,7 +52,7 @@
 
 </script>
 
-@if(env('ANALYTICS_SCRIPT'))
+@if(config('app.analytics_script'))
     <!-- Piwik -->
     <script type="text/javascript">
         var _paq = _paq || [];

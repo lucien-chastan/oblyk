@@ -135,6 +135,46 @@ class RoomController extends Controller
         return view('modal.gym-scheme', $data);
     }
 
+    function publishModal(Request $request, $gym_id, $room_id){
+        $GymRoom = GymRoom::class;
+
+        $gymRoom = $GymRoom::where('id', $room_id)->first();
+        $gym_id = $gymRoom->gym_id;
+        $callback = $request->input('callback') ?? 'reloadCurrentVue';
+
+        //définition du chemin de sauvgarde
+        $outputRoute = route('publishRoom', ['gym_id' => $gym_id, 'room_id' => $room_id]);
+
+        $data = [
+            'dataModal' => [
+                'gym_room' => $gymRoom,
+                'gym_id' => $gym_id,
+                'title' => $request->input('title'),
+                'method' => $request->input('method'),
+                'route' => $outputRoute,
+                'callback' => $callback
+            ]
+        ];
+
+        return view('modal.room-publish', $data);
+    }
+
+    function publishRoom(Request $request) {
+        $GymRoom = GymRoom::class;
+
+        $gymRoom = $GymRoom::where('id', $request->input('id'))->first();
+
+        $this->checkIsAdmin($gymRoom->gym_id);
+
+        if($gymRoom->isPublished()) {
+            $gymRoom->unpublished();
+        } else {
+            $gymRoom->publish();
+        }
+
+        return response()->json(json_encode($gymRoom));
+    }
+
     function saveCustomScheme(Request $request) {
         $GymRoom = GymRoom::class;
 

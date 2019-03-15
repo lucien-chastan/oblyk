@@ -65,6 +65,7 @@ class GymAdminController extends Controller
         $routes = $Route::whereIn('sector_id', $Sector::whereIn('room_id', $roomsArray)->select('id')->get()->toArray())
             ->with('sector')
             ->with('sector.room')
+            ->withCount('descriptions')
             ->orderBy('opener_date', 'desc')
             ->get();
 
@@ -128,7 +129,7 @@ class GymAdminController extends Controller
         $Grade = GymGrade::class;
         return view('pages.gym-admin.vues.grades', [
             'gym' => $Gym::find($gym_id),
-            'grades' => $Grade::where('gym_id', $gym_id)->with('gradeLines')->get()
+            'grades' => $Grade::where('gym_id', $gym_id)->with(['gradeLines' => function ($query) { $query->orderBy('order'); }])->get()
         ]);
     }
 

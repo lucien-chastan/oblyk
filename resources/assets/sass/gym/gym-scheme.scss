@@ -29,6 +29,18 @@
   #gym-scheme {
     width: calc(100% - 370px);
     left: 370px;
+
+    [type="radio"]:checked, [type="radio"]:not(:checked) {
+      position: relative;
+      left: inherit;
+      opacity: 1;
+    }
+    [type="checkbox"]:checked, [type="checkbox"]:not(:checked) {
+      position: relative;
+      left: inherit;
+      opacity: 1;
+    }
+
   }
   .open-close-btn {
     left: 370px;
@@ -61,6 +73,15 @@
   .side-nav-is-open {
     .open-close-btn {
       left: calc(100vw - 40px);
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .side-nav-is-open {
+    #gym-scheme {
+      width: 100%;
+      left: 0;
     }
   }
 }
@@ -108,11 +129,33 @@
     stroke-width: 2px;
     stroke-dasharray: 5px;
     transition: all 0.3s;
-    &:hover {
+    &:hover, &.hovered-sector {
       fill-opacity: 0.3;
       stroke-dasharray: none;
       stroke-opacity: 1;
       stroke-width: 3px;
+    }
+    &.active-sector {
+      fill: #ffffff;
+      stroke: #ffffff;
+      fill-opacity: 0.7;
+      stroke-dasharray: none;
+      stroke-opacity: 1;
+      stroke-width: 3px;
+    }
+  }
+
+  .route-map-line {
+    transition: all 0.3s;
+    stroke-opacity: 0.6;
+    stroke-width: 3px;
+    visibility: hidden;
+    &.visible-line {
+      visibility: visible;
+    }
+    &:hover, &.hovered-line, &.active-line {
+      stroke-width: 5px;
+      stroke-opacity: 1;
     }
   }
 
@@ -306,4 +349,20 @@
       }
     }
   }
+}
+
+.hold-tag-color {
+  height: 15px;
+  width: 15px;
+  border-radius: 3px
+}
+
+.gym-route-mini-icon {
+  font-size: 1em;
+  vertical-align: text-top;
+}
+
+.this-route-is-done {
+  font-size: 16px;
+  vertical-align: sub;
 }

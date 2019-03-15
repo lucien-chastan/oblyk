@@ -31,7 +31,7 @@ class GymController extends Controller
             ->with('descriptions.user')
             ->first();
 
-        $firstRoom = $GymRoom::where('gym_id', $gym->id)->orderBy('order')->first();
+        $firstRoom = $GymRoom::where([['gym_id', $gym->id], ['published_at', '!=', null]])->orderBy('order')->first();
 
         // If gym name is not a good name, then redirection
         if(Gym::webUrl($gym_id, $gym_title) != $gym->url()) {

@@ -10,7 +10,7 @@
         @endif
 
         <div class="text-center">
-            @if($gym->rooms_count != 0)
+            @if(isset($firstRoom) != 0)
                 <a href="{{ $firstRoom->url() }}" class="waves-effect waves-light btn-flat">
                     <i class="material-icons left">view_quilt</i>@lang('pages/gyms/tabs/information.goGuideBook')
                 </a>

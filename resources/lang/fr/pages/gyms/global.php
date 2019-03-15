@@ -17,6 +17,11 @@ return [
     'tabMap' => "Carte",
     'myCrosses' => "Mes croix",
     'guideBook' => "Topo",
+    'seeOnGuideBook' => "Voir sur le topo",
     'administer' => "Administrer",
 
+    'gym' => 'Salle',
+    'sector' => 'secteur',
+
+    'has_no_photo' => "Cette ligne n'a pas de photo",
 ];

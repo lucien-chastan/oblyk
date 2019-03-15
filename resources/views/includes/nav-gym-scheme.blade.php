@@ -28,7 +28,13 @@
             <li><a {!! $Helpers::modal(route('roomUploadSchemeModal', ['gym_id'=>$gym->id]), ["room_id"=>$room->id, "title"=>'Telecharger un plan', "method"=>"POST", "callback"=>"reloadPage"]) !!} class="btnModal">Changer le plan<i class="material-icons left">map</i></a></li>
             <li><a {!! $Helpers::modal(route('roomCustomScheme', ['gym_id'=>$gym->id, 'room_id'=>$room->id]), ["room_id"=>$room->id, "title"=>'Personnaliser le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Personnaliser<i class="material-icons left">color_lens</i></a></li>
             <li><a href="{{ route('gym_admin_home', ['gym_id' => $gym->id, 'gym_label'=> str_slug($gym->label)]) }}">Dashboard<i class="material-icons left">dashboard</i></a></li>
+            @if(!$room->isPublished())
+                <li><a {!! $Helpers::modal(route('roomPublishModal', ['gym_id'=>$gym->id, 'room_id'=>$room->id]), ["room_id"=>$room->id, "title"=>'Publier le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Rendre visible<i class="material-icons left">visibility</i></a></li>
+            @endif
             <li class="divider"></li>
+            @if($room->isPublished())
+                <li><a {!! $Helpers::modal(route('roomPublishModal', ['gym_id'=>$gym->id, 'room_id'=>$room->id]), ["room_id"=>$room->id, "title"=>'Cacher le topo', "method"=>"PUT", "callback"=>"reloadPage"]) !!} class="btnModal">Cacher<i class="material-icons left red-text">visibility_off</i></a></li>
+            @endif
             <li><a {!! $Helpers::tooltip(trans('modals/description.deleteTooltip')) !!} {!! $Helpers::modal(route('deleteModal'), ["route" => "/rooms/" . $room->id, "callback" => "afterDeleteGotTo"]) !!} class="btnModal">Supprimer cette espace<i class="material-icons left red-text">delete</i></a></li>
         </ul>
     @endif
@@ -86,7 +92,7 @@
                 <div class="collapsible-body">
                     <ul>
                         @foreach($rooms as $list_room)
-                            <li><a href="{{ $list_room->url() }}"><img alt="logo d'une salle" src="/img/room-logo.svg" class="left room-icon room-icon-side-nav" height="20">{{ $list_room->label }}</a></li>
+                            <li><a href="{{ $list_room->url() }}"><img alt="logo d'une salle" src="/img/icon-tab-gym.svg" class="left room-icon room-icon-side-nav" height="20">{{ $list_room->label }}</a></li>
                         @endforeach
                         @if(Auth::check() && $gym->userIsAdministrator(Auth::id()))
                             <li class="divider"></li>

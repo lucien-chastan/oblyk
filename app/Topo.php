@@ -92,7 +92,7 @@ class Topo extends Model
      */
     public function getVieuxCampeurInformation() {
         $data_vc = null;
-        $vc_base_url = env('VIEUX_CAMPEUR_BASE_URL');
+        $vc_base_url = config('app.vieux_campeur_base_url');
 
         if ($this->vc_ref != null && $vc_base_url != null) {
             try {
@@ -101,9 +101,9 @@ class Topo extends Model
                     'GET',
                     $vc_base_url . $this->vc_ref,
                     [
-                        'verify' => (bool)env('VERIFY_VIEUX_CAMPEUR_SSL_CERTIFICATE'),
-                        'connect_timeout' => (int)env('REQUEST_CONNECT_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
-                        'timeout' => (int)env('REQUEST_TIMEOUT_VIEUX_CAMPEUR_REQUEST'),
+                        'verify' => (bool)config('app.verify_vieux_campeur_ssl_certificate'),
+                        'connect_timeout' => (int)config('app.request_connect_timeout_vieux_campeur_request'),
+                        'timeout' => (int)config('app.request_timeout_vieux_campeur_request'),
                     ]
                 );
 

@@ -29,13 +29,13 @@ class GymSchemeController extends Controller
         }
 
         $bannerRGBA = HelpersTemplates::hexToRgb(
-            $room->banner_bg_color ?? env('ROOM_BANNER_BG_COLOR'),
-            $room->banner_opacity ?? env('ROOM_BANNER_OPACITY')
+            $room->banner_bg_color ?? config('app.room_banner_bg_color'),
+            $room->banner_opacity ?? config('app.room_banner_opacity')
         );
 
         $colors = [
-            'bgSchemeColor' => $room->scheme_bg_color ?? env('ROOM_SCHEME_BG_COLOR'),
-            'bannerColor' => $room->banner_color ?? env('ROOM_BANNER_COLOR'),
+            'bgSchemeColor' => $room->scheme_bg_color ?? config('app.room_scheme_bg_color'),
+            'bannerColor' => $room->banner_color ?? config('app.room_banner_color'),
             'bannerBgColor' => 'rgba(' . join(',', $bannerRGBA) . ')',
         ];
 
@@ -95,6 +95,7 @@ class GymSchemeController extends Controller
 
         $gymRoutes = $GymRoute::where([['sector_id', $gymSector->id], ['dismounted_at', null]])
             ->with(['crosses' => function($query) use ($gymSector) {$query->where([['user_id', Auth::id()],['sector_id', $gymSector->id]]);}])
+            ->withCount('descriptions')
             ->orderBy('opener_date')
             ->get();
 
@@ -116,7 +117,11 @@ class GymSchemeController extends Controller
         $Room = GymRoom::class;
         $Cross = IndoorCross::class;
 
-        $gymRoute = $GymRoute::where('id', $route_id)->with('sector')->first();
+        $gymRoute = $GymRoute::where('id', $route_id)
+            ->with('sector')
+            ->with('descriptions')
+            ->first();
+
         $room = $Room::find($gymRoute->sector->room_id);
         $gym = $Gym::find($room->gym_id);
 
@@ -160,9 +165,27 @@ class GymSchemeController extends Controller
 
     function getGymSectors($room_id)
     {
-        $GymSector = GymSector::class;
-        $sectors = $GymSector::where([['room_id', '=', $room_id], ['area', '!=', null]])->get();
+        $sectors = GymSector::where([['room_id', '=', $room_id], ['area', '!=', null]])->get();
         return response()->json(['sectors' => $sectors]);
+    }
+
+    function getGymRoutes($room_id)
+    {
+        $routes = [];
+        $sectors = GymSector::where('room_id', '=', $room_id)
+            ->with('routes')
+            ->get();
+
+        foreach ($sectors as $sector) {
+            foreach ($sector->routes as $route) {
+                if($route->line != '') {
+                    $route->line_color = $route->colors()[0];
+                    $routes[] = $route;
+                }
+            }
+        }
+
+        return response()->json(['routes' => $routes]);
     }
 
     function getLastCreatedRoomRoute($gym_id)

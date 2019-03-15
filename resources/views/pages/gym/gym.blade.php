@@ -46,7 +46,7 @@
             @include('pages.gym.tabs.fil-actu')
         </div>
 
-        @if(Auth::check() && ($is_administrator || env('ACTIVE_INDOOR')))
+        @if(Auth::check() && ($is_administrator || config('app.active_indoor')))
             <div id="liste-croix">
                 @include('pages.gym.tabs.cross-list')
             </div>
