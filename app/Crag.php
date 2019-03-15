@@ -5,9 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Log;
+use Laravel\Scout\Searchable;
 
 class Crag extends Model
 {
+    use Searchable;
 
     public $fillable = ['label', 'city', 'country', 'region', 'lat', 'lng'];
 

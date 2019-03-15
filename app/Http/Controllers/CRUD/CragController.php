@@ -250,4 +250,8 @@ class CragController extends Controller
     {
         //
     }
+    public function search(Request $request)
+    {
+        return Crag::search($request->search)->get();
+    }
 }
