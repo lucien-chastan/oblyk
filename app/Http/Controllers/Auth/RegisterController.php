@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\sendWelcome;
-use App\oldSearch;
 use App\Subscriber;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserPartnerSettings;
 use App\UserSettings;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -27,6 +28,22 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    public function register(Request $request)
+    {
+        try{
+            $this->validator($request->all())->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect('register')->withErrors($e->validator);
+        }
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
 
     /**
      * Where to redirect users after registration.
