@@ -140,8 +140,8 @@ function loadMap() {
     }
 
     map = L.map('map', {zoomControl: false, center: [lat, lng], zoom: zoom, layers: [carte]});
-    markers = L.markerClusterGroup();
-    gym_markers = L.markerClusterGroup();
+    markers = L.markerClusterGroup({disableClusteringAtZoom: 10});
+    gym_markers = L.markerClusterGroup({disableClusteringAtZoom: 10});
 
     var searchMapButton = L.Control.extend({
         options: {position: 'topleft'}, onAdd: function (map) {
