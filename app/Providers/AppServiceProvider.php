@@ -81,6 +81,7 @@ use App\Video;
 use App\Word;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -91,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
         Schema::defaultStringLength(191);
         Sector::observe(SectorObserver::class);
         Photo::observe(PhotoObserver::class);

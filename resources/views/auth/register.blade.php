@@ -59,9 +59,19 @@
                             <label for="password-confirm">@lang('auth.labelConfirmPassword')</label>
                         </div>
 
-                        <div class="input-field col s12">
-                            <input type="checkbox" name="newsletter" id="newsletter" {{ old('newsletter') ? 'checked' : '' }}>
-                            <label for="newsletter">@lang('auth.labelNewsletter')</label>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <input type="checkbox" name="newsletter" id="newsletter" {{ old('newsletter') ? 'checked' : '' }}>
+                                <label for="newsletter">@lang('auth.labelNewsletter')</label>
+                            </div>
+
+                            <div class="input-field col s12 m6">
+                                @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                    <div class="g-recaptcha"
+                                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
@@ -75,4 +85,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 @endsection
