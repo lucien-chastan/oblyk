@@ -6,7 +6,7 @@ Oblyk is an open-source community website dedicated to climbing. It aims to buil
 
 ![page d'accueil d'oblyk](https://oblyk.org/img/meta_home.jpg)
 
-## Dépendances
+## Dependencies
 
 To install Oblyk on your machine you must have the following software installed:
 
