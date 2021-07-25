@@ -1,5 +1,7 @@
 # Oblyk, Site communautraire dédié à l'escalade
 
+> ⚠️ Oblyk se restructure et devient une organisation 🔥🎉 retrouver les nouveaux dépôt ici : [oblyk](https://github.com/oblyk)
+
 [English version](readme.md)
 
 Oblyk est un site internet open-source communautaire dédié à l'escalade. Il à pour objectif de constituer une grande base de donnée open-data des falaises et voies d'escalades de france et du monde mais aussi des salles. Les grimpeurs peuvent aussi se servire de cet outil pour noter leurs croix ou encore trouver des partenaires d'escalades.
